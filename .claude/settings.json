@@ -61,6 +61,16 @@
         ]
       },
       {
+        "matcher": "Bash(git add*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const d=require('fs').readFileSync(0,'utf8');try{const c=JSON.parse(d)?.tool_input?.command||'';if(/(?:&&|;)\\s*git\\s+(commit|push)/.test(c)){process.stdout.write(JSON.stringify({decision:'block',reason:'Chain guard: split git add and git commit into separate Bash calls so lint/typecheck hooks fire.'})+' ');process.exit(2)}}catch{}\"",
+            "description": "Block git add && git commit/push chains — force two Bash calls so Bash(git commit*) lint hook fires"
+          }
+        ]
+      },
+      {
         "matcher": "Bash(git commit*)",
         "hooks": [
           {
@@ -71,12 +81,32 @@
         ]
       },
       {
+        "matcher": "Bash(git -C * commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[your-lint-command]",
+            "description": "Lint check before commit via git -C <path> — mirrors Bash(git commit*) for worktree/subdir invocations"
+          }
+        ]
+      },
+      {
         "matcher": "Bash(git push*)",
         "hooks": [
           {
             "type": "command",
             "command": "[your-typecheck-command]",
             "description": "Type check before push — customize per stack (see docs/blueprint/06-harness.md)"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git -C * push*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[your-typecheck-command]",
+            "description": "Type check before push via git -C <path> — mirrors Bash(git push*) for worktree/subdir invocations"
           }
         ]
       }

@@ -52,7 +52,7 @@ sprint: 6
   - `acceptance`: SessionStart and PostToolUse hooks fire without a permission prompt; verify by running a fresh session against a scaffold dir
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [ ] **TASK-045: Add `Bash(git -C *)` pattern to harness hook matchers and allowedTools** — PreToolUse hooks match `Bash(git commit*)` and `Bash(git push*)` but not `git -C <path> commit` or `git -C <path> push`; `-C` flag precedes the subcommand so existing patterns never fire; lint + typecheck hooks silently skip on all `git -C` invocations
+- [x] **TASK-045: Add `Bash(git -C *)` pattern to harness hook matchers and allowedTools** — PreToolUse hooks match `Bash(git commit*)` and `Bash(git push*)` but not `git -C <path> commit` or `git -C <path> push`; `-C` flag precedes the subcommand so existing patterns never fire; lint + typecheck hooks silently skip on all `git -C` invocations
   - `scope`: quick
   - `layers`: harness
   - `api-change`: no
@@ -177,6 +177,8 @@ sprint: 6
 |:-----|:-------|:----|
 | `.claude/settings.json` | Replace `${CLAUDE_PLUGIN_ROOT}` → `$CLAUDE_PROJECT_DIR` in all 5 hook commands | — |
 | `.claude/settings.json` | Add `permissions.allow: ["Bash(node .claude/scripts/*)"]` — suppress hook permission prompts | — |
+| `.claude/settings.json` | Add `Bash(git -C * commit*)` + `Bash(git -C * push*)` PreToolUse matchers; inline chain-guard for `Bash(git add*)` blocks `&& git commit` chains | — |
+| `.claude/settings.local.example.json` | Add `Bash(git -C *)` to permissions.allow | — |
 
 ---
 
