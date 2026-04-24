@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24 (Sprint 6 closed; Sprint 7 promoted)
+last_updated: 2026-04-24 (Sprint 7 closed; Sprint 8 promoted)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 6
+sprint: 8
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,52 +35,8 @@ sprint: 6
 
 ## Active Sprint
 
-### Sprint 7 — Harness Init Fixes (active)
-> **Theme:** Resolve all P0 blockers found in Sprint 6 smoke test — fix hook path, allowedTools gaps, and stale README adoption commands so new users can start without errors.
-
-- [x] **TASK-041: Fix `${CLAUDE_PLUGIN_ROOT}` in settings.json hooks** — variable only valid in plugin `hooks/hooks.json` context; project-local settings.json must use a path that resolves from workspace root; currently SessionStart hook fails with "hook command references ${CLAUDE_PLUGIN_ROOT} but hook is not associated with a plugin"
-  - `scope`: quick
-  - `layers`: harness
-  - `api-change`: no
-  - `acceptance`: SessionStart hook runs `session-start.js` without the `${CLAUDE_PLUGIN_ROOT}` error; verify against CC_SPEC.md for correct project-hook path syntax
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: medium
-- [x] **TASK-043: Add harness node scripts to `allowedTools` in settings.json** — hooks invoke `node .claude/scripts/*.js` as shell commands; without an `allowedTools` entry (`Bash(node .claude/scripts/*)`) Claude prompts for approval on every hook fire; blocks automated harness flow
-  - `scope`: quick
-  - `layers`: harness
-  - `api-change`: no
-  - `acceptance`: SessionStart and PostToolUse hooks fire without a permission prompt; verify by running a fresh session against a scaffold dir
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-- [x] **TASK-045: Add `Bash(git -C *)` pattern to harness hook matchers and allowedTools** — PreToolUse hooks match `Bash(git commit*)` and `Bash(git push*)` but not `git -C <path> commit` or `git -C <path> push`; `-C` flag precedes the subcommand so existing patterns never fire; lint + typecheck hooks silently skip on all `git -C` invocations
-  - `scope`: quick
-  - `layers`: harness
-  - `api-change`: no
-  - `acceptance`: PreToolUse lint hook fires when `git -C <path> commit` is run; `allowedTools` in `settings.local.example.json` includes `Bash(git -C *)` pattern
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-- [x] **TASK-039: Add settings.local.json setup step to README + SETUP template** — session-start.js hard-blocks on first session; no README or template tells users to create settings.local.json from settings.local.example.json
-  - `scope`: quick
-  - `layers`: docs, templates
-  - `api-change`: no
-  - `acceptance`: README "How to adopt" section includes settings.local.json copy step; SETUP.md.template has a "First session" prerequisite section
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-- [x] **TASK-040: Update README "How to adopt" commands** — stale: references `07-todo-format.md` instead of `templates/TODO.md.template`; copies meta-repo CLAUDE.md instead of `templates/CLAUDE.md.template`; no settings.local.json step
-  - `scope`: quick
-  - `layers`: docs
-  - `api-change`: no
-  - `acceptance`: README "How to adopt" bash block uses `templates/CLAUDE.md.template` and `templates/TODO.md.template`; includes settings.local.json step; README stays within 50-line limit
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-
----
-
-## Backlog
-
-### P0 — Scaffold init blockers (remaining after Sprint 7)
-
-<!-- TASK-039, 040, 041, 043, 045 promoted to Sprint 7 -->
+### Sprint 8 — Scripts + Harness Polish (active)
+> **Theme:** Fix remaining P0 script bugs found in Sprint 6 smoke test — stale line-limit value in validate-scaffold.js, false ownership warning on fresh template, and missing cp/mkdir tracking in harness.
 
 - [ ] **TASK-037: Fix `validate-scaffold.js` README line limit stale value** — limit is 80, canonical is 50 (DOCS_Guide.md §README); CI gate will silently pass oversized READMEs
   - `scope`: quick
@@ -89,7 +45,6 @@ sprint: 6
   - `acceptance`: `validate-scaffold.js` fails when README.md exceeds 50 lines; passes at 50
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-
 - [ ] **TASK-038: Fix session-start.js false ownership warning on fresh template** — `YYYY-MM-DD` placeholder in TODO.md.template fails date regex; new users see spurious "no ownership header" warning on first session
   - `scope`: quick
   - `layers`: scripts
@@ -97,7 +52,6 @@ sprint: 6
   - `acceptance`: running session-start.js in a scratch dir with TODO.md.template-instantiated file produces no ownership warning
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-
 - [ ] **TASK-042: Add harness tracking for `Bash(cp*)` and `Bash(mkdir*)` in settings.json** — init flow (Phase I-3) and scaffold adoption use `cp` and `mkdir`; these bypass `track-change.js` and may trigger permission prompts without an explicit allowlist entry
   - `scope`: quick
   - `layers`: harness
@@ -105,6 +59,15 @@ sprint: 6
   - `acceptance`: `settings.json` PostToolUse hook covers `Bash(cp*)` and `Bash(mkdir*)`; or explicit `allowedTools` entry prevents permission prompts during init scaffold setup
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
+
+---
+
+## Backlog
+
+### P0 — Scaffold init blockers (remaining after Sprint 8)
+
+<!-- TASK-039, 040, 041, 043, 045 promoted to Sprint 7 — closed -->
+<!-- TASK-037, 038, 042 promoted to Sprint 8 -->
 
 ### P2 — Sprint 7+ candidates
 
@@ -169,19 +132,13 @@ sprint: 6
 
 > Sprints are moved here from Active Sprint once complete, then archived to `docs/CHANGELOG.md`. This section holds only the current in-progress sprint's running log.
 
-> Sprint 0–6 blocks archived → `docs/CHANGELOG.md`.
+> Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
 
-### Sprint 7 — In Progress
+### Sprint 8 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `.claude/settings.json` | Replace `${CLAUDE_PLUGIN_ROOT}` → `$CLAUDE_PROJECT_DIR` in all 5 hook commands | — |
-| `.claude/settings.json` | Add `permissions.allow: ["Bash(node .claude/scripts/*)"]` — suppress hook permission prompts | — |
-| `.claude/settings.json` | Add `Bash(git -C * commit*)` + `Bash(git -C * push*)` PreToolUse matchers; inline chain-guard for `Bash(git add*)` blocks `&& git commit` chains | — |
-| `.claude/settings.local.example.json` | Add `Bash(git -C *)` to permissions.allow | — |
-| `README.md` | Add settings.local.json copy step to "How to adopt" bash block | — |
-| `templates/SETUP.md.template` | Add "First session (Claude Code harness)" section with settings.local.json copy step | — |
-| `README.md` | Fix stale paths → templates/; collapse blueprint listing to 1 line; trim to 47 lines | — |
+| _(no entries yet)_ | — | — |
 
 ---
 
@@ -242,7 +199,8 @@ Sprint 3  →  Agents + Skills (project-local)       (done — TASK-013..017)
 Sprint 4  →  Skills craft + description audit + behavioral template  (done — TASK-015, 018, 019, 032)
 Sprint 5  →  Templates + validation               (done — TASK-020, 022, 023)
 Sprint 6  →  Doc templates + eval harness         (active — TASK-021, 024, 033)
-Sprint 7+ →  Long-term maintenance + stretch      (P3 backlog — TASK-025..031, 034, 036)
+Sprint 7  →  Harness init fixes                   (done — TASK-039, 040, 041, 043, 045)
+Sprint 8+ →  Scripts + harness polish + stretch   (active — TASK-037, 038, 042; P2/P3 backlog)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

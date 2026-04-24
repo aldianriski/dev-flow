@@ -16,6 +16,22 @@ status: current
 
 ---
 
+## Sprint 7 — Harness Init Fixes (2026-04-24)
+
+**Blueprint version:** PATCH bump — hook path fix, allowedTools additions, git -C matcher coverage, chain-guard, README adoption corrections
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/settings.json` | TASK-041: Replace `${CLAUDE_PLUGIN_ROOT}` → `$CLAUDE_PROJECT_DIR` in all 5 hook commands | — |
+| `.claude/settings.json` | TASK-043: Add `permissions.allow: ["Bash(node .claude/scripts/*)"]` — suppress hook permission prompts | — |
+| `.claude/settings.json` | TASK-045: Add `Bash(git -C * commit*)` + `Bash(git -C * push*)` PreToolUse matchers; inline chain-guard on `Bash(git add*)` blocks `&& git commit` chains | — |
+| `.claude/settings.local.example.json` | TASK-045: Add `Bash(git -C *)` to permissions.allow | — |
+| `README.md` | TASK-039: Add settings.local.json copy step to "How to adopt" | — |
+| `README.md` | TASK-040: Fix stale paths → templates/; collapse blueprint listing; trim to 47 lines | — |
+| `templates/SETUP.md.template` | TASK-039: Add "First session (Claude Code harness)" section | — |
+
+---
+
 ## Sprint 6 — Doc Templates + Eval Harness (2026-04-24)
 
 **Blueprint version:** MINOR bump — new eval harness (§17 Channel 4); new `docs/DECISIONS.md`; six doc templates shipped
