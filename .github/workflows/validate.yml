@@ -1,0 +1,21 @@
+name: Validate scaffold + blueprint
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Validate scaffold
+        run: node .claude/scripts/validate-scaffold.js
+
+      - name: Validate blueprint
+        run: node .claude/scripts/validate-blueprint.js
