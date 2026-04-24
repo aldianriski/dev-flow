@@ -64,3 +64,19 @@ python evals/measure.py evals/snapshots/
 ```bash
 python -m py_compile evals/measure.py
 ```
+
+## Baseline Anomalies (Sprint 10 — 2026-04-24)
+
+Full 9-skill run after TASK-048. Findings registered as canonical baseline behavior.
+
+| Skill | brevity_delta | terse_isolation_delta | Notes |
+|:------|:-------------|:----------------------|:------|
+| lean-doc-generator | −68.5% | +56.1% | Only skill with both brevity reduction and low isolation delta — HOW-filter genuinely compresses |
+| dev-flow | +2.7% | +379.2% | Skill output wordier than baseline — structured Gate 0 template is inherently detailed; expected |
+| system-design-reviewer | +8.9% | +546.9% | Lens table + severity ratings add words vs raw advice; expected for review-type skills |
+| task-decomposer | +7.5% | +376.2% | TASK-NNN structured output is more verbose than narrative; expected |
+| All others | negative | 200–480% | Brevity reduction achieved; high isolation delta = skill adds structure beyond bare conciseness |
+
+**Pattern**: Skills where value is structured output (reviewer, decomposer, orchestrator) will have `brevity_delta >= 0`. This is not a defect — the metric measures brevity, not quality. Use `how_content_flag` and manual review to assess quality.
+
+**how_content_flag** = 0 on all 9 skill arms — no HOW-content detected in any skill output.

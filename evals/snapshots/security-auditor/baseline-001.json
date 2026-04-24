@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "security-auditor",
+  "skill_version": "1.0.0",
+  "date": "2026-04-24",
+  "prompt": "Audit this Express route: app.post('/orders', (req, res) => { const query = 'SELECT * FROM orders WHERE user_id = ' + req.body.userId; db.query(query, (err, result) => { res.json(result.rows); }); })",
+  "arms": {
+    "baseline": {
+      "output": "I can see several security issues with this code:\n\n1. SQL Injection (Critical): The most serious issue is string concatenation to build the SQL query. req.body.userId is directly inserted into the query string. An attacker can send userId = '1 OR 1=1' to retrieve all orders, or userId = '1; DROP TABLE orders;--' to destroy data.\n\nFix: Use parameterized queries:\nconst query = 'SELECT * FROM orders WHERE user_id = $1';\ndb.query(query, [req.body.userId], callback);\n\n2. No authentication: The endpoint does not check if the user is logged in. Anyone can query any user's orders.\n\n3. No authorization: Even authenticated users can query any userId, not just their own orders.\n\n4. Data exposure: The endpoint returns all columns from the orders table with SELECT *. This might expose sensitive fields that should not be in the API response.\n\n5. No input validation: req.body.userId is not validated to be a valid integer before the query runs.\n\n6. No error handling: If the database query fails, the error object may be leaked to the client through the unhandled callback error.",
+      "token_count": 210
+    },
+    "terse_control": {
+      "output": "CRITICAL: SQL injection via string concat — use parameterized query ($1). Also: no auth, no authz (userId ownership), SELECT * over-exposes data, no error handling (err ignored in callback).",
+      "token_count": 42
+    },
+    "skill": {
+      "output": "## Security Audit\n\n### CRITICAL\n\n**SQL Injection** — `'SELECT * FROM orders WHERE user_id = ' + req.body.userId` is unparameterized string concatenation. Payload `'; DROP TABLE orders;--` executes arbitrary SQL. Fix required before any deploy:\n```javascript\ndb.query('SELECT * FROM orders WHERE user_id = $1', [req.body.userId], cb);\n```\n\n### BLOCKING\n\n**Missing authentication** — No session or JWT verification. Unauthenticated callers reach the DB query.\n\n**Missing authorization** — No ownership check. Authenticated user A can retrieve user B's orders by supplying B's userId.\n\n**Unhandled callback error** — `err` is ignored; if the DB query fails, `result` is undefined and `result.rows` throws, crashing the process.\n\n### NON-BLOCKING\n\n**`SELECT *` over-exposure** — Returns all columns; scope to explicit fields matching the API contract.\n\n**No input validation** — `req.body.userId` should be validated as a positive integer before query execution to produce a clean 400 instead of a DB error.",
+      "token_count": 187
+    }
+  }
+}

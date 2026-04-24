@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "task-decomposer",
+  "skill_version": "1.0.0",
+  "date": "2026-04-24",
+  "prompt": "Break down this feature: Add JWT authentication to the order-service Express API. Users should register, log in, and receive a token. Protected routes should reject requests without a valid token.",
+  "arms": {
+    "baseline": {
+      "output": "Here is how I would break down the JWT authentication feature:\n\n1. Install dependencies: You will need jsonwebtoken for token creation and verification and bcrypt for password hashing. Run: npm install jsonwebtoken bcrypt\n\n2. Create user model: Add a users table to your database with columns: id, email, password_hash, created_at. Write a migration file for this.\n\n3. Create registration endpoint: POST /auth/register that takes email and password, hashes the password with bcrypt, saves to the database, and returns a success message.\n\n4. Create login endpoint: POST /auth/login that takes email and password, looks up the user, verifies the password with bcrypt.compare, and if valid, creates a JWT with jsonwebtoken.sign() and returns it.\n\n5. Create auth middleware: A function that reads the Authorization header, extracts the Bearer token, verifies it with jsonwebtoken.verify(), and attaches the decoded user to req.user. If invalid or missing, returns 401.\n\n6. Protect routes: Add the auth middleware to routes that require authentication, like your /orders endpoints.\n\n7. Add tests: Write tests for registration, login, token validation, and rejection of invalid tokens.\n\nThis should take about 2 to 3 days depending on experience.",
+      "token_count": 222
+    },
+    "terse_control": {
+      "output": "Tasks: (1) DB migration: users table. (2) POST /auth/register — bcrypt hash + insert. (3) POST /auth/login — verify + jwt.sign. (4) Auth middleware — jwt.verify + 401 on fail. (5) Wire middleware to /orders. (6) Tests for each endpoint. ~5 files.",
+      "token_count": 56
+    },
+    "skill": {
+      "output": "## Task Decomposition — JWT Auth for order-service\n\n**Input type**: Feature description\n**Risk score**: MEDIUM — touches auth layer, requires DB migration, existing /orders routes become breaking\n**Recommended scope**: full\n\n### TASK-NNN: Add users table migration\n- `layers`: repository, ci\n- `api-change`: no\n- `acceptance`: migration runs clean; users table has id, email, password_hash, created_at; rollback drops table cleanly\n- `risk`: low\n\n### TASK-NNN+1: POST /auth/register endpoint\n- `layers`: api, repository\n- `api-change`: yes\n- `acceptance`: 201 on valid email+password; bcrypt hash stored (plaintext never persisted); 409 on duplicate email; 400 on missing fields\n- `risk`: low\n- `depends-on`: TASK-NNN\n\n### TASK-NNN+2: POST /auth/login + JWT issuance\n- `layers`: api, repository\n- `api-change`: yes\n- `acceptance`: 200 + signed JWT on valid credentials; 401 on wrong password; 401 on unknown email; token payload contains userId + exp\n- `risk`: low\n- `depends-on`: TASK-NNN\n\n### TASK-NNN+3: Auth middleware + protect /orders routes\n- `layers`: api\n- `api-change`: yes — existing /orders now returns 401 without token (breaking change for existing clients)\n- `acceptance`: valid token → req.user populated; missing/invalid/expired → 401; health endpoint bypassed\n- `risk`: medium\n- `depends-on`: TASK-NNN+2\n\n**Assumptions registered**: Single-instance (no token revocation needed); HS256 algorithm (RS256 deferred).",
+      "token_count": 267
+    }
+  }
+}

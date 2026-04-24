@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "refactor-advisor",
+  "skill_version": "1.0.0",
+  "date": "2026-04-24",
+  "prompt": "This function does everything: validates input, queries the database, formats the response, logs the result, and sends an email notification. It is 150 lines long. Advise on refactoring.",
+  "arms": {
+    "baseline": {
+      "output": "This is a classic case of a function that violates the Single Responsibility Principle. A function should do one thing and do it well.\n\nHere is how I would refactor this:\n\nFirst, extract input validation into a separate validateInput(data) function. This function should return either the validated data or throw a validation error.\n\nNext, extract the database query into a repository class or function, like OrderRepository.create(data). This separates the data access concern from the business logic.\n\nThen, extract the response formatting into a mapper or DTO, like toOrderResponse(dbRecord). This keeps your API contract separate from your database schema.\n\nFor logging, you should use a centralized logger that is injected as a dependency. Create a Logger class or use a library like Winston.\n\nFinally, extract the email notification into a separate service, like NotificationService.sendOrderConfirmation(order).\n\nAfter refactoring, your main function should only orchestrate these steps. It should be around 10-15 lines long and read like a story: validate, save, format, log, notify.\n\nThis approach makes each piece independently testable and replaceable without affecting the others.",
+      "token_count": 196
+    },
+    "terse_control": {
+      "output": "SRP violation — 5 concerns in one function. Extract: validateInput(), repository layer, response mapper, injected logger, notification service. Orchestrator drops to 10-15 lines. Each unit independently testable.",
+      "token_count": 40
+    },
+    "skill": {
+      "output": "## Refactor Assessment\n\n**Smell**: God Function — 5 responsibilities, 150 lines, untestable in isolation.\n\n**Lens 1 — SRP**: Each responsibility is a separate change axis. A notification provider swap requires touching the same function as a validation rule change — high coupling.\n\n**Lens 2 — Testability**: DB + email + logging in one unit forces all three to be live or mocked simultaneously. Extraction makes each independently verifiable.\n\n**Risk**: LOW — pure structural split, no behavior change.\n\n**Recommended splits**:\n| Extract | To | Why |\n|:--------|:---|:----|\n| Input validation | `validateInput(data)` | Reusable; testable with no DB |\n| DB query | `Repository.create(data)` | Mockable in service tests |\n| Response format | `toDTO(record)` | Decouples DB schema from API contract |\n| Notification | `NotificationService.notify(event)` | Swappable provider |\n\n**Orchestrator**: drops from 150 → ~15 lines after extraction.\n\n**Do not extract logging** — inject logger as dependency instead; extraction adds indirection without testability gain.",
+      "token_count": 183
+    }
+  }
+}

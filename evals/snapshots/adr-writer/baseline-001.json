@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "adr-writer",
+  "skill_version": "1.0.0",
+  "date": "2026-04-24",
+  "prompt": "We decided to use PostgreSQL instead of MongoDB for our new user-service. The main reason was that our data has strong relational constraints between users, roles, and permissions. Document this decision.",
+  "arms": {
+    "baseline": {
+      "output": "Sure, I'll help you document this architectural decision. When choosing a database, there are many factors to consider. In your case, you've chosen PostgreSQL over MongoDB.\n\nPostgreSQL is a relational database that has been around since 1996. It supports ACID transactions, complex joins, and has excellent support for structured data. MongoDB is a document database that stores data in BSON format and is excellent for flexible schemas.\n\nFor your user-service, you've decided to go with PostgreSQL. Here's how to document this:\n\n## Architecture Decision Record\n\n**Title**: Use PostgreSQL for user-service database\n\n**Status**: Accepted\n\n**Context**: We need a database for our user-service that handles users, roles, and permissions.\n\n**Decision**: We will use PostgreSQL because our data has relational constraints between users, roles, and permissions. PostgreSQL supports foreign keys and referential integrity natively. Complex queries across these related entities are easier in SQL.\n\n**Consequences**: The team needs to know SQL. Schema changes require migrations. We lose the flexible schema benefits of MongoDB.",
+      "token_count": 192
+    },
+    "terse_control": {
+      "output": "## ADR: PostgreSQL over MongoDB for user-service\n\n**Status**: Accepted\n\n**Context**: User/role/permission data has strong relational constraints.\n\n**Decision**: PostgreSQL.\n\n**Rationale**: Referential integrity, JOIN queries across entities, ACID transactions.\n\n**Consequences**: SQL expertise required; schema migrations needed; no flexible schema.",
+      "token_count": 58
+    },
+    "skill": {
+      "output": "## ADR-NNN: Use PostgreSQL for user-service\n\n**Date**: 2026-04-24\n**Status**: Accepted\n**Deciders**: [team]\n\n### Context\n\nuser-service manages users, roles, and permissions with hard relational constraints. Foreign keys enforce role-assignment integrity. A flexible-schema store offers no advantage and would push constraint enforcement into application code.\n\n### Decision\n\nPostgreSQL.\n\n### Rationale\n\n- Native foreign keys enforce user→role→permission referential integrity at the DB layer\n- JOIN queries across all three entities are standard SQL — no application-side aggregation\n- ACID transactions guard multi-table permission updates\n\n### Consequences\n\n**Positive**: Constraint enforcement in DB not app code; standard SQL tooling; strong consistency.\n**Negative**: Schema migrations required for structural changes; no flexible document storage.\n**Risks**: None identified — team has existing PostgreSQL experience.",
+      "token_count": 148
+    }
+  }
+}
