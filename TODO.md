@@ -45,7 +45,7 @@ sprint: 11
   - `acceptance`: `/dev-flow sprint` reads all `[ ]` tasks in active sprint; weight score determines single-phase vs two-phase split; each task gets individual Gate 0 + validate; single Gate 2 per phase aggregates full diff; hard stop if any task scores full-scope or risk:high (must be run standalone); split plan shown to human before execution begins
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: medium
-- [ ] **TASK-036: Context compression sub-skill (`/dev-flow:compress`)** — compress `CLAUDE.md` and memory files to caveman-style prose for input token savings; write compressed version in-place, keep `.original.md` human-readable backup; validate that headings, code blocks, URLs, file paths, commands, and version numbers pass through untouched; Python 3.10+
+- [x] **TASK-036: Context compression sub-skill (`/dev-flow:compress`)** — compress `CLAUDE.md` and memory files to caveman-style prose for input token savings; write compressed version in-place, keep `.original.md` human-readable backup; validate that headings, code blocks, URLs, file paths, commands, and version numbers pass through untouched; Python 3.10+
   - `scope`: full
   - `layers`: skills, scripts
   - `api-change`: no
@@ -96,6 +96,12 @@ sprint: 11
 | File | Change | ADR |
 |:-----|:-------|:----|
 | `.claude/skills/dev-flow/SKILL.md` | TASK-044: Add sprint mode — weight scoring, Sprint Plan template, single/two-phase split, hard stop for scope:full+risk:high | — |
+| `.claude/skills/dev-flow-compress/SKILL.md` | TASK-036: New sub-skill — `/dev-flow:compress` spec, pass-through rules, compression rules, Red Flags | — |
+| `.claude/scripts/compress.py` | TASK-036: Python 3.10+ compress script — path traversal guard, `.md` guard, backup-before-write, CRLF-safe | — |
+| `.claude/scripts/__tests__/compress.test.py` | TASK-036: 17 unittest tests — backup, guards, pass-through, compression, CRLF | — |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-036: Add Sub-commands dispatch section for `:compress` | — |
+| `.claude/skills/MANIFEST.json` | TASK-036: Bind dev-flow-compress skill (user-invocable: false) | — |
+| `.claude/CLAUDE.md` | TASK-036: Add Python 3.10+ to stack + commands section | — |
 
 ---
 
@@ -116,7 +122,7 @@ SCAFFOLD WORK
 - Every SKILL.md that depends on AI not rationalizing gets a "Red Flags" table.
 - Heavy reference content (>100 lines, e.g. patterns catalog, anti-pattern lists) goes in
   a sibling file under skills/<name>/references/, NOT inline in SKILL.md.
-- Scripts are pure Node (>=18). No bash-only constructs. Tested on Windows Git Bash + Linux.
+- Scripts are Node.js ≥18 or Python 3.10+. No bash-only constructs. Tested on Windows Git Bash + Linux.
 - Every script under .claude/scripts/ gets a sibling __tests__/<name>.test.js.
 
 DOC WORK

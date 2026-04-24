@@ -60,6 +60,14 @@ digraph dev_flow {
 
 ---
 
+## Sub-commands
+
+| Sub-command | Action | Script |
+|:------------|:-------|:-------|
+| `:compress <target-file>` | Compress target `.md` file to caveman prose in-place | `scripts/compress.py` |
+
+---
+
 ## Phase Checklist (full mode — Phases 0–10)
 
 ### Phase 0 — Parse

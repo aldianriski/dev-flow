@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "generated": "2026-04-21",
+  "skills": [
+    {
+      "name": "adr-writer",
+      "path": "adr-writer/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "dev-flow",
+      "path": "dev-flow/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "lean-doc-generator",
+      "path": "lean-doc-generator/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "pr-reviewer",
+      "path": "pr-reviewer/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "refactor-advisor",
+      "path": "refactor-advisor/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "release-manager",
+      "path": "release-manager/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "security-auditor",
+      "path": "security-auditor/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "system-design-reviewer",
+      "path": "system-design-reviewer/SKILL.md",
+      "last-validated": "2026-04-21",
+      "user-invocable": true
+    },
+    {
+      "name": "task-decomposer",
+      "path": "task-decomposer/SKILL.md",
+      "last-validated": "2026-04-20",
+      "user-invocable": true
+    },
+    {
+      "name": "dev-flow-compress",
+      "path": "dev-flow-compress/SKILL.md",
+      "last-validated": "2026-04-24",
+      "user-invocable": false
+    }
+  ]
+}
