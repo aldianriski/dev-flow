@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24 (Sprint 7 closed; Sprint 8 promoted)
+last_updated: 2026-04-24 (Sprint 8 closed; Sprint 9 promoted)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 8
+sprint: 9
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,28 +35,28 @@ sprint: 8
 
 ## Active Sprint
 
-### Sprint 8 — Scripts + Harness Polish (active)
-> **Theme:** Fix remaining P0 script bugs found in Sprint 6 smoke test — stale line-limit value in validate-scaffold.js, false ownership warning on fresh template, and missing cp/mkdir tracking in harness.
+### Sprint 9 — Workflow Continuity + Compat (active)
+> **Theme:** Close workflow gaps: Python version compat for eval harness, continue/done prompt after commit, auto-sprint-rotation on sprint close.
 
-- [x] **TASK-037: Fix `validate-scaffold.js` README line limit stale value** — limit is 80, canonical is 50 (DOCS_Guide.md §README); CI gate will silently pass oversized READMEs
+- [ ] **TASK-047: Verify `evals/measure.py` compatibility on Python 3.10–3.12** — current dev machine runs 3.14 (confirmed by `.pyc` filename `cpython-314`); `Path.is_relative_to()` is 3.9+ so logic is safe, but untested on 3.10/3.11/3.12; validate or add `sys.version_info` guard with fallback for `is_relative_to`
   - `scope`: quick
   - `layers`: scripts
   - `api-change`: no
-  - `acceptance`: `validate-scaffold.js` fails when README.md exceeds 50 lines; passes at 50
+  - `acceptance`: `measure.py` runs without error on Python 3.10, 3.11, 3.12 (CI matrix or manual test); fallback documented in `evals/README.md` if `is_relative_to` unavailable
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [x] **TASK-038: Fix session-start.js false ownership warning on fresh template** — `YYYY-MM-DD` placeholder in TODO.md.template fails date regex; new users see spurious "no ownership header" warning on first session
+- [ ] **TASK-049: Add continue/done prompt to Phase 9 commit flow** — after commit succeeds, orchestrator asks "continue to next task or end session?"; if continue → skip Session Close, go directly to Phase 0 of next `[ ]` task in Active Sprint; if done → run full Phase 10 Session Close; enables uninterrupted improvement loops without manual `/dev-flow` re-invocation
   - `scope`: quick
-  - `layers`: scripts
+  - `layers`: skills
   - `api-change`: no
-  - `acceptance`: running session-start.js in a scratch dir with TODO.md.template-instantiated file produces no ownership warning
+  - `acceptance`: after commit in Phase 9, orchestrator outputs "Next: [TASK-NNN title] — type 'next' to continue or 'done' to close session"; 'next' jumps to Phase 0 of next task; 'done' runs Phase 10; if no remaining `[ ]` tasks → skip prompt, go directly to Phase 10 with sprint-complete flag
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [x] **TASK-042: Add harness tracking for `Bash(cp*)` and `Bash(mkdir*)` in settings.json** — init flow (Phase I-3) and scaffold adoption use `cp` and `mkdir`; these bypass `track-change.js` and may trigger permission prompts without an explicit allowlist entry
+- [ ] **TASK-046: Auto-create next sprint when active sprint is fully closed** — Session Close (Phase 10) detects all `[ ]` tasks in Active Sprint are done; prompts to rotate sprint block to `docs/CHANGELOG.md` and promote next P0→P1 backlog tasks into a new Active Sprint; prevents dead-end sessions where sprint completes but next work isn't queued
   - `scope`: quick
-  - `layers`: harness
+  - `layers`: skills
   - `api-change`: no
-  - `acceptance`: `settings.json` PostToolUse hook covers `Bash(cp*)` and `Bash(mkdir*)`; or explicit `allowedTools` entry prevents permission prompts during init scaffold setup
+  - `acceptance`: Phase 10 Session Close checks for zero open `[ ]` tasks in Active Sprint; if none remain, outputs sprint rotation checklist and proposed next sprint from top Backlog items; human approves before TODO.md is written
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
 
@@ -73,21 +73,7 @@ sprint: 8
 
 <!-- TASK-021, TASK-024, TASK-033 promoted to Sprint 6 -->
 
-- [ ] **TASK-046: Auto-create next sprint when active sprint is fully closed** — Session Close (Phase 10) detects all `[ ]` tasks in Active Sprint are done; prompts to rotate sprint block to `docs/CHANGELOG.md` and promote next P0→P1 backlog tasks into a new Active Sprint; prevents dead-end sessions where sprint completes but next work isn't queued
-  - `scope`: quick
-  - `layers`: skills
-  - `api-change`: no
-  - `acceptance`: Phase 10 Session Close checks for zero open `[ ]` tasks in Active Sprint; if none remain, outputs sprint rotation checklist and proposed next sprint from top Backlog items; human approves before TODO.md is written
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-
-- [ ] **TASK-047: Verify `evals/measure.py` compatibility on Python 3.10–3.12** — current dev machine runs 3.14 (confirmed by `.pyc` filename `cpython-314`); `Path.is_relative_to()` is 3.9+ so logic is safe, but untested on 3.10/3.11/3.12; validate or add `sys.version_info` guard with fallback for `is_relative_to`
-  - `scope`: quick
-  - `layers`: scripts
-  - `api-change`: no
-  - `acceptance`: `measure.py` runs without error on Python 3.10, 3.11, 3.12 (CI matrix or manual test); fallback documented in `evals/README.md` if `is_relative_to` unavailable
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
+<!-- TASK-046, 047, 049 promoted to Sprint 9 -->
 
 - [ ] **TASK-048: Apply three-arm eval to all shipped skills post-TASK-033** — TASK-033 ships harness + one baseline snapshot; follow-up: run eval against each of the 9 skills in MANIFEST.json; commit a baseline snapshot per skill; register results as the canonical baseline for future skill change reviews (prerequisite for TASK-026 RED-GREEN-REFACTOR enforcement)
   - `scope`: full
@@ -97,14 +83,6 @@ sprint: 8
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
   - `depends-on`: TASK-033
-
-- [ ] **TASK-049: Add continue/done prompt to Phase 9 commit flow** — after commit succeeds, orchestrator asks "continue to next task or end session?"; if continue → skip Session Close, go directly to Phase 0 of next `[ ]` task in Active Sprint; if done → run full Phase 10 Session Close; enables uninterrupted improvement loops without manual `/dev-flow` re-invocation
-  - `scope`: quick
-  - `layers`: skills
-  - `api-change`: no
-  - `acceptance`: after commit in Phase 9, orchestrator outputs "Next: [TASK-NNN title] — type 'next' to continue or 'done' to close session"; 'next' jumps to Phase 0 of next task; 'done' runs Phase 10; if no remaining `[ ]` tasks → skip prompt, go directly to Phase 10 with sprint-complete flag
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
 
 - [ ] **TASK-044: Sprint-completion mode — auto-run active sprint tasks in one flow** — no explicit mode keyword; dev-flow reads active sprint task list, scores total weight (scope + file count estimate + risk), and decides: if sprint fits in one phase run all tasks sequentially (Gate 0 → implement → validate per task, single Gate 2); if sprint is too large auto-split into Phase 1 / Phase 2 and present the split plan for human approval before starting
   - `scope`: full
@@ -134,15 +112,10 @@ sprint: 8
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
 
-### Sprint 8 — In Progress
+### Sprint 9 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `.claude/scripts/validate-scaffold.js` | Fix README.md + docs/README.md line limit 80 → 50; all 11 tests pass | — |
-| `.claude/scripts/session-start.js` | Fix false ownership warning: use `hasLastUpdated` field-presence check instead of date regex for "no header" guard | — |
-| `.claude/scripts/__tests__/session-start.test.js` | Add regression test: YYYY-MM-DD placeholder must not trigger ownership warning | — |
-| `.claude/settings.json` | Add `Bash(cp*)` and `Bash(mkdir*)` to permissions.allow — prevent init-flow permission prompts | — |
-| `.claude/settings.local.example.json` | Add `Bash(cp*)` and `Bash(mkdir*)` to permissions.allow | — |
 
 ---
 
@@ -204,7 +177,8 @@ Sprint 4  →  Skills craft + description audit + behavioral template  (done —
 Sprint 5  →  Templates + validation               (done — TASK-020, 022, 023)
 Sprint 6  →  Doc templates + eval harness         (active — TASK-021, 024, 033)
 Sprint 7  →  Harness init fixes                   (done — TASK-039, 040, 041, 043, 045)
-Sprint 8+ →  Scripts + harness polish + stretch   (active — TASK-037, 038, 042; P2/P3 backlog)
+Sprint 8  →  Scripts + harness polish              (done — TASK-037, 038, 042)
+Sprint 9+ →  Workflow continuity + compat + stretch (active — TASK-047, 049, 046; P2/P3 backlog)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

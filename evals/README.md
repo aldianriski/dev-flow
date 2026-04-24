@@ -45,6 +45,8 @@ python evals/measure.py evals/snapshots/lean-doc-generator/baseline-001.json
 python evals/measure.py evals/snapshots/
 ```
 
+**Python version:** 3.8+. `Path.is_relative_to()` (3.9+) is guarded with a `Path.parents` fallback for older runtimes.
+
 ## Metrics
 
 | Metric | Description |

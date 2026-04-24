@@ -81,7 +81,13 @@ def main() -> None:
         sys.exit(1)
 
     target = Path(sys.argv[1])
-    if not target.resolve().is_relative_to(_PROJECT_ROOT):
+    resolved = target.resolve()
+    try:
+        inside = resolved.is_relative_to(_PROJECT_ROOT)
+    except AttributeError:
+        # Python < 3.9: Path.is_relative_to unavailable
+        inside = _PROJECT_ROOT in resolved.parents or resolved == _PROJECT_ROOT
+    if not inside:
         print(f"Error: path must be within project root ({_PROJECT_ROOT})", file=sys.stderr)
         sys.exit(1)
 
