@@ -24,6 +24,7 @@ Gate-driven workflow for any software task. Choose a mode, follow the phases, st
 | `hotfix` | Production emergency | No gates — rollback check + lint warn only |
 | `review` | Review existing code or open PR | Gate 2 only |
 | `resume` | Interrupted session with an existing design plan | Resumes at first `[ ]` micro-task |
+| `sprint` | Run all `[ ]` tasks in Active Sprint in one flow | Gate 0 per task → single Gate 2 per phase |
 
 ```dot
 digraph dev_flow {
@@ -39,20 +40,23 @@ digraph dev_flow {
   kw -> hotfix [label="hotfix"];
   kw -> review [label="review PR#"];
   kw -> resume [label="resume TASK-N"];
+  kw -> sprint [label="sprint"];
   kw -> task   [label="(none)"];
   task -> full      [label="yes — Path A"];
   task -> free      [label="no"];
   free -> decompose [label="yes — Path B"];
   free -> full      [label="no → top backlog"];
   decompose [label="task-decomposer\n(Gate 0 combined)"];
+  sprint [label="Sprint Mode\n(weight score\n→ plan)"];
 }
 ```
 
 **Freeform detection order** (orchestrator checks in order):
-1. `/dev-flow [text that is not TASK-NNN and not a mode keyword]` → Path B (task-decomposer)
-2. `/dev-flow` with no active tasks in TODO.md → Path B
-3. `/dev-flow` with active tasks → Path A (full mode)
-4. `/dev-flow full TASK-NNN` → Path A explicit, skip decomposer
+1. `/dev-flow sprint` → Sprint Mode (weight score → plan)
+2. `/dev-flow [text that is not TASK-NNN and not a mode keyword]` → Path B (task-decomposer)
+3. `/dev-flow` with no active tasks in TODO.md → Path B
+4. `/dev-flow` with active tasks → Path A (full mode)
+5. `/dev-flow full TASK-NNN` → Path A explicit, skip decomposer
 
 ---
 
@@ -263,6 +267,52 @@ Type 'continue' to resume, or provide corrections.
 ```
 
 If design plan not found → **HARD STOP**: "Design plan for TASK-NNN not found. Options: (a) paste Gate 1 plan, (b) re-run Gate 1, (c) start from Gate 0."
+
+---
+
+## Sprint Mode
+
+Entry: `/dev-flow sprint`
+
+### Step 1 — Score all `[ ]` tasks in Active Sprint
+
+| Field | Score |
+|:------|:------|
+| `scope:quick` | 1 |
+| `scope:full` | 3 |
+| `risk:low` | 0 |
+| `risk:medium` | 1 |
+| `risk:high` | 2 |
+
+Task weight = scope score + risk score. Total = sum across all open tasks.
+
+### Step 2 — Classify + output Sprint Plan
+
+```
+## Sprint N Plan — [Sprint Name]
+**Tasks scored**:
+| Task | Title | Scope | Risk | Weight |
+|:-----|:------|:------|:-----|:-------|
+| TASK-NNN | [title] | [scope] | [risk] | [N] |
+**Total weight**: N → [single-phase | two-phase | blocked]
+
+**Phase 1**: [task list]
+**Phase 2** (if two-phase): [task list]
+**Blocked — run standalone**: [tasks where scope:full + risk:high, or "none"]
+
+Type 'run' to execute Phase 1, or provide corrections.
+```
+
+Classification rules:
+- Total ≤ 6, no blocked tasks → **single-phase** (all tasks sequentially, one Gate 2)
+- Total 7–12 → **two-phase** (present split, lighter tasks in Phase 1; await `run` before each phase)
+- Any task with `scope:full` + `risk:high` → **HARD STOP** for that task — list as blocked, remove from phase plan
+
+### Step 3 — Execute
+
+Per task in the phase: Gate 0 → Implement → Validate → Test. Mark `[x]` in TODO.md after each task passes.
+Single Gate 2 at end of phase aggregates full diff across all tasks in that phase.
+After Gate 2: if two-phase, output Phase 2 plan and await `run`. After final phase: Phase 9 commit flow.
 
 ---
 
