@@ -38,7 +38,7 @@ sprint: 6
 ### Sprint 7 — Harness Init Fixes (active)
 > **Theme:** Resolve all P0 blockers found in Sprint 6 smoke test — fix hook path, allowedTools gaps, and stale README adoption commands so new users can start without errors.
 
-- [ ] **TASK-041: Fix `${CLAUDE_PLUGIN_ROOT}` in settings.json hooks** — variable only valid in plugin `hooks/hooks.json` context; project-local settings.json must use a path that resolves from workspace root; currently SessionStart hook fails with "hook command references ${CLAUDE_PLUGIN_ROOT} but hook is not associated with a plugin"
+- [x] **TASK-041: Fix `${CLAUDE_PLUGIN_ROOT}` in settings.json hooks** — variable only valid in plugin `hooks/hooks.json` context; project-local settings.json must use a path that resolves from workspace root; currently SessionStart hook fails with "hook command references ${CLAUDE_PLUGIN_ROOT} but hook is not associated with a plugin"
   - `scope`: quick
   - `layers`: harness
   - `api-change`: no
@@ -175,7 +175,7 @@ sprint: 6
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| _(no entries yet)_ | — | — |
+| `.claude/settings.json` | Replace `${CLAUDE_PLUGIN_ROOT}` → `$CLAUDE_PROJECT_DIR` in all 5 hook commands | — |
 
 ---
 
