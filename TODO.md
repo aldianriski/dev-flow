@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-22 (Sprint 5 closed; Sprint 6 promoted)
+last_updated: 2026-04-24 (Sprint 6 closed; Sprint 7 promoted)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
 sprint: 6
@@ -35,36 +35,52 @@ sprint: 6
 
 ## Active Sprint
 
-### Sprint 6 — Doc Templates + Eval Harness (active)
-> **Theme:** Complete the template set with six doc templates, smoke-test the full scaffold end-to-end, and implement the three-arm eval harness needed for skill TDD evidence.
+### Sprint 7 — Harness Init Fixes (active)
+> **Theme:** Resolve all P0 blockers found in Sprint 6 smoke test — fix hook path, allowedTools gaps, and stale README adoption commands so new users can start without errors.
 
-- [x] **TASK-021: Author `docs/*.md.template` set** — README, ARCHITECTURE, DECISIONS, SETUP, AI_CONTEXT, CHANGELOG; each includes lean-doc ownership header and `[CUSTOMIZE]` markers
+- [ ] **TASK-041: Fix `${CLAUDE_PLUGIN_ROOT}` in settings.json hooks** — variable only valid in plugin `hooks/hooks.json` context; project-local settings.json must use a path that resolves from workspace root; currently SessionStart hook fails with "hook command references ${CLAUDE_PLUGIN_ROOT} but hook is not associated with a plugin"
   - `scope`: quick
-  - `layers`: templates, docs
+  - `layers`: harness
   - `api-change`: no
-  - `acceptance`: six template files exist under `templates/`; each has ownership header, at least one `[CUSTOMIZE]` marker, and one filled-in example section
+  - `acceptance`: SessionStart hook runs `session-start.js` without the `${CLAUDE_PLUGIN_ROOT}` error; verify against CC_SPEC.md for correct project-hook path syntax
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: medium
+- [ ] **TASK-043: Add harness node scripts to `allowedTools` in settings.json** — hooks invoke `node .claude/scripts/*.js` as shell commands; without an `allowedTools` entry (`Bash(node .claude/scripts/*)`) Claude prompts for approval on every hook fire; blocks automated harness flow
+  - `scope`: quick
+  - `layers`: harness
+  - `api-change`: no
+  - `acceptance`: SessionStart and PostToolUse hooks fire without a permission prompt; verify by running a fresh session against a scaffold dir
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [x] **TASK-024: Smoke-test the full scaffold against a scratch directory** — proves the starter actually starts; run `/dev-flow init` against a fresh dir; capture any issues as P0 backlog items
+- [ ] **TASK-045: Add `Bash(git -C *)` pattern to harness hook matchers and allowedTools** — PreToolUse hooks match `Bash(git commit*)` and `Bash(git push*)` but not `git -C <path> commit` or `git -C <path> push`; `-C` flag precedes the subcommand so existing patterns never fire; lint + typecheck hooks silently skip on all `git -C` invocations
   - `scope`: quick
-  - `layers`: scripts, docs
+  - `layers`: harness
   - `api-change`: no
-  - `acceptance`: `/dev-flow init` completes against a scratch directory without hard errors; any P0 issues captured in Backlog before Gate 2
+  - `acceptance`: PreToolUse lint hook fires when `git -C <path> commit` is run; `allowedTools` in `settings.local.example.json` includes `Bash(git -C *)` pattern
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: medium
-- [x] **TASK-033: Implement three-arm skill eval harness** — `baseline / terse-control / skill` methodology; Python 3.10+; offline `measure.py` + committed snapshots in `evals/snapshots/`; prerequisite for TASK-026. **Ref:** https://github.com/juliusbrussee/caveman (evals/ directory and three-arm harness methodology)
-  - `scope`: full
-  - `layers`: scripts, ci
+  - `risk`: low
+- [ ] **TASK-039: Add settings.local.json setup step to README + SETUP template** — session-start.js hard-blocks on first session; no README or template tells users to create settings.local.json from settings.local.example.json
+  - `scope`: quick
+  - `layers`: docs, templates
   - `api-change`: no
-  - `acceptance`: `measure.py` reads committed snapshots without API calls; `evals/snapshots/` has at least one baseline result; methodology documented in `evals/README.md`
+  - `acceptance`: README "How to adopt" section includes settings.local.json copy step; SETUP.md.template has a "First session" prerequisite section
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: medium
+  - `risk`: low
+- [ ] **TASK-040: Update README "How to adopt" commands** — stale: references `07-todo-format.md` instead of `templates/TODO.md.template`; copies meta-repo CLAUDE.md instead of `templates/CLAUDE.md.template`; no settings.local.json step
+  - `scope`: quick
+  - `layers`: docs
+  - `api-change`: no
+  - `acceptance`: README "How to adopt" bash block uses `templates/CLAUDE.md.template` and `templates/TODO.md.template`; includes settings.local.json step; README stays within 50-line limit
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: low
 
 ---
 
 ## Backlog
 
-### P0 — Scaffold init blockers (found in TASK-024 smoke test, 2026-04-24)
+### P0 — Scaffold init blockers (remaining after Sprint 7)
+
+<!-- TASK-039, 040, 041, 043, 045 promoted to Sprint 7 -->
 
 - [ ] **TASK-037: Fix `validate-scaffold.js` README line limit stale value** — limit is 80, canonical is 50 (DOCS_Guide.md §README); CI gate will silently pass oversized READMEs
   - `scope`: quick
@@ -82,38 +98,6 @@ sprint: 6
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
 
-- [ ] **TASK-039: Add settings.local.json setup step to README + SETUP template** — session-start.js hard-blocks on first session; no README or template tells users to create settings.local.json from settings.local.example.json
-  - `scope`: quick
-  - `layers`: docs, templates
-  - `api-change`: no
-  - `acceptance`: README "How to adopt" section includes settings.local.json copy step; SETUP.md.template has a "First session" prerequisite section
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-
-- [ ] **TASK-040: Update README "How to adopt" commands** — stale: references `07-todo-format.md` instead of `templates/TODO.md.template`; copies meta-repo CLAUDE.md instead of `templates/CLAUDE.md.template`; no settings.local.json step
-  - `scope`: quick
-  - `layers`: docs
-  - `api-change`: no
-  - `acceptance`: README "How to adopt" bash block uses `templates/CLAUDE.md.template` and `templates/TODO.md.template`; includes settings.local.json step; README stays within 50-line limit
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-
-- [ ] **TASK-041: Fix `${CLAUDE_PLUGIN_ROOT}` in settings.json hooks** — variable only valid in plugin `hooks/hooks.json` context; project-local settings.json must use a path that resolves from workspace root; currently SessionStart hook fails with "hook command references ${CLAUDE_PLUGIN_ROOT} but hook is not associated with a plugin"
-  - `scope`: quick
-  - `layers`: harness
-  - `api-change`: no
-  - `acceptance`: SessionStart hook runs `session-start.js` without the `${CLAUDE_PLUGIN_ROOT}` error; verify against CC_SPEC.md for correct project-hook path syntax
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: medium
-
-- [ ] **TASK-043: Add harness node scripts to `allowedTools` in settings.json** — hooks invoke `node .claude/scripts/*.js` as shell commands; without an `allowedTools` entry (`Bash(node .claude/scripts/*)`) Claude prompts for approval on every hook fire; blocks automated harness flow
-  - `scope`: quick
-  - `layers`: harness
-  - `api-change`: no
-  - `acceptance`: SessionStart and PostToolUse hooks fire without a permission prompt; verify by running a fresh session against a scaffold dir
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-
 - [ ] **TASK-042: Add harness tracking for `Bash(cp*)` and `Bash(mkdir*)` in settings.json** — init flow (Phase I-3) and scaffold adoption use `cp` and `mkdir`; these bypass `track-change.js` and may trigger permission prompts without an explicit allowlist entry
   - `scope`: quick
   - `layers`: harness
@@ -125,6 +109,39 @@ sprint: 6
 ### P2 — Sprint 7+ candidates
 
 <!-- TASK-021, TASK-024, TASK-033 promoted to Sprint 6 -->
+
+- [ ] **TASK-046: Auto-create next sprint when active sprint is fully closed** — Session Close (Phase 10) detects all `[ ]` tasks in Active Sprint are done; prompts to rotate sprint block to `docs/CHANGELOG.md` and promote next P0→P1 backlog tasks into a new Active Sprint; prevents dead-end sessions where sprint completes but next work isn't queued
+  - `scope`: quick
+  - `layers`: skills
+  - `api-change`: no
+  - `acceptance`: Phase 10 Session Close checks for zero open `[ ]` tasks in Active Sprint; if none remain, outputs sprint rotation checklist and proposed next sprint from top Backlog items; human approves before TODO.md is written
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: low
+
+- [ ] **TASK-047: Verify `evals/measure.py` compatibility on Python 3.10–3.12** — current dev machine runs 3.14 (confirmed by `.pyc` filename `cpython-314`); `Path.is_relative_to()` is 3.9+ so logic is safe, but untested on 3.10/3.11/3.12; validate or add `sys.version_info` guard with fallback for `is_relative_to`
+  - `scope`: quick
+  - `layers`: scripts
+  - `api-change`: no
+  - `acceptance`: `measure.py` runs without error on Python 3.10, 3.11, 3.12 (CI matrix or manual test); fallback documented in `evals/README.md` if `is_relative_to` unavailable
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: low
+
+- [ ] **TASK-048: Apply three-arm eval to all shipped skills post-TASK-033** — TASK-033 ships harness + one baseline snapshot; follow-up: run eval against each of the 9 skills in MANIFEST.json; commit a baseline snapshot per skill; register results as the canonical baseline for future skill change reviews (prerequisite for TASK-026 RED-GREEN-REFACTOR enforcement)
+  - `scope`: full
+  - `layers`: scripts, skills
+  - `api-change`: no
+  - `acceptance`: `evals/snapshots/<skill>/baseline-001.json` exists for all 9 skills; `python evals/measure.py evals/snapshots/` runs clean across all; results reviewed and anomalies noted in `evals/README.md`
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: low
+  - `depends-on`: TASK-033
+
+- [ ] **TASK-049: Add continue/done prompt to Phase 9 commit flow** — after commit succeeds, orchestrator asks "continue to next task or end session?"; if continue → skip Session Close, go directly to Phase 0 of next `[ ]` task in Active Sprint; if done → run full Phase 10 Session Close; enables uninterrupted improvement loops without manual `/dev-flow` re-invocation
+  - `scope`: quick
+  - `layers`: skills
+  - `api-change`: no
+  - `acceptance`: after commit in Phase 9, orchestrator outputs "Next: [TASK-NNN title] — type 'next' to continue or 'done' to close session"; 'next' jumps to Phase 0 of next task; 'done' runs Phase 10; if no remaining `[ ]` tasks → skip prompt, go directly to Phase 10 with sprint-complete flag
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: low
 
 - [ ] **TASK-044: Sprint-completion mode — auto-run active sprint tasks in one flow** — no explicit mode keyword; dev-flow reads active sprint task list, scores total weight (scope + file count estimate + risk), and decides: if sprint fits in one phase run all tasks sequentially (Gate 0 → implement → validate per task, single Gate 2); if sprint is too large auto-split into Phase 1 / Phase 2 and present the split plan for human approval before starting
   - `scope`: full
@@ -152,26 +169,13 @@ sprint: 6
 
 > Sprints are moved here from Active Sprint once complete, then archived to `docs/CHANGELOG.md`. This section holds only the current in-progress sprint's running log.
 
-> Sprint 0–5 blocks archived → `docs/CHANGELOG.md`.
+> Sprint 0–6 blocks archived → `docs/CHANGELOG.md`.
 
-### Sprint 6 — In Progress
+### Sprint 7 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `templates/README.md.template` | New — README template, 50-line limit, License section | — |
-| `templates/ARCHITECTURE.md.template` | New — Architecture template, 150-line limit | — |
-| `templates/DECISIONS.md.template` | New — Decision log template, ADR-001 example | — |
-| `templates/SETUP.md.template` | New — Setup template, env vars table | — |
-| `templates/AI_CONTEXT.md.template` | New — AI context template, Domain Glossary | — |
-| `templates/CHANGELOG.md.template` | New — Changelog template, filled sprint example | — |
-| `TODO.md` | Patch README line cap: 80 → 50 (matches DOCS_Guide.md) | — |
-| `TODO.md` | TASK-024 complete: 4 P0 issues → TASK-037–040; 2 harness bugs → TASK-041–043; TASK-044 sprint mode added | — |
-| `docs/BUGS.md` | Structured bug log: BUG-001 (PLUGIN_ROOT), BUG-002 (allowedTools) | — |
-| `evals/measure.py` | New — offline three-arm skill eval harness, stdlib only | ADR-001 |
-| `evals/README.md` | New — eval methodology doc, snapshot schema, usage | — |
-| `evals/snapshots/lean-doc-generator/baseline-001.json` | New — first committed baseline snapshot | — |
-| `docs/DECISIONS.md` | New — decision log, ADR-001: Python + three-arm methodology | ADR-001 |
-| `docs/blueprint/06-harness.md` | Added eval harness Channel 4 section | ADR-001 |
+| _(no entries yet)_ | — | — |
 
 ---
 
