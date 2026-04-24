@@ -170,6 +170,8 @@ Refs: [tracker URL or "none — [reason]"]
 ```
 
 ### Phase 10 — Session Close (mandatory — never skip)
+- [ ] Count open `[ ]` tasks in Active Sprint — zero → sprint-complete path below; any open → normal close
+
 ```
 ## Session Close — [TASK-NNN]: [Title] — [Date]
 **Docs touched**:
@@ -180,6 +182,23 @@ Refs: [tracker URL or "none — [reason]"]
   - [ ] Sprint block rotated to docs/CHANGELOG.md if sprint complete
 **Recommended next-session updates**: [list]
 **Corrections worth promoting to Validated Session Patterns**: [list]
+```
+
+**Sprint-complete path** (all Active Sprint tasks `[x]`):
+```
+## Sprint N Complete — [Sprint Name]
+**Rotation checklist**:
+  - [ ] Sprint Changelog block moved: TODO.md → docs/CHANGELOG.md (prepend)
+  - [ ] TODO.md Active Sprint replaced with Sprint N+1 tasks (2–5 from top Backlog)
+  - [ ] Promoted tasks removed from Backlog
+  - [ ] TODO.md header: last_updated + sprint number updated
+  - [ ] Memory updated: sprint state reflects Sprint N+1
+**Proposed Sprint N+1** (top Backlog items by priority):
+  | Task | Title | Scope | Risk |
+  |:-----|:------|:------|:-----|
+  | [top P0/P1 items — 2–5 tasks, ordered by dependency then priority] |
+  Backlog empty → list tasks to add manually before next session.
+Type 'rotate' to apply, or provide corrections.
 ```
 
 ---
