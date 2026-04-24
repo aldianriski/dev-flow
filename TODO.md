@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24 (Sprint 10 closed; Sprint 11 promoted)
+last_updated: 2026-04-24 (Sprint 11 closed; Sprint 12 promoted)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 11
+sprint: 12
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,24 +35,37 @@ sprint: 11
 
 ## Active Sprint
 
-### Sprint 11 — Sprint Mode + Context Compression (active)
-> **Theme:** Add `/dev-flow sprint` auto-run mode for full sprint in one flow; add `/dev-flow:compress` sub-skill for CLAUDE.md + memory compression.
+### Sprint 12 — TDD Framework + Multi-platform + Example + Init Script (active)
+> **Theme:** Skill quality enforcement (TDD), multi-platform manifest scaffolds, worked example, and bootstrap init script.
 
-- [x] **TASK-044: Sprint-completion mode — auto-run active sprint tasks in one flow** — no explicit mode keyword; dev-flow reads active sprint task list, scores total weight (scope + file count estimate + risk), and decides: if sprint fits in one phase run all tasks sequentially (Gate 0 → implement → validate per task, single Gate 2); if sprint is too large auto-split into Phase 1 / Phase 2 and present the split plan for human approval before starting
+- [ ] **TASK-026: Skill TDD pressure-test framework** — adopt superpowers' RED-GREEN-REFACTOR for skill content; subagent pressure scenarios with before/after eval evidence required for skill changes
   - `scope`: full
-  - `layers`: skills
+  - `layers`: skills, docs
   - `api-change`: no
-  - `acceptance`: `/dev-flow sprint` reads all `[ ]` tasks in active sprint; weight score determines single-phase vs two-phase split; each task gets individual Gate 0 + validate; single Gate 2 per phase aggregates full diff; hard stop if any task scores full-scope or risk:high (must be run standalone); split plan shown to human before execution begins
+  - `acceptance`: RED-GREEN-REFACTOR cycle documented in blueprint; skill changes require eval evidence before merge; baseline comparison tooling in place; existing evals/measure.py integrated or extended
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: medium
-- [x] **TASK-036: Context compression sub-skill (`/dev-flow:compress`)** — compress `CLAUDE.md` and memory files to caveman-style prose for input token savings; write compressed version in-place, keep `.original.md` human-readable backup; validate that headings, code blocks, URLs, file paths, commands, and version numbers pass through untouched; Python 3.10+
+- [ ] **TASK-027: Multi-platform plugin manifests (`.codex/`, `.cursor-plugin/`, `.opencode/`, `GEMINI.md`, `AGENTS.md`)** — defer to v2; structure now so adoption is non-breaking later
   - `scope`: full
-  - `layers`: skills, scripts
+  - `layers`: templates, docs, governance
   - `api-change`: no
-  - `acceptance`: `/dev-flow:compress` compresses target file in-place; `.original.md` backup created; headings, code blocks, URLs, file paths, commands, version numbers pass through untouched; Python 3.10+ compatible; `python -m py_compile` passes
+  - `acceptance`: scaffold structures defined for each target platform; non-breaking addition to existing layout; CONTRIBUTING.md updated with sync rules; TASK-034 unblocked after this ships
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-  - `depends-on`: TASK-020 (done)
+- [ ] **TASK-028: Worked example under `examples/node-express/`** — minimal Express service that has been bootstrapped via `/dev-flow init` end-to-end, committed as proof
+  - `scope`: full
+  - `layers`: examples, docs
+  - `api-change`: no
+  - `acceptance`: minimal Express service exists under `examples/node-express/`; bootstrapped via `/dev-flow init` flow; `examples/README.md` explains how to follow the same pattern
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: low
+- [ ] **TASK-030: `bin/dev-flow-init` bootstrap script (Node)** — copies scaffold into a target repo with stack prompts; replaces "git clone + manual cp" workflow over time
+  - `scope`: full
+  - `layers`: scripts, templates
+  - `api-change`: no
+  - `acceptance`: `node bin/dev-flow-init` copies scaffold into target repo; interactive stack prompts; Node.js ≥18; no bash-only constructs; tested on Windows Git Bash + Linux
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
+  - `risk`: medium
 
 ---
 
@@ -74,11 +87,8 @@ sprint: 11
 ### P3 — Long-term maintenance + stretch
 
 <!-- TASK-025 promoted to Sprint 10 -->
-- [ ] **TASK-026: Skill TDD pressure-test framework** — adopt superpowers' RED-GREEN-REFACTOR for skill content; subagent pressure scenarios with before/after eval evidence required for skill changes
-- [ ] **TASK-027: Multi-platform plugin manifests (`.codex/`, `.cursor-plugin/`, `.opencode/`, `GEMINI.md`, `AGENTS.md`)** — defer to v2; structure now so adoption is non-breaking later
-- [ ] **TASK-028: Worked example under `examples/node-express/`** — minimal Express service that has been bootstrapped via `/dev-flow init` end-to-end, committed as proof
-- [ ] **TASK-029: Plugin marketplace submission (Anthropic official + standalone)** — long-term distribution path; depends on v2 multi-platform layout
-- [ ] **TASK-030: `bin/dev-flow-init` bootstrap script (Node)** — copies scaffold into a target repo with stack prompts; replaces "git clone + manual cp" workflow over time
+<!-- TASK-026, 027, 028, 030 promoted to Sprint 12 -->
+- [ ] **TASK-029: Plugin marketplace submission (Anthropic official + standalone)** — long-term distribution path; depends on v2 multi-platform layout (TASK-027)
 - [ ] **TASK-031: Quarterly skill-staleness audit cron via the `loop` skill** — automation for the Section 17 calibration protocol
 - [ ] **TASK-034: Add single-source-of-truth governance rule to blueprint §5** — explicit rule: "edit canonical skill/rule files only, never edit auto-synced copies"; deferred until TASK-027 (multi-platform sync) provides the auto-sync infrastructure this rule guards against. **Ref:** https://github.com/juliusbrussee/caveman (CLAUDE.md "Single source of truth files" table)
 <!-- TASK-036 promoted to Sprint 11 -->
@@ -91,17 +101,10 @@ sprint: 11
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
 
-### Sprint 11 — In Progress
+### Sprint 12 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `.claude/skills/dev-flow/SKILL.md` | TASK-044: Add sprint mode — weight scoring, Sprint Plan template, single/two-phase split, hard stop for scope:full+risk:high | — |
-| `.claude/skills/dev-flow-compress/SKILL.md` | TASK-036: New sub-skill — `/dev-flow:compress` spec, pass-through rules, compression rules, Red Flags | — |
-| `.claude/scripts/compress.py` | TASK-036: Python 3.10+ compress script — path traversal guard, `.md` guard, backup-before-write, CRLF-safe | — |
-| `.claude/scripts/__tests__/compress.test.py` | TASK-036: 17 unittest tests — backup, guards, pass-through, compression, CRLF | — |
-| `.claude/skills/dev-flow/SKILL.md` | TASK-036: Add Sub-commands dispatch section for `:compress` | — |
-| `.claude/skills/MANIFEST.json` | TASK-036: Bind dev-flow-compress skill (user-invocable: false) | — |
-| `.claude/CLAUDE.md` | TASK-036: Add Python 3.10+ to stack + commands section | — |
 
 ---
 
@@ -166,7 +169,8 @@ Sprint 7  →  Harness init fixes                   (done — TASK-039, 040, 041
 Sprint 8  →  Scripts + harness polish              (done — TASK-037, 038, 042)
 Sprint 9  →  Workflow continuity + compat          (done — TASK-047, 049, 046)
 Sprint 10  → Eval baselines + CI gate               (done — TASK-048, 025)
-Sprint 11+ → Sprint mode + context compression     (active — TASK-044, 036; P3 backlog)
+Sprint 11  → Sprint mode + context compression      (done — TASK-044, 036)
+Sprint 12+ → TDD framework + multi-platform + example + init  (active — TASK-026, 027, 028, 030; P3 backlog)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

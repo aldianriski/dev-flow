@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24 (Sprint 8 archived)
+last_updated: 2026-04-24 (Sprint 10 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,47 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 11 — Sprint Mode + Context Compression (2026-04-24)
+
+**Blueprint version:** MINOR bump — `/dev-flow sprint` auto-run mode; `/dev-flow:compress` sub-skill + Python compression script
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/skills/dev-flow/SKILL.md` | TASK-044: Add sprint mode — weight scoring, Sprint Plan template, single/two-phase split, hard stop for scope:full+risk:high | — |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-036: Add Sub-commands dispatch section for `:compress` | — |
+| `.claude/skills/dev-flow-compress/SKILL.md` | TASK-036: New sub-skill — `/dev-flow:compress` spec, pass-through rules, compression rules, Red Flags | — |
+| `.claude/scripts/compress.py` | TASK-036: Python 3.10+ compress script — path traversal guard, `.md` guard, backup-before-write, CRLF-safe, 17 tests | — |
+| `.claude/scripts/__tests__/compress.test.py` | TASK-036: 17 unittest tests — backup, guards, pass-through, compression, CRLF | — |
+| `.claude/skills/MANIFEST.json` | TASK-036: Bind dev-flow-compress skill (user-invocable: false) | — |
+| `.claude/CLAUDE.md` | TASK-036: Add Python 3.10+ to stack + commands section; align scripts convention | — |
+
+---
+
+## Sprint 10 — Eval Baseline + CI Gate (2026-04-24)
+
+**Blueprint version:** MINOR bump — first full eval coverage across all 9 skills; GitHub Actions CI gate enforcing scaffold + blueprint integrity on every PR
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `evals/snapshots/*/baseline-001.json` | TASK-048: Three-arm baseline snapshots for all 9 skills (8 new); measure.py runs clean across all | — |
+| `evals/README.md` | TASK-048: Baseline Anomalies section — brevity_delta pattern documented for structured-output skills | — |
+| `.github/workflows/validate.yml` | TASK-025: GitHub Actions CI gate — validate-scaffold.js + validate-blueprint.js on every PR to master | — |
+
+---
+
+## Sprint 9 — Workflow Continuity + Compat (2026-04-24)
+
+**Blueprint version:** PATCH bump — Phase 9c continue/done prompt; Phase 10 sprint-complete detection + rotation checklist; `measure.py` Python 3.8+ fallback
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `evals/measure.py` | TASK-047: Guard `Path.is_relative_to()` with `Path.parents` fallback for Python < 3.9 | — |
+| `evals/README.md` | TASK-047: Document Python 3.8+ compatibility note | — |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-049: Add Phase 9c continue/done prompt — 'next' chains to next task, 'done' runs Phase 10, no tasks → sprint-complete Phase 10 | — |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-046: Add sprint-complete detection to Phase 10 — rotation checklist + proposed Sprint N+1 output; human approves before TODO.md written | — |
 
 ---
 
