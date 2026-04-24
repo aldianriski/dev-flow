@@ -37,6 +37,15 @@ npm test           # full suite
 npm run test:unit  # unit only
 ```
 
+## First session (Claude Code harness) [CUSTOMIZE]
+
+```bash
+cp .claude/settings.local.example.json .claude/settings.local.json
+# Edit settings.local.json — add your package manager and any extra Bash permissions
+```
+
+> `settings.local.json` is gitignored — per-machine only. Required before first `/dev-flow` session.
+
 ## Environment Variables [CUSTOMIZE]
 
 | Variable | Required | Description |

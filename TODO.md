@@ -59,7 +59,7 @@ sprint: 6
   - `acceptance`: PreToolUse lint hook fires when `git -C <path> commit` is run; `allowedTools` in `settings.local.example.json` includes `Bash(git -C *)` pattern
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [ ] **TASK-039: Add settings.local.json setup step to README + SETUP template** — session-start.js hard-blocks on first session; no README or template tells users to create settings.local.json from settings.local.example.json
+- [x] **TASK-039: Add settings.local.json setup step to README + SETUP template** — session-start.js hard-blocks on first session; no README or template tells users to create settings.local.json from settings.local.example.json
   - `scope`: quick
   - `layers`: docs, templates
   - `api-change`: no
@@ -179,6 +179,8 @@ sprint: 6
 | `.claude/settings.json` | Add `permissions.allow: ["Bash(node .claude/scripts/*)"]` — suppress hook permission prompts | — |
 | `.claude/settings.json` | Add `Bash(git -C * commit*)` + `Bash(git -C * push*)` PreToolUse matchers; inline chain-guard for `Bash(git add*)` blocks `&& git commit` chains | — |
 | `.claude/settings.local.example.json` | Add `Bash(git -C *)` to permissions.allow | — |
+| `README.md` | Add settings.local.json copy step to "How to adopt" bash block | — |
+| `templates/SETUP.md.template` | Add "First session (Claude Code harness)" section with settings.local.json copy step | — |
 
 ---
 
