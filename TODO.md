@@ -66,7 +66,7 @@ sprint: 6
   - `acceptance`: README "How to adopt" section includes settings.local.json copy step; SETUP.md.template has a "First session" prerequisite section
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [ ] **TASK-040: Update README "How to adopt" commands** — stale: references `07-todo-format.md` instead of `templates/TODO.md.template`; copies meta-repo CLAUDE.md instead of `templates/CLAUDE.md.template`; no settings.local.json step
+- [x] **TASK-040: Update README "How to adopt" commands** — stale: references `07-todo-format.md` instead of `templates/TODO.md.template`; copies meta-repo CLAUDE.md instead of `templates/CLAUDE.md.template`; no settings.local.json step
   - `scope`: quick
   - `layers`: docs
   - `api-change`: no
@@ -181,6 +181,7 @@ sprint: 6
 | `.claude/settings.local.example.json` | Add `Bash(git -C *)` to permissions.allow | — |
 | `README.md` | Add settings.local.json copy step to "How to adopt" bash block | — |
 | `templates/SETUP.md.template` | Add "First session (Claude Code harness)" section with settings.local.json copy step | — |
+| `README.md` | Fix stale paths → templates/; collapse blueprint listing to 1 line; trim to 47 lines | — |
 
 ---
 

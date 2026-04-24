@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-20
+last_updated: 2026-04-24
 update_trigger: New mode, agent, or skill added; adoption workflow changes
 status: current
 ---
@@ -30,29 +30,17 @@ Multi-platform distribution (`.codex/`, `.cursor-plugin/`, `AGENTS.md`) is plann
 ```bash
 git clone https://github.com/aldian/dev-flow
 cp -r dev-flow/.claude your-project/
-cp dev-flow/docs/blueprint/07-todo-format.md your-project/  # TODO.md template
+cp dev-flow/templates/CLAUDE.md.template your-project/.claude/CLAUDE.md
+cp dev-flow/templates/TODO.md.template your-project/TODO.md
 cp your-project/.claude/settings.local.example.json your-project/.claude/settings.local.json
-# Customize .claude/CLAUDE.md for your stack
-# Run /dev-flow init [project-name] to bootstrap
+# Edit .claude/CLAUDE.md for your stack, then run /dev-flow init [project-name]
 ```
 
 Full setup checklist: [`docs/blueprint/09-customization.md`](docs/blueprint/09-customization.md) §12.
 
 ## Blueprint structure
 
-```
-docs/blueprint/
-  01-philosophy.md          why, six principles, thin-coordinator rule
-  02-repo-structure.md      file tree
-  03-workflow-phases.md     phases 0–10, gates, modes
-  04-subagents.md           agent tiers, dispatch spec, output contract
-  05-skills.md              skills map, frontmatter standard, invocation reference
-  06-harness.md             settings.json, scripts, CLAUDE.md template
-  07-todo-format.md         TODO.md format, lean-doc standard
-  08-orchestrator-prompts.md gate prompts, TDD contract, hard stops
-  09-customization.md       stack customization, setup checklist
-  10-modes.md               INIT, Resume, Migration, Performance, Hotfix, Task Decomposer
-```
+[`docs/blueprint/`](docs/blueprint/) — 10 files covering philosophy, phases, subagents, skills, harness, and modes.
 
 ## License
 
