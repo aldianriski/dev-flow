@@ -52,7 +52,7 @@ sprint: 8
   - `acceptance`: running session-start.js in a scratch dir with TODO.md.template-instantiated file produces no ownership warning
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [ ] **TASK-042: Add harness tracking for `Bash(cp*)` and `Bash(mkdir*)` in settings.json** — init flow (Phase I-3) and scaffold adoption use `cp` and `mkdir`; these bypass `track-change.js` and may trigger permission prompts without an explicit allowlist entry
+- [x] **TASK-042: Add harness tracking for `Bash(cp*)` and `Bash(mkdir*)` in settings.json** — init flow (Phase I-3) and scaffold adoption use `cp` and `mkdir`; these bypass `track-change.js` and may trigger permission prompts without an explicit allowlist entry
   - `scope`: quick
   - `layers`: harness
   - `api-change`: no
@@ -141,6 +141,8 @@ sprint: 8
 | `.claude/scripts/validate-scaffold.js` | Fix README.md + docs/README.md line limit 80 → 50; all 11 tests pass | — |
 | `.claude/scripts/session-start.js` | Fix false ownership warning: use `hasLastUpdated` field-presence check instead of date regex for "no header" guard | — |
 | `.claude/scripts/__tests__/session-start.test.js` | Add regression test: YYYY-MM-DD placeholder must not trigger ownership warning | — |
+| `.claude/settings.json` | Add `Bash(cp*)` and `Bash(mkdir*)` to permissions.allow — prevent init-flow permission prompts | — |
+| `.claude/settings.local.example.json` | Add `Bash(cp*)` and `Bash(mkdir*)` to permissions.allow | — |
 
 ---
 

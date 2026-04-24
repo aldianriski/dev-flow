@@ -14,7 +14,9 @@
       "Bash(git log *)",
       "Bash(git branch *)",
       "Bash(git stash *)",
-      "Bash(git -C *)"
+      "Bash(git -C *)",
+      "Bash(cp*)",
+      "Bash(mkdir*)"
     ]
   }
 }

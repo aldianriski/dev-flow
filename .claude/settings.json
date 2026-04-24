@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node .claude/scripts/*)"
+      "Bash(node .claude/scripts/*)",
+      "Bash(cp*)",
+      "Bash(mkdir*)"
     ]
   },
   "hooks": {
