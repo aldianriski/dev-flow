@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "lean-doc-generator",
+  "skill_version": "1.0.0",
+  "date": "2026-04-24",
+  "prompt": "Create a README.md for a Node.js Express REST API project called 'order-service'. It handles order creation and status tracking. Team size: 3. Stack: Node 20, Express 4, PostgreSQL 15.",
+  "arms": {
+    "baseline": {
+      "output": "# order-service\n\nThis is a Node.js Express REST API for handling orders. It is built with Express 4 and PostgreSQL 15.\n\n## How it works\n\nThe service receives HTTP requests at various endpoints. When a POST request comes in to /orders, the controller layer validates the request body, then calls the service layer which applies business logic, then the repository layer executes a SQL INSERT into the orders table in PostgreSQL. The service returns the created order with its generated ID.\n\nFor status tracking, a GET request to /orders/:id triggers a SELECT query. The result is mapped to a response DTO and returned as JSON.\n\n## Setup\n\nRun `npm install` to install dependencies. Then copy `.env.example` to `.env` and fill in your database credentials. Run `npm run migrate` to apply database migrations. Start the server with `npm start`.\n\n## Endpoints\n\n- POST /orders - create a new order\n- GET /orders/:id - get order by ID\n- PATCH /orders/:id/status - update order status\n\n## Architecture\n\nThe codebase is organized into controllers, services, and repositories. Controllers handle HTTP concerns. Services contain business logic. Repositories handle database access. This separation ensures that business logic is not coupled to the HTTP layer or the database layer.",
+      "token_count": 218
+    },
+    "terse_control": {
+      "output": "# order-service\n\nNode 20 / Express 4 / PostgreSQL 15. Order creation and status tracking API.\n\n## Endpoints\n\n- POST /orders\n- GET /orders/:id\n- PATCH /orders/:id/status\n\n## Setup\n\n```bash\nnpm install\ncp .env.example .env\nnpm run migrate\nnpm start\n```",
+      "token_count": 67
+    },
+    "skill": {
+      "output": "# order-service\n\nREST API for order creation and status tracking.\nStack: Node 20 · Express 4 · PostgreSQL 15.\n\n## What it is\n\nHTTP service exposing three order lifecycle endpoints. Adopted from the dev-flow starter — see `.claude/` for workflow config.\n\n## How to adopt\n\n```bash\nnpm install\ncp .env.example .env   # fill DB credentials\nnpm run migrate\nnpm start\n```\n\n## License\n\nMIT.",
+      "token_count": 81
+    }
+  }
+}
