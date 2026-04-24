@@ -45,7 +45,7 @@ sprint: 6
   - `acceptance`: SessionStart hook runs `session-start.js` without the `${CLAUDE_PLUGIN_ROOT}` error; verify against CC_SPEC.md for correct project-hook path syntax
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: medium
-- [ ] **TASK-043: Add harness node scripts to `allowedTools` in settings.json** — hooks invoke `node .claude/scripts/*.js` as shell commands; without an `allowedTools` entry (`Bash(node .claude/scripts/*)`) Claude prompts for approval on every hook fire; blocks automated harness flow
+- [x] **TASK-043: Add harness node scripts to `allowedTools` in settings.json** — hooks invoke `node .claude/scripts/*.js` as shell commands; without an `allowedTools` entry (`Bash(node .claude/scripts/*)`) Claude prompts for approval on every hook fire; blocks automated harness flow
   - `scope`: quick
   - `layers`: harness
   - `api-change`: no
@@ -176,6 +176,7 @@ sprint: 6
 | File | Change | ADR |
 |:-----|:-------|:----|
 | `.claude/settings.json` | Replace `${CLAUDE_PLUGIN_ROOT}` → `$CLAUDE_PROJECT_DIR` in all 5 hook commands | — |
+| `.claude/settings.json` | Add `permissions.allow: ["Bash(node .claude/scripts/*)"]` — suppress hook permission prompts | — |
 
 ---
 
