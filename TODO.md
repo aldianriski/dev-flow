@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24 (Sprint 8 closed; Sprint 9 promoted)
+last_updated: 2026-04-24 (Sprint 10 closed; Sprint 11 promoted)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 9
+sprint: 11
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,30 +35,24 @@ sprint: 9
 
 ## Active Sprint
 
-### Sprint 9 — Workflow Continuity + Compat (active)
-> **Theme:** Close workflow gaps: Python version compat for eval harness, continue/done prompt after commit, auto-sprint-rotation on sprint close.
+### Sprint 11 — Sprint Mode + Context Compression (active)
+> **Theme:** Add `/dev-flow sprint` auto-run mode for full sprint in one flow; add `/dev-flow:compress` sub-skill for CLAUDE.md + memory compression.
 
-- [ ] **TASK-047: Verify `evals/measure.py` compatibility on Python 3.10–3.12** — current dev machine runs 3.14 (confirmed by `.pyc` filename `cpython-314`); `Path.is_relative_to()` is 3.9+ so logic is safe, but untested on 3.10/3.11/3.12; validate or add `sys.version_info` guard with fallback for `is_relative_to`
-  - `scope`: quick
-  - `layers`: scripts
-  - `api-change`: no
-  - `acceptance`: `measure.py` runs without error on Python 3.10, 3.11, 3.12 (CI matrix or manual test); fallback documented in `evals/README.md` if `is_relative_to` unavailable
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-- [ ] **TASK-049: Add continue/done prompt to Phase 9 commit flow** — after commit succeeds, orchestrator asks "continue to next task or end session?"; if continue → skip Session Close, go directly to Phase 0 of next `[ ]` task in Active Sprint; if done → run full Phase 10 Session Close; enables uninterrupted improvement loops without manual `/dev-flow` re-invocation
-  - `scope`: quick
+- [x] **TASK-044: Sprint-completion mode — auto-run active sprint tasks in one flow** — no explicit mode keyword; dev-flow reads active sprint task list, scores total weight (scope + file count estimate + risk), and decides: if sprint fits in one phase run all tasks sequentially (Gate 0 → implement → validate per task, single Gate 2); if sprint is too large auto-split into Phase 1 / Phase 2 and present the split plan for human approval before starting
+  - `scope`: full
   - `layers`: skills
   - `api-change`: no
-  - `acceptance`: after commit in Phase 9, orchestrator outputs "Next: [TASK-NNN title] — type 'next' to continue or 'done' to close session"; 'next' jumps to Phase 0 of next task; 'done' runs Phase 10; if no remaining `[ ]` tasks → skip prompt, go directly to Phase 10 with sprint-complete flag
+  - `acceptance`: `/dev-flow sprint` reads all `[ ]` tasks in active sprint; weight score determines single-phase vs two-phase split; each task gets individual Gate 0 + validate; single Gate 2 per phase aggregates full diff; hard stop if any task scores full-scope or risk:high (must be run standalone); split plan shown to human before execution begins
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-- [ ] **TASK-046: Auto-create next sprint when active sprint is fully closed** — Session Close (Phase 10) detects all `[ ]` tasks in Active Sprint are done; prompts to rotate sprint block to `docs/CHANGELOG.md` and promote next P0→P1 backlog tasks into a new Active Sprint; prevents dead-end sessions where sprint completes but next work isn't queued
-  - `scope`: quick
-  - `layers`: skills
+  - `risk`: medium
+- [ ] **TASK-036: Context compression sub-skill (`/dev-flow:compress`)** — compress `CLAUDE.md` and memory files to caveman-style prose for input token savings; write compressed version in-place, keep `.original.md` human-readable backup; validate that headings, code blocks, URLs, file paths, commands, and version numbers pass through untouched; Python 3.10+
+  - `scope`: full
+  - `layers`: skills, scripts
   - `api-change`: no
-  - `acceptance`: Phase 10 Session Close checks for zero open `[ ]` tasks in Active Sprint; if none remain, outputs sprint rotation checklist and proposed next sprint from top Backlog items; human approves before TODO.md is written
+  - `acceptance`: `/dev-flow:compress` compresses target file in-place; `.original.md` backup created; headings, code blocks, URLs, file paths, commands, version numbers pass through untouched; Python 3.10+ compatible; `python -m py_compile` passes
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
+  - `depends-on`: TASK-020 (done)
 
 ---
 
@@ -73,28 +67,13 @@ sprint: 9
 
 <!-- TASK-021, TASK-024, TASK-033 promoted to Sprint 6 -->
 
-<!-- TASK-046, 047, 049 promoted to Sprint 9 -->
-
-- [ ] **TASK-048: Apply three-arm eval to all shipped skills post-TASK-033** — TASK-033 ships harness + one baseline snapshot; follow-up: run eval against each of the 9 skills in MANIFEST.json; commit a baseline snapshot per skill; register results as the canonical baseline for future skill change reviews (prerequisite for TASK-026 RED-GREEN-REFACTOR enforcement)
-  - `scope`: full
-  - `layers`: scripts, skills
-  - `api-change`: no
-  - `acceptance`: `evals/snapshots/<skill>/baseline-001.json` exists for all 9 skills; `python evals/measure.py evals/snapshots/` runs clean across all; results reviewed and anomalies noted in `evals/README.md`
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-  - `depends-on`: TASK-033
-
-- [ ] **TASK-044: Sprint-completion mode — auto-run active sprint tasks in one flow** — no explicit mode keyword; dev-flow reads active sprint task list, scores total weight (scope + file count estimate + risk), and decides: if sprint fits in one phase run all tasks sequentially (Gate 0 → implement → validate per task, single Gate 2); if sprint is too large auto-split into Phase 1 / Phase 2 and present the split plan for human approval before starting
-  - `scope`: full
-  - `layers`: skills
-  - `api-change`: no
-  - `acceptance`: `/dev-flow sprint` reads all `[ ]` tasks in active sprint; weight score determines single-phase vs two-phase split; each task gets individual Gate 0 + validate; single Gate 2 per phase aggregates full diff; hard stop if any task scores full-scope or risk:high (must be run standalone); split plan shown to human before execution begins
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: medium
+<!-- TASK-046, 047, 049 promoted to Sprint 9 — closed -->
+<!-- TASK-048, 025 promoted to Sprint 10 — closed -->
+<!-- TASK-044, 036 promoted to Sprint 11 -->
 
 ### P3 — Long-term maintenance + stretch
 
-- [ ] **TASK-025: GitHub Actions workflow for blueprint + scaffold validation on PR** — runs `validate-scaffold.js` and `validate-blueprint.js`, blocks merge on failure
+<!-- TASK-025 promoted to Sprint 10 -->
 - [ ] **TASK-026: Skill TDD pressure-test framework** — adopt superpowers' RED-GREEN-REFACTOR for skill content; subagent pressure scenarios with before/after eval evidence required for skill changes
 - [ ] **TASK-027: Multi-platform plugin manifests (`.codex/`, `.cursor-plugin/`, `.opencode/`, `GEMINI.md`, `AGENTS.md`)** — defer to v2; structure now so adoption is non-breaking later
 - [ ] **TASK-028: Worked example under `examples/node-express/`** — minimal Express service that has been bootstrapped via `/dev-flow init` end-to-end, committed as proof
@@ -102,7 +81,7 @@ sprint: 9
 - [ ] **TASK-030: `bin/dev-flow-init` bootstrap script (Node)** — copies scaffold into a target repo with stack prompts; replaces "git clone + manual cp" workflow over time
 - [ ] **TASK-031: Quarterly skill-staleness audit cron via the `loop` skill** — automation for the Section 17 calibration protocol
 - [ ] **TASK-034: Add single-source-of-truth governance rule to blueprint §5** — explicit rule: "edit canonical skill/rule files only, never edit auto-synced copies"; deferred until TASK-027 (multi-platform sync) provides the auto-sync infrastructure this rule guards against. **Ref:** https://github.com/juliusbrussee/caveman (CLAUDE.md "Single source of truth files" table)
-- [ ] **TASK-036: Context compression sub-skill (`/dev-flow:compress`)** — compress `CLAUDE.md` and memory files to caveman-style prose for input token savings; write compressed version in-place, keep `.original.md` human-readable backup; validate that headings, code blocks, URLs, file paths, commands, and version numbers pass through untouched; Python 3.10+; requires TASK-020 (`CLAUDE.md.template`) to ship first so the template is the compression target, not a stub. **Ref:** https://github.com/juliusbrussee/caveman (see `caveman-compress/SKILL.md` and `caveman-compress/scripts/`)
+<!-- TASK-036 promoted to Sprint 11 -->
 
 ---
 
@@ -112,10 +91,11 @@ sprint: 9
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
 
-### Sprint 9 — In Progress
+### Sprint 11 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
+| `.claude/skills/dev-flow/SKILL.md` | TASK-044: Add sprint mode — weight scoring, Sprint Plan template, single/two-phase split, hard stop for scope:full+risk:high | — |
 
 ---
 
@@ -178,7 +158,9 @@ Sprint 5  →  Templates + validation               (done — TASK-020, 022, 023
 Sprint 6  →  Doc templates + eval harness         (active — TASK-021, 024, 033)
 Sprint 7  →  Harness init fixes                   (done — TASK-039, 040, 041, 043, 045)
 Sprint 8  →  Scripts + harness polish              (done — TASK-037, 038, 042)
-Sprint 9+ →  Workflow continuity + compat + stretch (active — TASK-047, 049, 046; P2/P3 backlog)
+Sprint 9  →  Workflow continuity + compat          (done — TASK-047, 049, 046)
+Sprint 10  → Eval baselines + CI gate               (done — TASK-048, 025)
+Sprint 11+ → Sprint mode + context compression     (active — TASK-044, 036; P3 backlog)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met
