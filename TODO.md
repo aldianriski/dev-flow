@@ -38,7 +38,7 @@ sprint: 8
 ### Sprint 8 — Scripts + Harness Polish (active)
 > **Theme:** Fix remaining P0 script bugs found in Sprint 6 smoke test — stale line-limit value in validate-scaffold.js, false ownership warning on fresh template, and missing cp/mkdir tracking in harness.
 
-- [ ] **TASK-037: Fix `validate-scaffold.js` README line limit stale value** — limit is 80, canonical is 50 (DOCS_Guide.md §README); CI gate will silently pass oversized READMEs
+- [x] **TASK-037: Fix `validate-scaffold.js` README line limit stale value** — limit is 80, canonical is 50 (DOCS_Guide.md §README); CI gate will silently pass oversized READMEs
   - `scope`: quick
   - `layers`: scripts
   - `api-change`: no
@@ -138,7 +138,7 @@ sprint: 8
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| _(no entries yet)_ | — | — |
+| `.claude/scripts/validate-scaffold.js` | Fix README.md + docs/README.md line limit 80 → 50; all 11 tests pass | — |
 
 ---
 
