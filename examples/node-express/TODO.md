@@ -1,0 +1,84 @@
+---
+owner: Tech Lead [CUSTOMIZE]
+last_updated: 2026-04-25
+update_trigger: Sprint completed, task added, or task status changed
+status: current
+---
+
+# node-express-example — Development Tracker [CUSTOMIZE]
+
+> **How to use this file**
+> - **Start of session** — read this file first. Understand active sprint before touching code.
+> - **Run /dev-flow** — orchestrator parses the first incomplete task `[ ]` in Active Sprint.
+> - **End of session** — run Session Close (Phase 10). Move completed items to Changelog.
+> - **Sprint completed** — remove from Active Sprint, add Changelog row (File | Change | ADR), update relevant docs.
+> - **Every code change** — if it introduces a new pattern or reverses a decision, update the relevant doc.
+> - **Docs to keep in sync**: `docs/README.md` · `docs/ARCHITECTURE.md` · `docs/DECISIONS.md` · `docs/AI_CONTEXT.md` [CUSTOMIZE]
+> - **Changelog rule** — holds ONLY the current in-progress sprint. Once changes are reflected in docs,
+>   MOVE the sprint block to `docs/CHANGELOG.md` (prepend — newest first), then DELETE from here.
+
+> **Sprint sizing rules**
+> - Group 2–5 tasks per sprint. Never plan a sprint with only 1 task.
+> - Order by dependency first, then importance + urgency.
+> - Promote tasks from Backlog in priority order (P0 → P1 → P2 → P3).
+> - Remove promoted tasks from Backlog immediately when added to Active Sprint.
+
+> **Layer values for this project** [CUSTOMIZE]
+> `api, service, repository, middleware, model`
+
+---
+
+## Active Sprint
+
+### Sprint 1 — [Sprint Theme] [CUSTOMIZE] (2026-04-25)
+> **Theme:** [One-line sprint theme — e.g. "Bootstrap auth and user management foundation"]
+
+- [ ] **TASK-001: Add JWT login endpoint** [CUSTOMIZE: replace with your task title, imperative verb, ≤60 chars] — [explain why this task matters; what it unblocks]
+  - `scope`: full
+  - `layers`: api, service, repository [CUSTOMIZE: comma-separated layer values for your stack]
+  - `api-change`: yes
+  - `acceptance`: POST /auth/login returns signed JWT on valid credentials; 401 on invalid [CUSTOMIZE: one sentence, measurable, testable by human at Gate 2]
+  - `tracker`: https://linear.app/myproject/issue/ENG-001 [CUSTOMIZE: real ticket URL, or "none — [justification]"]
+  - `risk`: medium
+
+---
+
+## Backlog
+
+### P0 — Critical / Blocking
+<!-- Add tasks that block the project from moving forward -->
+
+### P1 — [Next Phase] Required [CUSTOMIZE]
+<!-- Add tasks required before the next major milestone -->
+
+### P2 — Quality / Polish
+<!-- Add quality improvements, tech debt, non-blocking improvements -->
+
+### P3 — Post-[Milestone] / Long-term [CUSTOMIZE]
+<!-- Add future work, stretch goals, v2+ items -->
+
+---
+
+## Changelog
+
+> Current sprint only. Once changes reflected in docs, MOVE to `docs/CHANGELOG.md` then DELETE from here.
+
+### Sprint 1 — [Sprint Name] [CUSTOMIZE] (2026-04-25)
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| _(no entries yet)_ | — | — |
+
+---
+
+## Quick Rules [CUSTOMIZE]
+> Key conventions for contributors and AI agents — no need to open full docs for these.
+
+```
+[Add your project's key patterns here. Examples:]
+[- Auth: all routes require JWT except /health and /auth/*]
+[- Files: kebab-case for all filenames]
+[- DB: never query directly in controllers — go through the service layer]
+[- Tests: unit tests mock the service layer; integration tests hit real DB]
+[- [Add more patterns that would prevent repeated mistakes]]
+```

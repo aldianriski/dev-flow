@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-22
+last_updated: 2026-04-25
 update_trigger: New skill, agent, or script added; stack or architecture decisions change
 status: current
 ---
@@ -22,6 +22,8 @@ status: current
 docs/
   blueprint/   # authoritative system documentation (01–10)
 templates/     # CLAUDE.md.template, TODO.md.template (TASK-020)
+bin/           # CLI tools (dev-flow-init.js — scaffold bootstrap)
+  __tests__/   # unit tests for bin/ scripts
 ```
 
 ## Code Generation Order
@@ -35,7 +37,7 @@ templates/     # CLAUDE.md.template, TODO.md.template (TASK-020)
 
 ## Anti-Patterns (Avoid)
 ❌ HOW content in any doc file — move to code comments
-❌ Skill changes without eval evidence (RED-GREEN-REFACTOR per TASK-026)
+❌ Skill changes without eval evidence (RED-GREEN-REFACTOR — see `docs/blueprint/05-skills.md §Skill Change Protocol`)
 ❌ Hard stop count or gate model changes without a blueprint version bump
 ❌ Editing auto-synced copies — always edit the canonical source file
 

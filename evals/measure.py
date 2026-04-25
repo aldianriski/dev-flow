@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-# python evals/measure.py <snapshot.json>          -- single snapshot
-# python evals/measure.py <snapshots-dir/>         -- all *.json recursively
+# python evals/measure.py <snapshot.json>                    -- single snapshot
+# python evals/measure.py <snapshots-dir/>                   -- all *.json recursively
+# python evals/measure.py compare <old.json> <new.json>      -- delta between two snapshots
 """Three-arm skill eval harness. Reads committed snapshot fixtures; no API calls."""
 
 import json
@@ -75,19 +76,107 @@ def measure(path: Path) -> None:
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
-def main() -> None:
-    if len(sys.argv) < 2:
-        print("Usage: measure.py <snapshot.json | snapshots-dir/>", file=sys.stderr)
-        sys.exit(1)
-
-    target = Path(sys.argv[1])
-    resolved = target.resolve()
+def _check_inside(path: Path) -> bool:
+    resolved = path.resolve()
     try:
-        inside = resolved.is_relative_to(_PROJECT_ROOT)
+        return resolved.is_relative_to(_PROJECT_ROOT)
     except AttributeError:
         # Python < 3.9: Path.is_relative_to unavailable
-        inside = _PROJECT_ROOT in resolved.parents or resolved == _PROJECT_ROOT
-    if not inside:
+        return _PROJECT_ROOT in resolved.parents or resolved == _PROJECT_ROOT
+
+
+def compare(old_path: Path, new_path: Path) -> None:
+    if old_path.resolve() == new_path.resolve():
+        print("WARNING: old and new paths resolve to the same file — nothing to compare", file=sys.stderr)
+        return False
+
+    try:
+        old_data = json.loads(old_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"WARNING: skipping {old_path} — {e}", file=sys.stderr)
+        return
+    try:
+        new_data = json.loads(new_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"WARNING: skipping {new_path} — {e}", file=sys.stderr)
+        return
+
+    old_skill = old_data.get("skill", "?")
+    new_skill = new_data.get("skill", "?")
+    if old_skill != new_skill:
+        print(f"WARNING: comparing snapshots from different skills ({old_skill} vs {new_skill})", file=sys.stderr)
+
+    old_ver = old_data.get("skill_version", "?")
+    new_ver = new_data.get("skill_version", "?")
+    old_date = old_data.get("date", "?")
+    new_date = new_data.get("date", "?")
+
+    print(f"\n{'-' * 60}")
+    print(f"  COMPARE: {old_skill}")
+    print(f"  old: v{old_ver} [{old_date}]  {old_path.name}")
+    print(f"  new: v{new_ver} [{new_date}]  {new_path.name}")
+    print(f"{'-' * 60}")
+
+    old_arms = old_data.get("arms", {})
+    new_arms = new_data.get("arms", {})
+
+    for arm in ARMS:
+        in_old = arm in old_arms
+        in_new = arm in new_arms
+        if not in_old and not in_new:
+            continue
+        if not in_old:
+            print(f"WARNING: arm '{arm}' missing in old snapshot — skipping", file=sys.stderr)
+            continue
+        if not in_new:
+            print(f"WARNING: arm '{arm}' missing in new snapshot — skipping", file=sys.stderr)
+            continue
+
+        m_old = _metrics(old_arms[arm].get("output", ""))
+        m_new = _metrics(new_arms[arm].get("output", ""))
+
+        print(f"\narm: {arm}  (+% = new larger, -% = new smaller)")
+        header = f"{'metric':<{COL}}{'old':>{COL}}{'new':>{COL}}{'delta':>{COL}}"
+        print(header)
+        print("-" * len(header))
+        for metric in ("word_count", "line_count", "how_content_flag"):
+            v_old = m_old[metric]
+            v_new = m_new[metric]
+            d = _delta(v_new, v_old)
+            print(f"{metric:<{COL}}{str(v_old):>{COL}}{str(v_new):>{COL}}{d:>{COL}}")
+
+
+def main() -> None:
+    if len(sys.argv) < 2:
+        print(
+            "Usage: measure.py <snapshot.json | snapshots-dir/>\n"
+            "       measure.py compare <old.json> <new.json>",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    if sys.argv[1] == "compare":
+        if len(sys.argv) < 4:
+            print("Usage: measure.py compare <old.json> <new.json>", file=sys.stderr)
+            sys.exit(1)
+        paths = []
+        for arg in (sys.argv[2], sys.argv[3]):
+            p = Path(arg)
+            if not _check_inside(p):
+                print(f"Error: path must be within project root ({_PROJECT_ROOT})", file=sys.stderr)
+                sys.exit(1)
+            if not p.resolve().is_file():
+                print(f"Path not found: {p}", file=sys.stderr)
+                sys.exit(1)
+            paths.append(p)
+        did_compare = compare(paths[0], paths[1])
+        print()
+        if did_compare is False:
+            sys.exit(1)
+        return
+
+    target = Path(sys.argv[1])
+    if not _check_inside(target):
         print(f"Error: path must be within project root ({_PROJECT_ROOT})", file=sys.stderr)
         sys.exit(1)
 

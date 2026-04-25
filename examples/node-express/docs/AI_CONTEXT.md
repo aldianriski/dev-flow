@@ -1,0 +1,43 @@
+---
+owner: Tech Lead
+last_updated: 2026-04-25
+update_trigger: Stack changes, new domain concept introduced, or glossary updated
+status: current
+---
+
+# node-express-example — AI Context [CUSTOMIZE]
+
+## Stack [CUSTOMIZE]
+- **Language**: [e.g. TypeScript 5]
+- **Runtime**: [e.g. Node.js 20]
+- **Framework**: [e.g. Express 4]
+- **Database**: [e.g. PostgreSQL 15 via Prisma]
+- **Test runner**: [e.g. Vitest]
+
+## Architecture [CUSTOMIZE]
+[2–3 sentences on high-level structure. e.g. "Layered service: HTTP layer delegates to service layer which delegates to repository. No business logic in controllers."]
+
+## Dependency Rule [CUSTOMIZE]
+<!-- Example (filled in): -->
+Controller → Service → Repository → Database
+
+## Patterns in Use [CUSTOMIZE]
+- **[Pattern name]**: [where/how used — one line]
+- **[Pattern name]**: [where/how used — one line]
+
+## Anti-Patterns to Avoid [CUSTOMIZE]
+❌ [e.g. No SQL queries in controllers]
+❌ [Anti-pattern 2]
+
+## Domain Glossary [CUSTOMIZE]
+<!-- Define project-specific or non-obvious terms. Prevents AI misinterpretation. -->
+
+| Term | Meaning |
+|:-----|:--------|
+| [Term] | [One-sentence definition] |
+
+<!-- Example (filled in): -->
+| Term | Meaning |
+|:-----|:--------|
+| Workspace | Top-level tenant; maps to one customer account |
+| Member | User belonging to one or more Workspaces |

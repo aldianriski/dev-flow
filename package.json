@@ -1,0 +1,12 @@
+{
+  "name": "dev-flow",
+  "version": "0.1.0",
+  "description": "AI workflow starter scaffold — drop-in for any repo",
+  "bin": {
+    "dev-flow-init": "./bin/dev-flow-init.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

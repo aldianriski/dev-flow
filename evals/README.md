@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-24
+last_updated: 2026-04-25
 update_trigger: New snapshot added; metric definitions change; methodology revised
 status: current
 ---
@@ -46,6 +46,19 @@ python evals/measure.py evals/snapshots/
 ```
 
 **Python version:** 3.8+. `Path.is_relative_to()` (3.9+) is guarded with a `Path.parents` fallback for older runtimes.
+
+## Compare (RED-GREEN-REFACTOR)
+
+```bash
+python evals/measure.py compare evals/snapshots/<skill>/before.json evals/snapshots/<skill>/after.json
+```
+
+Shows per-arm old/new/delta table. Use for skill change eval evidence:
+- **RED**: commit baseline snapshot before the change (`before.json`)
+- **GREEN**: commit new snapshot after the change (`after.json`), run `compare`, verify `how_content_flag` does not increase
+- **REFACTOR**: clean up, re-run `compare` to confirm metrics stable
+
+Guards: same-file path resolves to no-op warning. Cross-skill comparison prints warning on stderr.
 
 ## Metrics
 

@@ -1,0 +1,22 @@
+{
+  "_instructions": [
+    "Copy this file to .claude/settings.local.json (gitignored — per machine).",
+    "Replace [package-manager] with your package manager: pnpm, npm, yarn, pip, go, etc.",
+    "Add additional Bash permissions for any commands your workflow requires.",
+    "Do NOT commit settings.local.json — it contains machine-specific allow-lists."
+  ],
+  "permissions": {
+    "allow": [
+      "Bash([package-manager] *)",
+      "Bash(git add *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git branch *)",
+      "Bash(git stash *)",
+      "Bash(git -C *)",
+      "Bash(cp*)",
+      "Bash(mkdir*)"
+    ]
+  }
+}

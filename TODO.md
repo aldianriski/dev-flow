@@ -38,28 +38,21 @@ sprint: 12
 ### Sprint 12 — TDD Framework + Multi-platform + Example + Init Script (active)
 > **Theme:** Skill quality enforcement (TDD), multi-platform manifest scaffolds, worked example, and bootstrap init script.
 
-- [ ] **TASK-026: Skill TDD pressure-test framework** — adopt superpowers' RED-GREEN-REFACTOR for skill content; subagent pressure scenarios with before/after eval evidence required for skill changes
+- [x] **TASK-026: Skill TDD pressure-test framework** — adopt superpowers' RED-GREEN-REFACTOR for skill content; subagent pressure scenarios with before/after eval evidence required for skill changes
   - `scope`: full
   - `layers`: skills, docs
   - `api-change`: no
+  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `acceptance`: RED-GREEN-REFACTOR cycle documented in blueprint; skill changes require eval evidence before merge; baseline comparison tooling in place; existing evals/measure.py integrated or extended
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: medium
-- [ ] **TASK-027: Multi-platform plugin manifests (`.codex/`, `.cursor-plugin/`, `.opencode/`, `GEMINI.md`, `AGENTS.md`)** — defer to v2; structure now so adoption is non-breaking later
-  - `scope`: full
-  - `layers`: templates, docs, governance
-  - `api-change`: no
-  - `acceptance`: scaffold structures defined for each target platform; non-breaking addition to existing layout; CONTRIBUTING.md updated with sync rules; TASK-034 unblocked after this ships
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
-- [ ] **TASK-028: Worked example under `examples/node-express/`** — minimal Express service that has been bootstrapped via `/dev-flow init` end-to-end, committed as proof
+- [x] **TASK-028: Worked example under `examples/node-express/`** — minimal Express service that has been bootstrapped via `/dev-flow init` end-to-end, committed as proof
   - `scope`: full
   - `layers`: examples, docs
   - `api-change`: no
   - `acceptance`: minimal Express service exists under `examples/node-express/`; bootstrapped via `/dev-flow init` flow; `examples/README.md` explains how to follow the same pattern
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [ ] **TASK-030: `bin/dev-flow-init` bootstrap script (Node)** — copies scaffold into a target repo with stack prompts; replaces "git clone + manual cp" workflow over time
+- [x] **TASK-030: `bin/dev-flow-init` bootstrap script (Node)** — copies scaffold into a target repo with stack prompts; replaces "git clone + manual cp" workflow over time
   - `scope`: full
   - `layers`: scripts, templates
   - `api-change`: no
@@ -88,7 +81,6 @@ sprint: 12
 
 <!-- TASK-025 promoted to Sprint 10 -->
 <!-- TASK-026, 027, 028, 030 promoted to Sprint 12 -->
-- [ ] **TASK-029: Plugin marketplace submission (Anthropic official + standalone)** — long-term distribution path; depends on v2 multi-platform layout (TASK-027)
 - [ ] **TASK-031: Quarterly skill-staleness audit cron via the `loop` skill** — automation for the Section 17 calibration protocol
 - [ ] **TASK-034: Add single-source-of-truth governance rule to blueprint §5** — explicit rule: "edit canonical skill/rule files only, never edit auto-synced copies"; deferred until TASK-027 (multi-platform sync) provides the auto-sync infrastructure this rule guards against. **Ref:** https://github.com/juliusbrussee/caveman (CLAUDE.md "Single source of truth files" table)
 <!-- TASK-036 promoted to Sprint 11 -->
@@ -105,6 +97,17 @@ sprint: 12
 
 | File | Change | ADR |
 |:-----|:-------|:----|
+| `evals/measure.py` | Added `compare` sub-command (before/after snapshot delta) | — |
+| `docs/blueprint/05-skills.md` | Added Skill Change Protocol (RED-GREEN-REFACTOR) section | — |
+| `CONTRIBUTING.md` | Resolved TASK-026 forward-refs; governance rule made concrete | — |
+| `.claude/CLAUDE.md` | Removed pending qualifier from eval evidence anti-pattern line | — |
+| `evals/README.md` | Documented `compare` usage + bumped last_updated | — |
+| `bin/dev-flow-init.js` | New CLI: copies scaffold into target repo with stack prompts | ADR-002 |
+| `bin/__tests__/dev-flow-init.test.js` | Unit tests for applySubstitutions + getLayersForPreset | — |
+| `package.json` | New: bin field + engines ≥18 | — |
+| `docs/DECISIONS.md` | Added ADR-002: no external deps in bin/ | — |
+| `examples/node-express/` | Worked example: scaffold + minimal Express server | — |
+| `examples/README.md` | Pattern explanation for bootstrap workflow | — |
 
 ---
 
