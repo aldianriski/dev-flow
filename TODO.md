@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24 (Sprint 11 closed; Sprint 12 promoted)
+last_updated: 2026-04-25 (Sprint 12 closed; Sprint 13 promoted)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 12
+sprint: 13
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,30 +35,23 @@ sprint: 12
 
 ## Active Sprint
 
-### Sprint 12 — TDD Framework + Multi-platform + Example + Init Script (active)
-> **Theme:** Skill quality enforcement (TDD), multi-platform manifest scaffolds, worked example, and bootstrap init script.
+### Sprint 13 — Governance + Automation (active)
+> **Theme:** Skill-staleness audit automation and single-source-of-truth governance rule.
 
-- [x] **TASK-026: Skill TDD pressure-test framework** — adopt superpowers' RED-GREEN-REFACTOR for skill content; subagent pressure scenarios with before/after eval evidence required for skill changes
+- [ ] **TASK-031: Quarterly skill-staleness audit cron via the `loop` skill** — automation for the Section 17 calibration protocol
   - `scope`: full
-  - `layers`: skills, docs
+  - `layers`: skills, harness
   - `api-change`: no
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `acceptance`: RED-GREEN-REFACTOR cycle documented in blueprint; skill changes require eval evidence before merge; baseline comparison tooling in place; existing evals/measure.py integrated or extended
-  - `risk`: medium
-- [x] **TASK-028: Worked example under `examples/node-express/`** — minimal Express service that has been bootstrapped via `/dev-flow init` end-to-end, committed as proof
-  - `scope`: full
-  - `layers`: examples, docs
+  - `acceptance`: scheduled loop audits `last-validated` dates on all skills; warns on skills >6 months stale; runnable via `/loop` skill
+  - `risk`: low
+- [ ] **TASK-034: Add single-source-of-truth governance rule to blueprint §5** — explicit rule: "edit canonical skill/rule files only, never edit auto-synced copies"
+  - `scope`: quick
+  - `layers`: docs, governance
   - `api-change`: no
-  - `acceptance`: minimal Express service exists under `examples/node-express/`; bootstrapped via `/dev-flow init` flow; `examples/README.md` explains how to follow the same pattern
+  - `acceptance`: blueprint §5 has explicit single-source-of-truth rule; CLAUDE.md anti-patterns updated; deferred note removed from Backlog
   - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
   - `risk`: low
-- [x] **TASK-030: `bin/dev-flow-init` bootstrap script (Node)** — copies scaffold into a target repo with stack prompts; replaces "git clone + manual cp" workflow over time
-  - `scope`: full
-  - `layers`: scripts, templates
-  - `api-change`: no
-  - `acceptance`: `node bin/dev-flow-init` copies scaffold into target repo; interactive stack prompts; Node.js ≥18; no bash-only constructs; tested on Windows Git Bash + Linux
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: medium
 
 ---
 
@@ -80,9 +73,8 @@ sprint: 12
 ### P3 — Long-term maintenance + stretch
 
 <!-- TASK-025 promoted to Sprint 10 -->
-<!-- TASK-026, 027, 028, 030 promoted to Sprint 12 -->
-- [ ] **TASK-031: Quarterly skill-staleness audit cron via the `loop` skill** — automation for the Section 17 calibration protocol
-- [ ] **TASK-034: Add single-source-of-truth governance rule to blueprint §5** — explicit rule: "edit canonical skill/rule files only, never edit auto-synced copies"; deferred until TASK-027 (multi-platform sync) provides the auto-sync infrastructure this rule guards against. **Ref:** https://github.com/juliusbrussee/caveman (CLAUDE.md "Single source of truth files" table)
+<!-- TASK-026, 027, 028, 030 promoted to Sprint 12 — closed -->
+<!-- TASK-031, 034 promoted to Sprint 13 -->
 <!-- TASK-036 promoted to Sprint 11 -->
 
 ---
@@ -93,21 +85,10 @@ sprint: 12
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
 
-### Sprint 12 — In Progress
+### Sprint 13 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `evals/measure.py` | Added `compare` sub-command (before/after snapshot delta) | — |
-| `docs/blueprint/05-skills.md` | Added Skill Change Protocol (RED-GREEN-REFACTOR) section | — |
-| `CONTRIBUTING.md` | Resolved TASK-026 forward-refs; governance rule made concrete | — |
-| `.claude/CLAUDE.md` | Removed pending qualifier from eval evidence anti-pattern line | — |
-| `evals/README.md` | Documented `compare` usage + bumped last_updated | — |
-| `bin/dev-flow-init.js` | New CLI: copies scaffold into target repo with stack prompts | ADR-002 |
-| `bin/__tests__/dev-flow-init.test.js` | Unit tests for applySubstitutions + getLayersForPreset | — |
-| `package.json` | New: bin field + engines ≥18 | — |
-| `docs/DECISIONS.md` | Added ADR-002: no external deps in bin/ | — |
-| `examples/node-express/` | Worked example: scaffold + minimal Express server | — |
-| `examples/README.md` | Pattern explanation for bootstrap workflow | — |
 
 ---
 
@@ -173,7 +154,8 @@ Sprint 8  →  Scripts + harness polish              (done — TASK-037, 038, 04
 Sprint 9  →  Workflow continuity + compat          (done — TASK-047, 049, 046)
 Sprint 10  → Eval baselines + CI gate               (done — TASK-048, 025)
 Sprint 11  → Sprint mode + context compression      (done — TASK-044, 036)
-Sprint 12+ → TDD framework + multi-platform + example + init  (active — TASK-026, 027, 028, 030; P3 backlog)
+Sprint 12  → TDD framework + init script + worked example      (done — TASK-026, 028, 030)
+Sprint 13+ → Governance + automation                           (active — TASK-031, 034)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

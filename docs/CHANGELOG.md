@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24 (Sprint 10 archived)
+last_updated: 2026-04-25 (Sprint 12 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,24 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 12 — TDD Framework + Init Script + Worked Example (2026-04-25)
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `evals/measure.py` | Added `compare` sub-command (before/after snapshot delta) | — |
+| `docs/blueprint/05-skills.md` | Added Skill Change Protocol (RED-GREEN-REFACTOR) section | — |
+| `CONTRIBUTING.md` | Resolved TASK-026 forward-refs; governance rule made concrete | — |
+| `.claude/CLAUDE.md` | Removed pending qualifier from eval evidence anti-pattern line | — |
+| `evals/README.md` | Documented `compare` usage + bumped last_updated | — |
+| `bin/dev-flow-init.js` | New CLI: copies scaffold into target repo with stack prompts | ADR-002 |
+| `bin/__tests__/dev-flow-init.test.js` | Unit tests for applySubstitutions + getLayersForPreset | — |
+| `package.json` | New: bin field + engines ≥18 | — |
+| `docs/DECISIONS.md` | Added ADR-002: no external deps in bin/ | — |
+| `examples/node-express/` | Worked example: scaffold + minimal Express server | — |
+| `examples/README.md` | Pattern explanation for bootstrap workflow | — |
 
 ---
 
