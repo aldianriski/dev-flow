@@ -34,3 +34,16 @@ Append-only. Never edit past ADRs. Use `/adr-writer` to add entries.
 - Inquirer.js — rejected: adds `node_modules/` to a scaffold-only repo; readline suffices
 - Shell scripts (`cp -r`) — rejected: violates "no bash-only constructs" and breaks on Windows
 **Consequences**: `bin/dev-flow-init.js` has no `npm install` prerequisite. Windows Git Bash and Linux both work. Future prompts requiring autocomplete or multi-select will require either a dependency or a custom readline wrapper.
+
+---
+
+## ADR-003: Orchestrator-managed phase state via `set-phase.js`
+
+**Date**: 2026-04-25
+**Status**: decided
+**Context**: TASK-050 (AUDIT.md AUD-001) — `read-guard.js` short-circuits with `if (!existsSync(PHASE_FILE)) process.exit(0)`. The phase file is never created in real sessions, so the §1 Thin-Coordinator Rule is silently bypassed in 100 % of sessions. A writer is needed; two enforcement models were considered.
+**Decision**: Orchestrator-managed via `node .claude/scripts/set-phase.js <phase>`. The orchestrator (Claude reading `dev-flow/SKILL.md`) runs the script as the first step of each compact-vulnerable phase (Implement, Test, Review, Security, Docs), and runs `set-phase.js clear` after Phase 9 commit. Phase state lives in `.claude/.phase` (gitignored). Allowlist of valid phase names enforced by the script.
+**Alternatives considered**:
+- Harness-managed PostToolUse hook detecting phase boundaries from output strings — rejected: orchestrator-internal markers would have to leak into output for the harness to parse, coupling the harness to the SKILL.md prompt format. Brittle across mode variations (sprint, hotfix, resume). Failure mode is silent (hook misses a marker → no phase set → fail-open).
+- State machine in a separate harness script invoked by every Bash tool call — rejected: high overhead, every Bash call pays the cost.
+**Consequences**: SKILL.md grows by ~12 lines (Phase Markers intro + 6 phase-entry markers). Orchestrator forgetting to call `set-phase.js` reverts to today's broken state — mitigated by making the call the first sub-bullet of each gated phase. Future tightening: a `validate-scaffold.js` check that flags missing phase calls in SKILL.md, or a session-start.js warning when `.claude/.phase` exists at session start (resume into stuck phase).

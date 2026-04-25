@@ -139,14 +139,16 @@ if (existsSync(changesFile)) {
 }
 
 // ─── Check 9: Compaction audit ───────────────────────────────────────────────
-const phaseFile = '.claude/.phase';
-const COMPACT_VULNERABLE = ['implement', 'test', 'review', 'security', 'docs'];
+// Re-uses the canonical Set from phase-constants.js so a new compact-vulnerable
+// phase landing in read-guard.js is picked up here automatically.
+const { PHASE_FILE: phaseFile, COMPACT_VULNERABLE } = require('./phase-constants');
 if (existsSync(phaseFile)) {
   const phase = readFileSync(phaseFile, 'utf8').trim().toLowerCase();
-  if (COMPACT_VULNERABLE.includes(phase)) {
+  if (COMPACT_VULNERABLE.has(phase)) {
     warnings.push(
-      `WARN: Resuming into phase '${phase}' (compact-vulnerable). ` +
-      'Per §1 Thin-Coordinator Rule: dispatch the phase subagent, do NOT Read source files in orchestrator.'
+      `WARN: ${phaseFile} exists at session start with phase '${phase}' (compact-vulnerable). ` +
+      `Likely stale from a crashed prior session — Read/Grep/Glob will be blocked until cleared. ` +
+      `Resume? Run \`node .claude/scripts/set-phase.js clear\` before continuing, or accept the lock and dispatch the phase subagent.`
     );
   }
   info.push(`ℹ Current workflow phase: ${phase}`);

@@ -150,13 +150,15 @@ test('Check 8 — reports session change count', () => {
 });
 
 // Check 9: warns on compact-vulnerable phase
-test('Check 9 — warns when resuming into compact-vulnerable phase', () => {
+test('Check 9 — warns when stale phase file exists with compact-vulnerable phase', () => {
   const dir = setup();
   try {
     writeFileSync(join(dir, '.claude', 'settings.local.json'), '{}');
     writeFileSync(join(dir, '.claude', '.phase'), 'implement');
     const result = run(dir);
-    assert.ok(result.stdout.includes("Resuming into phase 'implement'"));
+    assert.ok(result.stdout.includes("phase 'implement'"), 'mentions detected phase');
+    assert.ok(result.stdout.includes('compact-vulnerable'), 'flags as compact-vulnerable');
+    assert.ok(result.stdout.includes('set-phase.js clear'), 'suggests the clear command');
   } finally {
     teardown(dir);
   }

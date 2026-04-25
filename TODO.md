@@ -39,7 +39,7 @@ sprint: 14
 > **Theme:** Close the two P0 correctness findings from `AUDIT.md` pass 1 and clear cheap drift. Strategic radicals (R-1/R-3/R-10) tracked in Backlog P3 for separate epic decomposition.
 > **Source:** `AUDIT.md` (tactical) and `STRATEGY_REVIEW.md` (strategic) — both written 2026-04-25.
 
-- [ ] **TASK-050: Implement phase-state writer; close Thin-Coordinator Rule loop**
+- [x] **TASK-050: Implement phase-state writer; close Thin-Coordinator Rule loop**
   - scope: full
   - layers: harness, skills, scripts
   - api-change: no
@@ -116,6 +116,15 @@ sprint: 14
   - acceptance: `docs/blueprint/VERSION` (or equivalent single file) holds the canonical blueprint version; `AI_WORKFLOW_BLUEPRINT.md` redirect either reads VERSION at runtime or drops the version line; CI check fails any PR that triggers a MINOR/MAJOR rule (per CONTRIBUTING.md) without a VERSION bump. Document `package.json` version vs blueprint version coupling in DECISIONS.md.
   - tracker: AUDIT.md#AUD-009, AUDIT.md#AUD-017
 
+### P1 — Workflow self-audit (raised in Sprint 14 session)
+
+- [ ] **TASK-064: Sprint Mode — add Phase 9c continue/close prompt + context-budget gate; allow blocked tasks to run in same session**
+  - scope: full · layers: skills, docs, governance · risk: low
+  - acceptance: `.claude/skills/dev-flow/SKILL.md` Sprint Mode section emits a Phase 9c-style prompt after final-phase Gate 2 (before commit), listing remaining blocked tasks + current context usage estimate; user can type `next-blocked TASK-NNN` to continue into a standalone full-mode run inside the same session, or `commit` to close. Add hard stop: "context >70 % before phase entry → prune phase summary first." Update `docs/blueprint/10-modes.md` (or split file once AUD-008 lands) Sprint Mode subsection. Add eval snapshot before/after per Skill Change Protocol. Bump blueprint MINOR.
+  - tracker: session feedback 2026-04-25 — user wants ability to keep one Sprint flow open while context healthy and batch fewer commits per sprint
+  - risk: low
+  - notes: blueprint currently treats `scope:full + risk:high` as blocked → standalone session only. Proposed change keeps the standalone *run* but lets it execute in same conversation when context budget permits. Confirm with user whether (a) one commit per task or (b) one commit per sprint is preferred; today's behavior is (a). Single-commit-per-sprint also requires reworking Phase 9 in `08-orchestrator-prompts.md`.
+
 ### P2 — Audit Pass 1 polish
 
 - [ ] **TASK-061: Trim subagent files to thin wrappers**
@@ -178,6 +187,14 @@ sprint: 14
 | `README.md` | TASK-053: "27 Hard Stops" → "24 Hard Stops"; "9+ project-local … skills" → "10 project-local … skills" | none |
 | `.claude/scripts/validate-blueprint.js` | TASK-053: Add Check 4 — count ❌ in 08-orchestrator-prompts.md and skills in MANIFEST; fail when README claims drift or are missing | none |
 | `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-053: Add 7 cases (match, drift, N+ phrasing, missing claims) | none |
+| `.claude/scripts/phase-constants.js` | TASK-050: New — single source of truth for `VALID_PHASES` (11) + `COMPACT_VULNERABLE` (5) + `PHASE_FILE`. Imported by set-phase.js, read-guard.js, session-start.js | ADR-003 |
+| `.claude/scripts/set-phase.js` | TASK-050: New — orchestrator-managed writer for `.claude/.phase` (set/clear modes); rejects symlinks via `lstatSync` guard; allowlist-validated phase names | ADR-003 |
+| `.claude/scripts/__tests__/set-phase.test.js` | TASK-050: New — 11 unit tests (write, normalize, trim, mkdir, reject, usage, clear, idempotent, all 11 phases, exports, single-source invariant) | none |
+| `.claude/scripts/__tests__/phase-cycle.integration.test.js` | TASK-050: New — 6 integration tests (full cycle, allowlist pass, parse non-block, all compact-vulnerable phases via shared Set, idempotent clear, symlink refusal) | none |
+| `.claude/scripts/read-guard.js` | TASK-050: Import `PHASE_FILE` + `COMPACT_VULNERABLE` from phase-constants instead of hardcoded literals | none |
+| `.claude/scripts/session-start.js` | TASK-050: Check 9 — import `COMPACT_VULNERABLE` from phase-constants; escalate stale-phase warn message to suggest `set-phase.js clear` | none |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-050: Add §Phase Markers intro; mark Phase 0 (clear pre-flight), 3, 5, 6, 7, 8 with `set-phase.js` calls; add `set-phase.js clear` after Phase 9 commit | ADR-003 |
+| `docs/DECISIONS.md` | TASK-050: Append ADR-003 — orchestrator-managed phase state via `set-phase.js`; rejected harness-managed PostToolUse alternative documented | ADR-003 |
 
 ---
 

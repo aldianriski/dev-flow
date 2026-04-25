@@ -8,9 +8,7 @@
 'use strict';
 
 const { existsSync, readFileSync } = require('fs');
-
-const PHASE_FILE = '.claude/.phase';
-const COMPACT_VULNERABLE = new Set(['implement', 'test', 'review', 'security', 'docs']);
+const { PHASE_FILE, COMPACT_VULNERABLE } = require('./phase-constants');
 
 const ORCHESTRATOR_ALLOWLIST = [
   /^TODO\.md$/,
