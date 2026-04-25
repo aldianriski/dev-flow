@@ -39,7 +39,7 @@ bin/           # CLI tools (dev-flow-init.js — scaffold bootstrap)
 ❌ HOW content in any doc file — move to code comments
 ❌ Skill changes without eval evidence (RED-GREEN-REFACTOR — see `docs/blueprint/05-skills.md §Skill Change Protocol`)
 ❌ Hard stop count or gate model changes without a blueprint version bump
-❌ Editing auto-synced copies — always edit the canonical source file
+❌ Editing auto-synced copies — always edit the canonical source file (see `docs/blueprint/05-skills.md §Canonical Files Governance`)
 
 ## Commands
 ```bash

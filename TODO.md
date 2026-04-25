@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25 (Sprint 12 closed; Sprint 13 promoted)
+last_updated: 2026-04-25 (Sprint 13 closed; Sprint 14 active)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 13
+sprint: 14
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,23 +35,10 @@ sprint: 13
 
 ## Active Sprint
 
-### Sprint 13 — Governance + Automation (active)
-> **Theme:** Skill-staleness audit automation and single-source-of-truth governance rule.
+### Sprint 14 — TBD (active)
+> **Theme:** TBD — Backlog empty. Add new P0/P1 tasks before starting Sprint 14.
 
-- [ ] **TASK-031: Quarterly skill-staleness audit cron via the `loop` skill** — automation for the Section 17 calibration protocol
-  - `scope`: full
-  - `layers`: skills, harness
-  - `api-change`: no
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `acceptance`: scheduled loop audits `last-validated` dates on all skills; warns on skills >6 months stale; runnable via `/loop` skill
-  - `risk`: low
-- [ ] **TASK-034: Add single-source-of-truth governance rule to blueprint §5** — explicit rule: "edit canonical skill/rule files only, never edit auto-synced copies"
-  - `scope`: quick
-  - `layers`: docs, governance
-  - `api-change`: no
-  - `acceptance`: blueprint §5 has explicit single-source-of-truth rule; CLAUDE.md anti-patterns updated; deferred note removed from Backlog
-  - `tracker`: none — dev-flow meta-repo tracks tasks in TODO.md
-  - `risk`: low
+> No tasks yet. Promote from Backlog or add new items.
 
 ---
 
@@ -85,7 +72,7 @@ sprint: 13
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
 
-### Sprint 13 — In Progress
+### Sprint 14 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
@@ -155,7 +142,8 @@ Sprint 9  →  Workflow continuity + compat          (done — TASK-047, 049, 04
 Sprint 10  → Eval baselines + CI gate               (done — TASK-048, 025)
 Sprint 11  → Sprint mode + context compression      (done — TASK-044, 036)
 Sprint 12  → TDD framework + init script + worked example      (done — TASK-026, 028, 030)
-Sprint 13+ → Governance + automation                           (active — TASK-031, 034)
+Sprint 13  → Governance + automation                           (done — TASK-031, 034)
+Sprint 14+ → TBD                                               (active)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

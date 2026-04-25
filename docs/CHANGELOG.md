@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25 (Sprint 12 archived)
+last_updated: 2026-04-25 (Sprint 13 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,19 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 13 — Governance + Automation (2026-04-25)
+
+**Blueprint version:** PATCH bump — canonical files governance rule; skill-staleness audit script
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/blueprint/05-skills.md` | Added §Canonical Files Governance (SSOT rule + table + loop usage example) | none |
+| `.claude/CLAUDE.md` | Updated anti-pattern with §5 cross-reference | none |
+| `.claude/scripts/audit-skill-staleness.js` | New script: audits last-validated dates on all skills, exits 1 on stale/missing | none |
+| `.claude/scripts/__tests__/audit-skill-staleness.test.js` | 13 unit tests (TDD RED→GREEN) | none |
 
 ---
 

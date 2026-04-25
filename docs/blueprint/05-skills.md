@@ -72,6 +72,12 @@ based on context. If in doubt, start with `rigid` and loosen later with evidence
 **Staleness rule**: If `last-validated` is older than 6 months, the orchestrator warns before
 running the skill. The human must acknowledge before the skill runs.
 
+Run a quarterly audit manually or schedule via `/loop`:
+```bash
+node .claude/scripts/audit-skill-staleness.js
+# Via /loop (quarterly): /loop 90d node .claude/scripts/audit-skill-staleness.js
+```
+
 ### Full frontmatter example
 
 ```yaml
@@ -199,7 +205,17 @@ See `.claude/skills/MANIFEST.json` for the same binding in machine-readable form
 }
 ```
 
-**Single source of truth rule**: if the binding matrix above and MANIFEST.json disagree, MANIFEST.json wins. The binding matrix is a human-readable render of the manifest. Generate with `scripts/regenerate-manifest.js` (see TASK-017).
+## Canonical Files Governance
+
+**Rule**: Edit canonical source files only. Never edit auto-synced copies directly.
+
+| Canonical file | Auto-synced copy (never edit) | Re-sync command |
+|:---------------|:------------------------------|:----------------|
+| `.claude/skills/<name>/SKILL.md` | Any summary or rendered reference | — |
+| `.claude/skills/MANIFEST.json` | Phase binding matrix table in this doc | `node scripts/regenerate-manifest.js` |
+| `.claude/CLAUDE.md` | Any compressed copy | `python scripts/compress.py` |
+
+When canonical and copy disagree, canonical wins. If unsure which file is canonical, check its ownership header (`source:` field).
 
 ## Skill Invocation Reference
 
