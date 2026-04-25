@@ -1,36 +1,21 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24
+last_updated: 2026-04-25
 update_trigger: New bug found or bug resolved
 status: current
 ---
 
 # dev-flow — Known Bugs
 
-Active bugs blocking scaffold adoption. Resolved entries move to docs/CHANGELOG.md.
+> **Rule**: when a bug is open, list it here with severity, symptom, root cause, and the tracking task. When resolved, move the entry to `docs/CHANGELOG.md` under the sprint that fixed it as a "Resolved bugs" row, and trim this file back to "No open bugs."
 
 ---
 
-## BUG-001: `${CLAUDE_PLUGIN_ROOT}` fails in project-local settings.json hooks
+## BUG-003: `validate-blueprint.js` MANIFEST `skill.path` accepts `..` traversal
 
-**Status**: open — tracked in TASK-041
-**Severity**: P0 — blocks SessionStart hook on first session
-**Symptom**:
-```
-SessionStart:startup hook error
-Failed to run: Hook command references ${CLAUDE_PLUGIN_ROOT} but the hook is not
-associated with a plugin. This variable is only available in hooks defined in a
-plugin's hooks/hooks.json file, not in project-local settings.json.
-```
-**Root cause**: `settings.json` hooks use `node ${CLAUDE_PLUGIN_ROOT}/.claude/scripts/session-start.js`. `${CLAUDE_PLUGIN_ROOT}` only resolves inside a Claude Code plugin context (`hooks/hooks.json`). Project-local hooks must use a path resolvable from the workspace root.
-**Fix target**: replace `${CLAUDE_PLUGIN_ROOT}` with correct workspace-relative path syntax — verify against `context/research/CC_SPEC.md` before changing.
-
----
-
-## BUG-002: Harness node scripts not in `allowedTools` — permission prompt on every hook fire
-
-**Status**: open — tracked in TASK-043
-**Severity**: P0 — blocks automated harness flow
-**Symptom**: Claude prompts user to approve `node .claude/scripts/session-start.js` (and other hook scripts) on each SessionStart and PostToolUse event.
-**Root cause**: `settings.json` has no `allowedTools` entry for `Bash(node .claude/scripts/*)`. Without it, every hook invocation triggers a permission prompt.
-**Fix target**: add `allowedTools` entries for all harness node script patterns in `settings.json`.
+**Status**: open — needs tracking task in Backlog
+**Severity**: P2 — local-only tool, no remote input path; defense-in-depth issue
+**Symptom**: `.claude/scripts/validate-blueprint.js:31` joins `root` with `skill.path` from `MANIFEST.json` and passes the result to `existsSync`. A crafted MANIFEST with `"path": "../../etc/passwd"` resolves outside `.claude/skills/`. No traversal validation is performed by the consumer or by `checkManifest` in `scaffold-checks.js`.
+**Root cause**: `checkManifest` validates JSON shape (version, skills array) but does not constrain `skill.path` to a relative subpath.
+**Fix target**: in `scaffold-checks.js` `checkManifest`, reject any `skill.path` that contains `..` segments or is absolute. Add a unit test covering the traversal-attempt case.
+**Found by**: Sprint 14 TASK-051 security audit (Phase 7).

@@ -116,6 +116,45 @@ if (violations.length === 0) {
   }
 }
 
+// ─── Check 8: settings.json hooks contain no [your-X] placeholders ───────────
+// Committed settings.json must be runnable as-is. Placeholder commands like
+// [your-lint-command] break adopters silently. Per-stack hooks belong in
+// settings.local.json (rendered by bin/dev-flow-init.js).
+const settingsPath = join(root, '.claude/settings.json');
+if (!existsSync(settingsPath)) {
+  fail('.claude/settings.json missing — placeholder check skipped (Check 1 should have caught this)');
+} else {
+  let settings;
+  try {
+    settings = JSON.parse(readFileSync(settingsPath, 'utf8'));
+  } catch (err) {
+    fail(`.claude/settings.json: invalid JSON — ${err.message}`);
+    settings = null;
+  }
+  if (settings && settings.hooks && typeof settings.hooks === 'object') {
+    const offenders = [];
+    for (const eventName of Object.keys(settings.hooks)) {
+      const groups = settings.hooks[eventName];
+      if (!Array.isArray(groups)) continue;
+      for (const group of groups) {
+        const hooks = Array.isArray(group?.hooks) ? group.hooks : [];
+        for (const h of hooks) {
+          if (typeof h?.command === 'string' && h.command.includes('[your-')) {
+            offenders.push(`${eventName}/${group.matcher || '?'}`);
+          }
+        }
+      }
+    }
+    if (offenders.length === 0) {
+      pass('settings.json hooks free of [your-] placeholders');
+    } else {
+      fail(`settings.json contains placeholder hook command(s) at: ${offenders.join(', ')} — move per-stack hooks to settings.local.json (render via bin/dev-flow-init.js)`);
+    }
+  } else if (settings) {
+    pass('settings.json has no hooks block — placeholder check vacuously passes');
+  }
+}
+
 // ─── Output ───────────────────────────────────────────────────────────────────
 console.log('\n=== SCAFFOLD VALIDATION ===\n');
 for (const p of passes) console.log(`[PASS] ${p}`);

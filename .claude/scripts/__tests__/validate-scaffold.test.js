@@ -194,3 +194,76 @@ test('output always contains SCAFFOLD VALIDATION header', () => {
     teardown(dir);
   }
 });
+
+test('fails when settings.json hook command contains [your-] placeholder', () => {
+  const dir = setup();
+  try {
+    scaffold(dir);
+    const settings = {
+      hooks: {
+        PreToolUse: [
+          {
+            matcher: 'Bash(git commit*)',
+            hooks: [{ type: 'command', command: '[your-lint-command]' }],
+          },
+        ],
+      },
+    };
+    writeFileSync(join(dir, '.claude', 'settings.json'), JSON.stringify(settings));
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('placeholder'));
+    assert.ok(result.stdout.includes('Bash(git commit*)'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('passes when settings.json has no [your-] placeholders', () => {
+  const dir = setup();
+  try {
+    scaffold(dir);
+    const settings = {
+      hooks: {
+        PreToolUse: [
+          {
+            matcher: 'Read',
+            hooks: [{ type: 'command', command: 'node scripts/check.js' }],
+          },
+        ],
+      },
+    };
+    writeFileSync(join(dir, '.claude', 'settings.json'), JSON.stringify(settings));
+    const result = run(dir);
+    assert.equal(result.status, 0, result.stdout);
+    assert.ok(result.stdout.includes('settings.json hooks free of [your-]'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('fails when settings.json is invalid JSON', () => {
+  const dir = setup();
+  try {
+    scaffold(dir);
+    writeFileSync(join(dir, '.claude', 'settings.json'), 'not json {{{');
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('settings.json: invalid JSON'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('fails when settings.json is absent (Check 8 emits explicit signal)', () => {
+  const dir = setup();
+  try {
+    scaffold(dir);
+    rmSync(join(dir, '.claude', 'settings.json'));
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('settings.json missing'));
+  } finally {
+    teardown(dir);
+  }
+});

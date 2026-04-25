@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25 (Sprint 13 closed; Sprint 14 active)
+last_updated: 2026-04-25 (Sprint 14 populated from AUDIT.md pass 1 + STRATEGY_REVIEW.md)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
 sprint: 14
@@ -35,34 +35,121 @@ sprint: 14
 
 ## Active Sprint
 
-### Sprint 14 — TBD (active)
-> **Theme:** TBD — Backlog empty. Add new P0/P1 tasks before starting Sprint 14.
+### Sprint 14 — Audit Pass 1: P0 fixes + drift cleanup (active)
+> **Theme:** Close the two P0 correctness findings from `AUDIT.md` pass 1 and clear cheap drift. Strategic radicals (R-1/R-3/R-10) tracked in Backlog P3 for separate epic decomposition.
+> **Source:** `AUDIT.md` (tactical) and `STRATEGY_REVIEW.md` (strategic) — both written 2026-04-25.
 
-> No tasks yet. Promote from Backlog or add new items.
+- [ ] **TASK-050: Implement phase-state writer; close Thin-Coordinator Rule loop**
+  - scope: full
+  - layers: harness, skills, scripts
+  - api-change: no
+  - acceptance: `.claude/.phase` is written by orchestrator on each phase entry; integration test exercises full cycle (phase set → Read attempt during compact-vulnerable phase → blocked → phase clear → Read allowed); `read-guard.js` no longer fail-opens in real sessions.
+  - tracker: AUDIT.md#AUD-001 (P0)
+  - risk: high
+  - notes: AUD-001 confirmed via grep — only test fixtures call `writeFileSync` on `.claude/.phase`. Decide enforcement model in DECISIONS.md before implementation: (a) orchestrator-managed via SKILL.md step `node .claude/scripts/set-phase.js <name>`, or (b) harness-managed via PostToolUse hook detecting phase boundaries from output. Suggested: (a) — explicit and testable.
+
+- [x] **TASK-051: Move placeholder lint/typecheck hooks out of committed settings.json; add validate-scaffold guard**
+  - scope: full
+  - layers: harness, scripts, templates
+  - api-change: no
+  - acceptance: committed `.claude/settings.json` contains no `[your-X]` placeholder commands; stack-specific hook commands rendered into `settings.local.json` by `bin/dev-flow-init.js` from a `STACK_PRESETS` table; `validate-scaffold.js` fails on any hook `command` containing the substring `[your-`.
+  - tracker: AUDIT.md#AUD-002 (P0), AUDIT.md#AUD-010 (P1 — paired)
+  - risk: medium
+  - notes: dev-flow's own commits also fail this hook silently today. Verify post-fix that `git commit` in dev-flow itself runs a real lint command or no-ops cleanly.
+
+- [x] **TASK-052: Verify BUG-001/BUG-002 fixed; rotate BUGS.md entries to CHANGELOG**
+  - scope: quick
+  - layers: docs, governance
+  - api-change: no
+  - acceptance: BUG-001 (`${CLAUDE_PLUGIN_ROOT}` → `$CLAUDE_PROJECT_DIR`) and BUG-002 (Bash(node .claude/scripts/*) allowlisted) confirmed fixed in current `settings.json`; both entries moved to `docs/CHANGELOG.md` Sprint 7 block as resolved-bug rows; `docs/BUGS.md` body trimmed to "No open bugs." with rule line.
+  - tracker: AUDIT.md#AUD-013 (P2)
+  - risk: low
+
+- [x] **TASK-053: Reconcile README marketing numbers with source-of-truth**
+  - scope: quick
+  - layers: docs, scripts
+  - api-change: no
+  - acceptance: `README.md` "27 Hard Stops" replaced with the actual count (24 from `docs/blueprint/08-orchestrator-prompts.md`) OR phrased without a fixed number; "9+ skills" updated to match `MANIFEST.json` count (10) OR phrased without a number; `validate-blueprint.js` extended with a check that fails when README counts disagree with source files.
+  - tracker: AUDIT.md#AUD-014 (P2)
+  - risk: low
 
 ---
 
 ## Backlog
 
-### P0 — Scaffold init blockers (remaining after Sprint 8)
+### P1 — Audit Pass 1 follow-on (correctness + adoption)
 
-<!-- TASK-039, 040, 041, 043, 045 promoted to Sprint 7 — closed -->
-<!-- TASK-037, 038, 042 promoted to Sprint 8 -->
+<!-- AUD-001, AUD-002 promoted to Sprint 14 (TASK-050, TASK-051) -->
 
-### P2 — Sprint 7+ candidates
+- [ ] **TASK-054: CI runs full test suite + Node version matrix**
+  - scope: full · layers: ci, scripts · risk: low
+  - acceptance: `.github/workflows/validate.yml` runs `node --test` over all `__tests__/`, runs `python -m unittest discover` for `*.test.py`, runs `py_compile` on `evals/measure.py` + `compress.py`, and matrices Node 18/20/22; PR fails when any test fails. `audit-skill-staleness.js` moved to scheduled (weekly) cron job.
+  - tracker: AUDIT.md#AUD-003
 
-<!-- TASK-021, TASK-024, TASK-033 promoted to Sprint 6 -->
+- [ ] **TASK-055: Enforce skill-change RED-GREEN-REFACTOR in CI**
+  - scope: full · layers: ci, evals, governance · risk: medium
+  - acceptance: PRs touching any `.claude/skills/**/SKILL.md` require a paired `evals/snapshots/<skill>/<task-id>-after.json` + `compare` output committed under `evals/runs/<task-id>.md`; CI step fails the PR otherwise. Backfill missing before/after snapshots for Sprint 11 dev-flow + dev-flow-compress changes. CONTRIBUTING.md updated with the gate name.
+  - tracker: AUDIT.md#AUD-004
 
-<!-- TASK-046, 047, 049 promoted to Sprint 9 — closed -->
-<!-- TASK-048, 025 promoted to Sprint 10 — closed -->
-<!-- TASK-044, 036 promoted to Sprint 11 -->
+- [ ] **TASK-056: README primary adoption path uses dev-flow-init.js**
+  - scope: quick · layers: docs · risk: low
+  - acceptance: `README.md` "How to adopt" replaced — primary instruction is `node bin/dev-flow-init.js` (or `npx dev-flow-init` if `package.json bin` works post-clone); manual `cp -r` demoted to fallback. Add a "What gets created" table showing the 8 rendered files. Verify `npx` path actually works from a fresh clone.
+  - tracker: AUDIT.md#AUD-005
 
-### P3 — Long-term maintenance + stretch
+- [ ] **TASK-057: Decide examples/ mirror policy and apply**
+  - scope: full · layers: examples, scripts, ci · risk: medium
+  - acceptance: ADR written in `docs/DECISIONS.md` choosing one of three paths from AUDIT.md AUD-006: (a) delete mirror + minimal post-bootstrap files only, (b) auto-sync via pre-commit, (c) regenerate during CI. Implementation matches the ADR. CI fails if mirror drifts (paths a/c) or hook is missing (path b).
+  - tracker: AUDIT.md#AUD-006
 
-<!-- TASK-025 promoted to Sprint 10 -->
-<!-- TASK-026, 027, 028, 030 promoted to Sprint 12 — closed -->
-<!-- TASK-031, 034 promoted to Sprint 13 -->
-<!-- TASK-036 promoted to Sprint 11 -->
+- [ ] **TASK-058: Split dev-flow/SKILL.md to skills/dev-flow/references/**
+  - scope: full · layers: skills, evals · risk: medium
+  - acceptance: `.claude/skills/dev-flow/SKILL.md` ≤ 120 lines (frontmatter, Mode Dispatch, decision flow, Sub-commands, top-level Phase Checklist, Red Flags only); detail moved to `references/phases.md`, `references/hard-stops.md`, `references/mode-hotfix.md`, `references/mode-resume.md`, `references/mode-sprint.md`. `evals/measure.py compare` shows `terse_isolation_delta` does not regress past +379%.
+  - tracker: AUDIT.md#AUD-007
+
+- [ ] **TASK-059: Split blueprint mega-files (10-modes, 06-harness, 08-orchestrator)**
+  - scope: full · layers: docs, scripts · risk: medium
+  - acceptance: `docs/blueprint/10-modes.md` (871) split into `10a-init.md … 10f-task-decomposer.md` with 10-modes.md as ≤30-line index; `06-harness.md` (565) split into `06a-settings.md / 06b-scripts.md / 06c-claude-md-template.md`; `08-orchestrator-prompts.md` (397) split per phase if cohesive boundary exists. New blueprint-doc line cap (suggest 250) added to `validate-blueprint.js`. All cross-references updated.
+  - tracker: AUDIT.md#AUD-008
+
+- [ ] **TASK-060: Single SSOT for blueprint version; sync redirect + CI guard**
+  - scope: full · layers: governance, ci, docs · risk: low
+  - acceptance: `docs/blueprint/VERSION` (or equivalent single file) holds the canonical blueprint version; `AI_WORKFLOW_BLUEPRINT.md` redirect either reads VERSION at runtime or drops the version line; CI check fails any PR that triggers a MINOR/MAJOR rule (per CONTRIBUTING.md) without a VERSION bump. Document `package.json` version vs blueprint version coupling in DECISIONS.md.
+  - tracker: AUDIT.md#AUD-009, AUDIT.md#AUD-017
+
+### P2 — Audit Pass 1 polish
+
+- [ ] **TASK-061: Trim subagent files to thin wrappers**
+  - scope: quick · layers: agents, evals · risk: low
+  - acceptance: `code-reviewer.md`, `security-analyst.md`, `migration-analyst.md`, `performance-analyst.md` each ≤ 25 lines (frontmatter, mandate, input contract, "follow `[skill-name]`", output token budget). Re-run baseline eval; expect noticeable `brevity_delta` improvement.
+  - tracker: AUDIT.md#AUD-012
+
+- [ ] **TASK-062: Add GraphViz flowcharts to skills with non-obvious decision logic; document exemptions**
+  - scope: quick · layers: skills, docs · risk: low
+  - acceptance: `pr-reviewer/SKILL.md` and `lean-doc-generator/SKILL.md` get `dot` flowcharts (Stage 1→2 gating; HOW-filter branches). `refactor-advisor`, `system-design-reviewer`, `release-manager` reviewed and either get flowchart or are noted exempt in `docs/blueprint/05-skills.md` with reason. `security-auditor`, `adr-writer` documented as flowchart-exempt (pure checklist / append-only).
+  - tracker: AUDIT.md#AUD-011
+
+- [ ] **TASK-063: Archive IMPROVEMENT_LOG.md; escalate empty-sprint signal**
+  - scope: quick · layers: docs, governance, scripts · risk: low
+  - acceptance: `IMPROVEMENT_LOG.md` either deleted or moved to `docs/archive/2026-04-20-session-1-critique.md` with `status: archived` ownership header; root no longer surfaces it. `session-start.js` escalates to WARN (not info) when Active Sprint AND Backlog are both empty, with suggestion to run `/task-decomposer` or `/dev-flow <freeform>`.
+  - tracker: AUDIT.md#AUD-015, AUDIT.md#AUD-016
+
+### P3 — Strategic epics (decompose via /task-decomposer before promoting)
+
+> Direction-level moves from `STRATEGY_REVIEW.md`. Each is an epic, not a single task — run `/task-decomposer --epic "<name>"` against the strategy file before pulling into a sprint. Order is by leverage, not dependency.
+
+- [ ] **EPIC-A: Plugin-first distribution (R-1)** — replace `cp -r` adoption with a Claude Code plugin install. Eliminates `examples/` mirror and ~90 % of adoption friction. Pre-req: confirm CC plugin spec covers hooks + skills + agents bundles. Source: STRATEGY_REVIEW.md#R-1.
+
+- [ ] **EPIC-B: Code-enforced gates (R-3)** — Gate 0/1/2 become Node/Python functions returning `{pass, missing, suggested_fix}`. Hard stops become exit codes. Subsumes TASK-050 (phase-file) and reframes 24 hard stops as 5 enforced + N warnings (R-5). Source: STRATEGY_REVIEW.md#R-3, STRATEGY_REVIEW.md#R-5.
+
+- [ ] **EPIC-C: Dogfood on real product (R-10)** — pick a real side project, build it end-to-end with dev-flow, document friction in PR notes. Without this validation, dev-flow remains a research artifact. Source: STRATEGY_REVIEW.md#R-10.
+
+- [ ] **EPIC-D: State as YAML, telemetry as JSONL (R-2 + R-6)** — replace TODO.md as state-machine with `.claude/state.yaml`; add opt-in `.claude/.metrics.jsonl` for gate hits / hard-stop fires / phase durations. TODO.md becomes a render of state.yaml. Source: STRATEGY_REVIEW.md#R-2, STRATEGY_REVIEW.md#R-6.
+
+- [ ] **EPIC-E: Harness wrap-or-replace decision (R-9)** — choose: wrap CC primitives (`/dev-flow` invokes TaskCreate, Phase 6 invokes `/review`) or replace them with documented rationale in DECISIONS.md. Today does both partially. Source: STRATEGY_REVIEW.md#R-9.
+
+<!-- Closed-sprint trail (kept for reference) -->
+<!-- TASK-001..049 closed across Sprints 0–13. See docs/CHANGELOG.md. -->
+<!-- TASK-029, TASK-035 reserved/skipped — gap in numbering, do not reuse. -->
 
 ---
 
@@ -76,6 +163,21 @@ sprint: 14
 
 | File | Change | ADR |
 |:-----|:-------|:----|
+| `AUDIT.md` | New: 17-finding tactical audit (pass 1, quick scan) — 2 P0, 8 P1, 7 P2; suggested sprint plan | none |
+| `STRATEGY_REVIEW.md` | New: strategic critique (pros, cons, 10 radical alternatives R-1..R-10) — companion to AUDIT.md | none |
+| `TODO.md` | Sprint 14 populated (TASK-050..053 P0+P2 cleanup); Backlog populated with TASK-054..063 (P1+P2) and EPIC-A..E (P3 strategic) | none |
+| `.claude/settings.json` | TASK-051: Remove 4 `[your-X]` placeholder PreToolUse hooks (`Bash(git commit*)`, `Bash(git -C * commit*)`, `Bash(git push*)`, `Bash(git -C * push*)`); committed file is now runnable as-is | none |
+| `.claude/settings.local.example.json` | TASK-051: Promote to canonical template — embed full PreToolUse hook block with `[your-X]` tokens; rendered per-stack by `dev-flow-init.js` | none |
+| `bin/dev-flow-init.js` | TASK-051: Replace `LAYER_PRESETS` with `STACK_PRESETS` (layers + lintCommand + typecheckCommand + packageManager); add `renderSettingsLocal()`; add `isHookCommandSafe()` shell-metachar guard for custom prompts | none |
+| `bin/__tests__/dev-flow-init.test.js` | TASK-051: Replace `getLayersForPreset` tests with `getStackPreset` + `renderSettingsLocal` + `isHookCommandSafe` tests (24 cases) | none |
+| `.claude/scripts/validate-scaffold.js` | TASK-051: Add Check 8 — fail on `[your-` substring in any settings.json hook command; explicit fail when settings.json absent | none |
+| `.claude/scripts/__tests__/validate-scaffold.test.js` | TASK-051: Add 4 cases (placeholder fail, clean pass, invalid JSON, missing file) | none |
+| `.claude/settings.local.json` | TASK-051: Regenerate this repo's local — replace `[package-manager]` with `npm`, render 4 hooks with `node -e "process.exit(0)"` no-op (meta-repo has no app code to lint/typecheck) | none |
+| `docs/BUGS.md` | TASK-052: Trim to rule line; TASK-051 audit: open BUG-003 (validate-blueprint.js MANIFEST `skill.path` traversal) | none |
+| `docs/CHANGELOG.md` | TASK-052: Add Sprint 7 "Resolved bugs" sub-table with BUG-001 + BUG-002 fix verification; TASK-051: fix stale `getLayersForPreset` reference in Sprint 12 row | none |
+| `README.md` | TASK-053: "27 Hard Stops" → "24 Hard Stops"; "9+ project-local … skills" → "10 project-local … skills" | none |
+| `.claude/scripts/validate-blueprint.js` | TASK-053: Add Check 4 — count ❌ in 08-orchestrator-prompts.md and skills in MANIFEST; fail when README claims drift or are missing | none |
+| `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-053: Add 7 cases (match, drift, N+ phrasing, missing claims) | none |
 
 ---
 

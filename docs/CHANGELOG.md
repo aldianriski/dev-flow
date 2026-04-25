@@ -39,7 +39,7 @@ status: current
 | `.claude/CLAUDE.md` | Removed pending qualifier from eval evidence anti-pattern line | — |
 | `evals/README.md` | Documented `compare` usage + bumped last_updated | — |
 | `bin/dev-flow-init.js` | New CLI: copies scaffold into target repo with stack prompts | ADR-002 |
-| `bin/__tests__/dev-flow-init.test.js` | Unit tests for applySubstitutions + getLayersForPreset | — |
+| `bin/__tests__/dev-flow-init.test.js` | Unit tests for applySubstitutions + getStackPreset (renamed from getLayersForPreset in Sprint 14 TASK-051) | — |
 | `package.json` | New: bin field + engines ≥18 | — |
 | `docs/DECISIONS.md` | Added ADR-002: no external deps in bin/ | — |
 | `examples/node-express/` | Worked example: scaffold + minimal Express server | — |
@@ -115,6 +115,13 @@ status: current
 | `README.md` | TASK-039: Add settings.local.json copy step to "How to adopt" | — |
 | `README.md` | TASK-040: Fix stale paths → templates/; collapse blueprint listing; trim to 47 lines | — |
 | `templates/SETUP.md.template` | TASK-039: Add "First session (Claude Code harness)" section | — |
+
+**Resolved bugs:**
+
+| Bug | Fixed by | Verified | Notes |
+|:----|:---------|:---------|:------|
+| BUG-001: `${CLAUDE_PLUGIN_ROOT}` fails in project-local settings.json hooks | TASK-041 (Sprint 7) | TASK-052 (2026-04-25) — confirmed token absent from `.claude/settings.json`; all 5 hooks use `$CLAUDE_PROJECT_DIR` | rotated from `docs/BUGS.md` |
+| BUG-002: Harness node scripts not in `allowedTools` — permission prompt on every hook fire | TASK-043 (Sprint 7) | TASK-052 (2026-04-25) — confirmed `Bash(node .claude/scripts/*)` present in `permissions.allow` | rotated from `docs/BUGS.md` |
 
 ---
 

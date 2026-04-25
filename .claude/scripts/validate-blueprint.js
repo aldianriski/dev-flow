@@ -7,7 +7,7 @@
 // Pure Node (>=18), CommonJS, no shell-outs — cross-platform (Windows Git Bash + Linux).
 'use strict';
 
-const { existsSync } = require('fs');
+const { existsSync, readFileSync } = require('fs');
 const { join } = require('path');
 const { checkManifest } = require('./scaffold-checks');
 
@@ -67,6 +67,54 @@ if (allAgentsPresent) {
 // MANIFEST.json does not yet include phase assignments.
 // Phase range validation (0–10) is deferred until MANIFEST includes a phase field.
 pass('Phase range check: deferred (MANIFEST.json does not yet include phase field)');
+
+// ─── Check 4: README marketing numbers match source-of-truth ─────────────────
+// README claims hard-stop count and skill count. Both must match the actual
+// counts in docs/blueprint/08-orchestrator-prompts.md (❌ lines) and
+// MANIFEST.json (skills array length). Drift = fail.
+const readmePath = join(root, 'README.md');
+const hardStopsPath = join(root, 'docs/blueprint/08-orchestrator-prompts.md');
+
+if (existsSync(readmePath)) {
+  const readme = readFileSync(readmePath, 'utf8');
+
+  // Hard stops: count lines starting with ❌ in 08-orchestrator-prompts.md
+  if (existsSync(hardStopsPath)) {
+    const hsContent = readFileSync(hardStopsPath, 'utf8');
+    const actualHardStops = (hsContent.match(/^❌/gm) || []).length;
+    const hsClaim = readme.match(/(\d+)\+?\s+Hard Stops/i);
+    if (hsClaim) {
+      const claimed = parseInt(hsClaim[1], 10);
+      const isPlus = /\d+\+/.test(hsClaim[0]);
+      const ok = isPlus ? actualHardStops >= claimed : claimed === actualHardStops;
+      if (ok) {
+        pass(`README hard-stop count matches source (${actualHardStops})`);
+      } else {
+        fail(`README claims "${hsClaim[0].trim()}" but docs/blueprint/08-orchestrator-prompts.md has ${actualHardStops} ❌ lines`);
+      }
+    } else {
+      fail('README missing "N Hard Stops" claim — required for source-of-truth check (use a number to enable counting, or remove this check from CI when the project shrinks)');
+    }
+  }
+
+  // Skill count: skills.length in MANIFEST.json vs README claim
+  if (mResult.pass) {
+    const actualSkills = mResult.data.skills.length;
+    const skillClaim = readme.match(/(\d+)\+?\s+project-local[^\n]*skills/i);
+    if (skillClaim) {
+      const claimed = parseInt(skillClaim[1], 10);
+      const isPlus = /\d+\+/.test(skillClaim[0]);
+      const ok = isPlus ? actualSkills >= claimed : actualSkills === claimed;
+      if (ok) {
+        pass(`README skill count matches MANIFEST (${actualSkills})`);
+      } else {
+        fail(`README claims "${skillClaim[0].trim()}" but MANIFEST.json has ${actualSkills} skills`);
+      }
+    } else {
+      fail('README missing "N project-local … skills" claim — required for source-of-truth check');
+    }
+  }
+}
 
 // ─── Output ───────────────────────────────────────────────────────────────────
 console.log('\n=== BLUEPRINT VALIDATION ===\n');

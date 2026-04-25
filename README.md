@@ -15,9 +15,9 @@ Built on Claude Code. Designed to be more rigorous than [superpowers](https://gi
 A starter repository that you copy into any project to get:
 - **3 Gates** — scope, design, and review+security checkpoints before any commit
 - **6 Modes** — `init / full / quick / hotfix / review / resume`
-- **27 Hard Stops** — non-negotiable pipeline blocks for dangerous conditions
+- **24 Hard Stops** — non-negotiable pipeline blocks for dangerous conditions
 - **7 Subagents** — specialist workers (design, review, security, migration, performance, etc.)
-- **Skill library** — 9+ project-local, git-tracked skills
+- **Skill library** — 10 project-local, git-tracked skills
 - **Harness scripts** — session bootstrap, read-guard, change tracker, CI poller
 
 ## What it is not

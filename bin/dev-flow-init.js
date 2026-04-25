@@ -11,12 +11,36 @@ const rl   = require('readline');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
-const LAYER_PRESETS = {
-  'node-express':   'api, service, repository, middleware, model',
-  'react-next':     'api, hook, component, page, store, infrastructure',
-  'python-fastapi': 'api, service, repository, middleware, model',
-  'go-gin':         'api, service, repository, middleware, model',
+// Per-stack defaults. lintCommand/typecheckCommand wire into settings.local.json
+// PreToolUse hooks for Bash(git commit*) / Bash(git push*).
+const STACK_PRESETS = {
+  'node-express': {
+    layers: 'api, service, repository, middleware, model',
+    lintCommand: 'npm run lint',
+    typecheckCommand: 'npx tsc --noEmit',
+    packageManager: 'npm',
+  },
+  'react-next': {
+    layers: 'api, hook, component, page, store, infrastructure',
+    lintCommand: 'npm run lint',
+    typecheckCommand: 'npx tsc --noEmit',
+    packageManager: 'npm',
+  },
+  'python-fastapi': {
+    layers: 'api, service, repository, middleware, model',
+    lintCommand: 'ruff check .',
+    typecheckCommand: 'mypy .',
+    packageManager: 'pip',
+  },
+  'go-gin': {
+    layers: 'api, service, repository, middleware, model',
+    lintCommand: 'go vet ./...',
+    typecheckCommand: 'go build ./...',
+    packageManager: 'go',
+  },
 };
+
+const NOOP_COMMAND = 'node -e "process.exit(0)"';
 
 const TEMPLATE_MAP = [
   { src: 'templates/CLAUDE.md.template',       dest: '.claude/CLAUDE.md' },
@@ -52,9 +76,24 @@ function applySubstitutions(template, vars) {
   return out;
 }
 
-function getLayersForPreset(preset, custom) {
-  if (preset === 'custom') return (custom || '').trim();
-  return LAYER_PRESETS[preset] || '';
+// Reject the shell metacharacters that enable command chaining or substitution.
+// Allow `&&` / `||` / `|` for legitimate composition (e.g. `npm run lint && tsc --noEmit`).
+const FORBIDDEN_HOOK_META = /[\n\r;`]|\$\(/;
+
+function isHookCommandSafe(cmd) {
+  return typeof cmd === 'string' && cmd.length > 0 && !FORBIDDEN_HOOK_META.test(cmd);
+}
+
+function getStackPreset(preset, custom) {
+  if (preset === 'custom') {
+    return {
+      layers: (custom?.layers || '').trim(),
+      lintCommand: custom?.lintCommand || NOOP_COMMAND,
+      typecheckCommand: custom?.typecheckCommand || NOOP_COMMAND,
+      packageManager: custom?.packageManager || 'npm',
+    };
+  }
+  return STACK_PRESETS[preset] || null;
 }
 
 // ─── Copy ────────────────────────────────────────────────────────────────────
@@ -80,6 +119,34 @@ function copyScaffold(target) {
     path.join(target, 'docs', 'blueprint'),
     { recursive: true, dereference: false }
   );
+}
+
+// ─── Render settings.local.json from preset ──────────────────────────────────
+
+function renderSettingsLocal(target, preset) {
+  const examplePath = path.join(REPO_ROOT, '.claude', 'settings.local.example.json');
+  if (!fs.existsSync(examplePath)) return { skipped: true, reason: 'example missing' };
+
+  const raw = fs.readFileSync(examplePath, 'utf8');
+  const rendered = raw
+    .replaceAll('[your-lint-command]', preset.lintCommand)
+    .replaceAll('[your-typecheck-command]', preset.typecheckCommand)
+    .replaceAll('[package-manager]', preset.packageManager);
+
+  // Strip the _instructions block (rendered file should not carry user-facing prompts)
+  const parsed = JSON.parse(rendered);
+  delete parsed._instructions;
+  const finalText = JSON.stringify(parsed, null, 2) + '\n';
+
+  const destPath = path.join(target, '.claude', 'settings.local.json');
+  if (fs.existsSync(destPath)) {
+    const newPath = destPath + '.new';
+    fs.writeFileSync(newPath, finalText, 'utf8');
+    return { skipped: false, wrote: newPath, preserved: destPath };
+  }
+  fs.mkdirSync(path.dirname(destPath), { recursive: true });
+  fs.writeFileSync(destPath, finalText, 'utf8');
+  return { skipped: false, wrote: destPath };
 }
 
 // ─── Render templates ─────────────────────────────────────────────────────────
@@ -139,11 +206,27 @@ async function main() {
   const ownerRole   = await ask(iface, 'Owner role', 'Tech Lead');
 
   console.log('Stack presets: node-express | react-next | python-fastapi | go-gin | custom');
-  const preset = (await ask(iface, 'Stack', 'node-express')).toLowerCase();
+  const presetName = (await ask(iface, 'Stack', 'node-express')).toLowerCase();
 
-  let customLayers = '';
-  if (preset === 'custom') {
-    customLayers = await ask(iface, 'Layers (comma-separated)', '');
+  let preset;
+  if (presetName === 'custom') {
+    const layers = await ask(iface, 'Layers (comma-separated)', '');
+    const lintCommand = await ask(iface, 'Lint command', NOOP_COMMAND);
+    const typecheckCommand = await ask(iface, 'Typecheck command', NOOP_COMMAND);
+    const packageManager = await ask(iface, 'Package manager', 'npm');
+    if (!isHookCommandSafe(lintCommand) || !isHookCommandSafe(typecheckCommand)) {
+      process.stderr.write('Error: lint/typecheck command contains disallowed shell metacharacters (newline, ;, backtick, $()). Use && or || to chain commands instead.\n');
+      iface.close();
+      return;
+    }
+    preset = getStackPreset('custom', { layers, lintCommand, typecheckCommand, packageManager });
+  } else {
+    preset = getStackPreset(presetName);
+    if (!preset) {
+      process.stderr.write(`Error: unknown stack '${presetName}'.\n`);
+      iface.close();
+      return;
+    }
   }
 
   iface.close();
@@ -152,18 +235,30 @@ async function main() {
     projectName,
     ownerRole,
     date:   new Date().toISOString().slice(0, 10),
-    layers: getLayersForPreset(preset, customLayers),
+    layers: preset.layers,
   };
 
   fs.mkdirSync(target, { recursive: true });
   copyScaffold(target);
+  const settingsResult = renderSettingsLocal(target, preset);
   renderTemplates(target, vars);
 
   console.log('\nScaffold written to: ' + target);
+  console.log(`Hooks configured for ${presetName}: lint=${preset.lintCommand} | typecheck=${preset.typecheckCommand}`);
+  if (settingsResult.preserved) {
+    console.log(`Existing settings.local.json preserved; rendered output at ${settingsResult.wrote}`);
+  }
   console.log('Next: open .claude/CLAUDE.md and customize the [CUSTOMIZE] sections.');
 }
 
-module.exports = { applySubstitutions, getLayersForPreset };
+module.exports = {
+  applySubstitutions,
+  getStackPreset,
+  renderSettingsLocal,
+  isHookCommandSafe,
+  STACK_PRESETS,
+  NOOP_COMMAND,
+};
 
 if (require.main === module) {
   main().catch((err) => {

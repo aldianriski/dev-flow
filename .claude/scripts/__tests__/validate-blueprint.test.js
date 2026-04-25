@@ -132,3 +132,135 @@ test('output always contains BLUEPRINT VALIDATION header', () => {
     teardown(dir);
   }
 });
+
+// ─── Check 4: README marketing numbers ────────────────────────────────────────
+
+function scaffoldReadme(dir, content) {
+  writeFileSync(join(dir, 'README.md'), content);
+}
+
+function scaffoldHardStops(dir, count) {
+  const lines = ['# Hard Stops', ''];
+  for (let i = 0; i < count; i++) lines.push(`❌ Hard stop ${i + 1}`);
+  mkdirSync(join(dir, 'docs', 'blueprint'), { recursive: true });
+  writeFileSync(join(dir, 'docs', 'blueprint', '08-orchestrator-prompts.md'), lines.join('\n'));
+}
+
+test('passes when README hard-stop count matches blueprint', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    scaffoldReadme(dir, '- **24 Hard Stops** — pipeline blocks\n- **Skill library** — 1 project-local skills');
+    scaffoldHardStops(dir, 24);
+    const result = run(dir);
+    assert.equal(result.status, 0, result.stdout);
+    assert.ok(result.stdout.includes('README hard-stop count matches source (24)'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('fails when README hard-stop count drifts from blueprint', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    scaffoldReadme(dir, '- **27 Hard Stops** — outdated claim');
+    scaffoldHardStops(dir, 24);
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('README claims "27 Hard Stops"'));
+    assert.ok(result.stdout.includes('24 ❌ lines'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('passes when README skill count matches MANIFEST', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir, [
+      { name: 'a', path: 'a/SKILL.md', 'last-validated': '2026-01-01' },
+      { name: 'b', path: 'b/SKILL.md', 'last-validated': '2026-01-01' },
+    ]);
+    mkdirSync(join(dir, '.claude', 'skills', 'a'), { recursive: true });
+    mkdirSync(join(dir, '.claude', 'skills', 'b'), { recursive: true });
+    writeFileSync(join(dir, '.claude', 'skills', 'a', 'SKILL.md'), '---\nname: a\n---\n');
+    writeFileSync(join(dir, '.claude', 'skills', 'b', 'SKILL.md'), '---\nname: b\n---\n');
+    scaffoldAgents(dir);
+    scaffoldReadme(dir, '- **Skill library** — 2 project-local, git-tracked skills');
+    const result = run(dir);
+    assert.equal(result.status, 0, result.stdout);
+    assert.ok(result.stdout.includes('README skill count matches MANIFEST (2)'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('fails when README skill count drifts from MANIFEST', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    scaffoldReadme(dir, '- **Skill library** — 9 project-local, git-tracked skills');
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('README claims'));
+    assert.ok(result.stdout.includes('MANIFEST.json has 1 skills'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('passes when README uses N+ phrasing and actual count is at least N', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    scaffoldReadme(dir, '- **Skill library** — 1+ project-local, git-tracked skills');
+    const result = run(dir);
+    assert.equal(result.status, 0, result.stdout);
+    assert.ok(result.stdout.includes('README skill count matches MANIFEST (1)'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('fails when README is missing the Hard Stops claim entirely', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    scaffoldReadme(dir, '- **Skill library** — 1 project-local, git-tracked skills\n(no hard stops mentioned)');
+    scaffoldHardStops(dir, 24);
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('README missing'));
+    assert.ok(result.stdout.includes('Hard Stops'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('fails when README is missing the skill-count claim entirely', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    scaffoldReadme(dir, '- **24 Hard Stops** — pipeline blocks\n(no skill count mentioned)');
+    scaffoldHardStops(dir, 24);
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('README missing'));
+    assert.ok(result.stdout.includes('skills'));
+  } finally {
+    teardown(dir);
+  }
+});
