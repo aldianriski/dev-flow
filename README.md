@@ -41,6 +41,10 @@ Prompts: target dir · project name · owner role · stack (`node-express` · `r
 | `README.md` | Project README template |
 Fallback (`cp -r`): [`docs/blueprint/09-customization.md`](docs/blueprint/09-customization.md) §12.
 
+## Working on This Project
+
+**Start here every session →** [TODO.md](TODO.md)
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
