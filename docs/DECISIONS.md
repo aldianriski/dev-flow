@@ -60,3 +60,16 @@ Append-only. Never edit past ADRs. Use `/adr-writer` to add entries.
 - Option (b) pre-commit hook: rejected — still commits the mirror into git history, adds hook maintenance burden, and violates SSOT principle the project preaches.
 - Option (c) CI generation: better fit for a published npm package, but adds CI complexity and is premature before EPIC-A (plugin-first distribution). Defer to post-EPIC-A.
 **Consequences**: `examples/README.md` updated to explain trimmed structure and point readers to `dev-flow-init.js`. Drift protection: `validate.yml` exits 1 if `examples/*/.claude` re-appears. Adopters wanting a full worked example must run `dev-flow-init.js` themselves (consistent with TASK-056 primary adoption path).
+
+---
+
+## ADR-005 — Blueprint version coupling: package.json vs docs/blueprint/VERSION
+
+**Date**: 2026-04-26
+**Status**: decided
+
+**Decision**: Blueprint version (docs/blueprint/VERSION) and package.json version are independent. package.json tracks the scaffold/tooling release; blueprint VERSION tracks the workflow spec revision. They are not kept in sync.
+
+**Why**: Blueprint version bumps are editorial (new mode, new hard stop, prompt reword). Scaffold version bumps are code releases (new script, new bin/ tool). Coupling them forces unnecessary releases on both tracks.
+
+**Consequences**: Contributors must bump docs/blueprint/VERSION independently when making MINOR/MAJOR blueprint changes per CONTRIBUTING.md. CI warns (non-blocking) if blueprint docs changed without a VERSION file change in the same PR.

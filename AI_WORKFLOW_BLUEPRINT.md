@@ -38,5 +38,5 @@ status: current
 
 ## Version history
 
-See `docs/CHANGELOG.md` for full changelog. Current version: **1.7.0** (last blueprint content release).
+See `docs/CHANGELOG.md` for full changelog. Canonical version: `docs/blueprint/VERSION` (do not edit inline).
 Blueprint infrastructure split and governance added in Sprint 1 (2026-04-20) — no behavior change.

@@ -15,9 +15,11 @@ const root = process.argv[2] || '.';
 
 const passes = [];
 const failures = [];
+const warnings = [];
 
 function pass(msg) { passes.push(msg); }
 function fail(msg) { failures.push(msg); }
+function warn(msg) { warnings.push(msg); }
 
 // ─── Check 1: MANIFEST.json skills → filesystem ──────────────────────────────
 const manifestPath = join(root, '.claude/skills/MANIFEST.json');
@@ -63,7 +65,39 @@ if (allAgentsPresent) {
   pass(`All ${EXPECTED_AGENTS.length} blueprint §4 agent(s) present`);
 }
 
-// ─── Check 3: Phase number range — deferred ──────────────────────────────────
+// ─── Check 3: Blueprint doc 250-line cap ─────────────────────────────────────
+// Any file in docs/blueprint/ that exceeds 250 lines is flagged as a warning.
+// Index files (root 01–10 files) are exempt because they are intentionally short.
+// Sub-files (10a-, 10b-, 06a-, 06b-, etc.) must stay ≤250 lines.
+const { readdirSync, statSync } = require('fs');
+const blueprintDir = join(root, 'docs/blueprint');
+const BLUEPRINT_LINE_CAP = 250;
+// Index file pattern: exactly two digits followed by a dash then non-digit (e.g. 10-modes.md)
+const INDEX_FILE_RE = /^\d{2}-/;
+
+if (existsSync(blueprintDir)) {
+  let capViolations = 0;
+  let capChecked = 0;
+  for (const entry of readdirSync(blueprintDir)) {
+    if (!entry.endsWith('.md')) continue;
+    if (INDEX_FILE_RE.test(entry)) continue; // index files are exempt
+    const filePath = join(blueprintDir, entry);
+    if (!statSync(filePath).isFile()) continue;
+    const lineCount = readFileSync(filePath, 'utf8').split('\n').length;
+    capChecked++;
+    if (lineCount > BLUEPRINT_LINE_CAP) {
+      warn(`Blueprint sub-file "${entry}" is ${lineCount} lines (cap: ${BLUEPRINT_LINE_CAP}) — consider splitting`);
+      capViolations++;
+    }
+  }
+  if (capChecked > 0 && capViolations === 0) {
+    pass(`All ${capChecked} blueprint sub-file(s) within ${BLUEPRINT_LINE_CAP}-line cap`);
+  } else if (capChecked === 0) {
+    pass('Blueprint 250-line cap: no sub-files found to check');
+  }
+}
+
+// ─── Check (deferred): Phase number range ─────────────────────────────────────
 // MANIFEST.json does not yet include phase assignments.
 // Phase range validation (0–10) is deferred until MANIFEST includes a phase field.
 pass('Phase range check: deferred (MANIFEST.json does not yet include phase field)');
@@ -116,9 +150,29 @@ if (existsSync(readmePath)) {
   }
 }
 
+// ─── Check 5: Blueprint VERSION file in changelist when blueprint docs changed ─
+// In CI, CHANGED_FILES env var contains newline-separated file paths.
+// If any blueprint doc changed (docs/blueprint/**) but docs/blueprint/VERSION
+// did not → warn. Non-blocking (WARN only — human confirms if bump needed).
+const changedFilesEnv = process.env.CHANGED_FILES;
+if (changedFilesEnv) {
+  const changedFiles = changedFilesEnv.split('\n').map(f => f.trim()).filter(Boolean);
+  const versionFile = 'docs/blueprint/VERSION';
+  const blueprintDocChanged = changedFiles.some(
+    f => f.startsWith('docs/blueprint/') && f !== versionFile
+  );
+  const versionChanged = changedFiles.includes(versionFile);
+  if (blueprintDocChanged && !versionChanged) {
+    warn('Blueprint docs changed — verify docs/blueprint/VERSION is updated if this is a MINOR/MAJOR change (CONTRIBUTING.md).');
+  }
+}
+
 // ─── Output ───────────────────────────────────────────────────────────────────
 console.log('\n=== BLUEPRINT VALIDATION ===\n');
 for (const p of passes) console.log(`[PASS] ${p}`);
+if (warnings.length > 0) {
+  for (const w of warnings) console.log(`[WARN] ${w}`);
+}
 if (failures.length > 0) {
   for (const f of failures) console.log(`[FAIL] ${f}`);
   console.log(`\nRESULT: ${failures.length} failure(s)\n`);

@@ -248,6 +248,66 @@ test('fails when README is missing the Hard Stops claim entirely', () => {
   }
 });
 
+// ─── Check 3: Blueprint doc 250-line cap ──────────────────────────────────────
+
+function scaffoldBlueprintSubFile(dir, filename, lineCount) {
+  const blueprintDir = join(dir, 'docs', 'blueprint');
+  mkdirSync(blueprintDir, { recursive: true });
+  const content = Array.from({ length: lineCount }, (_, i) => `line ${i + 1}`).join('\n');
+  writeFileSync(join(blueprintDir, filename), content);
+}
+
+test('warns when a blueprint sub-file exceeds 250 lines', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    // 08-orchestrator-prompts.md is an index file (matches \d{2}-) — exempt; use sub-file naming
+    scaffoldBlueprintSubFile(dir, '10a-init.md', 251);
+    const result = run(dir);
+    // Warning is non-blocking — exit 0 but WARN in output
+    assert.equal(result.status, 0, result.stdout);
+    assert.ok(result.stdout.includes('[WARN]'), result.stdout);
+    assert.ok(result.stdout.includes('10a-init.md'), result.stdout);
+    assert.ok(result.stdout.includes('251'), result.stdout);
+    assert.ok(result.stdout.includes('250'), result.stdout);
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('passes when all blueprint sub-files are within the 250-line cap', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    scaffoldBlueprintSubFile(dir, '10a-init.md', 250);
+    scaffoldBlueprintSubFile(dir, '10b-harness-improvement.md', 100);
+    const result = run(dir);
+    assert.equal(result.status, 0, result.stdout);
+    assert.ok(result.stdout.includes('blueprint sub-file'), result.stdout);
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('index files (matching NN-) are exempt from the 250-line cap', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    // Index file pattern: two digits + dash — should be exempt even at 300 lines
+    scaffoldBlueprintSubFile(dir, '10-modes.md', 300);
+    const result = run(dir);
+    assert.equal(result.status, 0, result.stdout);
+  } finally {
+    teardown(dir);
+  }
+});
+
 test('fails when README is missing the skill-count claim entirely', () => {
   const dir = setup();
   try {
@@ -260,6 +320,41 @@ test('fails when README is missing the skill-count claim entirely', () => {
     assert.equal(result.status, 1);
     assert.ok(result.stdout.includes('README missing'));
     assert.ok(result.stdout.includes('skills'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+// ─── Check 5: Blueprint VERSION in changelist when blueprint docs changed ──────
+
+function runWithEnv(dir, env) {
+  return spawnSync('node', [SCRIPT, dir], { encoding: 'utf8', env: { ...process.env, ...env } });
+}
+
+test('Check 4 — warns when blueprint docs changed but VERSION not in changelist', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    const changedFiles = 'docs/blueprint/10-modes.md\ndocs/blueprint/05-skills.md';
+    const result = runWithEnv(dir, { CHANGED_FILES: changedFiles });
+    // Warning is non-blocking — exit 0 (unless other checks fail for unrelated reasons)
+    assert.ok(result.stdout.includes('[WARN] Blueprint docs changed'), result.stdout);
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('Check 4 — no warn when VERSION included in changelist', () => {
+  const dir = setup();
+  try {
+    scaffoldManifest(dir);
+    scaffoldSkill(dir);
+    scaffoldAgents(dir);
+    const changedFiles = 'docs/blueprint/10-modes.md\ndocs/blueprint/VERSION';
+    const result = runWithEnv(dir, { CHANGED_FILES: changedFiles });
+    assert.ok(!result.stdout.includes('[WARN] Blueprint docs changed'), result.stdout);
   } finally {
     teardown(dir);
   }
