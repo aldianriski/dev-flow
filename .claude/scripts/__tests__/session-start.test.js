@@ -136,6 +136,36 @@ test('Check 7 — reports next open task from Active Sprint', () => {
   }
 });
 
+// Check 7: WARN when Active Sprint AND Backlog both have no open tasks
+test('Check 7 — warns when Active Sprint and Backlog both empty', () => {
+  const dir = setup();
+  try {
+    writeFileSync(join(dir, '.claude', 'settings.local.json'), '{}');
+    writeFileSync(join(dir, 'TODO.md'),
+      '## Active Sprint\n\n- [x] **TASK-001: done**\n\n## Backlog\n\n- [x] **TASK-002: also done**\n');
+    const result = run(dir);
+    assert.ok(result.stdout.includes('WARN: Active Sprint and Backlog both empty'), 'should warn when both sections empty');
+    assert.equal(result.status, 0, 'WARN should not fail the script');
+  } finally {
+    teardown(dir);
+  }
+});
+
+// Check 7: info (not WARN) when Active Sprint empty but Backlog has tasks
+test('Check 7 — info (not WARN) when sprint empty but backlog has tasks', () => {
+  const dir = setup();
+  try {
+    writeFileSync(join(dir, '.claude', 'settings.local.json'), '{}');
+    writeFileSync(join(dir, 'TODO.md'),
+      '## Active Sprint\n\n- [x] **TASK-001: done**\n\n## Backlog\n\n- [ ] **TASK-002: pending**\n');
+    const result = run(dir);
+    assert.ok(result.stdout.includes('ℹ Active Sprint exists but has no open tasks'), 'should emit info not warn');
+    assert.ok(!result.stdout.includes('WARN: Active Sprint and Backlog both empty'), 'should not emit both-empty warn');
+  } finally {
+    teardown(dir);
+  }
+});
+
 // Check 8: reports session changes count
 test('Check 8 — reports session change count', () => {
   const dir = setup();

@@ -1,4 +1,4 @@
-// .claude/scripts/session-start.js
+﻿// .claude/scripts/session-start.js
 // v2.1 — bootstrap: settings, CLAUDE.md, skills, docs line counts,
 //         pending migrations, active sprint validation, context budget signal, compaction audit
 // Pure Node (>=18), CommonJS, no shell-outs — runs on Windows Git Bash + Linux.
@@ -113,16 +113,21 @@ for (const dir of migrationDirs) {
 }
 
 // ─── Check 7: Active sprint validation ───────────────────────────────────────
-if (existsSync('TODO.md')) {
-  const todo = readFileSync('TODO.md', 'utf8');
-  const hasActiveTask   = /- \[ \] \*\*TASK-/.test(todo);
-  const hasActiveSprint = /## Active Sprint/.test(todo);
+if (existsSync("TODO.md")) {
+  const todo = readFileSync("TODO.md", "utf8");
+  const hasActiveSprint  = /## Active Sprint/.test(todo);
+  const sprintSection    = todo.split(/\n## Backlog/)[0];
+  const hasActiveTask    = /- \[ \] \*\*TASK-/.test(sprintSection);
+  const backlogSection   = todo.split(/## Backlog/)[1] ?? "";
+  const hasBacklogTask   = /- \[ \] \*\*TASK-/.test(backlogSection);
   if (!hasActiveSprint) {
-    warnings.push('WARN: TODO.md has no Active Sprint section.');
+    warnings.push("WARN: TODO.md has no Active Sprint section.");
+  } else if (!hasActiveTask && !hasBacklogTask) {
+    warnings.push("WARN: Active Sprint and Backlog both empty — run /task-decomposer or /dev-flow <freeform> to plan next work.");
   } else if (!hasActiveTask) {
-    info.push('ℹ Active Sprint exists but has no open tasks — promote from Backlog or start new sprint.');
+    info.push("ℹ Active Sprint exists but has no open tasks — promote from Backlog or start new sprint.");
   } else {
-    const nextTask = todo.match(/- \[ \] \*\*(.+?)\*\*/)?.[1];
+    const nextTask = sprintSection.match(/- \[ \] \*\*(.+?)\*\*/)?.[1];
     if (nextTask) info.push(`ℹ Next task: ${nextTask}`);
   }
 }

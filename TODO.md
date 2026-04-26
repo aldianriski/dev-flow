@@ -39,7 +39,7 @@ sprint: 17
 > **Theme:** Split the remaining blueprint mega-files into sized reference docs, establish a single SSOT for blueprint version with a CI guard, and close the IMPROVEMENT_LOG.md archive quickwin.
 > **Source:** Backlog P1 (TASK-059, 060); P2 (TASK-063).
 
-- [ ] **TASK-059: Split blueprint mega-files (10-modes, 06-harness, 08-orchestrator)**
+- [x] **TASK-059: Split blueprint mega-files (10-modes, 06-harness, 08-orchestrator)**
   - scope: full · layers: docs, scripts · risk: medium
   - api-change: no
   - acceptance: `docs/blueprint/10-modes.md` (871) split into `10a-init.md … 10f-task-decomposer.md` with 10-modes.md as ≤30-line index; `06-harness.md` (565) split into `06a-settings.md / 06b-scripts.md / 06c-claude-md-template.md`; `08-orchestrator-prompts.md` (397) split per phase if cohesive boundary exists. New blueprint-doc line cap (suggest 250) added to `validate-blueprint.js`. All cross-references updated.
@@ -51,7 +51,7 @@ sprint: 17
   - acceptance: `docs/blueprint/VERSION` (or equivalent single file) holds the canonical blueprint version; `AI_WORKFLOW_BLUEPRINT.md` redirect either reads VERSION at runtime or drops the version line; CI check fails any PR that triggers a MINOR/MAJOR rule (per CONTRIBUTING.md) without a VERSION bump. Document `package.json` version vs blueprint version coupling in DECISIONS.md.
   - tracker: AUDIT.md#AUD-009, AUDIT.md#AUD-017
 
-- [ ] **TASK-063: Archive IMPROVEMENT_LOG.md; escalate empty-sprint signal**
+- [x] **TASK-063: Archive IMPROVEMENT_LOG.md; escalate empty-sprint signal**
   - scope: quick · layers: docs, governance, scripts · risk: low
   - api-change: no
   - acceptance: `IMPROVEMENT_LOG.md` either deleted or moved to `docs/archive/2026-04-20-session-1-critique.md` with `status: archived` ownership header; root no longer surfaces it. `session-start.js` escalates to WARN (not info) when Active Sprint AND Backlog are both empty, with suggestion to run `/task-decomposer` or `/dev-flow <freeform>`.
@@ -113,6 +113,23 @@ sprint: 17
 | `.claude/scripts/validate-blueprint.js` | Check 5 added — warns when blueprint docs change without VERSION | — |
 | `.claude/scripts/__tests__/validate-blueprint.test.js` | 2 tests for Check 5 | — |
 | `docs/DECISIONS.md` | ADR-005 appended — package.json vs blueprint VERSION independence | ADR-005 |
+| `docs/blueprint/10-modes.md` | TASK-059: Replaced with 19-line index; 6 sub-files split out | — |
+| `docs/blueprint/10a-init.md` | TASK-059: NEW — §16 INIT Mode (237 lines) | — |
+| `docs/blueprint/10b-harness-improvement.md` | TASK-059: NEW — §17 Harness CI Protocol (84 lines) | — |
+| `docs/blueprint/10c-resume.md` | TASK-059: NEW — §18 Session Resume (70 lines) | — |
+| `docs/blueprint/10d-migration-performance.md` | TASK-059: NEW — §19 Migration + §20 Performance (137 lines) | — |
+| `docs/blueprint/10e-hotfix.md` | TASK-059: NEW — §21 Hardened Hotfix (149 lines) | — |
+| `docs/blueprint/10f-task-decomposer.md` | TASK-059: NEW — §22 Task Decomposer + §23 Sprint Mode (294 lines) | — |
+| `docs/blueprint/06-harness.md` | TASK-059: Replaced with 16-line index; 3 sub-files split out | — |
+| `docs/blueprint/06a-settings.md` | TASK-059: NEW — settings.json + settings.local.json (118 lines) | — |
+| `docs/blueprint/06b-scripts.md` | TASK-059: NEW — all 5 scripts + evals/measure.py (415 lines) | — |
+| `docs/blueprint/06c-claude-md-template.md` | TASK-059: NEW — §7 CLAUDE.md Template (64 lines) | — |
+| `.claude/scripts/validate-blueprint.js` | TASK-059: Check 4 added — 250-line cap for blueprint sub-files | — |
+| `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-059: 3 tests for 250-line cap | — |
+| `IMPROVEMENT_LOG.md` | TASK-063: Deleted from root — archived to docs/archive/ | — |
+| `docs/archive/2026-04-20-session-1-critique.md` | TASK-063: NEW — archived Session 1 critique with status:archived header | — |
+| `.claude/scripts/session-start.js` | TASK-063: Check 7 — WARN when both Sprint + Backlog empty | — |
+| `.claude/scripts/__tests__/session-start.test.js` | TASK-063: 2 tests for new WARN path | — |
 
 ---
 
