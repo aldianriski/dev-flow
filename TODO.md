@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25 (Sprint 14 populated from AUDIT.md pass 1 + STRATEGY_REVIEW.md)
+last_updated: 2026-04-26 (Sprint 14 archived; Sprint 15 — Adoption + CI hardening)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 14
+sprint: 15
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,43 +35,35 @@ sprint: 14
 
 ## Active Sprint
 
-### Sprint 14 — Audit Pass 1: P0 fixes + drift cleanup (active)
-> **Theme:** Close the two P0 correctness findings from `AUDIT.md` pass 1 and clear cheap drift. Strategic radicals (R-1/R-3/R-10) tracked in Backlog P3 for separate epic decomposition.
-> **Source:** `AUDIT.md` (tactical) and `STRATEGY_REVIEW.md` (strategic) — both written 2026-04-25.
+### Sprint 15 — Adoption + CI hardening (active)
+> **Theme:** Wire up real CI validation (test suite + Node matrix + RED-GREEN-REFACTOR gate), polish the adoption path in README, and implement Sprint Mode context-budget improvements.
+> **Source:** Backlog P1 (TASK-054, 055, 056 from AUDIT.md; TASK-064 from 2026-04-25 session feedback).
 
-- [x] **TASK-050: Implement phase-state writer; close Thin-Coordinator Rule loop**
-  - scope: full
-  - layers: harness, skills, scripts
+- [x] **TASK-054: CI runs full test suite + Node version matrix**
+  - scope: full · layers: ci, scripts · risk: low
   - api-change: no
-  - acceptance: `.claude/.phase` is written by orchestrator on each phase entry; integration test exercises full cycle (phase set → Read attempt during compact-vulnerable phase → blocked → phase clear → Read allowed); `read-guard.js` no longer fail-opens in real sessions.
-  - tracker: AUDIT.md#AUD-001 (P0)
-  - risk: high
-  - notes: AUD-001 confirmed via grep — only test fixtures call `writeFileSync` on `.claude/.phase`. Decide enforcement model in DECISIONS.md before implementation: (a) orchestrator-managed via SKILL.md step `node .claude/scripts/set-phase.js <name>`, or (b) harness-managed via PostToolUse hook detecting phase boundaries from output. Suggested: (a) — explicit and testable.
+  - acceptance: `.github/workflows/validate.yml` runs `node --test` over all `__tests__/`, runs `python -m unittest discover` for `*.test.py`, runs `py_compile` on `evals/measure.py` + `compress.py`, and matrices Node 18/20/22; PR fails when any test fails. `audit-skill-staleness.js` moved to scheduled (weekly) cron job.
+  - tracker: AUDIT.md#AUD-003
 
-- [x] **TASK-051: Move placeholder lint/typecheck hooks out of committed settings.json; add validate-scaffold guard**
-  - scope: full
-  - layers: harness, scripts, templates
+- [ ] **TASK-055: Enforce skill-change RED-GREEN-REFACTOR in CI**
+  - scope: full · layers: ci, evals, governance · risk: medium
   - api-change: no
-  - acceptance: committed `.claude/settings.json` contains no `[your-X]` placeholder commands; stack-specific hook commands rendered into `settings.local.json` by `bin/dev-flow-init.js` from a `STACK_PRESETS` table; `validate-scaffold.js` fails on any hook `command` containing the substring `[your-`.
-  - tracker: AUDIT.md#AUD-002 (P0), AUDIT.md#AUD-010 (P1 — paired)
-  - risk: medium
-  - notes: dev-flow's own commits also fail this hook silently today. Verify post-fix that `git commit` in dev-flow itself runs a real lint command or no-ops cleanly.
+  - acceptance: PRs touching any `.claude/skills/**/SKILL.md` require a paired `evals/snapshots/<skill>/<task-id>-after.json` + `compare` output committed under `evals/runs/<task-id>.md`; CI step fails the PR otherwise. Backfill missing before/after snapshots for Sprint 11 dev-flow + dev-flow-compress changes. CONTRIBUTING.md updated with the gate name.
+  - tracker: AUDIT.md#AUD-004
+  - notes: depends on TASK-054 (CI infrastructure)
 
-- [x] **TASK-052: Verify BUG-001/BUG-002 fixed; rotate BUGS.md entries to CHANGELOG**
-  - scope: quick
-  - layers: docs, governance
+- [ ] **TASK-056: README primary adoption path uses dev-flow-init.js**
+  - scope: quick · layers: docs · risk: low
   - api-change: no
-  - acceptance: BUG-001 (`${CLAUDE_PLUGIN_ROOT}` → `$CLAUDE_PROJECT_DIR`) and BUG-002 (Bash(node .claude/scripts/*) allowlisted) confirmed fixed in current `settings.json`; both entries moved to `docs/CHANGELOG.md` Sprint 7 block as resolved-bug rows; `docs/BUGS.md` body trimmed to "No open bugs." with rule line.
-  - tracker: AUDIT.md#AUD-013 (P2)
-  - risk: low
+  - acceptance: `README.md` "How to adopt" replaced — primary instruction is `node bin/dev-flow-init.js` (or `npx dev-flow-init` if `package.json bin` works post-clone); manual `cp -r` demoted to fallback. Add a "What gets created" table showing the 8 rendered files. Verify `npx` path actually works from a fresh clone.
+  - tracker: AUDIT.md#AUD-005
 
-- [x] **TASK-053: Reconcile README marketing numbers with source-of-truth**
-  - scope: quick
-  - layers: docs, scripts
+- [ ] **TASK-064: Sprint Mode — add Phase 9c continue/close prompt + context-budget gate; allow blocked tasks to run in same session**
+  - scope: full · layers: skills, docs, governance · risk: low
   - api-change: no
-  - acceptance: `README.md` "27 Hard Stops" replaced with the actual count (24 from `docs/blueprint/08-orchestrator-prompts.md`) OR phrased without a fixed number; "9+ skills" updated to match `MANIFEST.json` count (10) OR phrased without a number; `validate-blueprint.js` extended with a check that fails when README counts disagree with source files.
-  - tracker: AUDIT.md#AUD-014 (P2)
-  - risk: low
+  - acceptance: `.claude/skills/dev-flow/SKILL.md` Sprint Mode section emits a Phase 9c-style prompt after final-phase Gate 2 (before commit), listing remaining blocked tasks + current context usage estimate; user can type `next-blocked TASK-NNN` to continue into a standalone full-mode run inside the same session, or `commit` to close. Add hard stop: "context >70 % before phase entry → prune phase summary first." Update `docs/blueprint/10-modes.md` Sprint Mode subsection. Add eval snapshot before/after per Skill Change Protocol. Bump blueprint MINOR.
+  - tracker: session feedback 2026-04-25 — user wants ability to keep one Sprint flow open while context healthy and batch fewer commits per sprint
+  - notes: blueprint currently treats `scope:full + risk:high` as blocked → standalone session only. Proposed change keeps the standalone *run* but lets it execute in same conversation when context budget permits. Confirm with user whether (a) one commit per task or (b) one commit per sprint is preferred; today's behavior is (a). Single-commit-per-sprint requires reworking Phase 9 in `08-orchestrator-prompts.md`.
 
 ---
 
@@ -80,21 +72,7 @@ sprint: 14
 ### P1 — Audit Pass 1 follow-on (correctness + adoption)
 
 <!-- AUD-001, AUD-002 promoted to Sprint 14 (TASK-050, TASK-051) -->
-
-- [ ] **TASK-054: CI runs full test suite + Node version matrix**
-  - scope: full · layers: ci, scripts · risk: low
-  - acceptance: `.github/workflows/validate.yml` runs `node --test` over all `__tests__/`, runs `python -m unittest discover` for `*.test.py`, runs `py_compile` on `evals/measure.py` + `compress.py`, and matrices Node 18/20/22; PR fails when any test fails. `audit-skill-staleness.js` moved to scheduled (weekly) cron job.
-  - tracker: AUDIT.md#AUD-003
-
-- [ ] **TASK-055: Enforce skill-change RED-GREEN-REFACTOR in CI**
-  - scope: full · layers: ci, evals, governance · risk: medium
-  - acceptance: PRs touching any `.claude/skills/**/SKILL.md` require a paired `evals/snapshots/<skill>/<task-id>-after.json` + `compare` output committed under `evals/runs/<task-id>.md`; CI step fails the PR otherwise. Backfill missing before/after snapshots for Sprint 11 dev-flow + dev-flow-compress changes. CONTRIBUTING.md updated with the gate name.
-  - tracker: AUDIT.md#AUD-004
-
-- [ ] **TASK-056: README primary adoption path uses dev-flow-init.js**
-  - scope: quick · layers: docs · risk: low
-  - acceptance: `README.md` "How to adopt" replaced — primary instruction is `node bin/dev-flow-init.js` (or `npx dev-flow-init` if `package.json bin` works post-clone); manual `cp -r` demoted to fallback. Add a "What gets created" table showing the 8 rendered files. Verify `npx` path actually works from a fresh clone.
-  - tracker: AUDIT.md#AUD-005
+<!-- TASK-054, TASK-055, TASK-056 promoted to Sprint 15 -->
 
 - [ ] **TASK-057: Decide examples/ mirror policy and apply**
   - scope: full · layers: examples, scripts, ci · risk: medium
@@ -118,12 +96,7 @@ sprint: 14
 
 ### P1 — Workflow self-audit (raised in Sprint 14 session)
 
-- [ ] **TASK-064: Sprint Mode — add Phase 9c continue/close prompt + context-budget gate; allow blocked tasks to run in same session**
-  - scope: full · layers: skills, docs, governance · risk: low
-  - acceptance: `.claude/skills/dev-flow/SKILL.md` Sprint Mode section emits a Phase 9c-style prompt after final-phase Gate 2 (before commit), listing remaining blocked tasks + current context usage estimate; user can type `next-blocked TASK-NNN` to continue into a standalone full-mode run inside the same session, or `commit` to close. Add hard stop: "context >70 % before phase entry → prune phase summary first." Update `docs/blueprint/10-modes.md` (or split file once AUD-008 lands) Sprint Mode subsection. Add eval snapshot before/after per Skill Change Protocol. Bump blueprint MINOR.
-  - tracker: session feedback 2026-04-25 — user wants ability to keep one Sprint flow open while context healthy and batch fewer commits per sprint
-  - risk: low
-  - notes: blueprint currently treats `scope:full + risk:high` as blocked → standalone session only. Proposed change keeps the standalone *run* but lets it execute in same conversation when context budget permits. Confirm with user whether (a) one commit per task or (b) one commit per sprint is preferred; today's behavior is (a). Single-commit-per-sprint also requires reworking Phase 9 in `08-orchestrator-prompts.md`.
+<!-- TASK-064 promoted to Sprint 15 -->
 
 ### P2 — Audit Pass 1 polish
 
@@ -167,34 +140,14 @@ sprint: 14
 > Sprints are moved here from Active Sprint once complete, then archived to `docs/CHANGELOG.md`. This section holds only the current in-progress sprint's running log.
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
+> Sprint 14 archived → `docs/CHANGELOG.md` (2026-04-26).
 
-### Sprint 14 — In Progress
+### Sprint 15 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `AUDIT.md` | New: 17-finding tactical audit (pass 1, quick scan) — 2 P0, 8 P1, 7 P2; suggested sprint plan | none |
-| `STRATEGY_REVIEW.md` | New: strategic critique (pros, cons, 10 radical alternatives R-1..R-10) — companion to AUDIT.md | none |
-| `TODO.md` | Sprint 14 populated (TASK-050..053 P0+P2 cleanup); Backlog populated with TASK-054..063 (P1+P2) and EPIC-A..E (P3 strategic) | none |
-| `.claude/settings.json` | TASK-051: Remove 4 `[your-X]` placeholder PreToolUse hooks (`Bash(git commit*)`, `Bash(git -C * commit*)`, `Bash(git push*)`, `Bash(git -C * push*)`); committed file is now runnable as-is | none |
-| `.claude/settings.local.example.json` | TASK-051: Promote to canonical template — embed full PreToolUse hook block with `[your-X]` tokens; rendered per-stack by `dev-flow-init.js` | none |
-| `bin/dev-flow-init.js` | TASK-051: Replace `LAYER_PRESETS` with `STACK_PRESETS` (layers + lintCommand + typecheckCommand + packageManager); add `renderSettingsLocal()`; add `isHookCommandSafe()` shell-metachar guard for custom prompts | none |
-| `bin/__tests__/dev-flow-init.test.js` | TASK-051: Replace `getLayersForPreset` tests with `getStackPreset` + `renderSettingsLocal` + `isHookCommandSafe` tests (24 cases) | none |
-| `.claude/scripts/validate-scaffold.js` | TASK-051: Add Check 8 — fail on `[your-` substring in any settings.json hook command; explicit fail when settings.json absent | none |
-| `.claude/scripts/__tests__/validate-scaffold.test.js` | TASK-051: Add 4 cases (placeholder fail, clean pass, invalid JSON, missing file) | none |
-| `.claude/settings.local.json` | TASK-051: Regenerate this repo's local — replace `[package-manager]` with `npm`, render 4 hooks with `node -e "process.exit(0)"` no-op (meta-repo has no app code to lint/typecheck) | none |
-| `docs/BUGS.md` | TASK-052: Trim to rule line; TASK-051 audit: open BUG-003 (validate-blueprint.js MANIFEST `skill.path` traversal) | none |
-| `docs/CHANGELOG.md` | TASK-052: Add Sprint 7 "Resolved bugs" sub-table with BUG-001 + BUG-002 fix verification; TASK-051: fix stale `getLayersForPreset` reference in Sprint 12 row | none |
-| `README.md` | TASK-053: "27 Hard Stops" → "24 Hard Stops"; "9+ project-local … skills" → "10 project-local … skills" | none |
-| `.claude/scripts/validate-blueprint.js` | TASK-053: Add Check 4 — count ❌ in 08-orchestrator-prompts.md and skills in MANIFEST; fail when README claims drift or are missing | none |
-| `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-053: Add 7 cases (match, drift, N+ phrasing, missing claims) | none |
-| `.claude/scripts/phase-constants.js` | TASK-050: New — single source of truth for `VALID_PHASES` (11) + `COMPACT_VULNERABLE` (5) + `PHASE_FILE`. Imported by set-phase.js, read-guard.js, session-start.js | ADR-003 |
-| `.claude/scripts/set-phase.js` | TASK-050: New — orchestrator-managed writer for `.claude/.phase` (set/clear modes); rejects symlinks via `lstatSync` guard; allowlist-validated phase names | ADR-003 |
-| `.claude/scripts/__tests__/set-phase.test.js` | TASK-050: New — 11 unit tests (write, normalize, trim, mkdir, reject, usage, clear, idempotent, all 11 phases, exports, single-source invariant) | none |
-| `.claude/scripts/__tests__/phase-cycle.integration.test.js` | TASK-050: New — 6 integration tests (full cycle, allowlist pass, parse non-block, all compact-vulnerable phases via shared Set, idempotent clear, symlink refusal) | none |
-| `.claude/scripts/read-guard.js` | TASK-050: Import `PHASE_FILE` + `COMPACT_VULNERABLE` from phase-constants instead of hardcoded literals | none |
-| `.claude/scripts/session-start.js` | TASK-050: Check 9 — import `COMPACT_VULNERABLE` from phase-constants; escalate stale-phase warn message to suggest `set-phase.js clear` | none |
-| `.claude/skills/dev-flow/SKILL.md` | TASK-050: Add §Phase Markers intro; mark Phase 0 (clear pre-flight), 3, 5, 6, 7, 8 with `set-phase.js` calls; add `set-phase.js clear` after Phase 9 commit | ADR-003 |
-| `docs/DECISIONS.md` | TASK-050: Append ADR-003 — orchestrator-managed phase state via `set-phase.js`; rejected harness-managed PostToolUse alternative documented | ADR-003 |
+| `.github/workflows/validate.yml` | TASK-054: Add Node 18/20/22 matrix, `node --test` suite, `py_compile` syntax check, direct Python test execution; `permissions: read-all`; SHA-pinned actions; `fail-fast: false` | none |
+| `.github/workflows/scheduled.yml` | TASK-054: New — weekly cron (Mon 08:00 UTC) for `audit-skill-staleness.js`; `workflow_dispatch` trigger; SHA-pinned actions | none |
 
 ---
 
@@ -262,7 +215,8 @@ Sprint 10  → Eval baselines + CI gate               (done — TASK-048, 025)
 Sprint 11  → Sprint mode + context compression      (done — TASK-044, 036)
 Sprint 12  → TDD framework + init script + worked example      (done — TASK-026, 028, 030)
 Sprint 13  → Governance + automation                           (done — TASK-031, 034)
-Sprint 14+ → TBD                                               (active)
+Sprint 14  → Audit Pass 1: P0 fixes + drift cleanup             (done — TASK-050..053)
+Sprint 15+ → Adoption + CI hardening                           (active)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

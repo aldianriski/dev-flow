@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25 (Sprint 13 archived)
+last_updated: 2026-04-25 (Sprint 14 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,38 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 14 — Audit Pass 1: P0 fixes + drift cleanup (2026-04-25)
+
+**Blueprint version:** PATCH bump — Phase Markers added to dev-flow/SKILL.md (Phase 0/3/5/6/7/8/9); ADR-003 records orchestrator-managed phase state. Counts as PATCH (mechanism is harness-only; phase model unchanged).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `AUDIT.md` | New: 17-finding tactical audit (pass 1, quick scan) — 2 P0, 8 P1, 7 P2; suggested sprint plan | none |
+| `STRATEGY_REVIEW.md` | New: strategic critique (pros, cons, 10 radical alternatives R-1..R-10) — companion to AUDIT.md | none |
+| `TODO.md` | Sprint 14 populated (TASK-050..053 P0+P2 cleanup); Backlog populated with TASK-054..063 (P1+P2), TASK-064 (workflow self-audit), and EPIC-A..E (P3 strategic) | none |
+| `.claude/settings.json` | TASK-051: Remove 4 `[your-X]` placeholder PreToolUse hooks (`Bash(git commit*)`, `Bash(git -C * commit*)`, `Bash(git push*)`, `Bash(git -C * push*)`); committed file is now runnable as-is | none |
+| `.claude/settings.local.example.json` | TASK-051: Promote to canonical template — embed full PreToolUse hook block with `[your-X]` tokens; rendered per-stack by `dev-flow-init.js` | none |
+| `bin/dev-flow-init.js` | TASK-051: Replace `LAYER_PRESETS` with `STACK_PRESETS` (layers + lintCommand + typecheckCommand + packageManager); add `renderSettingsLocal()`; add `isHookCommandSafe()` shell-metachar guard for custom prompts | none |
+| `bin/__tests__/dev-flow-init.test.js` | TASK-051: Replace `getLayersForPreset` tests with `getStackPreset` + `renderSettingsLocal` + `isHookCommandSafe` tests (24 cases) | none |
+| `.claude/scripts/validate-scaffold.js` | TASK-051: Add Check 8 — fail on `[your-` substring in any settings.json hook command; explicit fail when settings.json absent | none |
+| `.claude/scripts/__tests__/validate-scaffold.test.js` | TASK-051: Add 4 cases (placeholder fail, clean pass, invalid JSON, missing file) | none |
+| `.claude/settings.local.json` | TASK-051: Regenerate this repo's local — replace `[package-manager]` with `npm`, render 4 hooks with `node -e "process.exit(0)"` no-op (meta-repo has no app code to lint/typecheck) | none |
+| `docs/BUGS.md` | TASK-052: Trim to rule line; TASK-051 audit: open BUG-003 (validate-blueprint.js MANIFEST `skill.path` traversal) | none |
+| `docs/CHANGELOG.md` | TASK-052: Add Sprint 7 "Resolved bugs" sub-table with BUG-001 + BUG-002 fix verification; TASK-051: fix stale `getLayersForPreset` reference in Sprint 12 row | none |
+| `README.md` | TASK-053: "27 Hard Stops" → "24 Hard Stops"; "9+ project-local … skills" → "10 project-local … skills" | none |
+| `.claude/scripts/validate-blueprint.js` | TASK-053: Add Check 4 — count ❌ in 08-orchestrator-prompts.md and skills in MANIFEST; fail when README claims drift or are missing | none |
+| `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-053: Add 7 cases (match, drift, N+ phrasing, missing claims) | none |
+| `.claude/scripts/phase-constants.js` | TASK-050: New — single source of truth for `VALID_PHASES` (11) + `COMPACT_VULNERABLE` (5) + `PHASE_FILE`. Imported by set-phase.js, read-guard.js, session-start.js | ADR-003 |
+| `.claude/scripts/set-phase.js` | TASK-050: New — orchestrator-managed writer for `.claude/.phase` (set/clear modes); rejects symlinks via `lstatSync` guard; allowlist-validated phase names | ADR-003 |
+| `.claude/scripts/__tests__/set-phase.test.js` | TASK-050: New — 11 unit tests (write, normalize, trim, mkdir, reject, usage, clear, idempotent, all 11 phases, exports, single-source invariant) | none |
+| `.claude/scripts/__tests__/phase-cycle.integration.test.js` | TASK-050: New — 6 integration tests (full cycle, allowlist pass, parse non-block, all compact-vulnerable phases via shared Set, idempotent clear, symlink refusal) | none |
+| `.claude/scripts/read-guard.js` | TASK-050: Import `PHASE_FILE` + `COMPACT_VULNERABLE` from phase-constants instead of hardcoded literals | none |
+| `.claude/scripts/session-start.js` | TASK-050: Check 9 — import `COMPACT_VULNERABLE` from phase-constants; escalate stale-phase warn message to suggest `set-phase.js clear` | none |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-050: Add §Phase Markers intro; mark Phase 0 (clear pre-flight), 3, 5, 6, 7, 8 with `set-phase.js` calls; add `set-phase.js clear` after Phase 9 commit | ADR-003 |
+| `docs/DECISIONS.md` | TASK-050: Append ADR-003 — orchestrator-managed phase state via `set-phase.js`; rejected harness-managed PostToolUse alternative documented | ADR-003 |
 
 ---
 

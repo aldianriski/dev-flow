@@ -3,19 +3,39 @@ name: Validate scaffold + blueprint
 on:
   pull_request:
     branches: [master]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
 
       - name: Validate scaffold
         run: node .claude/scripts/validate-scaffold.js
 
       - name: Validate blueprint
         run: node .claude/scripts/validate-blueprint.js
+
+      - name: Node test suite
+        run: node --test .claude/scripts/__tests__/*.test.js bin/__tests__/*.test.js
+
+      - name: Python syntax check
+        run: python -m py_compile evals/measure.py .claude/scripts/compress.py
+
+      - name: Python test suite
+        run: python .claude/scripts/__tests__/compress.test.py
