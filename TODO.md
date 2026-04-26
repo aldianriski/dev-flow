@@ -45,7 +45,7 @@ sprint: 17
   - acceptance: `docs/blueprint/10-modes.md` (871) split into `10a-init.md … 10f-task-decomposer.md` with 10-modes.md as ≤30-line index; `06-harness.md` (565) split into `06a-settings.md / 06b-scripts.md / 06c-claude-md-template.md`; `08-orchestrator-prompts.md` (397) split per phase if cohesive boundary exists. New blueprint-doc line cap (suggest 250) added to `validate-blueprint.js`. All cross-references updated.
   - tracker: AUDIT.md#AUD-008
 
-- [ ] **TASK-060: Single SSOT for blueprint version; sync redirect + CI guard**
+- [x] **TASK-060: Single SSOT for blueprint version; sync redirect + CI guard**
   - scope: full · layers: governance, ci, docs · risk: low
   - api-change: no
   - acceptance: `docs/blueprint/VERSION` (or equivalent single file) holds the canonical blueprint version; `AI_WORKFLOW_BLUEPRINT.md` redirect either reads VERSION at runtime or drops the version line; CI check fails any PR that triggers a MINOR/MAJOR rule (per CONTRIBUTING.md) without a VERSION bump. Document `package.json` version vs blueprint version coupling in DECISIONS.md.
@@ -108,6 +108,11 @@ sprint: 17
 
 | File | Change | ADR |
 |:-----|:-------|:----|
+| `docs/blueprint/VERSION` | Created — canonical blueprint version SSOT | ADR-005 |
+| `AI_WORKFLOW_BLUEPRINT.md` | Body version line replaced with redirect to VERSION file | — |
+| `.claude/scripts/validate-blueprint.js` | Check 5 added — warns when blueprint docs change without VERSION | — |
+| `.claude/scripts/__tests__/validate-blueprint.test.js` | 2 tests for Check 5 | — |
+| `docs/DECISIONS.md` | ADR-005 appended — package.json vs blueprint VERSION independence | ADR-005 |
 
 ---
 
