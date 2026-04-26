@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "skill": "dev-flow",
+  "skill_version": "1.0.0",
+  "date": "2026-04-24",
+  "prompt": "I need to add rate limiting to my Express API to protect against abuse. Help me plan this task.",
+  "note": "Backfill: captured post-Sprint-11 (Sprint mode added in TASK-044). No pre-Sprint-11 before.json available; baseline-001.json serves as the canonical post-change baseline.",
+  "arms": {
+    "baseline": {
+      "output": "To add rate limiting to your Express API, you can use the express-rate-limit package. Here's how to do it:\n\nFirst, install the package:\nnpm install express-rate-limit\n\nThen import it in your main app file and create a limiter:\nconst rateLimit = require('express-rate-limit');\nconst limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });\n\nThen apply it to all routes:\napp.use(limiter);\n\nYou can also apply it to specific routes only. Consider storing rate limit data in Redis for multi-instance deployments. The package supports custom error messages and skip functions for health check endpoints. You should also add tests to verify that the 429 status is returned when the limit is exceeded.",
+      "token_count": 138
+    },
+    "terse_control": {
+      "output": "Use express-rate-limit. Install, configure windowMs + max, apply as middleware. Redis store for multi-instance. Scope: 1-3 files. Skip health endpoint. Add test for 429.",
+      "token_count": 34
+    },
+    "skill": {
+      "output": "## Scope Confirmation \u00e2\u20ac\u201d [TASK-NNN]: Add rate limiting to Express API\n\n**Understood goal**: Protect all public endpoints from request floods using a per-IP window limiter.\n**Chosen approach**: `express-rate-limit` middleware \u00e2\u20ac\u201d battle-tested, zero external deps for single-instance; Redis store if multi-instance needed later.\n**Scope boundary**:\n- Install `express-rate-limit`\n- Wire global limiter in `src/app.js`\n- Exclude health-check endpoint from limiter\n- Add integration test: 429 on N+1 request within window\n**Out of scope**: Redis store (single instance assumed), per-user limits, custom error pages\n**Edge cases**: Health-check endpoint bypasses limiter; test env uses high limit or skip flag\n**Constraints**: Layers: api | API change: yes (new 429 responses) | Risk: low\n\nType 'design' to proceed, or corrections.",
+      "token_count": 145
+    }
+  },
+  "backfill": true
+}

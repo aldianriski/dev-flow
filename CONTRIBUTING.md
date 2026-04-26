@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25
+last_updated: 2026-04-26
 update_trigger: Blueprint version bump protocol changes; new contribution category added
 status: current
 ---
@@ -33,6 +33,18 @@ Every version bump requires a `docs/CHANGELOG.md` entry with the bump rationale.
 - Skill changes that alter agent behavior require eval evidence before merge.
 - Use the RED-GREEN-REFACTOR protocol: commit before/after snapshots, run `python evals/measure.py compare <before.json> <after.json>`, attach output to PR. See `docs/blueprint/05-skills.md §Skill Change Protocol`.
 - Audit `description` field against agentskills.io rules: third-person, starts "Use when…", ≤500 chars, never summarizes process.
+
+## Eval gate (CI-enforced)
+
+PRs that touch any `.claude/skills/<name>/SKILL.md` file **must** include all three of the following in the same PR diff, or CI fails:
+
+1. **Before snapshot** — `evals/snapshots/<skill>/<task-id>-before.json` (committed before the skill change)
+2. **After snapshot** — `evals/snapshots/<skill>/<task-id>-after.json` (committed after the skill change)
+3. **Run record** — `evals/runs/<task-id>.md` containing `python evals/measure.py compare <before.json> <after.json>` output
+
+For **new skills** (no before state): omit the before snapshot and document the absence in the run record. The after snapshot and run record are still required.
+
+Gate script: `.claude/scripts/check-eval-gate.js` — runs automatically in CI on `pull_request` events.
 
 ## What NOT to change
 

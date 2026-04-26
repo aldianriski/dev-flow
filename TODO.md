@@ -45,7 +45,7 @@ sprint: 15
   - acceptance: `.github/workflows/validate.yml` runs `node --test` over all `__tests__/`, runs `python -m unittest discover` for `*.test.py`, runs `py_compile` on `evals/measure.py` + `compress.py`, and matrices Node 18/20/22; PR fails when any test fails. `audit-skill-staleness.js` moved to scheduled (weekly) cron job.
   - tracker: AUDIT.md#AUD-003
 
-- [ ] **TASK-055: Enforce skill-change RED-GREEN-REFACTOR in CI**
+- [x] **TASK-055: Enforce skill-change RED-GREEN-REFACTOR in CI**
   - scope: full · layers: ci, evals, governance · risk: medium
   - api-change: no
   - acceptance: PRs touching any `.claude/skills/**/SKILL.md` require a paired `evals/snapshots/<skill>/<task-id>-after.json` + `compare` output committed under `evals/runs/<task-id>.md`; CI step fails the PR otherwise. Backfill missing before/after snapshots for Sprint 11 dev-flow + dev-flow-compress changes. CONTRIBUTING.md updated with the gate name.
@@ -148,6 +148,14 @@ sprint: 15
 |:-----|:-------|:----|
 | `.github/workflows/validate.yml` | TASK-054: Add Node 18/20/22 matrix, `node --test` suite, `py_compile` syntax check, direct Python test execution; `permissions: read-all`; SHA-pinned actions; `fail-fast: false` | none |
 | `.github/workflows/scheduled.yml` | TASK-054: New — weekly cron (Mon 08:00 UTC) for `audit-skill-staleness.js`; `workflow_dispatch` trigger; SHA-pinned actions | none |
+| `.claude/scripts/check-eval-gate.js` | TASK-055: New — CI gate script; per-skill task-id matching for after-snapshot + run file; CHANGED_FILES env override for tests | none |
+| `.claude/scripts/__tests__/check-eval-gate.test.js` | TASK-055: New — 9 unit tests including regression case for shared-runsPattern bug | none |
+| `.github/workflows/validate.yml` | TASK-055: Add PR-only eval gate step + fetch-depth: 0 on checkout | none |
+| `evals/snapshots/dev-flow/TASK-044-after.json` | TASK-055: Sprint 11 backfill — post-Sprint-11 state; backfill:true flag | none |
+| `evals/snapshots/dev-flow-compress/TASK-036-after.json` | TASK-055: Sprint 11 backfill — new skill, no before; backfill:true flag | none |
+| `evals/runs/TASK-044.md` | TASK-055: Sprint 11 run record (narrative backfill) | none |
+| `evals/runs/TASK-036.md` | TASK-055: Sprint 11 run record for new skill (narrative backfill) | none |
+| `CONTRIBUTING.md` | TASK-055: Add Eval gate section — 3 required files, new-skill exception, gate script path | none |
 
 ---
 
