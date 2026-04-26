@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26 (Sprint 15 archived; Sprint 16 — Skills decomp + P2 cleanup)
+last_updated: 2026-04-26 (Sprint 16 archived; Sprint 17 — Blueprint decomp + SSOT version)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 16
+sprint: 17
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,33 +35,27 @@ sprint: 16
 
 ## Active Sprint
 
-### Sprint 16 — Skills decomp + P2 cleanup (active)
-> **Theme:** Split the oversized dev-flow SKILL.md into reference files, apply the examples/ mirror policy (ADR), and close P2 quickwins (subagent trim + GraphViz flowcharts).
-> **Source:** Backlog P1 (TASK-057, 058 from AUDIT.md); P2 (TASK-061, 062 from AUDIT.md).
+### Sprint 17 — Blueprint decomp + SSOT version (active)
+> **Theme:** Split the remaining blueprint mega-files into sized reference docs, establish a single SSOT for blueprint version with a CI guard, and close the IMPROVEMENT_LOG.md archive quickwin.
+> **Source:** Backlog P1 (TASK-059, 060); P2 (TASK-063).
 
-- [x] **TASK-057: Decide examples/ mirror policy and apply**
-  - scope: full · layers: examples, scripts, ci · risk: medium
+- [ ] **TASK-059: Split blueprint mega-files (10-modes, 06-harness, 08-orchestrator)**
+  - scope: full · layers: docs, scripts · risk: medium
   - api-change: no
-  - acceptance: ADR written in `docs/DECISIONS.md` choosing one of three paths from AUDIT.md AUD-006: (a) delete mirror + minimal post-bootstrap files only, (b) auto-sync via pre-commit, (c) regenerate during CI. Implementation matches the ADR. CI fails if mirror drifts (paths a/c) or hook is missing (path b).
-  - tracker: AUDIT.md#AUD-006
+  - acceptance: `docs/blueprint/10-modes.md` (871) split into `10a-init.md … 10f-task-decomposer.md` with 10-modes.md as ≤30-line index; `06-harness.md` (565) split into `06a-settings.md / 06b-scripts.md / 06c-claude-md-template.md`; `08-orchestrator-prompts.md` (397) split per phase if cohesive boundary exists. New blueprint-doc line cap (suggest 250) added to `validate-blueprint.js`. All cross-references updated.
+  - tracker: AUDIT.md#AUD-008
 
-- [x] **TASK-058: Split dev-flow/SKILL.md to skills/dev-flow/references/**
-  - scope: full · layers: skills, evals · risk: medium
+- [ ] **TASK-060: Single SSOT for blueprint version; sync redirect + CI guard**
+  - scope: full · layers: governance, ci, docs · risk: low
   - api-change: no
-  - acceptance: `.claude/skills/dev-flow/SKILL.md` ≤ 120 lines (frontmatter, Mode Dispatch, decision flow, Sub-commands, top-level Phase Checklist, Red Flags only); detail moved to `references/phases.md`, `references/hard-stops.md`, `references/mode-hotfix.md`, `references/mode-resume.md`, `references/mode-sprint.md`. `evals/measure.py compare` shows `terse_isolation_delta` does not regress past +379%.
-  - tracker: AUDIT.md#AUD-007
+  - acceptance: `docs/blueprint/VERSION` (or equivalent single file) holds the canonical blueprint version; `AI_WORKFLOW_BLUEPRINT.md` redirect either reads VERSION at runtime or drops the version line; CI check fails any PR that triggers a MINOR/MAJOR rule (per CONTRIBUTING.md) without a VERSION bump. Document `package.json` version vs blueprint version coupling in DECISIONS.md.
+  - tracker: AUDIT.md#AUD-009, AUDIT.md#AUD-017
 
-- [x] **TASK-061: Trim subagent files to thin wrappers**
-  - scope: quick · layers: agents, evals · risk: low
+- [ ] **TASK-063: Archive IMPROVEMENT_LOG.md; escalate empty-sprint signal**
+  - scope: quick · layers: docs, governance, scripts · risk: low
   - api-change: no
-  - acceptance: `code-reviewer.md`, `security-analyst.md`, `migration-analyst.md`, `performance-analyst.md` each ≤ 25 lines (frontmatter, mandate, input contract, "follow `[skill-name]`", output token budget). Re-run baseline eval; expect noticeable `brevity_delta` improvement.
-  - tracker: AUDIT.md#AUD-012
-
-- [x] **TASK-062: Add GraphViz flowcharts to skills with non-obvious decision logic; document exemptions**
-  - scope: quick · layers: skills, docs · risk: low
-  - api-change: no
-  - acceptance: `pr-reviewer/SKILL.md` and `lean-doc-generator/SKILL.md` get `dot` flowcharts (Stage 1→2 gating; HOW-filter branches). `refactor-advisor`, `system-design-reviewer`, `release-manager` reviewed and either get flowchart or are noted exempt in `docs/blueprint/05-skills.md` with reason. `security-auditor`, `adr-writer` documented as flowchart-exempt (pure checklist / append-only).
-  - tracker: AUDIT.md#AUD-011
+  - acceptance: `IMPROVEMENT_LOG.md` either deleted or moved to `docs/archive/2026-04-20-session-1-critique.md` with `status: archived` ownership header; root no longer surfaces it. `session-start.js` escalates to WARN (not info) when Active Sprint AND Backlog are both empty, with suggestion to run `/task-decomposer` or `/dev-flow <freeform>`.
+  - tracker: AUDIT.md#AUD-015, AUDIT.md#AUD-016
 
 ---
 
@@ -72,16 +66,7 @@ sprint: 16
 <!-- AUD-001, AUD-002 promoted to Sprint 14 (TASK-050, TASK-051) -->
 <!-- TASK-054, TASK-055, TASK-056 promoted to Sprint 15 -->
 <!-- TASK-057, TASK-058 promoted to Sprint 16 -->
-
-- [ ] **TASK-059: Split blueprint mega-files (10-modes, 06-harness, 08-orchestrator)**
-  - scope: full · layers: docs, scripts · risk: medium
-  - acceptance: `docs/blueprint/10-modes.md` (871) split into `10a-init.md … 10f-task-decomposer.md` with 10-modes.md as ≤30-line index; `06-harness.md` (565) split into `06a-settings.md / 06b-scripts.md / 06c-claude-md-template.md`; `08-orchestrator-prompts.md` (397) split per phase if cohesive boundary exists. New blueprint-doc line cap (suggest 250) added to `validate-blueprint.js`. All cross-references updated.
-  - tracker: AUDIT.md#AUD-008
-
-- [ ] **TASK-060: Single SSOT for blueprint version; sync redirect + CI guard**
-  - scope: full · layers: governance, ci, docs · risk: low
-  - acceptance: `docs/blueprint/VERSION` (or equivalent single file) holds the canonical blueprint version; `AI_WORKFLOW_BLUEPRINT.md` redirect either reads VERSION at runtime or drops the version line; CI check fails any PR that triggers a MINOR/MAJOR rule (per CONTRIBUTING.md) without a VERSION bump. Document `package.json` version vs blueprint version coupling in DECISIONS.md.
-  - tracker: AUDIT.md#AUD-009, AUDIT.md#AUD-017
+<!-- TASK-059, TASK-060 promoted to Sprint 17 -->
 
 ### P1 — Workflow self-audit (raised in Sprint 14 session)
 
@@ -90,11 +75,7 @@ sprint: 16
 ### P2 — Audit Pass 1 polish
 
 <!-- TASK-061, TASK-062 promoted to Sprint 16 -->
-
-- [ ] **TASK-063: Archive IMPROVEMENT_LOG.md; escalate empty-sprint signal**
-  - scope: quick · layers: docs, governance, scripts · risk: low
-  - acceptance: `IMPROVEMENT_LOG.md` either deleted or moved to `docs/archive/2026-04-20-session-1-critique.md` with `status: archived` ownership header; root no longer surfaces it. `session-start.js` escalates to WARN (not info) when Active Sprint AND Backlog are both empty, with suggestion to run `/task-decomposer` or `/dev-flow <freeform>`.
-  - tracker: AUDIT.md#AUD-015, AUDIT.md#AUD-016
+<!-- TASK-063 promoted to Sprint 17 -->
 
 ### P3 — Strategic epics (decompose via /task-decomposer before promoting)
 
@@ -121,25 +102,12 @@ sprint: 16
 > Sprints are moved here from Active Sprint once complete, then archived to `docs/CHANGELOG.md`. This section holds only the current in-progress sprint's running log.
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
-> Sprint 14–15 archived → `docs/CHANGELOG.md` (2026-04-26).
+> Sprint 14–16 archived → `docs/CHANGELOG.md` (2026-04-26).
 
-### Sprint 16 — In Progress
+### Sprint 17 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `examples/node-express/.claude/` | Deleted mirror tree (50+ files) per ADR-004 SSOT policy | ADR-004 |
-| `examples/node-express/docs/blueprint/` | Deleted mirror docs (10 files) per ADR-004 | ADR-004 |
-| `examples/README.md` | Updated: project-specific files only; `.claude/` generated by dev-flow-init.js | ADR-004 |
-| `.github/workflows/validate.yml` | Added examples mirror drift check step | ADR-004 |
-| `docs/DECISIONS.md` | ADR-004 appended: examples/ mirror deletion decision | ADR-004 |
-| `.claude/skills/dev-flow/SKILL.md` | Trimmed 372→116 lines; detail split to references/ | none |
-| `.claude/skills/dev-flow/references/phases.md` | NEW: full Phase 0-10 checklists + Gate templates (185 lines) | none |
-| `.claude/skills/dev-flow/references/hard-stops.md` | NEW: full 19-item hard stop list + context threshold template (34 lines) | none |
-| `.claude/skills/dev-flow/references/mode-hotfix.md` | NEW: hotfix banner + workflow sequence (13 lines) | none |
-| `.claude/skills/dev-flow/references/mode-resume.md` | NEW: resume prompt template (15 lines) | none |
-| `.claude/skills/dev-flow/references/mode-sprint.md` | NEW: full Sprint Mode scoring/classification/execute (74 lines) | none |
-| `evals/snapshots/dev-flow/TASK-058-{before,after}.json` | Eval snapshots for TASK-058 split | none |
-| `evals/runs/TASK-058.md` | Eval run narrative: RED→GREEN→REFACTOR | none |
 
 ---
 
@@ -209,7 +177,8 @@ Sprint 12  → TDD framework + init script + worked example      (done — TASK-
 Sprint 13  → Governance + automation                           (done — TASK-031, 034)
 Sprint 14  → Audit Pass 1: P0 fixes + drift cleanup             (done — TASK-050..053)
 Sprint 15  → Adoption + CI hardening                           (done — TASK-054..056, 064)
-Sprint 16+ → Skills decomp + P2 cleanup                        (active)
+Sprint 16  → Skills decomp + P2 cleanup                        (done — TASK-057, 058, 061, 062)
+Sprint 17+ → Blueprint decomp + SSOT version                   (active)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met
