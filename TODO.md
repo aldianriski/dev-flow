@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26 (Sprint 18 active; EPIC-A..E all decomposed)
+last_updated: 2026-04-26 (Sprint 18 active; EPIC-A..E decomposed; READINESS.md + TASK-091..096 added)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
 sprint: 18
@@ -35,11 +35,35 @@ sprint: 18
 
 ## Active Sprint
 
-### Sprint 18 — Plugin-first distribution (pending)
-> **Theme:** Lay groundwork for Claude Code plugin distribution. Verify spec, create manifest, update docs. TASK-067 (path rewrite) runs standalone after sprint.
-> **Source:** Backlog P1 EPIC-A decomposed (TASK-065..069).
+### Sprint 18 — Plugin foundation + support docs (sequenced)
+> **Theme:** Plugin manifest, install docs, support channel scaffolding. All low risk, doc/governance only — no runtime behavior changes. Runtime changes (path rewrite TASK-067, default-mode flip TASK-093) deferred to Sprint 19 to keep blast radius isolated.
+> **Source:** EPIC-A (TASK-065/066/068) + Internal rollout readiness (TASK-095). 4 tasks, all parallel-friendly except TASK-066 sequenced after TASK-065.
 
-> ⚠️ Promote tasks from Backlog P1 before running `/dev-flow sprint`. Suggested Sprint 18: TASK-065 + TASK-066 + TASK-068 (weight 3, single-phase). TASK-067 blocked standalone. TASK-069 after TASK-067.
+- [ ] **TASK-065: Verify CC plugin spec; document layout contract**
+  - scope: quick · layers: docs, governance · risk: low
+  - api-change: no
+  - acceptance: Read `context/research/CC_SPEC.md` (or latest Claude Code plugin docs). Produce `docs/research/cc-plugin-spec.md` confirming: plugin.json schema, where skills/agents/hooks live, how plugin-relative path vars work. Assumptions 1 and 4 from EPIC-A decomposition confirmed or corrected. No code changes.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A / READINESS.md (v1 / Distribution)
+
+- [ ] **TASK-066: Create `.claude-plugin/plugin.json` manifest**
+  - scope: quick · layers: governance, templates · risk: low
+  - api-change: no
+  - acceptance: `.claude-plugin/plugin.json` created per verified spec (TASK-065 prerequisite). Declares name, version, skills[], agents[], hooks reference. `validate-scaffold.js` or new `validate-plugin.js` checks it exists and has required fields. Unit test added.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A / READINESS.md (v1 / Distribution)
+  - depends-on: TASK-065
+
+- [ ] **TASK-068: Update README + bin/ docs for plugin-first install path**
+  - scope: quick · layers: docs, templates · risk: low
+  - api-change: no
+  - acceptance: README primary install path is plugin install command. `bin/dev-flow-init.js` documented as fallback/scaffold-copy. "What gets created" table updated to reflect plugin layout. CONTRIBUTING.md updated if it references old paths.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A / READINESS.md (v1 / Distribution)
+  - depends-on: TASK-066
+
+- [ ] **TASK-095: Support channel + friction-report template**
+  - scope: quick · layers: docs, governance · risk: low
+  - api-change: no
+  - acceptance: `docs/SUPPORT.md` created listing: support channel (internal Slack channel name + owner), how to file a friction report (template path + filing rule), expected first-response SLA. `docs/templates/friction-report.md` template includes sections: phase hit, expected behavior, observed behavior, suggested fix, severity (low/medium/high). README "Working on This Project" block links to `docs/SUPPORT.md`. CONTRIBUTING.md notes friction reports as the primary feedback channel until v2.
+  - tracker: READINESS.md (v1 / Maintainability)
 
 ---
 
@@ -61,43 +85,28 @@ sprint: 18
 <!-- TASK-061, TASK-062 promoted to Sprint 16 -->
 <!-- TASK-063 promoted to Sprint 17 -->
 
-### P1 — EPIC-A decomposed: Plugin-first distribution
+### P1 — EPIC-A continued: Plugin-first distribution (TASK-065/066/068 promoted to Sprint 18)
 
-> Dependency order: TASK-065 → TASK-066 → TASK-067 → TASK-068 → TASK-069. TASK-067 is scope:full + risk:high — runs standalone, not in sprint phase.
-
-- [ ] **TASK-065: Verify CC plugin spec; document layout contract**
-  - scope: quick · layers: docs, governance · risk: low
-  - api-change: no
-  - acceptance: Read `context/research/CC_SPEC.md` (or latest Claude Code plugin docs). Produce `docs/research/cc-plugin-spec.md` confirming: plugin.json schema, where skills/agents/hooks live, how plugin-relative path vars work. Assumptions 1 and 4 from EPIC-A decomposition confirmed or corrected. No code changes.
-  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
-
-- [ ] **TASK-066: Create `.claude-plugin/plugin.json` manifest**
-  - scope: quick · layers: governance, templates · risk: low
-  - api-change: no
-  - acceptance: `.claude-plugin/plugin.json` created per verified spec (TASK-065 prerequisite). Declares name, version, skills[], agents[], hooks reference. `validate-scaffold.js` or new `validate-plugin.js` checks it exists and has required fields. Unit test added.
-  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+> Remaining EPIC-A work after Sprint 18 promotion. TASK-067 = Sprint 19 standalone (scope:full + risk:high — runtime path-ref change, isolated blast radius). TASK-069 = Sprint 20 (after TASK-067 ships).
 
 - [ ] **TASK-067: Rewrite path refs `.claude/` → plugin-relative var in skills + agents**
   - scope: full · layers: skills, agents, scripts · risk: high
   - api-change: yes — skill/agent file paths change; adopters using scaffold-copy unaffected; plugin installs get new paths
   - acceptance: All `${CLAUDE_SKILL_DIR}/references/` paths in SKILL.md files use plugin-relative var. `read-guard.js`, `session-start.js` allowlists updated for new root. Existing scaffold-copy path (`bin/dev-flow-init.js`) still works unchanged. All 151+ tests pass.
-  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
-
-- [ ] **TASK-068: Update README + bin/ docs for plugin-first install path**
-  - scope: quick · layers: docs, templates · risk: low
-  - api-change: no
-  - acceptance: README primary install path is plugin install command. `bin/dev-flow-init.js` documented as fallback/scaffold-copy. "What gets created" table updated to reflect plugin layout. CONTRIBUTING.md updated if it references old paths.
-  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A / READINESS.md (v1 / Distribution)
+  - depends-on: TASK-066
 
 - [ ] **TASK-069: E2E smoke test — install plugin in clean project, run /dev-flow**
   - scope: quick · layers: examples, ci · risk: medium
   - api-change: no
   - acceptance: `examples/node-express/` repurposed as integration test fixture. Script or manual steps documented in `examples/README.md`: install plugin → run `/dev-flow full TASK-001` → verify Phase 0 parses correctly. CI step added to validate plugin manifest on PRs.
-  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A / READINESS.md (v1 / Distribution)
+  - depends-on: TASK-067
 
-### P1 — EPIC-B decomposed: Code-enforced gates
+### P1 — EPIC-B decomposed: Code-enforced gates (deferred to v2 — post v1 ship)
 
-> Dependency order: TASK-070 → TASK-071/072 (parallel) → TASK-073 → TASK-074. Proposed: Sprint 19: TASK-070..072. Sprint 20: TASK-073..074.
+> READINESS.md classifies EPIC-B as v2 (public marketplace requirement). v1 internal team accepts markdown-rule gates on trust; v2 demands read-guard fires in real sessions. Do not start until v1 ships and team usage is proven (TASK-091 + TASK-092 closed).
+> Dependency order when started: TASK-070 → TASK-071/072 (parallel) → TASK-073 → TASK-074.
 
 - [ ] **TASK-070: Define gate-module interface + gate-constants.js**
   - scope: quick · layers: scripts, governance · risk: low
@@ -136,7 +145,7 @@ sprint: 18
 
 ### P1 — EPIC-C decomposed: Dogfood on real product
 
-> Dependency order: TASK-075 → TASK-076 → TASK-077 (linear). Proposed: Sprint 19 (runs alongside or after EPIC-B Sprint 19 tasks).
+> Critical for v1 ship — proves dev-flow on a real feature before team rollout. Dependency order: TASK-075 → TASK-076 → TASK-077 (linear). Sequenced: Sprint 19 = TASK-075 (parallel with TASK-067 + TASK-093 + TASK-094); Sprint 20 = TASK-076 + TASK-077 (sequential within sprint).
 
 - [ ] **TASK-075: Bootstrap dogfood project in `examples/node-express/` using dev-flow scaffold**
   - scope: quick · layers: examples, governance · risk: low
@@ -159,9 +168,10 @@ sprint: 18
   - tracker: STRATEGY_REVIEW.md#R-10 / EPIC-C
   - depends-on: TASK-076
 
-### P1 — EPIC-D decomposed: State as YAML, telemetry as JSONL
+### P1 — EPIC-D decomposed: State as YAML, telemetry as JSONL (deferred to v2 — post v1 ship)
 
-> Dependency order: TASK-078 → TASK-079 → TASK-080 + TASK-081. TASK-082 → TASK-083 → TASK-084. Both sub-tracks converge at TASK-085. Proposed: Sprint 19: TASK-078..080. Sprint 20: TASK-081..083. Sprint 21: TASK-084..085.
+> READINESS.md classifies EPIC-D as v2. Internal team can ship without telemetry; public marketplace cannot — adoption signal must be measurable. Do not start until v1 ships.
+> Dependency order when started: TASK-078 → TASK-079 → TASK-080 + TASK-081. TASK-082 → TASK-083 → TASK-084. Both converge at TASK-085.
 
 - [ ] **TASK-078: Define `.claude/state.yaml` schema + JSON Schema for validation**
   - scope: quick · layers: governance, docs · risk: low
@@ -219,9 +229,10 @@ sprint: 18
   - tracker: STRATEGY_REVIEW.md#R-2 / STRATEGY_REVIEW.md#R-6 / EPIC-D
   - depends-on: TASK-081, TASK-084
 
-### P1 — EPIC-E decomposed: Harness wrap-or-replace decision
+### P1 — EPIC-E decomposed: Harness wrap-or-replace decision (deferred to v2 — post v1 ship)
 
-> Dependency order: TASK-086 → TASK-087/088/089 (parallel) → TASK-090. Proposed: Sprint N: TASK-086..089 (decision + apply in one sprint). Sprint N+1: TASK-090 + backlog filler.
+> READINESS.md classifies EPIC-E as v2. Internal team tolerates current mixed wrap/replace state; public marketplace requires consistency. Do not start until v1 ships.
+> Dependency order when started: TASK-086 → TASK-087/088/089 (parallel) → TASK-090.
 
 - [ ] **TASK-086: Audit current CC primitive overlap; draft wrap-vs-replace decision (ADR-005)**
   - scope: quick · layers: docs, governance · risk: low
@@ -257,6 +268,52 @@ sprint: 18
   - acceptance: Grep across `.claude/skills/` and `.claude/agents/` finds zero remaining mixed signals: no "spawn" + "invoke CC" co-present for same operation; no `TaskCreate`/`TaskList`/`/review`/`/init` references without ADR-005 framing. CLAUDE.md ≤200 lines. `docs/research/r9-primitive-audit.md` all five rows "resolved". EPIC-E in `TODO.md` marked `[x]` with date and pointer to ADR-005. `STRATEGY_REVIEW.md` R-9 section gains one-sentence outcome note.
   - tracker: STRATEGY_REVIEW.md#R-9 / EPIC-E
   - depends-on: TASK-087, TASK-088, TASK-089
+
+### P1 — Internal rollout readiness continued (TASK-095 promoted to Sprint 18)
+
+> Cross-cutting v1 gates from `READINESS.md`. TASK-095 promoted to Sprint 18. Sequenced: Sprint 19 = TASK-093 + TASK-094 (parallel with TASK-067 + TASK-075); Sprint 20 = TASK-097 (MVP mode, after TASK-093 lands); Sprint 21 = TASK-091 + TASK-096 (after EPIC-A + EPIC-C close, MVP available for teammates to try); Sprint 22 = TASK-092 (closes v1).
+
+- [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction**
+  - scope: full · layers: governance, examples, docs · risk: medium
+  - api-change: no
+  - acceptance: 3+ team members each run `/dev-flow` on one real task in their own codebase or `examples/node-express/`. Per-person friction captured in `docs/research/team-rollout-friction-<user>.md`. Aggregated `docs/research/team-rollout-summary.md` lists: per-person time-to-first-commit, top friction per phase, count completed-without-help vs needed-help. README "How to adopt" updated if friction reveals gaps.
+  - tracker: READINESS.md (v1 / Proof of usage)
+  - depends-on: TASK-069, TASK-077
+
+- [ ] **TASK-092: Onboarding budget — fresh teammate ≤30 min to first commit**
+  - scope: quick · layers: docs · risk: low
+  - api-change: no
+  - acceptance: 1 fresh teammate (no prior exposure) clones plugin, follows install path, completes Phase 0–1 of `TASK-001` in `examples/node-express/` within 30 minutes. Timer + observations logged in `docs/research/onboarding-timing.md`. If >30 min, README + onboarding doc edited iteratively until budget hit; re-tested with a second fresh teammate to confirm.
+  - tracker: READINESS.md (v1 / Proof of usage)
+  - depends-on: TASK-091
+
+- [ ] **TASK-093: Make `quick` the default mode; require explicit `/dev-flow full`**
+  - scope: quick · layers: skills, docs · risk: low
+  - api-change: yes — bare `/dev-flow <task>` now dispatches quick mode (5 phases) instead of full (10 phases); full mode opt-in via `/dev-flow full <task>`
+  - acceptance: `.claude/skills/dev-flow/SKILL.md` Mode Dispatch table marks `quick` as default. SKILL `dot` flowchart updated to reflect default-quick branch. Existing dispatch tests pass. New test in `__tests__/` asserts bare `/dev-flow` resolves to quick mode. `docs/CHANGELOG.md` entry notes MINOR bump rationale (default behavior change is user-visible).
+  - tracker: READINESS.md (v1 / Maintainability), STRATEGY_REVIEW.md#R-7
+  - depends-on: none
+
+- [ ] **TASK-094: ADR-006 — version-pin + breaking-change policy**
+  - scope: quick · layers: governance, docs · risk: low
+  - api-change: no
+  - acceptance: ADR-006 in `docs/DECISIONS.md` documents: semver mapping between `plugin.json` version and blueprint version; rules for MAJOR (phase/gate/hook contract change), MINOR (new mode/agent/skill/hard stop), PATCH (clarification only); how adopters pin a specific version on install. `CONTRIBUTING.md` gains "Breaking change policy" section linking to ADR-006. `plugin.json` (TASK-066 output) `version` field documented as the canonical pin point.
+  - tracker: READINESS.md (v1 / Maintainability), AUD-017
+  - depends-on: TASK-066
+
+- [ ] **TASK-096: Audit Pass 2 + re-verify Pass 1 closures**
+  - scope: full · layers: governance, docs · risk: medium
+  - api-change: no
+  - acceptance: Pass 2 deep audit executed per `AUDIT.md` "What this audit did NOT cover" list (line-by-line SKILL.md HOW-filter sweep, blueprint mega-files re-read, eval methodology audit, permission-prompt count audit, etc.). Findings recorded in new `AUDIT.md` section "Pass 2 findings" OR new file `AUDIT_PASS2.md` with severity tags. Each Pass 1 closure (AUD-001..017) re-verified against current state — Sprint 14–17 fixes still hold today; re-verification table appended to `docs/CHANGELOG.md` Sprint 17 block. Pass 2 findings classified P0/P1/P2 and promoted to backlog where actionable.
+  - tracker: READINESS.md (v1 / Maintainability), AUDIT.md
+  - depends-on: none
+
+- [ ] **TASK-097: Add `mvp` mode — 3-phase lean delivery for prototype/spike work**
+  - scope: quick · layers: skills, docs, governance · risk: medium
+  - api-change: yes — new mode `/dev-flow mvp <task>`; mode dispatch table grows from 6 → 7 modes; blueprint MINOR bump (new mode = MINOR per CONTRIBUTING.md)
+  - acceptance: ADR-007 in `docs/DECISIONS.md` records: (1) why MVP added vs making `quick` leaner, (2) explicit fence-line between `quick` (5 phases, design + tests) and `mvp` (3 phases, no design, no new-test mandate), (3) escape-hatch trigger (file count threshold or scope-growth signal that prompts escalate-to-quick). `.claude/skills/dev-flow/SKILL.md` Mode Dispatch table adds `mvp` row: phases = Parse → Implement → Close; gates = none for Gate 0/1; minimal Gate 2 = lint pass + existing tests still green + commit. SKILL `dot` flowchart updated showing mvp branch and escalation arrow back to quick. New `.claude/skills/dev-flow/references/mode-mvp.md` (≤80 lines) defines: skill load list (dev-flow only — lean context), allowed file-count threshold before escalation prompt, what mvp does NOT do (no subagent dispatch, no ADR mandate, no security audit), explicit "review opt-in via `/dev-flow review` after merge" note. Mode dispatch unit test added asserting `/dev-flow mvp TASK-X` resolves to mvp mode. `docs/blueprint/10b-resume.md` index (or successor file from AUD-008 split) gains MVP entry. `README.md` "6 Modes" → "7 Modes" (closes AUD-014 mode-count drift). `docs/CHANGELOG.md` entry tags MINOR blueprint bump with rationale. Blueprint VERSION file (Sprint 17 SSOT) bumped accordingly.
+  - tracker: READINESS.md (v1 / Maintainability), STRATEGY_REVIEW.md#R-7
+  - depends-on: TASK-093
 
 ### P3 — Strategic epics (decompose via /task-decomposer before promoting)
 
@@ -360,7 +417,12 @@ Sprint 14  → Audit Pass 1: P0 fixes + drift cleanup             (done — TASK
 Sprint 15  → Adoption + CI hardening                           (done — TASK-054..056, 064)
 Sprint 16  → Skills decomp + P2 cleanup                        (done — TASK-057, 058, 061, 062)
 Sprint 17  → Blueprint decomp + SSOT version                   (done — TASK-059, 060, 063 + BUG-003/004)
-Sprint 18+ → Epic decomposition                                 (active — decompose P3 epics first)
+Sprint 18  → Plugin foundation + support docs                   (active — TASK-065, 066, 068, 095)
+Sprint 19  → Path rewrite + default-mode flip + ADR + dogfood   (planned — TASK-067, 093, 094, 075)
+Sprint 20  → E2E smoke + dogfood E2E + friction log + MVP mode  (planned — TASK-069, 076, 077, 097)
+Sprint 21  → Team validation + Audit Pass 2                     (planned — TASK-091, 096)
+Sprint 22  → Onboarding budget + start v2                       (planned — TASK-092 + EPIC-B/D/E begins)
+v2 work    → EPIC-B (gates) + EPIC-D (state/telemetry) + EPIC-E (wrap-or-replace)  (deferred — post v1 ship)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met
