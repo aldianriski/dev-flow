@@ -35,11 +35,11 @@ sprint: 18
 
 ## Active Sprint
 
-### Sprint 18 — Epic decomposition (active)
-> **Theme:** All P1/P2 tasks exhausted. Decompose top P3 epics into TASK-NNN entries before promoting to sprints.
-> **Source:** Backlog P3 (EPIC-A, EPIC-B highest leverage per STRATEGY_REVIEW.md).
+### Sprint 18 — Plugin-first distribution (pending)
+> **Theme:** Lay groundwork for Claude Code plugin distribution. Verify spec, create manifest, update docs. TASK-067 (path rewrite) runs standalone after sprint.
+> **Source:** Backlog P1 EPIC-A decomposed (TASK-065..069).
 
-> ⚠️ No ready tasks — run `/dev-flow sprint` or `/task-decomposer` against EPIC-A or EPIC-B to generate TASK-NNN entries before executing this sprint.
+> ⚠️ Promote tasks from Backlog P1 before running `/dev-flow sprint`. Suggested Sprint 18: TASK-065 + TASK-066 + TASK-068 (weight 3, single-phase). TASK-067 blocked standalone. TASK-069 after TASK-067.
 
 ---
 
@@ -61,11 +61,45 @@ sprint: 18
 <!-- TASK-061, TASK-062 promoted to Sprint 16 -->
 <!-- TASK-063 promoted to Sprint 17 -->
 
+### P1 — EPIC-A decomposed: Plugin-first distribution
+
+> Dependency order: TASK-065 → TASK-066 → TASK-067 → TASK-068 → TASK-069. TASK-067 is scope:full + risk:high — runs standalone, not in sprint phase.
+
+- [ ] **TASK-065: Verify CC plugin spec; document layout contract**
+  - scope: quick · layers: docs, governance · risk: low
+  - api-change: no
+  - acceptance: Read `context/research/CC_SPEC.md` (or latest Claude Code plugin docs). Produce `docs/research/cc-plugin-spec.md` confirming: plugin.json schema, where skills/agents/hooks live, how plugin-relative path vars work. Assumptions 1 and 4 from EPIC-A decomposition confirmed or corrected. No code changes.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+
+- [ ] **TASK-066: Create `.claude-plugin/plugin.json` manifest**
+  - scope: quick · layers: governance, templates · risk: low
+  - api-change: no
+  - acceptance: `.claude-plugin/plugin.json` created per verified spec (TASK-065 prerequisite). Declares name, version, skills[], agents[], hooks reference. `validate-scaffold.js` or new `validate-plugin.js` checks it exists and has required fields. Unit test added.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+
+- [ ] **TASK-067: Rewrite path refs `.claude/` → plugin-relative var in skills + agents**
+  - scope: full · layers: skills, agents, scripts · risk: high
+  - api-change: yes — skill/agent file paths change; adopters using scaffold-copy unaffected; plugin installs get new paths
+  - acceptance: All `${CLAUDE_SKILL_DIR}/references/` paths in SKILL.md files use plugin-relative var. `read-guard.js`, `session-start.js` allowlists updated for new root. Existing scaffold-copy path (`bin/dev-flow-init.js`) still works unchanged. All 151+ tests pass.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+
+- [ ] **TASK-068: Update README + bin/ docs for plugin-first install path**
+  - scope: quick · layers: docs, templates · risk: low
+  - api-change: no
+  - acceptance: README primary install path is plugin install command. `bin/dev-flow-init.js` documented as fallback/scaffold-copy. "What gets created" table updated to reflect plugin layout. CONTRIBUTING.md updated if it references old paths.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+
+- [ ] **TASK-069: E2E smoke test — install plugin in clean project, run /dev-flow**
+  - scope: quick · layers: examples, ci · risk: medium
+  - api-change: no
+  - acceptance: `examples/node-express/` repurposed as integration test fixture. Script or manual steps documented in `examples/README.md`: install plugin → run `/dev-flow full TASK-001` → verify Phase 0 parses correctly. CI step added to validate plugin manifest on PRs.
+  - tracker: STRATEGY_REVIEW.md#R-1 / EPIC-A
+
 ### P3 — Strategic epics (decompose via /task-decomposer before promoting)
 
 > Direction-level moves from `STRATEGY_REVIEW.md`. Each is an epic, not a single task — run `/task-decomposer --epic "<name>"` against the strategy file before pulling into a sprint. Order is by leverage, not dependency.
 
-- [ ] **EPIC-A: Plugin-first distribution (R-1)** — replace `cp -r` adoption with a Claude Code plugin install. Eliminates `examples/` mirror and ~90 % of adoption friction. Pre-req: confirm CC plugin spec covers hooks + skills + agents bundles. Source: STRATEGY_REVIEW.md#R-1.
+- [x] **EPIC-A: Plugin-first distribution (R-1)** — decomposed 2026-04-26 → TASK-065..069 (see P1 above). Source: STRATEGY_REVIEW.md#R-1.
 
 - [ ] **EPIC-B: Code-enforced gates (R-3)** — Gate 0/1/2 become Node/Python functions returning `{pass, missing, suggested_fix}`. Hard stops become exit codes. Subsumes TASK-050 (phase-file) and reframes 24 hard stops as 5 enforced + N warnings (R-5). Source: STRATEGY_REVIEW.md#R-3, STRATEGY_REVIEW.md#R-5.
 
