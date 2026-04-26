@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26 (Sprint 16 archived; Sprint 17 — Blueprint decomp + SSOT version)
+last_updated: 2026-04-26 (Sprint 17 archived; Sprint 18 — Epic decomposition needed)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 17
+sprint: 18
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,27 +35,11 @@ sprint: 17
 
 ## Active Sprint
 
-### Sprint 17 — Blueprint decomp + SSOT version (active)
-> **Theme:** Split the remaining blueprint mega-files into sized reference docs, establish a single SSOT for blueprint version with a CI guard, and close the IMPROVEMENT_LOG.md archive quickwin.
-> **Source:** Backlog P1 (TASK-059, 060); P2 (TASK-063).
+### Sprint 18 — Epic decomposition (active)
+> **Theme:** All P1/P2 tasks exhausted. Decompose top P3 epics into TASK-NNN entries before promoting to sprints.
+> **Source:** Backlog P3 (EPIC-A, EPIC-B highest leverage per STRATEGY_REVIEW.md).
 
-- [x] **TASK-059: Split blueprint mega-files (10-modes, 06-harness, 08-orchestrator)**
-  - scope: full · layers: docs, scripts · risk: medium
-  - api-change: no
-  - acceptance: `docs/blueprint/10-modes.md` (871) split into `10a-init.md … 10f-task-decomposer.md` with 10-modes.md as ≤30-line index; `06-harness.md` (565) split into `06a-settings.md / 06b-scripts.md / 06c-claude-md-template.md`; `08-orchestrator-prompts.md` (397) split per phase if cohesive boundary exists. New blueprint-doc line cap (suggest 250) added to `validate-blueprint.js`. All cross-references updated.
-  - tracker: AUDIT.md#AUD-008
-
-- [x] **TASK-060: Single SSOT for blueprint version; sync redirect + CI guard**
-  - scope: full · layers: governance, ci, docs · risk: low
-  - api-change: no
-  - acceptance: `docs/blueprint/VERSION` (or equivalent single file) holds the canonical blueprint version; `AI_WORKFLOW_BLUEPRINT.md` redirect either reads VERSION at runtime or drops the version line; CI check fails any PR that triggers a MINOR/MAJOR rule (per CONTRIBUTING.md) without a VERSION bump. Document `package.json` version vs blueprint version coupling in DECISIONS.md.
-  - tracker: AUDIT.md#AUD-009, AUDIT.md#AUD-017
-
-- [x] **TASK-063: Archive IMPROVEMENT_LOG.md; escalate empty-sprint signal**
-  - scope: quick · layers: docs, governance, scripts · risk: low
-  - api-change: no
-  - acceptance: `IMPROVEMENT_LOG.md` either deleted or moved to `docs/archive/2026-04-20-session-1-critique.md` with `status: archived` ownership header; root no longer surfaces it. `session-start.js` escalates to WARN (not info) when Active Sprint AND Backlog are both empty, with suggestion to run `/task-decomposer` or `/dev-flow <freeform>`.
-  - tracker: AUDIT.md#AUD-015, AUDIT.md#AUD-016
+> ⚠️ No ready tasks — run `/dev-flow sprint` or `/task-decomposer` against EPIC-A or EPIC-B to generate TASK-NNN entries before executing this sprint.
 
 ---
 
@@ -102,39 +86,12 @@ sprint: 17
 > Sprints are moved here from Active Sprint once complete, then archived to `docs/CHANGELOG.md`. This section holds only the current in-progress sprint's running log.
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
-> Sprint 14–16 archived → `docs/CHANGELOG.md` (2026-04-26).
+> Sprint 14–17 archived → `docs/CHANGELOG.md` (2026-04-26).
 
-### Sprint 17 — In Progress
+### Sprint 18 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `docs/blueprint/VERSION` | Created — canonical blueprint version SSOT | ADR-005 |
-| `AI_WORKFLOW_BLUEPRINT.md` | Body version line replaced with redirect to VERSION file | — |
-| `.claude/scripts/validate-blueprint.js` | Check 5 added — warns when blueprint docs change without VERSION | — |
-| `.claude/scripts/__tests__/validate-blueprint.test.js` | 2 tests for Check 5 | — |
-| `docs/DECISIONS.md` | ADR-005 appended — package.json vs blueprint VERSION independence | ADR-005 |
-| `docs/blueprint/10-modes.md` | TASK-059: Replaced with 19-line index; 6 sub-files split out | — |
-| `docs/blueprint/10a-init.md` | TASK-059: NEW — §16 INIT Mode (237 lines) | — |
-| `docs/blueprint/10b-harness-improvement.md` | TASK-059: NEW — §17 Harness CI Protocol (84 lines) | — |
-| `docs/blueprint/10c-resume.md` | TASK-059: NEW — §18 Session Resume (70 lines) | — |
-| `docs/blueprint/10d-migration-performance.md` | TASK-059: NEW — §19 Migration + §20 Performance (137 lines) | — |
-| `docs/blueprint/10e-hotfix.md` | TASK-059: NEW — §21 Hardened Hotfix (149 lines) | — |
-| `docs/blueprint/10f-task-decomposer.md` | TASK-059: NEW — §22 Task Decomposer + §23 Sprint Mode (294 lines) | — |
-| `docs/blueprint/06-harness.md` | TASK-059: Replaced with 16-line index; 3 sub-files split out | — |
-| `docs/blueprint/06a-settings.md` | TASK-059: NEW — settings.json + settings.local.json (118 lines) | — |
-| `docs/blueprint/06b-scripts.md` | TASK-059: NEW — all 5 scripts + evals/measure.py (415 lines) | — |
-| `docs/blueprint/06c-claude-md-template.md` | TASK-059: NEW — §7 CLAUDE.md Template (64 lines) | — |
-| `.claude/scripts/validate-blueprint.js` | TASK-059: Check 4 added — 250-line cap for blueprint sub-files | — |
-| `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-059: 3 tests for 250-line cap | — |
-| `IMPROVEMENT_LOG.md` | TASK-063: Deleted from root — archived to docs/archive/ | — |
-| `docs/archive/2026-04-20-session-1-critique.md` | TASK-063: NEW — archived Session 1 critique with status:archived header | — |
-| `.claude/scripts/session-start.js` | TASK-063: Check 7 — WARN when both Sprint + Backlog empty | — |
-| `.claude/scripts/__tests__/session-start.test.js` | TASK-063: 2 tests for new WARN path | — |
-| `docs/BUGS.md` | BUG-003 + BUG-004 resolved — trimmed to "No open bugs" | — |
-| `.claude/scripts/scaffold-checks.js` | BUG-003: reject skill.path with `..` or absolute prefix in checkManifest | — |
-| `.claude/scripts/__tests__/validate-scaffold.test.js` | BUG-003: traversal-attempt test added | — |
-| `.claude/scripts/read-guard.js` | BUG-004: add `.claude/scripts/` prefix to ORCHESTRATOR_ALLOWLIST | — |
-| `.claude/scripts/__tests__/read-guard.test.js` | BUG-004: allowlist coverage test added | — |
 
 ---
 
@@ -205,7 +162,8 @@ Sprint 13  → Governance + automation                           (done — TASK-
 Sprint 14  → Audit Pass 1: P0 fixes + drift cleanup             (done — TASK-050..053)
 Sprint 15  → Adoption + CI hardening                           (done — TASK-054..056, 064)
 Sprint 16  → Skills decomp + P2 cleanup                        (done — TASK-057, 058, 061, 062)
-Sprint 17+ → Blueprint decomp + SSOT version                   (active)
+Sprint 17  → Blueprint decomp + SSOT version                   (done — TASK-059, 060, 063 + BUG-003/004)
+Sprint 18+ → Epic decomposition                                 (active — decompose P3 epics first)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

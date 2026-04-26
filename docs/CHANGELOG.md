@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26 (Sprint 16 archived)
+last_updated: 2026-04-26 (Sprint 17 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,44 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 17 — Blueprint decomp + SSOT version (2026-04-26)
+
+**Blueprint version:** PATCH — mega-files split; VERSION SSOT established; BUG-003/004 fixed.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/blueprint/VERSION` | TASK-060: Created — canonical blueprint version SSOT (1.7.0) | ADR-005 |
+| `AI_WORKFLOW_BLUEPRINT.md` | TASK-060: Body version line replaced with redirect to VERSION file | — |
+| `.claude/scripts/validate-blueprint.js` | TASK-060: Check 5 — warns when blueprint docs change without VERSION update | — |
+| `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-060: 2 tests for Check 5 | — |
+| `docs/DECISIONS.md` | TASK-060: ADR-005 — package.json vs blueprint VERSION independence | ADR-005 |
+| `docs/blueprint/10-modes.md` | TASK-059: 943→19 line index; 6 sub-files extracted | — |
+| `docs/blueprint/10a-init.md` | TASK-059: NEW — §16 INIT Mode (237 lines) | — |
+| `docs/blueprint/10b-harness-improvement.md` | TASK-059: NEW — §17 Harness CI Protocol (84 lines) | — |
+| `docs/blueprint/10c-resume.md` | TASK-059: NEW — §18 Session Resume (70 lines) | — |
+| `docs/blueprint/10d-migration-performance.md` | TASK-059: NEW — §19 Migration + §20 Performance (137 lines) | — |
+| `docs/blueprint/10e-hotfix.md` | TASK-059: NEW — §21 Hardened Hotfix (149 lines) | — |
+| `docs/blueprint/10f-task-decomposer.md` | TASK-059: NEW — §22 Task Decomposer + §23 Sprint Mode (294 lines) | — |
+| `docs/blueprint/06-harness.md` | TASK-059: 565→16 line index; 3 sub-files extracted | — |
+| `docs/blueprint/06a-settings.md` | TASK-059: NEW — settings.json + settings.local.json (118 lines) | — |
+| `docs/blueprint/06b-scripts.md` | TASK-059: NEW — all 5 scripts + evals/measure.py (415 lines) | — |
+| `docs/blueprint/06c-claude-md-template.md` | TASK-059: NEW — §7 CLAUDE.md Template (64 lines) | — |
+| `.claude/scripts/validate-blueprint.js` | TASK-059: Check 4 — 250-line cap WARN for blueprint sub-files | — |
+| `.claude/scripts/__tests__/validate-blueprint.test.js` | TASK-059: 3 tests for 250-line cap | — |
+| `IMPROVEMENT_LOG.md` | TASK-063: Deleted — archived to docs/archive/ | — |
+| `docs/archive/2026-04-20-session-1-critique.md` | TASK-063: NEW — archived Session 1 critique (status:archived) | — |
+| `.claude/scripts/session-start.js` | TASK-063: Check 7 WARN when both Sprint + Backlog empty | — |
+| `.claude/scripts/__tests__/session-start.test.js` | TASK-063: 2 tests for WARN path | — |
+| `docs/BUGS.md` | BUG-003 + BUG-004 resolved — "No open bugs" | — |
+| `.claude/scripts/scaffold-checks.js` | BUG-003: skill.path traversal guard in checkManifest | — |
+| `.claude/scripts/__tests__/validate-scaffold.test.js` | BUG-003: traversal-attempt test | — |
+| `.claude/scripts/read-guard.js` | BUG-004: `.claude/scripts/` prefix added to ORCHESTRATOR_ALLOWLIST | — |
+| `.claude/scripts/__tests__/read-guard.test.js` | BUG-004: allowlist coverage test | — |
+
+**Resolved bugs**: BUG-003 (skill.path traversal) · BUG-004 (read-guard over-blocking)
 
 ---
 
