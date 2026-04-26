@@ -50,6 +50,11 @@ function checkManifest(manifestPath) {
   if (!Array.isArray(raw.skills)) {
     return { pass: false, reason: 'invalid', message: 'MANIFEST.json "skills" must be an array' };
   }
+  for (const skill of raw.skills) {
+    if (typeof skill.path === 'string' && (skill.path.includes('..') || /^[/\\]/.test(skill.path))) {
+      return { pass: false, reason: 'invalid', message: `MANIFEST.json skill.path unsafe: "${skill.path}"` };
+    }
+  }
   return { pass: true, reason: 'ok', count: raw.skills.length, data: raw };
 }
 

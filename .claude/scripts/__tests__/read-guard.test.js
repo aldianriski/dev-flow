@@ -180,3 +180,14 @@ test('blocks on tool_input.path fallback for Grep tool', () => {
     teardown(dir);
   }
 });
+
+// .claude/scripts/ allowlist → allow even in compact-vulnerable phase
+test('allows .claude/scripts/ files in implement phase', () => {
+  const dir = setup('implement');
+  try {
+    const result = run(dir, { tool_name: 'Read', tool_input: { file_path: '.claude/scripts/session-start.js' } });
+    assert.equal(result.status, 0);
+  } finally {
+    teardown(dir);
+  }
+});

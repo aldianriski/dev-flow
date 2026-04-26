@@ -130,6 +130,11 @@ sprint: 17
 | `docs/archive/2026-04-20-session-1-critique.md` | TASK-063: NEW — archived Session 1 critique with status:archived header | — |
 | `.claude/scripts/session-start.js` | TASK-063: Check 7 — WARN when both Sprint + Backlog empty | — |
 | `.claude/scripts/__tests__/session-start.test.js` | TASK-063: 2 tests for new WARN path | — |
+| `docs/BUGS.md` | BUG-003 + BUG-004 resolved — trimmed to "No open bugs" | — |
+| `.claude/scripts/scaffold-checks.js` | BUG-003: reject skill.path with `..` or absolute prefix in checkManifest | — |
+| `.claude/scripts/__tests__/validate-scaffold.test.js` | BUG-003: traversal-attempt test added | — |
+| `.claude/scripts/read-guard.js` | BUG-004: add `.claude/scripts/` prefix to ORCHESTRATOR_ALLOWLIST | — |
+| `.claude/scripts/__tests__/read-guard.test.js` | BUG-004: allowlist coverage test added | — |
 
 ---
 

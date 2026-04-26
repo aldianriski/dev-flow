@@ -18,6 +18,7 @@ const ORCHESTRATOR_ALLOWLIST = [
   /^\.claude\/STATE\.ya?ml$/,
   /^CLAUDE\.md$/,
   /^\.claude\/CLAUDE\.md$/,
+  /^\.claude\/scripts\//,
 ];
 
 function readStdin() {

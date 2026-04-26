@@ -255,6 +255,22 @@ test('fails when settings.json is invalid JSON', () => {
   }
 });
 
+test('fails when MANIFEST.json skill.path contains path traversal', () => {
+  const dir = setup();
+  try {
+    scaffold(dir);
+    const { checkManifest } = require('../scaffold-checks.js');
+    const manifestPath = join(dir, '.claude', 'skills', 'MANIFEST.json');
+    writeFileSync(manifestPath, JSON.stringify({ version: '1.0', skills: [{ name: 'evil', path: '../../etc/passwd' }] }));
+    const result = checkManifest(manifestPath);
+    assert.equal(result.pass, false);
+    assert.equal(result.reason, 'invalid');
+    assert.ok(result.message.includes('unsafe'));
+  } finally {
+    teardown(dir);
+  }
+});
+
 test('fails when settings.json is absent (Check 8 emits explicit signal)', () => {
   const dir = setup();
   try {
