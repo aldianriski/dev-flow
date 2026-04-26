@@ -36,6 +36,26 @@ Skill changes that alter agent behavior require eval evidence before merge.
 
 No snapshot pair → PR is blocked. See `evals/README.md` for snapshot schema and full harness docs.
 
+## GraphViz Flowchart Policy
+
+Skills with non-obvious decision logic (conditional gating, branching stages) must include a `dot` flowchart inline in `SKILL.md`. Skills that are pure sequential checklists are exempt and must be documented as such here.
+
+**Skills with flowcharts:**
+| Skill | Flowchart covers |
+|:------|:----------------|
+| `dev-flow` | Mode dispatch + full pipeline flow |
+| `lean-doc-generator` | HOW/WHY/WHERE filter branches |
+| `pr-reviewer` | Stage 1→2 gating (Lens 1 fail → BLOCKED, else run S2 lenses) |
+
+**Flowchart-exempt skills (pure checklist / append-only / sequential):**
+| Skill | Reason |
+|:------|:-------|
+| `security-auditor` | Pure OWASP checklist — no conditional stage gating |
+| `adr-writer` | Append-only template fill — no branching decision |
+| `refactor-advisor` | Sequential multi-lens analysis — no conditional stage skip |
+| `system-design-reviewer` | Sequential multi-lens review — no conditional stage skip |
+| `release-manager` | Invocation table + sequential steps — no conditional stage skip |
+
 ## Skill Frontmatter Standard
 
 ### Spec-required fields (Claude Code / agentskills.io)

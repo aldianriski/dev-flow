@@ -42,6 +42,13 @@ jobs:
       - name: Python test suite
         run: python .claude/scripts/__tests__/compress.test.py
 
+      - name: Check examples mirror drift (ADR-004)
+        run: |
+          if find examples -mindepth 2 -maxdepth 2 -name ".claude" -type d 2>/dev/null | grep -q .; then
+            echo "DRIFT: examples/.claude mirror detected — delete per ADR-004"
+            exit 1
+          fi
+
       - name: Eval gate (skill changes require paired artifacts)
         if: github.event_name == 'pull_request'
         run: node .claude/scripts/check-eval-gate.js

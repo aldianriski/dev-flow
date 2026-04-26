@@ -13,6 +13,21 @@ type: rigid
 
 Perform a structured 7-lens code review on a diff or set of changed files. Loaded by the code-reviewer agent at Phase 6, or invoked directly by the user.
 
+```dot
+digraph pr_review {
+  rankdir=LR; node [shape=box, style=rounded];
+  start [shape=ellipse, label="diff / changed files"];
+  s1 [label="Stage 1\nLens 1 — Spec Compliance"];
+  blocked [shape=ellipse, label="status: BLOCKED\n(return immediately)"];
+  s2 [label="Stage 2\nLenses 2–7\n(Architecture → Docs)"];
+  done [shape=ellipse, label="tiered report"];
+  start -> s1;
+  s1 -> blocked [label="any fail"];
+  s1 -> s2 [label="all pass"];
+  s2 -> done;
+}
+```
+
 ## 7-Lens Review Checklist
 
 ### Lens 1 — Spec Compliance [S1]

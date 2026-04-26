@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "pr-reviewer",
+  "skill_version": "1.0.0",
+  "date": "2026-04-26",
+  "prompt": "You are reviewing a PR. Lens 1 (Spec Compliance) finds that one acceptance criterion is not implemented. What do you output and what do you do next?",
+  "arms": {
+    "baseline": {
+      "output": "I would flag the missing acceptance criterion as a CRITICAL finding under Spec Compliance, set status to BLOCKED, and return the review immediately without evaluating the remaining lenses. The PR cannot proceed until this is addressed.",
+      "token_count": 44
+    },
+    "terse_control": {
+      "output": "Missing acceptance criterion → CRITICAL [S1]. Status: BLOCKED. Stop. No S2 lenses.",
+      "token_count": 16
+    },
+    "skill": {
+      "output": "Per the Stage 1→2 flowchart: Lens 1 failure → status BLOCKED, return immediately. Only if all Lens 1 checks pass do I proceed to Lenses 2–7. Return CRITICAL [S1] finding now. No Stage 2 evaluation.",
+      "token_count": 37
+    }
+  }
+}
