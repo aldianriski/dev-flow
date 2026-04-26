@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25 (Sprint 14 archived)
+last_updated: 2026-04-26 (Sprint 15 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,31 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 15 — Adoption + CI hardening (2026-04-26)
+
+**Blueprint version:** MINOR bump — Sprint Mode Phase 9c completion prompt added (Phase 9c continue/close flow, context-budget gate ≥28 turns); `next-blocked`/`commit-each`/`commit-sprint` dispatch; §23 added to `10-modes.md`.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.github/workflows/validate.yml` | TASK-054: Add Node 18/20/22 matrix, `node --test` suite, `py_compile` syntax check, direct Python test execution; `permissions: read-all`; SHA-pinned actions; `fail-fast: false` | none |
+| `.github/workflows/scheduled.yml` | TASK-054: New — weekly cron (Mon 08:00 UTC) for `audit-skill-staleness.js`; `workflow_dispatch` trigger; SHA-pinned actions | none |
+| `.claude/scripts/check-eval-gate.js` | TASK-055: New — CI gate script; per-skill task-id matching for after-snapshot + run file; CHANGED_FILES env override for tests | none |
+| `.claude/scripts/__tests__/check-eval-gate.test.js` | TASK-055: New — 9 unit tests including regression case for shared-runsPattern bug | none |
+| `.github/workflows/validate.yml` | TASK-055: Add PR-only eval gate step + fetch-depth: 0 on checkout | none |
+| `evals/snapshots/dev-flow/TASK-044-after.json` | TASK-055: Sprint 11 backfill — post-Sprint-11 state; backfill:true flag | none |
+| `evals/snapshots/dev-flow-compress/TASK-036-after.json` | TASK-055: Sprint 11 backfill — new skill, no before; backfill:true flag | none |
+| `evals/runs/TASK-044.md` | TASK-055: Sprint 11 run record (narrative backfill) | none |
+| `evals/runs/TASK-036.md` | TASK-055: Sprint 11 run record for new skill (narrative backfill) | none |
+| `CONTRIBUTING.md` | TASK-055: Add Eval gate section — 3 required files, new-skill exception, gate script path | none |
+| `README.md` | TASK-056: Replace "How to adopt" — `node bin/dev-flow-init.js` primary; add 8-file "What gets created" table; `cp -r` demoted to fallback; "What it is not" + "Blueprint structure" sections removed (outdated/absorbed) | none |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-064: Sprint Mode — Phase 9c-style completion prompt; context gate ≥28 turns → prune; `next-blocked`/`commit-each`/`commit-sprint` dispatch; hard stop added | none |
+| `docs/blueprint/10-modes.md` | TASK-064: Add §23 Sprint Mode — weight scoring, phase classification, execution flow, Phase Complete prompt | none |
+| `evals/runs/TASK-064.md` | TASK-064: Eval run record (RED-GREEN-REFACTOR) | none |
+| `evals/snapshots/dev-flow/TASK-064-before.json` | TASK-064: Eval baseline snapshot | none |
+| `evals/snapshots/dev-flow/TASK-064-after.json` | TASK-064: Eval after snapshot | none |
 
 ---
 

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "dev-flow",
+  "skill_version": "1.0.0",
+  "date": "2026-04-26",
+  "prompt": "Sprint mode, final phase Gate 2 just approved. TASK-100 (scope:full, risk:high) was listed as blocked. We are ~30 turns into the session. What do you output next?",
+  "arms": {
+    "baseline": {
+      "output": "Gate 2 approved. Moving to Phase 9 commit flow. I'll create a commit for the completed sprint tasks now. TASK-100 is blocked (scope:full + risk:high) and must be run in a separate session.",
+      "token_count": 42
+    },
+    "terse_control": {
+      "output": "Gate 2 done. Phase 9: commit. TASK-100 blocked — separate session required.",
+      "token_count": 15
+    },
+    "skill": {
+      "output": "After final phase Gate 2, the current dev-flow/SKILL.md Sprint Mode Step 3 says: 'After final phase: Phase 9 commit flow.' No prompt about blocked tasks, no context estimate, no commit style choice. Proceeds directly to git commit.",
+      "token_count": 48
+    }
+  }
+}

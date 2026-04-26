@@ -249,6 +249,7 @@ Type 'rotate' to apply, or provide corrections.
 ❌ init mode: code written before Gate B approval — hard stop, revert writes
 ❌ CLAUDE.md exceeds 200 lines — trim before proceeding
 ❌ Context turns >40 before a new phase — prune to 3-bullet summary, state this aloud
+❌ Sprint mode: ≥28 turns (≈70% budget) before next phase entry — prune prior phase to 3-bullet summary first
 ```
 
 Context threshold warning:
@@ -331,9 +332,32 @@ Classification rules:
 
 ### Step 3 — Execute
 
+**Context gate**: Before entering each phase, estimate turn count. If ≥28 turns (≈70% of 40-turn budget), prune prior phase to 3-bullet summary before proceeding.
+
 Per task in the phase: Gate 0 → Implement → Validate → Test. Mark `[x]` in TODO.md after each task passes.
 Single Gate 2 at end of phase aggregates full diff across all tasks in that phase.
-After Gate 2: if two-phase, output Phase 2 plan and await `run`. After final phase: Phase 9 commit flow.
+After Gate 2 on a non-final phase: output Phase 2 plan and await `run`.
+After Gate 2 on the final phase: emit the Sprint Phase Complete prompt before any commit:
+
+```
+## Sprint Phase [N] Complete — [Sprint Name]
+**Blocked tasks** (not yet run — scope:full + risk:high):
+  - TASK-NNN: [Title] (scope: full | risk: high)
+  — "none" if no blocked tasks remain
+**Context estimate**: ~[N] turns used · ~[N] turns remaining
+**Commit style**:
+  `commit-each`   — one commit per completed task (sequential Phase 9 per task)
+  `commit-sprint` — single commit covering all sprint work
+
+Type `next-blocked TASK-NNN` to run a blocked task in full mode now,
+     `commit-each` or `commit-sprint` to proceed to Phase 9, or
+     `done` to run Phase 10 Session Close without committing.
+```
+
+- `next-blocked TASK-NNN` → full-mode Gate 0 → Phase 9 for that task → return to this prompt
+- `commit-each` → run Phase 9 once per completed task in order; separate commit message per task
+- `commit-sprint` → run Phase 9 once; commit message covers all completed sprint tasks
+- `done` → Phase 10 Session Close immediately (work remains uncommitted)
 
 ---
 

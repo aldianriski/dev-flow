@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26 (Sprint 14 archived; Sprint 15 — Adoption + CI hardening)
+last_updated: 2026-04-26 (Sprint 15 archived; Sprint 16 — Skills decomp + P2 cleanup)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 15
+sprint: 16
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -35,35 +35,33 @@ sprint: 15
 
 ## Active Sprint
 
-### Sprint 15 — Adoption + CI hardening (active)
-> **Theme:** Wire up real CI validation (test suite + Node matrix + RED-GREEN-REFACTOR gate), polish the adoption path in README, and implement Sprint Mode context-budget improvements.
-> **Source:** Backlog P1 (TASK-054, 055, 056 from AUDIT.md; TASK-064 from 2026-04-25 session feedback).
+### Sprint 16 — Skills decomp + P2 cleanup (active)
+> **Theme:** Split the oversized dev-flow SKILL.md into reference files, apply the examples/ mirror policy (ADR), and close P2 quickwins (subagent trim + GraphViz flowcharts).
+> **Source:** Backlog P1 (TASK-057, 058 from AUDIT.md); P2 (TASK-061, 062 from AUDIT.md).
 
-- [x] **TASK-054: CI runs full test suite + Node version matrix**
-  - scope: full · layers: ci, scripts · risk: low
+- [ ] **TASK-057: Decide examples/ mirror policy and apply**
+  - scope: full · layers: examples, scripts, ci · risk: medium
   - api-change: no
-  - acceptance: `.github/workflows/validate.yml` runs `node --test` over all `__tests__/`, runs `python -m unittest discover` for `*.test.py`, runs `py_compile` on `evals/measure.py` + `compress.py`, and matrices Node 18/20/22; PR fails when any test fails. `audit-skill-staleness.js` moved to scheduled (weekly) cron job.
-  - tracker: AUDIT.md#AUD-003
+  - acceptance: ADR written in `docs/DECISIONS.md` choosing one of three paths from AUDIT.md AUD-006: (a) delete mirror + minimal post-bootstrap files only, (b) auto-sync via pre-commit, (c) regenerate during CI. Implementation matches the ADR. CI fails if mirror drifts (paths a/c) or hook is missing (path b).
+  - tracker: AUDIT.md#AUD-006
 
-- [x] **TASK-055: Enforce skill-change RED-GREEN-REFACTOR in CI**
-  - scope: full · layers: ci, evals, governance · risk: medium
+- [ ] **TASK-058: Split dev-flow/SKILL.md to skills/dev-flow/references/**
+  - scope: full · layers: skills, evals · risk: medium
   - api-change: no
-  - acceptance: PRs touching any `.claude/skills/**/SKILL.md` require a paired `evals/snapshots/<skill>/<task-id>-after.json` + `compare` output committed under `evals/runs/<task-id>.md`; CI step fails the PR otherwise. Backfill missing before/after snapshots for Sprint 11 dev-flow + dev-flow-compress changes. CONTRIBUTING.md updated with the gate name.
-  - tracker: AUDIT.md#AUD-004
-  - notes: depends on TASK-054 (CI infrastructure)
+  - acceptance: `.claude/skills/dev-flow/SKILL.md` ≤ 120 lines (frontmatter, Mode Dispatch, decision flow, Sub-commands, top-level Phase Checklist, Red Flags only); detail moved to `references/phases.md`, `references/hard-stops.md`, `references/mode-hotfix.md`, `references/mode-resume.md`, `references/mode-sprint.md`. `evals/measure.py compare` shows `terse_isolation_delta` does not regress past +379%.
+  - tracker: AUDIT.md#AUD-007
 
-- [ ] **TASK-056: README primary adoption path uses dev-flow-init.js**
-  - scope: quick · layers: docs · risk: low
+- [ ] **TASK-061: Trim subagent files to thin wrappers**
+  - scope: quick · layers: agents, evals · risk: low
   - api-change: no
-  - acceptance: `README.md` "How to adopt" replaced — primary instruction is `node bin/dev-flow-init.js` (or `npx dev-flow-init` if `package.json bin` works post-clone); manual `cp -r` demoted to fallback. Add a "What gets created" table showing the 8 rendered files. Verify `npx` path actually works from a fresh clone.
-  - tracker: AUDIT.md#AUD-005
+  - acceptance: `code-reviewer.md`, `security-analyst.md`, `migration-analyst.md`, `performance-analyst.md` each ≤ 25 lines (frontmatter, mandate, input contract, "follow `[skill-name]`", output token budget). Re-run baseline eval; expect noticeable `brevity_delta` improvement.
+  - tracker: AUDIT.md#AUD-012
 
-- [ ] **TASK-064: Sprint Mode — add Phase 9c continue/close prompt + context-budget gate; allow blocked tasks to run in same session**
-  - scope: full · layers: skills, docs, governance · risk: low
+- [ ] **TASK-062: Add GraphViz flowcharts to skills with non-obvious decision logic; document exemptions**
+  - scope: quick · layers: skills, docs · risk: low
   - api-change: no
-  - acceptance: `.claude/skills/dev-flow/SKILL.md` Sprint Mode section emits a Phase 9c-style prompt after final-phase Gate 2 (before commit), listing remaining blocked tasks + current context usage estimate; user can type `next-blocked TASK-NNN` to continue into a standalone full-mode run inside the same session, or `commit` to close. Add hard stop: "context >70 % before phase entry → prune phase summary first." Update `docs/blueprint/10-modes.md` Sprint Mode subsection. Add eval snapshot before/after per Skill Change Protocol. Bump blueprint MINOR.
-  - tracker: session feedback 2026-04-25 — user wants ability to keep one Sprint flow open while context healthy and batch fewer commits per sprint
-  - notes: blueprint currently treats `scope:full + risk:high` as blocked → standalone session only. Proposed change keeps the standalone *run* but lets it execute in same conversation when context budget permits. Confirm with user whether (a) one commit per task or (b) one commit per sprint is preferred; today's behavior is (a). Single-commit-per-sprint requires reworking Phase 9 in `08-orchestrator-prompts.md`.
+  - acceptance: `pr-reviewer/SKILL.md` and `lean-doc-generator/SKILL.md` get `dot` flowcharts (Stage 1→2 gating; HOW-filter branches). `refactor-advisor`, `system-design-reviewer`, `release-manager` reviewed and either get flowchart or are noted exempt in `docs/blueprint/05-skills.md` with reason. `security-auditor`, `adr-writer` documented as flowchart-exempt (pure checklist / append-only).
+  - tracker: AUDIT.md#AUD-011
 
 ---
 
@@ -73,16 +71,7 @@ sprint: 15
 
 <!-- AUD-001, AUD-002 promoted to Sprint 14 (TASK-050, TASK-051) -->
 <!-- TASK-054, TASK-055, TASK-056 promoted to Sprint 15 -->
-
-- [ ] **TASK-057: Decide examples/ mirror policy and apply**
-  - scope: full · layers: examples, scripts, ci · risk: medium
-  - acceptance: ADR written in `docs/DECISIONS.md` choosing one of three paths from AUDIT.md AUD-006: (a) delete mirror + minimal post-bootstrap files only, (b) auto-sync via pre-commit, (c) regenerate during CI. Implementation matches the ADR. CI fails if mirror drifts (paths a/c) or hook is missing (path b).
-  - tracker: AUDIT.md#AUD-006
-
-- [ ] **TASK-058: Split dev-flow/SKILL.md to skills/dev-flow/references/**
-  - scope: full · layers: skills, evals · risk: medium
-  - acceptance: `.claude/skills/dev-flow/SKILL.md` ≤ 120 lines (frontmatter, Mode Dispatch, decision flow, Sub-commands, top-level Phase Checklist, Red Flags only); detail moved to `references/phases.md`, `references/hard-stops.md`, `references/mode-hotfix.md`, `references/mode-resume.md`, `references/mode-sprint.md`. `evals/measure.py compare` shows `terse_isolation_delta` does not regress past +379%.
-  - tracker: AUDIT.md#AUD-007
+<!-- TASK-057, TASK-058 promoted to Sprint 16 -->
 
 - [ ] **TASK-059: Split blueprint mega-files (10-modes, 06-harness, 08-orchestrator)**
   - scope: full · layers: docs, scripts · risk: medium
@@ -100,15 +89,7 @@ sprint: 15
 
 ### P2 — Audit Pass 1 polish
 
-- [ ] **TASK-061: Trim subagent files to thin wrappers**
-  - scope: quick · layers: agents, evals · risk: low
-  - acceptance: `code-reviewer.md`, `security-analyst.md`, `migration-analyst.md`, `performance-analyst.md` each ≤ 25 lines (frontmatter, mandate, input contract, "follow `[skill-name]`", output token budget). Re-run baseline eval; expect noticeable `brevity_delta` improvement.
-  - tracker: AUDIT.md#AUD-012
-
-- [ ] **TASK-062: Add GraphViz flowcharts to skills with non-obvious decision logic; document exemptions**
-  - scope: quick · layers: skills, docs · risk: low
-  - acceptance: `pr-reviewer/SKILL.md` and `lean-doc-generator/SKILL.md` get `dot` flowcharts (Stage 1→2 gating; HOW-filter branches). `refactor-advisor`, `system-design-reviewer`, `release-manager` reviewed and either get flowchart or are noted exempt in `docs/blueprint/05-skills.md` with reason. `security-auditor`, `adr-writer` documented as flowchart-exempt (pure checklist / append-only).
-  - tracker: AUDIT.md#AUD-011
+<!-- TASK-061, TASK-062 promoted to Sprint 16 -->
 
 - [ ] **TASK-063: Archive IMPROVEMENT_LOG.md; escalate empty-sprint signal**
   - scope: quick · layers: docs, governance, scripts · risk: low
@@ -140,22 +121,12 @@ sprint: 15
 > Sprints are moved here from Active Sprint once complete, then archived to `docs/CHANGELOG.md`. This section holds only the current in-progress sprint's running log.
 
 > Sprint 0–7 blocks archived → `docs/CHANGELOG.md`.
-> Sprint 14 archived → `docs/CHANGELOG.md` (2026-04-26).
+> Sprint 14–15 archived → `docs/CHANGELOG.md` (2026-04-26).
 
-### Sprint 15 — In Progress
+### Sprint 16 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `.github/workflows/validate.yml` | TASK-054: Add Node 18/20/22 matrix, `node --test` suite, `py_compile` syntax check, direct Python test execution; `permissions: read-all`; SHA-pinned actions; `fail-fast: false` | none |
-| `.github/workflows/scheduled.yml` | TASK-054: New — weekly cron (Mon 08:00 UTC) for `audit-skill-staleness.js`; `workflow_dispatch` trigger; SHA-pinned actions | none |
-| `.claude/scripts/check-eval-gate.js` | TASK-055: New — CI gate script; per-skill task-id matching for after-snapshot + run file; CHANGED_FILES env override for tests | none |
-| `.claude/scripts/__tests__/check-eval-gate.test.js` | TASK-055: New — 9 unit tests including regression case for shared-runsPattern bug | none |
-| `.github/workflows/validate.yml` | TASK-055: Add PR-only eval gate step + fetch-depth: 0 on checkout | none |
-| `evals/snapshots/dev-flow/TASK-044-after.json` | TASK-055: Sprint 11 backfill — post-Sprint-11 state; backfill:true flag | none |
-| `evals/snapshots/dev-flow-compress/TASK-036-after.json` | TASK-055: Sprint 11 backfill — new skill, no before; backfill:true flag | none |
-| `evals/runs/TASK-044.md` | TASK-055: Sprint 11 run record (narrative backfill) | none |
-| `evals/runs/TASK-036.md` | TASK-055: Sprint 11 run record for new skill (narrative backfill) | none |
-| `CONTRIBUTING.md` | TASK-055: Add Eval gate section — 3 required files, new-skill exception, gate script path | none |
 
 ---
 
@@ -224,7 +195,8 @@ Sprint 11  → Sprint mode + context compression      (done — TASK-044, 036)
 Sprint 12  → TDD framework + init script + worked example      (done — TASK-026, 028, 030)
 Sprint 13  → Governance + automation                           (done — TASK-031, 034)
 Sprint 14  → Audit Pass 1: P0 fixes + drift cleanup             (done — TASK-050..053)
-Sprint 15+ → Adoption + CI hardening                           (active)
+Sprint 15  → Adoption + CI hardening                           (done — TASK-054..056, 064)
+Sprint 16+ → Skills decomp + P2 cleanup                        (active)
 ```
 
 > Sprint cadence is not fixed. Each sprint completes when its acceptance criteria are met

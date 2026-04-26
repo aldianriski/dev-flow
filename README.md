@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-24
+last_updated: 2026-04-26
 update_trigger: New mode, agent, or skill added; adoption workflow changes
 status: current
 ---
@@ -20,27 +20,26 @@ A starter repository that you copy into any project to get:
 - **Skill library** — 10 project-local, git-tracked skills
 - **Harness scripts** — session bootstrap, read-guard, change tracker, CI poller
 
-## What it is not
-
-A Claude Code plugin or marketplace entry. Adoption is via `git clone` + manual copy (v1).
-Multi-platform distribution (`.codex/`, `.cursor-plugin/`, `AGENTS.md`) is planned for v2.
-
 ## How to adopt
 
 ```bash
 git clone https://github.com/aldian/dev-flow
-cp -r dev-flow/.claude your-project/
-cp dev-flow/templates/CLAUDE.md.template your-project/.claude/CLAUDE.md
-cp dev-flow/templates/TODO.md.template your-project/TODO.md
-cp your-project/.claude/settings.local.example.json your-project/.claude/settings.local.json
-# Edit .claude/CLAUDE.md for your stack, then run /dev-flow init [project-name]
+node dev-flow/bin/dev-flow-init.js
 ```
 
-Full setup checklist: [`docs/blueprint/09-customization.md`](docs/blueprint/09-customization.md) §12.
+Prompts: target dir · project name · owner role · stack (`node-express` · `react-next` · `python-fastapi` · `go-gin` · `custom`). Also copies `.claude/` + `docs/blueprint/` into your project.
 
-## Blueprint structure
-
-[`docs/blueprint/`](docs/blueprint/) — 10 files covering philosophy, phases, subagents, skills, harness, and modes.
+| File | Description |
+|:-----|:------------|
+| `.claude/CLAUDE.md` | AI context — fill `[CUSTOMIZE]` blocks |
+| `TODO.md` | Dev tracker — sprint, backlog, changelog |
+| `docs/CHANGELOG.md` | Sprint archive |
+| `docs/ARCHITECTURE.md` | Architecture map |
+| `docs/DECISIONS.md` | Decision log |
+| `docs/AI_CONTEXT.md` | Extended AI context |
+| `docs/SETUP.md` | Setup guide |
+| `README.md` | Project README template |
+Fallback (`cp -r`): [`docs/blueprint/09-customization.md`](docs/blueprint/09-customization.md) §12.
 
 ## License
 
