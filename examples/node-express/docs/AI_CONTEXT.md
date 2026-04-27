@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-25
+last_updated: 2026-04-27
 update_trigger: Stack changes, new domain concept introduced, or glossary updated
 status: current
 ---

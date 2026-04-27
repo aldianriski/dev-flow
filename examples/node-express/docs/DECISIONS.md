@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-25
+last_updated: 2026-04-27
 update_trigger: New architectural decision made
 status: current
 ---
@@ -13,7 +13,7 @@ status: current
 
 ## ADR-001: [Decision Title] [CUSTOMIZE]
 
-- **Date**: 2026-04-25
+- **Date**: 2026-04-27
 - **Status**: Accepted
 - **Context**: [What situation forced this decision? What constraints existed?]
 - **Decision**: [What was decided? One clear statement.]

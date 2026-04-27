@@ -1,0 +1,32 @@
+{
+  "name": "dev-flow",
+  "description": "Gate-driven AI workflow system for any software project. Built on Claude Code.",
+  "version": "1.8.0",
+  "author": {
+    "name": "Aldian Rizki",
+    "email": "m.aldian@paxel.co"
+  },
+  "license": "MIT",
+  "skills": [
+    "adr-writer",
+    "dev-flow",
+    "dev-flow-compress",
+    "lean-doc-generator",
+    "pr-reviewer",
+    "refactor-advisor",
+    "release-manager",
+    "security-auditor",
+    "system-design-reviewer",
+    "task-decomposer"
+  ],
+  "agents": [
+    "code-reviewer",
+    "design-analyst",
+    "init-analyst",
+    "migration-analyst",
+    "performance-analyst",
+    "scope-analyst",
+    "security-analyst"
+  ],
+  "hooks": "hooks/hooks.json"
+}

@@ -1,0 +1,66 @@
+{
+  "_instructions": [
+    "This file is the canonical template for .claude/settings.local.json (gitignored — per machine).",
+    "If you ran 'node bin/dev-flow-init.js', settings.local.json was rendered for your stack — edit that file, not this one.",
+    "If you copied dev-flow manually: cp settings.local.example.json settings.local.json, then replace [your-lint-command], [your-typecheck-command], [package-manager] with real commands for your stack.",
+    "Do NOT commit settings.local.json — it contains machine-specific allow-lists and lint/typecheck commands."
+  ],
+  "permissions": {
+    "allow": [
+      "Bash([package-manager] *)",
+      "Bash(git add *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git branch *)",
+      "Bash(git stash *)",
+      "Bash(git -C *)",
+      "Bash(cp*)",
+      "Bash(mkdir*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[your-lint-command]",
+            "description": "Lint check before commit — customize per stack (see docs/blueprint/06-harness.md)"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git -C * commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[your-lint-command]",
+            "description": "Lint check before commit via git -C <path> — mirrors Bash(git commit*) for worktree/subdir invocations"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git push*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[your-typecheck-command]",
+            "description": "Type check before push — customize per stack (see docs/blueprint/06-harness.md)"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git -C * push*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[your-typecheck-command]",
+            "description": "Type check before push via git -C <path> — mirrors Bash(git push*) for worktree/subdir invocations"
+          }
+        ]
+      }
+    ]
+  }
+}

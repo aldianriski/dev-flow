@@ -15,6 +15,8 @@ app.get('/', (_req, res) => {
   res.json({ message: 'node-express-example running' });
 });
 
+app.use(require('./middleware/error-handler'));
+
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log('Listening on port ' + PORT);

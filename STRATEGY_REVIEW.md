@@ -122,6 +122,8 @@ Today: (c) does both, partially. Worst path. Pick (a) or (b) and commit.
 ### R-10. Dogfood loudly or kill
 14 sprints on the workflow, no real product built with it. Pick a real side project, build it end-to-end with dev-flow, document friction in PR notes. If dev-flow accelerates → ship plugin to marketplace, watch external adopters file issues. If dev-flow slows you down → fix or kill the offending part. Right now dev-flow is Schrödinger's product — visible and unvalidated.
 
+**Outcome (2026-04-27):** TASK-001 (global error-handler middleware) completed end-to-end through all 10 dev-flow phases in `examples/node-express/`. Mode: full. No hard stops fired. Session notes: `docs/research/dogfood-session-notes.md`. Friction log: `docs/research/dogfood-friction-log.md`. **Result: validated** — dev-flow accelerated the task; all gates fired correctly; no false positives from review or security agents. Medium-priority friction found in Phase 4 (no lint config in example), Phase 3 (set-phase.js path resolution in subdirectory project), and Phase 8 (no fast-exit for no-doc-change tasks). Four follow-up tasks logged in friction log. EPIC-C closed.
+
 ---
 
 ## Bottom line

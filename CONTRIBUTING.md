@@ -1,7 +1,7 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26
-update_trigger: Blueprint version bump protocol changes; new contribution category added
+last_updated: 2026-04-27
+update_trigger: Blueprint version bump protocol changes; new contribution category added; breaking-change policy added
 status: current
 ---
 
@@ -27,6 +27,16 @@ Every version bump requires a `docs/CHANGELOG.md` entry with the bump rationale.
 4. Run `scripts/validate-blueprint.js` (Sprint 4) — every skill referenced in the phase binding matrix must exist in `.claude/skills/`, every agent in `.claude/agents/`.
 5. Submit a PR. Changes that alter agent behavior require eval evidence (RED-GREEN-REFACTOR — see `docs/blueprint/05-skills.md §Skill Change Protocol`).
 6. Update `docs/CHANGELOG.md` with the bump before merge.
+
+## Breaking change policy
+
+A **breaking change** is any MAJOR version bump: phase model, gate model, or hook contract change.
+
+- **MAJOR**: requires an ADR documenting what changed and the migration path for adopters. `plugin.json` version must bump in the same PR.
+- **MINOR**: `plugin.json` version bump + `docs/CHANGELOG.md` entry required in the same PR.
+- **PATCH**: `docs/CHANGELOG.md` entry sufficient; `plugin.json` bump optional if behavior is unchanged.
+
+Canonical adopter pin: `plugin.json` `version` field — see [ADR-006](docs/DECISIONS.md#adr-006). Non-negotiable contracts that cannot change without MAJOR + ADR are listed in "What NOT to change" below.
 
 ## Skill changes
 
@@ -55,6 +65,12 @@ The following are **non-negotiable** and cannot be relaxed without a MAJOR versi
 - The Thin-Coordinator Rule (§1 — orchestrator never Reads source files in compact-vulnerable phases)
 
 Rationale: [`context/workflow/DESIGN_PHILOSOPHY.md`](context/workflow/DESIGN_PHILOSOPHY.md).
+
+## Feedback (until v2)
+
+Friction reports are the primary feedback channel while dev-flow is in internal v1 rollout. File a friction report before opening a GitHub issue. See [`docs/SUPPORT.md`](docs/SUPPORT.md) for the template and filing rules.
+
+GitHub issues are for confirmed bugs only (reproduction steps verified). Feature requests go in `STRATEGY_REVIEW.md` as new R-N entries.
 
 ## Quarterly maintenance
 
