@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-27 (Sprint 21 archived; Sprint 22 active)
+last_updated: 2026-04-27 (Sprint 22 archived; Sprint 23 active)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 22
+sprint: 23
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -34,29 +34,29 @@ sprint: 22
 
 ## Active Sprint
 
-### Sprint 22 — Team validation (carried) + Pass 2 fixes (planned)
-> **Theme:** Complete v1 proof-of-usage gate (TASK-091 human-blocked, carried from Sprint 21) + fix Pass 2 script/docs findings.
-> **Note:** TASK-091 cannot be AI-executed. Tech Lead must initiate with 3+ teammates. TASK-098 + TASK-099 are AI-executable and can run in parallel with TASK-091.
+### Sprint 23 — Design thinking quality + team validation (carried)
+> **Theme:** TASK-100 AI-executable (Phase 0-2 thinking improvements). TASK-091 human-blocked (carried). TASK-092 deferred to Sprint 24 (blocked by TASK-091).
+> **Note:** TASK-091 cannot be AI-executed. Tech Lead must initiate with 3+ teammates.
 
-- [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction** *Do it in Backgroud, human confirm*
+- [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction** *Do it in Background, human confirm*
   - scope: full · layers: governance, examples, docs · risk: medium
   - api-change: no
   - acceptance: 3+ team members run `/dev-flow` on one real task. Per-person friction in `docs/research/team-rollout-friction-<user>.md`. Aggregated `docs/research/team-rollout-summary.md`: time-to-first-commit, top friction per phase, helped vs unhelped count. README updated if friction reveals gaps.
   - tracker: READINESS.md (v1 / Proof of usage)
   - depends-on: TASK-069, TASK-077
 
-- [x] **TASK-098: Fix HOW violations in 6 SKILL.md files**
-  - scope: full · layers: skills, evals · risk: medium
-  - api-change: no
-  - acceptance: `lean-doc-generator`, `adr-writer`, `release-manager`, `task-decomposer`, `dev-flow-compress`, `system-design-reviewer` SKILL.md files have no "Steps" / procedural HOW sections. Step logic moved to `references/<name>.md` sub-files (not deleted). `evals/measure.py compare` run for each changed skill; no `terse_isolation_delta` regression. Verified: `grep -rn "^## Steps" .claude/skills/` returns no matches.
-  - tracker: AUDIT_PASS2.md (AUD-P2-001)
-  - depends-on: none
-
-- [x] **TASK-099: Fix INDEX_FILE_RE + sync 10f validation rules + 10f line cap**
-  - scope: quick · layers: scripts, docs · risk: low
-  - api-change: no
-  - acceptance: (1) `validate-blueprint.js` INDEX_FILE_RE replaced with explicit allowlist `Set(['10-modes.md', '06-harness.md'])`; `05-skills.md` (290 lines) now emits a cap warning. (2) Missing 9th validation rule from `decomposition-spec.md:104` appended to `10f-task-decomposer.md` Validation Rules block. (3) §23 Sprint Mode (10f lines ~209-294) extracted to new `docs/blueprint/10g-sprint-mode.md`; `10-modes.md` index updated; `wc -l 10f-task-decomposer.md` ≤ 250. All existing validate-blueprint tests pass.
-  - tracker: AUDIT_PASS2.md (AUD-P2-002, AUD-P2-003, AUD-P2-004)
+- [ ] **TASK-100: Phase 0–2 thinking quality — Task Brief + batch clarify + expert persona + adversarial challenge**
+  - scope: full · layers: skills, docs · risk: medium
+  - api-change: yes — phases.md Phase 0/1/2 and Gate 1 updated; SKILL.md Phase Checklist updated
+  - acceptance:
+    1. **Task Brief (Phase 0 end)**: after parsing TODO.md, AI emits a compact brief before any question — task restated in own words, files expected to change, key risk, what "done" looks like. Max 8 lines. No question yet.
+    2. **Batch clarification (Phase 1)**: AI surfaces ALL open questions in one message (not one at a time). User answers in one reply. `phases.md` Phase 1 updated; "one question at a time" rule replaced with "one batch of all open questions."
+    3. **Expert persona (Phase 2 entry)**: AI declares relevant expert role based on task `layers:` field before producing design. Example: `layers: scripts, ci` → "Reasoning as a senior build-systems engineer." Declaration is one line; shapes the design framing.
+    4. **Adversarial challenge (Gate 1 pre-output)**: before presenting design plan for approval, AI runs a self-challenge: "What could go wrong?", "What is the riskiest assumption?", "What did I not consider?" — max 3 bullets. Addressed inline or flagged as open.
+    5. **Iteration loop (Phase 1 close)**: after user answers the batch clarification, AI summarises what it now understands and double check no answer need clarify again, if still exist ask again. then if already done all, proceed to next Gate. Prevents premature lock-in on a half-understood scope.
+    6. Eval evidence: `evals/measure.py compare` on `dev-flow` skill before/after; `terse_isolation_delta` must not regress past baseline.
+    7. DECISIONS.md entry: document Phase 1 batch-clarify + iteration loop as a workflow contract change (MINOR semver trigger — user-visible behavior).
+  - tracker: user friction note 2026-04-27
   - depends-on: none
 
 ---
@@ -217,25 +217,13 @@ sprint: 22
 
 ### P1 — Design thinking quality (user friction → workflow improvement)
 
-- [ ] **TASK-100: Phase 0–2 thinking quality — Task Brief + batch clarify + expert persona + adversarial challenge**
-  - scope: full · layers: skills, docs · risk: medium
-  - api-change: yes — phases.md Phase 0/1/2 and Gate 1 updated; SKILL.md Phase Checklist updated
-  - acceptance:
-    1. **Task Brief (Phase 0 end)**: after parsing TODO.md, AI emits a compact brief before any question — task restated in own words, files expected to change, key risk, what "done" looks like. Max 8 lines. No question yet.
-    2. **Batch clarification (Phase 1)**: AI surfaces ALL open questions in one message (not one at a time). User answers in one reply. `phases.md` Phase 1 updated; "one question at a time" rule replaced with "one batch of all open questions."
-    3. **Expert persona (Phase 2 entry)**: AI declares relevant expert role based on task `layers:` field before producing design. Example: `layers: scripts, ci` → "Reasoning as a senior build-systems engineer." Declaration is one line; shapes the design framing.
-    4. **Adversarial challenge (Gate 1 pre-output)**: before presenting design plan for approval, AI runs a self-challenge: "What could go wrong?", "What is the riskiest assumption?", "What did I not consider?" — max 3 bullets. Addressed inline or flagged as open.
-    5. **Iteration loop (Phase 1 close)**: after user answers the batch clarification, AI summarises what it now understands and double check no answer need clarify again, if still exist ask again. then if already done all, proceed to next Gate. Prevents premature lock-in on a half-understood scope.
-    6. Eval evidence: `evals/measure.py compare` on `dev-flow` skill before/after; `terse_isolation_delta` must not regress past baseline.
-    7. DECISIONS.md entry: document Phase 1 batch-clarify + iteration loop as a workflow contract change (MINOR semver trigger — user-visible behavior).
-  - tracker: user friction note 2026-04-27
-  - depends-on: none
+<!-- TASK-100 promoted to Sprint 23 -->
 
 ### P1 — Internal rollout readiness continued
 
-> Sequenced: Sprint 22 = TASK-091 (carried) + TASK-098 + TASK-099 (active); Sprint 23 = TASK-092 (closes v1).
+> Sequenced: Sprint 23 = TASK-091 (carried) + TASK-100 (active); Sprint 24 = TASK-092 (closes v1, blocked by TASK-091).
 
-- [ ] ~~TASK-091~~ promoted to Sprint 22
+- [ ] ~~TASK-091~~ promoted to Sprint 23
 - [x] ~~TASK-096~~ closed Sprint 21
 
 - [ ] **TASK-092: Onboarding budget — fresh teammate ≤30 min to first commit**
@@ -261,18 +249,13 @@ sprint: 22
 ## Changelog
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
-> Sprints 0–7, 14–21 archived → `docs/CHANGELOG.md`.
+> Sprints 0–7, 14–22 archived → `docs/CHANGELOG.md`.
 
-### Sprint 22 — In Progress
+### Sprint 23 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `.claude/skills/{adr-writer,release-manager,dev-flow-compress,lean-doc-generator,task-decomposer,system-design-reviewer}/SKILL.md` | Removed procedural HOW sections | AUD-P2-001 |
-| `.claude/skills/{adr-writer,release-manager,dev-flow-compress,lean-doc-generator,task-decomposer,system-design-reviewer}/references/procedure.md` | Created — step logic moved here from SKILL.md | AUD-P2-001 |
-| `.claude/scripts/validate-blueprint.js` | INDEX_FILE_RE → explicit allowlist Set; 05-skills.md now emits cap warning | AUD-P2-003 |
-| `docs/blueprint/10f-task-decomposer.md` | Added 9th validation rule; §23 Sprint Mode extracted; 294→206 lines | AUD-P2-002, AUD-P2-004 |
-| `docs/blueprint/10g-sprint-mode.md` | Created — §23 Sprint Mode extracted from 10f | AUD-P2-004 |
-| `docs/blueprint/10-modes.md` | Added 10g-sprint-mode.md row to index | AUD-P2-004 |
+| _(no entries yet)_ | — | — |
 
 ---
 
@@ -336,7 +319,8 @@ Sprint 18 →  Plugin foundation + support docs        (done — TASK-065, 066, 
 Sprint 19 →  Path rewrite + default-mode + ADR + dogfood  (done — TASK-067, 093, 094, 075)
 Sprint 20 →  E2E smoke + dogfood E2E + friction + MVP mode  (done — TASK-069, 076, 077, 097)
 Sprint 21 →  Audit Pass 2 + re-verification           (done — TASK-096; TASK-091 carried)
-Sprint 22 →  Team validation (carried) + Pass 2 fixes (active — TASK-091, 098, 099)
-Sprint 23 →  Onboarding budget + start v2            (planned — TASK-092 + EPIC-B/D/E begins)
+Sprint 22 →  Team validation (carried) + Pass 2 fixes (done — TASK-098, 099; TASK-091 carried)
+Sprint 23 →  Design thinking quality + team validation (active — TASK-100, TASK-091 carried)
+Sprint 24 →  Onboarding budget + start v2            (planned — TASK-092 + EPIC-B/D/E begins)
 v2 work  →  EPIC-B (gates) + EPIC-D (state/telemetry) + EPIC-E (wrap-or-replace)
 ```

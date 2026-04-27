@@ -16,6 +16,23 @@ status: current
 
 ---
 
+## Sprint 22 — Pass 2 fixes: HOW violations + blueprint correctness (2026-04-27)
+
+**Blueprint version:** PATCH — HOW content moved to references, script fix, §23 extraction; no phase/gate/mode changes.
+**Note:** TASK-091 (team validation) remains open — human-blocked. Carried to Sprint 23.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `6× skills/*/SKILL.md` | TASK-098: procedural HOW sections removed; pointer to `references/procedure.md` added | AUD-P2-001 |
+| `6× skills/*/references/procedure.md` | TASK-098: new — step logic moved from SKILL.md (not deleted) | AUD-P2-001 |
+| `.claude/scripts/validate-blueprint.js` | TASK-099: INDEX_FILE_RE → explicit `Set(['10-modes.md', '06-harness.md'])`; `05-skills.md` now emits cap warning | AUD-P2-003 |
+| `docs/blueprint/10f-task-decomposer.md` | TASK-099: 9th validation rule added; §23 Sprint Mode extracted; 294 → 206 lines | AUD-P2-002, AUD-P2-004 |
+| `docs/blueprint/10g-sprint-mode.md` | TASK-099: new — §23 Sprint Mode content | AUD-P2-004 |
+| `docs/blueprint/10-modes.md` | TASK-099: added `10g-sprint-mode.md` index row | AUD-P2-004 |
+| `TODO.md` | Sprint 22 closed; Sprint 23 started (TASK-091 carried + TASK-100 promoted) | — |
+
+---
+
 ## Sprint 21 — Audit Pass 2 + Pass 1 re-verification (2026-04-27)
 
 **Blueprint version:** PATCH — docs only; no phase/gate/mode changes.
