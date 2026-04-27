@@ -215,6 +215,22 @@ sprint: 22
   - tracker: STRATEGY_REVIEW.md#R-9 / EPIC-E
   - depends-on: TASK-087, TASK-088, TASK-089
 
+### P1 — Design thinking quality (user friction → workflow improvement)
+
+- [ ] **TASK-100: Phase 0–2 thinking quality — Task Brief + batch clarify + expert persona + adversarial challenge**
+  - scope: full · layers: skills, docs · risk: medium
+  - api-change: yes — phases.md Phase 0/1/2 and Gate 1 updated; SKILL.md Phase Checklist updated
+  - acceptance:
+    1. **Task Brief (Phase 0 end)**: after parsing TODO.md, AI emits a compact brief before any question — task restated in own words, files expected to change, key risk, what "done" looks like. Max 8 lines. No question yet.
+    2. **Batch clarification (Phase 1)**: AI surfaces ALL open questions in one message (not one at a time). User answers in one reply. `phases.md` Phase 1 updated; "one question at a time" rule replaced with "one batch of all open questions."
+    3. **Expert persona (Phase 2 entry)**: AI declares relevant expert role based on task `layers:` field before producing design. Example: `layers: scripts, ci` → "Reasoning as a senior build-systems engineer." Declaration is one line; shapes the design framing.
+    4. **Adversarial challenge (Gate 1 pre-output)**: before presenting design plan for approval, AI runs a self-challenge: "What could go wrong?", "What is the riskiest assumption?", "What did I not consider?" — max 3 bullets. Addressed inline or flagged as open.
+    5. **Iteration loop (Phase 1 close)**: after user answers the batch clarification, AI summarises what it now understands and asks exactly one question: "Anything to refine or explore deeper before we design?" If user engages, AI runs another clarification pass (max 2 loops total). If user says no / types `design`, proceed to Gate 0. Prevents premature lock-in on a half-understood scope.
+    6. Eval evidence: `evals/measure.py compare` on `dev-flow` skill before/after; `terse_isolation_delta` must not regress past baseline.
+    7. DECISIONS.md entry: document Phase 1 batch-clarify + iteration loop as a workflow contract change (MINOR semver trigger — user-visible behavior).
+  - tracker: user friction note 2026-04-27
+  - depends-on: none
+
 ### P1 — Internal rollout readiness continued
 
 > Sequenced: Sprint 22 = TASK-091 (carried) + TASK-098 + TASK-099 (active); Sprint 23 = TASK-092 (closes v1).
