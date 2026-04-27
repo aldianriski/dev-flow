@@ -233,6 +233,21 @@ sprint: 23
 <!-- TASK-100 promoted to Sprint 23 -->
 <!-- TASK-101 promoted to Sprint 23 -->
 
+- [ ] **TASK-102: Plugin release — marketplace.json + root-level skill/agent/hook paths**
+  - scope: full · layers: governance, scripts, templates · risk: medium
+  - api-change: yes — plugin install path changes; README updated
+  - acceptance:
+    1. `.claude-plugin/marketplace.json` created — lists dev-flow plugin with git source pointing to repo root. Format: schema version 1.0, plugins array with name, description, version, source.type=git, source.url, source.path.
+    2. `skills/` at repo root — all 10 skill dirs mirrored from `.claude/skills/`. Canonical source stays `.claude/skills/`; root `skills/` serves plugin consumers.
+    3. `agents/` at repo root — all 7 agent `.md` files mirrored from `.claude/agents/`.
+    4. `hooks/` at repo root — contains `hooks.json` from `.claude/hooks/` or extracted from settings hooks block.
+    5. `plugin.json` version bumped to 1.9.0.
+    6. `validate-scaffold.js` gains check: `skills/` + `agents/` + `hooks/` present at repo root.
+    7. README adoption section updated: replace broken plugin install with working two-step (`/plugin marketplace add aldian/dev-flow` → `/plugin install dev-flow@aldian/dev-flow`).
+    8. Local smoke test: `claude --plugin-dir .` loads skills without error.
+  - tracker: user adoption friction 2026-04-27
+  - depends-on: TASK-100, TASK-101
+
 ### P1 — Internal rollout readiness continued
 
 > Sequenced: Sprint 23 = TASK-091 (carried) + TASK-100 (active); Sprint 24 = TASK-092 (closes v1, blocked by TASK-091).
