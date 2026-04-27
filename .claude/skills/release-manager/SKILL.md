@@ -32,15 +32,7 @@ Pre-release suffixes: `-alpha.N`, `-beta.N`, `-rc.N`
 /release-manager --from-sprint   # Detect bump from Active Sprint task types
 ```
 
-## Steps
-
-1. **Read current version** from `package.json`, `pyproject.toml`, `go.mod`, or `VERSION` file.
-   If no version file found → ask user to specify before proceeding.
-2. **Classify changes** from `git log` since last tag — label each commit MAJOR / MINOR / PATCH.
-3. **Confirm bump** with user before writing anything.
-4. **Generate CHANGELOG entry** (format below).
-5. **Update version file** (e.g., `"version"` in `package.json`).
-6. **Propose tag command** — do not run it: `git tag -a v[version] -m "Release v[version]"`
+Execution procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 
 ## CHANGELOG Entry Format
 

@@ -38,21 +38,21 @@ sprint: 22
 > **Theme:** Complete v1 proof-of-usage gate (TASK-091 human-blocked, carried from Sprint 21) + fix Pass 2 script/docs findings.
 > **Note:** TASK-091 cannot be AI-executed. Tech Lead must initiate with 3+ teammates. TASK-098 + TASK-099 are AI-executable and can run in parallel with TASK-091.
 
-- [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction**
+- [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction** *Do it in Backgroud, human confirm*
   - scope: full · layers: governance, examples, docs · risk: medium
   - api-change: no
   - acceptance: 3+ team members run `/dev-flow` on one real task. Per-person friction in `docs/research/team-rollout-friction-<user>.md`. Aggregated `docs/research/team-rollout-summary.md`: time-to-first-commit, top friction per phase, helped vs unhelped count. README updated if friction reveals gaps.
   - tracker: READINESS.md (v1 / Proof of usage)
   - depends-on: TASK-069, TASK-077
 
-- [ ] **TASK-098: Fix HOW violations in 6 SKILL.md files**
+- [x] **TASK-098: Fix HOW violations in 6 SKILL.md files**
   - scope: full · layers: skills, evals · risk: medium
   - api-change: no
   - acceptance: `lean-doc-generator`, `adr-writer`, `release-manager`, `task-decomposer`, `dev-flow-compress`, `system-design-reviewer` SKILL.md files have no "Steps" / procedural HOW sections. Step logic moved to `references/<name>.md` sub-files (not deleted). `evals/measure.py compare` run for each changed skill; no `terse_isolation_delta` regression. Verified: `grep -rn "^## Steps" .claude/skills/` returns no matches.
   - tracker: AUDIT_PASS2.md (AUD-P2-001)
   - depends-on: none
 
-- [ ] **TASK-099: Fix INDEX_FILE_RE + sync 10f validation rules + 10f line cap**
+- [x] **TASK-099: Fix INDEX_FILE_RE + sync 10f validation rules + 10f line cap**
   - scope: quick · layers: scripts, docs · risk: low
   - api-change: no
   - acceptance: (1) `validate-blueprint.js` INDEX_FILE_RE replaced with explicit allowlist `Set(['10-modes.md', '06-harness.md'])`; `05-skills.md` (290 lines) now emits a cap warning. (2) Missing 9th validation rule from `decomposition-spec.md:104` appended to `10f-task-decomposer.md` Validation Rules block. (3) §23 Sprint Mode (10f lines ~209-294) extracted to new `docs/blueprint/10g-sprint-mode.md`; `10-modes.md` index updated; `wc -l 10f-task-decomposer.md` ≤ 250. All existing validate-blueprint tests pass.
@@ -225,7 +225,7 @@ sprint: 22
     2. **Batch clarification (Phase 1)**: AI surfaces ALL open questions in one message (not one at a time). User answers in one reply. `phases.md` Phase 1 updated; "one question at a time" rule replaced with "one batch of all open questions."
     3. **Expert persona (Phase 2 entry)**: AI declares relevant expert role based on task `layers:` field before producing design. Example: `layers: scripts, ci` → "Reasoning as a senior build-systems engineer." Declaration is one line; shapes the design framing.
     4. **Adversarial challenge (Gate 1 pre-output)**: before presenting design plan for approval, AI runs a self-challenge: "What could go wrong?", "What is the riskiest assumption?", "What did I not consider?" — max 3 bullets. Addressed inline or flagged as open.
-    5. **Iteration loop (Phase 1 close)**: after user answers the batch clarification, AI summarises what it now understands and asks exactly one question: "Anything to refine or explore deeper before we design?" If user engages, AI runs another clarification pass (max 2 loops total). If user says no / types `design`, proceed to Gate 0. Prevents premature lock-in on a half-understood scope.
+    5. **Iteration loop (Phase 1 close)**: after user answers the batch clarification, AI summarises what it now understands and double check no answer need clarify again, if still exist ask again. then if already done all, proceed to next Gate. Prevents premature lock-in on a half-understood scope.
     6. Eval evidence: `evals/measure.py compare` on `dev-flow` skill before/after; `terse_isolation_delta` must not regress past baseline.
     7. DECISIONS.md entry: document Phase 1 batch-clarify + iteration loop as a workflow contract change (MINOR semver trigger — user-visible behavior).
   - tracker: user friction note 2026-04-27
@@ -267,7 +267,12 @@ sprint: 22
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| _(no entries yet)_ | — | — |
+| `.claude/skills/{adr-writer,release-manager,dev-flow-compress,lean-doc-generator,task-decomposer,system-design-reviewer}/SKILL.md` | Removed procedural HOW sections | AUD-P2-001 |
+| `.claude/skills/{adr-writer,release-manager,dev-flow-compress,lean-doc-generator,task-decomposer,system-design-reviewer}/references/procedure.md` | Created — step logic moved here from SKILL.md | AUD-P2-001 |
+| `.claude/scripts/validate-blueprint.js` | INDEX_FILE_RE → explicit allowlist Set; 05-skills.md now emits cap warning | AUD-P2-003 |
+| `docs/blueprint/10f-task-decomposer.md` | Added 9th validation rule; §23 Sprint Mode extracted; 294→206 lines | AUD-P2-002, AUD-P2-004 |
+| `docs/blueprint/10g-sprint-mode.md` | Created — §23 Sprint Mode extracted from 10f | AUD-P2-004 |
+| `docs/blueprint/10-modes.md` | Added 10g-sprint-mode.md row to index | AUD-P2-004 |
 
 ---
 

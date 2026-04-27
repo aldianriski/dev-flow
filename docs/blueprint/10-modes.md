@@ -16,4 +16,5 @@ Index of mode reference files. Full detail in each sub-file.
 | [10c-resume.md](10c-resume.md) | §18 — Session Resume Protocol |
 | [10d-migration-performance.md](10d-migration-performance.md) | §19 — Migration Safety · §20 — Performance Gate |
 | [10e-hotfix.md](10e-hotfix.md) | §21 — Hardened Hotfix Mode |
-| [10f-task-decomposer.md](10f-task-decomposer.md) | §22 — Task Decomposer · §23 — Sprint Mode |
+| [10f-task-decomposer.md](10f-task-decomposer.md) | §22 — Task Decomposer |
+| [10g-sprint-mode.md](10g-sprint-mode.md) | §23 — Sprint Mode |

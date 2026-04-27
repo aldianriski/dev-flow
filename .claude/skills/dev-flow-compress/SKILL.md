@@ -21,12 +21,7 @@ Compress a Markdown file in-place to caveman-style prose. Creates `<stem>.origin
 
 `<target-file>` — path to `.md` file to compress (e.g. `.claude/CLAUDE.md`, `memory/user_role.md`).
 
-## Steps
-
-1. Validate `<target-file>` exists. If not — stop with error, no backup created.
-2. Run `python .claude/scripts/compress.py --target <target-file>`.
-3. Confirm backup at `<stem>.original.md` exists.
-4. Report: original line count → compressed line count, pass-through line count.
+Execution procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 
 ## Pass-Through Rules
 

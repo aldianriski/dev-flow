@@ -72,15 +72,15 @@ if (allAgentsPresent) {
 const { readdirSync, statSync } = require('fs');
 const blueprintDir = join(root, 'docs/blueprint');
 const BLUEPRINT_LINE_CAP = 250;
-// Index file pattern: exactly two digits followed by a dash then non-digit (e.g. 10-modes.md)
-const INDEX_FILE_RE = /^\d{2}-/;
+// Only true index files (short table-of-contents files) are exempt from the 250-line cap.
+const INDEX_FILES = new Set(['10-modes.md', '06-harness.md']);
 
 if (existsSync(blueprintDir)) {
   let capViolations = 0;
   let capChecked = 0;
   for (const entry of readdirSync(blueprintDir)) {
     if (!entry.endsWith('.md')) continue;
-    if (INDEX_FILE_RE.test(entry)) continue; // index files are exempt
+    if (INDEX_FILES.has(entry)) continue; // only true index files are exempt
     const filePath = join(blueprintDir, entry);
     if (!statSync(filePath).isFile()) continue;
     const lineCount = readFileSync(filePath, 'utf8').split('\n').length;
