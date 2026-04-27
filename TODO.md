@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-27 (TASK-096 closed; Sprint 21 active — TASK-091 pending human)
+last_updated: 2026-04-27 (Sprint 21 archived; Sprint 22 active)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 21
+sprint: 22
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -34,9 +34,9 @@ sprint: 21
 
 ## Active Sprint
 
-### Sprint 21 — Team validation + Audit Pass 2 (planned)
-> **Theme:** Prove v1 readiness with real team usage and a second audit sweep. Both tasks are independent and can run in parallel.
-> **Note:** TASK-091 requires human participants — cannot be AI-executed. Must be initiated by Tech Lead with 3+ teammates before next session.
+### Sprint 22 — Team validation (carried) + Pass 2 fixes (planned)
+> **Theme:** Complete v1 proof-of-usage gate (TASK-091 human-blocked, carried from Sprint 21) + fix Pass 2 script/docs findings.
+> **Note:** TASK-091 cannot be AI-executed. Tech Lead must initiate with 3+ teammates. TASK-098 + TASK-099 are AI-executable and can run in parallel with TASK-091.
 
 - [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction**
   - scope: full · layers: governance, examples, docs · risk: medium
@@ -45,7 +45,19 @@ sprint: 21
   - tracker: READINESS.md (v1 / Proof of usage)
   - depends-on: TASK-069, TASK-077
 
-- [x] **TASK-096: Audit Pass 2 + re-verify Pass 1 closures** _(closed Sprint 21)_
+- [ ] **TASK-098: Fix HOW violations in 6 SKILL.md files**
+  - scope: full · layers: skills, evals · risk: medium
+  - api-change: no
+  - acceptance: `lean-doc-generator`, `adr-writer`, `release-manager`, `task-decomposer`, `dev-flow-compress`, `system-design-reviewer` SKILL.md files have no "Steps" / procedural HOW sections. Step logic moved to `references/<name>.md` sub-files (not deleted). `evals/measure.py compare` run for each changed skill; no `terse_isolation_delta` regression. Verified: `grep -rn "^## Steps" .claude/skills/` returns no matches.
+  - tracker: AUDIT_PASS2.md (AUD-P2-001)
+  - depends-on: none
+
+- [ ] **TASK-099: Fix INDEX_FILE_RE + sync 10f validation rules + 10f line cap**
+  - scope: quick · layers: scripts, docs · risk: low
+  - api-change: no
+  - acceptance: (1) `validate-blueprint.js` INDEX_FILE_RE replaced with explicit allowlist `Set(['10-modes.md', '06-harness.md'])`; `05-skills.md` (290 lines) now emits a cap warning. (2) Missing 9th validation rule from `decomposition-spec.md:104` appended to `10f-task-decomposer.md` Validation Rules block. (3) §23 Sprint Mode (10f lines ~209-294) extracted to new `docs/blueprint/10g-sprint-mode.md`; `10-modes.md` index updated; `wc -l 10f-task-decomposer.md` ≤ 250. All existing validate-blueprint tests pass.
+  - tracker: AUDIT_PASS2.md (AUD-P2-002, AUD-P2-003, AUD-P2-004)
+  - depends-on: none
 
 ---
 
@@ -205,10 +217,10 @@ sprint: 21
 
 ### P1 — Internal rollout readiness continued
 
-> Sequenced: Sprint 21 = TASK-091 + TASK-096 (active); Sprint 22 = TASK-092 (closes v1).
+> Sequenced: Sprint 22 = TASK-091 (carried) + TASK-098 + TASK-099 (active); Sprint 23 = TASK-092 (closes v1).
 
-- [ ] ~~TASK-091~~ promoted to Sprint 21
-- [ ] ~~TASK-096~~ promoted to Sprint 21
+- [ ] ~~TASK-091~~ promoted to Sprint 22
+- [x] ~~TASK-096~~ closed Sprint 21
 
 - [ ] **TASK-092: Onboarding budget — fresh teammate ≤30 min to first commit**
   - scope: quick · layers: docs · risk: low
@@ -216,29 +228,6 @@ sprint: 21
   - acceptance: 1 fresh teammate completes Phase 0–1 of TASK-001 in `examples/node-express/` within 30 min. Timer + observations logged in `docs/research/onboarding-timing.md`. If >30 min, iterate until budget hit; re-test with second teammate.
   - tracker: READINESS.md (v1 / Proof of usage)
   - depends-on: TASK-091
-
-- [ ] **TASK-096: Audit Pass 2 + re-verify Pass 1 closures**
-  - scope: full · layers: governance, docs · risk: medium
-  - api-change: no
-  - acceptance: Pass 2 deep audit per AUDIT.md "not covered" list. Findings in `AUDIT_PASS2.md` with severity tags. Each AUD-001..017 re-verified; re-verification table in docs/CHANGELOG.md Sprint 17 block. Pass 2 findings classified P0/P1/P2 and promoted where actionable.
-  - tracker: READINESS.md (v1 / Maintainability), AUDIT.md
-  - depends-on: none
-
-### P2 — Audit Pass 2 follow-up (TASK-096 findings)
-
-- [ ] **TASK-098: Fix HOW violations in 6 SKILL.md files**
-  - scope: full · layers: skills, evals · risk: medium
-  - api-change: no
-  - acceptance: `lean-doc-generator`, `adr-writer`, `release-manager`, `task-decomposer`, `dev-flow-compress`, `system-design-reviewer` SKILL.md files have no "Steps" / procedural HOW sections. Step logic moved to `references/<name>.md` sub-files (not deleted). `evals/measure.py compare` run for each changed skill; no `terse_isolation_delta` regression. Verified: `grep -rn "^## Steps" .claude/skills/` returns no matches.
-  - tracker: AUDIT_PASS2.md (AUD-P2-001)
-  - depends-on: none
-
-- [ ] **TASK-099: Fix INDEX_FILE_RE + sync 10f validation rules + 10f line cap**
-  - scope: quick · layers: scripts, docs · risk: low
-  - api-change: no
-  - acceptance: (1) `validate-blueprint.js` INDEX_FILE_RE replaced with explicit allowlist `Set(['10-modes.md', '06-harness.md'])`; `05-skills.md` (290 lines) now emits a cap warning. (2) Missing 9th validation rule from `decomposition-spec.md:104` appended to `10f-task-decomposer.md` Validation Rules block. (3) §23 Sprint Mode (10f lines ~209-294) extracted to new `docs/blueprint/10g-sprint-mode.md`; `10-modes.md` index updated; `wc -l 10f-task-decomposer.md` ≤ 250. All existing validate-blueprint tests pass.
-  - tracker: AUDIT_PASS2.md (AUD-P2-002, AUD-P2-003, AUD-P2-004)
-  - depends-on: none
 
 ### P3 — Strategic epics (decompose via /task-decomposer before promoting)
 
@@ -256,17 +245,13 @@ sprint: 21
 ## Changelog
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
-> Sprints 0–7, 14–20 archived → `docs/CHANGELOG.md`.
+> Sprints 0–7, 14–21 archived → `docs/CHANGELOG.md`.
 
-### Sprint 21 — In Progress
+### Sprint 22 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `AUDIT_PASS2.md` | TASK-096: new — Pass 2 findings (4 items: 2×P1, 2×P2); cross-check results; coverage table | — |
-| `docs/CHANGELOG.md` | TASK-096: AUD-001..017 re-verification table appended to Sprint 17 block (all 17 CLOSED) | — |
-| `TODO.md` | TASK-096: TASK-098 + TASK-099 added to P2 backlog; TASK-096 closed | — |
-| `READINESS.md` | TASK-096: TASK-096 row → [x]; last_updated 2026-04-26 → 2026-04-27 | — |
-| `AUDIT.md` | TASK-096: audit_pass updated to 2; "not covered" section closed; last_updated 2026-04-25 → 2026-04-27 | — |
+| _(no entries yet)_ | — | — |
 
 ---
 
@@ -329,7 +314,8 @@ Sprint 17 →  Blueprint decomp + SSOT version        (done — TASK-059, 060, 0
 Sprint 18 →  Plugin foundation + support docs        (done — TASK-065, 066, 068, 095)
 Sprint 19 →  Path rewrite + default-mode + ADR + dogfood  (done — TASK-067, 093, 094, 075)
 Sprint 20 →  E2E smoke + dogfood E2E + friction + MVP mode  (done — TASK-069, 076, 077, 097)
-Sprint 21 →  Team validation + Audit Pass 2         (active — TASK-091, 096)
-Sprint 22 →  Onboarding budget + start v2            (planned — TASK-092 + EPIC-B/D/E begins)
+Sprint 21 →  Audit Pass 2 + re-verification           (done — TASK-096; TASK-091 carried)
+Sprint 22 →  Team validation (carried) + Pass 2 fixes (active — TASK-091, 098, 099)
+Sprint 23 →  Onboarding budget + start v2            (planned — TASK-092 + EPIC-B/D/E begins)
 v2 work  →  EPIC-B (gates) + EPIC-D (state/telemetry) + EPIC-E (wrap-or-replace)
 ```

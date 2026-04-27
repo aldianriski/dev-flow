@@ -16,6 +16,21 @@ status: current
 
 ---
 
+## Sprint 21 — Audit Pass 2 + Pass 1 re-verification (2026-04-27)
+
+**Blueprint version:** PATCH — docs only; no phase/gate/mode changes.
+**Note:** TASK-091 (team validation) remains open — human-blocked. Carried to Sprint 22.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `AUDIT_PASS2.md` | TASK-096: new — Pass 2 findings (AUD-P2-001..004: 2×P1, 2×P2); cross-check results; coverage table | — |
+| `docs/CHANGELOG.md` | TASK-096: AUD-001..017 re-verification table appended to Sprint 17 block (all 17 CLOSED) | — |
+| `READINESS.md` | TASK-096: TASK-096 row → [x]; last_updated → 2026-04-27 | — |
+| `AUDIT.md` | TASK-096: audit_pass → 2 (complete); "not covered" section closed; last_updated → 2026-04-27 | — |
+| `TODO.md` | TASK-096: TASK-098 + TASK-099 added to P2 backlog; sprint rotated 21→22 | — |
+
+---
+
 ## Sprint 20 — E2E smoke + dogfood E2E + friction log + MVP mode (2026-04-27)
 
 **Blueprint version: 1.7.0 → 1.8.0 (MINOR — new mode `mvp`)**
