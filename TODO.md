@@ -35,7 +35,7 @@ sprint: 23
 ## Active Sprint
 
 ### Sprint 23 — Design thinking quality + team validation (carried)
-> **Theme:** TASK-100 AI-executable (Phase 0-2 thinking improvements). TASK-091 human-blocked (carried). TASK-092 deferred to Sprint 24 (blocked by TASK-091).
+> **Theme:** TASK-100 AI-executable (Phase 0-2 thinking improvements). TASK-101 AI-executable (context frugality, depends on TASK-100). TASK-091 human-blocked (carried). TASK-092 deferred to Sprint 24 (blocked by TASK-091).
 > **Note:** TASK-091 cannot be AI-executed. Tech Lead must initiate with 3+ teammates.
 
 - [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction** *Do it in Background, human confirm*
@@ -45,7 +45,7 @@ sprint: 23
   - tracker: READINESS.md (v1 / Proof of usage)
   - depends-on: TASK-069, TASK-077
 
-- [ ] **TASK-100: Phase 0–2 thinking quality — Task Brief + batch clarify + expert persona + adversarial challenge**
+- [x] **TASK-100: Phase 0–2 thinking quality — Task Brief + batch clarify + expert persona + adversarial challenge**
   - scope: full · layers: skills, docs · risk: medium
   - api-change: yes — phases.md Phase 0/1/2 and Gate 1 updated; SKILL.md Phase Checklist updated
   - acceptance:
@@ -58,6 +58,19 @@ sprint: 23
     7. DECISIONS.md entry: document Phase 1 batch-clarify + iteration loop as a workflow contract change (MINOR semver trigger — user-visible behavior).
   - tracker: user friction note 2026-04-27
   - depends-on: none
+
+- [ ] **TASK-101: Context frugality rules — reduce orchestrator read overhead**
+  - scope: quick · layers: skills · risk: low
+  - api-change: yes — phases.md Phase 0/2/3 gain read-budget constraints
+  - acceptance:
+    1. **Phase 0 read boundary**: after `set-phase.js clear` + TODO.md read, no further file reads in Phase 0. Task Brief names files to change — trust it. All discovery deferred to design-analyst in Phase 2.
+    2. **Phase 2 orchestrator boundary**: explicit rule added — orchestrator does NOT issue Read/Grep/Glob after Phase 0. All codebase scanning delegated to design-analyst. If output insufficient → re-spawn with narrower query, not direct read.
+    3. **Phase 3 read budget**: read only files in the Gate 1 file map, only when executing the relevant micro-task. No pre-reading adjacent files. File absent from map → flag as Gate 1 miss, do not silently expand scope.
+    4. All three rules land in `phases.md` as explicit bullets. No SKILL.md checklist change (detail-level rules, not summary-level).
+    5. No semver bump (PATCH clarification — not new mode/gate/hard stop).
+    6. No DECISIONS.md entry (constraint refinement, not architectural decision).
+  - tracker: user friction note 2026-04-27
+  - depends-on: TASK-100
 
 ---
 
@@ -218,6 +231,7 @@ sprint: 23
 ### P1 — Design thinking quality (user friction → workflow improvement)
 
 <!-- TASK-100 promoted to Sprint 23 -->
+<!-- TASK-101 promoted to Sprint 23 -->
 
 ### P1 — Internal rollout readiness continued
 
@@ -255,7 +269,9 @@ sprint: 23
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| _(no entries yet)_ | — | — |
+| `phases.md`, `SKILL.md` | TASK-100: Task Brief + batch clarify + expert persona + adversarial challenge + iteration loop | ADR-009 |
+| `docs/DECISIONS.md`, `docs/blueprint/VERSION` | ADR-009 added; VERSION 1.8.0 → 1.9.0 (MINOR) | ADR-009 |
+| `evals/snapshots/dev-flow/TASK-100-{before,after}.json`, `evals/runs/TASK-100.md` | Eval evidence: terse_isolation_delta +1122.2% vs +379.2% baseline | — |
 
 ---
 

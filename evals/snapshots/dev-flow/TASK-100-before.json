@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "skill": "dev-flow",
+  "skill_version": "1.8.0",
+  "date": "2026-04-27",
+  "prompt": "Phase 1 Clarify. TASK-NNN: Migrate Express app from session cookies to JWT auth. layers: api, scripts. scope: full. Multiple open questions exist about JWT library choice, token storage, backward compat, and refresh tokens. What do you output next?",
+  "arms": {
+    "baseline": {
+      "output": "To clarify your JWT migration, could you tell me which JWT library you plan to use — jsonwebtoken, jose, or another? This will help determine the implementation approach and the algorithm options available to you.",
+      "token_count": 38
+    },
+    "terse_control": {
+      "output": "JWT lib? Cookie vs localStorage? Hard cutover? Refresh tokens?",
+      "token_count": 11
+    },
+    "skill": {
+      "output": "Which JWT library do you plan to use — `jsonwebtoken`, `jose`, or another? This affects the algorithm and key-rotation options available.",
+      "token_count": 24
+    }
+  }
+}

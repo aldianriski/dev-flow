@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-25
+last_updated: 2026-04-27
 update_trigger: Architectural decision made or reversed
 status: current
 ---
@@ -73,3 +73,81 @@ Append-only. Never edit past ADRs. Use `/adr-writer` to add entries.
 **Why**: Blueprint version bumps are editorial (new mode, new hard stop, prompt reword). Scaffold version bumps are code releases (new script, new bin/ tool). Coupling them forces unnecessary releases on both tracks.
 
 **Consequences**: Contributors must bump docs/blueprint/VERSION independently when making MINOR/MAJOR blueprint changes per CONTRIBUTING.md. CI warns (non-blocking) if blueprint docs changed without a VERSION file change in the same PR.
+
+---
+
+## ADR-006 — plugin.json version as canonical adopter pin; semver-to-blueprint mapping
+
+**Date**: 2026-04-27
+**Status**: decided
+
+**Context**: With plugin-first distribution (TASK-065/066), adopters install dev-flow via `claude plugin install`. The `plugin.json` `version` field is the only version signal visible at install time. A clear semver contract is needed so adopters can pin stable behavior.
+
+**Decision**: `plugin.json` `version` is the canonical pin point for adopters. Blueprint changes map to semver as follows:
+
+| Bump | Trigger | Adopter impact |
+|:-----|:--------|:---------------|
+| **MAJOR** | Phase model / gate model / hook contract change | Workflow behavior changes — migration path required |
+| **MINOR** | New mode / new agent / new skill / new hard stop | New capabilities added; existing behavior preserved |
+| **PATCH** | Clarification, prompt rewording, fix, doc improvement | No behavior change |
+
+Adopters pin a specific version at install: `claude plugin install https://github.com/aldian/dev-flow@<version>`. Every MAJOR or MINOR blueprint change requires a `plugin.json` version bump in the same PR. PATCH changes may omit the bump if `plugin.json` behavior is unchanged.
+
+**Alternatives considered**:
+- `docs/blueprint/VERSION` as pin point — rejected: adopters interact with `plugin.json`, not the blueprint VERSION file; ADR-005 already decoupled these two tracks.
+- No pinning support — rejected: teams on compliance timelines need stable, reproducible behavior.
+
+**Consequences**: `CONTRIBUTING.md` gains a "Breaking change policy" section cross-referencing this ADR. Every MAJOR/MINOR PR must include a `plugin.json` version bump and a `docs/CHANGELOG.md` entry. MAJOR PRs additionally require an ADR documenting the migration path.
+
+---
+
+## ADR-007 — Add `mvp` mode: 3-phase lean delivery for prototype/spike work
+
+**Date**: 2026-04-27
+**Status**: decided
+
+**Context**: TASK-097. Prototype and spike tasks need a lighter path than `quick` — which still requires design (Gate 0), review, and a TDD contract. The alternative of making `quick` leaner was considered but rejected: `quick` already has a 5-phase contract that teams depend on for real feature work. Eroding that contract would create confusion about when reviews happen.
+
+**Decision**: Add `mvp` mode with 3 phases: Parse → Implement → Close. Gate 0 and Gate 1 are skipped. Gate 2 is minimal: lint passes + existing tests still green + commit. Escape-hatch: >5 files changed triggers a HARD STOP prompting upgrade to `quick`.
+
+Fence-line (explicit, must not blur):
+- `quick` = 5 phases + Gate 0 scope confirmation + existing tests pass (new encouraged)
+- `mvp` = 3 phases + no gates + existing tests must stay green (new optional) + ≤5 file cap
+
+**Alternatives considered**:
+- Making `quick` leaner — rejected: erodes quick's contract for real feature tasks; teams use quick daily and expect Gate 0.
+- Free-form one-shot mode (no phases at all) — rejected: no gate = no lint enforcement, sessions drift without closure.
+
+**Consequences**: MINOR version bump (1.7.0 → 1.8.0). Mode Dispatch table grows from 7 to 8 rows. README "7 Modes". mode-dispatch.test.js extended with 3 assertions. `mode-mvp.md` reference added to SKILL.md.
+
+---
+
+## ADR-008 — Dogfood outcome: dev-flow validated on real implementation task (EPIC-C)
+
+**Date**: 2026-04-27
+**Status**: decided
+
+**Context**: TASK-077 / EPIC-C. First end-to-end dogfood run of dev-flow on a non-trivial implementation task (TASK-001: global error-handler middleware) in `examples/node-express/`. Mode: full. 10 phases executed.
+
+**Decision**: dev-flow validated. All gates fired correctly. No false positives from code-reviewer or security-analyst. No hard stops were triggered. The workflow accelerated the task compared to unstructured implementation — Gate 1 design plan provided unambiguous micro-task breakdown, and TDD contract (Phase 5) caught the middleware signature requirement before review.
+
+Four medium/low friction items found:
+1. Phase 4 lint is a no-op without a lint config in the example project (medium — add ESLint).
+2. Phase 3 set-phase.js path resolution requires explicit CLAUDE_PLUGIN_ROOT awareness in subdirectory projects (medium — document in phases.md).
+3. Gate 0/2 prompt wording ('design'/'commit') creates muscle-memory friction (low — add reminder notes).
+4. Phase 8 has no fast-exit path for zero-doc-change tasks (low — add quick-exit rule).
+
+**Consequences**: EPIC-C closed. Four follow-up tasks logged in `docs/research/dogfood-friction-log.md`. STRATEGY_REVIEW.md R-10 updated with outcome. No blocking issues that prevent v1 ship — all friction is low/medium and non-blocking.
+
+---
+
+## ADR-009 — Phase 1 batch-clarify + iteration loop: workflow contract change
+
+**Date**: 2026-04-27
+**Status**: decided
+**Context**: TASK-100 user friction report (2026-04-27) — AI was asking one clarification question per turn in Phase 1, forcing users into multi-turn back-and-forth before scope was confirmed. This burned context budget and delayed Gate 0 by 3–6 turns on average. A second friction point: after answering, no confirmation that all questions were resolved before proceeding.
+**Decision**: Replace the "one question at a time" rule in Phase 1 with batch clarification — all open questions surfaced in one message, user answers in one reply. Add an iteration loop: after reply, AI summarises understanding, checks for remaining ambiguity, asks again if needed, then proceeds to Gate 0 only when fully resolved.
+**Alternatives considered**:
+- Keep one-question-at-a-time — rejected: compounds context waste with no quality benefit; users with clear requirements still pay the cost
+- Silent assumption (skip clarification) — rejected: causes scope drift caught late at Gate 2 or post-commit
+**Consequences**: MINOR semver bump (1.8.0 → 1.9.0) — user-visible Phase 1 behavior changes. `phases.md` Phase 1 updated; SKILL.md Phase Checklist row updated. Users who relied on one-at-a-time pacing now receive all questions upfront — iteration loop recovers cases where batch is overwhelming.

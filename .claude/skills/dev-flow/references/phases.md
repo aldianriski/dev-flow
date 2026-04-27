@@ -6,9 +6,9 @@ Full detail for Phases 0–10. Loaded on demand from `dev-flow/SKILL.md`.
 
 ## Phase Markers (orchestrator-managed)
 
-`read-guard.js` blocks Read/Grep/Glob during compact-vulnerable phases. The orchestrator must write the active phase to `.claude/.phase` at each phase entry, then clear it after Phase 9 commit. See ADR-003. Phase names + the compact-vulnerable subset live in `.claude/scripts/phase-constants.js` (single source of truth).
-- Set: `node .claude/scripts/set-phase.js <phase>` (valid: parse, clarify, design, implement, validate, test, review, security, docs, commit, close)
-- Clear: `node .claude/scripts/set-phase.js clear` (idempotent; refuses to operate on symlinks)
+`read-guard.js` blocks Read/Grep/Glob during compact-vulnerable phases. The orchestrator must write the active phase to `.claude/.phase` at each phase entry, then clear it after Phase 9 commit. See ADR-003. Phase names + the compact-vulnerable subset live in `${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/phase-constants.js` (single source of truth).
+- Set: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js <phase>` (valid: parse, clarify, design, implement, validate, test, review, security, docs, commit, close)
+- Clear: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js clear` (idempotent; refuses to operate on symlinks)
 - Compact-vulnerable phases (must be marked): Implement, Test, Review, Security, Docs.
 - Stale-state recovery: Phase 0 first sub-bullet runs `clear` to release any stuck phase from a previous crashed session; `session-start.js` also warns if `.claude/.phase` exists at startup.
 
@@ -16,14 +16,16 @@ Full detail for Phases 0–10. Loaded on demand from `dev-flow/SKILL.md`.
 
 ## Phase 0 — Parse
 
-- [ ] Run: `node .claude/scripts/set-phase.js clear` (Phase Markers — pre-flight, releases any stale phase from a crashed prior session)
+- [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js clear` (Phase Markers — pre-flight, releases any stale phase from a crashed prior session)
 - [ ] Read TODO.md, find first `[ ]` task in Active Sprint
 - [ ] Extract: task ID, title, `scope`, `layers`, `api-change`, `acceptance`, `tracker`
 - [ ] `tracker` is "none" without justification → **HARD STOP**
+- [ ] Emit **Task Brief** (max 8 lines, no question yet): task restated in own words · files expected to change · key risk · what "done" looks like
 
 ## Phase 1 — Clarify
 
-- [ ] Ask ONE question at a time — never stack multiple questions
+- [ ] Surface ALL open questions in one message — never send follow-up before user replies
+- [ ] After user reply: summarise understanding · check if any answer needs follow-up · if unclear → batch-ask again · if all resolved → proceed to Gate 0
 - [ ] Stop when: goal clear, edge cases named, approach chosen
 - [ ] **HARD RULE**: zero code or file changes during Clarify
 
@@ -43,10 +45,16 @@ Type 'design' to proceed, or provide corrections.
 
 ## Phase 2 — Design
 
+- [ ] Declare expert persona (one line): derive role from task `layers:` field — e.g. `layers: scripts, ci` → "Reasoning as a senior build-systems engineer." Fallback: "Reasoning as a senior software engineer."
 - [ ] Spawn `design-analyst` (background Tier 3) — **HARD STOP if Gate 0 not confirmed**
 - [ ] Receive tiered report + micro-task implementation plan
 
 ## Gate 1 — Design Plan Approval
+
+**Adversarial challenge** (before presenting plan — max 3 bullets, address each inline or flag as open):
+- What could go wrong?
+- What is the riskiest assumption?
+- What did I not consider?
 
 ```
 ## Design Plan — [TASK-NNN]: [Title]
@@ -68,7 +76,7 @@ Micro-task rules: exact file paths only, no TBD, every verification runnable as-
 
 ## Phase 3 — Implement
 
-- [ ] Run: `node .claude/scripts/set-phase.js implement` (Phase Markers)
+- [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js implement` (Phase Markers)
 - [ ] Execute micro-tasks from Gate 1 plan in order; mark each `[x]` when verification passes
 - [ ] `quick` mode scope guard: >3 files changed → **HARD STOP**, confirm or upgrade to `full`
 
@@ -79,7 +87,7 @@ Micro-task rules: exact file paths only, no TBD, every verification runnable as-
 
 ## Phase 5 — Test (TDD contract)
 
-- [ ] Run: `node .claude/scripts/set-phase.js test` (Phase Markers)
+- [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js test` (Phase Markers)
 
 ```
 RED:    Write test first. Run it — MUST fail. If it passes immediately → test is wrong.
@@ -92,13 +100,13 @@ REFACTOR: Clean up. Re-run full suite.
 
 ## Phase 6 — Review (parallel with Phase 7)
 
-- [ ] Run: `node .claude/scripts/set-phase.js review` (Phase Markers)
+- [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js review` (Phase Markers)
 - [ ] Spawn `code-reviewer` (background Tier 3)
 - [ ] Two stages: [S1] spec compliance first, [S2] code quality only if S1 passes
 
 ## Phase 7 — Security (parallel with Phase 6)
 
-- [ ] Run: `node .claude/scripts/set-phase.js security` (Phase Markers)
+- [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js security` (Phase Markers)
 - [ ] Spawn `security-analyst` (background Tier 3)
 - [ ] Migration file in diff → also spawn `migration-analyst` → **HARD STOP if not done**
 - [ ] `risk: high` + `api|repository|service` in layers → spawn `performance-analyst` → **HARD STOP if not done**
@@ -120,7 +128,7 @@ Type 'commit' to proceed, or fix issues and re-run the affected agent.
 
 ## Phase 8 — Docs
 
-- [ ] Run: `node .claude/scripts/set-phase.js docs` (Phase Markers)
+- [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js docs` (Phase Markers)
 - [ ] Run `/lean-doc-generator` — HOW filter mandatory
 - [ ] Architectural decision made → run `/adr-writer`
 - [ ] Update `TODO.md`: mark task `[x]`, add Changelog row (File | Change | ADR)
@@ -128,7 +136,7 @@ Type 'commit' to proceed, or fix issues and re-run the affected agent.
 ## Phase 9 — Commit + PR
 
 - [ ] `git commit` (structured message, see below) + `git push`
-- [ ] Run: `node .claude/scripts/set-phase.js clear` (Phase Markers — release the lock)
+- [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js clear` (Phase Markers — release the lock)
 - [ ] Phase 9b — CI check: poll `scripts/ci-status.js`
   - **HARD STOP**: CI non-green after push → do not proceed to Session Close until green
 - [ ] Phase 9c — Continue or Close:
