@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-27 (Sprint 20 closed; Sprint 21 next)
+last_updated: 2026-04-27 (TASK-096 closed; Sprint 21 active — TASK-091 pending human)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
 sprint: 21
@@ -45,12 +45,7 @@ sprint: 21
   - tracker: READINESS.md (v1 / Proof of usage)
   - depends-on: TASK-069, TASK-077
 
-- [ ] **TASK-096: Audit Pass 2 + re-verify Pass 1 closures**
-  - scope: full · layers: governance, docs · risk: medium
-  - api-change: no
-  - acceptance: Pass 2 deep audit per AUDIT.md "not covered" list. Findings in `AUDIT_PASS2.md` with severity tags. Each AUD-001..017 re-verified; re-verification table in docs/CHANGELOG.md Sprint 17 block. Pass 2 findings classified P0/P1/P2 and promoted where actionable.
-  - tracker: READINESS.md (v1 / Maintainability), AUDIT.md
-  - depends-on: none
+- [x] **TASK-096: Audit Pass 2 + re-verify Pass 1 closures** _(closed Sprint 21)_
 
 ---
 
@@ -267,7 +262,11 @@ sprint: 21
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| _(no entries yet)_ | — | — |
+| `AUDIT_PASS2.md` | TASK-096: new — Pass 2 findings (4 items: 2×P1, 2×P2); cross-check results; coverage table | — |
+| `docs/CHANGELOG.md` | TASK-096: AUD-001..017 re-verification table appended to Sprint 17 block (all 17 CLOSED) | — |
+| `TODO.md` | TASK-096: TASK-098 + TASK-099 added to P2 backlog; TASK-096 closed | — |
+| `READINESS.md` | TASK-096: TASK-096 row → [x]; last_updated 2026-04-26 → 2026-04-27 | — |
+| `AUDIT.md` | TASK-096: audit_pass updated to 2; "not covered" section closed; last_updated 2026-04-25 → 2026-04-27 | — |
 
 ---
 
