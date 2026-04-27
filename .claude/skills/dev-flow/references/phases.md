@@ -21,6 +21,7 @@ Full detail for Phases 0–10. Loaded on demand from `dev-flow/SKILL.md`.
 - [ ] Extract: task ID, title, `scope`, `layers`, `api-change`, `acceptance`, `tracker`
 - [ ] `tracker` is "none" without justification → **HARD STOP**
 - [ ] Emit **Task Brief** (max 8 lines, no question yet): task restated in own words · files expected to change · key risk · what "done" looks like
+- [ ] **Read budget**: no further file reads after TODO.md — Task Brief names the files to change; all discovery deferred to design-analyst in Phase 2
 
 ## Phase 1 — Clarify
 
@@ -46,6 +47,7 @@ Type 'design' to proceed, or provide corrections.
 ## Phase 2 — Design
 
 - [ ] Declare expert persona (one line): derive role from task `layers:` field — e.g. `layers: scripts, ci` → "Reasoning as a senior build-systems engineer." Fallback: "Reasoning as a senior software engineer."
+- [ ] **Orchestrator read boundary**: do NOT issue Read/Grep/Glob after Phase 0 — all codebase scanning delegated to design-analyst; if output insufficient → re-spawn with narrower query
 - [ ] Spawn `design-analyst` (background Tier 3) — **HARD STOP if Gate 0 not confirmed**
 - [ ] Receive tiered report + micro-task implementation plan
 
@@ -77,6 +79,7 @@ Micro-task rules: exact file paths only, no TBD, every verification runnable as-
 ## Phase 3 — Implement
 
 - [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js implement` (Phase Markers)
+- [ ] **Read budget**: read only files named in the Gate 1 file map, only when executing the relevant micro-task — if a needed file is absent from the map, flag as a Gate 1 miss; do not silently expand scope
 - [ ] Execute micro-tasks from Gate 1 plan in order; mark each `[x]` when verification passes
 - [ ] `quick` mode scope guard: >3 files changed → **HARD STOP**, confirm or upgrade to `full`
 

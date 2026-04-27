@@ -59,7 +59,7 @@ sprint: 23
   - tracker: user friction note 2026-04-27
   - depends-on: none
 
-- [ ] **TASK-101: Context frugality rules — reduce orchestrator read overhead**
+- [x] **TASK-101: Context frugality rules — reduce orchestrator read overhead**
   - scope: quick · layers: skills · risk: low
   - api-change: yes — phases.md Phase 0/2/3 gain read-budget constraints
   - acceptance:
@@ -272,6 +272,7 @@ sprint: 23
 | `phases.md`, `SKILL.md` | TASK-100: Task Brief + batch clarify + expert persona + adversarial challenge + iteration loop | ADR-009 |
 | `docs/DECISIONS.md`, `docs/blueprint/VERSION` | ADR-009 added; VERSION 1.8.0 → 1.9.0 (MINOR) | ADR-009 |
 | `evals/snapshots/dev-flow/TASK-100-{before,after}.json`, `evals/runs/TASK-100.md` | Eval evidence: terse_isolation_delta +1122.2% vs +379.2% baseline | — |
+| `phases.md` (Phase 0/2/3) | TASK-101: Read budget + orchestrator boundary rules (3 bullets) | — |
 
 ---
 
