@@ -1,9 +1,9 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25
+last_updated: 2026-04-27
 update_trigger: New audit finding added; finding resolved → move to docs/CHANGELOG.md
 status: current
-audit_pass: 1 (quick scan)
+audit_pass: 2 (pass 2 complete — see AUDIT_PASS2.md)
 audit_lens: correctness · context efficiency · UX · self-rule compliance
 ---
 
@@ -431,15 +431,12 @@ audit_lens: correctness · context efficiency · UX · self-rule compliance
 
 ## What this audit did NOT cover
 
-Pass 2 (deep) is the next task. Open queue:
+Pass 2 (TASK-096, 2026-04-27) completed all items in this queue. See `AUDIT_PASS2.md` for findings.
 
-- Line-by-line read of every SKILL.md against the HOW filter (CLAUDE.md anti-pattern §1).
-- Full read of `docs/blueprint/05-skills.md` (270 lines), `06-harness.md` (565), `10-modes.md` (871) for internal contradictions.
-- Full read of `task-decomposer/references/decomposition-spec.md` (136 lines) for completeness vs SKILL.md.
-- Cross-check `validate-blueprint.js` `EXPECTED_AGENTS` list against MANIFEST.json + agents/ dir for new-agent drift.
-- Eval methodology audit: are baseline snapshots reproducible, and does `terse_isolation_delta` actually distinguish "skill signal" from "structured-output bias"? (Sprint 10 noted brevity_delta is positive on 4 of 9 skills — suggests the metric is misnamed for review-style skills.)
-- Read of `IMPROVEMENT_LOG.md` to extract any actionable item not already in CHANGELOG (low priority — assume covered).
-- Permission-prompt count audit — does the harness still prompt the user on each hook fire after BUG-002 fix? Verify by running a real session with logging.
+Pass 2 open (deferred to v2 EPIC):
+- Eval golden dataset reproducibility — are baseline snapshots reproducible across model versions?
+- Adversarial / red-team pass on bundled scripts and skills.
+- Multi-stack proof (Python-FastAPI, Go-Gin).
 
 ---
 

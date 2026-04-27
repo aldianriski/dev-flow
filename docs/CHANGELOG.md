@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26 (Sprint 17 archived)
+last_updated: 2026-04-27 (Sprint 20 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,73 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 20 — E2E smoke + dogfood E2E + friction log + MVP mode (2026-04-27)
+
+**Blueprint version: 1.7.0 → 1.8.0 (MINOR — new mode `mvp`)**
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.github/workflows/validate.yml` | TASK-069: drift check replaced with plugin manifest validation | — |
+| `examples/README.md` | TASK-069: E2E smoke test steps documented | — |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-097: `mvp` row in Mode Dispatch; flowchart + freeform rules updated; description updated | ADR-007 |
+| `.claude/skills/dev-flow/references/mode-mvp.md` | TASK-097: new — phases, gates, escalation threshold, fence-line vs quick | — |
+| `.claude/scripts/__tests__/mode-dispatch.test.js` | TASK-097: 3 mvp assertions added (table row, flowchart edges) | — |
+| `docs/DECISIONS.md` | TASK-097: ADR-007 — mvp mode rationale, fence-line, alternatives | ADR-007 |
+| `docs/blueprint/VERSION` | TASK-097: 1.7.0 → 1.8.0 | ADR-007 |
+| `.claude-plugin/plugin.json` | TASK-097: version 1.7.0 → 1.8.0 | ADR-007 |
+| `README.md` | TASK-097: 6 Modes → 7 Modes; mvp added to mode list | — |
+| `examples/node-express/src/middleware/error-handler.js` | TASK-076: dogfood — error handler middleware | — |
+| `examples/node-express/src/index.js` | TASK-076: dogfood — wire error handler after routes | — |
+| `examples/node-express/src/__tests__/error-handler.test.js` | TASK-076: dogfood — 3 unit tests | — |
+| `examples/node-express/TODO.md` | TASK-076: TASK-001 marked [x] | — |
+| `docs/research/dogfood-session-notes.md` | TASK-076: all 14 phase rows filled; friction observed | — |
+| `docs/research/dogfood-friction-log.md` | TASK-077: friction items, what worked, follow-up tasks | — |
+| `STRATEGY_REVIEW.md` | TASK-077: R-10 outcome paragraph added | — |
+| `TODO.md` | TASK-077: EPIC-C marked [x]; Sprint 20 changelog entries | — |
+| `docs/DECISIONS.md` | TASK-077: ADR-008 — dogfood outcome | ADR-008 |
+
+---
+
+## Sprint 19 — Path rewrite + default-mode flip + ADR-006 + dogfood bootstrap (2026-04-27)
+
+**Blueprint version:** MINOR — default invocation `/dev-flow TASK-N` now dispatches quick mode (5 phases) instead of full (10 phases); full mode requires explicit `/dev-flow full TASK-N`. Default behavior change is user-visible.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/scripts/read-guard.js` | TASK-067: plugin-root allowlist entries (`skills/`, `scripts/`) added alongside `.claude/` | — |
+| `.claude/scripts/session-start.js` | TASK-067: CLAUDE_PLUGIN_ROOT support — SKILLS_DIR + MANIFEST_PATH vars | — |
+| `.claude/skills/dev-flow/references/phases.md` | TASK-067: `node .claude/scripts/` → `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/` (12 occurrences) | — |
+| `.claude/skills/dev-flow-compress/SKILL.md` | TASK-067: compress.py invocation uses plugin-relative var | — |
+| `.claude/scripts/__tests__/read-guard.test.js` | TASK-067: 2 plugin-layout allowlist tests added | — |
+| `.claude/scripts/__tests__/session-start.test.js` | TASK-067: fix pre-existing stderr vs stdout assertion bug | — |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-093: `quick` marked default; `full` requires explicit keyword; dot + freeform rules updated | — |
+| `.claude/scripts/__tests__/mode-dispatch.test.js` | TASK-093: new — 5 content-validation tests for mode dispatch defaults | — |
+| `docs/DECISIONS.md` | TASK-094: ADR-006 — plugin.json as canonical adopter pin; semver-to-blueprint mapping | ADR-006 |
+| `CONTRIBUTING.md` | TASK-094: "Breaking change policy" section added, links ADR-006 | ADR-006 |
+| `examples/node-express/.claude/` | TASK-075: full scaffold generated (skills, agents, scripts, CLAUDE.md, settings) | — |
+| `examples/node-express/TODO.md` | TASK-075: Sprint 1 with 2 real tasks (TASK-001 error handler, TASK-002 users CRUD) | — |
+| `examples/node-express/.gitignore` | TASK-075: exclude dev-flow runtime files | — |
+| `examples/README.md` | TASK-075: updated to reflect checked-in .claude/ tree; immediate-use instructions | — |
+
+---
+
+## Sprint 18 — Plugin foundation + support docs (2026-04-27)
+
+**Blueprint version:** PATCH — plugin manifest scaffolded; plugin layout contract documented; support channel + friction-report template added; README plugin-first install path. No phase/gate/mode changes.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/research/cc-plugin-spec.md` | TASK-065: new — plugin layout contract; Assumptions 1+4 CONFIRMED | — |
+| `.claude-plugin/plugin.json` | TASK-066: new — plugin manifest (name, description, version, skills[], agents[], hooks) | — |
+| `.claude/scripts/validate-plugin.js` | TASK-066: new — manifest validator (4 checks; exit 0/1) | — |
+| `.claude/scripts/__tests__/validate-plugin.test.js` | TASK-066: new — 11 unit tests, all pass | — |
+| `README.md` | TASK-068: plugin-first install path primary; scaffold-copy fallback; plugin/init table | — |
+| `CONTRIBUTING.md` | TASK-068 + TASK-095: no old paths found; Feedback section added | — |
+| `docs/SUPPORT.md` | TASK-095: new — #dev-flow Slack channel, 2-day SLA, friction-report filing rules | — |
+| `docs/templates/friction-report.md` | TASK-095: new — friction report template (phase/expected/observed/fix/severity) | — |
 
 ---
 
@@ -51,6 +118,28 @@ status: current
 | `.claude/scripts/__tests__/read-guard.test.js` | BUG-004: allowlist coverage test | — |
 
 **Resolved bugs**: BUG-003 (skill.path traversal) · BUG-004 (read-guard over-blocking)
+
+**AUD-001..017 Pass 1 re-verification (TASK-096, 2026-04-27)**
+
+| ID | Title (abbreviated) | Pass 1 sprint | Re-verified state |
+|:---|:--------------------|:--------------|:------------------|
+| AUD-001 | Phase-file write side never implemented | Sprint 14 | ✓ CLOSED — `set-phase.js` (79 lines) writes `.claude/.phase`; invocations in `phases.md` |
+| AUD-002 | Placeholder hooks in settings.json | Sprint 14 | ✓ CLOSED — no `[your-lint-command]` strings in `settings.json` |
+| AUD-003 | CI runs only 2 validators | Sprint 15 | ✓ CLOSED — `validate.yml` runs `node --test` suite + Node 18/20/22 matrix |
+| AUD-004 | Skill change protocol not enforced | Sprint 15 | ✓ CLOSED — `check-eval-gate.js` CI gate + backfill snapshots committed |
+| AUD-005 | README teaches manual `cp -r` | Sprint 15 | ✓ CLOSED — `node bin/dev-flow-init.js` is primary path in README |
+| AUD-006 | `examples/node-express/` full mirror | Sprint 16 | ✓ CLOSED (monitor) — mirror deleted (ADR-004 Sprint 16); re-generated intentionally by TASK-075 (Sprint 19) for dogfood; drift check CI step active |
+| AUD-007 | `dev-flow/SKILL.md` at 335 lines | Sprint 16 | ✓ CLOSED — trimmed to 122 lines; detail in `references/` sub-files |
+| AUD-008 | Blueprint mega-files >500 lines | Sprint 17 | ✓ CLOSED — `10-modes.md` and `06-harness.md` split to sub-files |
+| AUD-009 | Blueprint version SSOT split 3 ways | Sprint 17 | ✓ CLOSED — `docs/blueprint/VERSION` = 1.8.0; ADR-005 documents independence |
+| AUD-010 | `dev-flow-init.js` does not render settings | Sprint 15 | ✓ CLOSED — `STACK_PRESETS` with `lintCommand`/`typecheckCommand` renders `settings.json` |
+| AUD-011 | SKILL.md files lack GraphViz flowcharts | Sprint 16 | ✓ CLOSED — `pr-reviewer` flowchart added; exemption policy in `05-skills.md` |
+| AUD-012 | Subagent files duplicate 70% of skill content | Sprint 16 | ✓ CLOSED — `code-reviewer.md` 89→17 lines; `security-analyst.md` 77→17 lines |
+| AUD-013 | `BUGS.md` references closed tasks | Sprint 17 | ✓ CLOSED — BUGS.md = "No open bugs." |
+| AUD-014 | README numbers drift from SSOT | Sprint 15 | ✓ CLOSED — README = "24 Hard Stops", "10 project-local skills" (matches actual) |
+| AUD-015 | `IMPROVEMENT_LOG.md` unmanaged at root | Sprint 17 | ✓ CLOSED — archived at `docs/archive/2026-04-20-session-1-critique.md` |
+| AUD-016 | Session-start: no actionable next step | Sprint 17 | ✓ CLOSED — `session-start.js` emits WARN when Sprint + Backlog both empty |
+| AUD-017 | `package.json` version untracked | Sprint 17 | ✓ CLOSED — ADR-005: package.json and blueprint VERSION are intentionally independent |
 
 ---
 

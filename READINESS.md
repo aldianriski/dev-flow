@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-26
+last_updated: 2026-04-27
 update_trigger: TASK closure flips a row; new readiness gate added; v1/v2 scope changes
 status: current
 scope: internal team rollout (v1) → public marketplace (v2)
@@ -37,7 +37,7 @@ companion: AUDIT.md (tactical findings), STRATEGY_REVIEW.md (direction), TODO.md
 - [ ] `mvp` mode added — 3-phase lean delivery for prototype work · TASK-097
 - [ ] Version-pin + breaking-change policy ADR · TASK-094
 - [ ] Support channel + friction-report template · TASK-095
-- [ ] Audit Pass 2 + Pass 1 re-verification · TASK-096
+- [x] Audit Pass 2 + Pass 1 re-verification · TASK-096
 
 ---
 
