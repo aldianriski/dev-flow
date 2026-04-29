@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-27
+last_updated: 2026-04-29
 update_trigger: Architectural decision made or reversed
 status: current
 ---
@@ -151,3 +151,17 @@ Four medium/low friction items found:
 - Keep one-question-at-a-time — rejected: compounds context waste with no quality benefit; users with clear requirements still pay the cost
 - Silent assumption (skip clarification) — rejected: causes scope drift caught late at Gate 2 or post-commit
 **Consequences**: MINOR semver bump (1.8.0 → 1.9.0) — user-visible Phase 1 behavior changes. `phases.md` Phase 1 updated; SKILL.md Phase Checklist row updated. Users who relied on one-at-a-time pacing now receive all questions upfront — iteration loop recovers cases where batch is overwhelming.
+
+---
+
+## ADR-010 — Plugin-first distribution: Claude Code plugin as primary adoption channel
+
+**Date**: 2026-04-29
+**Status**: decided
+**Context**: TASK-102. Original distribution model required `git clone` + `node bin/dev-flow-init.js` — too many manual steps for adoption. Claude Code's plugin system (`claude plugin install <url>`) supports git-sourced plugins with auto-loaded skills, agents, and hooks. Plugin-first distribution aligns with the Claude Code ecosystem and removes the init script barrier. Decision driven by user adoption friction observed across dogfood runs (EPIC-C) and team rollout planning.
+**Decision**: Adopt Claude Code plugin system as primary distribution channel. `skills/`, `agents/`, `hooks/` mirrored at repo root for plugin loader discovery. `.claude-plugin/marketplace.json` added for registry listing. `plugin.json` version bumped to `1.9.0`. README adoption section updated to plugin-first install steps.
+**Alternatives considered**:
+- Keep git clone + init script — rejected: too many steps; init script adds fragility and maintenance overhead; breaks on Windows path conventions
+- npm package — rejected: wrong ecosystem; Claude Code skills are not npm-compatible modules
+- Dual-track (both) — rejected: README cannot clearly serve two install flows; plugin-first covers 95% of adoption cases
+**Consequences**: MINOR semantically (new distribution path, no phase/gate changes). `validate-scaffold.js` gains check for root-level mirrors. Examples project stays in-repo but not mirrored at root — separate concern. Users who cloned before this change can continue using `.claude/skills/` directly — no breaking change to skill resolution.

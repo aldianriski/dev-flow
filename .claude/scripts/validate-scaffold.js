@@ -155,6 +155,15 @@ if (!existsSync(settingsPath)) {
   }
 }
 
+// ─── Check 9: Plugin root dirs present ──────────────────────────────────────
+const PLUGIN_ROOT_DIRS = ['skills', 'agents', 'hooks'];
+const missingPluginDirs = PLUGIN_ROOT_DIRS.filter(d => !existsSync(join(root, d)));
+if (missingPluginDirs.length > 0) {
+  fail(`Plugin root dirs missing: ${missingPluginDirs.join(', ')}`);
+} else {
+  pass('Plugin root dirs present (skills/ agents/ hooks/)');
+}
+
 // ─── Output ───────────────────────────────────────────────────────────────────
 console.log('\n=== SCAFFOLD VALIDATION ===\n');
 for (const p of passes) console.log(`[PASS] ${p}`);

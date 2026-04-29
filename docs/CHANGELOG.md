@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-27 (Sprint 20 archived)
+last_updated: 2026-04-29 (Sprint 23 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,23 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 23 — Design thinking quality + lean-doc consolidation (2026-04-29)
+
+**Blueprint version:** MINOR (1.9.0 — ADR-009 batch clarify) + PATCH (lean-doc skill merge).
+**Note:** TASK-091/092 removed from tracker — moved to GitHub issues; testing via separate project repo.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `phases.md`, `SKILL.md` | TASK-100: Task Brief + batch clarify + expert persona + adversarial challenge + iteration loop | ADR-009 |
+| `docs/DECISIONS.md`, `docs/blueprint/VERSION` | ADR-009 added; VERSION 1.8.0 → 1.9.0 (MINOR) | ADR-009 |
+| `evals/snapshots/dev-flow/TASK-100-{before,after}.json`, `evals/runs/TASK-100.md` | Eval evidence: terse_isolation_delta +1122.2% vs +379.2% baseline | — |
+| `phases.md` (Phase 0/2/3) | TASK-101: Read budget + orchestrator boundary rules (3 bullets) | — |
+| `.claude/skills/lean-doc-generator/` | TASK-103: v1+v2 merged — Steps 0-7 flow, sprint protocols, pre-delivery checklist; v2 folder deleted; `context:fork` + `type:rigid` restored; version 1.1.0 | — |
+| `evals/snapshots/lean-doc-generator/baseline-001.json` | TASK-103: Eval snapshot updated to skill_version 1.1.0; skill arm reflects Step 5 clarification behavior | — |
+| `docs/DECISIONS.md` | ADR-010: plugin-first distribution decision | ADR-010 |
 
 ---
 

@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-27 (Sprint 22 archived; Sprint 23 active)
+last_updated: 2026-04-29 (Sprint 23 archived; Sprint 24 active)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 23
+sprint: 24
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -34,43 +34,7 @@ sprint: 23
 
 ## Active Sprint
 
-### Sprint 23 — Design thinking quality + team validation (carried)
-> **Theme:** TASK-100 AI-executable (Phase 0-2 thinking improvements). TASK-101 AI-executable (context frugality, depends on TASK-100). TASK-091 human-blocked (carried). TASK-092 deferred to Sprint 24 (blocked by TASK-091).
-> **Note:** TASK-091 cannot be AI-executed. Tech Lead must initiate with 3+ teammates.
-
-- [ ] **TASK-091: Validate dev-flow on 3+ team members; aggregate friction** *Do it in Background, human confirm*
-  - scope: full · layers: governance, examples, docs · risk: medium
-  - api-change: no
-  - acceptance: 3+ team members run `/dev-flow` on one real task. Per-person friction in `docs/research/team-rollout-friction-<user>.md`. Aggregated `docs/research/team-rollout-summary.md`: time-to-first-commit, top friction per phase, helped vs unhelped count. README updated if friction reveals gaps.
-  - tracker: READINESS.md (v1 / Proof of usage)
-  - depends-on: TASK-069, TASK-077
-
-- [x] **TASK-100: Phase 0–2 thinking quality — Task Brief + batch clarify + expert persona + adversarial challenge**
-  - scope: full · layers: skills, docs · risk: medium
-  - api-change: yes — phases.md Phase 0/1/2 and Gate 1 updated; SKILL.md Phase Checklist updated
-  - acceptance:
-    1. **Task Brief (Phase 0 end)**: after parsing TODO.md, AI emits a compact brief before any question — task restated in own words, files expected to change, key risk, what "done" looks like. Max 8 lines. No question yet.
-    2. **Batch clarification (Phase 1)**: AI surfaces ALL open questions in one message (not one at a time). User answers in one reply. `phases.md` Phase 1 updated; "one question at a time" rule replaced with "one batch of all open questions."
-    3. **Expert persona (Phase 2 entry)**: AI declares relevant expert role based on task `layers:` field before producing design. Example: `layers: scripts, ci` → "Reasoning as a senior build-systems engineer." Declaration is one line; shapes the design framing.
-    4. **Adversarial challenge (Gate 1 pre-output)**: before presenting design plan for approval, AI runs a self-challenge: "What could go wrong?", "What is the riskiest assumption?", "What did I not consider?" — max 3 bullets. Addressed inline or flagged as open.
-    5. **Iteration loop (Phase 1 close)**: after user answers the batch clarification, AI summarises what it now understands and double check no answer need clarify again, if still exist ask again. then if already done all, proceed to next Gate. Prevents premature lock-in on a half-understood scope.
-    6. Eval evidence: `evals/measure.py compare` on `dev-flow` skill before/after; `terse_isolation_delta` must not regress past baseline.
-    7. DECISIONS.md entry: document Phase 1 batch-clarify + iteration loop as a workflow contract change (MINOR semver trigger — user-visible behavior).
-  - tracker: user friction note 2026-04-27
-  - depends-on: none
-
-- [x] **TASK-101: Context frugality rules — reduce orchestrator read overhead**
-  - scope: quick · layers: skills · risk: low
-  - api-change: yes — phases.md Phase 0/2/3 gain read-budget constraints
-  - acceptance:
-    1. **Phase 0 read boundary**: after `set-phase.js clear` + TODO.md read, no further file reads in Phase 0. Task Brief names files to change — trust it. All discovery deferred to design-analyst in Phase 2.
-    2. **Phase 2 orchestrator boundary**: explicit rule added — orchestrator does NOT issue Read/Grep/Glob after Phase 0. All codebase scanning delegated to design-analyst. If output insufficient → re-spawn with narrower query, not direct read.
-    3. **Phase 3 read budget**: read only files in the Gate 1 file map, only when executing the relevant micro-task. No pre-reading adjacent files. File absent from map → flag as Gate 1 miss, do not silently expand scope.
-    4. All three rules land in `phases.md` as explicit bullets. No SKILL.md checklist change (detail-level rules, not summary-level).
-    5. No semver bump (PATCH clarification — not new mode/gate/hard stop).
-    6. No DECISIONS.md entry (constraint refinement, not architectural decision).
-  - tracker: user friction note 2026-04-27
-  - depends-on: TASK-100
+→ [docs/sprint/SPRINT-024-plugin-lean-doc.md](docs/sprint/SPRINT-024-plugin-lean-doc.md)
 
 ---
 
@@ -233,34 +197,9 @@ sprint: 23
 <!-- TASK-100 promoted to Sprint 23 -->
 <!-- TASK-101 promoted to Sprint 23 -->
 
-- [ ] **TASK-102: Plugin release — marketplace.json + root-level skill/agent/hook paths**
-  - scope: full · layers: governance, scripts, templates · risk: medium
-  - api-change: yes — plugin install path changes; README updated
-  - acceptance:
-    1. `.claude-plugin/marketplace.json` created — lists dev-flow plugin with git source pointing to repo root. Format: schema version 1.0, plugins array with name, description, version, source.type=git, source.url, source.path.
-    2. `skills/` at repo root — all 10 skill dirs mirrored from `.claude/skills/`. Canonical source stays `.claude/skills/`; root `skills/` serves plugin consumers.
-    3. `agents/` at repo root — all 7 agent `.md` files mirrored from `.claude/agents/`.
-    4. `hooks/` at repo root — contains `hooks.json` from `.claude/hooks/` or extracted from settings hooks block.
-    5. `plugin.json` version bumped to 1.9.0.
-    6. `validate-scaffold.js` gains check: `skills/` + `agents/` + `hooks/` present at repo root.
-    7. README adoption section updated: replace broken plugin install with working two-step (`/plugin marketplace add aldian/dev-flow` → `/plugin install dev-flow@aldian/dev-flow`).
-    8. Local smoke test: `claude --plugin-dir .` loads skills without error.
-  - tracker: user adoption friction 2026-04-27
-  - depends-on: TASK-100, TASK-101
+<!-- TASK-102 promoted to Sprint 24 -->
 
-### P1 — Internal rollout readiness continued
-
-> Sequenced: Sprint 23 = TASK-091 (carried) + TASK-100 (active); Sprint 24 = TASK-092 (closes v1, blocked by TASK-091).
-
-- [ ] ~~TASK-091~~ promoted to Sprint 23
-- [x] ~~TASK-096~~ closed Sprint 21
-
-- [ ] **TASK-092: Onboarding budget — fresh teammate ≤30 min to first commit**
-  - scope: quick · layers: docs · risk: low
-  - api-change: no
-  - acceptance: 1 fresh teammate completes Phase 0–1 of TASK-001 in `examples/node-express/` within 30 min. Timer + observations logged in `docs/research/onboarding-timing.md`. If >30 min, iterate until budget hit; re-test with second teammate.
-  - tracker: READINESS.md (v1 / Proof of usage)
-  - depends-on: TASK-091
+<!-- TASK-091/092 moved to GitHub issues — validation via separate project repo, not this tracker -->
 
 ### P3 — Strategic epics (decompose via /task-decomposer before promoting)
 
@@ -278,16 +217,12 @@ sprint: 23
 ## Changelog
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
-> Sprints 0–7, 14–22 archived → `docs/CHANGELOG.md`.
+> Sprints 0–7, 14–23 archived → `docs/CHANGELOG.md`.
 
-### Sprint 23 — In Progress
+### Sprint 24 — In Progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `phases.md`, `SKILL.md` | TASK-100: Task Brief + batch clarify + expert persona + adversarial challenge + iteration loop | ADR-009 |
-| `docs/DECISIONS.md`, `docs/blueprint/VERSION` | ADR-009 added; VERSION 1.8.0 → 1.9.0 (MINOR) | ADR-009 |
-| `evals/snapshots/dev-flow/TASK-100-{before,after}.json`, `evals/runs/TASK-100.md` | Eval evidence: terse_isolation_delta +1122.2% vs +379.2% baseline | — |
-| `phases.md` (Phase 0/2/3) | TASK-101: Read budget + orchestrator boundary rules (3 bullets) | — |
 
 ---
 
@@ -352,7 +287,7 @@ Sprint 19 →  Path rewrite + default-mode + ADR + dogfood  (done — TASK-067, 
 Sprint 20 →  E2E smoke + dogfood E2E + friction + MVP mode  (done — TASK-069, 076, 077, 097)
 Sprint 21 →  Audit Pass 2 + re-verification           (done — TASK-096; TASK-091 carried)
 Sprint 22 →  Team validation (carried) + Pass 2 fixes (done — TASK-098, 099; TASK-091 carried)
-Sprint 23 →  Design thinking quality + team validation (active — TASK-100, TASK-091 carried)
-Sprint 24 →  Onboarding budget + start v2            (planned — TASK-092 + EPIC-B/D/E begins)
+Sprint 23 →  Design thinking quality + lean-doc consolidation (done — TASK-100, TASK-101, TASK-103)
+Sprint 24 →  Plugin release + lean-doc v2 adoption   (active — TASK-102, TASK-104)
 v2 work  →  EPIC-B (gates) + EPIC-D (state/telemetry) + EPIC-E (wrap-or-replace)
 ```

@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-26
+last_updated: 2026-04-29
 update_trigger: Patterns, conventions, or current focus change; new skill or mode added
 status: current
 ---
@@ -82,6 +82,6 @@ canonical:     Always edit canonical source — never edit auto-synced copies (b
 - Do not edit evals/ without updating ADR-001 rationale
 
 ## Current Focus
-done: Sprint 17 — blueprint decomp, archive cleanup, BUG-003/BUG-004 fixed
-active: Sprint 18 — EPIC-A plugin-first distribution (TASK-065, 066, 068 pending)
-next: EPIC-B..E after EPIC-A ships
+done: Sprint 23 — design thinking quality + lean-doc consolidation (TASK-100, 101, 103)
+active: Sprint 24 — plugin release + lean-doc v2 adoption (TASK-102, TASK-104)
+next: Sprint 25 — TODO.md pointer-only migration (deferred from Sprint 24)

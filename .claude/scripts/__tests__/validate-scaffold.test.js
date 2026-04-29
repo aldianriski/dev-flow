@@ -43,6 +43,9 @@ function scaffold(dir) {
     join(dir, '.claude', 'skills', 'my-skill', 'SKILL.md'),
     '---\nname: my-skill\ndescription: Use when testing.\n---\n'
   );
+  mkdirSync(join(dir, 'skills'), { recursive: true });
+  mkdirSync(join(dir, 'agents'), { recursive: true });
+  mkdirSync(join(dir, 'hooks'), { recursive: true });
 }
 
 function teardown(dir) {
@@ -279,6 +282,36 @@ test('fails when settings.json is absent (Check 8 emits explicit signal)', () =>
     const result = run(dir);
     assert.equal(result.status, 1);
     assert.ok(result.stdout.includes('settings.json missing'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('fails when plugin root dirs are missing (Check 9)', () => {
+  const dir = setup();
+  try {
+    scaffold(dir);
+    rmSync(join(dir, 'skills'), { recursive: true, force: true });
+    rmSync(join(dir, 'agents'), { recursive: true, force: true });
+    rmSync(join(dir, 'hooks'), { recursive: true, force: true });
+    const result = run(dir);
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.includes('Plugin root dirs missing'));
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('passes when plugin root dirs are present (Check 9)', () => {
+  const dir = setup();
+  try {
+    scaffold(dir);
+    mkdirSync(join(dir, 'skills'), { recursive: true });
+    mkdirSync(join(dir, 'agents'), { recursive: true });
+    mkdirSync(join(dir, 'hooks'), { recursive: true });
+    const result = run(dir);
+    assert.equal(result.status, 0, result.stdout);
+    assert.ok(result.stdout.includes('Plugin root dirs present'));
   } finally {
     teardown(dir);
   }

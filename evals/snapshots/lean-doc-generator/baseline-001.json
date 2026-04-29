@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "skill": "lean-doc-generator",
-  "skill_version": "1.0.0",
-  "date": "2026-04-24",
+  "skill_version": "1.1.0",
+  "date": "2026-04-29",
   "prompt": "Create a README.md for a Node.js Express REST API project called 'order-service'. It handles order creation and status tracking. Team size: 3. Stack: Node 20, Express 4, PostgreSQL 15.",
   "arms": {
     "baseline": {
@@ -14,8 +14,9 @@
       "token_count": 67
     },
     "skill": {
-      "output": "# order-service\n\nREST API for order creation and status tracking.\nStack: Node 20 · Express 4 · PostgreSQL 15.\n\n## What it is\n\nHTTP service exposing three order lifecycle endpoints. Adopted from the dev-flow starter — see `.claude/` for workflow config.\n\n## How to adopt\n\n```bash\nnpm install\ncp .env.example .env   # fill DB credentials\nnpm run migrate\nnpm start\n```\n\n## License\n\nMIT.",
-      "token_count": 81
+      "output": "Before I start writing, confirm:\n\n1. Package manager: npm / pnpm / yarn / bun?\n2. Dev infrastructure: local Docker or remote managed services (Supabase, PlanetScale, etc.)?\n3. Phase scope: which planned services are deferred for this phase?\n4. Frontend stack: CSS framework, component library, icons, animation, state management?\n5. Data layer split: if multiple DB/auth clients — what does each own exclusively?\n\n(Q3–Q5 can be skipped if not applicable for this REST API project — confirm which apply.)",
+      "token_count": 94,
+      "notes": "v1.1.0 behavior: skill fires Step 5 clarification before generating. Q1 (package manager) is mandatory for SETUP.md commands. Q2–Q5 skippable when not applicable. Immediate doc output suppressed until answers received. baseline-001 updated 2026-04-29 to reflect merged v1+v2 skill behavior."
     }
   }
 }
