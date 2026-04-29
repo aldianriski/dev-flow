@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-29 (Sprint 23 archived)
+last_updated: 2026-04-29 (Sprint 24 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,24 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 24 — Plugin distribution layout + lean-doc v2 adoption (2026-04-29)
+
+**Blueprint version:** PATCH (plugin layout, validate-scaffold Check 9).
+**Note:** Smoke test (TASK-102 AC8) + README manual verify pending human confirmation at Gate 2.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `skills/` `agents/` `hooks/` (root) | TASK-102: plugin distribution layout per CC_SPEC §5 — mirrors `.claude/` | ADR-010 |
+| `.claude-plugin/marketplace.json` | TASK-102: new — marketplace schema v1.0 | — |
+| `.claude-plugin/plugin.json` | TASK-102: version 1.8.0 → 1.9.0 | — |
+| `.claude/scripts/validate-scaffold.js` | TASK-102: Check 9 — plugin root dirs; 18/18 tests green | — |
+| `README.md` | TASK-102: two-step plugin install replaces broken single command | — |
+| `docs/AI_CONTEXT.md` | TASK-104: Current Focus updated Sprint 18→Sprint 24; v2 sections verified | — |
+| `docs/sprint/SPRINT-024-plugin-lean-doc.md` | TASK-104: sprint file format established (first entry in docs/sprint/) | — |
+| `.claude/skills/lean-doc-generator/` | TASK-103 (Sprint 23 remainder): SPRINT_PROTOCOLS.md added; eval baseline updated | — |
 
 ---
 

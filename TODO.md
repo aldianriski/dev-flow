@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-29 (Sprint 23 archived; Sprint 24 active)
+last_updated: 2026-04-29 (Sprint 24 complete)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
 sprint: 24
@@ -217,12 +217,19 @@ sprint: 24
 ## Changelog
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
-> Sprints 0–7, 14–23 archived → `docs/CHANGELOG.md`.
+> Sprints 0–7, 14–24 archived → `docs/CHANGELOG.md`.
 
-### Sprint 24 — In Progress
+### Sprint 24 — Done 2026-04-29
 
 | File | Change | ADR |
 |:-----|:-------|:----|
+| `skills/` `agents/` `hooks/` (root) | Plugin distribution layout — mirrors `.claude/` per CC_SPEC §5 | ADR-010 |
+| `.claude-plugin/marketplace.json` | New — marketplace schema v1.0 | — |
+| `.claude-plugin/plugin.json` | Version 1.8.0 → 1.9.0 | — |
+| `.claude/scripts/validate-scaffold.js` | Check 9 — plugin root dirs presence | — |
+| `README.md` | Two-step plugin install (replaces broken single command) | — |
+| `docs/AI_CONTEXT.md` | Current Focus updated Sprint 18→Sprint 24; v2 sections verified | — |
+| `.claude/skills/lean-doc-generator/` | v2 consolidation: SKILL.md rewritten, DOCS_Guide.md + VALIDATED_PATTERNS.md updated, SPRINT_PROTOCOLS.md added | — |
 
 ---
 
@@ -288,6 +295,6 @@ Sprint 20 →  E2E smoke + dogfood E2E + friction + MVP mode  (done — TASK-069
 Sprint 21 →  Audit Pass 2 + re-verification           (done — TASK-096; TASK-091 carried)
 Sprint 22 →  Team validation (carried) + Pass 2 fixes (done — TASK-098, 099; TASK-091 carried)
 Sprint 23 →  Design thinking quality + lean-doc consolidation (done — TASK-100, TASK-101, TASK-103)
-Sprint 24 →  Plugin release + lean-doc v2 adoption   (active — TASK-102, TASK-104)
+Sprint 24 →  Plugin release + lean-doc v2 adoption   (done — TASK-102, TASK-103 remainder, TASK-104)
 v2 work  →  EPIC-B (gates) + EPIC-D (state/telemetry) + EPIC-E (wrap-or-replace)
 ```
