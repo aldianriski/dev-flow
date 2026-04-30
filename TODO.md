@@ -192,6 +192,22 @@ sprint: 25
   - tracker: STRATEGY_REVIEW.md#R-9 / EPIC-E
   - depends-on: TASK-087, TASK-088, TASK-089
 
+### P1 — Harness bugs (BUG-005, BUG-006)
+
+- [ ] **TASK-109: Fix hook writing raw read-guard errors to BUGS.md**
+  - scope: quick · layers: harness, scripts · risk: low
+  - api-change: no
+  - acceptance: Identify hook responsible for writing to BUGS.md on read-guard block. Fix: either remove the write behavior, or sanitize output (strip TUI `⎿` table artifacts). BUGS.md no longer auto-corrupted when read-guard fires. Manual `git restore` no longer needed after blocked reads.
+  - tracker: docs/BUGS.md#BUG-005
+  - depends-on: none
+
+- [x] **TASK-110: Add governance docs to ORCHESTRATOR_ALLOWLIST in read-guard.js**
+  - scope: quick · layers: scripts, harness · risk: low
+  - api-change: yes — `ORCHESTRATOR_ALLOWLIST` in `read-guard.js` gains entries; unit test updated
+  - acceptance: `docs/DECISIONS.md` + `docs/blueprint/*` added to `ORCHESTRATOR_ALLOWLIST`. Orchestrator can Read these during implement phase without block. All existing read-guard unit tests pass. New test: allowlisted path during implement → no block.
+  - tracker: docs/BUGS.md#BUG-006
+  - depends-on: none
+
 ### P1 — Design thinking quality (user friction → workflow improvement)
 
 <!-- TASK-100 promoted to Sprint 23 -->
@@ -218,6 +234,14 @@ sprint: 25
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–7, 14–24 archived → `docs/CHANGELOG.md`.
+
+### Sprint 25 — In progress
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/scripts/read-guard.js` | TASK-110: `docs/DECISIONS.md` + `docs/blueprint/*.md` added to ORCHESTRATOR_ALLOWLIST; `path.posix.normalize()` added to close path traversal (security fix) | — |
+| `.claude/scripts/__tests__/read-guard.test.js` | TASK-110: 3 new tests (DECISIONS.md allow, blueprint allow, traversal block); 20/20 pass | — |
+| `docs/BUGS.md` | BUG-006 resolved | — |
 
 ---
 

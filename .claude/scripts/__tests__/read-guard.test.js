@@ -192,6 +192,38 @@ test('allows .claude/scripts/ files in implement phase', () => {
   }
 });
 
+// Governance docs allowlist — orchestrator ADR append use case
+test('allows docs/DECISIONS.md in implement phase', () => {
+  const dir = setup('implement');
+  try {
+    const result = run(dir, { tool_name: 'Read', tool_input: { file_path: 'docs/DECISIONS.md' } });
+    assert.equal(result.status, 0);
+  } finally {
+    teardown(dir);
+  }
+});
+
+test('allows docs/blueprint/ files in implement phase', () => {
+  const dir = setup('implement');
+  try {
+    const result = run(dir, { tool_name: 'Read', tool_input: { file_path: 'docs/blueprint/01-overview.md' } });
+    assert.equal(result.status, 0);
+  } finally {
+    teardown(dir);
+  }
+});
+
+// Path traversal — must not bypass allowlist via .. segments
+test('blocks path traversal through docs/blueprint/../ during implement phase', () => {
+  const dir = setup('implement');
+  try {
+    const result = run(dir, { tool_name: 'Read', tool_input: { file_path: 'docs/blueprint/../src/secrets.js' } });
+    assert.equal(result.status, 2, 'traversal path should be blocked');
+  } finally {
+    teardown(dir);
+  }
+});
+
 // Plugin-root allowlist entries (no .claude/ prefix)
 test('allows skills/MANIFEST.json in implement phase (plugin layout)', () => {
   const dir = setup('implement');

@@ -8,6 +8,7 @@
 'use strict';
 
 const { existsSync, readFileSync } = require('fs');
+const path = require('path');
 const { PHASE_FILE, COMPACT_VULNERABLE } = require('./phase-constants');
 
 const ORCHESTRATOR_ALLOWLIST = [
@@ -20,6 +21,9 @@ const ORCHESTRATOR_ALLOWLIST = [
   /^\.claude\/STATE\.ya?ml$/,
   /^\.claude\/CLAUDE\.md$/,
   /^\.claude\/scripts\//,
+  // Governance docs — orchestrator reads for ADR append + decision context
+  /^docs\/DECISIONS\.md$/,
+  /^docs\/blueprint\/.*\.md$/,
   // Plugin layout (no .claude/ prefix — plugin root via CLAUDE_PLUGIN_ROOT)
   /^skills\/MANIFEST\.json$/,
   /^scripts\//,
@@ -54,8 +58,9 @@ const phase = readFileSync(PHASE_FILE, 'utf8').trim().toLowerCase();
 // Non-vulnerable phase → allow
 if (!COMPACT_VULNERABLE.has(phase)) process.exit(0);
 
-// Normalize path separators for cross-platform matching
-const normalized = targetPath.replace(/\\/g, '/');
+// Normalize path separators + resolve .. and . segments to close traversal surface
+const raw = targetPath.replace(/\\/g, '/');
+const normalized = raw ? path.posix.normalize(raw) : '';
 
 // Unknown path — fail-open: cannot block what we can't identify
 if (!normalized) process.exit(0);
