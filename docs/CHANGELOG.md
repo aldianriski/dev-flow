@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-29 (Sprint 24 archived)
+last_updated: 2026-04-30 (Sprint 25 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,27 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 25 — Workflow gap closure (2026-04-30)
+
+**Blueprint version:** PATCH (Phase 0/10 advisory additions; skill-dispatch table; read-guard allowlist).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/scripts/read-guard.js` | TASK-110: `docs/DECISIONS.md` + `docs/blueprint/*.md` added to ORCHESTRATOR_ALLOWLIST; path traversal fix | — |
+| `.claude/scripts/__tests__/read-guard.test.js` | TASK-110: 3 new tests (DECISIONS.md allow, blueprint allow, traversal block); 20/20 pass | — |
+| `docs/BUGS.md` | BUG-006 resolved | — |
+| `.claude/skills/dev-flow/references/phases.md` | TASK-105: Phase 10 advisory doc-sync review table; TASK-106: Phase 0 session warm-up bullet; TASK-107: Gate 0 "Required skills" advisory field + dispatch lookup | — |
+| `.claude/skills/dev-flow/references/skill-dispatch.md` | TASK-107: new — layers-to-skills dispatch table (meta-repo + product layers) | ADR-011 |
+| `docs/DECISIONS.md` | TASK-107: ADR-011 skill-dispatch governance | ADR-011 |
+| `.claude/skills/dev-flow/references/mode-sprint.md` | TASK-108: Step 2 Sprint Plan table gains Skills column; Step 3 gains skill-dispatch advisory per task | — |
+
+**Resolved bugs:**
+| Bug | Root cause | Fix |
+|:----|:-----------|:----|
+| BUG-005: model transcribes read-guard blocks to BUGS.md | Model misinterpreted enforcement events as bugs to document | TASK-109: Red Flags row in SKILL.md; BUG-005 root cause corrected |
 
 ---
 

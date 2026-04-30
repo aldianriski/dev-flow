@@ -76,6 +76,7 @@ const reason =
   `If this path is orchestrator-scoped state, add it to ORCHESTRATOR_ALLOWLIST in read-guard.js.`;
 
 // Prefer structured JSON output (CC hook spec §1) so Claude sees structured feedback
+// Hook runtime consumes this JSON on exit 2 — model must not transcribe block events into docs/
 try {
   process.stdout.write(JSON.stringify({ decision: 'block', reason }) + '\n');
 } catch {

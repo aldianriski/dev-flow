@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-30 (Sprint 25 open)
+last_updated: 2026-04-30 (Sprint 25 closed)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 25
+sprint: 26
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -34,7 +34,7 @@ sprint: 25
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-025-workflow-gaps.md](docs/sprint/SPRINT-025-workflow-gaps.md)
+→ _Sprint 25 closed 2026-04-30. Define Sprint 26 — promote TASK-109 from Backlog or decompose new work._
 
 ---
 
@@ -194,7 +194,7 @@ sprint: 25
 
 ### P1 — Harness bugs (BUG-005, BUG-006)
 
-- [ ] **TASK-109: Fix hook writing raw read-guard errors to BUGS.md**
+- [x] **TASK-109: Fix hook writing raw read-guard errors to BUGS.md**
   - scope: quick · layers: harness, scripts · risk: low
   - api-change: no
   - acceptance: Identify hook responsible for writing to BUGS.md on read-guard block. Fix: either remove the write behavior, or sanitize output (strip TUI `⎿` table artifacts). BUGS.md no longer auto-corrupted when read-guard fires. Manual `git restore` no longer needed after blocked reads.
@@ -235,13 +235,15 @@ sprint: 25
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–7, 14–24 archived → `docs/CHANGELOG.md`.
 
-### Sprint 25 — In progress
+### Sprint 25 — Archived to docs/CHANGELOG.md (2026-04-30)
+
+### Sprint 26 — In progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `.claude/scripts/read-guard.js` | TASK-110: `docs/DECISIONS.md` + `docs/blueprint/*.md` added to ORCHESTRATOR_ALLOWLIST; `path.posix.normalize()` added to close path traversal (security fix) | — |
-| `.claude/scripts/__tests__/read-guard.test.js` | TASK-110: 3 new tests (DECISIONS.md allow, blueprint allow, traversal block); 20/20 pass | — |
-| `docs/BUGS.md` | BUG-006 resolved | — |
+| `.claude/skills/dev-flow/SKILL.md` | TASK-109: Red Flags row — read-guard blocks are enforcement events, not bugs to log | — |
+| `docs/BUGS.md` | TASK-109: BUG-005 root cause corrected; BUG-005 resolved | — |
+| `.claude/scripts/read-guard.js` | TASK-109: comment clarifying hook runtime consumption of block JSON | — |
 
 ---
 
@@ -308,6 +310,7 @@ Sprint 21 →  Audit Pass 2 + re-verification           (done — TASK-096; TASK
 Sprint 22 →  Team validation (carried) + Pass 2 fixes (done — TASK-098, 099; TASK-091 carried)
 Sprint 23 →  Design thinking quality + lean-doc consolidation (done — TASK-100, TASK-101, TASK-103)
 Sprint 24 →  Plugin release + lean-doc v2 adoption   (done — TASK-102, TASK-103 remainder, TASK-104)
-Sprint 25 →  Workflow gap closure (active — TASK-105..108)
+Sprint 25 →  Workflow gap closure (done — TASK-105..108, TASK-110)
+Sprint 26 →  TBD — define next
 v2 work  →  EPIC-B (gates) + EPIC-D (state/telemetry) + EPIC-E (wrap-or-replace)
 ```
