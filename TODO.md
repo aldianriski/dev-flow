@@ -237,6 +237,8 @@ sprint: 27
 | `.claude-plugin/marketplace.json` | TASK-111: schema fixed — name, owner, source simplified to `"."` | — |
 | `README.md` | TASK-111: install steps updated to two-step `claude plugin marketplace add` flow | — |
 | `context/research/CC_SPEC.md` | TASK-111: marketplace.json schema section added | — |
+| `.claude-plugin/marketplace.json` | TASK-112: source changed to explicit github object — fix BUG-008 | — |
+| `context/research/CC_SPEC.md` | TASK-112: source types table + BUG-008 note added | — |
 
 ---
 

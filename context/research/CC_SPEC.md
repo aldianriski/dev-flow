@@ -154,9 +154,19 @@ Required for `claude plugin marketplace add <repo-url>` to succeed.
 | `plugins[].name` | string | yes | Plugin identifier |
 | `plugins[].description` | string | yes | Short description |
 | `plugins[].version` | string | yes | Semver string |
-| `plugins[].source` | string | yes | `"."` for repo root |
+| `plugins[].source` | string or object | yes | See source types below |
 
-**Example:**
+**Source types (all valid per spec):**
+
+| Type | Format | Notes |
+|:-----|:-------|:------|
+| Relative path | `"."` | Newer CC only — triggers "source type not supported" on older versions |
+| GitHub explicit | `{"source": "github", "repo": "owner/repo"}` | Backward-compatible — preferred for marketplace installs |
+| Git URL | `{"source": "url", "url": "https://...git"}` | Any public git repo |
+| Git subdirectory | `{"source": "git-subdir", "url": "...", "path": "..."}` | Monorepo support |
+| npm | `{"source": "npm", "package": "@org/plugin"}` | npm registry |
+
+**Example (backward-compatible):**
 ```json
 {
   "schema_version": "1.0",
@@ -167,8 +177,13 @@ Required for `claude plugin marketplace add <repo-url>` to succeed.
       "name": "dev-flow",
       "description": "Gate-driven AI workflow system.",
       "version": "1.9.0",
-      "source": "."
+      "source": {
+        "source": "github",
+        "repo": "aldianriski/dev-flow"
+      }
     }
   ]
 }
 ```
+
+> **BUG-008 (2026-05-01):** `"source": "."` triggers "This plugin uses a source type your Claude Code version does not support" on older CC versions. Use explicit `{"source": "github", ...}` object format — backward-compatible with all CC versions that support `schema_version: "1.0"`.
