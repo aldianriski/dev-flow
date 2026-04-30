@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-30 (Sprint 25 closed)
+last_updated: 2026-04-30 (Sprint 26 closed)
 update_trigger: Sprint completed, task added, task status changed, or scaffold milestone reached
 status: current
-sprint: 26
+sprint: 27
 ---
 
 > **External references** (sprint improvement sources — read before working on derived tasks)
@@ -34,7 +34,7 @@ sprint: 26
 
 ## Active Sprint
 
-→ _Sprint 25 closed 2026-04-30. Define Sprint 26 — promote TASK-109 from Backlog or decompose new work._
+→ [docs/sprint/SPRINT-027-marketplace-schema-fix.md](docs/sprint/SPRINT-027-marketplace-schema-fix.md)
 
 ---
 
@@ -192,21 +192,12 @@ sprint: 26
   - tracker: STRATEGY_REVIEW.md#R-9 / EPIC-E
   - depends-on: TASK-087, TASK-088, TASK-089
 
-### P1 — Harness bugs (BUG-005, BUG-006)
+<!-- TASK-109 done Sprint 26 → docs/CHANGELOG.md -->
+<!-- TASK-110 done Sprint 25 → docs/CHANGELOG.md -->
 
-- [x] **TASK-109: Fix hook writing raw read-guard errors to BUGS.md**
-  - scope: quick · layers: harness, scripts · risk: low
-  - api-change: no
-  - acceptance: Identify hook responsible for writing to BUGS.md on read-guard block. Fix: either remove the write behavior, or sanitize output (strip TUI `⎿` table artifacts). BUGS.md no longer auto-corrupted when read-guard fires. Manual `git restore` no longer needed after blocked reads.
-  - tracker: docs/BUGS.md#BUG-005
-  - depends-on: none
+<!-- TASK-111 promoted to Sprint 27 -->
 
-- [x] **TASK-110: Add governance docs to ORCHESTRATOR_ALLOWLIST in read-guard.js**
-  - scope: quick · layers: scripts, harness · risk: low
-  - api-change: yes — `ORCHESTRATOR_ALLOWLIST` in `read-guard.js` gains entries; unit test updated
-  - acceptance: `docs/DECISIONS.md` + `docs/blueprint/*` added to `ORCHESTRATOR_ALLOWLIST`. Orchestrator can Read these during implement phase without block. All existing read-guard unit tests pass. New test: allowlisted path during implement → no block.
-  - tracker: docs/BUGS.md#BUG-006
-  - depends-on: none
+
 
 ### P1 — Design thinking quality (user friction → workflow improvement)
 
@@ -237,13 +228,15 @@ sprint: 26
 
 ### Sprint 25 — Archived to docs/CHANGELOG.md (2026-04-30)
 
-### Sprint 26 — In progress
+### Sprint 26 — Archived to docs/CHANGELOG.md (2026-04-30)
+
+### Sprint 27 — In progress
 
 | File | Change | ADR |
 |:-----|:-------|:----|
-| `.claude/skills/dev-flow/SKILL.md` | TASK-109: Red Flags row — read-guard blocks are enforcement events, not bugs to log | — |
-| `docs/BUGS.md` | TASK-109: BUG-005 root cause corrected; BUG-005 resolved | — |
-| `.claude/scripts/read-guard.js` | TASK-109: comment clarifying hook runtime consumption of block JSON | — |
+| `.claude-plugin/marketplace.json` | TASK-111: schema fixed — name, owner, source simplified to `"."` | — |
+| `README.md` | TASK-111: install steps updated to two-step `claude plugin marketplace add` flow | — |
+| `context/research/CC_SPEC.md` | TASK-111: marketplace.json schema section added | — |
 
 ---
 
@@ -311,6 +304,7 @@ Sprint 22 →  Team validation (carried) + Pass 2 fixes (done — TASK-098, 099;
 Sprint 23 →  Design thinking quality + lean-doc consolidation (done — TASK-100, TASK-101, TASK-103)
 Sprint 24 →  Plugin release + lean-doc v2 adoption   (done — TASK-102, TASK-103 remainder, TASK-104)
 Sprint 25 →  Workflow gap closure (done — TASK-105..108, TASK-110)
-Sprint 26 →  TBD — define next
+Sprint 26 →  Read-guard behavioral guardrail (done — TASK-109)
+Sprint 27 →  TBD — define next
 v2 work  →  EPIC-B (gates) + EPIC-D (state/telemetry) + EPIC-E (wrap-or-replace)
 ```

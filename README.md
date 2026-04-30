@@ -23,11 +23,8 @@ A starter repository that you copy into any project to get:
 ## How to adopt
 
 **Plugin install (recommended):**
-```
-/plugin marketplace add aldian/dev-flow
-/plugin install dev-flow@aldian/dev-flow
-```
 ```bash
+claude plugin marketplace add https://github.com/aldianriski/dev-flow
 node dev-flow/bin/dev-flow-init.js
 ```
 

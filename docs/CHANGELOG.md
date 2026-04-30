@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-30 (Sprint 25 archived)
+last_updated: 2026-04-30 (Sprint 26 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,18 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 26 — Read-guard behavioral guardrail (2026-04-30)
+
+**Blueprint version:** PATCH (Red Flags row added to SKILL.md; no phase/gate/mode changes).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/skills/dev-flow/SKILL.md` | TASK-109: Red Flags row — read-guard blocks are enforcement events, not bugs to log | — |
+| `docs/BUGS.md` | TASK-109: BUG-005 root cause corrected; BUG-005 resolved | — |
+| `.claude/scripts/read-guard.js` | TASK-109: comment clarifying hook runtime consumption of block JSON | — |
 
 ---
 

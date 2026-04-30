@@ -1,15 +1,16 @@
 {
   "schema_version": "1.0",
+  "name": "dev-flow",
+  "owner": {
+    "name": "Aldian Rizki",
+    "email": "aldian.mar@gmail.com"
+  },
   "plugins": [
     {
       "name": "dev-flow",
       "description": "Gate-driven AI workflow system for any software project. Built on Claude Code.",
       "version": "1.9.0",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/aldian/dev-flow",
-        "path": "."
-      }
+      "source": "."
     }
   ]
 }

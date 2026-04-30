@@ -138,3 +138,37 @@ source: research conducted 2026-04-20 by claude-code-guide agent for dev-flow Sp
 5. **Hook settings.json** (Sprint 2 TASK-012): add SessionStart `matcher: "startup|resume|clear|compact"`. Use spec exit-code / JSON output contract.
 6. **Blueprint §4 Subagent Dispatch Specification** (Sprint 1 TASK-005): rename `input_payload.context.files` contract; align `budget.return_tokens` with CC's JSON output size in mind.
 7. **Blueprint §5 Skills Map** (Sprint 1 TASK-005): add a "CC-spec field" column to the skill table, marking each skill's frontmatter fields as spec / CC-extension / project convention.
+
+---
+
+## marketplace.json Schema (v1.0)
+
+Required for `claude plugin marketplace add <repo-url>` to succeed.
+
+| Field | Type | Required | Notes |
+|:------|:-----|:---------|:------|
+| `schema_version` | string | yes | `"1.0"` |
+| `name` | string | yes | Top-level repo/package name |
+| `owner.name` | string | yes | Author display name |
+| `owner.email` | string | yes | Author contact email |
+| `plugins[].name` | string | yes | Plugin identifier |
+| `plugins[].description` | string | yes | Short description |
+| `plugins[].version` | string | yes | Semver string |
+| `plugins[].source` | string | yes | `"."` for repo root |
+
+**Example:**
+```json
+{
+  "schema_version": "1.0",
+  "name": "dev-flow",
+  "owner": { "name": "Aldian Rizki", "email": "aldian.mar@gmail.com" },
+  "plugins": [
+    {
+      "name": "dev-flow",
+      "description": "Gate-driven AI workflow system.",
+      "version": "1.9.0",
+      "source": "."
+    }
+  ]
+}
+```
