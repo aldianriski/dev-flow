@@ -16,9 +16,11 @@ Full detail for Phases 0–10. Loaded on demand from `dev-flow/SKILL.md`.
 
 ## Phase 0 — Parse
 
+- [ ] **Session warm-up**: check TODO.md or last Session Close output for non-empty "Recommended next-session updates" — surface each item before proceeding; apply any that affect current task scope
 - [ ] Run: `node ${CLAUDE_PLUGIN_ROOT:-.claude}/scripts/set-phase.js clear` (Phase Markers — pre-flight, releases any stale phase from a crashed prior session)
 - [ ] Read TODO.md, find first `[ ]` task in Active Sprint
 - [ ] Extract: task ID, title, `scope`, `layers`, `api-change`, `acceptance`, `tracker`
+- [ ] **Skill dispatch**: look up `layers` in `skill-dispatch.md` → record required skills for Gate 0 output
 - [ ] `tracker` is "none" without justification → **HARD STOP**
 - [ ] Emit **Task Brief** (max 8 lines, no question yet): task restated in own words · files expected to change · key risk · what "done" looks like
 - [ ] **Read budget**: no further file reads after TODO.md — Task Brief names the files to change; all discovery deferred to design-analyst in Phase 2
@@ -40,6 +42,7 @@ Full detail for Phases 0–10. Loaded on demand from `dev-flow/SKILL.md`.
 **Out of scope**: [explicitly excluded items]
 **Edge cases to handle**: [list]
 **Constraints**: Layers: [list] | API change: yes/no | Risk: low/medium/high
+**Required skills**: [advisory — from skill-dispatch.md lookup, or "none" if docs/governance only]
 **Context cost estimate**: [Tier 2 — single layer | Tier 3 — cross-layer]
 Type 'design' to proceed, or provide corrections.
 ```
@@ -173,6 +176,14 @@ Refs: [tracker URL or "none — [reason]"]
   - [ ] Task marked [x]
   - [ ] Changelog row added (File | Change | ADR)
   - [ ] Sprint block rotated to docs/CHANGELOG.md if sprint complete
+**Doc sync review** (advisory — check each doc affected by this session's changes):
+| Doc | Affected? (yes/no/n-a) | Action taken |
+|:----|:----------------------|:-------------|
+| `README.md` | | |
+| `docs/blueprint/*` | | |
+| `CHANGELOG.md` | | |
+| `CONTRIBUTING.md` | | |
+| `.claude/CLAUDE.md` | | |
 **Recommended next-session updates**: [list]
 **Corrections worth promoting to Validated Session Patterns**: [list]
 ```

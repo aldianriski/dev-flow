@@ -25,9 +25,9 @@ Task weight = scope score + risk score. Total = sum across all open tasks.
 ```
 ## Sprint N Plan — [Sprint Name]
 **Tasks scored**:
-| Task | Title | Scope | Risk | Weight |
-|:-----|:------|:------|:-----|:-------|
-| TASK-NNN | [title] | [scope] | [risk] | [N] |
+| Task | Title | Scope | Risk | Weight | Skills |
+|:-----|:------|:------|:-----|:-------|:-------|
+| TASK-NNN | [title] | [scope] | [risk] | [N] | [from skill-dispatch.md] |
 **Total weight**: N → [single-phase | two-phase | blocked]
 
 **Phase 1**: [task list]
@@ -49,6 +49,7 @@ Classification rules:
 **Context gate**: Before entering each phase, estimate turn count. If ≥28 turns (≈70% of 40-turn budget), prune prior phase to 3-bullet summary before proceeding.
 
 Per task in the phase: Gate 0 → Implement → Validate → Test. Mark `[x]` in TODO.md after each task passes.
+**Before Gate 0 per task** (advisory): look up task `layers` in `skill-dispatch.md` — surface required skills in Gate 0 "Required skills" field.
 Single Gate 2 at end of phase aggregates full diff across all tasks in that phase.
 After Gate 2 on a non-final phase: output Phase 2 plan and await `run`.
 After Gate 2 on the final phase: emit the Sprint Phase Complete prompt before any commit:

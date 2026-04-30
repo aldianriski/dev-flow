@@ -165,3 +165,31 @@ Four medium/low friction items found:
 - npm package — rejected: wrong ecosystem; Claude Code skills are not npm-compatible modules
 - Dual-track (both) — rejected: README cannot clearly serve two install flows; plugin-first covers 95% of adoption cases
 **Consequences**: MINOR semantically (new distribution path, no phase/gate changes). `validate-scaffold.js` gains check for root-level mirrors. Examples project stays in-repo but not mirrored at root — separate concern. Users who cloned before this change can continue using `.claude/skills/` directly — no breaking change to skill resolution.
+
+---
+
+## ADR-011: Skill-dispatch governance — layers-to-skills binding
+
+**Date**: 2026-04-30
+**Status**: Accepted
+**Deciders**: Tech Lead (Aldian Rizki)
+
+### Context
+
+10+ scaffolding skills exist in the skill library (fe-component-builder, be-service-scaffolder, api-contract-designer, etc.) but no binding between a task's `layers` field and which skills must be invoked. Each dev-AI pair picks freely, producing inconsistent code patterns across team. Identified in IMPROVEMENT.md loophole audit L3.
+
+### Decision
+
+Add `skill-dispatch.md` reference doc mapping `layers` field values → required skills. Surface the required skills as an **advisory** field in Gate 0 scope confirmation (`**Required skills**: [list]`). Not a hard stop — preserves human judgment for edge cases.
+
+### Alternatives considered
+
+1. **Hard stop at Phase 3** — block implementation if required skill not invoked. Rejected: too rigid for simple doc tasks where scaffolder adds no value.
+2. **Sprint-warn only** — surface in sprint plan but not in Gate 0. Rejected: too weak, doesn't surface early enough to change behavior before design.
+
+### Consequences
+
+- Gate 0 format gains one advisory field. All adopters see skill recommendations at scope confirmation.
+- Adopters can extend via `skill-dispatch-local.md` for project-specific layers.
+- No enforcement overhead; advisory can be overridden without ceremony.
+- Dispatch table must be maintained when new skills are added to the library.
