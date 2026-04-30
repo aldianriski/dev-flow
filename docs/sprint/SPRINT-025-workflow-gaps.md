@@ -2,7 +2,7 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-04-30
 update_trigger: sprint open / close / status change
-status: active
+status: complete
 plan_commit: —
 close_commit: —
 ---

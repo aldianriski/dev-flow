@@ -26,6 +26,7 @@ Gate-driven workflow for any software task. Choose a mode, follow the phases, st
 | `resume` | Interrupted session with an existing design plan | Resumes at first `[ ]` micro-task |
 | `sprint` | Run all `[ ]` tasks in Active Sprint in one flow | Gate 0 per task → single Gate 2 per phase |
 | `mvp` | Prototype/spike — no architecture needed | Gate 0: skip · Gate 1: skip · Gate 2: lint + existing tests green + commit |
+| `rotate` | All Active Sprint tasks done — close sprint, archive, define N+1 | No gates — pre-condition check only |
 
 ```dot
 digraph dev_flow {
@@ -42,9 +43,11 @@ digraph dev_flow {
   kw -> hotfix [label="hotfix"];
   kw -> review [label="review PR#"];
   kw -> resume [label="resume TASK-N"];
-  kw -> sprint [label="sprint"];
-  kw -> mvp   [label="mvp TASK-N"];
+  kw -> sprint  [label="sprint"];
+  kw -> mvp    [label="mvp TASK-N"];
+  kw -> rotate [label="rotate"];
   kw -> task   [label="(none)"];
+  rotate [label="Rotate Mode\n(close sprint\n→ define N+1)"];
   mvp [label="MVP Mode\n(Parse→Impl→Close)"];
   mvp -> quick [label="escalate\n(>5 files)", style=dashed];
   task -> quick     [label="yes — default"];
@@ -57,12 +60,13 @@ digraph dev_flow {
 ```
 
 **Freeform detection order** (orchestrator checks in order):
-1. `/dev-flow sprint` → Sprint Mode (weight score → plan)
-2. `/dev-flow [text that is not TASK-NNN and not a mode keyword]` → Path B (task-decomposer)
-3. `/dev-flow` with no active tasks in TODO.md → Path B
-4. `/dev-flow TASK-NNN` (no mode keyword) → quick mode (default)
-5. `/dev-flow mvp TASK-NNN` → mvp mode (prototype/spike override)
-6. `/dev-flow full TASK-NNN` → full mode (explicit override)
+1. `/dev-flow rotate` → Rotate Mode (close sprint + archive + define N+1)
+2. `/dev-flow sprint` → Sprint Mode (weight score → plan)
+3. `/dev-flow [text that is not TASK-NNN and not a mode keyword]` → Path B (task-decomposer)
+4. `/dev-flow` with no active tasks in TODO.md → Path B
+5. `/dev-flow TASK-NNN` (no mode keyword) → quick mode (default)
+6. `/dev-flow mvp TASK-NNN` → mvp mode (prototype/spike override)
+7. `/dev-flow full TASK-NNN` → full mode (explicit override)
 
 ---
 
@@ -107,7 +111,7 @@ digraph dev_flow {
 ❌ Sprint mode: ≥28 turns (≈70% budget) before next phase entry → prune first
 ```
 
-Mode details: hotfix → `${CLAUDE_SKILL_DIR}/references/mode-hotfix.md` · resume → `${CLAUDE_SKILL_DIR}/references/mode-resume.md` · sprint → `${CLAUDE_SKILL_DIR}/references/mode-sprint.md` · mvp → `${CLAUDE_SKILL_DIR}/references/mode-mvp.md`
+Mode details: hotfix → `${CLAUDE_SKILL_DIR}/references/mode-hotfix.md` · resume → `${CLAUDE_SKILL_DIR}/references/mode-resume.md` · sprint → `${CLAUDE_SKILL_DIR}/references/mode-sprint.md` · mvp → `${CLAUDE_SKILL_DIR}/references/mode-mvp.md` · rotate → `${CLAUDE_SKILL_DIR}/references/mode-rotate.md`
 
 ---
 
@@ -120,3 +124,4 @@ Mode details: hotfix → `${CLAUDE_SKILL_DIR}/references/mode-hotfix.md` · resu
 | "Session Close is just admin, let's skip" | Doc drift compounds — one skipped close creates three stale files |
 | "Let's use hotfix for this non-emergency" | Hotfix disables all gates — reserve strictly for production-down |
 | "We'll do a quick refactor inside this task" | Scope creep inside a task breaks Gate 1 — open a new task for refactors |
+| "read-guard blocked a read — log it to BUGS.md" | read-guard blocks are enforcement events, not bugs. Never write block output to docs/. Resolve by dispatching the correct subagent or adding the path to ORCHESTRATOR_ALLOWLIST. |

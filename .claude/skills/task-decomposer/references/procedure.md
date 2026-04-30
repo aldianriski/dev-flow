@@ -18,4 +18,4 @@ BASE: low
 
 **Step 6 — Granularity + Output**: apply granularity rules; run all 8 validation hard stops; present decomposition for human approval before writing. See `${CLAUDE_SKILL_DIR}/references/decomposition-spec.md` for output template, validation rules, and granularity rules.
 
-After `approve`: read TODO.md for next TASK number → insert into Active Sprint (overflow >5 → Backlog) → clear `.claude/.session-changes.txt`.
+After `approve`: read TODO.md for next TASK number → insert into Backlog under correct P-level section → clear `.claude/.session-changes.txt`. Sprint formation happens via `/dev-flow rotate`, not here.

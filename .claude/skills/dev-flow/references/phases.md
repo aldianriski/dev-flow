@@ -192,16 +192,14 @@ Refs: [tracker URL or "none — [reason]"]
 
 ```
 ## Sprint N Complete — [Sprint Name]
-**Rotation checklist**:
-  - [ ] Sprint Changelog block moved: TODO.md → docs/CHANGELOG.md (prepend)
-  - [ ] TODO.md Active Sprint replaced with Sprint N+1 tasks (2–5 from top Backlog)
-  - [ ] Promoted tasks removed from Backlog
-  - [ ] TODO.md header: last_updated + sprint number updated
-  - [ ] Memory updated: sprint state reflects Sprint N+1
-**Proposed Sprint N+1** (top Backlog items by priority):
-  | Task | Title | Scope | Risk |
-  |:-----|:------|:------|:-----|
-  | [top P0/P1 items — 2–5 tasks, ordered by dependency then priority] |
-  Backlog empty → list tasks to add manually before next session.
-Type 'rotate' to apply, or provide corrections.
+All sprint tasks done. Sprint rotation deferred to next session — context budget is tight at session end.
+
+**Before closing this session**:
+  - [ ] All completed tasks marked [x] in sprint file DoD
+  - [ ] Sprint Changelog rows added to TODO.md (File | Change | ADR)
+
+**Next session**: run `/dev-flow rotate` to:
+  - Close sprint file + archive to docs/CHANGELOG.md
+  - Auto-promote top Backlog tasks (P0→P1, skip v2-deferred)
+  - Create docs/sprint/SPRINT-NNN.md with T-cards for Sprint N+1
 ```

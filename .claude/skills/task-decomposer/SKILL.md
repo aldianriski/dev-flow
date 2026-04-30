@@ -54,7 +54,8 @@ Execution procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 - Identical acceptance criteria on two tasks → merge or differentiate before output
 - `--from-architecture` skips clarification and assumption registry — uses Gate B doc as spec; if invoked outside INIT Phase I-4, state this and require explicit human confirmation before proceeding
 - Missing ticket credentials → ask for paste; never block on missing env vars
-- After `approve`: two writes occur — TODO.md task insertion and `.claude/.session-changes.txt` clear; no other files are touched
+- After `approve`: two writes occur — TODO.md **Backlog** insertion and `.claude/.session-changes.txt` clear; no other files are touched
+- Never write tasks to Active Sprint — sprint formation happens via `/dev-flow rotate`
 
 ## Red Flags
 
