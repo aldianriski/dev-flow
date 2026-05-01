@@ -4,7 +4,7 @@ last_updated: 2026-05-01
 update_trigger: sprint open / close / status change / phase scope change
 status: closed
 plan_commit: a8d3158
-close_commit: pending (close commit)
+close_commit: 9cd403e
 last_updated: 2026-05-01
 ---
 
