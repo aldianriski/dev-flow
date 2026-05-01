@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 32 closed)
+last_updated: 2026-05-01 (Sprint 33 closed)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 33
+sprint: 34
 ---
 
 > **External references**
@@ -34,7 +34,7 @@ sprint: 33
 
 ## Active Sprint
 
-→ Sprint 33 — P2 polish sweep (not yet planned — run /task-decomposer or /dev-flow)
+→ Sprint 34 — (not yet planned — run /task-decomposer or /dev-flow)
 
 ---
 
@@ -58,15 +58,9 @@ sprint: 33
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-### Sprint 28 — Archived to docs/CHANGELOG.md (2026-05-01)
+### Sprint 33 — Archived to docs/CHANGELOG.md (2026-05-01)
 
-### Sprint 29 — Archived to docs/CHANGELOG.md (2026-05-01)
-
-### Sprint 30 — Archived to docs/CHANGELOG.md (2026-05-01)
-
-### Sprint 31 — Archived to docs/CHANGELOG.md (2026-05-01)
-
-### Sprint 32 — Archived to docs/CHANGELOG.md (2026-05-01)
+*Sprint 34 in progress — no entries yet.*
 
 ---
 

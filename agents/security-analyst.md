@@ -1,6 +1,6 @@
 ---
 name: security-analyst
-description: Use during a separate /security-review session to audit the implementation for OWASP Top 10 and stack-specific risks. Thin wrapper that preloads security-auditor skill.
+description: Use when a separate /security-review session is needed to audit for OWASP Top 10 and stack-specific risks. Thin wrapper that preloads security-auditor skill.
 model: claude-sonnet-4-6
 effort: medium
 tools: Read Grep Glob

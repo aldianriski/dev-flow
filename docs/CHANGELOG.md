@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 32 archived)
+last_updated: 2026-05-01 (Sprint 33 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -9,10 +9,27 @@ status: current
 
 > Entries are prepended (newest first). Each sprint block is moved here from `TODO.md` once its changes are reflected in docs.
 >
+> **Path note:** Pre-v2 entries (before Sprint 32) reference `.claude/skills/`; canonical path is `skills/` since v2.0.
+>
 > **Semver bump rules** (also in `CONTRIBUTING.md` when it exists):
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 33 — P2 polish sweep (2026-05-01)
+
+**Blueprint version:** PATCH (copywriting, headers, install docs; no phase/gate/mode changes).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `TODO.md` | P2-3: Removed stale archive stubs from Changelog section | — |
+| `scripts/session-start.js` | P2-5: Added precedence comment to SKILLS_DIR dual-path check | — |
+| `agents/code-reviewer.md` | P2-7: Description normalized to "Use when" form | — |
+| `agents/security-analyst.md` | P2-7: Description normalized to "Use when" form | — |
+| `docs/CHANGELOG.md` | P2-8: Pre-v2 path note added to intro | — |
+| `README.md` | P2-1: Plugin install step → `/dev-flow init`; P2-11: removed broken v2-rewrite-plan link | — |
 
 ---
 

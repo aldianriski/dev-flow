@@ -44,10 +44,11 @@ Copy into any project to get:
 **Plugin install (recommended):**
 ```bash
 claude plugin marketplace add https://github.com/aldianriski/dev-flow
-node dev-flow/bin/dev-flow-init.js
+# In your project directory — Claude Code auto-loads the plugin:
+/dev-flow init
 ```
 
-`dev-flow-init.js` prompts: target dir · project name · owner role · stack.
+`/dev-flow init` scaffolds `CLAUDE.md`, `CONTEXT.md`, and `TODO.md` into your project.
 
 | Provided by plugin | Created by init script |
 |:---|:---|
@@ -57,7 +58,7 @@ node dev-flow/bin/dev-flow-init.js
 
 ## Working on This Project
 
-**Start here every session →** [TODO.md](TODO.md) · **Rewrite plan →** [docs/v2-rewrite-plan.md](docs/v2-rewrite-plan.md)
+**Start here every session →** [TODO.md](TODO.md)
 
 ## License
 

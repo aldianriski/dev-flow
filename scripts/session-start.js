@@ -62,6 +62,7 @@ if (existsSync('.claude/CLAUDE.md')) {
 }
 
 // ─── Check 3: Skill staleness (last-validated > 6 months) ────────────────────
+// .claude/skills takes precedence: scaffold-copy users win; plugin-install users land on 'skills'
 const SKILLS_DIR = existsSync('.claude/skills') ? '.claude/skills' : 'skills';
 const sixMonthsAgo = new Date();
 sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);

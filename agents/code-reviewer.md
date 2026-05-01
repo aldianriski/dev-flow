@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Use during the Review phase to perform a structured code review. Thin wrapper that preloads pr-reviewer skill for deep review logic.
+description: Use when the Review phase is reached to perform a structured code review. Thin wrapper that preloads pr-reviewer skill for deep review logic.
 model: claude-sonnet-4-6
 effort: medium
 tools: Read Grep Glob Bash(git diff *) Bash(git log *)
