@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25
+last_updated: 2026-05-01
 update_trigger: New skill, agent, or script added; stack or architecture decisions change
 status: current
 ---
@@ -10,70 +10,61 @@ status: current
 ## Project Overview
 - **Name**: dev-flow
 - **Type**: Starter Scaffold / Skill Library
-- **Stack**: Markdown · Claude Code skills system · Node.js ≥18 · Python 3.10+ (scripts)
+- **Stack**: Markdown · Claude Code skills system · Node.js ≥18
 - **Architecture**: No layered app; organized by concern under `.claude/`
 
 ## File Structure
 ```
 .claude/
-  skills/      # SKILL.md files and sibling reference docs
-  agents/      # agent definitions (code-reviewer, security-analyst, etc.)
-  scripts/     # harness utilities (session bootstrap, read-guard, change tracker)
+  CLAUDE.md      # this file — project context
+  CONTEXT.md     # shared domain vocab, gates, modes, agent roster
+  skills/        # SKILL.md files + references/ subdirs
+  agents/        # agent definitions (orchestrator + 6 specialists)
+  scripts/       # session-start.js, read-guard.js only
 docs/
-  blueprint/   # authoritative system documentation (01–10)
-templates/     # CLAUDE.md.template, TODO.md.template (TASK-020)
-bin/           # CLI tools (dev-flow-init.js — scaffold bootstrap)
-  __tests__/   # unit tests for bin/ scripts
+  blueprint/     # v1 reference (read-only archive)
+  v2-rewrite-plan.md
+bin/             # dev-flow-init.js scaffold bootstrap
 ```
 
 ## Code Generation Order
-1. `SKILL.md` — spec, hard rules, Red Flags
-2. `skills/<name>/references/` — heavy reference content (>100 lines)
-3. Agent binding in `MANIFEST.json`
-4. `scripts/<name>.js` (Node) or `scripts/<name>.py` (Python) + sibling test file
+1. `SKILL.md` — purpose, steps, red flags
+2. `skills/<name>/references/` — reference content >100 lines
+3. Agent binding if new agent needed
+4. `scripts/<name>.js` — only for deterministic repeated ops
 
 ## Naming Conventions
 - Files: kebab-case
 
-## Anti-Patterns (Avoid)
-❌ HOW content in any doc file — move to code comments
-❌ Skill changes without eval evidence (RED-GREEN-REFACTOR — see `docs/blueprint/05-skills.md §Skill Change Protocol`)
-❌ Hard stop count or gate model changes without a blueprint version bump
-❌ Editing auto-synced copies — always edit the canonical source file (see `docs/blueprint/05-skills.md §Canonical Files Governance`)
+## Anti-Patterns
+❌ HOW content in doc files — move to code/skill
+❌ Skill changes without verifying against acceptance criteria
+❌ Gate or mode count changes without updating CONTEXT.md
+❌ Editing agents directly — always check CONTEXT.md Agent Roster first
 
 ## Commands
 ```bash
-node scripts/<name>.js              # run a Node harness script
-node scripts/__tests__/<name>.test.js  # run Node script unit tests
-python scripts/<name>.py            # run a Python harness script
-python -m py_compile scripts/<name>.py  # validate Python syntax
+node scripts/session-start.js   # session bootstrap
+node scripts/read-guard.js      # read-guard check
 ```
 
 ## Definition of Done
-Every task must satisfy all of these before commit:
-- [ ] Lint passes
-- [ ] Skill or doc change: lean-doc line limits respected (CLAUDE.md ≤200 lines)
+- [ ] Acceptance criteria verified by human at G2
 - [ ] Review: 0 blocking issues
-- [ ] Security: 0 critical findings
-- [ ] DECISIONS.md updated if an architectural decision was made
-- [ ] Acceptance criteria verified by human at Gate 2
+- [ ] CONTEXT.md updated if vocabulary or agent roster changed
+- [ ] ADR written for hard-to-reverse decisions
+- [ ] Line limits respected: CLAUDE.md ≤80 · SKILL.md ≤100 · agents ≤30
 
 ## Behavioral Guidelines
 
-### Think Before Coding
-Before writing any file, surface your assumptions and name any points of confusion explicitly.
-Do not generate plausible-sounding output to cover uncertainty.
-Ask before guessing on ambiguous requirements.
+### Think Before Acting
+Surface assumptions before writing. Ask on ambiguous requirements. Do not generate plausible-sounding output to cover uncertainty.
 
 ### Simplicity First
-Write the minimum content that satisfies the acceptance criteria.
-No speculative sections. No single-use abstractions.
-If a skill or section serves only one task, question whether it belongs at all.
+Minimum content satisfying acceptance criteria. No speculative sections. No single-use abstractions.
 
 ### Surgical Changes
-Touch only what the task requires. Match the style of surrounding files.
-Do not restructure adjacent skills or docs unless your change made them inconsistent.
+Touch only what the task requires. Do not restructure adjacent files unless your change made them inconsistent.
 
 ### Goal-Driven Execution
-Before implementing, restate the task as a verifiable goal with brief numbered steps.
-State what "done" looks like before starting. Do not begin until the goal is clear.
+Restate the task as a verifiable goal before implementing. State what "done" looks like. Do not begin until goal is clear.

@@ -1,127 +1,81 @@
 ---
 name: dev-flow
-description: Use when starting, resuming, or completing any development task. Orchestrates the full gate-driven workflow — init, full, quick, mvp, hotfix, review, and resume modes — enforcing Gate 0/1/2 and all 27 hard stops.
+description: Use when starting, resuming, or completing any development task. Orchestrates gate-driven agentic workflow — init, quick, and mvp modes — with G1 Scope and G2 Design gates.
 user-invocable: true
-argument-hint: "[mode] [task-id]"
-version: "1.0.0"
-last-validated: "2026-04-21"
+argument-hint: "[mode] [task-or-description]"
+version: "2.0.0"
+last-validated: "2026-05-01"
 type: rigid
 ---
 
-# dev-flow Orchestrator
+# dev-flow
 
-Gate-driven workflow for any software task. Choose a mode, follow the phases, stop at every hard stop.
+Gate-driven agentic workflow. Read `CONTEXT.md` before acting.
 
 ---
 
 ## Mode Dispatch
 
-| Mode | Entry condition | Gates enforced |
-|:-----|:----------------|:---------------|
-| `init` | New project — no repo, no architecture | Gate A → Gate B → Gate C → Gate 1 → Gate 2 |
-| `full` | Explicit `/dev-flow full TASK-N` — 10-phase run | Gate 0 → Gate 1 → Gate 2 |
-| `quick` | **(default)** Bare `/dev-flow TASK-N`; ≤3 files expected | Gate 0 → Gate 2 (Gate 1 skipped) |
-| `hotfix` | Production emergency | No gates — rollback check + lint warn only |
-| `review` | Review existing code or open PR | Gate 2 only |
-| `resume` | Interrupted session with an existing design plan | Resumes at first `[ ]` micro-task |
-| `sprint` | Run all `[ ]` tasks in Active Sprint in one flow | Gate 0 per task → single Gate 2 per phase |
-| `mvp` | Prototype/spike — no architecture needed | Gate 0: skip · Gate 1: skip · Gate 2: lint + existing tests green + commit |
-| `rotate` | All Active Sprint tasks done — close sprint, archive, define N+1 | No gates — pre-condition check only |
+| Mode | Gates | Use when |
+|---|---|---|
+| `init` | none | first-time scaffold — no `.claude/` exists |
+| `quick` | G1 | single task, S size, low risk |
+| `mvp` | G1 + G2 | feature work, M+ size, multi-task |
 
-```dot
-digraph dev_flow {
-  rankdir=LR; node [shape=box, style=rounded];
-  input [shape=ellipse, label="user input"];
-  kw    [shape=diamond, label="mode keyword?"];
-  task  [shape=diamond, label="task in\nActive Sprint?"];
-  free  [shape=diamond, label="freeform\ntext?"];
-
-  input -> kw;
-  kw -> init   [label="init"];
-  kw -> full   [label="full TASK-N"];
-  kw -> quick  [label="quick TASK-N"];
-  kw -> hotfix [label="hotfix"];
-  kw -> review [label="review PR#"];
-  kw -> resume [label="resume TASK-N"];
-  kw -> sprint  [label="sprint"];
-  kw -> mvp    [label="mvp TASK-N"];
-  kw -> rotate [label="rotate"];
-  kw -> task   [label="(none)"];
-  rotate [label="Rotate Mode\n(close sprint\n→ define N+1)"];
-  mvp [label="MVP Mode\n(Parse→Impl→Close)"];
-  mvp -> quick [label="escalate\n(>5 files)", style=dashed];
-  task -> quick     [label="yes — default"];
-  task -> free      [label="no"];
-  free -> decompose [label="yes — Path B"];
-  free -> quick     [label="no → default"];
-  decompose [label="task-decomposer\n(Gate 0 combined)"];
-  sprint [label="Sprint Mode\n(weight score\n→ plan)"];
-}
-```
-
-**Freeform detection order** (orchestrator checks in order):
-1. `/dev-flow rotate` → Rotate Mode (close sprint + archive + define N+1)
-2. `/dev-flow sprint` → Sprint Mode (weight score → plan)
-3. `/dev-flow [text that is not TASK-NNN and not a mode keyword]` → Path B (task-decomposer)
-4. `/dev-flow` with no active tasks in TODO.md → Path B
-5. `/dev-flow TASK-NNN` (no mode keyword) → quick mode (default)
-6. `/dev-flow mvp TASK-NNN` → mvp mode (prototype/spike override)
-7. `/dev-flow full TASK-NNN` → full mode (explicit override)
+Freeform input (no mode keyword):
+- No active tasks in TODO.md → run `task-decomposer` first
+- Active task found → `quick` (default)
 
 ---
 
-## Sub-commands
+## Phases
 
-| Sub-command | Action | Script |
-|:------------|:-------|:-------|
-| `:compress <target-file>` | Compress target `.md` file to caveman prose in-place | `scripts/compress.py` |
+### init
+1. Check `.claude/` doesn't exist — if it does, stop and ask
+2. Scaffold `CLAUDE.md` + `CONTEXT.md` + `TODO.md` from templates
+3. Confirm with human → done
 
----
+### quick
+1. **Parse** — restate task as verifiable goal; confirm with human in one line
+2. **G1 Scope** — run checklist (see `references/phases.md`); BLOCK if any fail
+3. **Implement** — execute task; flag scope creep immediately
+4. **Review** — auto-dispatch `code-reviewer`
+5. **Commit** — structured message (see `references/phases.md`)
 
-## Phase Checklist — full detail in `${CLAUDE_SKILL_DIR}/references/phases.md`
-
-| Phase | Name | Key action |
-|:------|:-----|:-----------|
-| 0 | Parse | `set-phase.js clear` pre-flight · read TODO.md |
-| 1 | Clarify | batch all questions · await answers · iterate if unclear · no code changes |
-| Gate 0 | Scope Confirmation | await `'design'` |
-| 2 | Design | spawn `design-analyst` |
-| Gate 1 | Design Plan Approval | await `'yes'` |
-| 3 | Implement | `set-phase.js implement` |
-| 4 | Validate | typecheck + lint → pass or **HARD STOP** |
-| 5 | Test | `set-phase.js test` · RED-GREEN-REGRESS-REFACTOR |
-| 6 | Review | `set-phase.js review` · spawn `code-reviewer` |
-| 7 | Security | `set-phase.js security` · spawn `security-analyst` |
-| Gate 2 | Aggregated Review + Security | await `'commit'` |
-| 8 | Docs | `set-phase.js docs` · `/lean-doc-generator` |
-| 9 | Commit + PR | `git commit` + `git push` + `set-phase.js clear` |
-| 10 | Session Close | mandatory — never skip |
+### mvp
+1. **Parse** — restate task as verifiable goal
+2. **G1 Scope** — run checklist; size M required; L → split first; BLOCK if fail
+3. **Grill** *(when requirements unclear)* — one question at a time; offer recommended answer; explore codebase before asking; stop when goal is unambiguous
+4. **G2 Design** — auto-dispatch `design-analyst`; BLOCK on `BLOCKED` finding; hard-to-reverse decision → dispatch `adr-writer`
+5. **Implement** — execute micro-tasks from design-analyst plan in order; mark each `[x]` when verification passes
+6. **Review** — auto-dispatch `code-reviewer`
+7. **Commit** — structured message; propose `performance-analyst` / `migration-analyst` if applicable
 
 ---
 
-## Hard Stops — full list in `${CLAUDE_SKILL_DIR}/references/hard-stops.md`
+## Agent Dispatch
 
-```
-❌ Gate 0 skipped — tracker "none" without justification
-❌ Typecheck fails — show error, wait for fix
-❌ Lint fails — show error, wait for fix
-❌ CRITICAL finding (review or security) — require explicit override
-❌ Session Close skipped — Phase 10 is mandatory after every commit
-❌ CLAUDE.md exceeds 200 lines — trim before proceeding
-❌ Sprint mode: ≥28 turns (≈70% budget) before next phase entry → prune first
-```
-
-Mode details: hotfix → `${CLAUDE_SKILL_DIR}/references/mode-hotfix.md` · resume → `${CLAUDE_SKILL_DIR}/references/mode-resume.md` · sprint → `${CLAUDE_SKILL_DIR}/references/mode-sprint.md` · mvp → `${CLAUDE_SKILL_DIR}/references/mode-mvp.md` · rotate → `${CLAUDE_SKILL_DIR}/references/mode-rotate.md`
+| Agent | Trigger | Type |
+|---|---|---|
+| `design-analyst` | G2 in `mvp` | auto |
+| `code-reviewer` | post-implement always | auto |
+| `scope-analyst` | G1 if size unclear | auto |
+| `performance-analyst` | api/db/hot-path + high risk | propose → human approves |
+| `migration-analyst` | DB schema change detected | propose → human approves |
+| `security-analyst` | never — separate session | tell user: run `/security-review` |
 
 ---
 
-## Red Flags — Rationalizations That Break the Workflow
+## Skill Dispatch
 
-| Rationalization | What it actually means |
-|:----------------|:-----------------------|
-| "This is small, Gate 0 is overkill" | Scope not confirmed — unconfirmed small changes cause large regressions |
-| "Tests pass, the review agent is redundant" | Review catches spec drift that tests cannot — spec drift ships silently |
-| "Session Close is just admin, let's skip" | Doc drift compounds — one skipped close creates three stale files |
-| "Let's use hotfix for this non-emergency" | Hotfix disables all gates — reserve strictly for production-down |
-| "We'll do a quick refactor inside this task" | Scope creep inside a task breaks Gate 1 — open a new task for refactors |
-| "read-guard blocked a read — log it to BUGS.md" | read-guard blocks are enforcement events, not bugs. Never write block output to docs/. Resolve by dispatching the correct subagent or adding the path to ORCHESTRATOR_ALLOWLIST. |
+At G1, look up task `layers` in `references/skill-dispatch.md` → list advisory skills.
+
+---
+
+## Red Flags
+
+❌ **G1 skipped** — unconfirmed scope causes regressions; no exceptions
+❌ **Size L not split** — mvp with L-size task is un-reviewable; split first
+❌ **CRITICAL finding not resolved** — ships defect; requires explicit human override
+❌ **Grill skipped on ambiguous requirements** — builds wrong thing; always grill before G2
+❌ **Security run in same session** — context contamination; always separate session

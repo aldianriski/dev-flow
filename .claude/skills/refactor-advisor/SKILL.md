@@ -18,6 +18,7 @@ Analyze code for quality issues and produce targeted refactor proposals with bef
 2. **SOLID violations** — SRP (too many reasons to change), OCP (modification not extension), LSP (subtypes break contract), ISP (fat interfaces), DIP (depends on concretions)
 3. **Clean Architecture drift** — outer layers importing inner layers, business logic in controllers, infrastructure in domain
 4. **DDD anti-patterns** — anemic domain model (no behavior), missing aggregates, leaking domain events, repositories in domain layer
+5. **Deep Module Opportunities** — modules whose interface is more complex than their implementation (inverted leverage); apply deletion test: *if this module were removed, would its complexity scatter across callers?* If yes → module earns its keep. If no → flatten it. Flag modules with high interface-to-hide ratio as refactor candidates.
 
 ## Output Format per Finding
 
