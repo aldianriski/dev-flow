@@ -9,7 +9,7 @@
     {
       "name": "dev-flow",
       "description": "Gate-driven AI workflow system for any software project. Built on Claude Code.",
-      "version": "2.1.0",
+      "version": "2.2.0",
       "source": {
         "source": "github",
         "repo": "aldianriski/dev-flow"

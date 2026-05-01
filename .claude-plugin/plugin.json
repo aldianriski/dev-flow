@@ -1,5 +1,6 @@
 {
   "name": "dev-flow",
+  "version": "2.2.0",
   "description": "Gate-driven AI workflow system for any software project. Built on Claude Code.",
   "author": {
     "name": "Aldian Rizki",
