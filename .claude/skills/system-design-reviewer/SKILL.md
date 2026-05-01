@@ -62,6 +62,14 @@ status: APPROVED | APPROVED_WITH_CONCERNS | NEEDS_REVISION | BLOCKED
 [What should happen before implementation begins — max 3 bullets]
 ```
 
+## Grill Mode (when design is unclear)
+
+When the proposed design is ambiguous or requirements underspecified — run this before reviewing:
+- Ask **one question at a time**; offer a recommended answer based on codebase evidence
+- Challenge terminology that conflicts with `CONTEXT.md` vocabulary
+- As terms crystallize → note: "Add to CONTEXT.md: `[term]` = [definition]"
+- Stop when design is unambiguous enough to apply all 5 Review Lenses
+
 ## Greenfield vs. Brownfield Mode
 
 Procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
