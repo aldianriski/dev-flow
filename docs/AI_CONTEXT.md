@@ -2,7 +2,7 @@
 owner: Tech Lead
 last_updated: 2026-04-29
 update_trigger: Patterns, conventions, or current focus change; new skill or mode added
-status: current
+status: stale
 ---
 
 # AI Context — dev-flow

@@ -2,7 +2,7 @@
 owner: Tech Lead
 last_updated: 2026-04-26
 update_trigger: New mode, agent, skill, or harness script added; workflow phase or gate model changes
-status: current
+status: stale
 ---
 
 # Architecture — dev-flow

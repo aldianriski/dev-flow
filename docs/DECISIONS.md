@@ -40,7 +40,7 @@ Append-only. Never edit past ADRs. Use `/adr-writer` to add entries.
 ## ADR-003: Orchestrator-managed phase state via `set-phase.js`
 
 **Date**: 2026-04-25
-**Status**: decided
+**Status**: superseded-by ADR-013
 **Context**: TASK-050 (AUDIT.md AUD-001) — `read-guard.js` short-circuits with `if (!existsSync(PHASE_FILE)) process.exit(0)`. The phase file is never created in real sessions, so the §1 Thin-Coordinator Rule is silently bypassed in 100 % of sessions. A writer is needed; two enforcement models were considered.
 **Decision**: Orchestrator-managed via `node .claude/scripts/set-phase.js <phase>`. The orchestrator (Claude reading `dev-flow/SKILL.md`) runs the script as the first step of each compact-vulnerable phase (Implement, Test, Review, Security, Docs), and runs `set-phase.js clear` after Phase 9 commit. Phase state lives in `.claude/.phase` (gitignored). Allowlist of valid phase names enforced by the script.
 **Alternatives considered**:
@@ -104,7 +104,7 @@ Adopters pin a specific version at install: `claude plugin install https://githu
 ## ADR-007 — Add `mvp` mode: 3-phase lean delivery for prototype/spike work
 
 **Date**: 2026-04-27
-**Status**: decided
+**Status**: superseded-by ADR-013
 
 **Context**: TASK-097. Prototype and spike tasks need a lighter path than `quick` — which still requires design (Gate 0), review, and a TDD contract. The alternative of making `quick` leaner was considered but rejected: `quick` already has a 5-phase contract that teams depend on for real feature work. Eroding that contract would create confusion about when reviews happen.
 
@@ -125,7 +125,7 @@ Fence-line (explicit, must not blur):
 ## ADR-008 — Dogfood outcome: dev-flow validated on real implementation task (EPIC-C)
 
 **Date**: 2026-04-27
-**Status**: decided
+**Status**: superseded-by ADR-013
 
 **Context**: TASK-077 / EPIC-C. First end-to-end dogfood run of dev-flow on a non-trivial implementation task (TASK-001: global error-handler middleware) in `examples/node-express/`. Mode: full. 10 phases executed.
 
@@ -144,7 +144,7 @@ Four medium/low friction items found:
 ## ADR-009 — Phase 1 batch-clarify + iteration loop: workflow contract change
 
 **Date**: 2026-04-27
-**Status**: decided
+**Status**: superseded-by ADR-013
 **Context**: TASK-100 user friction report (2026-04-27) — AI was asking one clarification question per turn in Phase 1, forcing users into multi-turn back-and-forth before scope was confirmed. This burned context budget and delayed Gate 0 by 3–6 turns on average. A second friction point: after answering, no confirmation that all questions were resolved before proceeding.
 **Decision**: Replace the "one question at a time" rule in Phase 1 with batch clarification — all open questions surfaced in one message, user answers in one reply. Add an iteration loop: after reply, AI summarises understanding, checks for remaining ambiguity, asks again if needed, then proceeds to Gate 0 only when fully resolved.
 **Alternatives considered**:
@@ -193,3 +193,76 @@ Add `skill-dispatch.md` reference doc mapping `layers` field values → required
 - Adopters can extend via `skill-dispatch-local.md` for project-specific layers.
 - No enforcement overhead; advisory can be overridden without ceremony.
 - Dispatch table must be maintained when new skills are added to the library.
+
+---
+
+## ADR-012: Wrap-or-replace Claude Code primitives — Replace
+
+**Date**: 2026-05-01
+**Status**: Accepted
+**Deciders**: Tech Lead (Aldian Rizki)
+
+### Context
+
+v2 skills and agents overlap with three Claude Code built-in primitives: `/review` slash command, `TaskCreate/TaskList/TaskUpdate` tools, and `/init` slash command. No explicit decision existed on whether to wrap (use CC primitive + add behavior on top) or replace (custom implementation, CC primitive ignored). Without a decision, contributors risk mixing both approaches and creating inconsistent behavior. Audit: `docs/research/r9-primitive-audit.md`.
+
+### Decision
+
+**Replace** over Wrap across all three overlaps.
+
+- `/review` → `code-reviewer` agent (auto-dispatched) + `pr-reviewer` skill is canonical. CC `/review` is not used.
+- `TaskCreate / TaskList / TaskUpdate` → `TODO.md` is canonical for task tracking. CC task tools are not used.
+- `/init` → `dev-flow init` mode is canonical for project scaffolding. CC `/init` is not used.
+
+### Alternatives considered
+
+1. **Wrap `/review`**: Use CC `/review` and post-process output into tiered format. Rejected — CC `/review` has no task-context awareness; tiered format (CRITICAL/BLOCKING/NON-BLOCKING) depends on task acceptance criteria which CC `/review` does not receive.
+2. **Use TaskCreate/TaskList for tracking**: Provides native task state. Rejected — CC task tools are session-scoped and ephemeral; TODO.md is project-scoped and git-tracked; sprint structure is lost on session reset.
+3. **Use CC `/init` + supplement**: Run CC `/init` then append CONTEXT.md + TODO.md. Rejected — two-step init adds fragility; CONTEXT.md and TODO.md are required from step one for gates to function; simpler to own the full scaffold.
+
+### Consequences
+
+- All three CC primitives are explicitly excluded from v2 workflow. Skills and agent descriptions updated to say so (TASK-087, TASK-088, TASK-089).
+- Contributors must not wire CC task tools or `/review` into future skill additions — document in Quick Rules.
+- If CC primitives gain task-context or session-persistence features, this ADR should be revisited.
+
+**EPIC-E closed** — consistency sweep (TASK-090) confirmed zero conflicting CC primitive references across `skills/` and `agents/`. Sprint 29 complete 2026-05-01.
+
+---
+
+## ADR-013: v2 rewrite supersedes v1 phase/mode/phase-tracking model; read-guard retired
+
+**Date**: 2026-05-01
+**Status**: decided
+**Deciders**: Tech Lead (Aldian Rizki)
+
+### Context
+
+The v2 rewrite (Sprints 18–29) replaced the v1 phase model (10 sequential phases tracked via `.claude/.phase` file), the v1 mode set (init/full/quick/hotfix/review/resume), and the phase-tracking machinery (`set-phase.js`, `ci-status.js`, `track-change.js`). ADR-003 decided orchestrator-managed phase state via `set-phase.js`; ADR-007 added `mvp` mode as a 3-phase path; ADR-008 validated the v1 dogfood run; ADR-009 changed Phase 1 clarification behavior. None of these were marked superseded after the v2 rewrite landed. Separately, `read-guard.js` — the PreToolUse hook enforcing the Thin-Coordinator Rule — became a silent no-op: `COMPACT_VULNERABLE = new Set()` (empty), phase file never written, guard always pass-through. The hook still fired on every Read/Grep/Glob call, paying Node startup cost with zero enforcement.
+
+### Decision
+
+1. ADR-003, ADR-007, ADR-008, and ADR-009 are superseded by this ADR. The v1 phase model, mode set, and phase-tracking contract they describe are retired.
+2. `scripts/read-guard.js` is deleted. The PreToolUse `Read|Grep|Glob` hook entry is removed from `hooks/hooks.json`. Dead enforcement code is worse than no enforcement code.
+3. The Thin-Coordinator Rule remains a stated principle in CONTEXT.md but has no runtime enforcement in v2. A v2-compatible enforcement mechanism (if any) is a future decision.
+
+### Alternatives considered
+
+| Option | Reason rejected |
+|:-------|:----------------|
+| Keep read-guard.js stub "for forward compatibility" | Zero protection + Node startup cost on every file read; misleading comment implies enforcement that does not exist |
+| Restore phase-tracking (set-phase.js + .phase) | Substantial redesign outside P0 audit scope; v2 SKILL.md has no phase-entry markers; deferred to future sprint |
+
+### Consequences
+
+**Positive**:
+- PreToolUse hook no longer fires on every Read/Grep/Glob — no Node startup overhead per file read
+- Stale governance docs (ARCHITECTURE.md, AI_CONTEXT.md) marked `status: stale` — honest signal to readers
+- ADR status log accurate — superseded ADRs correctly marked
+
+**Negative** (trade-offs accepted):
+- Thin-Coordinator Rule has no runtime enforcement in v2 — relies on prompt discipline only
+- If a future sprint restores enforcement, it must design from scratch; the v1 scaffold is gone
+
+**Neutral**:
+- `hooks/hooks.json` retains the `Bash(git add*)` chain-guard and `SessionStart` bootstrap hook — unaffected
