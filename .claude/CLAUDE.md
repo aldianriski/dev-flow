@@ -11,19 +11,24 @@ status: current
 - **Name**: dev-flow
 - **Type**: Starter Scaffold / Skill Library
 - **Stack**: Markdown · Claude Code skills system · Node.js ≥18
-- **Architecture**: No layered app; organized by concern under `.claude/`
+- **Architecture**: Plugin-first layout — components at repo root per Claude Code plugin spec
 
 ## File Structure
 ```
+skills/          # SKILL.md files + references/ subdirs (plugin auto-discovers)
+agents/          # agent definitions (orchestrator + 6 specialists)
+scripts/         # session-start.js, read-guard.js only
+hooks/
+  hooks.json     # plugin hook config
+.claude-plugin/
+  plugin.json    # plugin manifest
+  marketplace.json
 .claude/
   CLAUDE.md      # this file — project context
   CONTEXT.md     # shared domain vocab, gates, modes, agent roster
-  skills/        # SKILL.md files + references/ subdirs
-  agents/        # agent definitions (orchestrator + 6 specialists)
-  scripts/       # session-start.js, read-guard.js only
+  settings.json  # local dev hooks
 docs/
   blueprint/     # v1 reference (read-only archive)
-  v2-rewrite-plan.md
 bin/             # dev-flow-init.js scaffold bootstrap
 ```
 

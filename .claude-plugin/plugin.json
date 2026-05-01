@@ -1,7 +1,6 @@
 {
   "name": "dev-flow",
   "description": "Gate-driven AI workflow system for any software project. Built on Claude Code.",
-  "version": "1.9.1",
   "author": {
     "name": "Aldian Rizki",
     "email": "m.aldian@paxel.co"
@@ -16,38 +15,6 @@
             "type": "command",
             "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/session-start.js",
             "description": "Bootstrap: verify settings.local, CLAUDE.md size, skill staleness, doc line counts, pending migrations, active sprint"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash(git push*)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/ci-status.js",
-            "description": "Poll CI status after push — block Session Close if pipeline is non-green"
-          }
-        ]
-      },
-      {
-        "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/track-change.js",
-            "description": "Append written file path to .claude/.session-changes.txt for scope guard and context tracking"
-          }
-        ]
-      },
-      {
-        "matcher": "Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/track-change.js",
-            "description": "Append edited file path to .claude/.session-changes.txt for scope guard and context tracking"
           }
         ]
       }
