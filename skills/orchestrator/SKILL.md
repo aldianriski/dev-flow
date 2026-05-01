@@ -1,6 +1,6 @@
 ---
 name: orchestrator
-description: Use when starting, resuming, or completing any development task. Orchestrates gate-driven agentic workflow — init, quick, and mvp modes — with G1 Scope and G2 Design gates.
+description: Use when starting, resuming, or completing any development task. Orchestrates gate-driven agentic workflow — init, quick, and mvp modes — with G1 Scope and G2 Design gates. Do not use for non-task work — use /zoom-out for orientation, /diagnose for debugging, /refactor-advisor for code-smell sweeps.
 user-invocable: true
 argument-hint: "[mode] [task-or-description]"
 version: "2.0.0"

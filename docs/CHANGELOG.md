@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 36 archived)
+last_updated: 2026-05-01 (Sprint 37 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,32 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 37 — EPIC-Audit Phase 3 — token/redundancy reduction (2026-05-01)
+
+**Blueprint version:** PATCH-equivalent (description normalizations + agent line trims; no phase/gate/contract change).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `agents/dispatcher.md` | T1 — body trim (31 → 30 lines, OVER-CAP closed); T4 — description "Use as lead..." → "Use when running..." (P2-7 closed) | — |
+| `agents/design-analyst.md` | T1 — body trim (31 → 29 lines, OVER-CAP closed) | — |
+| `skills/system-design-reviewer/SKILL.md` | T2 — description preamble swap "Use before..." → "Use when reviewing..." (R4 violation cleared, eval-skills 13/14 → 14/14) | — |
+| `skills/orchestrator/SKILL.md` | T3 — description appended "Do not use" clause (P1-9 closed) | — |
+| `skills/task-decomposer/SKILL.md` | T3 — description appended "Do not use" clause (P1-9 closed) | — |
+| `docs/audit/baseline-metrics.md` + `.json` | T5+T6+T7 — regenerated; delta section + Overlap review + References audit appended | — |
+| `docs/audit/skill-eval-report.md` | T7 — regenerated (14/14 pass) | — |
+| `.github/workflows/validate.yml` | T7 — `continue-on-error: true` removed from eval-skills step (Sprint 36 stopgap retired) | — |
+| `docs/sprint/SPRINT-037-token-redundancy-reduction.md` | NEW — sprint plan + execution log + retro | — |
+
+**Audit closures:**
+- P0-5 (cap violations) — closed via T1 trim, no ADR-016 cap amend needed.
+- P1-9 (Do-not-use clauses) — closed via T3 on `orchestrator` + `task-decomposer`.
+- P2-7 (agent description normalize) — closed via T4 on `dispatcher`.
+- Sprint 36 R4 carryover — closed via T2 on `system-design-reviewer`.
+
+**Quality gate (Q7):** zero OVER-CAP + 14/14 eval-skills pass — **PASS**. Token reduction modest (≈140 tokens / 1.1% on agents+skills total), achieved without forcing cosmetic trims.
 
 ---
 

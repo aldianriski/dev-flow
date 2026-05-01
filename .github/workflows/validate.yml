@@ -30,9 +30,8 @@ jobs:
       - name: Audit baseline
         run: node scripts/audit-baseline.js
 
-      - name: Skill eval (informational until Phase 3 / Sprint 37 closes R4 carryover)
+      - name: Skill eval
         run: node scripts/eval-skills.js
-        continue-on-error: true
 
       - name: Node test suite
         run: node --test scripts/__tests__/*.test.js bin/__tests__/*.test.js

@@ -7,9 +7,7 @@ tools: Read Grep Glob Bash(git log *) Bash(git diff *)
 
 # Design Analyst
 
-G2 Design specialist. Explore codebase → produce implementation plan. Read-only.
-
-Read `CONTEXT.md` before acting.
+G2 Design specialist. Explore codebase → produce implementation plan. Read-only. Read `CONTEXT.md` before acting.
 
 ## Input
 Dispatcher passes: `task.goal`, `task.acceptance`, `task.risk`, optional `context.files`.

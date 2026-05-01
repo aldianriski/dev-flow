@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 37 promoted — plan locked, awaiting approval)
+last_updated: 2026-05-01 (Sprint 37 closed — EPIC-Audit Phase 3 done)
 update_trigger: Sprint completed, task added, task status changed
 status: current
 sprint: 37
@@ -34,8 +34,8 @@ sprint: 37
 
 ## Active Sprint
 
-→ **Sprint 37 — Token/Redundancy Reduction** (EPIC-Audit Phase 3) · `status: planning`
-> Plan: `docs/sprint/SPRINT-037-token-redundancy-reduction.md`. Awaiting user approval to flip `status: active` + author plan-lock commit.
+→ — none —
+> Sprint 37 closed (2026-05-01). Next: Sprint 38 = Phase 4c Superpowers patterns. Run `/lean-doc-generator` Sprint Promote to open.
 
 ---
 
@@ -67,7 +67,7 @@ sprint: 37
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 37 in flight — see `docs/sprint/SPRINT-037-token-redundancy-reduction.md`. No completed work yet.*
+*Sprint 37 archived → `docs/CHANGELOG.md`. No active sprint.*
 
 ---
 

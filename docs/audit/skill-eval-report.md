@@ -6,12 +6,12 @@ status: current
 generator: scripts/eval-skills.js
 ---
 
-# Skill Eval Report — 2026-05-01T13:34:05.103Z
+# Skill Eval Report — 2026-05-01T14:43:55.658Z
 
 - Skills evaluated: **14**
-- Pass: **13**
-- Fail: **1**
-- Total violations: 1
+- Pass: **14**
+- Fail: **0**
+- Total violations: 0
 
 ## Rules
 
@@ -36,15 +36,8 @@ generator: scripts/eval-skills.js
 | refactor-advisor | 62 | ✓ pass | — |
 | release-manager | 70 | ✓ pass | — |
 | security-auditor | 77 | ✓ pass | — |
-| system-design-reviewer | 92 | ✗ fail (1) | R4 |
+| system-design-reviewer | 92 | ✓ pass | — |
 | task-decomposer | 72 | ✓ pass | — |
 | tdd | 81 | ✓ pass | — |
 | write-a-skill | 81 | ✓ pass | — |
 | zoom-out | 55 | ✓ pass | — |
-
-## Violation details
-
-### system-design-reviewer
-
-- **R4** — description starts with "Use when"
-

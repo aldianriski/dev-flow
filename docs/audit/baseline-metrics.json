@@ -1,22 +1,17 @@
 {
   "aggregate": {
-    "generated": "2026-05-01T13:34:05.100Z",
+    "generated": "2026-05-01T14:43:55.569Z",
     "skill_count": 14,
     "agent_count": 7,
     "script_count": 3,
     "skill_lines_total": 1062,
-    "agent_lines_total": 174,
-    "skill_tokens_total": 10276,
-    "agent_tokens_total": 1686,
+    "agent_lines_total": 171,
+    "skill_tokens_total": 10338,
+    "agent_tokens_total": 1688,
     "skills_over_cap": [],
-    "agents_over_cap": [
-      "design-analyst",
-      "dispatcher"
-    ],
+    "agents_over_cap": [],
     "skills_missing_red_flags": [],
-    "skills_desc_not_use_when": [
-      "system-design-reviewer"
-    ],
+    "skills_desc_not_use_when": [],
     "skills_desc_over_500": []
   },
   "skills": [
@@ -80,9 +75,9 @@
       "name": "orchestrator",
       "file": "skills/orchestrator/SKILL.md",
       "lines": 84,
-      "chars": 3120,
-      "tokens_approx": 780,
-      "desc_chars": 172,
+      "chars": 3248,
+      "tokens_approx": 812,
+      "desc_chars": 300,
       "has_red_flags": true,
       "has_use_when": true,
       "over_cap": false,
@@ -147,11 +142,11 @@
       "name": "system-design-reviewer",
       "file": "skills/system-design-reviewer/SKILL.md",
       "lines": 92,
-      "chars": 3650,
-      "tokens_approx": 913,
-      "desc_chars": 279,
+      "chars": 3688,
+      "tokens_approx": 922,
+      "desc_chars": 317,
       "has_red_flags": true,
-      "has_use_when": false,
+      "has_use_when": true,
       "over_cap": false,
       "references": [
         "skills/system-design-reviewer/references/procedure.md"
@@ -161,9 +156,9 @@
       "name": "task-decomposer",
       "file": "skills/task-decomposer/SKILL.md",
       "lines": 72,
-      "chars": 3923,
-      "tokens_approx": 981,
-      "desc_chars": 227,
+      "chars": 4007,
+      "tokens_approx": 1002,
+      "desc_chars": 311,
       "has_red_flags": true,
       "has_use_when": true,
       "over_cap": false,
@@ -222,20 +217,20 @@
     {
       "name": "design-analyst",
       "file": "agents/design-analyst.md",
-      "lines": 31,
-      "chars": 1110,
+      "lines": 29,
+      "chars": 1109,
       "tokens_approx": 278,
       "desc_chars": 155,
-      "over_cap": true
+      "over_cap": false
     },
     {
       "name": "dispatcher",
       "file": "agents/dispatcher.md",
-      "lines": 31,
-      "chars": 1464,
-      "tokens_approx": 366,
-      "desc_chars": 157,
-      "over_cap": true
+      "lines": 30,
+      "chars": 1470,
+      "tokens_approx": 368,
+      "desc_chars": 163,
+      "over_cap": false
     },
     {
       "name": "migration-analyst",
@@ -290,8 +285,8 @@
     {
       "name": "session-start.js",
       "file": "scripts/session-start.js",
-      "lines": 175,
-      "chars": 7259
+      "lines": 241,
+      "chars": 10547
     }
   ],
   "govDocs": [
@@ -329,19 +324,19 @@
     },
     {
       "file": "docs/DECISIONS.md",
-      "lines": 329,
-      "chars": 27000,
-      "tokens_approx": 6750,
+      "lines": 382,
+      "chars": 31980,
+      "tokens_approx": 7995,
       "status": "current",
-      "last_updated": "2026-05-01"
+      "last_updated": "2026-05-01 (ADR-015 added — Sprint 36)"
     },
     {
       "file": "docs/CHANGELOG.md",
-      "lines": 700,
-      "chars": 55930,
-      "tokens_approx": 13983,
+      "lines": 717,
+      "chars": 57455,
+      "tokens_approx": 14364,
       "status": "current",
-      "last_updated": "2026-05-01 (Sprint 35 archived)"
+      "last_updated": "2026-05-01 (Sprint 36 archived)"
     },
     {
       "file": "README.md",
@@ -353,9 +348,9 @@
     },
     {
       "file": "TODO.md",
-      "lines": 125,
-      "chars": 5792,
-      "tokens_approx": 1448,
+      "lines": 123,
+      "chars": 5730,
+      "tokens_approx": 1433,
       "status": "unknown",
       "last_updated": "unknown"
     }

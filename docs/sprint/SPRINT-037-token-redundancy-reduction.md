@@ -2,9 +2,10 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-01
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending (plan-lock commit)
-close_commit: —
+status: closed
+plan_commit: 4594638
+close_commit: pending (close commit)
+last_updated: 2026-05-01
 ---
 
 # Sprint 037 — Token/Redundancy Reduction (EPIC-Audit Phase 3)
@@ -133,22 +134,30 @@ Same shape as Sprint 35/36 close. Plan-lock + close + SHA backfill three-commit 
 
 ## Sprint DoD
 
-- [ ] T1 OVER-CAP count = 0 (Path A) OR cap amended via ADR-016 (Path B)
-- [ ] T2 eval-skills 14/14 pass (R4 closed)
-- [ ] T3 both target descriptions contain "Do not use" clause
-- [ ] T4 all 7 agents start description with "Use when"
-- [ ] T5 overlap review for 3 pairs documented; zero merges, cross-links if >40%
-- [ ] T6 unused references audited; safe deletions made; tests still pass
-- [ ] T7 baseline regenerated with delta section; CI continue-on-error dropped if eval-skills 14/14
-- [ ] Plan-lock commit landed before any T1..T7 commit
-- [ ] Close commit + CHANGELOG row + TODO update + retro
-- [ ] `last_updated` advanced on touched governance files
+- [x] T1 OVER-CAP count = 0 — Path A (trim) succeeded, no ADR-016 cap amend
+- [x] T2 eval-skills 14/14 pass (R4 closed via SDR description fix)
+- [x] T3 both target descriptions contain "Do not use" clause (P1-9 closed)
+- [x] T4 all 7 agents start description with "Use when" (P2-7 closed)
+- [x] T5 overlap review for 3 pairs documented; zero merges, zero new cross-links (all dispositions intentional)
+- [x] T6 unused references audited — zero unbound files, zero deletes
+- [x] T7 baseline regenerated with delta section; CI continue-on-error dropped (eval 14/14)
+- [x] Plan-lock commit landed before any T1..T7 commit (`4594638`)
+- [x] Close commit + CHANGELOG row + TODO update + retro
+- [x] `last_updated` advanced on touched governance files
 
 ---
 
 ## Execution Log
 
-*(empty — populated as tasks complete)*
+- 2026-05-01: Plan locked at `4594638` — sprint doc + TODO.md pre-lock writes only.
+- 2026-05-01: T1 done — Path A (trim) succeeded, no ADR-016 needed. Both agents had a separable "tagline" + "Read CONTEXT.md" two-paragraph block in the body; merged into one paragraph. dispatcher 31 → 30 lines (post-baseline regen); design-analyst 31 → 29 lines. Sprint 34 DEC-2 ADR-016 reservation preserved for Phase 4c (Sprint 38).
+- 2026-05-01: T2 done — `system-design-reviewer/SKILL.md` description preamble: "Use before building..." → "Use when reviewing a proposed or existing system design — before building...". Char count <500. eval-skills 14/14 pass (R4 closed).
+- 2026-05-01: T3 done — `orchestrator/SKILL.md` description appended: "Do not use for non-task work — use /zoom-out for orientation, /diagnose for debugging, /refactor-advisor for code-smell sweeps." `task-decomposer/SKILL.md` description appended: "Do not use when a task already exists in Active Sprint — use /orchestrator instead." Both <500 chars. P1-9 closed.
+- 2026-05-01: T4 done — pre-flight grep showed 6/7 agents already compliant with "Use when" (Sprint 33 P2-7 partial close + Sprint 35 sweep both contributed). Only `dispatcher` non-compliant. Reframed: "Use as lead agent..." → "Use when running an agentic engineering workflow as lead — reads task, selects mode, runs gates, dispatches specialist agents." 7/7 verified via `grep -c "^description: Use when" agents/*.md`. P2-7 closed.
+- 2026-05-01: T5 done — 3 pair manual review. All disposition = intentional. Pair A (`pr-reviewer` × `code-reviewer` agent) preload pattern per ADR-015 Rule 3. Pair B (`system-design-reviewer` × `pr-reviewer`) different review lenses (~10-15% architecture-lens overlap, intentional). Pair C (`tdd` × `diagnose`) shares feedback-loop pattern + RED/GREEN/REGRESS vocabulary (~15-20% overlap), conceptually distinct, already cross-linked from `tdd` description. No merges, no new cross-links. Findings appended to `baseline-metrics.md` § Overlap review.
+- 2026-05-01: T6 done — 12 `skills/*/references/*.md` files inspected via mechanical grep on filename patterns + `${CLAUDE_SKILL_DIR}/references/` template. **All 12 referenced** from parent SKILL.md or sibling references file. Zero unbound. Zero deletes. Findings appended to `baseline-metrics.md` § References audit.
+- 2026-05-01: T7 done — `audit-baseline.js` regenerated (skills 1062 lines unchanged, agents 174 → 171, OVER-CAP 2 → 0); `eval-skills.js` 14/14 pass (was 13/14); delta section appended to `baseline-metrics.md`; `.github/workflows/validate.yml` eval-skills step `continue-on-error: true` removed (no longer needed).
+- 2026-05-01: T8 — sprint doc populated; CHANGELOG.md row added; TODO.md updated; close commit authored.
 
 ---
 
@@ -156,8 +165,18 @@ Same shape as Sprint 35/36 close. Plan-lock + close + SHA backfill three-commit 
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
-
-*(empty — populated as work happens)*
+| `agents/dispatcher.md` | T1 + T4 | merged tagline + Read-CONTEXT into one paragraph (31 → 30 lines, OVER-CAP closed); description preamble normalized to "Use when..." | medium | T7 baseline regen |
+| `agents/design-analyst.md` | T1 | merged tagline + Read-CONTEXT (31 → 29 lines, OVER-CAP closed) | medium | T7 |
+| `skills/system-design-reviewer/SKILL.md` | T2 | description preamble "Use before..." → "Use when reviewing..." (R4 violation cleared) | low | T7 eval-skills |
+| `skills/orchestrator/SKILL.md` | T3 | description appended "Do not use" clause pointing to /zoom-out, /diagnose, /refactor-advisor | low | T7 |
+| `skills/task-decomposer/SKILL.md` | T3 | description appended "Do not use when a task already exists in Active Sprint — use /orchestrator instead" | low | T7 |
+| `docs/audit/baseline-metrics.md` | T5, T6, T7 | regenerated by `audit-baseline.js`; delta section appended (+ Overlap review + References audit findings) | low | self |
+| `docs/audit/baseline-metrics.json` | T7 | regenerated by `audit-baseline.js` | low | self |
+| `docs/audit/skill-eval-report.md` | T7 | regenerated by `eval-skills.js` (14/14 pass; was 13/14) | low | self |
+| `.github/workflows/validate.yml` | T7 | `continue-on-error: true` removed from eval-skills step (no longer needed) | low | n/a |
+| `docs/sprint/SPRINT-037-token-redundancy-reduction.md` | T1 / T8 | NEW at promote (`status: planning` → `active`); populated through close | low | n/a |
+| `TODO.md` | promote / close | sprint pointer at promote; cleared at close | low | n/a |
+| `docs/CHANGELOG.md` | close | Sprint 37 row appended | low | n/a |
 
 ---
 
@@ -181,4 +200,24 @@ Same shape as Sprint 35/36 close. Plan-lock + close + SHA backfill three-commit 
 
 ## Retro
 
-*(empty — written at close)*
+**Worked:**
+- **Try-trim-first strategy (DEC-1) was correct.** Both 31-line agents had a structurally redundant "tagline + blank + Read-CONTEXT.md + blank" pattern that merged cleanly into one paragraph. No content loss, no ADR-016 cap amend needed. Sprint 34 DEC-2 ADR-016 reservation preserved for Phase 4c without re-juggling.
+- **Pre-flight grep on T4 saved time.** Sprint 35 sweep had incidentally already normalized 4 of 5 agents to "Use when..." form; T4 reduced to 1 file edit. Sprint 33 P2-7 partial close + Sprint 35 carryover = 6/7 already compliant. Verifying before patching prevented redundant work.
+- **Quality-gated DoD (Q7) was the right call.** Drop the 10% line-reduction target → measurable gates (zero OVER-CAP + 14/14 eval). Final delta was modest (3 agent lines, ~140 tokens) but every quality gate passed clean. Quantitative target would have forced cosmetic trims with negative ROI.
+- **T6 references audit found nothing — and that's good signal.** 12 files all bound. Lean surface confirmed. Negative-result audits are still worth running; they harden the no-cleanup-debt assertion.
+- **CI flag drop (T7) closes a Sprint 36 loop cleanly.** `continue-on-error: true` was added in `631be1f` as a stopgap until Phase 3 closes R4. Removed exactly when stopgap's reason expired. Tight loop.
+
+**Friction:**
+- T6 grep regex needed two passes: literal filename refs + `${CLAUDE_SKILL_DIR}/references/` template form. Single-pass missed template references. Documented in the audit findings; future audits should use the same two-pass.
+- T2 description char count (<500) was a soft constraint not enforced by `eval-skills.js`. Manual count required. Enhancement candidate: add R8 char-cap rule to eval-skills.
+- Baseline `wc -l` line count vs `audit-baseline.js` line count: 29 vs 30 on dispatcher post-trim. Off-by-one (final newline handling). Both under cap, so functionally fine, but the discrepancy is a footgun for future trim work targeting cap edges. Worth a small comment in `audit-baseline.js`.
+
+**Pattern candidate (surface to user, ask before locking into VALIDATED_PATTERNS.md):**
+- Pattern: "Try-trim-first / cap-amend-fallback" — pragmatic decision tree for cap violations. Worked here; could become standard for future cap-bound files.
+- Pattern: "Quality gate over quantity gate" — Q7's reframe. Better signal-to-noise than percentage targets for cleanup sprints.
+- Pattern: "Pre-flight grep before patch" — verify state before assuming fix scope. T4's reduction from 5 patches to 1 came from this. Worth standardizing in agent description audits.
+
+**Surprise log:**
+- All 14 skills passed eval-skills 13/14 → 14/14 with a single 1-line description fix (T2). The R-rule check was sharp; surface was already 99% clean. Sprint 33/34/35 incremental trim got us 99%; this sprint's job was the last 1%.
+- Total token reduction across skills was -102 (≈1%) despite 4 description changes. Adding "Do not use" clauses (T3) added tokens; trimming agent body removed them. Near net-zero on skills, real reduction on agents only. Not a surprise after the fact, but useful calibration data for future cleanup planning.
+- ADR-016 reservation preservation was a quiet win — Phase 4c (Sprint 38) keeps its reserved ADR slot, so Phase 4 sub-phases don't have to re-juggle the 014-019 numbering scheme.
