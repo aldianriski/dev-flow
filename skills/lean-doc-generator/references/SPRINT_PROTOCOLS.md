@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-29
+last_updated: 2026-05-01
 update_trigger: Sprint lifecycle rules change; new promote/execute/close steps added
 status: current
 ---
@@ -9,6 +9,22 @@ status: current
 
 > On-demand reference for sprint promote, execute, and close operations.
 > Load this file only when a sprint command is triggered — not for initial doc generation (Steps 0–7).
+
+---
+
+## ⚠️ Anti-Drift Hard Stops
+
+**Observed drift (Sprints 30-33):** Four consecutive sprints shipped governance changes via `fix(governance):` / `docs(governance):` commits **without ever creating a `docs/sprint/SPRINT-NNN-*.md` plan doc**. Sprint Promote Protocol was bypassed; Sprint Close Protocol was inert because there was no plan to verify against. Backfilled retroactively in Sprint 034 (TASK-117).
+
+**Hard stops to prevent recurrence:**
+
+1. **Before any commit message starting `sprint(NNN):` OR `fix(governance):` OR `docs(governance):` OR scope-touching multi-skill/agent edit:** verify `docs/sprint/SPRINT-NNN-<slug>.md` exists with `status: active` and a Plan section. **If missing → STOP and run Sprint Promote Protocol before committing.**
+
+2. **Audit-driven sprints count too.** A sprint that resolves audit findings (P0/P1/P2 sweep) is still a sprint. Same protocol applies.
+
+3. **Single-task sprints.** Even one-task remediation work needs a plan doc — protocol is a forcing function for "what does done look like" before changing files.
+
+4. **Backfill discipline.** If a sprint shipped without a plan doc (drift detected), backfill it retroactively with `backfilled: <date>` in frontmatter, plan reconstructed from commit message, retro acknowledging the drift. Never silently leave it.
 
 ---
 

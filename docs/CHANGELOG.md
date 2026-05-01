@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 33 archived)
+last_updated: 2026-05-01 (Sprint 34 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,37 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 34 — EPIC-Audit Phase 0 — audit reconcile + baseline + roadmap (2026-05-01)
+
+**Blueprint version:** MINOR (new scripts: `audit-baseline.js`, `eval-skills.js`; new SPRINT_PROTOCOLS.md hard stops; new docs/audit/ artifacts).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/sprint/SPRINT-034-audit-and-plan.md` | NEW — Sprint 34 plan + Phase 1-6 refined roadmap | — |
+| `docs/audit/AUDIT-2026-05-01-RECONCILED.md` | NEW — audit finding-by-finding reconciliation (24/28 closed) | — |
+| `docs/audit/baseline-metrics.md` + `.json` | NEW — frozen Phase 3 comparison baseline | — |
+| `docs/audit/skill-eval-report.md` | NEW — minimal structural eval (13/14 pass) | — |
+| `docs/audit/external-refs-probe.md` | NEW — 4-repo surface scan + adopt/reject + phase reorder | — |
+| `scripts/audit-baseline.js` + `__tests__/audit-baseline.test.js` | NEW — baseline collector, 5 unit tests | — |
+| `scripts/eval-skills.js` + `__tests__/eval-skills.test.js` | NEW — minimal structural eval harness, 5 unit tests | — |
+| `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` | Anti-Drift Hard Stops section added | — |
+| `docs/sprint/SPRINT-028-wrap-or-replace.md` | NEW — committed (was untracked) | — |
+| `docs/sprint/SPRINT-029-epic-e-close.md` | NEW — committed (was untracked) | — |
+| `docs/sprint/SPRINT-030..033-*.md` | NEW — backfilled retroactively from commit messages | — |
+| `docs/research/r9-primitive-audit.md` | NEW — committed (was untracked Sprint 28 artifact) | — |
+| `TODO.md` | Sprint 34 entry + EPIC-Audit Phase 1-6 backlog + roadmap update | — |
+
+**ADRs:** none (deferred — ADR-014..019 reserved for Phases 1-4d).
+**Tests added:** 10 (5 audit-baseline + 5 eval-skills).
+**Findings carried forward:**
+- Phase 3: system-design-reviewer R4 fix; 2 agents 1-line over cap; P1-9 + P2-7 partial closes.
+- Phase 4b: P2-10 caveman statusline runtime check.
+- Phase 5: stale ARCHITECTURE.md + AI_CONTEXT.md refresh.
+
+**Phase reorder per external-refs-probe synthesis:** 4c → 4b → 4d → 4a (lowest-risk-first; 4b unblocks eval harness extension).
 
 ---
 

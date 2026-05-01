@@ -1,0 +1,363 @@
+{
+  "aggregate": {
+    "generated": "2026-05-01T11:16:36.371Z",
+    "skill_count": 14,
+    "agent_count": 7,
+    "script_count": 3,
+    "skill_lines_total": 1062,
+    "agent_lines_total": 174,
+    "skill_tokens_total": 10268,
+    "agent_tokens_total": 1688,
+    "skills_over_cap": [],
+    "agents_over_cap": [
+      "design-analyst",
+      "orchestrator"
+    ],
+    "skills_missing_red_flags": [],
+    "skills_desc_not_use_when": [
+      "system-design-reviewer"
+    ],
+    "skills_desc_over_500": []
+  },
+  "skills": [
+    {
+      "name": "adr-writer",
+      "file": "skills/adr-writer/SKILL.md",
+      "lines": 74,
+      "chars": 2718,
+      "tokens_approx": 680,
+      "desc_chars": 294,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/adr-writer/references/procedure.md"
+      ]
+    },
+    {
+      "name": "dev-flow",
+      "file": "skills/dev-flow/SKILL.md",
+      "lines": 84,
+      "chars": 3112,
+      "tokens_approx": 778,
+      "desc_chars": 172,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/dev-flow/references/phases.md",
+        "skills/dev-flow/references/skill-dispatch.md"
+      ]
+    },
+    {
+      "name": "dev-flow-compress",
+      "file": "skills/dev-flow-compress/SKILL.md",
+      "lines": 62,
+      "chars": 2308,
+      "tokens_approx": 577,
+      "desc_chars": 243,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/dev-flow-compress/references/procedure.md"
+      ]
+    },
+    {
+      "name": "diagnose",
+      "file": "skills/diagnose/SKILL.md",
+      "lines": 73,
+      "chars": 2451,
+      "tokens_approx": 613,
+      "desc_chars": 259,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": []
+    },
+    {
+      "name": "lean-doc-generator",
+      "file": "skills/lean-doc-generator/SKILL.md",
+      "lines": 89,
+      "chars": 3459,
+      "tokens_approx": 865,
+      "desc_chars": 308,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/lean-doc-generator/references/DOCS_Guide.md",
+        "skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md",
+        "skills/lean-doc-generator/references/VALIDATED_PATTERNS.md"
+      ]
+    },
+    {
+      "name": "pr-reviewer",
+      "file": "skills/pr-reviewer/SKILL.md",
+      "lines": 90,
+      "chars": 3244,
+      "tokens_approx": 811,
+      "desc_chars": 302,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/pr-reviewer/references/review-standards.md"
+      ]
+    },
+    {
+      "name": "refactor-advisor",
+      "file": "skills/refactor-advisor/SKILL.md",
+      "lines": 62,
+      "chars": 2964,
+      "tokens_approx": 741,
+      "desc_chars": 217,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": []
+    },
+    {
+      "name": "release-manager",
+      "file": "skills/release-manager/SKILL.md",
+      "lines": 70,
+      "chars": 2452,
+      "tokens_approx": 613,
+      "desc_chars": 274,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/release-manager/references/procedure.md"
+      ]
+    },
+    {
+      "name": "security-auditor",
+      "file": "skills/security-auditor/SKILL.md",
+      "lines": 77,
+      "chars": 3516,
+      "tokens_approx": 879,
+      "desc_chars": 279,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": []
+    },
+    {
+      "name": "system-design-reviewer",
+      "file": "skills/system-design-reviewer/SKILL.md",
+      "lines": 92,
+      "chars": 3652,
+      "tokens_approx": 913,
+      "desc_chars": 279,
+      "has_red_flags": true,
+      "has_use_when": false,
+      "over_cap": false,
+      "references": [
+        "skills/system-design-reviewer/references/procedure.md"
+      ]
+    },
+    {
+      "name": "task-decomposer",
+      "file": "skills/task-decomposer/SKILL.md",
+      "lines": 72,
+      "chars": 3915,
+      "tokens_approx": 979,
+      "desc_chars": 227,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/task-decomposer/references/decomposition-spec.md",
+        "skills/task-decomposer/references/procedure.md"
+      ]
+    },
+    {
+      "name": "tdd",
+      "file": "skills/tdd/SKILL.md",
+      "lines": 81,
+      "chars": 3058,
+      "tokens_approx": 765,
+      "desc_chars": 206,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": []
+    },
+    {
+      "name": "write-a-skill",
+      "file": "skills/write-a-skill/SKILL.md",
+      "lines": 81,
+      "chars": 2759,
+      "tokens_approx": 690,
+      "desc_chars": 190,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": []
+    },
+    {
+      "name": "zoom-out",
+      "file": "skills/zoom-out/SKILL.md",
+      "lines": 55,
+      "chars": 1455,
+      "tokens_approx": 364,
+      "desc_chars": 261,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": []
+    }
+  ],
+  "agents": [
+    {
+      "name": "code-reviewer",
+      "file": "agents/code-reviewer.md",
+      "lines": 18,
+      "chars": 717,
+      "tokens_approx": 180,
+      "desc_chars": 141,
+      "over_cap": false
+    },
+    {
+      "name": "design-analyst",
+      "file": "agents/design-analyst.md",
+      "lines": 31,
+      "chars": 1110,
+      "tokens_approx": 278,
+      "desc_chars": 157,
+      "over_cap": true
+    },
+    {
+      "name": "migration-analyst",
+      "file": "agents/migration-analyst.md",
+      "lines": 24,
+      "chars": 867,
+      "tokens_approx": 217,
+      "desc_chars": 138,
+      "over_cap": false
+    },
+    {
+      "name": "orchestrator",
+      "file": "agents/orchestrator.md",
+      "lines": 31,
+      "chars": 1460,
+      "tokens_approx": 365,
+      "desc_chars": 153,
+      "over_cap": true
+    },
+    {
+      "name": "performance-analyst",
+      "file": "agents/performance-analyst.md",
+      "lines": 23,
+      "chars": 962,
+      "tokens_approx": 241,
+      "desc_chars": 162,
+      "over_cap": false
+    },
+    {
+      "name": "scope-analyst",
+      "file": "agents/scope-analyst.md",
+      "lines": 29,
+      "chars": 875,
+      "tokens_approx": 219,
+      "desc_chars": 127,
+      "over_cap": false
+    },
+    {
+      "name": "security-analyst",
+      "file": "agents/security-analyst.md",
+      "lines": 18,
+      "chars": 749,
+      "tokens_approx": 188,
+      "desc_chars": 157,
+      "over_cap": false
+    }
+  ],
+  "scripts": [
+    {
+      "name": "audit-baseline.js",
+      "file": "scripts/audit-baseline.js",
+      "lines": 218,
+      "chars": 9168
+    },
+    {
+      "name": "eval-skills.js",
+      "file": "scripts/eval-skills.js",
+      "lines": 120,
+      "chars": 4648
+    },
+    {
+      "name": "session-start.js",
+      "file": "scripts/session-start.js",
+      "lines": 175,
+      "chars": 7255
+    }
+  ],
+  "govDocs": [
+    {
+      "file": ".claude/CLAUDE.md",
+      "lines": 76,
+      "chars": 2590,
+      "tokens_approx": 648,
+      "status": "current",
+      "last_updated": "2026-05-01"
+    },
+    {
+      "file": ".claude/CONTEXT.md",
+      "lines": 80,
+      "chars": 3005,
+      "tokens_approx": 752,
+      "status": "unknown",
+      "last_updated": "unknown"
+    },
+    {
+      "file": "docs/ARCHITECTURE.md",
+      "lines": 89,
+      "chars": 4764,
+      "tokens_approx": 1191,
+      "status": "stale",
+      "last_updated": "2026-04-26"
+    },
+    {
+      "file": "docs/AI_CONTEXT.md",
+      "lines": 88,
+      "chars": 5321,
+      "tokens_approx": 1331,
+      "status": "stale",
+      "last_updated": "2026-04-29"
+    },
+    {
+      "file": "docs/DECISIONS.md",
+      "lines": 269,
+      "chars": 21291,
+      "tokens_approx": 5323,
+      "status": "current",
+      "last_updated": "2026-04-29"
+    },
+    {
+      "file": "docs/CHANGELOG.md",
+      "lines": 645,
+      "chars": 51199,
+      "tokens_approx": 12800,
+      "status": "current",
+      "last_updated": "2026-05-01 (Sprint 33 archived)"
+    },
+    {
+      "file": "README.md",
+      "lines": 66,
+      "chars": 2291,
+      "tokens_approx": 573,
+      "status": "current",
+      "last_updated": "2026-05-01"
+    },
+    {
+      "file": "TODO.md",
+      "lines": 146,
+      "chars": 7388,
+      "tokens_approx": 1847,
+      "status": "unknown",
+      "last_updated": "unknown"
+    }
+  ]
+}

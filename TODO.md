@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 33 closed)
+last_updated: 2026-05-01 (Sprint 34 closed — EPIC-Audit Phase 0 done)
 update_trigger: Sprint completed, task added, task status changed
 status: current
 sprint: 34
@@ -34,21 +34,33 @@ sprint: 34
 
 ## Active Sprint
 
-→ Sprint 34 — (not yet planned — run /task-decomposer or /dev-flow)
+→ — none —
+> Sprint 34 closed (2026-05-01). Next: Sprint 35 = Phase 1 Atomic Naming Rename. Run `/lean-doc-generator` Sprint Promote to open.
 
 ---
 
 ## Backlog
 
-### P1 — EPIC-E: Wrap-or-replace Claude Code primitives
+### P0 — EPIC-Audit: Full project audit + external-ref alignment
 
-> Dependency order: TASK-086 → TASK-087/088/089 (parallel) → TASK-090.
+> Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint.
+
+- [ ] **Phase 1 — Atomic naming rename** (Sprint 35) — skill `dev-flow` → `orchestrator`, agent `orchestrator` → `dispatcher`
+- [ ] **Phase 2 — Workflow wiring verification** (Sprint 36) — gates ↔ modes ↔ agents ↔ skills ↔ hooks
+- [ ] **Phase 3 — Token/redundancy reduction** (Sprint 37) — based on Sprint 34 baseline
+- [ ] **Phase 4a — Karpathy patterns** (Sprint 38)
+- [ ] **Phase 4b — Caveman compare (plugin vs mattpocock skill)** (Sprint 39)
+- [ ] **Phase 4c — Superpowers patterns** (Sprint 40)
+- [ ] **Phase 4d — Mattpocock skill library** (Sprint 41)
+- [ ] **Phase 5 — Stale doc refresh** (Sprint 42) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
+- [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 43)
+
+### P1 — EPIC-E: Wrap-or-replace Claude Code primitives (closed)
 
 - [x] **TASK-086** — audit + ADR-012 (Sprint 28)
 - [x] **TASK-087** — review + security steps updated (Sprint 28)
 - [x] **TASK-088** — task tracking updated (Sprint 28)
 - [x] **TASK-089** — init mode updated (Sprint 28)
-
 - [x] **TASK-090** — sweep clean, ADR-012 closed, EPIC-E done (Sprint 29)
 
 ---
@@ -58,9 +70,7 @@ sprint: 34
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-### Sprint 33 — Archived to docs/CHANGELOG.md (2026-05-01)
-
-*Sprint 34 in progress — no entries yet.*
+*Sprint 34 archived → `docs/CHANGELOG.md`. No active sprint.*
 
 ---
 
@@ -105,6 +115,11 @@ Sprint 21–24 →  Audit Pass 2 + plugin release          (done)
 Sprint 25–26 →  Workflow gaps + read-guard guardrail    (done)
 Sprint 27    →  Marketplace schema fix                  (done — TASK-111, TASK-112)
 Sprint 28    →  Wrap-or-replace CC primitives           (done — TASK-086..089, ADR-012)
-Sprint 29    →  EPIC-E close — consistency sweep        (TASK-090)
-v2 next      →  EPIC-E sweep (Sprint 29) → backlog empty
+Sprint 29    →  EPIC-E close — consistency sweep        (done — TASK-090)
+Sprint 30    →  P0 safety + truth-in-docs               (done — read-guard removed, hooks dedup, ADR sweep)
+Sprint 31    →  P0 workflow contract                    (done — agent trim, phase naming, rotate, SECURITY.md)
+Sprint 32    →  P1 consistency sweep                    (done — vocab + dispatch + skill-desc fixes)
+Sprint 33    →  P2 polish sweep                         (done — copywriting + naming alignment)
+Sprint 34    →  EPIC-Audit Phase 0 (audit reconcile + baseline + plan)  (planning)
+Sprint 35-43 →  EPIC-Audit Phases 1-6 (rename / wiring / trim / 4 ext-ref deep / docs / archive)
 ```
