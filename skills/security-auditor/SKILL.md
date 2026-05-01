@@ -1,6 +1,6 @@
 ---
 name: security-auditor
-description: Use when code, API specs, or configuration files need a security audit — or when a /security-review session is needed. Invoked automatically by the security-analyst agent in a separate /security-review session.
+description: Use when code, API specs, or configuration files need a security audit — or when a /security-review session is needed. Invoked automatically by the security-analyst agent in a separate /security-review session. Do not use for general code quality review; use pr-reviewer instead.
 user-invocable: true
 context: fork
 agent: security-analyst

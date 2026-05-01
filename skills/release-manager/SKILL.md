@@ -1,6 +1,6 @@
 ---
 name: release-manager
-description: Use when managing semantic versioning, generating changelogs from git history or PR lists, or producing formatted release notes at the end of a sprint or before a deployment.
+description: Use when managing semantic versioning, generating changelogs from git history or PR lists, or producing formatted release notes at the end of a sprint or before a deployment. Do not use for sprint planning or task creation; use task-decomposer or lean-doc-generator instead.
 user-invocable: true
 context: fork
 version: "1.0.0"

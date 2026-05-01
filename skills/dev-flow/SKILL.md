@@ -22,6 +22,8 @@ Gate-driven agentic workflow. Read `CONTEXT.md` before acting.
 | `quick` | G1 | single task, S size, low risk |
 | `mvp` | G1 + G2 | feature work, M+ size, multi-task |
 
+> Replaces CC primitives: `init` → CC `/init` · review step → CC `/review` · task tracking → CC TaskCreate/TaskList. See ADR-012.
+
 Freeform input (no mode keyword):
 - No active tasks in TODO.md → run `task-decomposer` first
 - Active task found → `quick` (default)

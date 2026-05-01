@@ -18,7 +18,7 @@ Maps task `layers` → advisory skills. Surfaced at G1. All entries overridable 
 
 ---
 
-## Common Product Layers (Adopter Repos)
+## Common Product Layers (Adopter Repos) — Skills Not Bundled With dev-flow
 
 | Layer | Advisory Skills |
 |---|---|

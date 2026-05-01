@@ -1,6 +1,6 @@
 ---
 name: lean-doc-generator
-description: Use when creating, updating, or reviewing technical documentation, ADRs, sprint files, or AI context files. Also use for sprint lifecycle (start/promote/close). Follows LEAN DOCUMENTATION STANDARD — WHY and WHERE only, never HOW.
+description: Use when creating, updating, or reviewing technical documentation, ADRs, sprint files, or AI context files. Also use for sprint lifecycle (start/promote/close). Follows LEAN DOCUMENTATION STANDARD — WHY and WHERE only, never HOW. Do not use to document HOW something works; redirect to code comments instead.
 argument-hint: "[init | type subject | sprint-command]"
 allowed-tools: Read, Write, Bash(git *), Glob, Grep
 user-invocable: true
@@ -12,7 +12,7 @@ last-validated: "2026-05-01"
 
 # Lean Documentation Generator
 
-Generate high-signal technical documentation. Read `reference/DOCS_Guide.md` before writing anything.
+Generate high-signal technical documentation. Read `references/DOCS_Guide.md` before writing anything.
 
 ## Golden Rule
 
@@ -41,17 +41,17 @@ Generate high-signal technical documentation. Read `reference/DOCS_Guide.md` bef
 
 **Step 0 — Staleness scan**: check ownership headers; flag `stale` / `needs-review` / no-header before proceeding.
 
-**Step 1 — Load standard**: read `reference/DOCS_Guide.md` — 4 Laws, Core Files, line limits, anti-patterns, checklist.
+**Step 1 — Load standard**: read `references/DOCS_Guide.md` — 4 Laws, Core Files, line limits, anti-patterns, checklist.
 
 **Step 2 — Codebase access**: read manifests only (`package.json`, `pyproject.toml`, `Dockerfile`, `go.mod`) + existing docs. If inaccessible → ask user to paste file tree + manifest + system description.
 
 **Step 3 — HOW filter**: discard anything that explains implementation; keep WHY/WHERE only.
 
-**Step 4 — Outline approval** *(init only)*: present Tier 1/2/3 options from `reference/DOCS_Guide.md §9`; wait for human choice before writing.
+**Step 4 — Outline approval** *(init only)*: present Tier 1/2/3 options from `references/DOCS_Guide.md §9`; wait for human choice before writing.
 
 **Step 5 — Stack clarification** *(init only)*: ask in one message — package manager, dev infra, deferred services, frontend stack, data layer split.
 
-**Step 6 — Generate**: write approved docs; enforce all line limits from `reference/DOCS_Guide.md`; include ownership header on every file.
+**Step 6 — Generate**: write approved docs; enforce all line limits from `references/DOCS_Guide.md`; include ownership header on every file.
 
 **Step 7 — Session close**: list docs delivered + ownership headers to verify + recommended updates.
 
@@ -59,7 +59,7 @@ Generate high-signal technical documentation. Read `reference/DOCS_Guide.md` bef
 
 ## Sprint Lifecycle
 
-Full protocols in `reference/SPRINT_PROTOCOLS.md`.
+Full protocols in `references/SPRINT_PROTOCOLS.md`.
 
 | User says… | Protocol |
 |---|---|
@@ -83,6 +83,6 @@ Commit strategy: `sprint(NNN): plan locked` at promote · `sprint(NNN): <summary
 
 ## Reference
 
-- `reference/DOCS_Guide.md` — full standard: Core Files, line limits, templates, anti-patterns, pre-delivery checklist
-- `reference/SPRINT_PROTOCOLS.md` — sprint promote/execute/close protocols
-- `reference/VALIDATED_PATTERNS.md` — confirmed session corrections
+- `references/DOCS_Guide.md` — full standard: Core Files, line limits, templates, anti-patterns, pre-delivery checklist
+- `references/SPRINT_PROTOCOLS.md` — sprint promote/execute/close protocols
+- `references/VALIDATED_PATTERNS.md` — confirmed session corrections

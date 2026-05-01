@@ -1,6 +1,6 @@
 ---
 name: refactor-advisor
-description: Use when existing code has become harder to change — increasing complexity, test brittleness from adjacent edits, or team uncertainty about where logic belongs.
+description: Use when existing code has become harder to change — increasing complexity, test brittleness from adjacent edits, or team uncertainty about where logic belongs. Do not use for debugging failures; use diagnose instead.
 user-invocable: true
 context: fork
 version: "1.0.0"

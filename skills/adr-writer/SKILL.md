@@ -1,6 +1,6 @@
 ---
 name: adr-writer
-description: Use when a significant technical decision has been made or is being debated — choosing between frameworks, adopting a new pattern, reversing a previous decision, or making an architectural trade-off that future contributors need to understand.
+description: Use when a significant technical decision has been made or is being debated — choosing between frameworks, adopting a new pattern, reversing a previous decision, or making an architectural trade-off that future contributors need to understand. Do not use for reversible or low-impact decisions.
 user-invocable: true
 argument-hint: "[decision title or description]"
 version: "1.0.0"

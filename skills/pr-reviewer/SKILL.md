@@ -1,6 +1,6 @@
 ---
 name: pr-reviewer
-description: Use when a pull request or changed file set is ready for structured review — or when the Review phase of the dev-flow gate is reached. Invoked automatically by the code-reviewer agent during the Review phase.
+description: Use when a pull request or changed file set is ready for structured review — or when the Review phase of the dev-flow gate is reached. Invoked automatically by the code-reviewer agent during the Review phase. Do not use for informal ad-hoc review; the systematic 7-lens process is required for all PRs.
 user-invocable: true
 context: fork
 agent: code-reviewer
@@ -13,20 +13,7 @@ type: rigid
 
 Perform a structured 7-lens code review on a diff or set of changed files. Loaded by the code-reviewer agent during the Review phase, or invoked directly by the user.
 
-```dot
-digraph pr_review {
-  rankdir=LR; node [shape=box, style=rounded];
-  start [shape=ellipse, label="diff / changed files"];
-  s1 [label="Stage 1\nLens 1 — Spec Compliance"];
-  blocked [shape=ellipse, label="status: BLOCKED\n(return immediately)"];
-  s2 [label="Stage 2\nLenses 2–7\n(Architecture → Docs)"];
-  done [shape=ellipse, label="tiered report"];
-  start -> s1;
-  s1 -> blocked [label="any fail"];
-  s1 -> s2 [label="all pass"];
-  s2 -> done;
-}
-```
+Flow: diff → **Stage 1** Lens 1 only → `BLOCKED` on any fail → **Stage 2** Lenses 2–7 → tiered report.
 
 ## 7-Lens Review Checklist
 
@@ -99,21 +86,4 @@ status: DONE | DONE_WITH_CONCERNS | BLOCKED
 | "I already reviewed this informally" | Systematic lens-by-lens review is non-negotiable — ad-hoc review misses cross-cutting issues |
 | "Lens 1 only has minor gaps — I'll flag and continue" | Any Lens 1 (spec compliance) failure → `BLOCKED`. Do not proceed to S2 lenses. |
 
-## Finding Severity Examples
-
-**Correct — CRITICAL (exact location, exact fix required):**
-> [Lens 5]: auth/jwt.js:31 — `alg: none` accepted by verifier; any unsigned token passes auth. Fix: add explicit algorithm allowlist to verifier options.
-
-**Incorrect — downgraded to avoid friction:**
-> [Lens 5]: auth/jwt.js:31 — JWT algorithm handling could be tightened (NON-BLOCKING)
-
-**Correct — NON-BLOCKING (observation, no merge block):**
-> [Lens 7]: README.md — Ownership header `last_updated` not updated after today's changes.
-
-## Hard Rules
-
-- Stage 1 (Lens 1) failure → status `BLOCKED`. Do not proceed to S2 lenses.
-- Do NOT return raw file contents — line references and brief excerpts only.
-- CRITICAL findings are never truncated — spill into follow-up response if needed.
-- Return token budget: ≤250 tokens.
-- If ADR is recommended → list it as NON-BLOCKING with: "Flag for /adr-writer: [topic]"
+*Severity examples + hard rules → `references/review-standards.md`*

@@ -1,6 +1,6 @@
 ---
 name: system-design-reviewer
-description: Use before building a new system, service, or major feature — or when reviewing an existing architecture for scalability, coupling, or correctness issues — at Gate 1 design approval or on demand.
+description: Use before building a new system, service, or major feature — or when reviewing an existing architecture for scalability, coupling, or correctness issues — at Gate 1 design approval or on demand. Do not use for code-level review or debugging; use pr-reviewer or diagnose instead.
 user-invocable: true
 context: fork
 version: "1.0.0"

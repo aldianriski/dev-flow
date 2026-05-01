@@ -1,6 +1,6 @@
 ---
 name: dev-flow-compress
-description: Use when compressing a CLAUDE.md or memory file to caveman-style prose for input token savings. Invoked as a dev-flow sub-command — /dev-flow:compress <target-file>.
+description: Use when compressing a CLAUDE.md or memory file to caveman-style prose for input token savings. Invoked as a dev-flow sub-command — /dev-flow:compress <target-file>. Do not use on arbitrary text files; target is CLAUDE.md or memory files only.
 user-invocable: false
 argument-hint: "<target-file>"
 version: "1.0.0"

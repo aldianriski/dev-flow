@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-30 (Sprint 26 archived)
+last_updated: 2026-05-01 (Sprint 32 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -13,6 +13,52 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 32 — P1 consistency sweep (2026-05-01)
+
+**Blueprint version:** PATCH (descriptions, paths, reference dirs; no phase/gate/mode changes).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/CONTEXT.md` | P1-1: `skill` vocab updated — reflects both `skills/` (plugin) and `.claude/skills/` (scaffold) | — |
+| `skills/lean-doc-generator/` | P1-2: `reference/` renamed `references/`; all SKILL.md paths updated | — |
+| `skills/dev-flow/references/skill-dispatch.md` | P1-3: Adopter section labeled "Skills Not Bundled With dev-flow" | — |
+| `agents/code-reviewer.md` | P1-4: Removed ADR-012 ref from description | — |
+| `skills/pr-reviewer/SKILL.md` | P1-5: Trimmed 120 → 89 lines; severity examples + hard rules extracted | — |
+| `skills/pr-reviewer/references/review-standards.md` | P1-5: New — extracted finding severity examples and hard rules | — |
+| `.claude/settings.local.json` | P1-7: Removed 4 no-op PreToolUse hooks (git commit/push silent allow) | — |
+| `docs/audit/v2-rewrite-plan.md` | P1-8: Moved from `docs/` to `docs/audit/` | — |
+| 9 SKILL.md files | P1-9: `Do not use when` clause added to all skills missing it | — |
+
+---
+
+## Sprint 28 — Wrap-or-replace CC primitives (2026-05-01)
+
+**Blueprint version:** PATCH (skill/agent notes added; no phase/gate/mode changes).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/research/r9-primitive-audit.md` | TASK-086: created — 3-row CC primitive overlap audit | ADR-012 |
+| `docs/DECISIONS.md` | TASK-086: ADR-012 appended — Replace over Wrap across all CC primitives | ADR-012 |
+| `skills/dev-flow/SKILL.md` | TASK-087/088/089: Replaces note — CC `/init`, `/review`, TaskCreate/TaskList all replaced | ADR-012 |
+| `agents/code-reviewer.md` | TASK-087: description references ADR-012 | — |
+| `skills/dev-flow/references/phases.md` | TASK-088: Session Close notes TODO.md canonical; CC task tools not used | — |
+
+---
+
+## Sprint 27 — Marketplace schema fix (2026-05-01)
+
+**Blueprint version:** PATCH (config-only changes; no phase/gate/mode changes).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude-plugin/marketplace.json` | TASK-111: schema fixed — name, owner, source fields corrected | — |
+| `README.md` | TASK-111: install steps updated to two-step `claude plugin marketplace add` flow | — |
+| `context/research/CC_SPEC.md` | TASK-111: marketplace.json schema section added | — |
+| `.claude-plugin/marketplace.json` | TASK-112: source changed to explicit github object — fix BUG-008 | — |
+| `context/research/CC_SPEC.md` | TASK-112: source types table + BUG-008 note added | — |
 
 ---
 

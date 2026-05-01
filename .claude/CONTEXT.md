@@ -10,7 +10,7 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 |---|---|
 | **gate** | Human checkpoint; must pass before proceeding |
 | **mode** | Operational context: `init` / `quick` / `mvp` |
-| **skill** | Slash command loaded on demand from `.claude/skills/` |
+| **skill** | Slash command loaded on demand from `skills/` (plugin install) or `.claude/skills/` (scaffold copy) |
 | **agent** | Specialist worker spawned by orchestrator for targeted analysis |
 | **red flag** | Condition that hard-stops a skill; listed inline per skill |
 | **vertical slice** | Independently demoable end-to-end behavior unit |
