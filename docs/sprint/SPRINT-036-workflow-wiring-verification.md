@@ -2,9 +2,10 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-01
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending (plan-lock commit)
-close_commit: —
+status: closed
+plan_commit: a8d3158
+close_commit: pending (close commit)
+last_updated: 2026-05-01
 ---
 
 # Sprint 036 — Workflow Wiring Verification (EPIC-Audit Phase 2)
@@ -134,22 +135,28 @@ Phase 2 goals from Sprint 34 plan:
 
 ## Sprint DoD
 
-- [ ] T1 wiring-map.md written; zero unintentional orphans
-- [ ] T2 dispatch coverage verified; mismatches resolved or logged
-- [ ] T3 hook matcher coverage asserted in wiring-map (no patch per Q2)
-- [ ] T4 session-start regex fix + sprint-plan-doc check land; fixtures pass
-- [ ] T5 sprint-anchor staleness check lands; dedupe logic verified; fixtures pass
-- [ ] `node --test scripts/__tests__/session-start.test.js` exits 0 (≥6 fixtures total across T4 + T5)
-- [ ] T6 ADR-015 written OR commit-msg-only justified in retro
-- [ ] Plan-lock commit landed before any T1..T5 commit
-- [ ] Close commit + CHANGELOG row + TODO update + retro
-- [ ] `last_updated` advanced on touched governance files
+- [x] T1 wiring-map.md written; zero unintentional orphans
+- [x] T2 dispatch coverage verified; 3 mismatches resolved (pipeline-builder, security-auditor, code-reviewer)
+- [x] T3 hook matcher coverage asserted in wiring-map (no patch per Q2)
+- [x] T4 session-start regex fix + sprint-plan-doc check land; fixtures pass
+- [x] T5 sprint-anchor staleness check lands; dedupe logic verified; fixtures pass
+- [x] `node --test scripts/__tests__/session-start.test.js` exits 0 (8 fixtures total across T4 + T5)
+- [x] T6 ADR-015 written (workflow wiring contract — one-way dispatch + dispatch-table membership)
+- [x] Plan-lock commit landed before any T1..T5 commit (`a8d3158`)
+- [x] Close commit + CHANGELOG row + TODO update + retro
+- [x] `last_updated` advanced on touched governance files (DECISIONS.md, this sprint doc, TODO.md)
 
 ---
 
 ## Execution Log
 
-*(empty — populated as tasks complete)*
+- 2026-05-01: Plan locked at `a8d3158` — sprint doc + TODO.md pre-lock writes only.
+- 2026-05-01: T1 done — `docs/audit/wiring-map.md` written (read-only trace). Modes × phases × agent × skill × hook tabled. 7 agents all bound; 14 skills all have invocation paths (4 auto-bound, 10 on-demand including 2 agent-preloaded). Zero unintentional orphans. 3 dispatch-table mismatches surfaced for T2.
+- 2026-05-01: T2 done — 3 fixes applied to `skills/orchestrator/references/skill-dispatch.md`: `pipeline-builder` removed from `ci` row (not bundled); `security-auditor` moved out of adopter section into Always-On (bundled, preloaded by `security-analyst`); `code-reviewer` row clarified as agent that preloads `pr-reviewer` skill.
+- 2026-05-01: T3 done — verify-only (no patch per Q2). Hook coverage table populated in wiring-map.md § Hook Coverage. SessionStart matcher `startup|resume|clear|compact` confirmed; PreToolUse `Bash(git add*)` chain-guard confirmed in plugin + project-local; Sprint 35 `read-guard.js` deletion not regressed.
+- 2026-05-01: T4 done — `scripts/__tests__/session-start.test.js` written first (TDD red phase: 5 pass / 3 fail). Then `scripts/session-start.js` modified: Check 7 regex extended to recognize `→ **Sprint NNN — ...` pointer format (Sprint 35 retro fix); new Check 9 enforces sprint-plan-doc presence (BLOCK when sprint named + plan doc missing + docs/sprint/ exists; soft-warn for adopter bootstrap when docs/sprint/ absent per DEC-6). Tests went green (8/8 pass).
+- 2026-05-01: T5 done — new Check 10 added in same file: parses most-recent `## Sprint NNN — title (YYYY-MM-DD)` heading from `docs/CHANGELOG.md`; warns on `status: current` docs whose `last_updated` predates the anchor; suppresses when Check 5 60-day rule would already fire (priority: 60-day calendar wins). Tests still 8/8 pass. Live run on this repo surfaced sprint-anchor warnings on `docs/SETUP.md` and `docs/TEST_SCENARIOS.md` (both `last_updated: 2026-04-26` < anchor `2026-05-01`) — useful signal, not a regression.
+- 2026-05-01: T6 done — ADR-015 written in `docs/DECISIONS.md` covering Rule 1 (one-way dispatch) + Rule 2 (dispatch-table membership for advisory surfacing) + Rule 3 (bundled vs adopter section). Sprint 34 DEC-2 ADR-015 reservation consumed. Protocol Promote/Close run cleanly.
 
 ---
 
@@ -157,8 +164,14 @@ Phase 2 goals from Sprint 34 plan:
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
-
-*(empty — populated as work happens)*
+| `docs/audit/wiring-map.md` | T1 | NEW — end-to-end wiring trace; modes × phases × agents × skills × hooks; orphan analysis | low | n/a |
+| `skills/orchestrator/references/skill-dispatch.md` | T2 | 3 fixes: `pipeline-builder` row removed (not bundled); `security-auditor` moved out of adopter section into Always-On; `code-reviewer` row clarified as agent + preloaded skill | low | T1 cross-check |
+| `scripts/session-start.js` | T4 + T5 | Check 7 regex extended (sprint-pointer format); new Check 9 (sprint-plan-doc must exist; BLOCK or soft-warn per DEC-6); new Check 10 (sprint-anchor staleness vs CHANGELOG, deduped against Check 5 60-day) | medium | yes (8 fixtures) |
+| `scripts/__tests__/session-start.test.js` | T4 + T5 | NEW — 8 fixtures covering regex fix, sprint-plan-doc check (4 paths), sprint-anchor staleness check (3 paths), smoke test against self | low | self |
+| `docs/DECISIONS.md` | T6 | ADR-015 appended (workflow wiring contract); `last_updated` advanced | low | n/a |
+| `docs/sprint/SPRINT-036-workflow-wiring-verification.md` | T1 / T6 | NEW at promote (`status: planning` → `active`); populated through close | low | n/a |
+| `TODO.md` | promote / close | sprint pointer at promote; cleared at close | low | n/a |
+| `docs/CHANGELOG.md` | close | Sprint 36 row appended | low | n/a |
 
 ---
 
@@ -181,4 +194,25 @@ Phase 2 goals from Sprint 34 plan:
 
 ## Retro
 
-*(empty — written at close)*
+**Worked:**
+- T1 read-only trace before any patch decision was the right call. The wiring-map made T2's 3 mismatches mechanically visible and gave T6 substance candidates without speculation.
+- TDD-shaped T4/T5 (write tests → red phase → implement → green phase) prevented blind regex changes. 5 of 8 fixtures passed in red phase because they tested current correct behavior; only 3 measured the new behavior. Single test file covered Sprint 35 retro carryover + 2 new checks.
+- ADR-015 substance gate at T6 (per Q4 deferral) produced a tighter ADR than guessing at promote. Three rules, all descriptive of current behavior, prescriptive for future additions.
+- DEC-6 two-tier severity (BLOCK in-flight sprint vs soft-warn adopter bootstrap) was correct call. Live test fixture (T4(d)) confirmed adopter-bootstrap path doesn't BLOCK.
+
+**Friction:**
+- Test fixtures need explicit `\n` in `[].join('\n')` to dodge Windows CRLF issues. Caught at first run; would have lost time if not pre-flagged.
+- Check 5 60-day vs Check 10 sprint-anchor dedupe required ordering thought (which warning wins). Locked: 60-day wins (more general signal). Implementation uses early `continue` rather than Set tracking.
+- Sprint-anchor regex on CHANGELOG.md depends on heading format `## Sprint NNN — title (YYYY-MM-DD)`. If a future sprint uses a different format the check silently skips. Acceptable for now; could be brittleness later.
+- Live run surfaced 2 new warnings on `docs/SETUP.md` + `docs/TEST_SCENARIOS.md` (last_updated 2026-04-26). These docs aren't stale per content audit — they just predate Sprint 35. Phase 5 / Sprint 42 doc refresh will close. Until then warnings persist. Acceptable signal.
+
+**Pattern candidate (surface to user, ask before locking into VALIDATED_PATTERNS.md):**
+- Pattern: "Read-only trace doc (wiring-map.md) before patch decisions" — Sprint 36 T1 made T2 mechanical and T6 grounded. Worth lifting to a general "produce truth-doc first, then patch decisions against it" pattern for future audit-style sprints.
+- Pattern: "TDD-shaped session-start checks" — write fixtures first, watch red phase prove the gap, implement to green. Test file becomes the contract for future check additions. Worth standardizing.
+- Pattern: "Two-tier severity (BLOCK + soft-warn)" — in-flight project enforcement vs adopter bootstrap leniency. Useful pattern for any session-start governance check.
+
+**Surprise log:**
+- All 7 agents and all 14 skills had clear invocation paths. T1 expected to find at least 1 unintentional orphan; found zero. The audit found order, not chaos. Healthy.
+- Plugin `hooks/hooks.json` and project-local `.claude/settings.json` both have the `Bash(git add*)` chain-guard — redundant but intentional (project-local works without plugin loaded; covers dev-on-this-repo case). Documented in wiring-map § Hook Coverage.
+- Sprint 35 retro flagged session-start regex quirk; Sprint 36 fixed it as part of the same file's expansion. Single-touch beat splitting.
+- ADR-014 (Sprint 35) used `superseded-in-part` markers as a precedent; ADR-015 didn't need any (it adds rules, doesn't supersede prior decisions).

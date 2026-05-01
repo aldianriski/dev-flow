@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 35 archived)
+last_updated: 2026-05-01 (Sprint 36 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,23 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 36 — EPIC-Audit Phase 2 — workflow wiring verification (2026-05-01)
+
+**Blueprint version:** PATCH-equivalent (governance check + table fixes; no phase/gate/contract change). Plus ADR-015 (workflow wiring contract — one-way dispatch + dispatch-table membership).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/audit/wiring-map.md` | NEW — end-to-end wiring trace; modes × phases × agents × skills × hooks; orphan analysis | ADR-015 |
+| `skills/orchestrator/references/skill-dispatch.md` | T2 — 3 fixes: `pipeline-builder` row removed (not bundled); `security-auditor` moved out of adopter section into Always-On; `code-reviewer` row clarified as agent + preloaded skill | ADR-015 |
+| `scripts/session-start.js` | T4+T5 — Check 7 regex extended for sprint-pointer format; new Check 9 (sprint-plan-doc must exist; BLOCK/soft-warn per DEC-6); new Check 10 (sprint-anchor staleness vs CHANGELOG, deduped against Check 5 60-day rule) | — |
+| `scripts/__tests__/session-start.test.js` | NEW — 8 fixtures covering regex fix, sprint-plan-doc check (4 paths), sprint-anchor staleness (3 paths), self-smoke | — |
+| `docs/DECISIONS.md` | T6 — ADR-015 appended (workflow wiring contract); `last_updated` advanced | ADR-015 |
+| `docs/sprint/SPRINT-036-workflow-wiring-verification.md` | NEW — sprint plan + execution log + retro | — |
+
+**Test status:** `node --test scripts/__tests__/session-start.test.js` 8/8 pass. Live session-start now also enforces sprint-plan-doc presence + sprint-anchor staleness signal.
 
 ---
 

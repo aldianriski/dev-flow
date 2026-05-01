@@ -14,7 +14,7 @@ Maps task `layers` → advisory skills. Surfaced at G1. All entries overridable 
 | `agents` | `lean-doc-generator` |
 | `templates` | `lean-doc-generator` |
 | `harness` · `scripts` | none |
-| `ci` | `pipeline-builder` |
+| `ci` | none (adopter-supplied; `pipeline-builder` not bundled) |
 
 ---
 
@@ -28,7 +28,6 @@ Maps task `layers` → advisory skills. Surfaced at G1. All entries overridable 
 | `fe` (animations) | + `fe-motion-designer` |
 | `be` · `service` · `repository` | `be-service-scaffolder` |
 | `database` · `data` | `data-model-designer` · `query-optimizer` |
-| `security` | `security-auditor` |
 | `observability` · `logging` | `observability-setup` |
 | `etl` · `pipeline` | `etl-pipeline-builder` |
 | `analytics` | `analytics-schema-designer` |
@@ -37,10 +36,11 @@ Maps task `layers` → advisory skills. Surfaced at G1. All entries overridable 
 
 ## Always-On (every task)
 
-| When | Skill |
+| When | Skill / Agent |
 |---|---|
-| post-implement | `code-reviewer` |
+| post-implement | `code-reviewer` agent → preloads `pr-reviewer` skill |
 | after commit | `lean-doc-generator` |
 | hard-to-reverse decision | `adr-writer` |
+| separate `/security-review` session | `security-analyst` agent → preloads `security-auditor` skill (bundled) |
 
 Adopters: add project-specific rows in `skill-dispatch-local.md` (takes precedence).

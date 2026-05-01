@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-05-01
+last_updated: 2026-05-01 (ADR-015 added — Sprint 36)
 update_trigger: Architectural decision made or reversed
 status: current
 ---
@@ -326,3 +326,56 @@ Both renames executed in a single atomic sprint (Sprint 35) — splitting would 
 - `plugin.json` `version` not bumped by this rename — adopter contract is the namespace and plugin name, both preserved. Future Phase 5 doc refresh may bump.
 
 **EPIC-Audit Phase 1 closed** — Sprint 35 atomic naming rename shipped.
+
+---
+
+## ADR-015: Workflow wiring contract — one-way dispatch + dispatch-table membership rule
+
+**Date**: 2026-05-01
+**Status**: Accepted
+**Deciders**: Tech Lead (Aldian Rizki)
+
+### Context
+
+Sprint 36 Phase 2 wiring trace (`docs/audit/wiring-map.md`) mapped every phase × mode × agent × skill × hook binding end-to-end. Two implicit rules surfaced that the codebase already follows but never canonicalized:
+
+1. **Dispatch is one-way: dispatcher → specialists.** No specialist agent dispatches another. Every specialist (`design-analyst`, `code-reviewer`, `scope-analyst`, `performance-analyst`, `migration-analyst`, `security-analyst`) returns its output to the dispatcher; the dispatcher decides next step. Two specialists (`code-reviewer`, `security-analyst`) preload a fork-context skill (`pr-reviewer`, `security-auditor`) but the skills do not call other agents.
+
+2. **Skills not listed in `skill-dispatch.md` are on-demand only.** 10 of the 14 bundled skills (`task-decomposer`, `system-design-reviewer`, `pr-reviewer`, `security-auditor`, `refactor-advisor`, `release-manager`, `adr-writer`, `dev-flow-compress`, `diagnose`, `tdd`, `zoom-out`, `write-a-skill`) are user-invokable on-demand and never auto-surface at G1 advisory. Only 4 skills are in the dispatch table: `lean-doc-generator`, `adr-writer`, `code-reviewer` (agent), `pipeline-builder` (now removed — Sprint 36 T2 fix).
+
+Without explicit rules, future skill or agent additions could:
+- chain agent→agent→agent (unbounded depth, hard to reason about, no human gate per hop)
+- silently auto-surface at G1 without dispatch-table opt-in (advisory pollution)
+
+### Decision
+
+**Rule 1 — One-way dispatch.** Specialist agents MUST NOT spawn other agents. The dispatcher is the only agent allowed to spawn specialists. Specialist output returns to dispatcher; dispatcher decides next dispatch. Skills preloaded by an agent are scoped to that agent's session — no cross-agent invocation through preload.
+
+**Rule 2 — Dispatch-table membership for advisory surfacing.** A skill auto-surfaces at G1 advisory ONLY IF it appears in `skills/orchestrator/references/skill-dispatch.md` (meta-repo layer table or always-on table). Skills not in the table are on-demand only. New skills added to the bundle MUST decide at authoring time: dispatch-table member (auto-advisory) OR on-demand (user-invocable).
+
+**Rule 3 — Bundled vs adopter section in dispatch table reflects skill availability.** Skills with a `skills/<name>/SKILL.md` file in this repo go in the meta-repo or always-on tables. Skills referenced for adopter use but not bundled go in the "Skills Not Bundled With dev-flow" section. T2 fixes in Sprint 36 corrected 3 mis-categorizations (`pipeline-builder` removed, `security-auditor` moved to always-on, `code-reviewer` clarified as agent-with-preloaded-skill).
+
+### Alternatives considered
+
+1. **Allow specialist→specialist chaining for efficiency.** Rejected — removes human-gate-per-hop; opaque dispatch graphs become unreviewable at G2 design-analyst output. Performance gain is hypothetical; correctness loss is concrete.
+
+2. **Implicit "all bundled skills are dispatch-table-eligible" rule.** Rejected — `dev-flow-compress` is invoked out-of-band as `/dev-flow:compress <file>`, never advisory. `write-a-skill` is meta and shouldn't surface during normal feature work. Implicit eligibility couples skill authoring to advisory surface, removing meaningful opt-in.
+
+3. **Defer rules until they break.** Rejected — Sprint 34 audit + Sprint 36 wiring trace already surfaced 3 mismatches in the dispatch table (T2). Without rules, the next mismatch ships silently. Anti-Drift principle: codify before drift recurs.
+
+### Consequences
+
+**Positive**:
+- Dispatch graph is shallow (depth ≤ 2: dispatcher → specialist [→ preloaded skill]). Easy to reason about; G2 design-analyst output stays reviewable.
+- New skill authors have a clear decision at write time: opt into dispatch table or stay on-demand. No accidental advisory surface.
+- Adopter section vs bundled section in `skill-dispatch.md` becomes mechanically verifiable (T2 cross-check pattern from Sprint 36 wiring-map can be a future test).
+
+**Negative** (trade-offs accepted):
+- Specialist agents that legitimately need cross-agent work must funnel through dispatcher (extra round-trip). Acceptable: such cases are rare (`security-analyst` runs in a separate session entirely; other specialists are leaves).
+- Authors must remember to update dispatch table when adding a skill that's auto-advisory. Mitigation: `write-a-skill` skill should prompt for dispatch-table decision (future enhancement, not in this sprint).
+
+**Neutral**:
+- Existing 14-skill / 7-agent surface already follows both rules. No code changes needed beyond the 3 T2 dispatch-table fixes in Sprint 36.
+- ADR is descriptive of current behavior, prescriptive for future additions.
+
+**EPIC-Audit Phase 2 closed** — Sprint 36 workflow wiring verification shipped.

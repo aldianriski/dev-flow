@@ -134,22 +134,88 @@ for (const dir of migrationDirs) {
 }
 
 // ─── Check 7: Active sprint validation ───────────────────────────────────────
+// Sprint 36 T4: regex tracks both TASK-NNN bullet form AND `→ **Sprint NNN — ...`
+// pointer form (post-Sprint-35 promote convention).
 if (existsSync('TODO.md')) {
   const todo = readFileSync('TODO.md', 'utf8');
   const hasActiveSprint = /## Active Sprint/.test(todo);
   const sprintSection   = todo.split(/\n## Backlog/)[0];
   const hasActiveTask   = /- \[ \] \*\*TASK-/.test(sprintSection);
+  const hasSprintPointer = /→\s*\*\*Sprint\s+\d+/.test(sprintSection);
   const backlogSection  = todo.split(/## Backlog/)[1] ?? '';
-  const hasBacklogTask  = /- \[ \] \*\*TASK-/.test(backlogSection);
+  const hasBacklogTask  = /- \[ \] \*\*(?:TASK-|Phase\s+\d)/.test(backlogSection);
+  const hasActiveWork   = hasActiveTask || hasSprintPointer;
   if (!hasActiveSprint) {
     warnings.push('WARN: TODO.md has no Active Sprint section.');
-  } else if (!hasActiveTask && !hasBacklogTask) {
+  } else if (!hasActiveWork && !hasBacklogTask) {
     warnings.push('WARN: Active Sprint and Backlog both empty — run /task-decomposer or /orchestrator to plan next work.');
-  } else if (!hasActiveTask) {
+  } else if (!hasActiveWork) {
     info.push('ℹ Active Sprint exists but has no open tasks — promote from Backlog or start new sprint.');
   } else {
-    const nextTask = sprintSection.match(/- \[ \] \*\*(.+?)\*\*/)?.[1];
+    const nextTask = sprintSection.match(/- \[ \] \*\*(.+?)\*\*/)?.[1]
+                  ?? sprintSection.match(/→\s*\*\*(Sprint\s+\d+\s+—\s+[^*]+)\*\*/)?.[1];
     if (nextTask) info.push(`ℹ Next task: ${nextTask}`);
+  }
+}
+
+// ─── Check 9: Sprint plan doc must exist (Anti-Drift Hard Stop #1) ───────────
+// Sprint 36 T4 (new check). If TODO.md frontmatter declares `sprint: NNN`
+// AND docs/sprint/ dir exists, then docs/sprint/SPRINT-NNN-*.md must exist.
+// docs/sprint/ absent = adopter bootstrap → soft warn, no BLOCK.
+if (existsSync('TODO.md')) {
+  const todo = readFileSync('TODO.md', 'utf8');
+  const sprintNumMatch = todo.match(/^sprint:\s*(\d+)/m);
+  if (sprintNumMatch) {
+    const sprintNum = sprintNumMatch[1].padStart(3, '0');
+    const sprintDir = 'docs/sprint';
+    if (!existsSync(sprintDir)) {
+      warnings.push(`WARN: TODO.md declares sprint ${sprintNum} but ${sprintDir}/ does not exist (adopter bootstrap?).`);
+    } else {
+      const planFiles = readdirSync(sprintDir).filter(f => f.startsWith(`SPRINT-${sprintNum}-`) && f.endsWith('.md'));
+      if (planFiles.length === 0) {
+        errors.push(`BLOCK: TODO.md declares sprint ${sprintNum} but no docs/sprint/SPRINT-${sprintNum}-*.md plan doc exists. Anti-Drift Hard Stop: missing plan doc. Create plan or clear sprint pointer.`);
+      } else {
+        info.push(`✓ Sprint ${sprintNum} plan doc found: ${planFiles[0]}`);
+      }
+    }
+  }
+}
+
+// ─── Check 10: Doc last_updated vs CHANGELOG sprint anchor ───────────────────
+// Sprint 36 T5 (new check). Sprint-anchored staleness signal.
+// Suppression: only fires when Check 5 60-day rule did NOT fire AND status != stale.
+{
+  const sixtyDaysAgo2 = new Date();
+  sixtyDaysAgo2.setDate(sixtyDaysAgo2.getDate() - 60);
+  let anchorDate = null;
+  let anchorSprint = null;
+  if (existsSync('docs/CHANGELOG.md')) {
+    const changelog = readFileSync('docs/CHANGELOG.md', 'utf8');
+    const m = changelog.match(/^## Sprint\s+(\d+)\s+[—-]\s+.+?\((\d{4}-\d{2}-\d{2})\)/m);
+    if (m) {
+      anchorSprint = m[1];
+      anchorDate = new Date(m[2]);
+    }
+  }
+  if (anchorDate) {
+    const anchoredDocs = [
+      'docs/README.md', 'docs/ARCHITECTURE.md', 'docs/DECISIONS.md',
+      'docs/SETUP.md', 'docs/AI_CONTEXT.md', 'docs/CHANGELOG.md',
+      'docs/TEST_SCENARIOS.md', 'TODO.md',
+    ];
+    for (const docPath of anchoredDocs) {
+      if (!existsSync(docPath)) continue;
+      const content = readFileSync(docPath, 'utf8');
+      const statusMatch  = content.match(/status:\s*(stale|needs-review|current)/);
+      const updatedMatch = content.match(/last_updated:\s*(\d{4}-\d{2}-\d{2})/);
+      if (!statusMatch || statusMatch[1] !== 'current') continue;  // skip stale (Check 5 handles) + missing
+      if (!updatedMatch) continue;
+      const updated = new Date(updatedMatch[1]);
+      if (updated < sixtyDaysAgo2) continue;  // Check 5 60-day fires; suppress to avoid duplicate
+      if (updated < anchorDate) {
+        warnings.push(`WARN: ${docPath} last_updated ${updatedMatch[1]} is older than most-recent sprint ${anchorSprint} (${anchorDate.toISOString().slice(0,10)}) — verify accuracy.`);
+      }
+    }
   }
 }
 

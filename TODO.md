@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 36 promoted — plan locked, awaiting approval)
+last_updated: 2026-05-01 (Sprint 36 closed — EPIC-Audit Phase 2 done)
 update_trigger: Sprint completed, task added, task status changed
 status: current
 sprint: 36
@@ -34,8 +34,8 @@ sprint: 36
 
 ## Active Sprint
 
-→ **Sprint 36 — Workflow Wiring Verification** (EPIC-Audit Phase 2) · `status: planning`
-> Plan: `docs/sprint/SPRINT-036-workflow-wiring-verification.md`. Awaiting user approval to flip `status: active` + author plan-lock commit.
+→ — none —
+> Sprint 36 closed (2026-05-01). Next: Sprint 37 = Phase 3 Token/redundancy reduction. Run `/lean-doc-generator` Sprint Promote to open.
 
 ---
 
@@ -68,7 +68,7 @@ sprint: 36
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 36 in flight — see `docs/sprint/SPRINT-036-workflow-wiring-verification.md`. No completed work yet.*
+*Sprint 36 archived → `docs/CHANGELOG.md`. No active sprint.*
 
 ---
 
