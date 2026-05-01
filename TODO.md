@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 34 closed — EPIC-Audit Phase 0 done)
+last_updated: 2026-05-01 (Sprint 35 promoted — plan locked, awaiting approval)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 34
+sprint: 35
 ---
 
 > **External references**
@@ -34,8 +34,8 @@ sprint: 34
 
 ## Active Sprint
 
-→ — none —
-> Sprint 34 closed (2026-05-01). Next: Sprint 35 = Phase 1 Atomic Naming Rename. Run `/lean-doc-generator` Sprint Promote to open.
+→ **Sprint 35 — Atomic Naming Rename** (EPIC-Audit Phase 1) · `status: planning`
+> Plan: `docs/sprint/SPRINT-035-atomic-naming-rename.md`. Awaiting user approval to flip `status: active` + author plan-lock commit.
 
 ---
 
@@ -45,7 +45,6 @@ sprint: 34
 
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint.
 
-- [ ] **Phase 1 — Atomic naming rename** (Sprint 35) — skill `dev-flow` → `orchestrator`, agent `orchestrator` → `dispatcher`
 - [ ] **Phase 2 — Workflow wiring verification** (Sprint 36) — gates ↔ modes ↔ agents ↔ skills ↔ hooks
 - [ ] **Phase 3 — Token/redundancy reduction** (Sprint 37) — based on Sprint 34 baseline
 - [ ] **Phase 4a — Karpathy patterns** (Sprint 38)
@@ -70,7 +69,7 @@ sprint: 34
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 34 archived → `docs/CHANGELOG.md`. No active sprint.*
+*Sprint 35 in flight — see `docs/sprint/SPRINT-035-atomic-naming-rename.md`. No completed work yet.*
 
 ---
 
