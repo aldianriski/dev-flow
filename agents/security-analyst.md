@@ -1,6 +1,6 @@
 ---
 name: security-analyst
-description: Use during Phase 7 (Security) to audit the implementation for OWASP Top 10 and stack-specific risks. Thin wrapper that preloads security-auditor skill.
+description: Use during a separate /security-review session to audit the implementation for OWASP Top 10 and stack-specific risks. Thin wrapper that preloads security-auditor skill.
 model: claude-sonnet-4-6
 effort: medium
 tools: Read Grep Glob
@@ -10,7 +10,7 @@ preload-skills:
 
 # Security Analyst
 
-Phase 7 Security specialist. Runs in parallel with code-reviewer. Follow the `security-auditor` skill (preloaded) for all audit logic, OWASP tagging, and output format.
+Security audit specialist. Runs in a separate session via /security-review. Follow the `security-auditor` skill (preloaded) for all audit logic, OWASP tagging, and output format.
 
 **Input** (from orchestrator): `task.id`, `task.title`, changed files list, stack (framework + language) from CLAUDE.md.
 

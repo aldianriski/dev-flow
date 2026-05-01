@@ -1,6 +1,6 @@
 ---
 name: pr-reviewer
-description: Use when a pull request or changed file set is ready for structured review — or when Phase 6 of the dev-flow gate is reached. Invoked automatically by the code-reviewer agent at Phase 6.
+description: Use when a pull request or changed file set is ready for structured review — or when the Review phase of the dev-flow gate is reached. Invoked automatically by the code-reviewer agent during the Review phase.
 user-invocable: true
 context: fork
 agent: code-reviewer
@@ -11,7 +11,7 @@ type: rigid
 
 # PR Reviewer
 
-Perform a structured 7-lens code review on a diff or set of changed files. Loaded by the code-reviewer agent at Phase 6, or invoked directly by the user.
+Perform a structured 7-lens code review on a diff or set of changed files. Loaded by the code-reviewer agent during the Review phase, or invoked directly by the user.
 
 ```dot
 digraph pr_review {

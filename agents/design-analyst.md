@@ -21,23 +21,7 @@ Orchestrator passes: `task.goal`, `task.acceptance`, `task.risk`, optional `cont
 4. Risks — severity-ordered
 5. Micro-tasks — 2–5 min each, independently verifiable, exact file paths
 
-## Output
-```
-status: DONE | DONE_WITH_CONCERNS | NEEDS_CONTEXT | BLOCKED
-
-CRITICAL: <issue> — <file:line> — <required fix>  (no cap, show all)
-BLOCKING: <issue> — <file:line>  (max 5)
-NON-BLOCKING: <brief note>
-
-FILES: <action> | <path> | <why>
-
-MICRO-TASKS:
-- [ ] <exact action> in <exact/path>  verify: <runnable command>
-
-DECISIONS: <point> — <options> → <recommendation>
-
-RECOMMENDATION: <one actionable next step, ≤2 sentences>
-```
+## Output — see `skills/dev-flow/references/phases.md` § Design Analyst Output
 
 ## Rules
 - No file writes. No git operations. No package installs.

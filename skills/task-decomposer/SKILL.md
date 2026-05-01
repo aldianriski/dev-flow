@@ -55,7 +55,7 @@ Execution procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 - `--from-architecture` skips clarification and assumption registry — uses Gate B doc as spec; if invoked outside INIT Phase I-4, state this and require explicit human confirmation before proceeding
 - Missing ticket credentials → ask for paste; never block on missing env vars
 - After `approve`: write to TODO.md **Backlog** only; no other files touched
-- Never write tasks to Active Sprint — sprint formation happens via `/dev-flow rotate`
+- Never write tasks to Active Sprint — sprint formation happens via `/lean-doc-generator` Sprint Promote
 - **Vertical slice**: every task must be independently demoable end-to-end; no horizontal layers (e.g. "write all tests" or "build all models" are not valid tasks)
 - **HITL/AFK classification**: label each task — `HITL` (human must review output before proceeding) or `AFK` (autonomous completion safe); default to HITL when uncertain
 - **PRD path** (large features, epics, `--prd`): generate PRD outline first — problem statement · user stories · implementation decisions · testing decisions — await human approval, then decompose into vertical slices

@@ -53,7 +53,7 @@ Type 'revise [task number] [correction]' to adjust a specific task.
 Type 'split TASK-NNN' to further decompose a task.
 Type 'merge TASK-NNN TASK-MMM' to combine two tasks.
 
-> **Sprint formation**: tasks land in Backlog. Run `/dev-flow rotate` to promote tasks to a sprint and create the sprint file.
+> **Sprint formation**: tasks land in Backlog. Run `/lean-doc-generator` Sprint Promote to promote tasks to a sprint and create the sprint file.
 ```
 
 ---
@@ -87,7 +87,7 @@ If any assumption is wrong, tell me now. If all acceptable, type 'decompose'.
 **Grouping rules**:
 - Group 2–5 tasks per P-level/epic block in Backlog (never 1 alone — add adjacent task or note standalone reason)
 - Order by: dependency first, then importance, then risk (high first)
-- Sprint formation happens via `/dev-flow rotate`, not here
+- Sprint formation happens via `/lean-doc-generator` Sprint Promote, not here
 
 ---
 

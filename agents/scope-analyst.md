@@ -14,25 +14,7 @@ Read `CONTEXT.md` before acting.
 ## Input
 Feature description + optional file hints from orchestrator.
 
-## Output
-```
-status: DONE | NEEDS_CONTEXT
-
-FILES AFFECTED: <path> — <why>  (max 10)
-LAYERS TOUCHED: <list>
-NEW FILES: <path> — <what it contains>
-PATTERNS TO REUSE: <name> in <path>
-
-size: S | M | L
-cross-layer: yes | no
-api-change: yes | no
-db-change: yes | no
-auth-change: yes | no
-
-risk: low | medium | high — <one-sentence rationale>
-
-RECOMMENDATION: <one task or split? — ≤2 sentences>
-```
+## Output — see `skills/dev-flow/references/phases.md` § Scope Analyst Output
 
 ## Risk Scoring
 | Condition | Risk |

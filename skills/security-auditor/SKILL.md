@@ -1,6 +1,6 @@
 ---
 name: security-auditor
-description: Use when code, API specs, or configuration files need a security audit — or when Phase 7 of the dev-flow gate is reached. Invoked automatically by the security-analyst agent at Phase 7.
+description: Use when code, API specs, or configuration files need a security audit — or when a /security-review session is needed. Invoked automatically by the security-analyst agent in a separate /security-review session.
 user-invocable: true
 context: fork
 agent: security-analyst
@@ -11,7 +11,7 @@ type: rigid
 
 # Security Auditor
 
-Audit code, API specs, or configurations for security vulnerabilities. Loaded by the security-analyst agent at Phase 7, or invoked directly by the user.
+Audit code, API specs, or configurations for security vulnerabilities. Loaded by the security-analyst agent in a separate /security-review session, or invoked directly by the user.
 
 ## OWASP Top 10 Checklist (2021)
 
