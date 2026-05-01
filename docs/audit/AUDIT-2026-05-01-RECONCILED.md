@@ -85,13 +85,13 @@ Parent audit: `docs/audit/AUDIT-2026-05-01.md` issued 2026-05-01 with 8 P0, 9 P1
 Feed these into next sprint planning:
 
 ### P1-9 (Partial) — Add "Do not use when" clauses to 2 skills
-- `skills/dev-flow/SKILL.md` — line 3, add exclusion clause
+- `skills/orchestrator/SKILL.md` — line 3, add exclusion clause (path post Sprint 35 rename)
 - `skills/task-decomposer/SKILL.md` — line 3, add exclusion clause
 - **Effort**: trivial (one line each)
 
 ### P2-7 (Open) — Standardize agent description preambles
 - Enforce: "Use when [condition]. [What it produces]. [Constraint if any]."
-- Touch: orchestrator, code-reviewer, security-analyst, performance-analyst, migration-analyst, scope-analyst, design-analyst
+- Touch: dispatcher (renamed from orchestrator in Sprint 35), code-reviewer, security-analyst, performance-analyst, migration-analyst, scope-analyst, design-analyst
 - **Effort**: 2–3 hours (consistency pass)
 
 ### P2-10 (Unknown) — Verify caveman statusline notice filtering

@@ -17,6 +17,6 @@ Performance specialist. Triggered only when task has `risk: high` + `layers` inc
 - Sync operation >100 ms on hot path → BLOCKING
 - Deterministic hot endpoint without cache → NON-BLOCKING (suggest TTL)
 
-**Input** (from orchestrator): changed files list, `task.title`, CLAUDE.md performance baselines if present.
+**Input** (from dispatcher): changed files list, `task.title`, CLAUDE.md performance baselines if present.
 
 **Output**: ≤250 tokens. CRITICAL / BLOCKING / NON-BLOCKING + RECOMMENDATION. No file writes.

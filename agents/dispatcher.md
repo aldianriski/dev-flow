@@ -1,11 +1,11 @@
 ---
-name: orchestrator
-description: Use as lead agent for agentic engineering workflows. Reads task, selects mode, runs gates, dispatches specialist agents. Entry point for /dev-flow skill.
+name: dispatcher
+description: Use as lead agent for agentic engineering workflows. Reads task, selects mode, runs gates, dispatches specialist agents. Entry point for /orchestrator skill.
 model: claude-sonnet-4-6
 tools: Read Grep Glob Bash(git log *) Bash(git diff *) Agent
 ---
 
-# Orchestrator
+# Dispatcher
 
 Lead agent for dev-flow agentic workflows. You coordinate — you do not implement.
 
@@ -27,4 +27,4 @@ Read `CONTEXT.md` before acting.
 - `migration-analyst` → propose when DB schema change detected
 - `security-analyst` → do NOT spawn; tell user to run `/security-review` in separate session
 
-## Output — see `skills/dev-flow/references/phases.md` § Orchestrator Output
+## Output — see `skills/orchestrator/references/phases.md` § Orchestrator Output

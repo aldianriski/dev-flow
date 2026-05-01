@@ -1,17 +1,17 @@
 {
   "aggregate": {
-    "generated": "2026-05-01T11:16:36.371Z",
+    "generated": "2026-05-01T13:11:01.340Z",
     "skill_count": 14,
     "agent_count": 7,
     "script_count": 3,
     "skill_lines_total": 1062,
     "agent_lines_total": 174,
-    "skill_tokens_total": 10268,
-    "agent_tokens_total": 1688,
+    "skill_tokens_total": 10276,
+    "agent_tokens_total": 1686,
     "skills_over_cap": [],
     "agents_over_cap": [
       "design-analyst",
-      "orchestrator"
+      "dispatcher"
     ],
     "skills_missing_red_flags": [],
     "skills_desc_not_use_when": [
@@ -32,21 +32,6 @@
       "over_cap": false,
       "references": [
         "skills/adr-writer/references/procedure.md"
-      ]
-    },
-    {
-      "name": "dev-flow",
-      "file": "skills/dev-flow/SKILL.md",
-      "lines": 84,
-      "chars": 3112,
-      "tokens_approx": 778,
-      "desc_chars": 172,
-      "has_red_flags": true,
-      "has_use_when": true,
-      "over_cap": false,
-      "references": [
-        "skills/dev-flow/references/phases.md",
-        "skills/dev-flow/references/skill-dispatch.md"
       ]
     },
     {
@@ -92,12 +77,27 @@
       ]
     },
     {
+      "name": "orchestrator",
+      "file": "skills/orchestrator/SKILL.md",
+      "lines": 84,
+      "chars": 3120,
+      "tokens_approx": 780,
+      "desc_chars": 172,
+      "has_red_flags": true,
+      "has_use_when": true,
+      "over_cap": false,
+      "references": [
+        "skills/orchestrator/references/phases.md",
+        "skills/orchestrator/references/skill-dispatch.md"
+      ]
+    },
+    {
       "name": "pr-reviewer",
       "file": "skills/pr-reviewer/SKILL.md",
       "lines": 90,
-      "chars": 3244,
-      "tokens_approx": 811,
-      "desc_chars": 302,
+      "chars": 3252,
+      "tokens_approx": 813,
+      "desc_chars": 310,
       "has_red_flags": true,
       "has_use_when": true,
       "over_cap": false,
@@ -147,7 +147,7 @@
       "name": "system-design-reviewer",
       "file": "skills/system-design-reviewer/SKILL.md",
       "lines": 92,
-      "chars": 3652,
+      "chars": 3650,
       "tokens_approx": 913,
       "desc_chars": 279,
       "has_red_flags": true,
@@ -161,8 +161,8 @@
       "name": "task-decomposer",
       "file": "skills/task-decomposer/SKILL.md",
       "lines": 72,
-      "chars": 3915,
-      "tokens_approx": 979,
+      "chars": 3923,
+      "tokens_approx": 981,
       "desc_chars": 227,
       "has_red_flags": true,
       "has_use_when": true,
@@ -200,9 +200,9 @@
       "name": "zoom-out",
       "file": "skills/zoom-out/SKILL.md",
       "lines": 55,
-      "chars": 1455,
-      "tokens_approx": 364,
-      "desc_chars": 261,
+      "chars": 1463,
+      "tokens_approx": 366,
+      "desc_chars": 265,
       "has_red_flags": true,
       "has_use_when": true,
       "over_cap": false,
@@ -214,8 +214,8 @@
       "name": "code-reviewer",
       "file": "agents/code-reviewer.md",
       "lines": 18,
-      "chars": 717,
-      "tokens_approx": 180,
+      "chars": 715,
+      "tokens_approx": 179,
       "desc_chars": 141,
       "over_cap": false
     },
@@ -225,6 +225,15 @@
       "lines": 31,
       "chars": 1110,
       "tokens_approx": 278,
+      "desc_chars": 155,
+      "over_cap": true
+    },
+    {
+      "name": "dispatcher",
+      "file": "agents/dispatcher.md",
+      "lines": 31,
+      "chars": 1464,
+      "tokens_approx": 366,
       "desc_chars": 157,
       "over_cap": true
     },
@@ -232,26 +241,17 @@
       "name": "migration-analyst",
       "file": "agents/migration-analyst.md",
       "lines": 24,
-      "chars": 867,
+      "chars": 865,
       "tokens_approx": 217,
       "desc_chars": 138,
       "over_cap": false
     },
     {
-      "name": "orchestrator",
-      "file": "agents/orchestrator.md",
-      "lines": 31,
-      "chars": 1460,
-      "tokens_approx": 365,
-      "desc_chars": 153,
-      "over_cap": true
-    },
-    {
       "name": "performance-analyst",
       "file": "agents/performance-analyst.md",
       "lines": 23,
-      "chars": 962,
-      "tokens_approx": 241,
+      "chars": 960,
+      "tokens_approx": 240,
       "desc_chars": 162,
       "over_cap": false
     },
@@ -261,15 +261,15 @@
       "lines": 29,
       "chars": 875,
       "tokens_approx": 219,
-      "desc_chars": 127,
+      "desc_chars": 125,
       "over_cap": false
     },
     {
       "name": "security-analyst",
       "file": "agents/security-analyst.md",
       "lines": 18,
-      "chars": 749,
-      "tokens_approx": 188,
+      "chars": 747,
+      "tokens_approx": 187,
       "desc_chars": 157,
       "over_cap": false
     }
@@ -291,71 +291,71 @@
       "name": "session-start.js",
       "file": "scripts/session-start.js",
       "lines": 175,
-      "chars": 7255
+      "chars": 7259
     }
   ],
   "govDocs": [
     {
       "file": ".claude/CLAUDE.md",
       "lines": 76,
-      "chars": 2590,
-      "tokens_approx": 648,
+      "chars": 2588,
+      "tokens_approx": 647,
       "status": "current",
       "last_updated": "2026-05-01"
     },
     {
       "file": ".claude/CONTEXT.md",
       "lines": 80,
-      "chars": 3005,
-      "tokens_approx": 752,
+      "chars": 3033,
+      "tokens_approx": 759,
       "status": "unknown",
       "last_updated": "unknown"
     },
     {
       "file": "docs/ARCHITECTURE.md",
       "lines": 89,
-      "chars": 4764,
-      "tokens_approx": 1191,
+      "chars": 4788,
+      "tokens_approx": 1197,
       "status": "stale",
       "last_updated": "2026-04-26"
     },
     {
       "file": "docs/AI_CONTEXT.md",
       "lines": 88,
-      "chars": 5321,
-      "tokens_approx": 1331,
+      "chars": 5325,
+      "tokens_approx": 1332,
       "status": "stale",
       "last_updated": "2026-04-29"
     },
     {
       "file": "docs/DECISIONS.md",
-      "lines": 269,
-      "chars": 21291,
-      "tokens_approx": 5323,
+      "lines": 329,
+      "chars": 27000,
+      "tokens_approx": 6750,
       "status": "current",
-      "last_updated": "2026-04-29"
+      "last_updated": "2026-05-01"
     },
     {
       "file": "docs/CHANGELOG.md",
-      "lines": 645,
-      "chars": 51199,
-      "tokens_approx": 12800,
+      "lines": 676,
+      "chars": 53266,
+      "tokens_approx": 13317,
       "status": "current",
-      "last_updated": "2026-05-01 (Sprint 33 archived)"
+      "last_updated": "2026-05-01 (Sprint 34 archived)"
     },
     {
       "file": "README.md",
       "lines": 66,
-      "chars": 2291,
-      "tokens_approx": 573,
+      "chars": 2295,
+      "tokens_approx": 574,
       "status": "current",
       "last_updated": "2026-05-01"
     },
     {
       "file": "TODO.md",
-      "lines": 146,
-      "chars": 7388,
-      "tokens_approx": 1847,
+      "lines": 125,
+      "chars": 5904,
+      "tokens_approx": 1476,
       "status": "unknown",
       "last_updated": "unknown"
     }

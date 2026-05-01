@@ -28,7 +28,7 @@ and template files into the target.
 
 Stacks: `node-express` · `react-next` · `python-fastapi` · `go-gin` · `custom`
 
-After init: fill `[CUSTOMIZE]` blocks in `.claude/CLAUDE.md`, then run `/dev-flow init`.
+After init: fill `[CUSTOMIZE]` blocks in `.claude/CLAUDE.md`, then run `/orchestrator init`.
 
 Fallback (no Node): `cp -r dev-flow/.claude your-project/` — see `docs/blueprint/09-customization.md §12`.
 

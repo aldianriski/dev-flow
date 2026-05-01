@@ -30,7 +30,7 @@ load_next: ARCHITECTURE.md if touching workflow phases, agent dispatch, or harne
 | How do I adopt it into my project?          | README.md              | SETUP.md             |
 | Which phase/mode runs this?                 | AI_CONTEXT.md §Patterns | ARCHITECTURE.md     |
 | Why was this design decision made?          | DECISIONS.md           | —                    |
-| How do agents connect to the orchestrator?  | ARCHITECTURE.md        | docs/blueprint/04    |
+| How do agents connect to the dispatcher?    | ARCHITECTURE.md        | docs/blueprint/04    |
 | What's in the current sprint?               | TODO.md                | —                    |
 | What must I NOT do in this codebase?        | AI_CONTEXT.md §Do Not  | DECISIONS.md         |
 | How do I run the harness scripts?           | SETUP.md               | —                    |
@@ -65,7 +65,7 @@ templates/         CLAUDE.md.template + TODO.md.template + 6 other doc templates
 Gate model:        3 human gates block all Tier 3 ops — see ARCHITECTURE.md §Key Patterns
 Thin Coordinator:  Orchestrator gets summaries only; read-guard.js enforces at PreToolUse
 Skill-as-spec:     SKILL.md = spec + prompt; bound to phases via MANIFEST.json
-Hard stops:        24 non-negotiable blocks — .claude/skills/dev-flow/references/hard-stops.md
+Hard stops:        24 non-negotiable blocks — .claude/skills/orchestrator/references/hard-stops.md
 Mode dispatch:     init / full / quick / hotfix / review / resume — each is a phase subset
 
 ## Conventions

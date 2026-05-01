@@ -9,7 +9,7 @@ status: current
 
 > **How to use this file**
 > - **Start of session** — read this file first. Understand active sprint before touching code.
-> - **Run /dev-flow** — orchestrator parses the first incomplete task `[ ]` in Active Sprint.
+> - **Run /orchestrator** — dispatcher parses the first incomplete task `[ ]` in Active Sprint.
 > - **End of session** — run Session Close (Phase 10). Move completed items to Changelog.
 > - **Sprint completed** — remove from Active Sprint, add Changelog row (File | Change | ADR), update relevant docs.
 > - **Every code change** — if it introduces a new pattern or reverses a decision, update the relevant doc.

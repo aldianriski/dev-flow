@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 35 promoted — plan locked, awaiting approval)
+last_updated: 2026-05-01 (Sprint 35 closed — EPIC-Audit Phase 1 done)
 update_trigger: Sprint completed, task added, task status changed
 status: current
 sprint: 35
@@ -16,7 +16,7 @@ sprint: 35
 
 > **How to use this file**
 > - **Start of session** — read this file first. Understand active sprint before touching code.
-> - **Run /dev-flow** — orchestrator parses first incomplete task `[ ]` in Active Sprint.
+> - **Run /orchestrator** — dispatcher parses first incomplete task `[ ]` in Active Sprint.
 > - **End of session** — Session Close. Move completed items to Changelog.
 > - **Sprint completed** — remove from Active Sprint, append Changelog row (File | Change | ADR), update relevant docs, rotate sprint block to `docs/CHANGELOG.md`.
 > - **Changelog rule** — holds ONLY current in-progress sprint. Once reflected in docs, MOVE to `docs/CHANGELOG.md` (prepend), then DELETE from here.
@@ -34,8 +34,8 @@ sprint: 35
 
 ## Active Sprint
 
-→ **Sprint 35 — Atomic Naming Rename** (EPIC-Audit Phase 1) · `status: planning`
-> Plan: `docs/sprint/SPRINT-035-atomic-naming-rename.md`. Awaiting user approval to flip `status: active` + author plan-lock commit.
+→ — none —
+> Sprint 35 closed (2026-05-01). Next: Sprint 36 = Phase 2 Workflow wiring verification. Run `/lean-doc-generator` Sprint Promote to open.
 
 ---
 
@@ -69,7 +69,7 @@ sprint: 35
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 35 in flight — see `docs/sprint/SPRINT-035-atomic-naming-rename.md`. No completed work yet.*
+*Sprint 35 archived → `docs/CHANGELOG.md`. No active sprint.*
 
 ---
 

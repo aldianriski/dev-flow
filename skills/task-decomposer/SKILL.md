@@ -10,8 +10,8 @@ type: rigid
 spawns: scope-analyst
 when_to_use: |
   Use when the user has an idea, ticket, PRD, or epic not yet written as a TODO.md task.
-  Also invoked automatically by dev-flow Path B (freeform input).
-  Do NOT use when a task already exists in Active Sprint — use /dev-flow instead.
+  Also invoked automatically by orchestrator Path B (freeform input).
+  Do NOT use when a task already exists in Active Sprint — use /orchestrator instead.
 ---
 
 # Task Decomposer

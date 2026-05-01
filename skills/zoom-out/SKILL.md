@@ -1,6 +1,6 @@
 ---
 name: zoom-out
-description: Use when entering an unfamiliar area of the codebase or before a cross-cutting change. Produces a bird's-eye module map using CONTEXT.md vocabulary. Read-only. No implementation suggestions. Do not use when you need an implementation plan; use dev-flow instead.
+description: Use when entering an unfamiliar area of the codebase or before a cross-cutting change. Produces a bird's-eye module map using CONTEXT.md vocabulary. Read-only. No implementation suggestions. Do not use when you need an implementation plan; use orchestrator instead.
 user-invocable: true
 argument-hint: "[area | feature | module name]"
 version: "1.0.0"
@@ -51,4 +51,4 @@ LOAD THIS NEXT:
 ## Red Flags
 
 ❌ **Inventing domain terms** — always defer to CONTEXT.md vocabulary; inconsistent naming causes agent drift
-❌ **Suggesting implementation** — zoom-out is orientation only; use dev-flow for implementation
+❌ **Suggesting implementation** — zoom-out is orientation only; use orchestrator for implementation

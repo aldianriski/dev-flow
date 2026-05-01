@@ -62,7 +62,7 @@ The following are **non-negotiable** and cannot be relaxed without a MAJOR versi
 - The 3-gate model (Gate 0, Gate 1, Gate 2)
 - The 6 workflow modes
 - The 27 hard stop catalog
-- The Thin-Coordinator Rule (§1 — orchestrator never Reads source files in compact-vulnerable phases)
+- The Thin-Coordinator Rule (§1 — dispatcher never Reads source files in compact-vulnerable phases)
 
 Rationale: [`context/workflow/DESIGN_PHILOSOPHY.md`](context/workflow/DESIGN_PHILOSOPHY.md).
 

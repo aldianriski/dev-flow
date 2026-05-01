@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-29
+last_updated: 2026-05-01
 update_trigger: Architectural decision made or reversed
 status: current
 ---
@@ -171,7 +171,7 @@ Four medium/low friction items found:
 ## ADR-011: Skill-dispatch governance — layers-to-skills binding
 
 **Date**: 2026-04-30
-**Status**: Accepted
+**Status**: Accepted (superseded-in-part by ADR-014 — naming only; substance preserved; `skill-dispatch.md` now at `skills/orchestrator/references/`)
 **Deciders**: Tech Lead (Aldian Rizki)
 
 ### Context
@@ -199,7 +199,7 @@ Add `skill-dispatch.md` reference doc mapping `layers` field values → required
 ## ADR-012: Wrap-or-replace Claude Code primitives — Replace
 
 **Date**: 2026-05-01
-**Status**: Accepted
+**Status**: Accepted (superseded-in-part by ADR-014 — naming only; "dev-flow init" mode now invoked as `/orchestrator init`)
 **Deciders**: Tech Lead (Aldian Rizki)
 
 ### Context
@@ -233,7 +233,7 @@ v2 skills and agents overlap with three Claude Code built-in primitives: `/revie
 ## ADR-013: v2 rewrite supersedes v1 phase/mode/phase-tracking model; read-guard retired
 
 **Date**: 2026-05-01
-**Status**: decided
+**Status**: decided (superseded-in-part by ADR-014 — naming only; v2 skill is now `orchestrator`, agent is now `dispatcher`)
 **Deciders**: Tech Lead (Aldian Rizki)
 
 ### Context
@@ -266,3 +266,63 @@ The v2 rewrite (Sprints 18–29) replaced the v1 phase model (10 sequential phas
 
 **Neutral**:
 - `hooks/hooks.json` retains the `Bash(git add*)` chain-guard and `SessionStart` bootstrap hook — unaffected
+
+---
+
+## ADR-014: Atomic naming rename — skill `dev-flow` → `orchestrator`; agent `orchestrator` → `dispatcher`
+
+**Date**: 2026-05-01
+**Status**: Accepted
+**Deciders**: Tech Lead (Aldian Rizki)
+
+### Context
+
+Two name collisions surfaced in Sprint 34 baseline (`docs/audit/baseline-metrics.md`) and the user-driven naming-clarity audit ask (audit ticket #3, 2026-05-01):
+
+1. **Skill `dev-flow` ↔ plugin `dev-flow`** — the skill name and plugin name are identical. The slash command `/dev-flow` is ambiguous in both code and prose: does it refer to plugin scope (the whole dev-flow workflow) or the specific orchestration skill? Adopters reading skill cross-references can't tell whether "`dev-flow`" means the plugin brand or the skill identifier without surrounding context.
+
+2. **Agent `orchestrator` ↔ planned skill `orchestrator`** — the orchestration skill is the natural target for the rename (the skill *is* the orchestrator workflow), but that name was already taken by the lead agent. Renaming the skill to `orchestrator` requires renaming the agent first.
+
+The plugin name `dev-flow` is the public-facing brand on GitHub, the marketplace, the binary `bin/dev-flow-init.js`, and the namespace prefix `dev-flow:`. Renaming the plugin would break every adopter's install URL, every issue link, every published reference. Renaming the skill and agent — both internal identifiers — has zero adopter impact (no one pins skill names).
+
+### Decision
+
+**Skill `dev-flow` → `orchestrator`.** Plugin name `dev-flow` is preserved.
+
+**Agent `orchestrator` → `dispatcher`.** All internal references to the lead-agent role (e.g. "input from orchestrator", "spawned by orchestrator") update to `dispatcher`. The `Orchestration over coding` principle name in CONTEXT.md is preserved as a workflow concept — it now refers to the role the `dispatcher` agent owns.
+
+**Sweep scope** — every skill, agent, and governance doc updated; plugin manifest, binary name, repo URL, and `dev-flow-compress` skill kept literal (different artifact). Closed sprint docs, frozen audits, and prior ADRs (ADR-001..013) preserve their original wording as historical record. ADR-011, ADR-012, ADR-013 receive `superseded-in-part by ADR-014` status markers (naming only — substance preserved).
+
+Both renames executed in a single atomic sprint (Sprint 35) — splitting would double the grep-sweep cost across overlapping files (`skills/orchestrator/SKILL.md`, all 7 agents that reference the lead role).
+
+### Alternatives considered
+
+1. **Rename the plugin instead of the skill.** Rejected — breaks every adopter install URL, every namespace reference (`dev-flow:adr-writer` etc.), every GitHub issue link. The plugin is the public brand; the skill is an internal identifier.
+
+2. **Rename only the skill (`dev-flow` → `orchestrator`); keep the agent named `orchestrator`.** Rejected — produces a worse collision: skill `orchestrator` and agent `orchestrator` would share the same name with no disambiguation possible from `/orchestrator` invocation context. Resolves nothing.
+
+3. **Rename only the agent (`orchestrator` → `dispatcher`); keep the skill named `dev-flow`.** Rejected — the agent rename alone doesn't solve the plugin/skill name collision that motivated the audit ask. Half-measure.
+
+4. **Split into two sprints (skill rename in Sprint 35a, agent rename in Sprint 35b).** Rejected — overlapping files (skill body references the lead-agent role; agent body references the orchestrating skill) would force two passes through the same edits, doubling sweep cost. Atomic sprint = single locked plan = single ADR narrative.
+
+5. **Defer naming to post-v1 ship.** Rejected — every sprint that lands on the old names accretes more references that have to be cleaned later. The cost grows linearly with deferred time; the benefit is zero.
+
+### Consequences
+
+**Positive**:
+- `/orchestrator` slash command unambiguously names the workflow skill; plugin scope is the namespace prefix `dev-flow:` (e.g. `dev-flow:adr-writer`).
+- Agent `dispatcher` semantically describes its single responsibility (dispatch specialist agents) without colliding with the workflow concept.
+- Phase 2 (Sprint 36) workflow wiring verification can map `gates ↔ modes ↔ agents ↔ skills ↔ hooks` without name aliasing.
+- Closed sprint docs and frozen audits preserve original-name references as historical record — no rewriting of the past.
+
+**Negative** (trade-offs accepted):
+- Adopters who memorized `/dev-flow init` must learn `/orchestrator init`. Mitigated: the change is a one-time cost; CHANGELOG.md captures it; bare-form disambiguation depends on Claude Code resolution rules (recorded in Sprint 35 retro).
+- Three closed ADRs (011, 012, 013) gain `superseded-in-part` markers — minor history annotation, not content rewrite.
+- Subagent invocations using `dev-flow:orchestrator` must update to `dev-flow:dispatcher`. No external adopters depend on this; internal refs swept in T3.
+
+**Neutral**:
+- Plugin name `dev-flow`, binary `bin/dev-flow-init.js`, plugin namespace `dev-flow:`, repo URL — all unchanged.
+- Skill `dev-flow-compress` kept literal — different skill, different concern.
+- `plugin.json` `version` not bumped by this rename — adopter contract is the namespace and plugin name, both preserved. Future Phase 5 doc refresh may bump.
+
+**EPIC-Audit Phase 1 closed** — Sprint 35 atomic naming rename shipped.

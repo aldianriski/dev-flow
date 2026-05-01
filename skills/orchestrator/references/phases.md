@@ -1,6 +1,6 @@
-# dev-flow Phase Reference
+# Orchestrator Phase Reference
 
-Loaded on demand from `dev-flow/SKILL.md`.
+Loaded on demand from `orchestrator/SKILL.md`.
 
 ---
 

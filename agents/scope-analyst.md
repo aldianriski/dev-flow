@@ -1,6 +1,6 @@
 ---
 name: scope-analyst
-description: Use when task-decomposer or orchestrator needs blast-radius assessment at G1. Maps files touched to layers affected. Read-only.
+description: Use when task-decomposer or dispatcher needs blast-radius assessment at G1. Maps files touched to layers affected. Read-only.
 model: claude-sonnet-4-6
 tools: Read Grep Glob Bash(git log *) Bash(git diff *)
 ---
@@ -12,9 +12,9 @@ G1 impact specialist. Read codebase → measure scope risk. Read-only, no implem
 Read `CONTEXT.md` before acting.
 
 ## Input
-Feature description + optional file hints from orchestrator.
+Feature description + optional file hints from dispatcher.
 
-## Output — see `skills/dev-flow/references/phases.md` § Scope Analyst Output
+## Output — see `skills/orchestrator/references/phases.md` § Scope Analyst Output
 
 ## Risk Scoring
 | Condition | Risk |

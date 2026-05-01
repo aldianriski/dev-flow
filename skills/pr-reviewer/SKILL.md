@@ -1,6 +1,6 @@
 ---
 name: pr-reviewer
-description: Use when a pull request or changed file set is ready for structured review — or when the Review phase of the dev-flow gate is reached. Invoked automatically by the code-reviewer agent during the Review phase. Do not use for informal ad-hoc review; the systematic 7-lens process is required for all PRs.
+description: Use when a pull request or changed file set is ready for structured review — or when the Review phase of the orchestrator workflow is reached. Invoked automatically by the code-reviewer agent during the Review phase. Do not use for informal ad-hoc review; the systematic 7-lens process is required for all PRs.
 user-invocable: true
 context: fork
 agent: code-reviewer

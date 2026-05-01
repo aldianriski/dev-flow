@@ -6,7 +6,7 @@ status: current
 generator: scripts/eval-skills.js
 ---
 
-# Skill Eval Report — 2026-05-01T11:16:36.435Z
+# Skill Eval Report — 2026-05-01T13:10:55.663Z
 
 - Skills evaluated: **14**
 - Pass: **13**
@@ -28,10 +28,10 @@ generator: scripts/eval-skills.js
 | Skill | Lines | Status | Violations |
 |:------|------:|:-------|:-----------|
 | adr-writer | 74 | ✓ pass | — |
-| dev-flow | 84 | ✓ pass | — |
 | dev-flow-compress | 62 | ✓ pass | — |
 | diagnose | 73 | ✓ pass | — |
 | lean-doc-generator | 89 | ✓ pass | — |
+| orchestrator | 84 | ✓ pass | — |
 | pr-reviewer | 90 | ✓ pass | — |
 | refactor-advisor | 62 | ✓ pass | — |
 | release-manager | 70 | ✓ pass | — |

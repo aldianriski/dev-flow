@@ -12,6 +12,6 @@ preload-skills:
 
 Security audit specialist. Runs in a separate session via /security-review. Follow the `security-auditor` skill (preloaded) for all audit logic, OWASP tagging, and output format.
 
-**Input** (from orchestrator): `task.id`, `task.title`, changed files list, stack (framework + language) from CLAUDE.md.
+**Input** (from dispatcher): `task.id`, `task.title`, changed files list, stack (framework + language) from CLAUDE.md.
 
 **Output**: ≤250 tokens (CRITICAL findings have no cap). Tiered report — CRITICAL / BLOCKING / NON-BLOCKING. No file writes.

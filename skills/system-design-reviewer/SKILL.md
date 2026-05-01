@@ -85,7 +85,7 @@ Procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 
 ## Hard Rules
 
-- CRITICAL findings block Gate 1 — the orchestrator must not proceed to Implement without addressing them.
+- CRITICAL findings block Gate 1 — the dispatcher must not proceed to Implement without addressing them.
 - Do NOT propose implementation details — design review only.
 - Do NOT return raw file contents.
 - If no architecture document exists for a brownfield review → return `NEEDS_CONTEXT`.

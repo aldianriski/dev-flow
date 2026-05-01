@@ -11,7 +11,7 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 | **gate** | Human checkpoint; must pass before proceeding |
 | **mode** | Operational context: `init` / `quick` / `mvp` |
 | **skill** | Slash command loaded on demand from `skills/` (plugin install) or `.claude/skills/` (scaffold copy) |
-| **agent** | Specialist worker spawned by orchestrator for targeted analysis |
+| **agent** | Specialist worker spawned by dispatcher for targeted analysis |
 | **red flag** | Condition that hard-stops a skill; listed inline per skill |
 | **vertical slice** | Independently demoable end-to-end behavior unit |
 | **deep module** | Module whose interface is simple relative to its implementation; high leverage |
@@ -21,7 +21,7 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 
 ## Agentic Engineering Principles
 
-- **Orchestration over coding** — design, direct, oversee; agents execute
+- **Orchestration over coding** — design, direct, oversee; agents execute (the dispatcher agent owns this role)
 - **Human in loop** — humans set goals, approve gates, review outputs; agents never self-approve
 - **Context first** — right context → right output; agents must read CONTEXT.md before acting
 - **Minimal footprint** — agents read, plan, report; humans approve writes
@@ -60,13 +60,13 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 
 | Agent | Trigger | Spawned by |
 |---|---|---|
-| `orchestrator` | `/dev-flow` | user |
-| `design-analyst` | G2 always | orchestrator (auto) |
-| `code-reviewer` | post-implementation | orchestrator (auto) |
-| `scope-analyst` | G1 if size unclear | orchestrator (auto) |
+| `dispatcher` | `/orchestrator` | user |
+| `design-analyst` | G2 always | dispatcher (auto) |
+| `code-reviewer` | post-implementation | dispatcher (auto) |
+| `scope-analyst` | G1 if size unclear | dispatcher (auto) |
 | `security-analyst` | separate `/security-review` session | user |
-| `performance-analyst` | high-risk + api/db layers | orchestrator (propose → human approves) |
-| `migration-analyst` | DB schema change detected | orchestrator (propose → human approves) |
+| `performance-analyst` | high-risk + api/db layers | dispatcher (propose → human approves) |
+| `migration-analyst` | DB schema change detected | dispatcher (propose → human approves) |
 
 ---
 

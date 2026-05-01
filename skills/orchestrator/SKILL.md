@@ -1,5 +1,5 @@
 ---
-name: dev-flow
+name: orchestrator
 description: Use when starting, resuming, or completing any development task. Orchestrates gate-driven agentic workflow — init, quick, and mvp modes — with G1 Scope and G2 Design gates.
 user-invocable: true
 argument-hint: "[mode] [task-or-description]"
@@ -8,7 +8,7 @@ last-validated: "2026-05-01"
 type: rigid
 ---
 
-# dev-flow
+# orchestrator
 
 Gate-driven agentic workflow. Read `CONTEXT.md` before acting.
 

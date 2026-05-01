@@ -3,9 +3,12 @@ owner: Aldian Rizki
 created: 2026-05-01
 status: approved
 branch: v2-rewrite
+superseded_partly_by: ADR-014 (Sprint 35 — skill `dev-flow` → `orchestrator`, agent `orchestrator` → `dispatcher`)
 ---
 
 # dev-flow v2 — Rewrite Plan
+
+> **Note (Sprint 35 supersede):** This plan describes v2 with the original names skill `dev-flow` and agent `orchestrator`. Post Sprint 35 (ADR-014): the skill is `orchestrator` and the agent is `dispatcher`. References below are preserved as historical record of the v2 plan as approved.
 
 ## Problem
 

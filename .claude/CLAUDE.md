@@ -16,7 +16,7 @@ status: current
 ## File Structure
 ```
 skills/          # SKILL.md files + references/ subdirs (plugin auto-discovers)
-agents/          # agent definitions (orchestrator + 6 specialists)
+agents/          # agent definitions (dispatcher + 6 specialists)
 scripts/         # session-start.js, read-guard.js only
 hooks/
   hooks.json     # plugin hook config

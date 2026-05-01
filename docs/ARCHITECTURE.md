@@ -28,7 +28,7 @@ It runs entirely inside a Claude Code session.
 
 | Component | Location | Single Responsibility |
 |:----------|:---------|:----------------------|
-| Orchestrator skill | `.claude/skills/dev-flow/SKILL.md` | Phase sequencing, gate enforcement, context management |
+| Orchestrator skill | `.claude/skills/orchestrator/SKILL.md` | Phase sequencing, gate enforcement, context management |
 | Task decomposer | `.claude/skills/task-decomposer/SKILL.md` | Freeform intent → structured TASK-NNN entries |
 | Design agent | `.claude/agents/design-analyst.md` | Read-only codebase exploration; produces implementation plan |
 | Review agent | `.claude/agents/code-reviewer.md` | 7-lens PR review; thin wrapper → pr-reviewer skill |
@@ -52,11 +52,11 @@ block all Tier 3 operations. No background agent spawns without a confirmed gate
 **Thin Coordinator Rule**: Orchestrator receives summaries from agents, not raw file content.
 Enforced by `read-guard.js` PreToolUse hook.
 
-**Mode-modal dispatch**: `/dev-flow` selects a workflow path (init / full / quick / hotfix / review /
+**Mode-modal dispatch**: `/orchestrator` selects a workflow path (init / full / quick / hotfix / review /
 resume) at session start. Each mode activates a different phase subset.
 
 **Hard stops**: 24 non-negotiable pipeline blocks. Defined in
-`.claude/skills/dev-flow/references/hard-stops.md`. Violation = session halt.
+`.claude/skills/orchestrator/references/hard-stops.md`. Violation = session halt.
 
 **Skill-as-spec**: Each SKILL.md is both specification and prompt template. Skills are loaded by
 name at the phase they're bound to in MANIFEST.json.
@@ -81,8 +81,8 @@ name at the phase they're bound to in MANIFEST.json.
 
 ## Reference Files
 
-- Workflow phases: `.claude/skills/dev-flow/references/phases.md`
-- Hard stops: `.claude/skills/dev-flow/references/hard-stops.md`
-- Mode specs: `.claude/skills/dev-flow/references/mode-*.md`
+- Workflow phases: `.claude/skills/orchestrator/references/phases.md`
+- Hard stops: `.claude/skills/orchestrator/references/hard-stops.md`
+- Mode specs: `.claude/skills/orchestrator/references/mode-*.md`
 - Skill binding: `.claude/skills/MANIFEST.json`
 - Canonical spec: `docs/blueprint/01-10` (authoritative source for all phase/gate/agent definitions)

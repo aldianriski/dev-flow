@@ -2,9 +2,10 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-01
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending (plan-lock commit)
-close_commit: —
+status: closed
+plan_commit: bc1d0f5
+close_commit: pending (close commit)
+last_updated: 2026-05-01
 ---
 
 # Sprint 035 — Atomic Naming Rename (EPIC-Audit Phase 1)
@@ -134,20 +135,26 @@ User-driven naming-clarity ask (audit ticket #3, 2026-05-01). Highest-risk singl
 
 ## Sprint DoD
 
-- [ ] T1 acceptance met (skill renamed, frontmatter coherent, eval passes)
-- [ ] T2 acceptance met (agent renamed, frontmatter coherent)
-- [ ] T3 grep gates pass (zero unexpected hits)
-- [ ] ADR-014 committed in DECISIONS.md
-- [ ] T5 smoke test 5/5 pass (R4 carryover noted)
-- [ ] Plan-lock commit landed before any T1..T5 commit
-- [ ] Close commit + CHANGELOG row + TODO update + retro
-- [ ] `last_updated` frontmatter advanced on touched governance files
+- [x] T1 acceptance met (skill renamed, frontmatter coherent, eval passes)
+- [x] T2 acceptance met (agent renamed, frontmatter coherent)
+- [x] T3 grep gates pass (zero unexpected hits — all in CHANGELOG/closed-sprint/frozen-audit/this-plan/ADR-014)
+- [x] ADR-014 committed in DECISIONS.md (+ status markers on ADR-011/012/013 per DEC-8)
+- [x] T5 smoke test 5/5 pass (R4 carryover on system-design-reviewer noted; OVER-CAP 2 agents carryover)
+- [x] Plan-lock commit landed before any T1..T5 commit (`bc1d0f5`)
+- [x] Close commit + CHANGELOG row + TODO update + retro
+- [x] `last_updated` frontmatter advanced on touched governance files (DECISIONS.md, this sprint doc, TODO.md)
 
 ---
 
 ## Execution Log
 
-*(empty — populated as tasks complete)*
+- 2026-05-01: Plan locked at commit `bc1d0f5` — sprint doc + TODO.md pre-lock writes only.
+- 2026-05-01: T1 done — `git mv skills/dev-flow skills/orchestrator`; SKILL.md frontmatter `name: orchestrator`; H1 heading updated. Three files moved (SKILL.md + 2 references). History preserved.
+- 2026-05-01: T2 done — `git mv agents/orchestrator.md agents/dispatcher.md`; frontmatter `name: dispatcher`, description self-ref `/dev-flow skill` → `/orchestrator skill`; H1 heading updated; body output ref updated to new skill path. 30-line cap violation (31 lines) carries over to Phase 3 per DEC-2 (Sprint 34) — not trimmed here per surgical-changes rule.
+- 2026-05-01: T3 done — sweep across skills, agents, governance docs, scripts, templates. Adjudication rule: `dev-flow` as plugin/workflow/ecosystem brand → KEEP; `/dev-flow` slash command literal → `/orchestrator`; `skills/dev-flow/` path → `skills/orchestrator/`; "the orchestrator" agent role → "the dispatcher". DEC-6 / DEC-7 added mid-task to handle historical audit docs and regenerated artifacts.
+- 2026-05-01: T4 done — ADR-014 appended to DECISIONS.md (inline section convention). `superseded-in-part by ADR-014 (naming only)` status markers added to ADR-011, ADR-012, ADR-013 per DEC-8. DECISIONS.md `last_updated` advanced to 2026-05-01.
+- 2026-05-01: T5 done — `eval-skills.js`: pass=13 fail=1 (pre-existing R4 violation on `system-design-reviewer` — Phase 3 carryover). `audit-baseline.js`: regenerated cleanly (14 skills, 7 agents); skill `orchestrator` row replaces `dev-flow`; agent `dispatcher` row replaces `orchestrator`; OVER-CAP unchanged at 2 agents (`dispatcher` 31, `design-analyst` 31) — Phase 3 carryover. `session-start.js`: runs clean; pre-existing stale-doc warnings + Active-Sprint regex quirk both unrelated to rename. Final grep gates PASS — all hits in excluded paths (CHANGELOG, closed sprints, frozen audits, this sprint's own plan, ADR-014 itself).
+- 2026-05-01: T6 done — sprint doc populated; CHANGELOG.md row added; TODO.md updated; close commit authored.
 
 ---
 
@@ -155,8 +162,39 @@ User-driven naming-clarity ask (audit ticket #3, 2026-05-01). Highest-risk singl
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
-
-*(empty — populated as work happens)*
+| `skills/dev-flow/` → `skills/orchestrator/` (3 files) | T1 | dir rename via `git mv`; SKILL.md frontmatter `name: orchestrator`; H1 heading updated | medium | T5 (eval) |
+| `agents/orchestrator.md` → `agents/dispatcher.md` | T2 | file rename via `git mv`; frontmatter `name: dispatcher`; description + body self-refs updated | medium | T5 (smoke) |
+| `skills/pr-reviewer/SKILL.md` | T3 | description: "dev-flow gate" → "orchestrator workflow" | low | T5 |
+| `skills/orchestrator/references/phases.md` | T3 | H1 + load-source ref updated to new skill path | low | T5 |
+| `skills/task-decomposer/SKILL.md` | T3 | when_to_use: `dev-flow Path B` → `orchestrator Path B`; `/dev-flow` → `/orchestrator` | low | T5 |
+| `skills/zoom-out/SKILL.md` | T3 | description + Red Flags: "use dev-flow" → "use orchestrator" (2 sites) | low | T5 |
+| `skills/system-design-reviewer/SKILL.md` | T3 | Hard Rules: "the orchestrator must not proceed" → "the dispatcher must not proceed" | low | T5 (R4 carryover unaffected) |
+| `agents/security-analyst.md` | T3 | Input source: "from orchestrator" → "from dispatcher" | low | T5 |
+| `agents/scope-analyst.md` | T3 | description + Input + Output path updated (3 sites) | low | T5 |
+| `agents/design-analyst.md` | T3 | description + Input + Output path updated (3 sites) | low | T5 |
+| `agents/performance-analyst.md` | T3 | Input: "from orchestrator" → "from dispatcher" | low | T5 |
+| `agents/code-reviewer.md` | T3 | Input: "from orchestrator" → "from dispatcher" | low | T5 |
+| `agents/migration-analyst.md` | T3 | Input: "from orchestrator" → "from dispatcher" | low | T5 |
+| `.claude/CLAUDE.md` | T3 | File Structure comment: `(orchestrator + 6 specialists)` → `(dispatcher + 6 specialists)` | low | T5 |
+| `.claude/CONTEXT.md` | T3 | Vocabulary "agent" def + Principles + Agent Roster table (8 sites total) | low | T5 |
+| `README.md` | T3 | tagline + agents count comment + skills table row + adopt commands (4 sites) | low | T5 |
+| `CONTRIBUTING.md` | T3 | What NOT to change: Thin-Coordinator Rule role rename | low | T5 |
+| `TODO.md` | T1 / T6 | sprint pointer (planning) at promote; close updates at T6 | low | n/a |
+| `docs/sprint/SPRINT-035-atomic-naming-rename.md` | T1 / T6 | new — sprint plan doc; populated through close | low | n/a |
+| `docs/ARCHITECTURE.md` | T3 | 6 paths + 1 slash command updated; doc still `status: stale` (Phase 5 rewrite) | low | T5 |
+| `docs/AI_CONTEXT.md` | T3 | Navigation row + Hard stops path (2 sites); doc still `status: stale` (Phase 5 delete-and-merge) | low | T5 |
+| `docs/SETUP.md` | T3 | adopt step: `/dev-flow init` → `/orchestrator init` | low | T5 |
+| `docs/research/r9-primitive-audit.md` | T3 | `/review` row: orchestrator → dispatcher (2 sites); `/init` row: `dev-flow init` → `orchestrator init` (2 sites) | low | T5 |
+| `templates/TODO.md.template` | T3 | "Run /dev-flow — orchestrator parses" → "Run /orchestrator — dispatcher parses" | low | T5 |
+| `templates/SETUP.md.template` | T3 | "first /dev-flow session" → "first /orchestrator session" | low | T5 |
+| `scripts/session-start.js` | T3 | warning string: `/dev-flow` → `/orchestrator` | low | T5 (session-start runs clean) |
+| `docs/audit/AUDIT-2026-05-01-RECONCILED.md` | T3 | selective forward-looking refs only (lines 88, 94) per DEC-6 | low | n/a |
+| `docs/audit/v2-rewrite-plan.md` | T3 | frontmatter `superseded_partly_by: ADR-014` + supersede banner per DEC-6 | low | n/a |
+| `docs/audit/baseline-metrics.md` | T5 | regenerated by `audit-baseline.js` per DEC-7 | low | self |
+| `docs/audit/baseline-metrics.json` | T5 | regenerated by `audit-baseline.js` per DEC-7 | low | self |
+| `docs/audit/skill-eval-report.md` | T5 | regenerated by `eval-skills.js` per DEC-7 | low | self |
+| `docs/DECISIONS.md` | T4 | ADR-014 appended; status markers on ADR-011/012/013 per DEC-8; `last_updated` advanced | low | n/a |
+| `docs/CHANGELOG.md` | T6 | Sprint 35 row appended (close) | low | n/a |
 
 ---
 
@@ -167,6 +205,9 @@ User-driven naming-clarity ask (audit ticket #3, 2026-05-01). Highest-risk singl
 - **DEC-3**: Q3 locked — Phase 5 will merge `docs/AI_CONTEXT.md` essentials into `.claude/CONTEXT.md` and delete the separate doc. No execution this sprint.
 - **DEC-4**: ADR convention reaffirmed — inline sections in `docs/DECISIONS.md` (no `docs/adr/` standalone files). T4 follows existing shape.
 - **DEC-5**: Plugin name `dev-flow`, binary `bin/dev-flow-init.js`, plugin namespace `dev-flow:` all unchanged. Adopters' install paths preserved.
+- **DEC-6**: Historical audit/plan docs (`docs/audit/AUDIT-2026-05-01-RECONCILED.md`, `docs/audit/v2-rewrite-plan.md`) treated like closed sprint docs and ADR history — historical findings preserved as written; only forward-looking remediation references updated. v2-rewrite-plan.md gets a `superseded_partly_by: ADR-014` frontmatter field + supersede banner. RECONCILED gets selective edits on lines 88, 94 (forward-looking remediation only). Discovered mid-T3 when grep gates needed clarification for which audit docs are "frozen" — extending the original AUDIT-2026-05-01.md exclusion to cover its sibling reconciliation doc and the v2 plan.
+- **DEC-7**: `docs/audit/baseline-metrics.md` and `docs/audit/skill-eval-report.md` regenerated by T5 via `audit-baseline.js` + `eval-skills.js` rather than hand-edited. Both scripts scan dirs dynamically — no hardcoded skill/agent names, so post-T1/T2 the regenerated artifacts naturally show the new names. Same exclusion treatment as `baseline-metrics.json`.
+- **DEC-8**: ADR supersede strategy — only ADRs whose decision substance touches the renamed identifiers receive `superseded-in-part by ADR-014 (naming only)` markers (ADR-011, ADR-012, ADR-013). ADR-001..010 either never reference skill `dev-flow` or agent `orchestrator` by name, or do so only in incidental historical context — left as written. Rationale: ADR-014 changes names only, not decision substance; "append-only" rule on past ADRs is honored by status-field-only updates (precedent: ADR-013 used the same pattern to mark ADR-003/007/008/009 superseded).
 
 ---
 
@@ -178,4 +219,24 @@ User-driven naming-clarity ask (audit ticket #3, 2026-05-01). Highest-risk singl
 
 ## Retro
 
-*(empty — written at close)*
+**Worked:**
+- Atomic single-sprint approach (DEC-2) was the right call. Skill body and agent body cross-reference each other; splitting would have forced a second pass through the same files. Single sprint = single coherent ADR-014 narrative.
+- Grep-gate-as-acceptance for T3 pinned the highest-risk task to a binary verifiable signal. Removed adjudication ambiguity.
+- Adjudication rule locked early in T3 (`dev-flow` as plugin/brand → KEEP; `/dev-flow` slash command → CHANGE; `the orchestrator` agent role → `dispatcher`) prevented per-instance hand-wringing across 35+ sweep targets.
+- Mid-task DECISIONS captured (DEC-6 / DEC-7 / DEC-8) without halting execution — Anti-Drift Hard Stop #1 (commit-without-plan) was the binding constraint, not "no decisions mid-flight". The lock is on plan baseline, not on judgment refinement.
+
+**Friction:**
+- Edit tool requires Read first — batched 6 Edit calls failed because Reads weren't done. Cost a round-trip. Pattern: always Read in the same batch as planned Edits.
+- `audit-baseline.js` and `eval-skills.js` happened to scan dirs dynamically (no hardcoded names). T5 plan flagged "may have hardcoded names" as a risk — the risk didn't materialize, but verification time is cheap insurance.
+- Slash command disambiguation (`/orchestrator` bare vs `/dev-flow:orchestrator` namespaced) couldn't be tested from a Bash session — only verifiable post plugin reload. Recorded as residual uncertainty (T5 acceptance allowed for it).
+- `skills/dev-flow-compress/` is a separate skill but the name shares the `dev-flow-` prefix — multiple grep regex tweaks needed (`skills/dev-flow[^-]` vs naive `skills/dev-flow`) to avoid false-positive sweep hits. Future renames involving prefix collisions need similar regex care.
+
+**Pattern candidate (surface to user, ask before locking into VALIDATED_PATTERNS.md):**
+- Pattern: "Atomic rename with `git mv` + grep-gate-as-acceptance" — works when scope is bounded, sweep targets are enumerable, and exclusion rules are upfront. Not generalizable to refactors that change behavior.
+- Pattern: "ADR `superseded-in-part by NNN (naming only)` status marker" — preserves "append-only" rule for ADRs while signaling targeted changes. Used here for ADR-011/012/013. Could become a convention.
+- Pattern: "Audit/plan docs treated like closed sprint docs (frozen historical record + selective forward-looking edits)" — DEC-6 generalization. Worth locking if Phase 5 surfaces more such docs.
+
+**Surprise log:**
+- `docs/audit/baseline-metrics.json` was originally a sweep target in the plan (line counts) but `audit-baseline.js` regenerates it dynamically — sweep was wasted intent. T5 regen was the correct path. Plan T3 exclusion list correctly listed it; mid-task DEC-7 extended the same logic to `baseline-metrics.md` and `skill-eval-report.md`.
+- agents/orchestrator.md was 31 lines (1 over cap) at audit baseline; renamed to dispatcher.md, still 31 lines. Cap violation traveled with the rename. Phase 3/Sprint 37 trim still needed — confirmed via T5 baseline regen output `OVER-CAP: 0 skills, 2 agents`.
+- Session-start.js Active-Sprint regex (`- \[ \] \*\*TASK-`) doesn't match the new sprint-pointer format (Active Sprint section now contains a sprint reference, not TASK- bullets). Pre-existing quirk — session-start emits "both empty" warning even when a sprint is set. Phase 2 (Sprint 36) session-start improvements should address.

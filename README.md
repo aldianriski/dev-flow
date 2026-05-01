@@ -8,7 +8,7 @@ status: current
 # dev-flow — Agentic Engineering Workflow Starter
 
 Skills-first, context-minimal AI workflow for any software project.
-Built on Claude Code. Orchestrator delegates to agents. Humans gate.
+Built on Claude Code. Dispatcher delegates to agents. Humans gate.
 
 ## What it is
 
@@ -16,7 +16,7 @@ Copy into any project to get:
 - **2 Gates** — G1 Scope + G2 Design checkpoints before any commit
 - **3 Modes** — `init / quick / mvp`
 - **14 Skills** — project-local, git-tracked, ≤100 lines each
-- **7 Agents** — orchestrator + 6 specialists (design, review, security, migration, performance, scope)
+- **7 Agents** — dispatcher + 6 specialists (design, review, security, migration, performance, scope)
 - **CONTEXT.md** — shared domain vocabulary for all agents
 - **2 Scripts** — session bootstrap + read-guard only
 
@@ -24,7 +24,7 @@ Copy into any project to get:
 
 | Skill | Purpose |
 |---|---|
-| `dev-flow` | Core orchestrator — gates, modes, agent dispatch |
+| `orchestrator` | Core workflow — gates, modes, agent dispatch |
 | `task-decomposer` | Freeform intent → TASK entries + vertical slices |
 | `system-design-reviewer` | Architecture review + grill mode for unclear designs |
 | `pr-reviewer` | Structured code review |
@@ -45,10 +45,10 @@ Copy into any project to get:
 ```bash
 claude plugin marketplace add https://github.com/aldianriski/dev-flow
 # In your project directory — Claude Code auto-loads the plugin:
-/dev-flow init
+/orchestrator init
 ```
 
-`/dev-flow init` scaffolds `CLAUDE.md`, `CONTEXT.md`, and `TODO.md` into your project.
+`/orchestrator init` scaffolds `CLAUDE.md`, `CONTEXT.md`, and `TODO.md` into your project.
 
 | Provided by plugin | Created by init script |
 |:---|:---|

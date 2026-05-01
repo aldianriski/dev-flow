@@ -144,7 +144,7 @@ if (existsSync('TODO.md')) {
   if (!hasActiveSprint) {
     warnings.push('WARN: TODO.md has no Active Sprint section.');
   } else if (!hasActiveTask && !hasBacklogTask) {
-    warnings.push('WARN: Active Sprint and Backlog both empty — run /task-decomposer or /dev-flow to plan next work.');
+    warnings.push('WARN: Active Sprint and Backlog both empty — run /task-decomposer or /orchestrator to plan next work.');
   } else if (!hasActiveTask) {
     info.push('ℹ Active Sprint exists but has no open tasks — promote from Backlog or start new sprint.');
   } else {

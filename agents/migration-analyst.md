@@ -18,6 +18,6 @@ Migration safety specialist. Check only changed migration files.
 - Full table lock on >100 k rows (ALTER without CONCURRENTLY) → BLOCKING
 - Migration not idempotent → WARN
 
-**Input** (from orchestrator): migration file path(s), `task.id`, `task.title`.
+**Input** (from dispatcher): migration file path(s), `task.id`, `task.title`.
 
 **Output**: ≤250 tokens. GO / NO-GO + CRITICAL / BLOCKING / NON-BLOCKING. No file writes.
