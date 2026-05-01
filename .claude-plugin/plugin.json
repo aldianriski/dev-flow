@@ -7,26 +7,72 @@
     "email": "m.aldian@paxel.co"
   },
   "license": "MIT",
-  "skills": [
-    "adr-writer",
-    "dev-flow",
-    "dev-flow-compress",
-    "lean-doc-generator",
-    "pr-reviewer",
-    "refactor-advisor",
-    "release-manager",
-    "security-auditor",
-    "system-design-reviewer",
-    "task-decomposer"
-  ],
-  "agents": [
-    "code-reviewer",
-    "design-analyst",
-    "init-analyst",
-    "migration-analyst",
-    "performance-analyst",
-    "scope-analyst",
-    "security-analyst"
-  ],
-  "hooks": "hooks/hooks.json"
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/session-start.js",
+            "description": "Bootstrap: verify settings.local, CLAUDE.md size, skill staleness, doc line counts, pending migrations, active sprint"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash(git push*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/ci-status.js",
+            "description": "Poll CI status after push — block Session Close if pipeline is non-green"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/track-change.js",
+            "description": "Append written file path to .claude/.session-changes.txt for scope guard and context tracking"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/track-change.js",
+            "description": "Append edited file path to .claude/.session-changes.txt for scope guard and context tracking"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/read-guard.js",
+            "description": "Block orchestrator source-file Reads during compact-vulnerable phases (§1 Thin-Coordinator Rule)"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash(git add*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const d=require('fs').readFileSync(0,'utf8');try{const c=JSON.parse(d)?.tool_input?.command||'';if(/(?:&&|;)\\s*git\\s+(commit|push)/.test(c)){process.stdout.write(JSON.stringify({decision:'block',reason:'Chain guard: split git add and git commit into separate Bash calls so lint/typecheck hooks fire.'})+' ');process.exit(2)}}catch{}\"",
+            "description": "Block git add && git commit/push chains — force two Bash calls so Bash(git commit*) lint hook fires"
+          }
+        ]
+      }
+    ]
+  }
 }

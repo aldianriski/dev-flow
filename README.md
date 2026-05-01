@@ -1,24 +1,43 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-27
+last_updated: 2026-05-01
 update_trigger: New mode, agent, or skill added; adoption workflow changes
 status: current
 ---
 
-# dev-flow — Universal AI Workflow Starter
+# dev-flow — Agentic Engineering Workflow Starter
 
-A gate-driven, mode-modal AI workflow system for any software project.
-Built on Claude Code. Designed to be more rigorous than [superpowers](https://github.com/obra/superpowers) while adopting its best craft patterns.
+Skills-first, context-minimal AI workflow for any software project.
+Built on Claude Code. Orchestrator delegates to agents. Humans gate.
 
 ## What it is
 
-A starter repository that you copy into any project to get:
-- **3 Gates** — scope, design, and review+security checkpoints before any commit
-- **7 Modes** — `init / full / quick / mvp / hotfix / review / resume`
-- **24 Hard Stops** — non-negotiable pipeline blocks for dangerous conditions
-- **7 Subagents** — specialist workers (design, review, security, migration, performance, etc.)
-- **Skill library** — 10 project-local, git-tracked skills
-- **Harness scripts** — session bootstrap, read-guard, change tracker, CI poller
+Copy into any project to get:
+- **2 Gates** — G1 Scope + G2 Design checkpoints before any commit
+- **3 Modes** — `init / quick / mvp`
+- **14 Skills** — project-local, git-tracked, ≤100 lines each
+- **7 Agents** — orchestrator + 6 specialists (design, review, security, migration, performance, scope)
+- **CONTEXT.md** — shared domain vocabulary for all agents
+- **2 Scripts** — session bootstrap + read-guard only
+
+## Skills
+
+| Skill | Purpose |
+|---|---|
+| `dev-flow` | Core orchestrator — gates, modes, agent dispatch |
+| `task-decomposer` | Freeform intent → TASK entries + vertical slices |
+| `system-design-reviewer` | Architecture review + grill mode for unclear designs |
+| `pr-reviewer` | Structured code review |
+| `security-auditor` | OWASP audit (separate session) |
+| `refactor-advisor` | Code smells + deep-module opportunities |
+| `release-manager` | Semver + changelog |
+| `adr-writer` | Architectural decision records |
+| `lean-doc-generator` | WHY/WHERE docs only — never HOW |
+| `dev-flow-compress` | Compress CLAUDE.md / memory files |
+| `diagnose` | 6-phase systematic debugging |
+| `tdd` | Tracer bullet → red-green-refactor |
+| `zoom-out` | Bird's-eye module map before diving in |
+| `write-a-skill` | Author new skills with quality constraints |
 
 ## How to adopt
 
@@ -28,17 +47,17 @@ claude plugin marketplace add https://github.com/aldianriski/dev-flow
 node dev-flow/bin/dev-flow-init.js
 ```
 
-`dev-flow-init.js` prompts: target dir · project name · owner role · stack (`node-express` · `react-next` · `python-fastapi` · `go-gin` · `custom`).
+`dev-flow-init.js` prompts: target dir · project name · owner role · stack.
 
 | Provided by plugin | Created by init script |
 |:---|:---|
-| `skills/`, `agents/`, `hooks/` — auto-loaded by Claude Code | `.claude/CLAUDE.md`, `TODO.md`, `docs/` template tree |
+| `skills/`, `agents/`, `hooks/` — auto-loaded by Claude Code | `CLAUDE.md`, `CONTEXT.md`, `TODO.md` |
 
-**Scaffold copy (fallback):** `git clone` + `node bin/dev-flow-init.js`. See [`docs/blueprint/09-customization.md`](docs/blueprint/09-customization.md) §12.
+**Scaffold copy (fallback):** `git clone` + `node bin/dev-flow-init.js`.
 
 ## Working on This Project
 
-**Start here every session →** [TODO.md](TODO.md) · **Support / friction reports →** [docs/SUPPORT.md](docs/SUPPORT.md)
+**Start here every session →** [TODO.md](TODO.md) · **Rewrite plan →** [docs/v2-rewrite-plan.md](docs/v2-rewrite-plan.md)
 
 ## License
 
