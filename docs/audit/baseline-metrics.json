@@ -1,6 +1,6 @@
 {
   "aggregate": {
-    "generated": "2026-05-01T13:11:01.340Z",
+    "generated": "2026-05-01T13:34:05.100Z",
     "skill_count": 14,
     "agent_count": 7,
     "script_count": 3,
@@ -337,11 +337,11 @@
     },
     {
       "file": "docs/CHANGELOG.md",
-      "lines": 676,
-      "chars": 53266,
-      "tokens_approx": 13317,
+      "lines": 700,
+      "chars": 55930,
+      "tokens_approx": 13983,
       "status": "current",
-      "last_updated": "2026-05-01 (Sprint 34 archived)"
+      "last_updated": "2026-05-01 (Sprint 35 archived)"
     },
     {
       "file": "README.md",
@@ -354,8 +354,8 @@
     {
       "file": "TODO.md",
       "lines": 125,
-      "chars": 5904,
-      "tokens_approx": 1476,
+      "chars": 5792,
+      "tokens_approx": 1448,
       "status": "unknown",
       "last_updated": "unknown"
     }

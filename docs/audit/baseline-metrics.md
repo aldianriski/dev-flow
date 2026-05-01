@@ -6,7 +6,7 @@ status: current
 generator: scripts/audit-baseline.js
 ---
 
-# Baseline Metrics — 2026-05-01T13:11:01.340Z
+# Baseline Metrics — 2026-05-01T13:34:05.100Z
 
 ## Aggregate
 
@@ -67,9 +67,9 @@ generator: scripts/audit-baseline.js
 | docs/ARCHITECTURE.md | 89 | stale | 2026-04-26 | 1197 |
 | docs/AI_CONTEXT.md | 88 | stale | 2026-04-29 | 1332 |
 | docs/DECISIONS.md | 329 | current | 2026-05-01 | 6750 |
-| docs/CHANGELOG.md | 676 | current | 2026-05-01 (Sprint 34 archived) | 13317 |
+| docs/CHANGELOG.md | 700 | current | 2026-05-01 (Sprint 35 archived) | 13983 |
 | README.md | 66 | current | 2026-05-01 | 574 |
-| TODO.md | 125 | unknown | unknown | 1476 |
+| TODO.md | 125 | unknown | unknown | 1448 |
 
 ---
 

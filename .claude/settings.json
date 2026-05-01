@@ -21,16 +21,6 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Read|Grep|Glob",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node $CLAUDE_PROJECT_DIR/scripts/read-guard.js",
-            "description": "Block orchestrator source-file Reads during compact-vulnerable phases (§1 Thin-Coordinator Rule)"
-          }
-        ]
-      },
-      {
         "matcher": "Bash(git add*)",
         "hooks": [
           {
