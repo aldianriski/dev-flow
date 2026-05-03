@@ -4,7 +4,7 @@ last_updated: 2026-05-03
 update_trigger: sprint open / close / status change / phase scope change
 status: closed
 plan_commit: 678f513
-close_commit: <pending>
+close_commit: 192eee1
 ---
 
 # Sprint 039 — Codemap + Modes + Skills (build new tooling)

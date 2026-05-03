@@ -23,7 +23,7 @@ status: current
 - Sprint file: [docs/sprint/SPRINT-039-codemap-modes-skills.md](sprint/SPRINT-039-codemap-modes-skills.md)
 - PRD: — (tooling sprint; no parent PRD)
 - Plan commit: `678f513`
-- Close commit: `<pending>`
+- Close commit: `192eee1`
 - Summary: Built four pieces of new tooling — codemap base knowledge (3-tier L0/L1/L2 + PowerShell PostToolUse AST rebuild on `git commit`), `sprint-bulk` dispatcher mode (Hybrid C — G1+G2 batched once per sprint, sequential default, parallel only on zero file overlap), `/prime` skill (ordered context loader + health check), `/release-patch` skill (PATCH bump lockstep + CHANGELOG + MEMORY refresh + CONTEXT drift warn + stale-doc auto-clear + HARD STOP push gate).
 - Docs updated: `.claude/CLAUDE.md` §Codemap (L0) NEW · `.claude/CONTEXT.md` Modes table 3→4 rows + Vocabulary · `agents/dispatcher.md` (4-mode dispatch) · `skills/orchestrator/SKILL.md` + `references/phases.md` (sprint-bulk Phase) · `docs/codemap/CODEMAP.md` (regenerated) · `docs/codemap/handoff.json` NEW · `hooks/hooks.json` + `.claude/settings.json` (PostToolUse on `Bash(git commit*)`)
 - ADRs: — (no new ADR; T1 references ADR-016 PS-only hook policy)
