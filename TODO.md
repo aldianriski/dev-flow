@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-03 (Sprint 038 promoted — Foundation Hardening; 5 tasks active)
+last_updated: 2026-05-03 (Sprint 038 closed — Foundation Hardening; pending promote of Sprint 039)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 38
+sprint: none
 ---
 
 > **External references**
@@ -34,35 +34,9 @@ sprint: 38
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-038-foundation-hardening.md](docs/sprint/SPRINT-038-foundation-hardening.md)
+→ — none —
 
-> Sprint 038 — Foundation Hardening (hook surgery + cache). Promoted 2026-05-03. Status: planning (flips to active on plan-lock commit).
-
-- [x] **TASK-091 (T1)** — Doc routing rules at `docs/_routing.json` ✅ a03c970
-  - `scope`: quick · `layers`: governance, docs · `risk`: low · `HITL`
-  - `acceptance`: file exists, valid JSON, schema covers HOW/WHY/WHERE/WHO + L0 overflow pointer; lean-doc-generator reads from it before placement decisions
-  - `depends-on`: none
-
-- [x] **TASK-095 (T2)** — Remove `scripts/session-start.js` Node invocation from hooks + commands ✅ b8ef0c2
-  - `scope`: full · `layers`: scripts, governance, skills, agents · `risk`: high · `HITL`
-  - `acceptance`: no `node scripts/session-start.js` in `hooks/hooks.json`, `.claude/settings.json`, any SKILL.md, any agent, CLAUDE.md commands; `grep -r "session-start"` returns only script file (or zero hits if deleted); ADR-016 captures kill rationale
-  - `depends-on`: none
-  - `note`: root cause = `loader:1368` Node module resolution + Windows space-in-path; unfixable cleanly after 5 attempts
-
-- [x] **TASK-096 (T3)** — Remove `scripts/read-guard.js` Node invocation from hooks + commands ✅ 6fc6abd
-  - `scope`: full · `layers`: scripts, governance, skills, agents · `risk`: high · `HITL`
-  - `acceptance`: no `node scripts/read-guard.js` invocation anywhere; `grep -r "read-guard"` returns only script (or zero hits); read-guard logic absorbed into hook layer or skill self-policing; same ADR as TASK-095 (ADR-016)
-  - `depends-on`: TASK-095
-
-- [x] **TASK-101 (T4)** — PowerShell SessionStart hook (replaces killed Node session-start) ✅ 09ad2ab
-  - `scope`: quick · `layers`: governance, scripts · `risk`: medium · `HITL`
-  - `acceptance`: `hooks/hooks.json` SessionStart points at PowerShell script (not Node); script at `scripts/session-start.ps1`; verifies `.claude/settings.local.json` (warn), `.claude/CLAUDE.md` (fail if missing), active sprint detectable (warn if `sprint: none`); zero loader errors on Windows space-path; <500ms cold start; no Node anywhere
-  - `depends-on`: TASK-095
-
-- [x] **TASK-102 (T5)** — lean-doc-generator in-session hash-keyed cache ✅ fda4f4b
-  - `scope`: quick · `layers`: skills, governance · `risk`: medium · `AFK`
-  - `acceptance`: `.claude/.lean-doc-cache.json` (gitignored), schema `{ "<path>": "<sha1>", ... }`; skip re-scan on hash hit; SessionStart hook (TASK-101) deletes cache before checks; cache hit logged at debug
-  - `depends-on`: TASK-101
+> Sprint 038 closed 2026-05-03 — archived to `docs/CHANGELOG.md`. Next: Sprint 039 Codemap+Modes+Skills (4 tasks: TASK-098, TASK-099, TASK-100, TASK-103) — pending promote.
 
 ---
 
@@ -120,7 +94,7 @@ sprint: 38
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 37 archived → `docs/CHANGELOG.md`. No active sprint.*
+*Sprint 38 archived → `docs/CHANGELOG.md`. No active sprint.*
 
 ---
 
@@ -171,5 +145,8 @@ Sprint 31    →  P0 workflow contract                    (done — agent trim, 
 Sprint 32    →  P1 consistency sweep                    (done — vocab + dispatch + skill-desc fixes)
 Sprint 33    →  P2 polish sweep                         (done — copywriting + naming alignment)
 Sprint 34    →  EPIC-Audit Phase 0 (audit reconcile + baseline + plan)  (planning)
-Sprint 35-43 →  EPIC-Audit Phases 1-6 (rename / wiring / trim / 4 ext-ref deep / docs / archive)
+Sprint 35-37 →  EPIC-Audit Phases 1-3 (rename / wiring / trim)         (done)
+Sprint 38    →  Foundation Hardening (kill Node hooks + PS replacement + lean-doc cache)  (done)
+Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)
+Sprint 40-45 →  EPIC-Audit Phases 4-6 (4 ext-ref deep / stale doc refresh / archive)
 ```

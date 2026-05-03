@@ -2,7 +2,7 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-03
 update_trigger: sprint open / close / status change / phase scope change
-status: active
+status: closed
 plan_commit: e8a475b
 close_commit: tbd
 ---
@@ -102,7 +102,26 @@ Serial spine: T2 → T4 → T5. T1 and T3 can interleave. All hooks work touches
 
 ## Execution Log
 
-*(empty — append `### YYYY-MM-DD HH:MM | T<N> done` blocks during execution.)*
+### 2026-05-03 | T1 (TASK-091) done — `a03c970`
+Routing scaffold landed at `docs/_routing.json`. Schema covers HOW/WHY/WHERE/WHO + L0 overflow pointer. lean-doc-generator SKILL.md updated to read it before placement. Acceptance verified.
+
+### 2026-05-03 | T2 (TASK-095) done — `b8ef0c2`
+`node scripts/session-start.js` removed from `hooks/hooks.json`, `.claude/settings.json`, all SKILL.md, agents, CLAUDE.md commands. `scripts/session-start.js` deleted (240 lines gone). ADR-016 written capturing kill rationale (loader:1368 + Windows space-path, 5 prior fix attempts failed). Sibling test file deleted (270 lines).
+
+### 2026-05-03 | T3 (TASK-096) done — `6fc6abd`
+Residual `read-guard.js` references scrubbed across docs (ARCHITECTURE.md, AI_CONTEXT.md, SETUP.md, CLAUDE.md, README.md, audit/wiring-map.md, TEST_SCENARIOS.md). ADR-016 appended with read-guard absorption note. Acceptance verified — zero invocations remain.
+
+### 2026-05-03 | Surprise — orchestrator code-reviewer dispatch (mid-sprint, `f43f094`)
+Discovered: orchestrator was auto-dispatching to code-reviewer agent on doc/delete tasks, wasting effort. Resolution: changed dispatch model to propose → human approves. One-line edit in `skills/orchestrator/SKILL.md` + dispatch-table clarification. Logged as decision DEC-1 below. Not in original plan; surfaced because TASK-095/096 (delete-only changes) tripped pointless review dispatches.
+
+### 2026-05-03 | T4 (TASK-101) done — `09ad2ab`
+PowerShell SessionStart hook live at `scripts/session-start.ps1` (64 lines). `hooks/hooks.json` SessionStart points at PowerShell (not Node). Verifies CLAUDE.md (fail-if-missing), settings.local.json (warn), active sprint (warn). Cold-start <500ms on Windows space-path. Zero loader errors observed across multiple sessions.
+
+### 2026-05-03 | Surprise — PS 5.1 ANSI parsing (during T4)
+Discovered: PowerShell 5.1 parses `.ps1` files as ANSI when written UTF-8 without BOM. Em-dashes (`—`) in comments became mojibake and broke the parser. Resolution: rewrote script with ASCII-only comments. Logged for VALIDATED_PATTERNS candidate.
+
+### 2026-05-03 | T5 (TASK-102) done — `fda4f4b`
+`.claude/.lean-doc-cache.json` schema `{ "<path>": "<sha1>", ... }` added to `.gitignore`. lean-doc-generator skips re-scan on hash hit. SessionStart hook (T4) clears the cache file at session boundary. Cache hit logged at debug. Acceptance verified.
 
 ---
 
@@ -110,22 +129,67 @@ Serial spine: T2 → T4 → T5. T1 and T3 can interleave. All hooks work touches
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
-| *(empty — append one row per file touched)* | | | | |
+| `docs/_routing.json` | T1 | NEW — placement schema (HOW/WHY/WHERE/WHO + L0 overflow) | low | n/a (data file) |
+| `skills/lean-doc-generator/SKILL.md` | T1, T5 | Reads `_routing.json` before placement; SHA1 cache wired | low | n/a (skill) |
+| `hooks/hooks.json` | T2, T4 | Node session-start removed; PS replacement registered | high | manual (Windows session smoke) |
+| `.claude/settings.json` | T2 | Local hook node invocation removed | med | manual |
+| `.claude/CLAUDE.md` | T2, T3 | Commands block — Node session-start + read-guard refs removed | low | n/a (doc) |
+| `scripts/session-start.js` | T2 | DELETED (240 lines) — Node hook killed | high | n/a (deleted with file) |
+| `scripts/__tests__/session-start.test.js` | T2 | DELETED (270 lines) — sibling tests gone with script | low | n/a (deleted) |
+| `docs/adr/ADR-016-kill-node-hook-scripts.md` | T2, T3 | NEW — kill rationale + read-guard absorption note | low | n/a (ADR) |
+| `docs/DECISIONS.md` | T2 | ADR-016 link appended; `last_updated` advanced | low | n/a (doc) |
+| `docs/ARCHITECTURE.md` | T3 | read-guard refs scrubbed | low | n/a (doc) |
+| `docs/AI_CONTEXT.md` | T3 | read-guard refs scrubbed | low | n/a (doc) |
+| `docs/SETUP.md` | T3 | read-guard refs scrubbed | low | n/a (doc) |
+| `docs/TEST_SCENARIOS.md` | T3 | session-start/read-guard test rows removed | low | n/a (doc) |
+| `docs/audit/wiring-map.md` | T3 | hook-wiring map refreshed (no Node) | low | n/a (doc) |
+| `README.md` | T3 | Commands block — read-guard ref removed | low | n/a (doc) |
+| `scripts/session-start.ps1` | T4 | NEW (64 lines) — PowerShell SessionStart hook | med | manual (Windows session smoke) |
+| `.gitignore` | T5 | `.claude/.lean-doc-cache.json` excluded | low | n/a |
+| `skills/orchestrator/SKILL.md` | bonus | code-reviewer dispatch propose → human approves | low | n/a (skill) |
+| `skills/orchestrator/references/skill-dispatch.md` | bonus | dispatch-table clarification (code-reviewer manual) | low | n/a (doc) |
+| `docs/codemap/CODEMAP.md` | T1, T2 | Routing + hooks lines refreshed | low | n/a (doc) |
+| `TODO.md` | T1..T5 | Task `[x]` ticks per close | low | n/a (tracker) |
+| `docs/sprint/SPRINT-038-foundation-hardening.md` | close | Status flip + execution log + retro | low | n/a (sprint) |
 
 ---
 
 ## Decisions
 
-*(empty — append `DEC-N` rows for architectural-level decisions during execution.)*
+| ID | Decision | Reason | ADR |
+|:---|:---------|:-------|:----|
+| DEC-1 | Kill Node hook scripts entirely (no patch path) | 5 prior fix attempts failed on Windows space-path; loader:1368 root cause is structural, not in our code | ADR-016 |
+| DEC-2 | Replace SessionStart with PowerShell, not bash | Native on Windows; zero loader risk; works on the affected `C:\Users\HYPE AMD\…` path | ADR-016 |
+| DEC-3 | code-reviewer dispatch is propose-only, human approves | Mid-sprint observation: auto-dispatch wasted effort on doc/delete tasks; opt-in is cheaper than opt-out | — |
+| DEC-4 | lean-doc-generator cache is in-session only (cleared by SessionStart) | Avoids cross-session bleed without an invalidation protocol; sha1 is the contract within session | — |
 
 ---
 
 ## Open Questions for Review
 
-*(empty — append open questions surfaced during execution.)*
+*(none — all questions surfaced during execution were resolved in flight; logged as DEC-1..4 above.)*
 
 ---
 
 ## Retro
 
-*(empty — fill at close: Worked / Friction / Pattern candidate / Surprise log.)*
+**Worked:**
+- Killing Node-in-hooks rather than patching it landed cleanly on the first attempt after 5 prior failed fixes. Sometimes the right move is removal.
+- T2 → T3 → T4 sequencing kept the SessionStart bootstrap dark for the shortest possible window (single working session).
+- ADR-016 single-source for both T2 and T3 avoided rationale duplication.
+- In-session cache (T5) gated by SessionStart-clear (T4) was a clean dependency — T5 inherited correctness from T4's hook contract.
+- Mid-sprint orchestrator fix (`f43f094`) was scoped tightly and bounced through sprint-execute § Surprise instead of breaking plan freeze.
+
+**Friction:**
+- PowerShell 5.1 ANSI parsing on UTF-8 no-BOM files was a nasty surprise. Em-dashes in `.ps1` comments broke the parser silently — debugged via parse error line number, not symptom. Cost ~20 min.
+- `loader:1368` was misdiagnosed as a Node version issue twice before the space-path root cause was confirmed. The error message was unhelpful.
+- Auto code-reviewer dispatch on delete-only tasks (T2/T3) was loud noise that obscured real signal. Caught and fixed mid-sprint.
+
+**Pattern candidates:**
+- **PowerShell scripts must be ASCII-only or BOM-tagged on Windows 5.1.** Worth a VALIDATED_PATTERNS entry — this trap will hit again. (User confirm before adding.)
+- **Code-reviewer dispatch is propose-only by default; auto-dispatch is the wrong default.** Already landed in `f43f094`; worth surfacing as a permanent rule. (User confirm.)
+- **Sprint Close should NOT auto-push.** Push gating belongs to a dedicated `release-patch` skill (TASK-103 in Sprint 039). Sprint Close stops at close-commit + CHANGELOG; release-patch owns the version bump + push-gate dialogue. Confirmed for Sprint 039 scope.
+
+**Surprise log:**
+- Orchestrator dispatch fix (mid-sprint, `f43f094`) — see Execution Log above.
+- PowerShell ANSI/UTF-8 BOM trap (during T4) — see Execution Log above.

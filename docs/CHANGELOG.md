@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01 (Sprint 37 archived)
+last_updated: 2026-05-03 (Sprint 38 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,50 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 38 — Foundation Hardening (hook surgery + cache) (2026-05-03)
+
+- Sprint file: [docs/sprint/SPRINT-038-foundation-hardening.md](sprint/SPRINT-038-foundation-hardening.md)
+- PRD: — (foundation work; no parent PRD)
+- Plan commit: `e8a475b`
+- Close commit: `tbd` *(filled after squash-commit lands)*
+- Summary: Killed Node SessionStart + read-guard hooks (Windows space-path loader:1368 unfixable); replaced with PowerShell SessionStart; added doc routing scaffold and lean-doc in-session SHA1 cache. Foundation for Sprint 039.
+- Docs updated: ADR-016 NEW · DECISIONS.md (ADR-016 link) · ARCHITECTURE.md, AI_CONTEXT.md, SETUP.md, README.md, CLAUDE.md (read-guard + Node hook scrub) · audit/wiring-map.md · TEST_SCENARIOS.md · codemap/CODEMAP.md · _routing.json NEW
+- ADRs: ADR-016
+- Files changed: 22 (incl. 2 deletes — `scripts/session-start.js` + sibling test)
+- Tests added: 0 (manual Windows session smoke for hooks; deleted 270-line Node test file alongside the script)
+
+**Blueprint version:** PATCH-equivalent bump owed (no phase/gate/contract change). Version sync deferred to Sprint 039 TASK-103 (`/release-patch` skill).
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/_routing.json` | T1 NEW — placement schema (HOW/WHY/WHERE/WHO + L0 overflow) | — |
+| `skills/lean-doc-generator/SKILL.md` | T1 reads `_routing.json`; T5 SHA1 cache wired | — |
+| `hooks/hooks.json` | T2 Node session-start removed; T4 PS replacement registered | ADR-016 |
+| `.claude/settings.json` | T2 local Node hook invocation removed | ADR-016 |
+| `.claude/CLAUDE.md` | T2/T3 Node + read-guard refs scrubbed from Commands | ADR-016 |
+| `scripts/session-start.js` | T2 DELETED (240 lines) | ADR-016 |
+| `scripts/__tests__/session-start.test.js` | T2 DELETED (270 lines) | ADR-016 |
+| `scripts/session-start.ps1` | T4 NEW (64 lines) — PowerShell SessionStart hook | ADR-016 |
+| `docs/adr/ADR-016-kill-node-hook-scripts.md` | T2+T3 NEW — kill rationale + read-guard absorption | ADR-016 |
+| `docs/DECISIONS.md` | T2 ADR-016 link | ADR-016 |
+| `docs/ARCHITECTURE.md`, `docs/AI_CONTEXT.md`, `docs/SETUP.md`, `README.md` | T3 read-guard refs scrubbed | — |
+| `docs/audit/wiring-map.md` | T3 hook-wiring map refreshed | — |
+| `docs/TEST_SCENARIOS.md` | T3 session-start/read-guard test rows removed | — |
+| `docs/codemap/CODEMAP.md` | routing + hooks lines refreshed | — |
+| `.gitignore` | T5 `.claude/.lean-doc-cache.json` excluded | — |
+| `skills/orchestrator/SKILL.md` + `references/skill-dispatch.md` | bonus `f43f094` — code-reviewer dispatch propose → human approves | — |
+| `docs/sprint/SPRINT-038-foundation-hardening.md` | NEW — sprint plan + execution log + retro | — |
+
+**Retro highlights** (full retro in sprint file):
+- **Worked:** removal beat patching after 5 failed fix attempts; T2→T4 sequencing kept SessionStart dark for one working session; ADR-016 single-source covered both kills.
+- **Friction:** PowerShell 5.1 silently parses UTF-8 no-BOM `.ps1` files as ANSI — em-dashes broke the parser (~20 min lost). `loader:1368` misdiagnosed as Node version issue twice before space-path root cause confirmed.
+- **Pattern candidates** (pending user confirm for VALIDATED_PATTERNS):
+  - PowerShell scripts must be ASCII-only or BOM-tagged on Windows 5.1.
+  - Code-reviewer dispatch is propose-only; auto-dispatch is the wrong default.
+  - Sprint Close MUST NOT auto-push — version-bump + push gate belongs to `release-patch` skill (TASK-103 / Sprint 039).
 
 ---
 
