@@ -1,6 +1,6 @@
 ---
 name: orchestrator
-description: Use when starting, resuming, or completing any development task. Orchestrates gate-driven agentic workflow — init, quick, and mvp modes — with G1 Scope and G2 Design gates. Do not use for non-task work — use /zoom-out for orientation, /diagnose for debugging, /refactor-advisor for code-smell sweeps.
+description: Use when starting, resuming, or completing any development task or sprint. Orchestrates gate-driven agentic workflow — init, quick, mvp, and sprint-bulk modes — with G1 Scope and G2 Design gates. Do not use for non-task work — use /zoom-out for orientation, /diagnose for debugging, /refactor-advisor for code-smell sweeps.
 user-invocable: true
 argument-hint: "[mode] [task-or-description]"
 version: "2.0.0"
@@ -21,6 +21,7 @@ Gate-driven agentic workflow. Read `CONTEXT.md` before acting.
 | `init` | none | first-time scaffold — no `.claude/` exists |
 | `quick` | G1 | single task, S size, low risk |
 | `mvp` | G1 + G2 | feature work, M+ size, multi-task |
+| `sprint-bulk` | G1 + G2 (batched once per sprint) | multi-task sprint, auto-loop Active Sprint tasks |
 
 > Replaces CC primitives: `init` → CC `/init` · review step → CC `/review` · task tracking → CC TaskCreate/TaskList. See ADR-012.
 
@@ -52,6 +53,16 @@ Freeform input (no mode keyword):
 5. **Implement** — execute micro-tasks from design-analyst plan in order; mark each `[x]` when verification passes
 6. **Review** — propose `code-reviewer`; human types `y` to dispatch, `n` to skip (use `n` for doc-only / delete-only / trivial diffs)
 7. **Commit** — structured message; propose `performance-analyst` / `migration-analyst` if applicable
+
+### sprint-bulk
+1. **Sprint Scope Batch (G1 once)** — combined goal, sprint-wide red flags; BLOCK on fail
+2. **Sprint Design Batch (G2 once)** — scope-analyst + design-analyst on full task list; emit session-scoped sprint-PRD block
+3. **Overlap gate** — pairwise FILES_AFFECTED intersection; ALL pairs empty → parallel; else sequential (default)
+4. **Auto-loop** — iterate `[ ]` tasks; per-task Implement + propose code-reviewer + Commit + mark `[x]`
+5. **First-blocker halt** — stop on BLOCKED/CRITICAL or human `block`; report and wait
+6. **Sprint close** — all `[x]` → run `/lean-doc-generator` Sprint Close + prompt `/release-patch`
+
+See `references/phases.md` § sprint-bulk Phase for full detail.
 
 ---
 

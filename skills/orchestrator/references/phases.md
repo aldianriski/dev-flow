@@ -133,3 +133,39 @@ risk: low | medium | high — <one-sentence rationale>
 
 RECOMMENDATION: <one task or split? — ≤2 sentences>
 ```
+
+---
+
+## sprint-bulk Phase (mvp-class, batched)
+
+Use when running a multi-task sprint end-to-end. Replaces per-task G1+G2 with a single batched gate pass + auto-loop.
+
+**1. Sprint Scope Batch (G1 once)**
+- Read all `[ ]` tasks under `## Active Sprint` in TODO.md.
+- Run G1 checklist for the sprint as a whole: combined goal, total size (must be ≤ M when summed; L → split sprint), shared constraints, sprint-wide red flags.
+- BLOCK if any sprint-level red flag fails.
+
+**2. Sprint Design Batch (G2 once)**
+- Auto-dispatch `scope-analyst` ONCE with the full task list. Expect FILES AFFECTED list per task.
+- Auto-dispatch `design-analyst` ONCE with combined task list — produces a session-scoped sprint-PRD block (not written to disk; persistent artifact = separate task).
+- BLOCK on any `BLOCKED` finding. Hard-to-reverse decision → dispatch `adr-writer`.
+
+**3. Overlap derivation (parallelism gate)**
+- For each task pair `(Ti, Tj)`, compute `FILES_AFFECTED(Ti) ∩ FILES_AFFECTED(Tj)`.
+- If ANY pair has non-empty intersection → run sequentially (default).
+- If ALL pairs have empty intersection → fan out tasks to parallel subagents.
+- Pure set intersection on path strings; no schema change to scope-analyst needed.
+
+**4. Sequential auto-loop (default path)**
+- Iterate Active Sprint tasks `[ ]` in declared order.
+- Per-task: run Implement → propose `code-reviewer` y/n (per dispatcher dispatch rules; never auto-fire) → Commit → mark `[x]`.
+- After each task close, advance to next `[ ]`.
+
+**5. First-blocker halt**
+- Halt loop on first of: scope-analyst returns `BLOCKED`, design-analyst returns `BLOCKED`, human types `block` at any task boundary, code-reviewer returns `CRITICAL`.
+- Do NOT auto-skip blocked task. Report which task halted, why, and the remaining task list. Wait for human direction.
+
+**6. Sprint close**
+- When all tasks are `[x]`: run `/lean-doc-generator` Sprint Close, then prompt for `/release-patch` if version bump applicable.
+
+**Note**: sprint-PRD is session-scoped — emitted as a formatted block in the conversation, never written to disk. Persistent artifact creation is out of scope; separate task if needed.

@@ -9,7 +9,7 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 | Term | Definition |
 |---|---|
 | **gate** | Human checkpoint; must pass before proceeding |
-| **mode** | Operational context: `init` / `quick` / `mvp` |
+| **mode** | Operational context: `init` / `quick` / `mvp` / `sprint-bulk` |
 | **skill** | Slash command loaded on demand from `skills/` (plugin install) or `.claude/skills/` (scaffold copy) |
 | **agent** | Specialist worker spawned by dispatcher for targeted analysis |
 | **red flag** | Condition that hard-stops a skill; listed inline per skill |
@@ -53,6 +53,7 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 | `init` | none | first-time project scaffold |
 | `quick` | G1 | single task, low risk, S size |
 | `mvp` | G1 + G2 | feature work, multi-task, M+ size |
+| `sprint-bulk` | G1 + G2 (batched once per sprint) | multi-task sprint; sequential default; parallel only when file-overlap == ∅ |
 
 ---
 
