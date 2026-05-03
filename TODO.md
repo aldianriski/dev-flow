@@ -59,7 +59,7 @@ sprint: 38
   - `acceptance`: `hooks/hooks.json` SessionStart points at PowerShell script (not Node); script at `scripts/session-start.ps1`; verifies `.claude/settings.local.json` (warn), `.claude/CLAUDE.md` (fail if missing), active sprint detectable (warn if `sprint: none`); zero loader errors on Windows space-path; <500ms cold start; no Node anywhere
   - `depends-on`: TASK-095
 
-- [ ] **TASK-102 (T5)** — lean-doc-generator in-session hash-keyed cache
+- [x] **TASK-102 (T5)** — lean-doc-generator in-session hash-keyed cache ✅ fda4f4b
   - `scope`: quick · `layers`: skills, governance · `risk`: medium · `AFK`
   - `acceptance`: `.claude/.lean-doc-cache.json` (gitignored), schema `{ "<path>": "<sha1>", ... }`; skip re-scan on hash hit; SessionStart hook (TASK-101) deletes cache before checks; cache hit logged at debug
   - `depends-on`: TASK-101
