@@ -61,7 +61,6 @@ status: current
 | Area | Gap | Priority |
 |:-----|:----|:---------|
 | `.claude/scripts/validate-scaffold.js` | No unit tests — file structure checks untested in isolation | P1 |
-| `.claude/scripts/read-guard.js` | No unit tests — PreToolUse hook logic untested | P1 |
 | `.claude/scripts/track-change.js` | No unit tests | P2 |
 | `.claude/scripts/regenerate-manifest.js` | No unit tests — MANIFEST.json generation untested | P2 |
 | `evals/measure.py` | No automated test — eval correctness verified only by manual three-arm run | P2 |
@@ -70,7 +69,6 @@ status: current
 ## Completion Roadmap
 
 - [ ] **Test `validate-scaffold.js`** — mock filesystem and assert expected pass/fail cases
-- [ ] **Test `read-guard.js`** — verify block/allow logic for each tool category
 - [ ] **Test `regenerate-manifest.js`** — assert MANIFEST.json output matches skills directory state
 - [ ] **Integration test for scaffold CLI** — spawn `dev-flow-init.js` against a temp directory, assert output files
 - [ ] **Eval harness regression tests** — assert `measure.py` metric computation against known fixtures

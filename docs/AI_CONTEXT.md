@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-29
+last_updated: 2026-05-03
 update_trigger: Patterns, conventions, or current focus change; new skill or mode added
 status: stale
 ---
@@ -54,7 +54,7 @@ language: Markdown (spec), Node.js ≥18 (harness scripts), Python 3.10+ (eval h
 ## Structure
 .claude/skills/    10 SKILL.md files — orchestrator + specialist + universal skills
 .claude/agents/    7 agent definitions — design, review, security, migration, perf, init, scope
-.claude/scripts/   Harness scripts — session bootstrap, read-guard, change tracker, CI poller
+scripts/           Harness scripts — audit-baseline, eval-skills (Node hook scripts retired ADR-016)
 docs/blueprint/    Canonical system spec (01–10) — authoritative, version-controlled
 bin/               Scaffold CLI (dev-flow-init.js) — adopter entry point
 bin/__tests__/     CLI unit tests — Node built-in test runner, no external framework
@@ -63,7 +63,7 @@ templates/         CLAUDE.md.template + TODO.md.template + 6 other doc templates
 
 ## Patterns
 Gate model:        3 human gates block all Tier 3 ops — see ARCHITECTURE.md §Key Patterns
-Thin Coordinator:  Orchestrator gets summaries only; read-guard.js enforces at PreToolUse
+Thin Coordinator:  Orchestrator gets summaries only; principle stated in CONTEXT.md (runtime enforcement retired ADR-013/ADR-016)
 Skill-as-spec:     SKILL.md = spec + prompt; bound to phases via MANIFEST.json
 Hard stops:        24 non-negotiable blocks — .claude/skills/orchestrator/references/hard-stops.md
 Mode dispatch:     init / full / quick / hotfix / review / resume — each is a phase subset

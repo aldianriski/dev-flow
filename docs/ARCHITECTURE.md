@@ -37,7 +37,7 @@ It runs entirely inside a Claude Code session.
 | Performance agent | `.claude/agents/performance-analyst.md` | Perf gate (conditional — hot-path changes only) |
 | Init analyst | `.claude/agents/init-analyst.md` | INIT mode: full codebase discovery → ADR |
 | Scope analyst | `.claude/agents/scope-analyst.md` | Blast-radius map for task-decomposer |
-| Read guard | `.claude/scripts/read-guard.js` | PreToolUse hook: enforces Thin-Coordinator Rule |
+| ~~Read guard~~ | (removed Sprint 30 ADR-013 / Sprint 38 ADR-016) | Thin-Coordinator Rule retained as principle in CONTEXT.md; no runtime enforcement |
 | Change tracker | `.claude/scripts/track-change.js` | PostToolUse hook: file change counter for scope guard |
 | CI poller | `.claude/scripts/ci-status.js` | PostToolUse hook: polls CI after git push |
 | Scaffold CLI | `bin/dev-flow-init.js` | One-command scaffold bootstrap for adopter repos |
@@ -49,7 +49,7 @@ It runs entirely inside a Claude Code session.
 block all Tier 3 operations. No background agent spawns without a confirmed gate.
 
 **Thin Coordinator Rule**: Orchestrator receives summaries from agents, not raw file content.
-Enforced by `read-guard.js` PreToolUse hook.
+Stated principle in CONTEXT.md; runtime enforcement retired (ADR-013 / ADR-016).
 
 **Mode-modal dispatch**: `/orchestrator` selects a workflow path (init / full / quick / hotfix / review /
 resume) at session start. Each mode activates a different phase subset.
@@ -72,7 +72,7 @@ name at the phase they're bound to in MANIFEST.json.
 ## Security Boundaries
 
 - No network access by default — harness scripts are pure Node/Python, no HTTP calls
-- `read-guard.js` blocks direct file reads in agent context (Thin Coordinator Rule)
+- ~~`read-guard.js` blocks direct file reads~~ (retired ADR-013/ADR-016; Thin Coordinator Rule now prompt-only)
 - `isHookCommandSafe()` in `bin/dev-flow-init.js` validates hook command allowlist before
   writing `settings.json` to adopter repos (ADR-002)
 - Path traversal guard in scaffold CLI: resolved paths must stay within target directory

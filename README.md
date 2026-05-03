@@ -18,7 +18,7 @@ Copy into any project to get:
 - **14 Skills** — project-local, git-tracked, ≤100 lines each
 - **7 Agents** — dispatcher + 6 specialists (design, review, security, migration, performance, scope)
 - **CONTEXT.md** — shared domain vocabulary for all agents
-- **2 Scripts** — session bootstrap + read-guard only
+- **2 Scripts** — `audit-baseline.js` + `eval-skills.js` (Node hook scripts retired ADR-016)
 
 ## Skills
 
