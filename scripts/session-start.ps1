@@ -17,6 +17,10 @@ $root = if ($env:CLAUDE_PROJECT_DIR) { $env:CLAUDE_PROJECT_DIR }
 $claude  = Join-Path $root '.claude\CLAUDE.md'
 $local   = Join-Path $root '.claude\settings.local.json'
 $todo    = Join-Path $root 'TODO.md'
+$cache   = Join-Path $root '.claude\.lean-doc-cache.json'
+
+# Clear lean-doc-generator session cache (TASK-102) so next /lean-doc invocation re-scans.
+if (Test-Path -LiteralPath $cache) { Remove-Item -LiteralPath $cache -Force }
 
 Write-Output '=== SESSION START REPORT ==='
 Write-Output ''

@@ -39,6 +39,8 @@ Generate high-signal technical documentation. Read `references/DOCS_Guide.md` be
 
 ## Execution Flow
 
+**Step 0a — Cache check** (label: `lean-doc-cache`): read `.claude/.lean-doc-cache.json` (created on demand, gitignored). For every file about to be re-scanned, compute SHA1 of contents; if cached SHA1 matches, skip the scan and reuse last result (log `[cache hit] <path>` at debug level). Update cache with new SHA1 after each fresh scan. SessionStart hook deletes the cache so each session starts cold. Schema: `{ "<absolute-path>": "<sha1-hex>", ... }`.
+
 **Step 0 — Staleness scan**: check ownership headers; flag `stale` / `needs-review` / no-header before proceeding.
 
 **Step 1 — Load standard**: read `references/DOCS_Guide.md` — 4 Laws, Core Files, line limits, anti-patterns, checklist.

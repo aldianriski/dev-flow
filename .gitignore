@@ -4,6 +4,7 @@
 .claude/.phase
 .claude/STATE.yaml
 .claude/STATE.yml
+.claude/.lean-doc-cache.json
 
 # Node
 node_modules/
