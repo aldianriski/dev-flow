@@ -41,7 +41,7 @@ sprint: 39
 - [x] **T1 — TASK-098** — Codemap base knowledge system (3-tier + post-commit AST hook) · `full` · `high` · HITL ✅ 665db28
 - [ ] **T2 — TASK-099** — Add `sprint-bulk` mode to dispatcher (Hybrid C) · `full` · `high` · HITL
 - [x] **T3 — TASK-100** — `/prime` skill — ordered context loader + health check · `quick` · `low` · AFK · *depends on T1* ✅ 3331a6a
-- [ ] **T4 — TASK-103** — `/release-patch` skill — version sync + CHANGELOG + sprint-state refresh + human-gated push · `full` · `high` · HITL
+- [x] **T4 — TASK-103** — `/release-patch` skill — version sync + CHANGELOG + sprint-state refresh + human-gated push · `full` · `high` · HITL ✅ 5ceec5e
 
 ---
 
