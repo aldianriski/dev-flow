@@ -38,7 +38,7 @@ sprint: 38
 
 > Sprint 038 — Foundation Hardening (hook surgery + cache). Promoted 2026-05-03. Status: planning (flips to active on plan-lock commit).
 
-- [ ] **TASK-091 (T1)** — Doc routing rules at `docs/_routing.json`
+- [x] **TASK-091 (T1)** — Doc routing rules at `docs/_routing.json` ✅ a03c970
   - `scope`: quick · `layers`: governance, docs · `risk`: low · `HITL`
   - `acceptance`: file exists, valid JSON, schema covers HOW/WHY/WHERE/WHO + L0 overflow pointer; lean-doc-generator reads from it before placement decisions
   - `depends-on`: none
