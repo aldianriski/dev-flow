@@ -1,0 +1,66 @@
+{
+  "$schema_version": "1.0",
+  "purpose": "Single source of truth for doc placement. lean-doc-generator MUST consult this before creating any new file in docs/. See LEAN DOCUMENTATION STANDARD: WHY/WHERE only, HOW goes in code.",
+  "last_updated": "2026-05-03",
+
+  "folders": {
+    "docs/sprint/":    { "accepts": ["sprint-plan", "sprint-retro"],          "naming": "SPRINT-NNN-<slug>.md" },
+    "docs/adr/":       { "accepts": ["WHY", "decision"],                       "naming": "ADR-NNN-<slug>.md" },
+    "docs/codemap/":   { "accepts": ["WHERE", "module-map", "dep-graph", "handoff"], "naming": "CODEMAP.md | handoff.json" },
+    "docs/reports/":   { "accepts": ["diagnose-report", "refactor-note", "review-output", "audit"],  "naming": "<type>-YYYY-MM-DD-<slug>.md" },
+    "docs/design/":    { "accepts": ["mockup", "design-system", "email-template", "wireframe"],      "naming": "<type>-<slug>.md" },
+    "docs/uat/":       { "accepts": ["test-scenario", "uat-checklist", "acceptance-test"],          "naming": "UAT-<feature>-<slug>.md" },
+    "docs/research/":  { "accepts": ["external-ref-probe", "spike", "research-note"],                "naming": "<topic>-<slug>.md" },
+    "docs/templates/": { "accepts": ["doc-template", "scaffold-template"],                            "naming": "<type>-template.md" },
+    "docs/audit/":     { "accepts": ["audit-snapshot", "baseline"],                                   "naming": "AUDIT-YYYY-MM-DD-<slug>.md" },
+    "docs/" :          { "accepts": ["AI_CONTEXT", "ARCHITECTURE", "CHANGELOG", "DECISIONS", "SETUP", "SUPPORT", "TEST_SCENARIOS", "WHO"], "naming": "<NAME>.md (root-level core docs only — do NOT add new ones)" }
+  },
+
+  "content_types": {
+    "HOW": {
+      "rule": "NEVER goes in docs/. Belongs in code comments, SKILL.md, agent files, or types.",
+      "target": "skills/<name>/SKILL.md | code comments | <agent>.md",
+      "redirect_message": "HOW content rejected — move to code comments or SKILL.md"
+    },
+    "WHY": {
+      "rule": "Decisions, rationale, trade-offs.",
+      "target": "docs/adr/ADR-NNN-<slug>.md (hard-to-reverse) | docs/DECISIONS.md (lightweight)"
+    },
+    "WHERE": {
+      "rule": "Module map, dep graph, file layout, hub-and-spoke structure.",
+      "target": "docs/codemap/CODEMAP.md | docs/ARCHITECTURE.md (high-level only)"
+    },
+    "WHO": {
+      "rule": "Owners, contributors, decision rights, contact protocol.",
+      "target": "docs/SUPPORT.md | per-doc ownership header (owner: <role>)"
+    }
+  },
+
+  "L0_overflow": {
+    "from": ".claude/CLAUDE.md",
+    "to": "docs/codemap/CODEMAP.md",
+    "trigger": ".claude/CLAUDE.md exceeds 80 lines",
+    "spill_section": "## Codemap (L0)",
+    "pointer_format": "> Overflow: see docs/codemap/CODEMAP.md §L0-overflow",
+    "rationale": "CLAUDE.md hard cap = 80 lines (governance). L0 one-liners spill into CODEMAP.md when cap reached; CLAUDE.md keeps single-line pointer."
+  },
+
+  "routing_priority": [
+    "1. Match content_types HOW filter first — if HOW, REJECT (no doc created)",
+    "2. Match folders.<dir>.accepts by content tag",
+    "3. If multiple folders match, pick most specific (deepest path)",
+    "4. If zero folders match, prompt user once and append new rule to this file"
+  ],
+
+  "on_unmapped": {
+    "behavior": "lean-doc-generator MUST prompt user before placing unmapped content. User answer persisted as new entry in folders or content_types.",
+    "prompt_template": "Content type '<tag>' has no routing rule. Suggest folder + naming pattern, then I update docs/_routing.json."
+  },
+
+  "enforcement": {
+    "skill": "skills/lean-doc-generator/SKILL.md",
+    "step_label": "routing-lookup",
+    "step_description": "consult docs/_routing.json before writing any file under docs/",
+    "violation": "Any new file in docs/ that bypassed this routing = scope-drift; reviewer flags BLOCKING"
+  }
+}

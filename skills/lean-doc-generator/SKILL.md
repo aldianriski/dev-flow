@@ -7,7 +7,7 @@ user-invocable: true
 context: fork
 type: rigid
 version: "2.0.0"
-last-validated: "2026-05-01"
+last-validated: "2026-05-03"
 ---
 
 # Lean Documentation Generator
@@ -44,6 +44,8 @@ Generate high-signal technical documentation. Read `references/DOCS_Guide.md` be
 **Step 1 — Load standard**: read `references/DOCS_Guide.md` — 4 Laws, Core Files, line limits, anti-patterns, checklist.
 
 **Step 2 — Codebase access**: read manifests only (`package.json`, `pyproject.toml`, `Dockerfile`, `go.mod`) + existing docs. If inaccessible → ask user to paste file tree + manifest + system description.
+
+**Step 2.5 — Routing lookup** (label: `routing-lookup`): read `docs/_routing.json`. For every new file under `docs/`, match content tag → `folders.<dir>.accepts`. If unmapped, prompt user using `on_unmapped.prompt_template` and append rule to routing file. Never skip this step; bypassed routing = scope-drift flagged by reviewer.
 
 **Step 3 — HOW filter**: discard anything that explains implementation; keep WHY/WHERE only.
 
