@@ -49,7 +49,7 @@ sprint: 38
   - `depends-on`: none
   - `note`: root cause = `loader:1368` Node module resolution + Windows space-in-path; unfixable cleanly after 5 attempts
 
-- [ ] **TASK-096 (T3)** — Remove `scripts/read-guard.js` Node invocation from hooks + commands
+- [x] **TASK-096 (T3)** — Remove `scripts/read-guard.js` Node invocation from hooks + commands ✅ 6fc6abd
   - `scope`: full · `layers`: scripts, governance, skills, agents · `risk`: high · `HITL`
   - `acceptance`: no `node scripts/read-guard.js` invocation anywhere; `grep -r "read-guard"` returns only script (or zero hits); read-guard logic absorbed into hook layer or skill self-policing; same ADR as TASK-095 (ADR-016)
   - `depends-on`: TASK-095
