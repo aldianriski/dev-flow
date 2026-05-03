@@ -265,7 +265,7 @@ The v2 rewrite (Sprints 18–29) replaced the v1 phase model (10 sequential phas
 - If a future sprint restores enforcement, it must design from scratch; the v1 scaffold is gone
 
 **Neutral**:
-- `hooks/hooks.json` retains the `Bash(git add*)` chain-guard and `SessionStart` bootstrap hook — unaffected
+- `hooks/hooks.json` retains the `Bash(git add*)` chain-guard. (Sprint 038 / ADR-016 superseded the `SessionStart` Node bootstrap hook — removed; PowerShell replacement in TASK-101.)
 
 ---
 

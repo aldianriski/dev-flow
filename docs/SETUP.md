@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-26
+last_updated: 2026-05-03
 update_trigger: Prerequisites change; harness script added or renamed; adopt workflow changes
 status: current
 ---
@@ -46,19 +46,17 @@ cp .claude/settings.local.example.json .claude/settings.local.json
 ## Verification
 
 ```bash
-node .claude/scripts/session-start.js       # bootstrap: settings + CLAUDE.md + skill staleness
 node .claude/scripts/validate-scaffold.js   # scaffold file structure integrity
 node bin/__tests__/dev-flow-init.test.js    # CLI unit tests (Node built-in runner)
 python -m py_compile evals/measure.py       # eval harness syntax check
 ```
 
-Expected: zero errors from session-start and validate-scaffold; all tests pass.
+Expected: zero errors from validate-scaffold; all tests pass. (SessionStart bootstrap migrated to PowerShell hook in TASK-101 — see ADR-016.)
 
 ## Useful Commands
 
 ```bash
 # Harness validation
-node .claude/scripts/session-start.js           # full session bootstrap report
 node .claude/scripts/validate-scaffold.js       # scaffold integrity check
 node .claude/scripts/validate-blueprint.js      # blueprint doc structure check
 node .claude/scripts/audit-skill-staleness.js   # flag stale skills

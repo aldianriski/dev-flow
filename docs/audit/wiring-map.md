@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01
+last_updated: 2026-05-03
 update_trigger: New mode, agent, skill, or hook added; phase model changes; dispatch table edited
 status: current
 ---
@@ -62,7 +62,7 @@ Notes: `security-analyst` never auto-spawns. User invocation via `/security-revi
 
 | Event | Matcher | Command | Source | Status |
 |:------|:--------|:--------|:-------|:-------|
-| `SessionStart` | `startup\|resume\|clear\|compact` | `node $CLAUDE_PLUGIN_ROOT/scripts/session-start.js` | `hooks/hooks.json` | live |
+| `SessionStart` | — | (removed Sprint 038 ADR-016; PS replacement TASK-101) | `hooks/hooks.json` | removed |
 | `PreToolUse` | `Bash(git add*)` | inline node — block `git add && git commit/push` chain | `hooks/hooks.json` | live |
 | `PreToolUse` | `Bash(git add*)` | inline node — same chain-guard | `.claude/settings.json` | live (development redundancy — works without plugin loaded) |
 | `PreToolUse` | `Bash(git commit*)` | `[your-lint-command]` | `.claude/settings.local.example.json` (per-machine) | template |

@@ -17,7 +17,7 @@ status: current
 ```
 skills/          # SKILL.md files + references/ subdirs (plugin auto-discovers)
 agents/          # agent definitions (dispatcher + 6 specialists)
-scripts/         # session-start.js, read-guard.js only
+scripts/         # audit-baseline.js, eval-skills.js (Node hook scripts retired ADR-016)
 hooks/
   hooks.json     # plugin hook config
 .claude-plugin/
@@ -49,8 +49,8 @@ bin/             # dev-flow-init.js scaffold bootstrap
 
 ## Commands
 ```bash
-node scripts/session-start.js   # session bootstrap
-node scripts/read-guard.js      # read-guard check
+node scripts/audit-baseline.js  # baseline metrics snapshot
+node scripts/eval-skills.js     # skill description / line-count eval
 ```
 
 ## Definition of Done

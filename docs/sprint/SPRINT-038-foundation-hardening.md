@@ -45,14 +45,14 @@ Sprint 039 (codemap base knowledge, sprint-bulk mode, /prime, /release-patch) ne
 
 ### T2 — TASK-095 — Remove `scripts/session-start.js` Node invocation from hooks + commands
 **Scope:** full · **Layers:** scripts, governance, skills, agents · **Risk:** high · **HITL**
-**Acceptance:** no `node scripts/session-start.js` in `hooks/hooks.json`, `.claude/settings.json`, any SKILL.md, any agent, CLAUDE.md commands; `grep -r "session-start"` returns only script file (or zero hits if deleted); ADR-013 captures kill rationale.
+**Acceptance:** no `node scripts/session-start.js` in `hooks/hooks.json`, `.claude/settings.json`, any SKILL.md, any agent, CLAUDE.md commands; `grep -r "session-start"` returns only script file (or zero hits if deleted); ADR-016 captures kill rationale (renumbered from ADR-013 due to existing collision in DECISIONS.md).
 **Depends on:** none.
 **Note:** root cause = `loader:1368` Node module resolution + Windows space-in-path; unfixable cleanly after 5 attempts.
 
 ### T3 — TASK-096 — Remove `scripts/read-guard.js` Node invocation from hooks + commands
 **Scope:** full · **Layers:** scripts, governance, skills, agents · **Risk:** high · **HITL**
 **Acceptance:** no `node scripts/read-guard.js` invocation anywhere; `grep -r "read-guard"` returns only script (or zero hits); read-guard logic absorbed into hook layer or skill self-policing; same ADR as T2 (TASK-095).
-**Depends on:** T2 (TASK-095) — share ADR-013, sequence after to keep one rationale doc.
+**Depends on:** T2 (TASK-095) — share ADR-016, sequence after to keep one rationale doc.
 
 ### T4 — TASK-101 — PowerShell SessionStart hook (replaces killed Node session-start)
 **Scope:** quick · **Layers:** governance, scripts · **Risk:** medium · **HITL**
@@ -70,7 +70,7 @@ Sprint 039 (codemap base knowledge, sprint-bulk mode, /prime, /release-patch) ne
 
 ```
 T1 (TASK-091)  ── independent ──┐
-T2 (TASK-095)  ──┬── T3 (TASK-096) [shared ADR-013]
+T2 (TASK-095)  ──┬── T3 (TASK-096) [shared ADR-016]
                  └── T4 (TASK-101) ── T5 (TASK-102)
 ```
 
@@ -82,7 +82,7 @@ Serial spine: T2 → T4 → T5. T1 and T3 can interleave. All hooks work touches
 
 - **Windows space-path verification per task.** Every hook + script change must be tested on `C:\Users\HYPE AMD\…` before merge. No "works on my machine" exits.
 - **Hooks regression window.** T2 + T3 remove SessionStart bootstrap; T4 restores it. If T4 slips, sessions start without bootstrap until landed. Mitigation: complete T2 → T4 in a single working session where possible.
-- **ADR-013 single-source.** T2 + T3 share one ADR. Avoid double-writing rationale. T3 appends to T2's ADR section, does not duplicate.
+- **ADR-016 single-source.** T2 + T3 share one ADR. Avoid double-writing rationale. T3 appends to T2's ADR section, does not duplicate. (Renumbered from ADR-013 to avoid collision with existing DECISIONS.md ADR-013.)
 - **Cache invalidation correctness (T5).** Hash-keyed cache must invalidate on every doc edit; sha1 of file contents is the contract. SessionStart-clears the file at session boundary; no cross-session bleed.
 
 ---
@@ -90,8 +90,8 @@ Serial spine: T2 → T4 → T5. T1 and T3 can interleave. All hooks work touches
 ## Sprint DoD
 
 - [ ] T1 `docs/_routing.json` exists, valid JSON, schema covers HOW/WHY/WHERE/WHO + L0 overflow; lean-doc-generator reads from it.
-- [ ] T2 zero `node scripts/session-start.js` invocations anywhere; ADR-013 written.
-- [ ] T3 zero `node scripts/read-guard.js` invocations anywhere; logic absorbed; ADR-013 appended.
+- [ ] T2 zero `node scripts/session-start.js` invocations anywhere; ADR-016 written.
+- [ ] T3 zero `node scripts/read-guard.js` invocations anywhere; logic absorbed; ADR-016 appended.
 - [ ] T4 PowerShell SessionStart hook live; zero loader errors on Windows space-path; <500ms cold start.
 - [ ] T5 cache file gitignored; SessionStart clears it; cache hit logged at debug.
 - [ ] Plan-lock commit landed before any T1..T5 commit.

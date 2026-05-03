@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-26
+last_updated: 2026-05-03
 update_trigger: New mode, agent, skill, or harness script added; workflow phase or gate model changes
 status: stale
 ---
@@ -37,7 +37,6 @@ It runs entirely inside a Claude Code session.
 | Performance agent | `.claude/agents/performance-analyst.md` | Perf gate (conditional — hot-path changes only) |
 | Init analyst | `.claude/agents/init-analyst.md` | INIT mode: full codebase discovery → ADR |
 | Scope analyst | `.claude/agents/scope-analyst.md` | Blast-radius map for task-decomposer |
-| Session bootstrap | `.claude/scripts/session-start.js` | Validates settings, CLAUDE.md size, skill staleness, doc line counts |
 | Read guard | `.claude/scripts/read-guard.js` | PreToolUse hook: enforces Thin-Coordinator Rule |
 | Change tracker | `.claude/scripts/track-change.js` | PostToolUse hook: file change counter for scope guard |
 | CI poller | `.claude/scripts/ci-status.js` | PostToolUse hook: polls CI after git push |
@@ -66,7 +65,7 @@ name at the phase they're bound to in MANIFEST.json.
 | Dependency | Type | Purpose |
 |:-----------|:-----|:--------|
 | Claude Code CLI | Runtime | Session host — skills, agents, hooks all run inside a Claude Code session |
-| Node.js ≥ 18 | Runtime | Harness scripts (`session-start.js`, `track-change.js`, etc.) |
+| Node.js ≥ 18 | Runtime | Harness scripts (`audit-baseline.js`, `eval-skills.js`, `bin/`); SessionStart hook moved to PowerShell per ADR-016 |
 | Python 3.10+ | Runtime | Eval harness (`evals/measure.py`) — stdlib only (ADR-001) |
 | Git | CLI | `ci-status.js` polls git state; `track-change.js` counts changed files |
 

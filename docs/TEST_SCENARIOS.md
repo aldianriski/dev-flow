@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-04-26
+last_updated: 2026-05-03
 update_trigger: New test added, coverage gap closed, suite restructured
 status: current
 ---
@@ -60,18 +60,15 @@ status: current
 
 | Area | Gap | Priority |
 |:-----|:----|:---------|
-| `.claude/scripts/session-start.js` | No unit tests — bootstrap logic runs as side-effectful script | P1 |
 | `.claude/scripts/validate-scaffold.js` | No unit tests — file structure checks untested in isolation | P1 |
 | `.claude/scripts/read-guard.js` | No unit tests — PreToolUse hook logic untested | P1 |
 | `.claude/scripts/track-change.js` | No unit tests | P2 |
 | `.claude/scripts/regenerate-manifest.js` | No unit tests — MANIFEST.json generation untested | P2 |
 | `evals/measure.py` | No automated test — eval correctness verified only by manual three-arm run | P2 |
 | Scaffold CLI integration | No integration test covering full `dev-flow-init.js` interactive flow | P2 |
-| `.claude/scripts/scaffold-checks.js` | Indirectly tested via session-start but no direct tests | P3 |
 
 ## Completion Roadmap
 
-- [ ] **Refactor `session-start.js`** — extract pure functions for unit testing (settings check, line count, staleness scan)
 - [ ] **Test `validate-scaffold.js`** — mock filesystem and assert expected pass/fail cases
 - [ ] **Test `read-guard.js`** — verify block/allow logic for each tool category
 - [ ] **Test `regenerate-manifest.js`** — assert MANIFEST.json output matches skills directory state

@@ -45,13 +45,13 @@ sprint: 38
 
 - [ ] **TASK-095 (T2)** — Remove `scripts/session-start.js` Node invocation from hooks + commands
   - `scope`: full · `layers`: scripts, governance, skills, agents · `risk`: high · `HITL`
-  - `acceptance`: no `node scripts/session-start.js` in `hooks/hooks.json`, `.claude/settings.json`, any SKILL.md, any agent, CLAUDE.md commands; `grep -r "session-start"` returns only script file (or zero hits if deleted); ADR-013 captures kill rationale
+  - `acceptance`: no `node scripts/session-start.js` in `hooks/hooks.json`, `.claude/settings.json`, any SKILL.md, any agent, CLAUDE.md commands; `grep -r "session-start"` returns only script file (or zero hits if deleted); ADR-016 captures kill rationale
   - `depends-on`: none
   - `note`: root cause = `loader:1368` Node module resolution + Windows space-in-path; unfixable cleanly after 5 attempts
 
 - [ ] **TASK-096 (T3)** — Remove `scripts/read-guard.js` Node invocation from hooks + commands
   - `scope`: full · `layers`: scripts, governance, skills, agents · `risk`: high · `HITL`
-  - `acceptance`: no `node scripts/read-guard.js` invocation anywhere; `grep -r "read-guard"` returns only script (or zero hits); read-guard logic absorbed into hook layer or skill self-policing; same ADR as TASK-095
+  - `acceptance`: no `node scripts/read-guard.js` invocation anywhere; `grep -r "read-guard"` returns only script (or zero hits); read-guard logic absorbed into hook layer or skill self-policing; same ADR as TASK-095 (ADR-016)
   - `depends-on`: TASK-095
 
 - [ ] **TASK-101 (T4)** — PowerShell SessionStart hook (replaces killed Node session-start)
