@@ -54,7 +54,7 @@ sprint: 38
   - `acceptance`: no `node scripts/read-guard.js` invocation anywhere; `grep -r "read-guard"` returns only script (or zero hits); read-guard logic absorbed into hook layer or skill self-policing; same ADR as TASK-095 (ADR-016)
   - `depends-on`: TASK-095
 
-- [ ] **TASK-101 (T4)** — PowerShell SessionStart hook (replaces killed Node session-start)
+- [x] **TASK-101 (T4)** — PowerShell SessionStart hook (replaces killed Node session-start) ✅ 09ad2ab
   - `scope`: quick · `layers`: governance, scripts · `risk`: medium · `HITL`
   - `acceptance`: `hooks/hooks.json` SessionStart points at PowerShell script (not Node); script at `scripts/session-start.ps1`; verifies `.claude/settings.local.json` (warn), `.claude/CLAUDE.md` (fail if missing), active sprint detectable (warn if `sprint: none`); zero loader errors on Windows space-path; <500ms cold start; no Node anywhere
   - `depends-on`: TASK-095
