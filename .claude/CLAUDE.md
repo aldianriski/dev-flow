@@ -49,8 +49,9 @@ bin/             # dev-flow-init.js scaffold bootstrap
 
 ## Commands
 ```bash
-node scripts/audit-baseline.js  # baseline metrics snapshot
-node scripts/eval-skills.js     # skill description / line-count eval
+node scripts/audit-baseline.js                                # baseline metrics
+node scripts/eval-skills.js                                   # skill eval
+powershell -File scripts/codemap-refresh.ps1                  # rebuild codemap (auto on commit)
 ```
 
 ## Definition of Done
@@ -73,3 +74,6 @@ Touch only what the task requires. Do not restructure adjacent files unless your
 
 ### Goal-Driven Execution
 Restate the task as a verifiable goal before implementing. State what "done" looks like. Do not begin until goal is clear.
+
+## Codemap (L0)
+> Overflow: see [docs/codemap/CODEMAP.md §L0-overflow](../docs/codemap/CODEMAP.md) (TASK-098)

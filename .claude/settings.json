@@ -30,6 +30,18 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/scripts/codemap-refresh.ps1\"",
+            "description": "Codemap refresh (TASK-098): regenerate docs/codemap/CODEMAP.md + handoff.json after every commit. Pure regex, no LLM, warn-only on failure."
+          }
+        ]
+      }
     ]
   }
 }

@@ -1,0 +1,351 @@
+{
+    "last_built":  "2026-05-03T22:23:30.8495772+07:00",
+    "metadata":  {
+                     "edge_count":  9,
+                     "generated_by":  "codemap-refresh",
+                     "repo_root":  "D:\\Project\\dev-flow",
+                     "node_count":  73,
+                     "module_count":  9
+                 },
+    "edges":  [
+                  {
+                      "from":  "CONTRIBUTING.md",
+                      "to":  "docs/DECISIONS.md",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  "CONTRIBUTING.md",
+                      "to":  "context/workflow/DESIGN_PHILOSOPHY.md",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  "CONTRIBUTING.md",
+                      "to":  "docs/SUPPORT.md",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  "README.md",
+                      "to":  "TODO.md",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  "README.md",
+                      "to":  "LICENSE",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  ".claude/CLAUDE.md",
+                      "to":  "../docs/codemap/CODEMAP.md",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  "docs/CHANGELOG.md",
+                      "to":  "sprint/SPRINT-038-foundation-hardening.md",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  "docs/SUPPORT.md",
+                      "to":  "templates/friction-report.md",
+                      "kind":  "markdown-link"
+                  },
+                  {
+                      "from":  "skills/codemap-refresh/SKILL.md",
+                      "to":  "path",
+                      "kind":  "markdown-link"
+                  }
+              ],
+    "nodes":  [
+                  {
+                      "kind":  "markdown",
+                      "path":  "CONTRIBUTING.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "README.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "SECURITY.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "TODO.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  ".claude/CLAUDE.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  ".claude/CONTEXT.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "agents/code-reviewer.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "agents/design-analyst.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "agents/dispatcher.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "agents/migration-analyst.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "agents/performance-analyst.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "agents/scope-analyst.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "agents/security-analyst.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/AI_CONTEXT.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/ARCHITECTURE.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/CHANGELOG.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/DECISIONS.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/SETUP.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/SUPPORT.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/TEST_SCENARIOS.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/adr/ADR-016-kill-node-hook-scripts.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/audit/AUDIT-2026-05-01-RECONCILED.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/audit/AUDIT-2026-05-01.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/audit/baseline-metrics.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/audit/external-refs-probe.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/audit/skill-eval-report.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/audit/v2-rewrite-plan.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/audit/wiring-map.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/codemap/CODEMAP.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/research/r9-primitive-audit.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-024-plugin-lean-doc.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-025-workflow-gaps.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-027-marketplace-schema-fix.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-028-wrap-or-replace.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-029-epic-e-close.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-030-p0-safety-truth.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-031-p0-workflow-contract.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-032-p1-consistency.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-033-p2-polish.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-034-audit-and-plan.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-035-atomic-naming-rename.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-036-workflow-wiring-verification.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-037-token-redundancy-reduction.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-038-foundation-hardening.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/sprint/SPRINT-039-codemap-modes-skills.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "docs/templates/friction-report.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/adr-writer/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/adr-writer/references/procedure.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/codemap-refresh/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/dev-flow-compress/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/dev-flow-compress/references/procedure.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/diagnose/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/lean-doc-generator/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/lean-doc-generator/references/DOCS_Guide.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/lean-doc-generator/references/VALIDATED_PATTERNS.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/orchestrator/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/orchestrator/references/phases.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/orchestrator/references/skill-dispatch.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/pr-reviewer/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/pr-reviewer/references/review-standards.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/refactor-advisor/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/release-manager/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/release-manager/references/procedure.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/security-auditor/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/system-design-reviewer/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/system-design-reviewer/references/procedure.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/task-decomposer/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/task-decomposer/references/decomposition-spec.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/task-decomposer/references/procedure.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/tdd/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/write-a-skill/SKILL.md"
+                  },
+                  {
+                      "kind":  "markdown",
+                      "path":  "skills/zoom-out/SKILL.md"
+                  }
+              ]
+}
