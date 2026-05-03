@@ -43,7 +43,7 @@ sprint: 38
   - `acceptance`: file exists, valid JSON, schema covers HOW/WHY/WHERE/WHO + L0 overflow pointer; lean-doc-generator reads from it before placement decisions
   - `depends-on`: none
 
-- [ ] **TASK-095 (T2)** — Remove `scripts/session-start.js` Node invocation from hooks + commands
+- [x] **TASK-095 (T2)** — Remove `scripts/session-start.js` Node invocation from hooks + commands ✅ b8ef0c2
   - `scope`: full · `layers`: scripts, governance, skills, agents · `risk`: high · `HITL`
   - `acceptance`: no `node scripts/session-start.js` in `hooks/hooks.json`, `.claude/settings.json`, any SKILL.md, any agent, CLAUDE.md commands; `grep -r "session-start"` returns only script file (or zero hits if deleted); ADR-016 captures kill rationale
   - `depends-on`: none
