@@ -4,7 +4,7 @@ last_updated: 2026-05-03
 update_trigger: sprint open / close / status change / phase scope change
 status: closed
 plan_commit: e8a475b
-close_commit: tbd
+close_commit: f0326c3
 ---
 
 # Sprint 038 — Foundation Hardening (hook surgery + cache)

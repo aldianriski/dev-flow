@@ -23,7 +23,7 @@ status: current
 - Sprint file: [docs/sprint/SPRINT-038-foundation-hardening.md](sprint/SPRINT-038-foundation-hardening.md)
 - PRD: — (foundation work; no parent PRD)
 - Plan commit: `e8a475b`
-- Close commit: `tbd` *(filled after squash-commit lands)*
+- Close commit: `f0326c3`
 - Summary: Killed Node SessionStart + read-guard hooks (Windows space-path loader:1368 unfixable); replaced with PowerShell SessionStart; added doc routing scaffold and lean-doc in-session SHA1 cache. Foundation for Sprint 039.
 - Docs updated: ADR-016 NEW · DECISIONS.md (ADR-016 link) · ARCHITECTURE.md, AI_CONTEXT.md, SETUP.md, README.md, CLAUDE.md (read-guard + Node hook scrub) · audit/wiring-map.md · TEST_SCENARIOS.md · codemap/CODEMAP.md · _routing.json NEW
 - ADRs: ADR-016
