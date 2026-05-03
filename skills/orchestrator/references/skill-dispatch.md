@@ -38,7 +38,7 @@ Maps task `layers` → advisory skills. Surfaced at G1. All entries overridable 
 
 | When | Skill / Agent |
 |---|---|
-| post-implement | `code-reviewer` agent → preloads `pr-reviewer` skill |
+| post-implement (proposed; human `y/n`) | `code-reviewer` agent → preloads `pr-reviewer` skill |
 | after commit | `lean-doc-generator` |
 | hard-to-reverse decision | `adr-writer` |
 | separate `/security-review` session | `security-analyst` agent → preloads `security-auditor` skill (bundled) |

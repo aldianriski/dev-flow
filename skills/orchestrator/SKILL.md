@@ -4,7 +4,7 @@ description: Use when starting, resuming, or completing any development task. Or
 user-invocable: true
 argument-hint: "[mode] [task-or-description]"
 version: "2.0.0"
-last-validated: "2026-05-01"
+last-validated: "2026-05-03"
 type: rigid
 ---
 
@@ -41,7 +41,7 @@ Freeform input (no mode keyword):
 1. **Parse** — restate task as verifiable goal; confirm with human in one line
 2. **G1 Scope** — run checklist (see `references/phases.md`); BLOCK if any fail
 3. **Implement** — execute task; flag scope creep immediately
-4. **Review** — auto-dispatch `code-reviewer`
+4. **Review** — propose `code-reviewer`; human types `y` to dispatch, `n` to skip (use `n` for doc-only / delete-only / trivial diffs)
 5. **Commit** — structured message (see `references/phases.md`)
 
 ### mvp
@@ -50,7 +50,7 @@ Freeform input (no mode keyword):
 3. **Grill** *(when requirements unclear)* — one question at a time; offer recommended answer; explore codebase before asking; stop when goal is unambiguous
 4. **G2 Design** — auto-dispatch `design-analyst`; BLOCK on `BLOCKED` finding; hard-to-reverse decision → dispatch `adr-writer`
 5. **Implement** — execute micro-tasks from design-analyst plan in order; mark each `[x]` when verification passes
-6. **Review** — auto-dispatch `code-reviewer`
+6. **Review** — propose `code-reviewer`; human types `y` to dispatch, `n` to skip (use `n` for doc-only / delete-only / trivial diffs)
 7. **Commit** — structured message; propose `performance-analyst` / `migration-analyst` if applicable
 
 ---
@@ -60,7 +60,7 @@ Freeform input (no mode keyword):
 | Agent | Trigger | Type |
 |---|---|---|
 | `design-analyst` | G2 in `mvp` | auto |
-| `code-reviewer` | post-implement always | auto |
+| `code-reviewer` | post-implement | propose → human approves |
 | `scope-analyst` | G1 if size unclear | auto |
 | `performance-analyst` | api/db/hot-path + high risk | propose → human approves |
 | `migration-analyst` | DB schema change detected | propose → human approves |
