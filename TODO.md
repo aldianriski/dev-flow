@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-03 (Sprint 038 closed — Foundation Hardening; pending promote of Sprint 039)
+last_updated: 2026-05-03 (Sprint 039 promoted — Codemap + Modes + Skills)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 39
 ---
 
 > **External references**
@@ -34,39 +34,18 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ `docs/sprint/SPRINT-039-codemap-modes-skills.md`
 
-> Sprint 038 closed 2026-05-03 — archived to `docs/CHANGELOG.md`. Next: Sprint 039 Codemap+Modes+Skills (4 tasks: TASK-098, TASK-099, TASK-100, TASK-103) — pending promote.
+> Sprint 039 — Codemap + Modes + Skills. Theme: build new tooling (codemap base / sprint-bulk mode / `/prime` / `/release-patch`). Predecessor: Sprint 038 closed `f0326c3`.
+
+- [ ] **T1 — TASK-098** — Codemap base knowledge system (3-tier + post-commit AST hook) · `full` · `high` · HITL
+- [ ] **T2 — TASK-099** — Add `sprint-bulk` mode to dispatcher (Hybrid C) · `full` · `high` · HITL
+- [ ] **T3 — TASK-100** — `/prime` skill — ordered context loader + health check · `quick` · `low` · AFK · *depends on T1*
+- [ ] **T4 — TASK-103** — `/release-patch` skill — version sync + CHANGELOG + sprint-state refresh + human-gated push · `full` · `high` · HITL
 
 ---
 
 ## Backlog
-
-### P0 — Sprint 039: Codemap + Modes + Skills — build new tooling (4 tasks)
-
-> Theme: codemap base knowledge, sprint-bulk dispatcher mode, /prime skill, /release-patch skill. Builds on Sprint 038 hook+cache foundation.
-
-- [ ] **TASK-098** — Codemap base knowledge system (3-tier + post-commit AST hook)
-  - `scope`: full · `layers`: governance, docs, skills, scripts · `risk`: high · `HITL`
-  - `acceptance`: `docs/codemap/CODEMAP.md` exists (auto-generated, hubs+deps+modules); `docs/codemap/handoff.json` valid JSON schema `{nodes[], edges[], metadata{}, last_built}`; CLAUDE.md `## Codemap (L0)` block with one-liner per module + overflow pointer to CODEMAP.md if 80-line cap exceeded; new skill `skills/codemap-refresh/SKILL.md` ≤100 lines regenerates all 3; PowerShell PostToolUse hook on `Bash(git commit*)` rebuilds AST tree (no LLM, no Node) <5s on clean repo; tested on Windows space-path
-  - `depends-on`: none
-  - `note`: steals patterns from OpenViking (3-tier), codemap (handoff envelope), graphify (post-commit AST rebuild)
-
-- [ ] **TASK-099** — Add `sprint-bulk` mode to dispatcher (Hybrid C)
-  - `scope`: full · `layers`: agents, skills, governance, docs · `risk`: high · `HITL`
-  - `acceptance`: dispatcher lists 4 modes (init/quick/mvp/sprint-bulk); `sprint-bulk` batches G1+G2 once per sprint into single sprint-PRD; sequential default; auto-loops Active Sprint tasks; parallelism only when scope-analyst returns file-overlap matrix == ∅ for every pair; `.claude/CONTEXT.md` Modes table shows 4 rows; orchestrator skill lists `sprint-bulk` in mode-selection; `plugin.json` MINOR bump (new mode)
-  - `depends-on`: none
-  - `note`: do not run mid-sprint with another open task — version bump triggers plugin reload
-
-- [ ] **TASK-100** — `/prime` skill — ordered context loader + health check
-  - `scope`: quick · `layers`: skills, docs · `risk`: low · `AFK`
-  - `acceptance`: `skills/prime/SKILL.md` ≤100 lines, frontmatter `name: prime` + `description` "Use when…"; reads in order CLAUDE.md → CONTEXT.md → MEMORY.md → active sprint plan → CODEMAP.md L0; emits health report `[OK|MISSING]` per file + sprint number + task count; non-error if optional artifacts (CODEMAP.md, MEMORY.md) absent
-  - `depends-on`: TASK-098 (CODEMAP.md L0 must exist; gracefully degrades if absent)
-
-- [ ] **TASK-103** — `/release-patch` skill — version sync + CHANGELOG + sprint-state refresh + human-gated push
-  - `scope`: full · `layers`: skills, governance, docs · `risk`: high · `HITL`
-  - `acceptance`: `skills/release-patch/SKILL.md` ≤100 lines; bumps PATCH in `.claude-plugin/plugin.json` AND `.claude-plugin/marketplace.json` lockstep; skip-bump if `git diff --name-only HEAD` shows only `^docs/` paths; CHANGELOG.md gains entry (sprint number + closed tasks from TODO.md Changelog); MEMORY.md `dev-flow sprint state` refreshed if sprint just closed; CONTEXT.md drift warning if gates/modes/agents changed but CONTEXT.md not in diff; stale-doc `last_updated` auto-clear; push = HARD STOP (emits `ready to push, run \`git push origin master\`` and exits); reviewer can grep — no `git push` in skill files
-  - `depends-on`: none
 
 ### P0 — EPIC-Audit: Full project audit + external-ref alignment
 
@@ -94,7 +73,7 @@ sprint: none
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 38 archived → `docs/CHANGELOG.md`. No active sprint.*
+*Sprint 38 archived → `docs/CHANGELOG.md`. Sprint 039 active — execution log in `docs/sprint/SPRINT-039-codemap-modes-skills.md`.*
 
 ---
 
@@ -147,6 +126,6 @@ Sprint 33    →  P2 polish sweep                         (done — copywriting 
 Sprint 34    →  EPIC-Audit Phase 0 (audit reconcile + baseline + plan)  (planning)
 Sprint 35-37 →  EPIC-Audit Phases 1-3 (rename / wiring / trim)         (done)
 Sprint 38    →  Foundation Hardening (kill Node hooks + PS replacement + lean-doc cache)  (done)
-Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)
+Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)  (active)
 Sprint 40-45 →  EPIC-Audit Phases 4-6 (4 ext-ref deep / stale doc refresh / archive)
 ```
