@@ -39,7 +39,7 @@ sprint: 39
 > Sprint 039 — Codemap + Modes + Skills. Theme: build new tooling (codemap base / sprint-bulk mode / `/prime` / `/release-patch`). Predecessor: Sprint 038 closed `f0326c3`.
 
 - [x] **T1 — TASK-098** — Codemap base knowledge system (3-tier + post-commit AST hook) · `full` · `high` · HITL ✅ 665db28
-- [ ] **T2 — TASK-099** — Add `sprint-bulk` mode to dispatcher (Hybrid C) · `full` · `high` · HITL
+- [x] **T2 — TASK-099** — Add `sprint-bulk` mode to dispatcher (Hybrid C) · `full` · `high` · HITL ✅ d1f1438
 - [x] **T3 — TASK-100** — `/prime` skill — ordered context loader + health check · `quick` · `low` · AFK · *depends on T1* ✅ 3331a6a
 - [x] **T4 — TASK-103** — `/release-patch` skill — version sync + CHANGELOG + sprint-state refresh + human-gated push · `full` · `high` · HITL ✅ 5ceec5e
 
