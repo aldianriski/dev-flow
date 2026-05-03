@@ -13,7 +13,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node $CLAUDE_PROJECT_DIR/scripts/session-start.js",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/session-start.js\"",
             "description": "Bootstrap: verify settings.local, CLAUDE.md size, skill staleness, doc line counts, pending migrations, active sprint"
           }
         ]
