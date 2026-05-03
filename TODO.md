@@ -51,8 +51,10 @@ sprint: none
 - [ ] **Phase 4b — Caveman compare (plugin vs mattpocock skill)** (Sprint 41)
 - [ ] **Phase 4c — Superpowers patterns** (Sprint 42)
 - [ ] **Phase 4d — Mattpocock skill library** (Sprint 43)
-- [ ] **Phase 5 — Stale doc refresh** (Sprint 44) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
-- [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 45)
+- [ ] **Phase 4e — Get shit done patterns** (Sprint 44)
+- [ ] **Phase 4f — Skill wrapper patterns with skill-creator** (Sprint 45)
+- [ ] **Phase 5 — Stale doc refresh** (Sprint 46) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
+- [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 47)
 
 ### P1 — EPIC-E: Wrap-or-replace Claude Code primitives (closed)
 
