@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-03 (Sprint 38 archived)
+last_updated: 2026-05-03 (Sprint 39 archived)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,51 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 39 — Codemap + Modes + Skills (2026-05-03)
+
+- Sprint file: [docs/sprint/SPRINT-039-codemap-modes-skills.md](sprint/SPRINT-039-codemap-modes-skills.md)
+- PRD: — (tooling sprint; no parent PRD)
+- Plan commit: `678f513`
+- Close commit: `<pending>`
+- Summary: Built four pieces of new tooling — codemap base knowledge (3-tier L0/L1/L2 + PowerShell PostToolUse AST rebuild on `git commit`), `sprint-bulk` dispatcher mode (Hybrid C — G1+G2 batched once per sprint, sequential default, parallel only on zero file overlap), `/prime` skill (ordered context loader + health check), `/release-patch` skill (PATCH bump lockstep + CHANGELOG + MEMORY refresh + CONTEXT drift warn + stale-doc auto-clear + HARD STOP push gate).
+- Docs updated: `.claude/CLAUDE.md` §Codemap (L0) NEW · `.claude/CONTEXT.md` Modes table 3→4 rows + Vocabulary · `agents/dispatcher.md` (4-mode dispatch) · `skills/orchestrator/SKILL.md` + `references/phases.md` (sprint-bulk Phase) · `docs/codemap/CODEMAP.md` (regenerated) · `docs/codemap/handoff.json` NEW · `hooks/hooks.json` + `.claude/settings.json` (PostToolUse on `Bash(git commit*)`)
+- ADRs: — (no new ADR; T1 references ADR-016 PS-only hook policy)
+- Files changed: 17 (incl. 4 NEW: codemap-refresh.ps1, handoff.json, codemap-refresh/SKILL.md, prime/SKILL.md, release-patch/SKILL.md)
+- Tests added: 0 (manual smoke — codemap-refresh ~140 ms cold; PostToolUse hook silent on test commit `98bbe4a` per known harness cache behavior)
+
+**Blueprint version:** **MINOR** bump 2.3.0 → 2.4.0 lockstep (`plugin.json` + `marketplace.json`) — `sprint-bulk` is a new dispatcher mode + three new skills (`codemap-refresh`, `prime`, `release-patch`) per semver MINOR rule. Reload activates on next plugin reinstall.
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `scripts/codemap-refresh.ps1` | T1 NEW (~145 lines) — pure-regex 3-tier rebuild; UTF-8 no-BOM via `[IO.File]::WriteAllText` | — |
+| `skills/codemap-refresh/SKILL.md` | T1 NEW (61 lines) — manual trigger doc | — |
+| `docs/codemap/CODEMAP.md` | T1 REGEN — Hubs / Deps / Modules / L0-overflow (replaces TASK-091 stub) | — |
+| `docs/codemap/handoff.json` | T1 NEW — generated L2 envelope (nodes/edges/metadata/last_built) | — |
+| `.claude/CLAUDE.md` | T1 `## Codemap (L0)` block + overflow pointer + Commands entry | — |
+| `hooks/hooks.json` | T1 PostToolUse `Bash(git commit*)` → codemap-refresh.ps1 | ADR-016 |
+| `.claude/settings.json` | T1 mirrored PostToolUse with `$CLAUDE_PROJECT_DIR` variant | ADR-016 |
+| `agents/dispatcher.md` | T2 26 lines — 4-mode dispatch + code-reviewer propose-rule | — |
+| `skills/orchestrator/SKILL.md` | T2 94 lines — Mode Dispatch row + sprint-bulk Phase block | — |
+| `skills/orchestrator/references/phases.md` | T2 sprint-bulk Phase section + overlap derivation + first-blocker definition | — |
+| `.claude/CONTEXT.md` | T2 Modes table 3→4 rows + Vocabulary mode def | — |
+| `.claude-plugin/plugin.json` | T2 2.3.0 → 2.4.0 (MINOR — new mode + new skills) | — |
+| `.claude-plugin/marketplace.json` | T2 2.3.0 → 2.4.0 lockstep | — |
+| `skills/prime/SKILL.md` | T3 NEW (81 lines) — ordered context loader + health check | — |
+| `skills/release-patch/SKILL.md` | T4 NEW (81 lines) — 7-step PATCH release flow + HARD STOP push gate | — |
+| `TODO.md` | T1–T4 housekeeping commits — `[ ]` → `[x]` per task | — |
+| `docs/sprint/SPRINT-039-codemap-modes-skills.md` | sprint open + active + close; execution log + retro filled | — |
+
+**Retro highlights** (full retro in sprint file):
+- **Worked:** decompose-skip on user direction was safe (acceptance pre-set in Backlog held); pattern theft over invention (OpenViking + codemap + graphify); doc-only skills T3/T4 trivial; lockstep version-bump rule held.
+- **Friction:** PostToolUse hook silent on test commit `98bbe4a` due to harness cache — `settings.json` reload requires session restart, `hooks.json` reload requires plugin reinstall (known behavior, not bug); PS 5.1 `Out-File -Encoding utf8` writes BOM and broke node `JSON.parse` (switched to `[IO.File]::WriteAllText` + `new UTF8Encoding($false)`); ADR drafted as `ADR-013` collided with existing ADR-013 in DECISIONS.md (5 prior cross-refs) — renumbered to `ADR-016`.
+- **Pattern candidates** (pending user confirm for VALIDATED_PATTERNS):
+  - PS 5.1 → JSON for node consumers: always `[IO.File]::WriteAllText` + `new UTF8Encoding($false)`, never `Out-File -Encoding utf8`.
+  - Always grep DECISIONS.md for max ADR number before allocating a new ADR ID.
+  - Plugin MINOR bump (new mode/agent/skill) — schedule between tasks, never mid-task.
+  - PostToolUse / SessionStart hook config changes require session restart (settings.json) or plugin reinstall (hooks.json); document inline in hook config comments.
 
 ---
 

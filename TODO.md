@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-03 (Sprint 039 promoted — Codemap + Modes + Skills)
+last_updated: 2026-05-03 (Sprint 039 closed — Codemap + Modes + Skills)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 39
+sprint: none
 ---
 
 > **External references**
@@ -13,6 +13,7 @@ sprint: 39
 > - https://github.com/juliusbrussee/caveman → eval harness, single-source-of-truth discipline, context compression
 > - https://github.com/obra/superpowers → plugin development baseline
 > - https://github.com/mattpocock/skills → skill library, evaluation harness, plugin infrastructure, and other patterns for building AI agents
+> - https://github.com/gsd-build/get-shit-done → A light-weight and powerful meta-prompting, context engineering and spec-driven development system
 
 > **How to use this file**
 > - **Start of session** — read this file first. Understand active sprint before touching code.
@@ -34,14 +35,9 @@ sprint: 39
 
 ## Active Sprint
 
-→ `docs/sprint/SPRINT-039-codemap-modes-skills.md`
+→ — none —
 
-> Sprint 039 — Codemap + Modes + Skills. Theme: build new tooling (codemap base / sprint-bulk mode / `/prime` / `/release-patch`). Predecessor: Sprint 038 closed `f0326c3`.
-
-- [x] **T1 — TASK-098** — Codemap base knowledge system (3-tier + post-commit AST hook) · `full` · `high` · HITL ✅ 665db28
-- [x] **T2 — TASK-099** — Add `sprint-bulk` mode to dispatcher (Hybrid C) · `full` · `high` · HITL ✅ d1f1438
-- [x] **T3 — TASK-100** — `/prime` skill — ordered context loader + health check · `quick` · `low` · AFK · *depends on T1* ✅ 3331a6a
-- [x] **T4 — TASK-103** — `/release-patch` skill — version sync + CHANGELOG + sprint-state refresh + human-gated push · `full` · `high` · HITL ✅ 5ceec5e
+> Next: Sprint 040 — EPIC-Audit Phase 4a (Karpathy patterns).
 
 ---
 
@@ -73,7 +69,7 @@ sprint: 39
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 38 archived → `docs/CHANGELOG.md`. Sprint 039 active — execution log in `docs/sprint/SPRINT-039-codemap-modes-skills.md`.*
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. No sprint active — Sprint 040 (EPIC-Audit Phase 4a Karpathy patterns) next.*
 
 ---
 
@@ -126,6 +122,6 @@ Sprint 33    →  P2 polish sweep                         (done — copywriting 
 Sprint 34    →  EPIC-Audit Phase 0 (audit reconcile + baseline + plan)  (planning)
 Sprint 35-37 →  EPIC-Audit Phases 1-3 (rename / wiring / trim)         (done)
 Sprint 38    →  Foundation Hardening (kill Node hooks + PS replacement + lean-doc cache)  (done)
-Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)  (active)
+Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)  (done)
 Sprint 40-45 →  EPIC-Audit Phases 4-6 (4 ext-ref deep / stale doc refresh / archive)
 ```
