@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-03 (Sprint 039 closed — Codemap + Modes + Skills)
+last_updated: 2026-05-04 (Sprint 040 promoted — EPIC-Audit Phase 4a Karpathy patterns)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 040
 ---
 
 > **External references**
@@ -14,6 +14,7 @@ sprint: none
 > - https://github.com/obra/superpowers → plugin development baseline
 > - https://github.com/mattpocock/skills → skill library, evaluation harness, plugin infrastructure, and other patterns for building AI agents
 > - https://github.com/gsd-build/get-shit-done → A light-weight and powerful meta-prompting, context engineering and spec-driven development system
+> - https://github.com/anthropics/skills/tree/main/skills/skill-creator → Creating custom skills for Claude
 
 > **How to use this file**
 > - **Start of session** — read this file first. Understand active sprint before touching code.
@@ -35,9 +36,10 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ [docs/sprint/SPRINT-040-karpathy-patterns.md](docs/sprint/SPRINT-040-karpathy-patterns.md) — EPIC-Audit Phase 4a (Karpathy patterns) · status: planning
 
-> Next: Sprint 040 — EPIC-Audit Phase 4a (Karpathy patterns).
+> Tasks: T1 EXAMPLES.md probe · T2 CLAUDE.md lineage lock · T3 verify-step decision · T4 ADR-019.
+> Next: Sprint 041 — EPIC-Audit Phase 4b (Caveman compare).
 
 ---
 
@@ -47,7 +49,6 @@ sprint: none
 
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
 
-- [ ] **Phase 4a — Karpathy patterns** (Sprint 40)
 - [ ] **Phase 4b — Caveman compare (plugin vs mattpocock skill)** (Sprint 41)
 - [ ] **Phase 4c — Superpowers patterns** (Sprint 42)
 - [ ] **Phase 4d — Mattpocock skill library** (Sprint 43)
@@ -71,7 +72,7 @@ sprint: none
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. No sprint active — Sprint 040 (EPIC-Audit Phase 4a Karpathy patterns) next.*
+*Sprint 040 (EPIC-Audit Phase 4a Karpathy patterns) active — see Active Sprint section above. Sprints 38 + 039 archived → `docs/CHANGELOG.md`.*
 
 ---
 
