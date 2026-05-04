@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending
+status: closed
+plan_commit: 7e06c72
 close_commit: pending
 ---
 
@@ -91,13 +91,13 @@ No parallelism opportunity — sprint-bulk overlap gate would force sequential a
 
 ## Sprint DoD
 
-- [ ] T1 § Decisions row: per-skill `examples/` convention adopt Y/N + reason. Source noted (live fetch or cached probe).
-- [ ] T2 `.claude/CONTEXT.md` § Behavioral Guidelines Lineage block landed with locked wording + MIT attribution. `last_updated: 2026-05-04` advanced.
-- [ ] T3 § Decisions row: verify-step micro-protocol Y/N + placement (G2 OR task-decomposer) + reason. Backlog task created if Y.
-- [ ] T4 `docs/adr/ADR-019-karpathy-patterns.md` exists. Status: Accepted. Captures T1+T2+T3 outcomes + MIT credit.
-- [ ] Plan-lock commit landed before any T1..T4 commit.
-- [ ] Close commit + CHANGELOG row + TODO update + retro.
-- [ ] `last_updated` advanced on CONTEXT.md (and any other touched governance file).
+- [x] T1 § Decisions row: per-skill `examples/` convention adopt Y/N + reason. Source noted (live fetch or cached probe). → DEC-1, source = gh CLI raw fetch (upstream `2c606141936f`).
+- [x] T2 `.claude/CONTEXT.md` § Behavioral Guidelines Lineage block landed with locked wording + MIT attribution. `last_updated: 2026-05-04` advanced. → § Behavioral Guidelines Lineage block landed; `last_updated` flagged in Q1 (CONTEXT.md lacks frontmatter, recorded inline in lineage block instead).
+- [x] T3 § Decisions row: verify-step micro-protocol Y/N + placement (G2 OR task-decomposer) + reason. Backlog task created if Y. → DEC-3, no Backlog task (already shipped Sprint 035 `414ee8e`).
+- [x] T4 `docs/adr/ADR-019-karpathy-patterns.md` exists. Status: Accepted. Captures T1+T2+T3 outcomes + MIT credit. → eed5126.
+- [x] Plan-lock commit landed before any T1..T4 commit. → 7e06c72.
+- [x] Close commit + CHANGELOG row + TODO update + retro. → this commit.
+- [x] `last_updated` advanced on CONTEXT.md (and any other touched governance file). → recorded inline in § Behavioral Guidelines Lineage; CONTEXT.md frontmatter add scoped to Q1 follow-up.
 
 ---
 
@@ -115,21 +115,21 @@ karpathy `EXAMPLES.md` fetched via gh CLI raw (`gh api -H "Accept: application/v
 Side findings (captured to memory):
 - gh CLI on Git Bash rewrites leading-slash endpoint paths to filesystem paths → `feedback_gh_cli_no_leading_slash.md`. Drop leading `/` on `gh api <path>` calls.
 
-### 2026-05-04 | T2 done — pending commit
+### 2026-05-04 | T2 done — 54c88b1
 Wording diff complete via gh CLI raw fetch of karpathy `CLAUDE.md` (upstream SHA `2c606141936f`, 65 lines, 2357 bytes). Drift = INTENTIONAL adaptation for meta-repo context: "Coding" → "Acting" (P1 headline); "code" → "content"/"task" in P2/P3 bodies; bullets distilled to single paragraphs; orphan-removal subsection of P3 dropped; Goal-Driven `verify-step` format dropped (T3 decides re-add).
 
 Lineage locked in `.claude/CONTEXT.md` § Behavioral Guidelines Lineage — table of 4 principles with karpathy headline / dev-flow headline / adaptation note + MIT attribution + verified-at SHA + date. Forward maintenance contract: when upstream substantively changes, re-diff and bump SHA + date.
 
 Open finding flagged: `.claude/CONTEXT.md` lacks ownership-header frontmatter (owner / last_updated / update_trigger / status), violating CLAUDE.md DOC WORK rule. Out of T2 scope to add — surfaced to § Open Questions for Review.
 
-### 2026-05-04 | T3 done — pending commit
+### 2026-05-04 | T3 done — 8261847
 **Surprise during T3:** verify-step micro-protocol is **already adopted** at G2 design-analyst MICRO-TASKS template (`skills/orchestrator/references/phases.md:107` — `- [ ] <exact action> in <exact/path>  verify: <runnable command>`). Landed in Sprint 035 (commit `414ee8e`, 2026-05-01) without explicit karpathy lineage record.
 
 Decision: **YES, placement = G2 design-analyst MICRO-TASKS** (correct level — per-execution-step granularity). Confirmed pattern in place; no implementation work required. Lineage credit added to ADR-019 (T4). No Backlog task created — pattern shipped 3 sprints ago.
 
 Why not task-decomposer Acceptance: Acceptance is task-level (sprint task = 1-N micro-task fanout); verify lives at micro-task level. Two distinct granularities — correct separation.
 
-### 2026-05-04 | T4 done — pending commit
+### 2026-05-04 | T4 done — eed5126
 ADR-019 written at `docs/adr/ADR-019-karpathy-patterns.md`. Status: Accepted. Captures DEC-1 (reject EXAMPLES.md), DEC-2 (lineage lock + SHA `2c606141936f`), DEC-3 (verify-step retroactive credit). Format follows ADR-016 precedent (Context / Decision / Alternatives / Consequences / References). MIT attribution + upstream pin recorded. ADR numbering: honored Sprint 034 DEC-2 reservation despite gap (017, 018); future allocations should be sequential per Sprint 039 retro pattern — captured in ADR Consequences.
 
 ---
@@ -151,9 +151,9 @@ ADR-019 written at `docs/adr/ADR-019-karpathy-patterns.md`. Status: Accepted. Ca
 
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
-| DEC-1 (T1) | Do NOT adopt root-level `EXAMPLES.md` per karpathy convention | Meta-repo has no app-code domain; CLAUDE.md anti-patterns + skill Red Flags already cover principle-violation surface; karpathy value is principle wording (T2), not example format | ADR-019 (pending T4) |
-| DEC-2 (T2) | Lineage of 4 Behavioral Guidelines locked in CONTEXT.md § Behavioral Guidelines Lineage with MIT attribution + upstream SHA `2c606141936f` + date 2026-05-04 | Existing `.claude/CLAUDE.md` block was adopted without lineage record; drift risk grows silently. Locking SHA + adaptation table makes future re-diffs deterministic | ADR-019 (pending T4) |
-| DEC-3 (T3) | Verify-step micro-protocol confirmed at G2 design-analyst MICRO-TASKS (already shipped Sprint 035, commit `414ee8e`); placement at task-decomposer rejected | design-analyst MICRO-TASKS template `verify: <runnable command>` is karpathy P4 pattern at the right granularity; task-decomposer Acceptance is task-level (separate granularity, correct separation). No new work — pattern in place, lineage credit only via ADR-019 | ADR-019 (pending T4) |
+| DEC-1 (T1) | Do NOT adopt root-level `EXAMPLES.md` per karpathy convention | Meta-repo has no app-code domain; CLAUDE.md anti-patterns + skill Red Flags already cover principle-violation surface; karpathy value is principle wording (T2), not example format | ADR-019 |
+| DEC-2 (T2) | Lineage of 4 Behavioral Guidelines locked in CONTEXT.md § Behavioral Guidelines Lineage with MIT attribution + upstream SHA `2c606141936f` + date 2026-05-04 | Existing `.claude/CLAUDE.md` block was adopted without lineage record; drift risk grows silently. Locking SHA + adaptation table makes future re-diffs deterministic | ADR-019 |
+| DEC-3 (T3) | Verify-step micro-protocol confirmed at G2 design-analyst MICRO-TASKS (already shipped Sprint 035, commit `414ee8e`); placement at task-decomposer rejected | design-analyst MICRO-TASKS template `verify: <runnable command>` is karpathy P4 pattern at the right granularity; task-decomposer Acceptance is task-level (separate granularity, correct separation). No new work — pattern in place, lineage credit only via ADR-019 | ADR-019 |
 | DEC-4 (T4) | ADR-019 number honored despite Sprint 038 breaking Sprint 034 DEC-2 reservation chain (took ADR-016); future ADRs should allocate sequentially via Sprint 039 retro pattern | Sprint plan committed to ADR-019; honoring keeps T1-T3 cross-references stable; gap (017, 018) accepted as one-time cost; sequential-allocation discipline restored going forward | ADR-019 |
 
 ---
@@ -166,4 +166,28 @@ ADR-019 written at `docs/adr/ADR-019-karpathy-patterns.md`. Status: Accepted. Ca
 
 ## Retro
 
-*(empty — populate at close.)*
+### Worked
+- **gh CLI primary policy paid off immediately.** First T1 fetch dir-listed the repo (8 entries) + grabbed two raw files (CLAUDE.md 65 lines, EXAMPLES.md 522 lines) in 3 commands. Byte-exact raw output let T2 wording diff land deterministically. WebFetch fallback never needed.
+- **Decompose-skip on user direction held a second sprint.** Sprint 039 retro flagged this pattern as safe; Sprint 040 confirmed — decomposition Q&A was bundled at promote, no mid-sprint scope drift. Pre-set acceptance criteria absorbed all four task variations.
+- **Investigation surfaced unrecorded prior adoption.** T3 found verify-step micro-protocol already in `phases.md:107` since Sprint 035 (`414ee8e`). Avoided unnecessary implementation work; ADR-019 captures retroactive lineage credit. Lesson: before "implement X", grep the codebase for X first.
+- **ADR file convention crystallized.** Sprint 039 took ADR-016 to `docs/adr/`; Sprint 040 followed with ADR-019. `docs/DECISIONS.md` officially frozen at ADR-001..015 in ADR-019 Consequences.
+- **Strict serial dependency held.** T1 → T2 → T3 → T4 chain executed without re-ordering. gh CLI dir-list at T1 + raw fetch reused for T2 (same session) — no re-auth, no re-rate-limit risk.
+
+### Friction
+- **gh CLI Git Bash leading-slash bug.** First `gh api /repos/...` invocation failed with `invalid API endpoint: "C:/Program Files/Git/repos/..."` — MINGW64 rewrote the path. Fix: drop leading `/`. Captured to `feedback_gh_cli_no_leading_slash.md`. Same trap class as Sprint 038/039 PS-encoding issues — Windows shell layer surprises recur.
+- **CONTEXT.md missing ownership-header frontmatter.** T2 acceptance "advance `last_updated` on CONTEXT.md" cannot be met because the file lacks the frontmatter that holds it. CLAUDE.md DOC WORK rule mandates ownership headers on every doc file — CONTEXT.md is non-compliant. Worked around inline in the new lineage block (recorded date there); proper fix queued to Q1 / new Backlog P1 task.
+- **ADR numbering reservation chain partially broken.** Sprint 034 DEC-2 reserved ADR-016 for Phase 4c, but Sprint 038 took ADR-016 for hooks (next-free). Sprint 040 honored ADR-019 reservation but accepted gap (017, 018) as a one-time cost. Going forward: sequential allocation per Sprint 039 retro pattern; reservations from DEC-2 superseded.
+- **Decision-only sprint with 4 commits each made small visible diffs.** T1 (17 line diff) and T3 (9 line diff) were essentially decision-row appends. Considered batching T1+T3 into one commit; kept separate to preserve task-to-commit traceability. Acceptable trade.
+
+### Pattern candidates (pending user confirm)
+1. **Always grep before "implement X" claims.** T3 surprise (verify-step already shipped Sprint 035) shows that prior-sprint adoption can hide in plain sight. Before Backlog-promoting an "adopt X" task, run `git log -p --all -S "X"` and grep current source. Generalizes Sprint 039 ADR-collision lesson to feature additions.
+2. **gh CLI is the default tool for ANY github fetch in dev-flow flows.** Codified in `feedback_github_cli_default.md`. Promotes WebFetch from "first try" to "fallback only." Saves rate-limit headaches + gives byte-exact raw via `Accept: application/vnd.github.raw`.
+3. **gh CLI on Git Bash: drop leading slash on endpoint paths.** Codified in `feedback_gh_cli_no_leading_slash.md`. Add to any doc that lists gh-CLI commands.
+4. **External-pattern adoption sprints should produce a lineage record + ADR even when no implementation lands.** Sprint 040 lands 0 lines of skill/agent/hook code yet shipped real value (lineage lock + ADR-019). Decision-only sprints are a valid sprint shape; don't pad them with extra implementation tasks.
+
+### Surprise log (cross-ref to Execution Log)
+- T1: gh CLI leading-slash bug on first invocation — fixed by removing slash.
+- T1: karpathy `EXAMPLES.md` is ONE root-level file, not per-skill — pre-sprint cached-probe assumption was wrong. Reframed T1 from "per-skill convention?" to "root-level convention?"; decision still N.
+- T3: verify-step micro-protocol ALREADY shipped at G2 design-analyst MICRO-TASKS since Sprint 035. T3 reduced from "decide + implement?" to "credit lineage."
+- T4: ADR-019 number gap (017, 018) accepted; future allocations sequential.
+- T2: CONTEXT.md lacks ownership-header frontmatter — DOC WORK rule violation pre-existing, not caused by this sprint. Surfaced for follow-up.

@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 040 promoted — EPIC-Audit Phase 4a Karpathy patterns)
+last_updated: 2026-05-04 (Sprint 040 closed — EPIC-Audit Phase 4a Karpathy patterns)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 040
+sprint: none
 ---
 
 > **External references**
@@ -36,9 +36,8 @@ sprint: 040
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-040-karpathy-patterns.md](docs/sprint/SPRINT-040-karpathy-patterns.md) — EPIC-Audit Phase 4a (Karpathy patterns) · status: planning
+→ — none —
 
-> Tasks: T1 EXAMPLES.md probe · T2 CLAUDE.md lineage lock · T3 verify-step decision · T4 ADR-019.
 > Next: Sprint 041 — EPIC-Audit Phase 4b (Caveman compare).
 
 ---
@@ -57,6 +56,10 @@ sprint: 040
 - [ ] **Phase 5 — Stale doc refresh** (Sprint 46) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
 - [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 47)
 
+### P1 — Doc-quality follow-ups
+
+- [ ] **TASK-104** — Add ownership-header frontmatter to `.claude/CONTEXT.md` (owner / last_updated / update_trigger / status). DOC WORK rule violation surfaced in Sprint 040 Q1. Estimated S, layers `governance, docs`.
+
 ### P1 — EPIC-E: Wrap-or-replace Claude Code primitives (closed)
 
 - [x] **TASK-086** — audit + ADR-012 (Sprint 28)
@@ -72,7 +75,17 @@ sprint: 040
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
-*Sprint 040 (EPIC-Audit Phase 4a Karpathy patterns) active — see Active Sprint section above. Sprints 38 + 039 archived → `docs/CHANGELOG.md`.*
+### Sprint 040 — EPIC-Audit Phase 4a (Karpathy patterns) — closed 2026-05-04
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `.claude/CONTEXT.md` | NEW § Behavioral Guidelines Lineage block — 4-principle adaptation table + MIT attribution + upstream SHA `2c606141936f` lock | ADR-019 |
+| `docs/adr/ADR-019-karpathy-patterns.md` | NEW — karpathy adoption + lineage credit; 3-part decision (lineage lock + verify-step retro credit + EXAMPLES.md reject) | ADR-019 |
+| `docs/sprint/SPRINT-040-karpathy-patterns.md` | NEW — sprint plan + execution log + 4 decisions + retro | — |
+
+Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close (this commit).
+
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprint 040 awaits archive on next `/release-patch` invocation.*
 
 ---
 
@@ -126,5 +139,6 @@ Sprint 34    →  EPIC-Audit Phase 0 (audit reconcile + baseline + plan)  (plann
 Sprint 35-37 →  EPIC-Audit Phases 1-3 (rename / wiring / trim)         (done)
 Sprint 38    →  Foundation Hardening (kill Node hooks + PS replacement + lean-doc cache)  (done)
 Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)  (done)
-Sprint 40-45 →  EPIC-Audit Phases 4-6 (4 ext-ref deep / stale doc refresh / archive)
+Sprint 40    →  EPIC-Audit Phase 4a — Karpathy patterns (lineage lock + ADR-019 + verify-step retro credit)  (done)
+Sprint 41-45 →  EPIC-Audit Phases 4b-6 (3 ext-ref deep / stale doc refresh / archive)
 ```
