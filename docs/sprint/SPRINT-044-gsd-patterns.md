@@ -1,0 +1,169 @@
+---
+owner: Tech Lead (Aldian Rizki)
+last_updated: 2026-05-04
+update_trigger: sprint open / close / status change / phase scope change
+status: active
+plan_commit: pending
+close_commit: pending
+---
+
+# Sprint 044 — EPIC-Audit Phase 4e (Get-shit-done patterns)
+
+**Theme:** Deep-audit `gsd-build/get-shit-done` against dev-flow — diff GSD's spec-driven phase pipeline (sketch/spike/spec/discuss/plan/execute/verify/validate/ship) vs dev-flow's Init/Quick/MVP/Sprint-Bulk modes + G1/G2 gates, evaluate `commands/` namespace + per-command pattern at 60+-command scale, audit `contexts/` directory pattern (per-domain context injection) vs dev-flow's single `.claude/CONTEXT.md`, lock decisions in ADR-023. Adopt-or-reject each candidate with rationale; no skill or agent behavior change without eval evidence (defers to TASK-116 acceptance harness per ADR-021 DEC-4).
+**Mode:** mvp · **Driver:** Tech Lead · **AI:** Claude Opus 4.7
+**Predecessor:** Sprint 043 closed `0a69140`.
+**Successor:** Sprint 045 (EPIC-Audit Phase 4f — skill-creator wrapper patterns).
+
+---
+
+## Why this sprint exists
+
+Sprint 039 added `gsd-build/get-shit-done` to TODO.md External References mid-sprint (Sprint 039 retro surprise log line). It was NOT scanned in Sprint 034's external-refs probe (`docs/audit/external-refs-probe.md` covers karpathy/caveman/superpowers/mattpocock only; GSD postdates the probe). Sprint 044 lands as the FIRST scan of GSD against dev-flow.
+
+GSD scale at 2026-05-04 HEAD `42ed7cee8d8d`:
+- 64 commands under `commands/gsd/` (vs dev-flow's `agents/` invocations + plugin slash commands)
+- 80+ workflow files under `get-shit-done/workflows/` (per-phase `.md` recipes)
+- `contexts/` directory (per-domain context injection — separate from `CONTEXT.md`)
+- `.plans/` and `.out-of-scope/` directories at repo root (mattpocock-style negative-space + planning surface)
+- `sdk/` and `bin/` directories (programmatic API surface)
+- `tests/` with vitest config
+- Multi-language READMEs (en/zh-CN/ja-JP/ko-KR/pt-BR)
+
+Repo is **substantively larger** than caveman (~3 skills + eval harness), superpowers (~6 skills + hooks), mattpocock (~17 skills, no eval). At 60k stars + 5k forks it's also the most-validated. **Risk: scope-creep magnet.** Sprint must NOT attempt verbatim adoption of GSD's phase pipeline — dev-flow's Modes (Init/Quick/MVP/Sprint-Bulk) + Gates (G1/G2) are its own coherent system; lifting GSD's 8-phase pipeline wholesale would be replacement, not adoption.
+
+**Five adopt-candidate axes (probed at promote, not pre-validated by external-refs-probe.md since GSD postdates):**
+
+1. **Phase-pipeline diff** — GSD has explicit `discuss-phase`, `plan-phase`, `execute-phase`, `verify-phase`, `validate-phase`, `ship` as separate commands. dev-flow has Modes (lifecycle aggregates) + G1/G2 gates (decision points). Different decomposition. T1 produces side-by-side mapping: which GSD phases map to dev-flow gates? which are sub-steps within a single dev-flow Mode? which represent a phase dev-flow lacks? — feeds T3 ADR.
+2. **`contexts/` directory pattern** — GSD has `commands/gsd/contexts/` (per-domain context files; separate from `CONTEXT.md`). dev-flow has single `.claude/CONTEXT.md` for all domain vocab. T2 reads GSD's `contexts/` end-to-end + dev-flow's `CONTEXT.md`; assesses whether per-domain split adds value at dev-flow's scale (small meta-repo, single domain). Default recommendation: defer (single-domain doesn't warrant split); but record if T2 discovers a sub-domain that genuinely deserves its own context file.
+3. **Spec-driven workflow lineage** — GSD's tagline "spec-driven development" + `spec-phase.md` / `discuss-phase.md` workflow. dev-flow uses task-decomposer + ADR-writer for spec capture. Diff workflow shape — does GSD's spec-phase represent something dev-flow's task-decomposer skill misses? Read GSD's `spec-phase.md` workflow + dev-flow's `task-decomposer/SKILL.md` for diff. Recommendation: lift trigger phrases or spec-output structure if delta is high; defer otherwise.
+4. **`.plans/` directory pattern** — GSD has `.plans/` at repo root (top-level for in-flight plans; visible to humans + AI). dev-flow has `docs/sprint/SPRINT-NNN-*.md` for sprint plans. Different shapes (GSD = workspace-level scratch; dev-flow = sprint-bound formal plan). T2 records the difference; default recommendation: NO LIFT (dev-flow's sprint files already serve plan-discovery role; `.plans/` would duplicate).
+5. **`commands/` namespace + plugin command pattern** — GSD uses `commands/gsd/` with 64 markdown command files invoked as `/gsd:<command>`. dev-flow uses skills (`skills/<name>/SKILL.md`) + agents (`agents/<name>/`). Different invocation contract. T1 records which GSD commands are skill-equivalent vs agent-equivalent vs neither (e.g., `/gsd:autonomous`, `/gsd:thread`). Recommendation: NO migration to commands-namespace (dev-flow skill+agent split is well-aligned with Claude Code plugin spec); but lift trigger-phrase ideas from individual commands if delta high (defers behavior changes to TASK-116 per ADR-021 DEC-4).
+
+This sprint is **decision-only for items 1, 2, 3, 4** (research notes + ADR), and **diff-only for item 5** (research note; no skill/command edits — those would require TASK-116 acceptance evidence per ADR-021 DEC-4). No skill behavior changes; no new commands written; no `contexts/` migration this sprint. Any approved lift = its own sprint with re-prime + agent-context refresh checklist (CONTEXT.md ripple risk if `contexts/` adoption recommended).
+
+---
+
+## Open Questions (locked at promote — pending user "approve all" / individual approval)
+
+- (a) **External fetch tool** — proposal: gh CLI primary (no local cache for `gsd-build/get-shit-done`). Source = `gh api repos/gsd-build/get-shit-done/contents/...` exclusively. SHA pin mandatory (HEAD `42ed7cee8d8d` at promote). WebFetch fallback on gh failure; no cached probe (GSD postdates external-refs-probe.md). Per Sprint 040 codified policy + Sprint 041/042/043 confirmed precedent.
+- (b) **Scope ceiling for T1 phase-pipeline diff** — proposal: read at most **8 GSD workflow files** + **8 GSD command files** end-to-end (16-file cap to control gh fetch burn). Workflow read list (priority): `discuss-phase.md` `plan-phase.md` `execute-phase.md` `verify-phase.md` `validate-phase.md` `spec-phase.md` `sketch.md` `spike.md`. Command read list (priority): `quick.md` `autonomous.md` `manager.md` `progress.md` `thread.md` `code-review.md` `debug.md` `verify-work.md`. If T1 needs additional reads to resolve diff, log to OQ surfaces during execution; do NOT silently expand.
+- (c) **Lift candidates surfacing rule** — proposal: T1 + T2 surface trigger-phrase + structural lift candidates as RECOMMENDATIONS only; ZERO skill/command edits this sprint. All behavior changes queue to TASK-116 acceptance harness per ADR-021 DEC-4. Mirrors Sprint 042/043 pattern (decision-vs-implementation split codified across 4 ext-ref deep sprints).
+- (d) **`.out-of-scope/` follow-on adoption** — proposal: if T1/T2 surface 1-2 high-signal "considered + rejected" candidates from GSD (e.g., GSD's multi-language READMEs, GSD's `sdk/` programmatic API, GSD's `.changeset/` release flow), seed `.out-of-scope/` pointers per Sprint 043 DEC-6 pattern. Cap at 2 new pointers this sprint to avoid sweep. Default: 0 new pointers (lift only if signal warrants).
+- (e) **CONTEXT.md additive lift discipline** — proposal: same as Sprint 043 OQ-e. T2 reads GSD's `commands/gsd/contexts/*` end-to-end + GSD's repo-root `CONTEXT.md`. Lift candidates land as RECOMMENDATIONS in ADR-023; actual `.claude/CONTEXT.md` edits queue to future TASK with re-prime + agent-context refresh checklist. NO `.claude/CONTEXT.md` edits this sprint.
+- (f) **TASK-116 / TASK-117 / TASK-118 cross-pollination** — proposal: if T1 surfaces trigger-phrase lift candidates → queue under existing TASK-116 (skill-triggering acceptance harness) without creating a new task. If T2 surfaces CONTEXT.md additive lifts beyond Sprint 043 DEC-5's three (`_Avoid_` annotations + § Relationships + § Flagged ambiguities) → APPEND to TASK-117 scope (don't create TASK-119 unless scope is genuinely separate). Avoid task proliferation.
+
+---
+
+## Plan
+
+### T1 — Phase-pipeline + commands-namespace diff (GSD vs dev-flow Modes/Gates/skills)
+**Scope:** quick · **Layers:** docs, governance · **Risk:** medium · **HITL** *(reviewer must verify scope ceiling held — 16-file read cap per OQ-b; no scope creep into 64-command sweep)*
+**Acceptance:** `docs/research/gsd-phase-pipeline-diff-2026-05-04.md` exists with: (a) gh CLI raw fetch + SHA pin (HEAD `42ed7cee8d8d` at promote), (b) MIT license confirmation via `gh api repos/gsd-build/get-shit-done/license`, (c) **8 GSD workflow files read** per OQ-b list (sketch / spike / spec / discuss / plan / execute / verify / validate-phase) — capture each workflow's purpose + 1-2 sample triggers + output shape, (d) **8 GSD command files read** per OQ-b list (quick / autonomous / manager / progress / thread / code-review / debug / verify-work) — capture each command's invocation pattern + scope, (e) **Phase-to-Mode/Gate mapping matrix** (rows: GSD-phase / GSD-command name; columns: maps-to-dev-flow-Mode? / maps-to-dev-flow-Gate? / maps-to-dev-flow-Skill? / maps-to-dev-flow-Agent? / no-equivalent — gap candidate), (f) **Bidirectional finding section** — record explicitly anywhere dev-flow's mode/gate/skill is superior to GSD's equivalent (Sprint 042 DEC-2 + Sprint 043 DEC-2 pattern), (g) **Per-axis recommendation** — Phase pipeline (lift Y/N + which) / commands-namespace (migrate Y/N) / spec-phase pattern (lift Y/N for task-decomposer skill) — each with rationale + ADR-021 DEC-4 deferral confirmation. § Decisions row in sprint file: per-axis recommendation + deferral + bidirectional finding count.
+**Source:** `gh api repos/gsd-build/get-shit-done/contents/get-shit-done/workflows` (workflow listing) + per-file raw fetch via `gh api repos/.../contents/get-shit-done/workflows/<name>` for the 8 named files; `gh api repos/.../contents/commands/gsd` (commands listing) + per-file raw fetch for the 8 named files.
+**Depends on:** none.
+**Note:** READ-ONLY audit. NO `skills/<name>/SKILL.md` edits, NO `agents/<name>/*` edits, NO new commands files this sprint. License check via `gh api repos/.../license` BEFORE T1 commit — record SHA + MIT confirmation in research note header per Sprint 040/041/042/043 precedent. **Hard scope ceiling: 16 files. If T1 hits ceiling without resolving diff, surface to user — do NOT silently expand.**
+
+### T2 — `contexts/` + `.plans/` directory patterns + GSD CONTEXT.md reconcile
+**Scope:** quick · **Layers:** docs, governance · **Risk:** medium · **HITL** *(reviewer must verify additive-only CONTEXT.md discipline; verify zero `.claude/CONTEXT.md` edits land this sprint)*
+**Acceptance:** `docs/research/gsd-contexts-and-plans-2026-05-04.md` exists with three parts: **Part A (`contexts/` directory)** — (a) gh CLI raw fetch of `commands/gsd/contexts/*` end-to-end (file listing + per-file size + per-file purpose summary), (b) reconciliation strategy: does dev-flow's single-domain meta-repo justify per-domain context split? (default: NO; but record if a sub-domain emerges), (c) recommendation: 0 contexts to lift / N contexts to lift (additive only), (d) if lift recommended, queue to TASK-117 (per OQ-f). **Part B (GSD CONTEXT.md reconcile)** — (e) gh CLI raw fetch of `gsd-build/get-shit-done/CONTEXT.md` + SHA pin, (f) section-level matrix (GSD sections vs dev-flow sections — present/absent/divergent), (g) lift-candidate list (additive only per OQ-e); if non-zero, queue to TASK-117 per OQ-f. **Part C (`.plans/` directory)** — (h) gh CLI raw fetch of `.plans/` listing (purpose, contents, naming convention), (i) compare to dev-flow's `docs/sprint/SPRINT-NNN-*.md`, (j) recommendation: NO LIFT (dev-flow sprint files already serve plan-discovery role) — record as DEC row to prevent future "should we adopt `.plans/`" question. § Decisions row in sprint file: contexts/ defer + GSD CONTEXT.md lift count (queue to TASK-117 if >0) + `.plans/` no-lift decision + bidirectional finding count.
+**Source:** `gh api repos/gsd-build/get-shit-done/contents/commands/gsd/contexts` + per-file raw fetch; `gh api repos/.../contents/CONTEXT.md` (raw fetch); `gh api repos/.../contents/.plans` (listing only — do not deep-read individual plan files; sample 1 plan file at most for shape).
+**Depends on:** T1 (T1's MIT license check + SHA pin reused; T1's command-file reads may surface contexts/ references — feed T2's targeted read list).
+**Note:** READ-ONLY audit + design only. NO `.claude/CONTEXT.md` edits this sprint (those are scope creep + CONTEXT.md ripple risk per Sprint 043 DEC-5 precedent). NO `.plans/` directory creation. NO `contexts/` directory creation.
+
+### T3 — ADR-023 (GSD patterns adoption decisions)
+**Scope:** quick · **Layers:** governance, docs · **Risk:** low · **HITL** *(reviewer must verify ADR completeness + alignment with T1+T2 outputs + sequential numbering check)*
+**Acceptance:** `docs/adr/ADR-023-gsd-patterns.md` exists, status Accepted, format follows ADR-019/020/021/022 precedent (Context / Decision / Alternatives / Consequences / References). Captures:
+1. T1 phase-pipeline diff finding + per-axis recommendation (lift / no-lift / queue to TASK-116) — confirms ADR-021 DEC-4 deferral pattern.
+2. T1 commands-namespace migration decision (default: NO migration; dev-flow skill+agent split aligned with plugin spec).
+3. T1 spec-phase lift recommendation for task-decomposer skill (Y/N + which trigger phrases — queue to TASK-116 if Y).
+4. T1 bidirectional findings (anywhere dev-flow > GSD).
+5. T2-Part-A `contexts/` deferral (single-domain doesn't warrant split) + re-eval triggers (when dev-flow gains second domain).
+6. T2-Part-B GSD CONTEXT.md reconciliation strategy + lift-count decision (additive only; queue to TASK-117 if >0 per OQ-f).
+7. T2-Part-C `.plans/` no-lift decision + rationale (dev-flow sprint files already serve plan-discovery role).
+8. (If applicable) `.out-of-scope/` follow-on pointers landed per OQ-d (cap 2 this sprint).
+9. Lineage credit (gsd-build/get-shit-done MIT verified by Lex Christopherson at SHA `42ed7cee8d8d`).
+**Depends on:** T1, T2.
+**Note:** ADR-023 sequential — confirmed via `ls docs/adr/` (max = 022) at promote. PR template is NOT touched this sprint (already landed Sprint 042 T4). **Pre-T3-commit:** re-grep `docs/adr/` to confirm ADR-023 still free (Sprint 040/041/042/043 retro pattern). If T1/T2 recommend `contexts/` lift, ADR-023 records the recommendation + queues edits to a future sprint per OQ-e additive-only discipline.
+
+---
+
+## Dependency Chain
+
+```
+T1 ─→ T2 ─→ T3
+```
+
+T1 → T2 (T2 reuses T1's MIT license check + SHA pin; T1's command-file reads may surface `contexts/` references for T2's targeted read list). T2 → T3 (T3 ADR captures T1+T2's findings as landed decisions, not proposals). No parallelization opportunity — sequential by data flow.
+
+---
+
+## Cross-task risks
+
+- **gh CLI primary policy** (Sprint 040 codified, Sprint 041/042/043 confirmed). Drop leading slash on Git Bash. Fallback: WebFetch → no cached probe (GSD postdates `external-refs-probe.md`).
+- **GSD scope-creep magnet.** 64 commands + 80+ workflows + 4 directory patterns at 60k stars. T1's 16-file read ceiling (OQ-b) is the structural defense. If T1 hits ceiling without resolving diff, **STOP and surface to user — do NOT silently expand**. Pattern from Sprint 043 retro: pre-resolve scope ceilings at promote.
+- **No external-refs-probe coverage for GSD.** Sprint 034 probe predates GSD addition. T1 is the FIRST scan; recommendations have less prior-art-validation than caveman/superpowers/mattpocock did. ADR-023 must explicitly note "first-scan; recommendations are initial findings, not validated against multi-pass probe."
+- **GSD's spec-driven phase pipeline is a coherent system.** Lifting individual phases without lifting the whole would be incoherent (e.g., adopting `spec-phase` without `discuss-phase` breaks the upstream context flow). Default: NO partial pipeline lift. ADR-023 must explicitly forbid "pick-and-mix lifts of GSD phases."
+- **`contexts/` adoption ripple risk.** If recommended, every agent's CONTEXT.md cross-ref breaks; same risk as Sprint 043 DEC-5 lift queue. NO `.claude/CONTEXT.md` edits this sprint per OQ-e.
+- **`.plans/` adoption duplicates dev-flow sprint files.** Default no-lift recorded as a Decision (not silent omission) to prevent the question recurring in Sprints 045-047.
+- **TASK proliferation risk.** OQ-f locks: trigger-phrase lifts → queue to TASK-116; CONTEXT.md additive lifts → APPEND to TASK-117. Do NOT create TASK-119 unless scope is genuinely separate.
+- **ADR-023 sequential numbering** — max ADR = 022 (Sprint 043 just landed). ADR-023 confirmed safe via `ls docs/adr/` (verify pre-T3-commit per Sprint 040/041/042/043 retro pattern).
+- **Decision-only sprint with 0-2 mechanical lifts** — T1+T2+T3 = research + ADR (zero code change). Optional `.out-of-scope/` pointer additions land in T2 if OQ-d lift signal is high; cap 2 pointers. release-patch should skip-bump if zero file changes outside `docs/` + `.out-of-scope/` (mirror Sprint 043's release-patch flagged behavior).
+- **Date verification at promote.** Per Sprint 042/043 retro friction: lean-doc-generator stamped 2026-05-04 dates last 2 sprints when today was 2026-05-04. Today is 2026-05-04. All artifacts MUST stamp `2026-05-04`. TASK-118 (date-sanity check in lean-doc-generator pre-flight) is queued; not landed yet. Manual verification required at every artifact write.
+
+---
+
+## Sprint DoD
+
+- [ ] T1 `docs/research/gsd-phase-pipeline-diff-2026-05-04.md` exists with mapping matrix + bidirectional finding section + per-axis recommendation. § Decisions row landed.
+- [ ] T2 `docs/research/gsd-contexts-and-plans-2026-05-04.md` exists with Part A + Part B + Part C. § Decisions row landed. CONTEXT.md edits = 0 (additive recommendations queue to TASK-117 only).
+- [ ] T3 `docs/adr/ADR-023-gsd-patterns.md` exists, status Accepted, follows ADR-019..022 format.
+- [ ] Plan-lock commit landed before any T1..T3 commit.
+- [ ] Close commit + CHANGELOG row + TODO update + retro.
+- [ ] Open questions (a–f above) resolved on promote, recorded as locked decisions.
+- [ ] Date verification: all artifacts stamped `2026-05-04`.
+- [ ] T1 16-file read ceiling held; if expanded, surfaced + recorded.
+- [ ] Zero `.claude/CONTEXT.md` edits, zero `skills/<name>/*` edits, zero `agents/<name>/*` edits (READ-ONLY sprint).
+
+---
+
+## Execution Log
+
+*(Empty — append `### YYYY-MM-DD HH:MM | T<N> done` blocks as work lands.)*
+
+---
+
+## Files Changed
+
+*(Empty — one row per file as work lands.)*
+
+| File | Task | Change | Risk | Test added |
+|:-----|:-----|:-------|:-----|:-----------|
+
+---
+
+## Decisions
+
+*(Empty — append rows as decisions land. Format: `DEC-N (T<X>) | Decision | Reason | ADR`)*
+
+| ID | Decision | Reason | ADR |
+|:---|:---------|:-------|:----|
+
+---
+
+## Open Questions for Review
+
+*(Empty — append OQs as they surface during execution. All promote-time OQs (a–f) above resolved at promote per "approve all" pattern from Sprint 042/043.)*
+
+---
+
+## Retro
+
+*(Empty — fill at close.)*
+
+### Worked
+
+### Friction
+
+### Pattern candidates (pending user confirm)
+
+### Surprise log (cross-ref to Execution Log)
