@@ -4,7 +4,7 @@ last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
 status: closed
 plan_commit: 89d2389
-close_commit: pending
+close_commit: 80920ef
 ---
 
 # Sprint 045 — EPIC-Audit Phase 4f (skill-creator wrapper patterns) + CONTEXT.md lifts + lean-doc date-sanity
