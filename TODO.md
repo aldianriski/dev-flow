@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 043 promoted — EPIC-Audit Phase 4d Mattpocock skill library)
+last_updated: 2026-05-04 (Sprint 043 closed — EPIC-Audit Phase 4d Mattpocock skill library)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 043
+sprint: none
 ---
 
 > **External references**
@@ -36,9 +36,8 @@ sprint: 043
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-043-mattpocock-skill-library.md](docs/sprint/SPRINT-043-mattpocock-skill-library.md) — EPIC-Audit Phase 4d (Mattpocock skill library) · status: active
+→ — none —
 
-> Tasks: T1 4-skill diff (tdd/diagnose/zoom-out/task-decomposer) · T2 bucket-migration cost + CONTEXT.md reconcile · T3 `.out-of-scope/` adoption + 3 pointers · T4 ADR-022.
 > Next: Sprint 044 — EPIC-Audit Phase 4e (Get-shit-done patterns).
 
 ---
@@ -57,6 +56,8 @@ sprint: 043
 ### P1 — Doc-quality follow-ups
 
 - [ ] **TASK-104** — Add ownership-header frontmatter to `.claude/CONTEXT.md` (owner / last_updated / update_trigger / status). DOC WORK rule violation surfaced in Sprint 040 Q1. Estimated S, layers `governance, docs`.
+- [ ] **TASK-117** — Apply 3 additive `.claude/CONTEXT.md` lifts per Sprint 043 DEC-5: (i) `_Avoid_` annotations on existing § Vocabulary entries; (ii) NEW § Relationships section between Modes and Agent Roster; (iii) NEW § Flagged ambiguities section at end (seed Sprint 035 ADR-014 rename + Sprint 039 codemap-refresh skill-vs-script + at-most-2 others). Design input: [`docs/research/mattpocock-bucket-and-context-2026-05-04.md`](docs/research/mattpocock-bucket-and-context-2026-05-04.md) Part B. Re-prime + agent-context refresh checklist required (CONTEXT.md ripple risk). Estimated S, layers `governance, docs`.
+- [ ] **TASK-118** — Add date-sanity check to `dev-flow:lean-doc-generator` skill pre-flight (compare frontmatter + research filename dates against today; warn or auto-correct). Sprint 042 + 043 retro pattern candidate — recurring friction. Estimated S, layers `skills, docs`.
 
 ### P1 — Implementation follow-ups (deferred from research sprints)
 
@@ -77,6 +78,21 @@ sprint: 043
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
+
+### Sprint 043 — EPIC-Audit Phase 4d (Mattpocock skill library) — closed 2026-05-04
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/research/mattpocock-skill-diff-2026-05-04.md` | NEW — 4-skill matrix (tdd/diagnose/zoom-out/task-decomposer) + trigger-phrase deltas + per-skill recommendations + bidirectional zoom-out finding | ADR-022 |
+| `docs/research/mattpocock-bucket-and-context-2026-05-04.md` | NEW — Part A bucket migration cost matrix + defer rationale; Part B CONTEXT.md section matrix + 3 lift recommendations | ADR-022 |
+| `.out-of-scope/README.md` | NEW — convention + frontmatter spec + ADR relationship + lineage credit to mattpocock | ADR-022 |
+| `.out-of-scope/run-hook-shim.md` | NEW — sources ADR-021 DEC-3 | ADR-022 |
+| `.out-of-scope/tests-dir-empty-scaffold.md` | NEW — sources ADR-021 DEC-6 | ADR-022 |
+| `.out-of-scope/statusline-savings-badge.md` | NEW — sources ADR-020 DEC-6 | ADR-022 |
+| `docs/adr/ADR-022-mattpocock-skill-library-patterns.md` | NEW — 7-decision ADR + locks `docs/adr/` convention as documented standard | ADR-022 |
+| `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | NEW — sprint plan + execution log + 7 decisions + retro | — |
+
+Plan-lock `2813289` · T1 `db88a40` · T2 `39a56f4` · T3 `5d2c2e7` · T4 `cacc199` · close (this commit).
 
 ### Sprint 042 — EPIC-Audit Phase 4c (Superpowers patterns) — closed 2026-05-04
 
@@ -112,7 +128,7 @@ Plan-lock `87bb523` · T1 `0ee6f8d` · T2 `b79815f` · T3 `7ab9ff6` · close (th
 
 Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close `3fec973`.
 
-*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 await archive on next `/release-patch` invocation that triggers a bump (or manual archive).*
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 + 043 await archive on next `/release-patch` invocation that triggers a bump (or manual archive — release-patch skip-bump on docs-only is the cause; flagged for fix).*
 
 ---
 
@@ -169,5 +185,6 @@ Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /p
 Sprint 40    →  EPIC-Audit Phase 4a — Karpathy patterns (lineage lock + ADR-019 + verify-step retro credit)  (done)
 Sprint 41    →  EPIC-Audit Phase 4b — Caveman compare (dual-lineage + 3-arm port plan + ADR-020 + caveman-shrink reject)  (done)
 Sprint 42    →  EPIC-Audit Phase 4c — Superpowers patterns (hooks lineage + acceptance harness + PR template lift + ADR-021)  (done)
-Sprint 43-45 →  EPIC-Audit Phases 4d-6 (2 ext-ref deep / stale doc refresh / archive)
+Sprint 43    →  EPIC-Audit Phase 4d — Mattpocock skill library (4-skill diff + bucket defer + CONTEXT.md lifts + .out-of-scope/ + ADR-022 + docs/adr/ convention lock)  (done)
+Sprint 44-45 →  EPIC-Audit Phases 4e-6 (2 ext-ref deep / stale doc refresh / archive)
 ```

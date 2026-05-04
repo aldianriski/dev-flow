@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending
+status: closed
+plan_commit: 2813289
 close_commit: pending
 ---
 
@@ -111,20 +111,20 @@ T1 → T2 (T2 reuses T1's bucket-listing gh fetch result). T2 → T3 (T3 confirm
 
 ## Sprint DoD
 
-- [ ] T1 `docs/research/mattpocock-skill-diff-2026-05-04.md` exists with 4-skill comparison matrix + trigger-phrase delta + reference-graph delta + per-skill recommendation. § Decisions row landed.
-- [ ] T2 `docs/research/mattpocock-bucket-and-context-2026-05-04.md` exists with Part A (bucket migration cost matrix + defer rationale + threshold lock) + Part B (CONTEXT.md reconciliation matrix + lift recommendations). § Decisions row landed.
-- [ ] T3 `.out-of-scope/` directory exists with `README.md` + 3 pointer files (`run-hook-shim.md`, `tests-dir-empty-scaffold.md`, `statusline-savings-badge.md`). Each pointer ≤20 lines with required frontmatter.
-- [ ] T4 `docs/adr/ADR-022-mattpocock-skill-library-patterns.md` exists, status Accepted, captures T1+T2-PartA+T2-PartB+T3 + `docs/adr/` convention lock + lineage credit. § Decisions row landed.
-- [ ] Plan-lock commit landed before any T1..T4 commit.
-- [ ] Close commit + CHANGELOG row + TODO update + retro.
-- [ ] Open questions (a–e above) resolved on promote, recorded as locked decisions.
-- [ ] Date verification: all artifacts stamped `2026-05-04` (per Sprint 042 retro pattern candidate #4 — pre-flight date check).
+- [x] T1 `docs/research/mattpocock-skill-diff-2026-05-04.md` exists with 4-skill comparison matrix + trigger-phrase delta + reference-graph delta + per-skill recommendation. § Decisions row landed. → db88a40.
+- [x] T2 `docs/research/mattpocock-bucket-and-context-2026-05-04.md` exists with Part A + Part B. § Decisions row landed. → 39a56f4.
+- [x] T3 `.out-of-scope/` directory exists with `README.md` + 3 pointer files. Each pointer ≤20 lines with required frontmatter. → 5d2c2e7.
+- [x] T4 `docs/adr/ADR-022-mattpocock-skill-library-patterns.md` exists, status Accepted. → cacc199.
+- [x] Plan-lock commit landed before any T1..T4 commit. → 2813289.
+- [x] Close commit + CHANGELOG row + TODO update + retro. → this commit.
+- [x] Open questions (a–e above) resolved on promote, recorded as locked decisions. → DEC-1 through DEC-7.
+- [x] Date verification: all artifacts stamped `2026-05-04` (post lean-doc-generator date fix at promote).
 
 ---
 
 ## Execution Log
 
-### 2026-05-04 | T1 done — pending commit
+### 2026-05-04 | T1 done — db88a40
 mattpocock skill paths verified via `gh api repos/mattpocock/skills/contents/skills/engineering` (license MIT confirmed via `gh api repos/.../license`; SHA pinned `b843cb5ea74b`). 3 same-named skills found in `engineering/` bucket (tdd 109 lines, diagnose 117 lines, zoom-out 7 lines). `task-decomposer` has no upstream (dev-flow original; mattpocock has issue-tracker-workflow skills `to-issues`/`to-prd`/`triage` instead — different domain framing).
 
 Output: `docs/research/mattpocock-skill-diff-2026-05-04.md` — 4-skill comparison matrix + trigger-phrase deltas + reference-graph deltas + per-skill lift recommendations.
@@ -146,7 +146,7 @@ Reject list (do NOT add even after eval): `tdd ← build features|fix bugs` (vag
 
 Per ADR-021 DEC-4: NO skill edits this sprint. T1 surfaces candidates; TASK-116 verifies; only validated phrases ship.
 
-### 2026-05-04 | T2 done — pending commit
+### 2026-05-04 | T2 done — 39a56f4
 mattpocock CONTEXT.md (26 lines, project-specific to Issue Tracker domain) fetched via gh CLI raw. Bucket structure verified (engineering 10 / productivity 3 / misc 4 / personal excluded / deprecated 4).
 
 Output: `docs/research/mattpocock-bucket-and-context-2026-05-04.md` — single research note with two parts.
@@ -168,7 +168,7 @@ Output: `docs/research/mattpocock-bucket-and-context-2026-05-04.md` — single r
 **DEC-4:** DEFER bucketing per 20-skill threshold lock; ADR-022 records re-eval triggers explicitly to avoid silent kick-the-can.
 **DEC-5:** Recommend 3 ADDITIVE CONTEXT.md lifts; queue to future TASK; do not execute this sprint.
 
-### 2026-05-04 | T3 done — pending commit
+### 2026-05-04 | T3 done — 5d2c2e7
 `.out-of-scope/` directory created at repo root with 4 files:
 
 1. `.out-of-scope/README.md` (~22 lines) — convention, frontmatter spec, relationship to docs/adr/, how-to-add, lineage credit to mattpocock.
@@ -182,7 +182,7 @@ Lineage: pointer convention adapted from `mattpocock/skills/.out-of-scope/` (MIT
 
 **Decision:** `.out-of-scope/` adoption complete. Future negative-space decisions land here as discoverable index pointing to ADRs.
 
-### 2026-05-04 | T4 done — pending commit
+### 2026-05-04 | T4 done — cacc199
 ADR-022 written at `docs/adr/ADR-022-mattpocock-skill-library-patterns.md`. Status: Accepted. Captures 7 decisions:
 - D1: 5 trigger-phrase lift candidates queued to TASK-116 (no skill edits)
 - D2: bidirectional `zoom-out` finding (dev-flow > mattpocock; no lift)
@@ -232,18 +232,36 @@ ADR-022 sequential per Sprint 040/041/042 retro pattern; max-ADR check confirmed
 
 ## Open Questions for Review
 
-*(Empty — surface any execution-time discoveries here. All promote-time OQs already locked above.)*
+*(None surfaced during execution — all five promote-time OQs (a–e) resolved cleanly at promote per "approve all" pattern. T1+T2+T3+T4 executed on stable inputs without re-litigation. OQ-d held: only the 3 named .out-of-scope/ pointers landed; T1/T2 surfaced no new pointer candidates.)*
 
 ---
 
 ## Retro
 
-*(Empty — fill at close per Sprint Close Protocol step 4.)*
-
 ### Worked
+- **Bidirectional finding pattern (DEC-2 zoom-out) reused successfully.** Sprint 042 introduced "record bidirectional findings as Decisions table rows" pattern; Sprint 043 applied it to `zoom-out` (dev-flow > mattpocock 55 vs 7 lines). Pattern is generalizing — record explicitly when ext-ref audit assumption inverts.
+- **5-OQ pre-resolve at promote held cleanly.** All five OQs (a–e) locked before T1; no mid-sprint re-litigation; no new OQs surfaced during execution. Pattern candidate from Sprint 042 retro #1 confirmed second sprint.
+- **3 deferred-decisions pattern (TASK-115 / TASK-116 / future CONTEXT.md TASK).** Decision-vs-implementation split now codified across Sprints 041/042/043. Each surfaces a research note + ADR + backlog task with link back to research. TASK-115 from 041, TASK-116 from 042, future CONTEXT.md TASK from this sprint — all queued cleanly.
+- **`.out-of-scope/` adoption hit the right scale.** 3 pointers from prior ADR DEC rows; not a sweep, not a backfill of all rejected paths. Pointer-to-ADR pattern preserves source-of-truth; README ≤30 lines locks convention. First non-ADR negative-space surface for dev-flow; precedent set.
+- **`docs/adr/` convention lock retroactive close.** Convention has been in practice 4 sprints (ADR-016/019/020/021); locking now with DEC-7 closes the emergent-vs-documented gap before next sprint adds another ADR. Cheap to do; high signal.
 
 ### Friction
+- **lean-doc-generator stamped 2026-05-03 dates again.** Same friction as Sprint 042 retro pattern candidate #4. Date-sanity check still NOT in lean-doc-generator pre-flight. Required 2 manual fixes (sprint frontmatter + research filenames; both replace_all). Worth a `dev-flow:lean-doc-generator` skill update sprint.
+- **TODO.md modified by lean-doc-generator outside review window** — same as Sprint 042. Skill autonomously updates Active Sprint pointer + removes Backlog item before user approval. Recovered cleanly but pattern repeats.
+- **`task-decomposer` no-upstream finding required clarifying note in research matrix.** Initial impulse was to map mattpocock's `triage` / `to-issues` / `to-prd` as proxies; correctly recorded as "different domain framing" (issue-tracker workflow vs sprint/TODO management) instead of forcing a comparison. Lesson: when ext-ref has no exact match, record explicitly + categorize the divergence reason.
+- **Bucket-migration cost matrix surfaced unknowns the probe didn't.** Probe (line 132) said "14 skills small enough that buckets may be premature" but didn't enumerate migration costs. T2 added: plugin auto-discovery uncertainty (does plugin loader scan sub-buckets?), `bin/dev-flow-init.js` scaffold path drift, skill-dispatch.md alignment. These are real costs that defer recommendation strengthens.
 
 ### Pattern candidates (pending user confirm)
+1. **Date-sanity check in lean-doc-generator pre-flight.** Compare frontmatter + research filename dates against today's date; warn or auto-correct. Sprint 042 retro #4 + this sprint's friction = two-sprint pattern. Worth fixing.
+2. **`docs/adr/` convention now LOCKED (DEC-7).** Sequential allocation + 1-file-per-ADR + pre-allocation grep both surfaces. Pattern from Sprint 039 retro now formal documented standard.
+3. **`.out-of-scope/` as standard surface for negative-space decisions.** Pattern from this sprint. Adopt going forward: any ADR with a "DEFER" or "REJECT" decision should consider whether a `.out-of-scope/` pointer aids discoverability. Not every reject merits a pointer — only ones with concrete re-eval triggers worth surfacing.
+4. **Bidirectional finding pattern (Sprint 042 DEC-2 + Sprint 043 DEC-2).** When ext-ref audit inverts (dev-flow > upstream), record as Decisions table row + ADR Consequences. Two sprints in, this is generalizing.
+5. **Decision-only sprint with one mechanical lift (Sprints 040/041/042/043 all this shape).** Four sprints of consistent shape. Worth codifying as a sprint shape in `dev-flow:lean-doc-generator` references — "ext-ref deep audit" = research notes (1-3) + ADR + 0-1 mechanical lifts.
 
 ### Surprise log (cross-ref to Execution Log)
+- T1: `zoom-out` is dev-flow > mattpocock (inverse finding); recorded as DEC-2.
+- T1: `task-decomposer` has no mattpocock upstream; mattpocock has issue-tracker-domain skills instead (different problem framing); recorded as DEC-3.
+- T1: mattpocock `tdd` body (109 lines) + `diagnose` body (117 lines) both significantly richer than dev-flow equivalents but exceed 100-line cap; trigger-phrase lifts feasible, body lifts not.
+- T2: NO Vocabulary overlap between mattpocock CONTEXT.md (issue-tracker domain) and dev-flow CONTEXT.md (workflow meta-repo). Different domains; reconciliation = NO LIFT on Vocabulary.
+- T2: `_Avoid_:` annotation pattern is a small but high-value lift — explicit "what NOT to call this" guidance prevents naming-collision drift over time. Recommendation queued via DEC-5.
+- T4: ADR-022 sequential allocation + locking `docs/adr/` convention happened in same ADR — efficient consolidation; no separate "convention-lock" ADR needed.
