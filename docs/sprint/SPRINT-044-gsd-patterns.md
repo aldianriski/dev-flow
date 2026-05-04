@@ -174,6 +174,22 @@ Output: `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` — three-p
 
 **DEC-7..9 land in § Decisions.**
 
+### 2026-05-04 | T3 done — pending commit
+ADR-023 written at `docs/adr/ADR-023-gsd-patterns.md`. Status: Accepted. Captures all 9 decisions from T1 + T2:
+- DEC-1: NO LIFT 9-phase pipeline (re-eval at ~150 assets)
+- DEC-2: NO LIFT commands/ namespace split
+- DEC-3: DEFER XML-tagged body (consider for write-a-skill template only)
+- DEC-4: NO LIFT agent: + allowed-tools: frontmatter (defer adopter scale)
+- DEC-5: NO LIFT persistent workflow artifacts (sprint plan + research/ covers it)
+- DEC-6: bidirectional sprint-bulk batched gates finding
+- DEC-7: DEFER contexts/ per-mode profiles
+- DEC-8: NO LIFT .plans/ directory
+- DEC-9: ZERO CONTEXT.md lifts + bidirectional CONTEXT.md richness finding
+
+Net: GSD validates direction but patterns not portable at 6.8× scale gap. No new `.out-of-scope/` pointers (GSD decisions are scale-driven, not concept-rejecting). TASK-116/117/118 unaffected.
+
+ADR-023 sequential per Sprint 043 DEC-7 convention lock; max-ADR check confirmed = 022 before allocation. Format follows ADR-019..022 precedent.
+
 *(Empty — append `### YYYY-MM-DD HH:MM | T<N> done` blocks as work lands.)*
 
 ---
@@ -186,6 +202,8 @@ Output: `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` — three-p
 | `docs/sprint/SPRINT-044-gsd-patterns.md` | T1 | Execution Log + § Decisions DEC-1 through DEC-6 rows | low | — |
 | `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` | T2 | NEW (~135 lines) — Part A contexts/ defer + Part B .plans/ no-lift + Part C CONTEXT.md zero-lift + bidirectional finding | low | — |
 | `docs/sprint/SPRINT-044-gsd-patterns.md` | T2 | Execution Log + § Decisions DEC-7, DEC-8, DEC-9 rows | low | — |
+| `docs/adr/ADR-023-gsd-patterns.md` | T3 | NEW (~120 lines) — 9-decision ADR + 2 bidirectional findings + 8 alternatives + scale-anchor anchor | low | — |
+| `docs/sprint/SPRINT-044-gsd-patterns.md` | T3 | Execution Log + cross-link DEC-1..9 to ADR-023 | low | — |
 
 *(Empty — one row per file as work lands.)*
 
@@ -198,15 +216,15 @@ Output: `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` — three-p
 
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
-| DEC-1 (T1) | NO LIFT on GSD 9-phase pipeline (sketch/spike/discuss/spec/plan/execute/verify/validate/ship); dev-flow mode + gate model adequate at 24-asset scale | GSD pipeline assumes 164+ assets + persistent per-phase artifacts; ceremony cost not justified at dev-flow scale. Re-eval if dev-flow grows past ~150 assets | ADR-023 (pending T3) |
-| DEC-2 (T1) | NO LIFT on `commands/` namespace separate from `skills/`; dev-flow's `skills/` covers the surface | Splitting commands+skills duplicates dispatcher concerns without scale benefit | ADR-023 (pending T3) |
-| DEC-3 (T1) | DEFER XML-tagged command body (`<objective>`, `<execution_context>`, `<context>`) — CONSIDER for `write-a-skill` template only | Improves agent parseability but hurts human readability; not wholesale lift. Could benefit auto-trigger-frequent skills where AI parsing matters more than human reading | ADR-023 (pending T3) |
-| DEC-4 (T1) | NO LIFT on `agent:` + `allowed-tools:` frontmatter fields (per-command granularity) | dev-flow orchestrator dispatch-table covers agent routing; tool-allowlist premature at single-author scale (DEFER, re-eval at adopter scale) | ADR-023 (pending T3) |
-| DEC-5 (T1) | NO LIFT on persistent workflow artifacts (PLAN.md / RESEARCH.md / VERIFICATION.md / REVIEWS.md) | dev-flow `docs/sprint/SPRINT-NNN-*.md` + `docs/research/<topic>-<date>.md` covers same ground without per-phase file proliferation | ADR-023 (pending T3) |
-| DEC-6 (T1) | **Bidirectional finding:** dev-flow `sprint-bulk` batches G1+G2 once per sprint; GSD has no equivalent — every phase pays gate cost | Record explicitly per Sprint 042/043 bidirectional pattern; avoid future "match GSD per-phase ceremony" pressure | ADR-023 (pending T3) |
-| DEC-7 (T2-A) | DEFER `contexts/` per-mode output-style profiles | dev-flow has single posture (Behavioral Guidelines); meta-repo work is primarily one mode; per-mode profiles cost not justified at single-author scale. NOT `.out-of-scope/` candidate (pattern interesting, may apply later) | ADR-023 (pending T3) |
-| DEC-8 (T2-B) | NO LIFT on `.plans/` directory | dev-flow `docs/sprint/SPRINT-NNN-*.md` is functionally equivalent + more explicit (numbering + status frontmatter + retro) | ADR-023 (pending T3) |
-| DEC-9 (T2-C) | ZERO additive CONTEXT.md lifts from GSD; Sprint 043 DEC-5 (3 mattpocock-derived lifts via TASK-117) remains the only CONTEXT.md change queue | GSD CONTEXT.md = TypeScript-module domain (orthogonal to dev-flow workflow-domain). Bidirectional: each richer in own domain | ADR-023 (pending T3) |
+| DEC-1 (T1) | NO LIFT on GSD 9-phase pipeline (sketch/spike/discuss/spec/plan/execute/verify/validate/ship); dev-flow mode + gate model adequate at 24-asset scale | GSD pipeline assumes 164+ assets + persistent per-phase artifacts; ceremony cost not justified at dev-flow scale. Re-eval if dev-flow grows past ~150 assets | ADR-023 |
+| DEC-2 (T1) | NO LIFT on `commands/` namespace separate from `skills/`; dev-flow's `skills/` covers the surface | Splitting commands+skills duplicates dispatcher concerns without scale benefit | ADR-023 |
+| DEC-3 (T1) | DEFER XML-tagged command body (`<objective>`, `<execution_context>`, `<context>`) — CONSIDER for `write-a-skill` template only | Improves agent parseability but hurts human readability; not wholesale lift. Could benefit auto-trigger-frequent skills where AI parsing matters more than human reading | ADR-023 |
+| DEC-4 (T1) | NO LIFT on `agent:` + `allowed-tools:` frontmatter fields (per-command granularity) | dev-flow orchestrator dispatch-table covers agent routing; tool-allowlist premature at single-author scale (DEFER, re-eval at adopter scale) | ADR-023 |
+| DEC-5 (T1) | NO LIFT on persistent workflow artifacts (PLAN.md / RESEARCH.md / VERIFICATION.md / REVIEWS.md) | dev-flow `docs/sprint/SPRINT-NNN-*.md` + `docs/research/<topic>-<date>.md` covers same ground without per-phase file proliferation | ADR-023 |
+| DEC-6 (T1) | **Bidirectional finding:** dev-flow `sprint-bulk` batches G1+G2 once per sprint; GSD has no equivalent — every phase pays gate cost | Record explicitly per Sprint 042/043 bidirectional pattern; avoid future "match GSD per-phase ceremony" pressure | ADR-023 |
+| DEC-7 (T2-A) | DEFER `contexts/` per-mode output-style profiles | dev-flow has single posture (Behavioral Guidelines); meta-repo work is primarily one mode; per-mode profiles cost not justified at single-author scale. NOT `.out-of-scope/` candidate (pattern interesting, may apply later) | ADR-023 |
+| DEC-8 (T2-B) | NO LIFT on `.plans/` directory | dev-flow `docs/sprint/SPRINT-NNN-*.md` is functionally equivalent + more explicit (numbering + status frontmatter + retro) | ADR-023 |
+| DEC-9 (T2-C) | ZERO additive CONTEXT.md lifts from GSD; Sprint 043 DEC-5 (3 mattpocock-derived lifts via TASK-117) remains the only CONTEXT.md change queue | GSD CONTEXT.md = TypeScript-module domain (orthogonal to dev-flow workflow-domain). Bidirectional: each richer in own domain | ADR-023 |
 
 *(Empty — append rows as decisions land. Format: `DEC-N (T<X>) | Decision | Reason | ADR`)*
 
