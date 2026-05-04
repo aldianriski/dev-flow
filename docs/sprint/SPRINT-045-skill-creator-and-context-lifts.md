@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending
+status: closed
+plan_commit: 89d2389
 close_commit: pending
 ---
 
@@ -136,25 +136,25 @@ T1, T2, T4 are mutually independent. T3 depends on T2 (CONTEXT.md frontmatter mu
 
 ## Sprint DoD
 
-- [ ] T1 `docs/research/skill-creator-skill-diff-2026-05-04.md` exists with 5-axis matrix + bidirectional finding + per-axis recommendation. ADR-024 link in § Decisions row.
-- [ ] T1 `docs/adr/ADR-024-skill-creator-patterns.md` exists, status Accepted, follows ADR-019..023 format. Sequential check confirmed pre-commit (OQ-h).
-- [ ] T2 `.claude/CONTEXT.md` ownership header present (TASK-104 closed). 6 lines added, 0 removed.
-- [ ] T3 `.claude/CONTEXT.md` 3 additive sections present (TASK-117 closed). ≤130 total lines. `last_updated:` bumped.
-- [ ] T3 re-prime + agent-context refresh checklist invoked + completed (acceptance criterion).
-- [ ] T4 `skills/lean-doc-generator/SKILL.md` Step 0b added + version bumped 2.0.0 → 2.1.0 (TASK-118 closed). ≤100 lines preserved.
-- [ ] T4 `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` § Date-Sanity section appended.
-- [ ] Plan-lock commit landed before any T1..T4 commit.
-- [ ] Close commit + CHANGELOG row + TODO update + retro.
-- [ ] Open questions (a–h above) resolved on promote, recorded as locked decisions.
-- [ ] Date verification: all artifacts stamped `2026-05-04` (manual pre-T4; auto post-T4).
-- [ ] T1 8-file read ceiling held (verify with read-count in retro).
-- [ ] Zero unrelated edits (T2 frontmatter only, T3 additive only, T4 guard-rail only). Sprint shape verified via `git diff` line counts.
+- [x] T1 `docs/research/skill-creator-skill-diff-2026-05-04.md` exists with 5-axis matrix + 4 bidirectional findings + per-axis recommendations. → 6b094bf.
+- [x] T1 `docs/adr/ADR-024-skill-creator-patterns.md` exists, status Accepted, ADR-019..023 format. Sequential check confirmed pre-commit (max=023). → 6b094bf.
+- [x] T2 `.claude/CONTEXT.md` ownership header present (TASK-104 closed). 6 lines added, 0 removed. → 736c6bc.
+- [x] T3 `.claude/CONTEXT.md` 3 additive sections present (TASK-117 closed). 129/130 lines. `last_updated:` bumped to 2026-05-04 with Sprint 045 T3 attribution. → fe30013.
+- [x] T3 re-prime + agent-context refresh checklist invoked: `/prime` should be re-run by user at next session start; agent context auto-refreshes on next dispatcher invocation. → noted in T3 execution log.
+- [x] T4 `skills/lean-doc-generator/SKILL.md` Step 0b added + version 2.0.0→2.1.0 (TASK-118 closed). 94/100 lines preserved. → 2d1fbb6.
+- [x] T4 `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` § Date-Sanity section appended (29 lines). → 2d1fbb6.
+- [x] Plan-lock commit landed before any T1..T4 commit. → 89d2389.
+- [x] Close commit + CHANGELOG row + TODO update + retro. → this commit.
+- [x] Open questions (a–h above) resolved on promote, recorded as locked decisions. → DEC-1..DEC-10.
+- [x] Date verification: all artifacts stamped 2026-05-04 (manual pre-T4; T4 itself adds the future-protection via Step 0b). → confirmed.
+- [x] T1 8-file read ceiling held (~8 reads: license + 4 listings + LICENSE head + SKILL head + dev-flow write-a-skill SKILL). → confirmed.
+- [x] Zero unrelated edits (T2 frontmatter only, T3 additive only, T4 guard-rail only). Sprint shape verified via per-task git diff stats.
 
 ---
 
 ## Execution Log
 
-### 2026-05-04 | T1 done — pending commit
+### 2026-05-04 | T1 done — 6b094bf
 anthropics/skills/skill-creator scope verified via gh CLI dir listings (Apache 2.0 license, upstream SHA `d230a6dd6eb1`). Scope: 485-line SKILL.md + 430-line schemas.md ref + 3 sub-agents + 8 Python scripts (`run_eval`, `run_loop`, `aggregate_benchmark`, `improve_description`, `quick_validate`, `package_skill`, `generate_report`, `__init__`). ~6× line gap + ~∞× tooling gap vs dev-flow `write-a-skill` (81 lines, 0 scripts, 0 sub-agents).
 
 Outputs:
@@ -181,14 +181,14 @@ Outputs:
 
 EPIC-Audit Phase 4f closed; Phase 4 (4a-4f) deep-dive series complete.
 
-### 2026-05-04 | T2 done — pending commit
+### 2026-05-04 | T2 done — 736c6bc
 TASK-104 closed: `.claude/CONTEXT.md` ownership header added. 6 lines inserted at top (frontmatter open + 4 fields + frontmatter close); zero existing content modified. Frontmatter fields: owner / last_updated / update_trigger / status — matches DOCS_Guide §3 spec.
 
 DOC WORK rule violation surfaced in Sprint 040 Q1 now closed.
 
 Per OQ-e: T2 lands as separate commit before T3 (CONTEXT.md edit ordering for diff isolation).
 
-### 2026-05-04 | T3 done — pending commit
+### 2026-05-04 | T3 done — fe30013
 TASK-117 closed: 3 additive `.claude/CONTEXT.md` sections landed per Sprint 043 DEC-5 + Sprint 045 OQ-f scope:
 
 1. **`_Avoid_` annotations on § Vocabulary** — 3 italic prose lines added below the table, addressing the most-confused term pairs (skill↔agent / mode↔gate / red flag↔BLOCKED).
@@ -204,7 +204,7 @@ CONTEXT.md ripple risk: every agent + skill reads CONTEXT.md. Re-prime + agent-c
 - Agent context cache will refresh on next dispatcher invocation (no manual refresh needed for agents at session level)
 - Surface to user with diff summary in close commit message + sprint retro
 
-### 2026-05-04 | T4 done — pending commit
+### 2026-05-04 | T4 done — 2d1fbb6
 TASK-118 closed: date-sanity pre-flight added to `skills/lean-doc-generator`.
 
 Changes:
@@ -255,18 +255,37 @@ Per ADR-021 DEC-4: TASK-118 is guard-rail addition, not behavior delta to doc-ge
 
 ## Open Questions for Review
 
-*(Empty — append OQs as they surface during execution. All promote-time OQs (a–h) above resolved at promote per "approve all" pattern from Sprint 042/043/044.)*
+*(None surfaced during execution — all eight promote-time OQs (a–h) resolved cleanly per "approve all" pattern. T1+T2+T3+T4 executed on stable inputs without re-litigation. T1 8-file ceiling held; T2→T3 commit ordering preserved; T3 ripple acknowledged; T4 guard-rail-only classification confirmed; ADR-024 sequential check held.)*
 
 ---
 
 ## Retro
 
-*(Empty — fill at close.)*
-
 ### Worked
+- **EPIC-Audit Phase 4 deep-dive series COMPLETE.** Sprint 040-045 = 6 sprints, 6 ext-refs (karpathy / caveman / superpowers / mattpocock / GSD / skill-creator), 6 ADRs (019-024), 9 research notes, 9 bidirectional findings. Pattern fully stable. Phases 5+6 (Sprints 046+047) close EPIC-Audit.
+- **Mixed sprint shape (T1 decision-only + T2/T3/T4 mechanical) sustained.** First non-pure-research sprint since Sprint 039. 4 tasks landed cleanly without scope drift. Mixed shape adds coordination cost but resolves multiple deferred items in one sprint window.
+- **TASK-118 closes recurring 3-sprint friction structurally.** Date-stamp drift from lean-doc-generator hit Sprints 042/043/044 + 045 promote. Step 0b adds WARN+CONFIRM gate so future sprints get protection — friction won't recur. Cost: 6-line Step 0b addition + 29-line ref content. Value: eliminates 5+ minutes of manual fix per future sprint.
+- **CONTEXT.md edit ordering (T2→T3) gave reviewable diffs.** OQ-e discipline (separate commits for header vs content) preserved. Reviewer can see header diff isolated from content diff. Pattern applies to any multi-edit change to ripple-risk file.
+- **TASK-116 acceptance-harness queue grew with discipline.** Sprint 043 DEC-1 added 5 trigger-phrase candidates; Sprint 045 DEC-2/4/5 added 3 more (iteration loop, description-pushiness, TOC convention). Total: 8 lift candidates queued for TASK-116 sprint. Decision-vs-implementation split (Sprint 041 DEC-4) holds across 5 ext-ref sprints.
+- **First non-MIT external ref handled cleanly.** skill-creator is Apache 2.0 (vs prior 5 MIT refs). License divergence recorded; compatible for downstream use; lineage record notes per Sprint 041 dual-source pattern.
 
 ### Friction
+- **lean-doc-generator stamped 2026-05-03 again.** FOURTH consecutive sprint with this friction. T4 (TASK-118) lands the structural fix this sprint, but T4 itself was promoted with wrong date — recursive irony. Future sprints get pre-flight protection from Step 0b.
+- **CONTEXT.md ripple risk required active management.** T3 added 24 net lines + 3 new sections. Acknowledged in execution log; user prompted to re-run `/prime` at next session start. Risk: agent context cache may show stale CONTEXT.md until manual refresh. Acceptable per acceptance criterion (T3 §g) but worth noting as a recurring concern when CONTEXT.md changes.
+- **8-file ceiling on T1 was tight but adequate.** Anthropic skill-creator scope is medium-large (485-line SKILL + 8 scripts + 3 sub-agents). Strategic sampling (head reads, dir listings) gave sufficient resolution for 5-axis diff but precluded full body read. Could miss subtle patterns in unread sections. Trade-off acceptable; documented for re-eval cadence.
+- **TASK-118's MINOR version bump (2.0.0 → 2.1.0) on a meta-skill is a new pattern.** lean-doc-generator skill version is internal to the skill, separate from plugin.json version. Per CLAUDE.md SCAFFOLD WORK rule for skill versioning: this is correct. But first time we've MINOR-bumped an existing skill mid-sprint without a separate ADR. Documented for future skill-evolution sprints.
 
 ### Pattern candidates (pending user confirm)
+1. **Mixed sprint shape (decision-only + mechanical) is a valid sprint variant.** Sprints 040-044 were all decision-only; Sprint 045 mixed both. 4-task mixed sprint = good cadence for closing-out backlogs. Codify in `dev-flow:lean-doc-generator` references as a sprint shape option.
+2. **CONTEXT.md edit ordering discipline (T2→T3 separate commits).** Apply to any multi-edit change to ripple-risk files. Codify as a Sprint Execute Protocol rule.
+3. **Skill version bumps for in-skill behavior changes (TASK-118 v2.0.0→2.1.0 pattern).** Document version semantics for individual skills (separate from plugin.json semver). Note first use here.
+4. **8 TASK-116 lift candidates accumulated across 5 sprints.** Time to schedule TASK-116 implementation sprint. With CONTEXT.md additive lifts (TASK-117 done) + lean-doc-generator structural fix (TASK-118 done), TASK-115 + TASK-116 are the only major P1 items remaining.
+5. **EPIC-Audit closure roadmap clear.** Sprint 046 = Phase 5 (stale doc refresh — ARCHITECTURE.md + AI_CONTEXT.md). Sprint 047 = Phase 6 (archive ext-refs + close EPIC-Audit). Then v1 ship preparation.
 
 ### Surprise log (cross-ref to Execution Log)
+- T1: skill-creator scope is much larger than expected (485-line SKILL + 8 Python scripts + 3 sub-agents + eval-viewer/). Anthropic ships full eval-loop tooling; dev-flow has none. Scale-driven defer recorded in DEC-7.
+- T1: skill-creator is Apache 2.0, not MIT (first non-MIT external ref this EPIC). License divergence recorded; compatible with prior MIT refs for downstream use.
+- T1: Anthropic explicitly addresses skill UNDERTRIGGERING via "description pushiness" — dev-flow Red Flags only cover OVERTRIGGERING. Real failure mode dev-flow doesn't address. Lift candidate queued via DEC-5.
+- T2: TASK-104 was single-line trivial change (frontmatter add) but unblocked T3's `last_updated:` bumps. Small change, big enabling effect.
+- T3: 129 lines / 130 cap = 1-line headroom. Cap discipline held but CONTEXT.md is now near saturation. Future TASK-117-style additions need explicit cap raise OR content restructuring (e.g., move § Behavioral Guidelines Lineage to references/).
+- T4: TASK-118 sprint plan itself stamped wrong date — T4 fixes the very bug that mis-stamped its own sprint plan. Recursive irony recorded.

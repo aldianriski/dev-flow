@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 045 promoted — Phase 4f + TASK-104/117/118)
+last_updated: 2026-05-04 (Sprint 045 closed — Phase 4f + TASK-104/117/118 + EPIC-Audit Phase 4 series complete)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 045
+sprint: none
 ---
 
 > **External references**
@@ -36,10 +36,9 @@ sprint: 045
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md](docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md) — Phase 4f + CONTEXT.md lifts + lean-doc date-sanity · status: active
+→ — none —
 
-> Tasks: T1 (Phase 4f skill-creator + ADR-024) · T2 (TASK-104 CONTEXT.md header) · T3 (TASK-117 3 additive sections) · T4 (TASK-118 date-sanity pre-flight).
-> Next: Sprint 046 — EPIC-Audit Phase 5 (stale doc refresh).
+> Next: Sprint 046 — EPIC-Audit Phase 5 (stale doc refresh — `ARCHITECTURE.md` + `AI_CONTEXT.md`).
 
 ---
 
@@ -49,15 +48,15 @@ sprint: 045
 
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
 
-- [→] **Phase 4f — Skill wrapper patterns with skill-creator** — promoted to Sprint 045 T1 (anthropics/skills/skill-creator deep diff + ADR-024).
+- [x] **Phase 4f — Skill wrapper patterns with skill-creator** — closed Sprint 045 T1 (ADR-024). EPIC-Audit Phase 4 deep-dive series (4a-4f) COMPLETE.
 - [ ] **Phase 5 — Stale doc refresh** (Sprint 46) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
 - [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 47)
 
 ### P1 — Doc-quality follow-ups
 
-- [→] **TASK-104** — promoted to Sprint 045 T2.
-- [→] **TASK-117** — promoted to Sprint 045 T3.
-- [→] **TASK-118** — promoted to Sprint 045 T4.
+- [x] **TASK-104** — closed Sprint 045 T2 (CONTEXT.md ownership header added).
+- [x] **TASK-117** — closed Sprint 045 T3 (3 additive CONTEXT.md sections: `_Avoid_` annotations + § Relationships + § Flagged Ambiguities; 129/130 lines).
+- [x] **TASK-118** — closed Sprint 045 T4 (Step 0b date-sanity pre-flight added to lean-doc-generator; v2.0.0→2.1.0; closes 4-sprint recurring friction).
 
 ### P1 — Implementation follow-ups (deferred from research sprints)
 
@@ -78,6 +77,21 @@ sprint: 045
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
+
+### Sprint 045 — Phase 4f + CONTEXT.md lifts + lean-doc date-sanity — closed 2026-05-04
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/research/skill-creator-skill-diff-2026-05-04.md` | NEW — anthropics/skills/skill-creator (Apache 2.0, SHA d230a6dd6eb1) 5-axis diff vs dev-flow write-a-skill + 4 bidirectional findings + 3 TASK-116 lift candidates | ADR-024 |
+| `docs/adr/ADR-024-skill-creator-patterns.md` | NEW — 7-decision ADR + lineage credit + scale-driven defer rationale; FIRST non-MIT external ref this EPIC | ADR-024 |
+| `.claude/CONTEXT.md` | T2: NEW frontmatter ownership header (TASK-104 closed). T3: 3 additive sections — `_Avoid_` annotations + § Relationships + § Flagged Ambiguities (TASK-117 closed); 129/130 lines | (TASK-104 implements DOCS_Guide §3; TASK-117 implements Sprint 043 DEC-5) |
+| `skills/lean-doc-generator/SKILL.md` | T4: Step 0b date-sanity pre-flight (6 lines); v2.0.0→2.1.0 MINOR; last-validated→2026-05-04. 93→94 lines (TASK-118 closed) | (closes Sprint 044 retro Pattern Candidate #4) |
+| `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` | T4: NEW § Date-Sanity reference content (29 lines: trigger/logic/template/rules/citation) | (cross-link from SKILL.md Step 0b) |
+| `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | NEW — sprint plan + execution log + 10 decisions + retro | — |
+
+Plan-lock `89d2389` · T1 `6b094bf` · T2 `736c6bc` · T3 `fe30013` · T4 `2d1fbb6` · close (this commit).
+
+**EPIC-Audit Phase 4 deep-dive series (4a-4f) COMPLETE.** 6 sprints (040-045) · 6 ext-refs · 6 ADRs (019-024) · 9 research notes · 9 bidirectional findings.
 
 ### Sprint 044 — EPIC-Audit Phase 4e (GSD patterns) — closed 2026-05-04
 
@@ -139,7 +153,7 @@ Plan-lock `87bb523` · T1 `0ee6f8d` · T2 `b79815f` · T3 `7ab9ff6` · close (th
 
 Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close `3fec973`.
 
-*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 + 043 + 044 await archive on next `/release-patch` invocation that triggers a bump (or manual archive — release-patch skip-bump on docs-only is the cause; flagged for fix).*
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 + 043 + 044 + 045 await archive on next `/release-patch` invocation that triggers a bump (or manual archive — release-patch skip-bump on docs-only is the cause; flagged for fix).*
 
 ---
 
