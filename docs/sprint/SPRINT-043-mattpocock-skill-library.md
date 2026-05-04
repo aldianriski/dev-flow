@@ -182,6 +182,18 @@ Lineage: pointer convention adapted from `mattpocock/skills/.out-of-scope/` (MIT
 
 **Decision:** `.out-of-scope/` adoption complete. Future negative-space decisions land here as discoverable index pointing to ADRs.
 
+### 2026-05-04 | T4 done — pending commit
+ADR-022 written at `docs/adr/ADR-022-mattpocock-skill-library-patterns.md`. Status: Accepted. Captures 7 decisions:
+- D1: 5 trigger-phrase lift candidates queued to TASK-116 (no skill edits)
+- D2: bidirectional `zoom-out` finding (dev-flow > mattpocock; no lift)
+- D3: `task-decomposer` lineage = dev-flow original
+- D4: DEFER bucket adoption (20-skill threshold; re-eval triggers explicit)
+- D5: ADOPT 3 ADDITIVE CONTEXT.md lifts as RECOMMENDATIONS (not executed)
+- D6: ADOPT `.out-of-scope/` directory + 3 pointers (mattpocock convention)
+- D7: LOCK `docs/adr/` co-located convention as documented standard (was emergent since Sprint 039)
+
+ADR-022 sequential per Sprint 040/041/042 retro pattern; max-ADR check confirmed = 021 before allocation. mattpocock MIT verified via `gh api repos/.../license` in T1. Format follows ADR-019/020/021 precedent.
+
 ---
 
 ## Files Changed
@@ -199,6 +211,8 @@ Lineage: pointer convention adapted from `mattpocock/skills/.out-of-scope/` (MIT
 | `.out-of-scope/tests-dir-empty-scaffold.md` | T3 | NEW (15 lines) — sources ADR-021 DEC-6 | low | — |
 | `.out-of-scope/statusline-savings-badge.md` | T3 | NEW (15 lines) — sources ADR-020 DEC-6 | low | — |
 | `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T3 | Execution Log + § Decisions DEC-6 row | low | — |
+| `docs/adr/ADR-022-mattpocock-skill-library-patterns.md` | T4 | NEW (~115 lines) — 7-decision ADR + locks docs/adr/ convention | low | — |
+| `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T4 | Execution Log + § Decisions DEC-7 row | low | — |
 
 ---
 
@@ -206,12 +220,13 @@ Lineage: pointer convention adapted from `mattpocock/skills/.out-of-scope/` (MIT
 
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
-| DEC-1 (T1) | 5 trigger-phrase lift candidates from mattpocock queued to TASK-116 acceptance harness; NO skill edits this sprint | Per ADR-021 DEC-4 skill behavior changes require eval evidence; surface candidates here, verify in TASK-116 sprint, ship only validated phrases | ADR-022 (pending T4) |
-| DEC-2 (T1) | **Bidirectional finding:** `zoom-out` is dev-flow > mattpocock (55 vs 7 lines, auto-trigger vs disable-model-invocation). NO LIFT for zoom-out | Avoid future "match mattpocock" pressure; record explicitly per Sprint 042 DEC-2 pattern | ADR-022 (pending T4) |
-| DEC-3 (T1) | `task-decomposer` has no mattpocock upstream; dev-flow original. mattpocock issue-tracker-workflow skills (`to-issues`/`to-prd`/`triage`) are different domain framing | Lineage record; not a fork | ADR-022 (pending T4) |
-| DEC-4 (T2-A) | DEFER bucket adoption per 20-skill threshold lock (currently 17). Re-eval triggers explicit in ADR-022 (count=20, first deprecated, EPIC-Audit completion) | Migration cost matrix shows S-M coordination risk on plugin auto-discovery + scaffold paths; not justified at 17-skill scale | ADR-022 (pending T4) |
-| DEC-5 (T2-B) | ADOPT 3 ADDITIVE CONTEXT.md lifts as RECOMMENDATIONS (not executed this sprint): `_Avoid_` annotations, § Relationships, § Flagged ambiguities | OQ-e additive-only discipline; CONTEXT.md ripple risk requires re-prime checklist; future TASK executes | ADR-022 (pending T4) |
-| DEC-6 (T3) | Adopt `.out-of-scope/` directory at repo root + 3 negative-space pointers (run-hook-shim, tests-dir-empty-scaffold, statusline-savings-badge) | Discoverable index for negative-space decisions; pointer-to-ADR pattern preserves source-of-truth in ADRs while surfacing rejected paths at repo root | ADR-022 (pending T4) |
+| DEC-1 (T1) | 5 trigger-phrase lift candidates from mattpocock queued to TASK-116 acceptance harness; NO skill edits this sprint | Per ADR-021 DEC-4 skill behavior changes require eval evidence; surface candidates here, verify in TASK-116 sprint, ship only validated phrases | ADR-022 |
+| DEC-2 (T1) | **Bidirectional finding:** `zoom-out` is dev-flow > mattpocock (55 vs 7 lines, auto-trigger vs disable-model-invocation). NO LIFT for zoom-out | Avoid future "match mattpocock" pressure; record explicitly per Sprint 042 DEC-2 pattern | ADR-022 |
+| DEC-3 (T1) | `task-decomposer` has no mattpocock upstream; dev-flow original. mattpocock issue-tracker-workflow skills (`to-issues`/`to-prd`/`triage`) are different domain framing | Lineage record; not a fork | ADR-022 |
+| DEC-4 (T2-A) | DEFER bucket adoption per 20-skill threshold lock (currently 17). Re-eval triggers explicit in ADR-022 (count=20, first deprecated, EPIC-Audit completion) | Migration cost matrix shows S-M coordination risk on plugin auto-discovery + scaffold paths; not justified at 17-skill scale | ADR-022 |
+| DEC-5 (T2-B) | ADOPT 3 ADDITIVE CONTEXT.md lifts as RECOMMENDATIONS (not executed this sprint): `_Avoid_` annotations, § Relationships, § Flagged ambiguities | OQ-e additive-only discipline; CONTEXT.md ripple risk requires re-prime checklist; future TASK executes | ADR-022 |
+| DEC-6 (T3) | Adopt `.out-of-scope/` directory at repo root + 3 negative-space pointers (run-hook-shim, tests-dir-empty-scaffold, statusline-savings-badge) | Discoverable index for negative-space decisions; pointer-to-ADR pattern preserves source-of-truth in ADRs while surfacing rejected paths at repo root | ADR-022 |
+| DEC-7 (T4) | LOCK `docs/adr/` co-located convention as documented standard (1-file-per-ADR after ADR-015; sequential numbering via grep both surfaces) | In practice since Sprint 039 (ADR-016); 4 sprints of consistent use; lock now while pattern is fresh to avoid silent emergent-vs-documented drift | ADR-022 |
 
 ---
 
