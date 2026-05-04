@@ -103,19 +103,33 @@ No parallelism opportunity — sprint-bulk overlap gate would force sequential a
 
 ## Execution Log
 
-*(empty — populate per task close.)*
+### 2026-05-04 | T1 done — pending commit
+karpathy `EXAMPLES.md` fetched via gh CLI raw (`gh api -H "Accept: application/vnd.github.raw" repos/forrestchang/andrej-karpathy-skills/contents/EXAMPLES.md` — upstream SHA `2c606141936f`, 522 lines, 14838 bytes). Repo dir-list confirmed `EXAMPLES.md` at root (not per-skill). Format: ONE root-level file with 4 sections (one per principle: Think Before Coding / Simplicity First / Surgical Changes / Goal-Driven Execution), each with 2-3 Wrong-vs-Right Python code diffs.
+
+**Decision: N — do not adopt root-level EXAMPLES.md.** Reasons:
+1. dev-flow is meta-repo (markdown skills/agents/governance) with no app-code domain to demonstrate.
+2. Karpathy examples are Python code diffs; dev-flow has no equivalent code surface — only prose specs and SKILL.md frontmatter.
+3. `.claude/CLAUDE.md` § Anti-Patterns block + per-skill `Red Flags` sections already cover principle-violation surface at the meta-repo abstraction level.
+4. Adopting would force inventing meta-domain examples (skill rewrites? agent diffs?) — large content investment for marginal AI-behavior gain. Karpathy's value is principle wording (T2 lineage), not the EXAMPLES.md format.
+
+Side findings (captured to memory):
+- gh CLI on Git Bash rewrites leading-slash endpoint paths to filesystem paths → `feedback_gh_cli_no_leading_slash.md`. Drop leading `/` on `gh api <path>` calls.
 
 ---
 
 ## Files Changed
 
-*(empty — populate at close.)*
+| File | Task | Change | Risk | Test added |
+|:-----|:-----|:-------|:-----|:-----------|
+| `docs/sprint/SPRINT-040-karpathy-patterns.md` | T1 | Execution Log + § Decisions DEC-1 row | low | — |
 
 ---
 
 ## Decisions
 
-*(empty — T1, T3 land rows here; T2 lineage lock; T4 ADR pointer.)*
+| ID | Decision | Reason | ADR |
+|:---|:---------|:-------|:----|
+| DEC-1 (T1) | Do NOT adopt root-level `EXAMPLES.md` per karpathy convention | Meta-repo has no app-code domain; CLAUDE.md anti-patterns + skill Red Flags already cover principle-violation surface; karpathy value is principle wording (T2), not example format | ADR-019 (pending T4) |
 
 ---
 
