@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 046 closed — EPIC-Audit Phase 5 stale doc refresh)
+last_updated: 2026-05-04 (Sprint 047 promoted — EPIC-Audit Phase 6 close)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 047
 ---
 
 > **External references**
@@ -36,9 +36,9 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ docs/sprint/SPRINT-047-epic-audit-close.md
 
-> Next: Sprint 047 — EPIC-Audit Phase 6 (archive external refs + close EPIC-Audit) → v1 ship prep.
+> Next: v1 ship prep — TASK-115 (caveman 3-arm eval harness port) + TASK-116 (superpowers acceptance harness) per ADR-020 DEC-3 + ADR-021 DEC-4.
 
 ---
 
