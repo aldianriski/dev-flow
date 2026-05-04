@@ -156,6 +156,25 @@ Output: `docs/research/superpowers-acceptance-harness-2026-05-04.md` — verbati
 
 **Decision:** Adopt acceptance harness pattern; implementation deferred to TASK-116 (future sprint per ADR-016 eval-evidence rule).
 
+### 2026-05-04 | T4 done — pending commit
+PR template fetched via gh CLI raw (superpowers `.github/PULL_REQUEST_TEMPLATE.md`, 126 lines, upstream SHA `e7a2d16476bf`). Adapted + landed at `.github/PULL_REQUEST_TEMPLATE.md`. ADR-021 written at `docs/adr/ADR-021-superpowers-patterns.md`.
+
+**PR template adaptation:**
+- LIFTED: structure (problem → change → alternatives → multi-change check → rigor → human review).
+- DROPPED: maintainer-frustration tone ("PRs will be closed without review", "94% rejection rate" framing); superpowers-specific sections (core-library appropriateness, new-harness bootstrap acceptance test for `brainstorming` skill).
+- ADDED: dev-flow specifics — sprint reference, DoD checklist from CLAUDE.md, ADR-016 skill-change eval requirement (cross-link to TASK-116 future harness), layer values from CLAUDE.md, Windows path-with-spaces + gh CLI leading-slash reminders from memory.
+- Attribution preserved in HTML comment header.
+
+**ADR-021 captures 6 decisions:**
+- DEC-1: keep-superset matcher (no `hooks.json` change)
+- DEC-2: hook-surface divergence documented (dev-flow richer than superpowers)
+- DEC-3: DEFER run-hook shim adoption
+- DEC-4: adopt acceptance harness pattern, TASK-116 deferred, prime/orchestrator/tdd seed
+- DEC-5: PR template lifted + adapted (this commit)
+- DEC-6: `tests/` dir adoption deferred to TASK-116 (no empty-dir scaffold)
+
+ADR sequential per Sprint 040/041 retro pattern; max-ADR check confirmed = 020 before allocation.
+
 ---
 
 ## Files Changed
@@ -170,6 +189,9 @@ Output: `docs/research/superpowers-acceptance-harness-2026-05-04.md` — verbati
 | `docs/sprint/SPRINT-042-superpowers-patterns.md` | T2 | Execution Log + § Decisions DEC-3 row | low | — |
 | `docs/research/superpowers-acceptance-harness-2026-05-04.md` | T3 | NEW (~120 lines) — pattern walkthrough + 3-skill seed + integration layout + 6-risk matrix for TASK-116 | low | — |
 | `docs/sprint/SPRINT-042-superpowers-patterns.md` | T3 | Execution Log + § Decisions DEC-4 row | low | — |
+| `.github/PULL_REQUEST_TEMPLATE.md` | T4 | NEW (~70 lines) — adapted from superpowers (lift structure, drop frustration tone, add dev-flow DoD + ADR-016 skill rule + layer values) | low | — |
+| `docs/adr/ADR-021-superpowers-patterns.md` | T4 | NEW (~110 lines) — 6-decision ADR (matcher / divergence / shim defer / acceptance harness / PR template lift / tests dir defer) | low | — |
+| `docs/sprint/SPRINT-042-superpowers-patterns.md` | T4 | Execution Log + § Decisions DEC-5, DEC-6 rows | low | — |
 
 ---
 
@@ -177,10 +199,12 @@ Output: `docs/research/superpowers-acceptance-harness-2026-05-04.md` — verbati
 
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
-| DEC-1 (T1) | SessionStart matcher reconciliation = **keep-superset** (`startup\|resume\|clear\|compact`); no change to dev-flow `hooks.json` | Extra `resume` matcher is harmless; covers session-resume signal coverage that align-down would lose; upstream PR out of scope | ADR-021 (pending T4) |
-| DEC-2 (T1) | Document hook-surface divergence in research note: dev-flow has RICHER hook surface (3 hooks vs superpowers' 1) — PreToolUse chain-guard + PostToolUse codemap-refresh are dev-flow value-adds | Audit framing assumed dev-flow learns FROM superpowers; reality is bidirectional — record it for future re-diff cadence | ADR-021 (pending T4) |
-| DEC-3 (T2) | DEFER `run-hook.ps1` shim adoption; no backlog task | superpowers shim solves cross-platform polyglot; dev-flow Windows-only per ADR-016. Direct-call simpler, fewer indirection layers, adequate at 3-hook scale. Re-eval if hook count >5 OR cross-platform reconsidered | ADR-021 (pending T4) |
-| DEC-4 (T3) | Adopt skill-triggering acceptance harness pattern; 3-skill seed = `prime`, `orchestrator`, `tdd`; Mode A (manual); implementation deferred to TASK-116 | Pattern satisfies ADR-016 eval-evidence requirement for skill-description changes. Manual mode adequate at 3-skill scale; CI mode worthwhile if seed >10. Per Sprint 041 DEC-4 research-vs-implementation split | ADR-021 (pending T4) |
+| DEC-1 (T1) | SessionStart matcher reconciliation = **keep-superset** (`startup\|resume\|clear\|compact`); no change to dev-flow `hooks.json` | Extra `resume` matcher is harmless; covers session-resume signal coverage that align-down would lose; upstream PR out of scope | ADR-021 |
+| DEC-2 (T1) | Document hook-surface divergence in research note: dev-flow has RICHER hook surface (3 hooks vs superpowers' 1) — PreToolUse chain-guard + PostToolUse codemap-refresh are dev-flow value-adds | Audit framing assumed dev-flow learns FROM superpowers; reality is bidirectional — record it for future re-diff cadence | ADR-021 |
+| DEC-3 (T2) | DEFER `run-hook.ps1` shim adoption; no backlog task | superpowers shim solves cross-platform polyglot; dev-flow Windows-only per ADR-016. Direct-call simpler, fewer indirection layers, adequate at 3-hook scale. Re-eval if hook count >5 OR cross-platform reconsidered | ADR-021 |
+| DEC-4 (T3) | Adopt skill-triggering acceptance harness pattern; 3-skill seed = `prime`, `orchestrator`, `tdd`; Mode A (manual); implementation deferred to TASK-116 | Pattern satisfies ADR-016 eval-evidence requirement for skill-description changes. Manual mode adequate at 3-skill scale; CI mode worthwhile if seed >10. Per Sprint 041 DEC-4 research-vs-implementation split | ADR-021 |
+| DEC-5 (T4) | Lift `.github/PULL_REQUEST_TEMPLATE.md` from superpowers, adapted to dev-flow | Structure is good (problem → change → alternatives → rigor → review); tone is hostile (single-author repo) — drop frustration framing, keep checklist; add DoD + ADR-016 skill-change rule + sprint reference | ADR-021 |
+| DEC-6 (T4) | DEFER `tests/` directory creation to TASK-116 implementation sprint | Empty directories don't survive git; first test files land WITH the skill-triggering harness; no value in empty scaffold now | ADR-021 |
 
 ---
 
