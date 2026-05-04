@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 041 promoted — EPIC-Audit Phase 4b Caveman compare)
+last_updated: 2026-05-04 (Sprint 041 closed — EPIC-Audit Phase 4b Caveman compare)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 041
+sprint: none
 ---
 
 > **External references**
@@ -36,9 +36,8 @@ sprint: 041
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-041-caveman-compare.md](docs/sprint/SPRINT-041-caveman-compare.md) — EPIC-Audit Phase 4b (Caveman compare) · status: planning
+→ — none —
 
-> Tasks: T1 SKILL.md diff (caveman vs mattpocock) · T2 eval-harness port audit · T3 ADR-020 (decisions + caveman-shrink reject + statusline defer).
 > Next: Sprint 042 — EPIC-Audit Phase 4c (Superpowers patterns).
 
 ---
@@ -60,6 +59,10 @@ sprint: 041
 
 - [ ] **TASK-104** — Add ownership-header frontmatter to `.claude/CONTEXT.md` (owner / last_updated / update_trigger / status). DOC WORK rule violation surfaced in Sprint 040 Q1. Estimated S, layers `governance, docs`.
 
+### P1 — Implementation follow-ups (deferred from research sprints)
+
+- [ ] **TASK-115** — Port caveman 3-arm eval harness to JS (`scripts/eval-run.js` + `scripts/eval-measure.js`). Design input: [`docs/research/caveman-eval-harness-port-notes-2026-05-04.md`](docs/research/caveman-eval-harness-port-notes-2026-05-04.md). Tokenizer = `gpt-tokenizer`. Snapshot schema 1:1 with caveman. Sibling tests required. Estimated M, layers `scripts, docs`.
+
 ### P1 — EPIC-E: Wrap-or-replace Claude Code primitives (closed)
 
 - [x] **TASK-086** — audit + ADR-012 (Sprint 28)
@@ -75,6 +78,17 @@ sprint: 041
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
 
+### Sprint 041 — EPIC-Audit Phase 4b (Caveman compare) — closed 2026-05-04
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/research/caveman-skill-diff-2026-05-04.md` | NEW — section-level diff matrix + winner-per-axis + net assessment (juliusbrussee `ef6050c5e184` vs mattpocock `b843cb5ea74b`) | ADR-020 |
+| `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` | NEW — file walkthrough + tokenizer parity matrix (`gpt-tokenizer` primary) + snapshot schema 1:1 + 5-risk matrix for TASK-115 | ADR-020 |
+| `docs/adr/ADR-020-caveman-patterns.md` | NEW — 5-decision ADR (no fork / dual-lineage credit / 3-arm port / caveman-shrink reject / statusline defer) | ADR-020 |
+| `docs/sprint/SPRINT-041-caveman-compare.md` | NEW — sprint plan + execution log + 6 decisions + 2 OQs + retro | — |
+
+Plan-lock `87bb523` · T1 `0ee6f8d` · T2 `b79815f` · T3 `7ab9ff6` · close (this commit).
+
 ### Sprint 040 — EPIC-Audit Phase 4a (Karpathy patterns) — closed 2026-05-04
 
 | File | Change | ADR |
@@ -83,9 +97,9 @@ sprint: 041
 | `docs/adr/ADR-019-karpathy-patterns.md` | NEW — karpathy adoption + lineage credit; 3-part decision (lineage lock + verify-step retro credit + EXAMPLES.md reject) | ADR-019 |
 | `docs/sprint/SPRINT-040-karpathy-patterns.md` | NEW — sprint plan + execution log + 4 decisions + retro | — |
 
-Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close (this commit).
+Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close `3fec973`.
 
-*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprint 040 awaits archive on next `/release-patch` invocation.*
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 await archive on next `/release-patch` invocation that triggers a bump (or manual archive).*
 
 ---
 
@@ -140,5 +154,6 @@ Sprint 35-37 →  EPIC-Audit Phases 1-3 (rename / wiring / trim)         (done)
 Sprint 38    →  Foundation Hardening (kill Node hooks + PS replacement + lean-doc cache)  (done)
 Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)  (done)
 Sprint 40    →  EPIC-Audit Phase 4a — Karpathy patterns (lineage lock + ADR-019 + verify-step retro credit)  (done)
-Sprint 41-45 →  EPIC-Audit Phases 4b-6 (3 ext-ref deep / stale doc refresh / archive)
+Sprint 41    →  EPIC-Audit Phase 4b — Caveman compare (dual-lineage + 3-arm port plan + ADR-020 + caveman-shrink reject)  (done)
+Sprint 42-45 →  EPIC-Audit Phases 4c-6 (3 ext-ref deep / stale doc refresh / archive)
 ```

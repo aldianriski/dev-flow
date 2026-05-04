@@ -2,7 +2,7 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: active
+status: closed
 plan_commit: 87bb523
 close_commit: pending
 ---
@@ -89,18 +89,18 @@ T1 + T2 parallelizable (independent sources: T1 = SKILL.md files, T2 = Python ev
 
 ## Sprint DoD
 
-- [ ] T1 `docs/research/caveman-skill-diff-2026-05-04.md` exists with section-level diff + winner-per-axis. § Decisions row landed.
-- [ ] T2 `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` exists with file walkthrough + tiktoken parity risk + snapshot schema. § Decisions row landed.
-- [ ] T3 `docs/adr/ADR-020-caveman-patterns.md` exists, status Accepted, captures T1+T2 + caveman-shrink reject + statusline defer cross-link.
-- [ ] Plan-lock commit landed before any T1..T3 commit.
-- [ ] Close commit + CHANGELOG row + TODO update + retro.
-- [ ] OQ1 (statusline-badge) and OQ2 (backup-on-write divergence) recorded in § Open Questions for Review.
+- [x] T1 `docs/research/caveman-skill-diff-2026-05-04.md` exists with section-level diff + winner-per-axis. § Decisions row landed. → 0ee6f8d.
+- [x] T2 `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` exists with file walkthrough + tiktoken parity risk + snapshot schema. § Decisions row landed. → b79815f.
+- [x] T3 `docs/adr/ADR-020-caveman-patterns.md` exists, status Accepted, captures T1+T2 + caveman-shrink reject + statusline defer cross-link. → 7ab9ff6.
+- [x] Plan-lock commit landed before any T1..T3 commit. → 87bb523.
+- [x] Close commit + CHANGELOG row + TODO update + retro. → this commit.
+- [x] OQ1 (statusline-badge) and OQ2 (backup-on-write divergence) recorded in § Open Questions for Review.
 
 ---
 
 ## Execution Log
 
-### 2026-05-04 | T1 done — pending commit
+### 2026-05-04 | T1 done — 0ee6f8d
 SKILL.md diff complete via local plugin cache (`84cc3c14fa1e/skills/caveman/SKILL.md`, 67 lines, juliusbrussee SHA `ef6050c5e184`) + gh CLI raw fetch (`mattpocock/skills/contents/skills/productivity/caveman/SKILL.md`, 49 lines, mattpocock SHA `b843cb5ea74b`). Both MIT verified via `gh api repos/.../license`.
 
 Output: `docs/research/caveman-skill-diff-2026-05-04.md` (section-level matrix + winner-per-axis + net assessment).
@@ -114,7 +114,7 @@ Output: `docs/research/caveman-skill-diff-2026-05-04.md` (section-level matrix +
 
 No new caveman skill in dev-flow recommended — both freely installable; cloning = maintenance burden with no value. Lineage credit only via ADR-020.
 
-### 2026-05-04 | T2 done — pending commit
+### 2026-05-04 | T2 done — b79815f
 Eval-harness audit complete. Sources: local plugin cache `84cc3c14fa1e/evals/{llm_run.py,measure.py}` (juliusbrussee SHA `ef6050c5e184`, 105 + 107 lines).
 
 Output: `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` (file-by-file walkthrough + tokenizer parity matrix + snapshot schema + 5 risks for TASK-115).
@@ -128,7 +128,7 @@ Output: `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` (file-by-f
 
 **Decision:** Adopt 3-arm pattern (DEC-3); port plan ready (DEC-4); TASK-115 backlog annotation queued for sprint close.
 
-### 2026-05-04 | T3 done — pending commit
+### 2026-05-04 | T3 done — 7ab9ff6
 ADR-020 written at `docs/adr/ADR-020-caveman-patterns.md`. Status: Accepted. Captures 5 decisions:
 - D1: no caveman fork in dev-flow (DEC-1)
 - D2: lineage credit to both variants with SHA pins (DEC-2)
@@ -168,10 +168,33 @@ Format follows ADR-019 precedent. Both upstreams MIT confirmed via `gh api repos
 
 ## Open Questions for Review
 
-*(empty — OQ1 + OQ2 land here at close.)*
+- **OQ1 (T3) — Statusline-badge contract.** Whether to adopt caveman's `CAVEMAN_STATUSLINE_SAVINGS` badge (or an equivalent) for dev-flow. Sprint 034 probe (line 165) explicitly defers until `dev-flow-compress` is hardened. ADR-020 § Decision-5 records the deferral. Revisit at Sprint 042+ once `dev-flow-compress` has eval coverage and a stable invocation contract.
+- **OQ2 (T1) — Backup-on-write semantics divergence.** `dev-flow-compress` creates `<stem>.original.md` (per `skills/dev-flow-compress/SKILL.md` line 14). Caveman-compress backup convention not investigated this sprint (out of T1 scope — pure SKILL.md diff focus). If divergent, may surface inconsistent restore behavior for users running both. Recommend P2 backlog task to compare backup conventions and either align or document the divergence.
 
 ---
 
 ## Retro
 
-*(empty — populate at close.)*
+### Worked
+- **Local-cache + gh CLI dual-source paid off.** T1 + T2 read juliusbrussee artifacts from local plugin cache (zero network); mattpocock variant came via gh CLI raw fetch. Both sources tagged with verified upstream SHAs. No fallback to WebFetch needed — Sprint 040 policy held a second sprint.
+- **Sprint 040 retro pattern #4 confirmed.** Decision-only sprint shape (research notes + ADR, zero code) shipped real value (lineage lock + design input for TASK-115 + caveman-shrink rejection rationale). No padding with speculative implementation.
+- **Pre-verification step locked.** T2 research note documents Node tokenizer parity check explicitly so TASK-115 implementer doesn't have to rediscover it. Costs ~20 lines in research note; saves a debugging cycle when TASK-115 lands.
+- **Sequential ADR allocation discipline held.** Max-ADR check before allocation per Sprint 039/040 retro lesson; ADR-020 sequential after ADR-019 (no gap, no collision).
+- **Two licensed lineages handled cleanly.** Both upstreams MIT-verified via `gh api repos/.../license`. SHA pinning + re-diff cadence rule documented in research note + ADR.
+
+### Friction
+- **`subprocess.run` Python ↔ `child_process.spawn` Node mapping needs a checklist for TASK-115.** Walked through it in T2 research note but didn't lock a checklist format. Future port-audit tasks should produce a side-by-side mapping table (Python call → Node equivalent + gotchas).
+- **mattpocock variant is meaningfully shorter (49 vs 67 lines) but loses key features (intensity levels, wenyan).** "Brevity wins per axis" finding tempted reframing toward "adopt mattpocock"; rejected because daily-use winner = juliusbrussee. Lesson: per-axis winner ≠ overall winner; net assessment must reconcile.
+- **OQ2 (backup semantics) was discovered late.** Surfaced during T1 SKILL.md diff but not investigated — pure diff focus didn't include implementation comparison. Future "compare X vs Y" research tasks should explicitly include "backup/restore/transactional contract" as a checklist axis.
+- **No `docs/research/` ownership-header convention pre-existed.** Created `r9-primitive-audit.md` predates the convention; Sprint 041 research notes added headers fresh. May want to backfill `r9-primitive-audit.md` in a doc-quality sprint.
+
+### Pattern candidates (pending user confirm)
+1. **Two-source dual-fetch for ext-ref deep dives:** local plugin cache (primary, instant, byte-exact) + gh CLI verification (SHA pin + license check). Promotes from one-off pattern (Sprint 040 used gh CLI only) to standard for any locally-installed upstream. Codify in `feedback_github_cli_default.md` or new `feedback_dual_source_extref.md`.
+2. **Pre-verification step for cross-language ports.** T2 documented a tokenizer parity check before TASK-115 lands code. Generalize: any port from language A to language B should include a "byte-equivalence pre-verification step" in the research note before implementation sprint promotes.
+3. **OQ surfacing rule.** Open questions discovered during execution should be surfaced to § Open Questions for Review WITH a recommended next-sprint placement (P2 backlog, retro re-eval, etc.) — not just left as questions. Sprint 041 OQ1 has explicit re-eval condition; OQ2 has explicit P2 placement. Apply this rule going forward.
+
+### Surprise log (cross-ref to Execution Log)
+- T1: mattpocock variant is leaner but loses intensity levels + wenyan. Per-axis winners split between variants. Net assessment reconciles to "juliusbrussee for daily use, mattpocock for minimal-skill reference."
+- T2: caveman uses tiktoken `o200k_base` (OpenAI tokenizer, approximation of Claude BPE). Header comment in `measure.py` is candid about this — savings ratios meaningful, absolutes "approximate output-length reduction." Important caveat to forward into TASK-115's reporting.
+- T2: caveman runs single-shot snapshots (one LLM call per arm × prompt) — no statistical replication. Documented in research note R2; matches caveman's "snapshots are point-in-time" stance.
+- T3: caveman-shrink MCP rejection rationale crystallized during ADR drafting. Two failure modes (unreviewable diffs + skill-discipline erosion) are clean enough to forward into future MCP-vs-skill decisions.
