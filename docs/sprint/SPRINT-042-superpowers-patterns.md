@@ -142,6 +142,20 @@ Output: `docs/research/superpowers-run-hook-shim-2026-05-04.md` — verbatim sou
 
 **Decision:** DEFER shim adoption per locked OQ(c). No backlog task — re-evaluate trigger conditions documented in research note.
 
+### 2026-05-04 | T3 done — pending commit
+superpowers `tests/skill-triggering/run-test.sh` (88 lines) + `run-all.sh` (60 lines) + sample prompt fetched via gh CLI raw (upstream SHA `e7a2d16476bf`).
+
+Output: `docs/research/superpowers-acceptance-harness-2026-05-04.md` — verbatim acceptance pattern, test-format spec, 3-skill seed (prime/orchestrator/tdd) with naturalistic prompts, integration target `tests/skill-triggering/`, manual-vs-automated mode comparison, 6-risk matrix.
+
+**Key findings:**
+- Acceptance test = `claude -p <naive-prompt> --plugin-dir <dev-flow> --output-format stream-json` then grep stream-json for `"name":"Skill"` + `"skill":"<skill-name>"`. Pass = both present.
+- Naive prompts must NOT name the skill — they describe a task, and a well-tuned skill description should auto-select.
+- 3-skill seed locked per OQ(d): `prime` (session-bootstrap, highest-frequency), `orchestrator` (workflow entry), `tdd` (code-implementation, reuses superpowers' validated prompt).
+- Recommendation = Mode A (manual run before skill-description changes ship); upgrade to Mode B (CI on every PR) if seed grows past ~10 skills.
+- 6 implementation risks documented for TASK-116: stream-json shape drift (medium), `--plugin-dir` for in-dev plugin (medium), regex brittleness (low), non-determinism (medium — run 3× require 2/3 pass), Windows space-in-path (low), permission-skip risk acceptance (low).
+
+**Decision:** Adopt acceptance harness pattern; implementation deferred to TASK-116 (future sprint per ADR-016 eval-evidence rule).
+
 ---
 
 ## Files Changed
@@ -154,6 +168,8 @@ Output: `docs/research/superpowers-run-hook-shim-2026-05-04.md` — verbatim sou
 | `docs/sprint/SPRINT-042-superpowers-patterns.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2 rows | low | — |
 | `docs/research/superpowers-run-hook-shim-2026-05-04.md` | T2 | NEW (~110 lines) — verbatim shim source + dispatch walkthrough + proposed dev-flow shape (unimplemented) + adopt/defer matrix | low | — |
 | `docs/sprint/SPRINT-042-superpowers-patterns.md` | T2 | Execution Log + § Decisions DEC-3 row | low | — |
+| `docs/research/superpowers-acceptance-harness-2026-05-04.md` | T3 | NEW (~120 lines) — pattern walkthrough + 3-skill seed + integration layout + 6-risk matrix for TASK-116 | low | — |
+| `docs/sprint/SPRINT-042-superpowers-patterns.md` | T3 | Execution Log + § Decisions DEC-4 row | low | — |
 
 ---
 
@@ -164,6 +180,7 @@ Output: `docs/research/superpowers-run-hook-shim-2026-05-04.md` — verbatim sou
 | DEC-1 (T1) | SessionStart matcher reconciliation = **keep-superset** (`startup\|resume\|clear\|compact`); no change to dev-flow `hooks.json` | Extra `resume` matcher is harmless; covers session-resume signal coverage that align-down would lose; upstream PR out of scope | ADR-021 (pending T4) |
 | DEC-2 (T1) | Document hook-surface divergence in research note: dev-flow has RICHER hook surface (3 hooks vs superpowers' 1) — PreToolUse chain-guard + PostToolUse codemap-refresh are dev-flow value-adds | Audit framing assumed dev-flow learns FROM superpowers; reality is bidirectional — record it for future re-diff cadence | ADR-021 (pending T4) |
 | DEC-3 (T2) | DEFER `run-hook.ps1` shim adoption; no backlog task | superpowers shim solves cross-platform polyglot; dev-flow Windows-only per ADR-016. Direct-call simpler, fewer indirection layers, adequate at 3-hook scale. Re-eval if hook count >5 OR cross-platform reconsidered | ADR-021 (pending T4) |
+| DEC-4 (T3) | Adopt skill-triggering acceptance harness pattern; 3-skill seed = `prime`, `orchestrator`, `tdd`; Mode A (manual); implementation deferred to TASK-116 | Pattern satisfies ADR-016 eval-evidence requirement for skill-description changes. Manual mode adequate at 3-skill scale; CI mode worthwhile if seed >10. Per Sprint 041 DEC-4 research-vs-implementation split | ADR-021 (pending T4) |
 
 ---
 
