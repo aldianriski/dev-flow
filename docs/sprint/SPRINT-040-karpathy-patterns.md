@@ -122,6 +122,13 @@ Lineage locked in `.claude/CONTEXT.md` § Behavioral Guidelines Lineage — tabl
 
 Open finding flagged: `.claude/CONTEXT.md` lacks ownership-header frontmatter (owner / last_updated / update_trigger / status), violating CLAUDE.md DOC WORK rule. Out of T2 scope to add — surfaced to § Open Questions for Review.
 
+### 2026-05-04 | T3 done — pending commit
+**Surprise during T3:** verify-step micro-protocol is **already adopted** at G2 design-analyst MICRO-TASKS template (`skills/orchestrator/references/phases.md:107` — `- [ ] <exact action> in <exact/path>  verify: <runnable command>`). Landed in Sprint 035 (commit `414ee8e`, 2026-05-01) without explicit karpathy lineage record.
+
+Decision: **YES, placement = G2 design-analyst MICRO-TASKS** (correct level — per-execution-step granularity). Confirmed pattern in place; no implementation work required. Lineage credit added to ADR-019 (T4). No Backlog task created — pattern shipped 3 sprints ago.
+
+Why not task-decomposer Acceptance: Acceptance is task-level (sprint task = 1-N micro-task fanout); verify lives at micro-task level. Two distinct granularities — correct separation.
+
 ---
 
 ## Files Changed
@@ -131,6 +138,7 @@ Open finding flagged: `.claude/CONTEXT.md` lacks ownership-header frontmatter (o
 | `docs/sprint/SPRINT-040-karpathy-patterns.md` | T1 | Execution Log + § Decisions DEC-1 row | low | — |
 | `.claude/CONTEXT.md` | T2 | NEW § Behavioral Guidelines Lineage block — 4-principle adaptation table + MIT attribution + upstream SHA lock | low | — |
 | `docs/sprint/SPRINT-040-karpathy-patterns.md` | T2 | Execution Log + § Decisions DEC-2 row | low | — |
+| `docs/sprint/SPRINT-040-karpathy-patterns.md` | T3 | Execution Log + § Decisions DEC-3 row (verify-step already shipped Sprint 035) | low | — |
 
 ---
 
@@ -140,6 +148,7 @@ Open finding flagged: `.claude/CONTEXT.md` lacks ownership-header frontmatter (o
 |:---|:---------|:-------|:----|
 | DEC-1 (T1) | Do NOT adopt root-level `EXAMPLES.md` per karpathy convention | Meta-repo has no app-code domain; CLAUDE.md anti-patterns + skill Red Flags already cover principle-violation surface; karpathy value is principle wording (T2), not example format | ADR-019 (pending T4) |
 | DEC-2 (T2) | Lineage of 4 Behavioral Guidelines locked in CONTEXT.md § Behavioral Guidelines Lineage with MIT attribution + upstream SHA `2c606141936f` + date 2026-05-04 | Existing `.claude/CLAUDE.md` block was adopted without lineage record; drift risk grows silently. Locking SHA + adaptation table makes future re-diffs deterministic | ADR-019 (pending T4) |
+| DEC-3 (T3) | Verify-step micro-protocol confirmed at G2 design-analyst MICRO-TASKS (already shipped Sprint 035, commit `414ee8e`); placement at task-decomposer rejected | design-analyst MICRO-TASKS template `verify: <runnable command>` is karpathy P4 pattern at the right granularity; task-decomposer Acceptance is task-level (separate granularity, correct separation). No new work — pattern in place, lineage credit only via ADR-019 | ADR-019 (pending T4) |
 
 ---
 
