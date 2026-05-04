@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 041 closed — EPIC-Audit Phase 4b Caveman compare)
+last_updated: 2026-05-04 (Sprint 042 promoted — EPIC-Audit Phase 4c Superpowers patterns)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 042
 ---
 
 > **External references**
@@ -36,9 +36,10 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ [docs/sprint/SPRINT-042-superpowers-patterns.md](docs/sprint/SPRINT-042-superpowers-patterns.md) — EPIC-Audit Phase 4c (Superpowers patterns) · status: active
 
-> Next: Sprint 042 — EPIC-Audit Phase 4c (Superpowers patterns).
+> Tasks: T1 hooks.json diff · T2 run-hook shim audit · T3 acceptance-harness design (prime/orchestrator/tdd seed) · T4 PR template lift + ADR-021.
+> Next: Sprint 043 — EPIC-Audit Phase 4d (Mattpocock skill library).
 
 ---
 
@@ -48,7 +49,6 @@ sprint: none
 
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
 
-- [ ] **Phase 4c — Superpowers patterns** (Sprint 42)
 - [ ] **Phase 4d — Mattpocock skill library** (Sprint 43)
 - [ ] **Phase 4e — Get shit done patterns** (Sprint 44)
 - [ ] **Phase 4f — Skill wrapper patterns with skill-creator** (Sprint 45)
