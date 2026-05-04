@@ -146,6 +146,28 @@ Reject list (do NOT add even after eval): `tdd ← build features|fix bugs` (vag
 
 Per ADR-021 DEC-4: NO skill edits this sprint. T1 surfaces candidates; TASK-116 verifies; only validated phrases ship.
 
+### 2026-05-04 | T2 done — pending commit
+mattpocock CONTEXT.md (26 lines, project-specific to Issue Tracker domain) fetched via gh CLI raw. Bucket structure verified (engineering 10 / productivity 3 / misc 4 / personal excluded / deprecated 4).
+
+Output: `docs/research/mattpocock-bucket-and-context-2026-05-04.md` — single research note with two parts.
+
+**Part A (bucket migration):**
+- dev-flow current scale: 17 skills + 7 agents = 24 surface. 17 < 20 threshold (OQ-c lock).
+- Proposed dev-flow buckets if/when adopted: governance (6) / engineering (6) / productivity (4) / misc (1, task-decomposer alone). agents/ stays separate.
+- Cost matrix: ~6 substantive migration items; high coordination risk on plugin auto-discovery + bin/dev-flow-init.js scaffold path drift. Recommended atomic single-sprint commit (Sprint 035 precedent).
+- Re-eval triggers: skill count=20 / first skill deprecated / EPIC-Audit completion checkpoint (Sprint 047).
+
+**Part B (CONTEXT.md reconcile):**
+- Section-level matrix: NO overlap on Vocabulary (different domains); NO LIFT on dev-flow's Principles/Gates/Modes/Agent Roster/Skill Standards/Behavioral Lineage.
+- 3 ADDITIVE lift candidates (per OQ-e additive-only discipline):
+  1. `_Avoid_:` annotation pattern → add to existing § Vocabulary entries (S cost, medium value)
+  2. NEW § Relationships section → between Modes and Agent Roster (S cost, medium value)
+  3. NEW § Flagged ambiguities section → end of CONTEXT.md, seeded with Sprint 035 rename + Sprint 039 codemap-refresh history (S cost, high value)
+- Edits NOT landed this sprint; future TASK with re-prime + agent-context refresh checklist (CONTEXT.md ripple risk).
+
+**DEC-4:** DEFER bucketing per 20-skill threshold lock; ADR-022 records re-eval triggers explicitly to avoid silent kick-the-can.
+**DEC-5:** Recommend 3 ADDITIVE CONTEXT.md lifts; queue to future TASK; do not execute this sprint.
+
 ---
 
 ## Files Changed
@@ -156,6 +178,8 @@ Per ADR-021 DEC-4: NO skill edits this sprint. T1 surfaces candidates; TASK-116 
 |:-----|:-----|:-------|:-----|:-----------|
 | `docs/research/mattpocock-skill-diff-2026-05-04.md` | T1 | NEW (~110 lines) — 4-skill matrix + trigger-phrase deltas + reference-graph deltas + per-skill recommendations + bidirectional finding | low | — |
 | `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2, DEC-3 rows | low | — |
+| `docs/research/mattpocock-bucket-and-context-2026-05-04.md` | T2 | NEW (~150 lines) — Part A bucket migration cost matrix + defer rationale + Part B CONTEXT.md section matrix + 3 lift recommendations | low | — |
+| `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T2 | Execution Log + § Decisions DEC-4, DEC-5 rows | low | — |
 
 ---
 
@@ -166,6 +190,8 @@ Per ADR-021 DEC-4: NO skill edits this sprint. T1 surfaces candidates; TASK-116 
 | DEC-1 (T1) | 5 trigger-phrase lift candidates from mattpocock queued to TASK-116 acceptance harness; NO skill edits this sprint | Per ADR-021 DEC-4 skill behavior changes require eval evidence; surface candidates here, verify in TASK-116 sprint, ship only validated phrases | ADR-022 (pending T4) |
 | DEC-2 (T1) | **Bidirectional finding:** `zoom-out` is dev-flow > mattpocock (55 vs 7 lines, auto-trigger vs disable-model-invocation). NO LIFT for zoom-out | Avoid future "match mattpocock" pressure; record explicitly per Sprint 042 DEC-2 pattern | ADR-022 (pending T4) |
 | DEC-3 (T1) | `task-decomposer` has no mattpocock upstream; dev-flow original. mattpocock issue-tracker-workflow skills (`to-issues`/`to-prd`/`triage`) are different domain framing | Lineage record; not a fork | ADR-022 (pending T4) |
+| DEC-4 (T2-A) | DEFER bucket adoption per 20-skill threshold lock (currently 17). Re-eval triggers explicit in ADR-022 (count=20, first deprecated, EPIC-Audit completion) | Migration cost matrix shows S-M coordination risk on plugin auto-discovery + scaffold paths; not justified at 17-skill scale | ADR-022 (pending T4) |
+| DEC-5 (T2-B) | ADOPT 3 ADDITIVE CONTEXT.md lifts as RECOMMENDATIONS (not executed this sprint): `_Avoid_` annotations, § Relationships, § Flagged ambiguities | OQ-e additive-only discipline; CONTEXT.md ripple risk requires re-prime checklist; future TASK executes | ADR-022 (pending T4) |
 
 ---
 
