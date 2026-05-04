@@ -151,6 +151,29 @@ Output: `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` — phase-
 
 **File-read ceiling:** within OQ-b 16-file cap (4 commands + CONTEXT.md + 6 dir listings + 3 dev-flow cross-refs).
 
+### 2026-05-04 | T2 done — pending commit
+GSD `contexts/` (3 mode-profiles: dev/research/review), `.plans/` (sample 1 file), and `CONTEXT.md` (41 lines, TypeScript-module domain) fetched/sampled via gh CLI raw.
+
+Output: `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` — three-part research note.
+
+**Part A (contexts/):**
+- GSD `contexts/dev.md` (low verbosity, action-oriented) vs `research.md` (high verbosity, exploratory) — agent-output-style profiles loaded via config.
+- dev-flow has NO equivalent — single posture (Behavioral Guidelines). Concerns are ORTHOGONAL: GSD contexts/ = HOW agents respond; dev-flow CONTEXT.md = WHAT workflow is.
+- Recommendation: DEFER. Re-eval if dev-flow develops distinct work-mode patterns. NOT `.out-of-scope/` (interesting, may apply later).
+
+**Part B (.plans/):**
+- GSD `.plans/<numeric>-<slug>.md` convention.
+- dev-flow `docs/sprint/SPRINT-NNN-*.md` is functionally equivalent + more explicit (numbering + status frontmatter + retro discipline).
+- Recommendation: NO LIFT.
+
+**Part C (CONTEXT.md):**
+- GSD CONTEXT.md = TypeScript-module domain glossary (10 modules listed). NO OVERLAP with dev-flow workflow-domain CONTEXT.md.
+- Recommendation: ZERO lifts from GSD. Sprint 043 DEC-5 (3 mattpocock-derived lifts via TASK-117) remains the only CONTEXT.md change queue.
+
+**Bidirectional finding (Part C):** dev-flow CONTEXT.md has 8 workflow sections; GSD CONTEXT.md has 1 code-architecture section. Each richer in their respective domain.
+
+**DEC-7..9 land in § Decisions.**
+
 *(Empty — append `### YYYY-MM-DD HH:MM | T<N> done` blocks as work lands.)*
 
 ---
@@ -161,6 +184,8 @@ Output: `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` — phase-
 |:-----|:-----|:-------|:-----|:-----------|
 | `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` | T1 | NEW (~120 lines) — scale survey + phase-pipeline mapping + commands/skills comparison + 8 per-pattern recommendations + bidirectional finding + ceiling check | low | — |
 | `docs/sprint/SPRINT-044-gsd-patterns.md` | T1 | Execution Log + § Decisions DEC-1 through DEC-6 rows | low | — |
+| `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` | T2 | NEW (~135 lines) — Part A contexts/ defer + Part B .plans/ no-lift + Part C CONTEXT.md zero-lift + bidirectional finding | low | — |
+| `docs/sprint/SPRINT-044-gsd-patterns.md` | T2 | Execution Log + § Decisions DEC-7, DEC-8, DEC-9 rows | low | — |
 
 *(Empty — one row per file as work lands.)*
 
@@ -179,6 +204,9 @@ Output: `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` — phase-
 | DEC-4 (T1) | NO LIFT on `agent:` + `allowed-tools:` frontmatter fields (per-command granularity) | dev-flow orchestrator dispatch-table covers agent routing; tool-allowlist premature at single-author scale (DEFER, re-eval at adopter scale) | ADR-023 (pending T3) |
 | DEC-5 (T1) | NO LIFT on persistent workflow artifacts (PLAN.md / RESEARCH.md / VERIFICATION.md / REVIEWS.md) | dev-flow `docs/sprint/SPRINT-NNN-*.md` + `docs/research/<topic>-<date>.md` covers same ground without per-phase file proliferation | ADR-023 (pending T3) |
 | DEC-6 (T1) | **Bidirectional finding:** dev-flow `sprint-bulk` batches G1+G2 once per sprint; GSD has no equivalent — every phase pays gate cost | Record explicitly per Sprint 042/043 bidirectional pattern; avoid future "match GSD per-phase ceremony" pressure | ADR-023 (pending T3) |
+| DEC-7 (T2-A) | DEFER `contexts/` per-mode output-style profiles | dev-flow has single posture (Behavioral Guidelines); meta-repo work is primarily one mode; per-mode profiles cost not justified at single-author scale. NOT `.out-of-scope/` candidate (pattern interesting, may apply later) | ADR-023 (pending T3) |
+| DEC-8 (T2-B) | NO LIFT on `.plans/` directory | dev-flow `docs/sprint/SPRINT-NNN-*.md` is functionally equivalent + more explicit (numbering + status frontmatter + retro) | ADR-023 (pending T3) |
+| DEC-9 (T2-C) | ZERO additive CONTEXT.md lifts from GSD; Sprint 043 DEC-5 (3 mattpocock-derived lifts via TASK-117) remains the only CONTEXT.md change queue | GSD CONTEXT.md = TypeScript-module domain (orthogonal to dev-flow workflow-domain). Bidirectional: each richer in own domain | ADR-023 (pending T3) |
 
 *(Empty — append rows as decisions land. Format: `DEC-N (T<X>) | Decision | Reason | ADR`)*
 
