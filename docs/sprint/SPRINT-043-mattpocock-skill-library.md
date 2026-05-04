@@ -168,6 +168,20 @@ Output: `docs/research/mattpocock-bucket-and-context-2026-05-04.md` — single r
 **DEC-4:** DEFER bucketing per 20-skill threshold lock; ADR-022 records re-eval triggers explicitly to avoid silent kick-the-can.
 **DEC-5:** Recommend 3 ADDITIVE CONTEXT.md lifts; queue to future TASK; do not execute this sprint.
 
+### 2026-05-04 | T3 done — pending commit
+`.out-of-scope/` directory created at repo root with 4 files:
+
+1. `.out-of-scope/README.md` (~22 lines) — convention, frontmatter spec, relationship to docs/adr/, how-to-add, lineage credit to mattpocock.
+2. `.out-of-scope/run-hook-shim.md` (15 lines) — sources ADR-021 DEC-3; re-eval = hook count >5 OR cross-platform reconsidered.
+3. `.out-of-scope/tests-dir-empty-scaffold.md` (15 lines) — sources ADR-021 DEC-6; re-eval = TASK-116 lands first test files.
+4. `.out-of-scope/statusline-savings-badge.md` (15 lines) — sources ADR-020 DEC-6; re-eval = dev-flow-compress hardened (eval coverage + stable invocation).
+
+Per OQ-d: ONLY the 3 named pointers landed this sprint. T1/T2 surfaced no new candidates; OQ-d lock held.
+
+Lineage: pointer convention adapted from `mattpocock/skills/.out-of-scope/` (MIT, SHA b843cb5ea74b). NOT verbatim mattpocock content — dev-flow pointers source dev-flow ADR DEC rows.
+
+**Decision:** `.out-of-scope/` adoption complete. Future negative-space decisions land here as discoverable index pointing to ADRs.
+
 ---
 
 ## Files Changed
@@ -180,6 +194,11 @@ Output: `docs/research/mattpocock-bucket-and-context-2026-05-04.md` — single r
 | `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2, DEC-3 rows | low | — |
 | `docs/research/mattpocock-bucket-and-context-2026-05-04.md` | T2 | NEW (~150 lines) — Part A bucket migration cost matrix + defer rationale + Part B CONTEXT.md section matrix + 3 lift recommendations | low | — |
 | `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T2 | Execution Log + § Decisions DEC-4, DEC-5 rows | low | — |
+| `.out-of-scope/README.md` | T3 | NEW (~22 lines) — convention + frontmatter spec + ADR relationship + how-to-add + mattpocock lineage credit | low | — |
+| `.out-of-scope/run-hook-shim.md` | T3 | NEW (15 lines) — sources ADR-021 DEC-3 | low | — |
+| `.out-of-scope/tests-dir-empty-scaffold.md` | T3 | NEW (15 lines) — sources ADR-021 DEC-6 | low | — |
+| `.out-of-scope/statusline-savings-badge.md` | T3 | NEW (15 lines) — sources ADR-020 DEC-6 | low | — |
+| `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T3 | Execution Log + § Decisions DEC-6 row | low | — |
 
 ---
 
@@ -192,6 +211,7 @@ Output: `docs/research/mattpocock-bucket-and-context-2026-05-04.md` — single r
 | DEC-3 (T1) | `task-decomposer` has no mattpocock upstream; dev-flow original. mattpocock issue-tracker-workflow skills (`to-issues`/`to-prd`/`triage`) are different domain framing | Lineage record; not a fork | ADR-022 (pending T4) |
 | DEC-4 (T2-A) | DEFER bucket adoption per 20-skill threshold lock (currently 17). Re-eval triggers explicit in ADR-022 (count=20, first deprecated, EPIC-Audit completion) | Migration cost matrix shows S-M coordination risk on plugin auto-discovery + scaffold paths; not justified at 17-skill scale | ADR-022 (pending T4) |
 | DEC-5 (T2-B) | ADOPT 3 ADDITIVE CONTEXT.md lifts as RECOMMENDATIONS (not executed this sprint): `_Avoid_` annotations, § Relationships, § Flagged ambiguities | OQ-e additive-only discipline; CONTEXT.md ripple risk requires re-prime checklist; future TASK executes | ADR-022 (pending T4) |
+| DEC-6 (T3) | Adopt `.out-of-scope/` directory at repo root + 3 negative-space pointers (run-hook-shim, tests-dir-empty-scaffold, statusline-savings-badge) | Discoverable index for negative-space decisions; pointer-to-ADR pattern preserves source-of-truth in ADRs while surfacing rejected paths at repo root | ADR-022 (pending T4) |
 
 ---
 
