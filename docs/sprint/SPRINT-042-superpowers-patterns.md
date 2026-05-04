@@ -129,6 +129,19 @@ Output: `docs/research/superpowers-hooks-diff-2026-05-04.md` — full matcher co
 
 **Recommendation locked:** keep-superset, no change to dev-flow `hooks.json` matcher.
 
+### 2026-05-04 | T2 done — pending commit
+superpowers `hooks/run-hook.cmd` (47 lines, polyglot cmd+bash) + companion `hooks/session-start` (57 lines, bash) fetched via gh CLI raw (upstream SHA `e7a2d16476bf`).
+
+Output: `docs/research/superpowers-run-hook-shim-2026-05-04.md` — verbatim source, dispatch-pattern walkthrough, Windows compatibility matrix, proposed dev-flow shim shape (UNIMPLEMENTED), adopt-vs-defer evaluation.
+
+**Key findings:**
+- superpowers shim solves Windows + Unix polyglot via clever `: << 'CMDBLOCK'` bash heredoc trick that cmd.exe ignores. Tries Git for Windows bash → PATH bash → silent exit 0 graceful degrade.
+- dev-flow is Windows-only per ADR-016 — no polyglot need. Current direct-call pattern (`powershell -File <script>`) is simpler, fewer indirection layers, more debuggable.
+- Shim adoption justified only if dev-flow grows past ~5 hooks (current: 3) OR reconsiders cross-platform. Neither on roadmap.
+- 3 lessons worth keeping even without adoption: extensionless filenames (Claude Code Windows auto-detect avoidance), silent graceful degradation (already adopted Sprint 039 DEC-5), polyglot trick (clever but unneeded).
+
+**Decision:** DEFER shim adoption per locked OQ(c). No backlog task — re-evaluate trigger conditions documented in research note.
+
 ---
 
 ## Files Changed
@@ -139,6 +152,8 @@ Output: `docs/research/superpowers-hooks-diff-2026-05-04.md` — full matcher co
 |:-----|:-----|:-------|:-----|:-----------|
 | `docs/research/superpowers-hooks-diff-2026-05-04.md` | T1 | NEW (~80 lines) — verbatim superpowers hooks.json + side-by-side matcher + coverage matrix + reconciliation rec | low | — |
 | `docs/sprint/SPRINT-042-superpowers-patterns.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2 rows | low | — |
+| `docs/research/superpowers-run-hook-shim-2026-05-04.md` | T2 | NEW (~110 lines) — verbatim shim source + dispatch walkthrough + proposed dev-flow shape (unimplemented) + adopt/defer matrix | low | — |
+| `docs/sprint/SPRINT-042-superpowers-patterns.md` | T2 | Execution Log + § Decisions DEC-3 row | low | — |
 
 ---
 
@@ -148,6 +163,7 @@ Output: `docs/research/superpowers-hooks-diff-2026-05-04.md` — full matcher co
 |:---|:---------|:-------|:----|
 | DEC-1 (T1) | SessionStart matcher reconciliation = **keep-superset** (`startup\|resume\|clear\|compact`); no change to dev-flow `hooks.json` | Extra `resume` matcher is harmless; covers session-resume signal coverage that align-down would lose; upstream PR out of scope | ADR-021 (pending T4) |
 | DEC-2 (T1) | Document hook-surface divergence in research note: dev-flow has RICHER hook surface (3 hooks vs superpowers' 1) — PreToolUse chain-guard + PostToolUse codemap-refresh are dev-flow value-adds | Audit framing assumed dev-flow learns FROM superpowers; reality is bidirectional — record it for future re-diff cadence | ADR-021 (pending T4) |
+| DEC-3 (T2) | DEFER `run-hook.ps1` shim adoption; no backlog task | superpowers shim solves cross-platform polyglot; dev-flow Windows-only per ADR-016. Direct-call simpler, fewer indirection layers, adequate at 3-hook scale. Re-eval if hook count >5 OR cross-platform reconsidered | ADR-021 (pending T4) |
 
 ---
 
