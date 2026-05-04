@@ -128,11 +128,39 @@ T1 → T2 (T2 reuses T1's MIT license check + SHA pin; T1's command-file reads m
 
 ## Execution Log
 
+### 2026-05-04 | T1 done — pending commit
+GSD repo structure verified via gh CLI dir listings (license MIT, SHA `42ed7cee8d8d`). Scale confirmed: ~64 commands + ~80 workflows + ~20 agents = 164+ surface assets vs dev-flow's 24. Plus full TypeScript SDK (package.json, tsconfig, vitest), 5-language READMEs, persistent workflow artifacts (PLAN/RESEARCH/VERIFICATION/REVIEWS).
+
+Output: `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` — phase-pipeline mapping + commands/skills namespace comparison + 8 per-pattern recommendations + bidirectional finding + 16-file-ceiling check.
+
+**Key findings:**
+- GSD 9-phase pipeline (sketch / spike / discuss / spec / plan / execute / verify / validate / ship) maps to dev-flow's mode + gate model at coarser granularity. dev-flow folds GSD's per-phase artifacts into orchestrator MICRO-TASKS + sprint plan.
+- GSD command body uses XML-tagged blocks (`<objective>`, `<execution_context>`, `<context>`) — improves agent parseability, hurts human readability. dev-flow conversational markdown is more readable but less structured.
+- GSD has `agent:` + `allowed-tools:` frontmatter (per-command granularity); dev-flow uses orchestrator dispatch + session-level permissions. Different design choices, both valid at respective scales.
+- **Bidirectional finding (per Sprint 042/043 pattern):** dev-flow's `sprint-bulk` mode batches G1+G2 once for multi-task sprints; GSD has no equivalent. Record explicitly to avoid future "match GSD per-phase ceremony" pressure.
+
+**Per-pattern recommendations (all NO LIFT for current sprint):**
+- 9-phase pipeline → NO (premature at 24-asset scale; re-eval if dev-flow grows past ~150 assets)
+- commands/ namespace separate from skills/ → NO (duplicate dispatcher concerns)
+- XML-tagged body structure → CONSIDER for write-a-skill template (frequent-auto-trigger skills only)
+- `agent:` frontmatter routing → NO (orchestrator dispatch-table covers it)
+- `allowed-tools:` per-command → DEFER (premature at single-author scale)
+- Workflow `@~/...` slash-include → NO (per-skill references/ does this)
+- Persistent PLAN/RESEARCH/VERIFICATION/REVIEWS artifacts → NO (sprint plan + docs/research/ covers it)
+- Multi-language READMEs → NO (single-author scope)
+
+**File-read ceiling:** within OQ-b 16-file cap (4 commands + CONTEXT.md + 6 dir listings + 3 dev-flow cross-refs).
+
 *(Empty — append `### YYYY-MM-DD HH:MM | T<N> done` blocks as work lands.)*
 
 ---
 
 ## Files Changed
+
+| File | Task | Change | Risk | Test added |
+|:-----|:-----|:-------|:-----|:-----------|
+| `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` | T1 | NEW (~120 lines) — scale survey + phase-pipeline mapping + commands/skills comparison + 8 per-pattern recommendations + bidirectional finding + ceiling check | low | — |
+| `docs/sprint/SPRINT-044-gsd-patterns.md` | T1 | Execution Log + § Decisions DEC-1 through DEC-6 rows | low | — |
 
 *(Empty — one row per file as work lands.)*
 
@@ -142,6 +170,15 @@ T1 → T2 (T2 reuses T1's MIT license check + SHA pin; T1's command-file reads m
 ---
 
 ## Decisions
+
+| ID | Decision | Reason | ADR |
+|:---|:---------|:-------|:----|
+| DEC-1 (T1) | NO LIFT on GSD 9-phase pipeline (sketch/spike/discuss/spec/plan/execute/verify/validate/ship); dev-flow mode + gate model adequate at 24-asset scale | GSD pipeline assumes 164+ assets + persistent per-phase artifacts; ceremony cost not justified at dev-flow scale. Re-eval if dev-flow grows past ~150 assets | ADR-023 (pending T3) |
+| DEC-2 (T1) | NO LIFT on `commands/` namespace separate from `skills/`; dev-flow's `skills/` covers the surface | Splitting commands+skills duplicates dispatcher concerns without scale benefit | ADR-023 (pending T3) |
+| DEC-3 (T1) | DEFER XML-tagged command body (`<objective>`, `<execution_context>`, `<context>`) — CONSIDER for `write-a-skill` template only | Improves agent parseability but hurts human readability; not wholesale lift. Could benefit auto-trigger-frequent skills where AI parsing matters more than human reading | ADR-023 (pending T3) |
+| DEC-4 (T1) | NO LIFT on `agent:` + `allowed-tools:` frontmatter fields (per-command granularity) | dev-flow orchestrator dispatch-table covers agent routing; tool-allowlist premature at single-author scale (DEFER, re-eval at adopter scale) | ADR-023 (pending T3) |
+| DEC-5 (T1) | NO LIFT on persistent workflow artifacts (PLAN.md / RESEARCH.md / VERIFICATION.md / REVIEWS.md) | dev-flow `docs/sprint/SPRINT-NNN-*.md` + `docs/research/<topic>-<date>.md` covers same ground without per-phase file proliferation | ADR-023 (pending T3) |
+| DEC-6 (T1) | **Bidirectional finding:** dev-flow `sprint-bulk` batches G1+G2 once per sprint; GSD has no equivalent — every phase pays gate cost | Record explicitly per Sprint 042/043 bidirectional pattern; avoid future "match GSD per-phase ceremony" pressure | ADR-023 (pending T3) |
 
 *(Empty — append rows as decisions land. Format: `DEC-N (T<X>) | Decision | Reason | ADR`)*
 
