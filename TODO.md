@@ -8,13 +8,7 @@ status: current
 sprint: 047
 ---
 
-> **External references**
-> - https://github.com/forrestchang/andrej-karpathy-skills/blob/main/CLAUDE.md → behavioral guidelines patterns
-> - https://github.com/juliusbrussee/caveman → eval harness, single-source-of-truth discipline, context compression
-> - https://github.com/obra/superpowers → plugin development baseline
-> - https://github.com/mattpocock/skills → skill library, evaluation harness, plugin infrastructure, and other patterns for building AI agents
-> - https://github.com/gsd-build/get-shit-done → A light-weight and powerful meta-prompting, context engineering and spec-driven development system
-> - https://github.com/anthropics/skills/tree/main/skills/skill-creator → Creating custom skills for Claude
+> **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
 
 > **How to use this file**
 > - **Start of session** — read this file first. Understand active sprint before touching code.
@@ -44,13 +38,9 @@ sprint: 047
 
 ## Backlog
 
-### P0 — EPIC-Audit: Full project audit + external-ref alignment
+### P0 — EPIC-Audit (closed Sprint 047)
 
-> Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
-
-- [x] **Phase 4f — Skill wrapper patterns with skill-creator** — closed Sprint 045 T1 (ADR-024). EPIC-Audit Phase 4 deep-dive series (4a-4f) COMPLETE.
-- [x] **Phase 5 — Stale doc refresh** — closed Sprint 046 (ARCHITECTURE.md 87→75 lines + AI_CONTEXT.md 87→100 lines; both status: stale → current).
-- [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 47)
+- [x] **EPIC-Audit complete** — Phase 0 (Sprint 034 baseline) → Phase 1-3 (Sprints 035-037 rename/wiring/trim) → Phase 4 (Sprints 040-045 ext-ref deep-dives 4a-4f) → Phase 5 (Sprint 046 stale doc refresh) → Phase 6 (Sprint 047 archive + close). 13 sprints · 6 ext-refs · 6 ADRs (019-024) + ADR-025 closeout · 9 research notes · 9 bidirectional findings. Full retro: `docs/audit/EPIC-Audit-retro.md`.
 
 ### P1 — Doc-quality follow-ups
 
