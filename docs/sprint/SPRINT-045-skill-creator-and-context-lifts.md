@@ -154,7 +154,32 @@ T1, T2, T4 are mutually independent. T3 depends on T2 (CONTEXT.md frontmatter mu
 
 ## Execution Log
 
-*(Empty — append `### YYYY-MM-DD HH:MM | T<N> done` blocks as work lands.)*
+### 2026-05-04 | T1 done — pending commit
+anthropics/skills/skill-creator scope verified via gh CLI dir listings (Apache 2.0 license, upstream SHA `d230a6dd6eb1`). Scope: 485-line SKILL.md + 430-line schemas.md ref + 3 sub-agents + 8 Python scripts (`run_eval`, `run_loop`, `aggregate_benchmark`, `improve_description`, `quick_validate`, `package_skill`, `generate_report`, `__init__`). ~6× line gap + ~∞× tooling gap vs dev-flow `write-a-skill` (81 lines, 0 scripts, 0 sub-agents).
+
+Outputs:
+- `docs/research/skill-creator-skill-diff-2026-05-04.md` — 5-axis diff matrix + 4 bidirectional findings + per-axis recommendations + ceiling check.
+- `docs/adr/ADR-024-skill-creator-patterns.md` — 7-decision ADR + 6 alternatives + 4 bidirectional findings.
+
+**Key findings:**
+- Axis 1 (frontmatter): NO LIFT — dev-flow's 7 fields are governance-justified (version + last-validated + type + user-invocable + argument-hint).
+- Axis 2 (creation flow): LIFT iteration-loop framing → queue TASK-116 (Anthropic's "Iterate until satisfied" is more honest than dev-flow's single-pass Review gate).
+- Axis 3 (quality checklist): NO LIFT bidirectional — dev-flow inline checklist > Anthropic script-based.
+- Axis 4 (reference pattern): LIFT TOC convention for >300-line refs → queue TASK-116. DEFER domain-organization (no cross-framework skills currently). DEFER programmatic-validation scripts (future tooling sprint).
+- Axis 5 (anti-patterns): LIFT description-pushiness anti-pattern → queue TASK-116 (dev-flow Red Flags don't cover UNDERTRIGGERING; only OVERTRIGGERING).
+
+**Bidirectional findings (4):** dev-flow > Anthropic on explicit quality checklist + tighter line cap + explicit red-flags template + mandatory reference-file frontmatter.
+
+**3 NEW TASK-116 lift candidates** (joins prior queue from Sprint 043 DEC-1's 5 candidates):
+1. write-a-skill ← add Phase 4 "Iterate"
+2. write-a-skill ← add Red Flag "description undertriggering — be pushy"
+3. write-a-skill ← add reference-file convention "≤300 lines or include TOC"
+
+**Notable:** skill-creator is FIRST non-MIT external ref in EPIC-Audit Phase 4 (Apache 2.0 vs prior MIT). License divergence recorded in lineage; compatible for downstream use.
+
+**File-read ceiling:** within OQ-b 8-file cap (license + 4 dir listings + LICENSE head + SKILL.md head 150 of 485 lines + dev-flow write-a-skill SKILL.md = 8 reads).
+
+EPIC-Audit Phase 4f closed; Phase 4 (4a-4f) deep-dive series complete.
 
 ---
 
@@ -162,8 +187,9 @@ T1, T2, T4 are mutually independent. T3 depends on T2 (CONTEXT.md frontmatter mu
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
-
-*(Empty — one row per file as work lands.)*
+| `docs/research/skill-creator-skill-diff-2026-05-04.md` | T1 | NEW (~110 lines) — 5-axis diff matrix + 4 bidirectional findings + per-axis recommendations + ceiling check | low | — |
+| `docs/adr/ADR-024-skill-creator-patterns.md` | T1 | NEW (~120 lines) — 7-decision ADR + 6 alternatives + lineage credit (Apache 2.0, SHA d230a6dd6eb1) | low | — |
+| `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T1 | Execution Log + § Decisions DEC-1 through DEC-7 rows | low | — |
 
 ---
 
@@ -171,8 +197,13 @@ T1, T2, T4 are mutually independent. T3 depends on T2 (CONTEXT.md frontmatter mu
 
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
-
-*(Empty — append rows as decisions land. Format: `DEC-N (T<X>) | Decision | Reason | ADR`)*
+| DEC-1 (T1) | Frontmatter NO LIFT — dev-flow's 7 fields are governance-justified extras over Anthropic's 2 required + 1 optional | dev-flow extras (version / last-validated / type / user-invocable / argument-hint) exist for ADR-006 + ADR-016/021 governance reasons | ADR-024 |
+| DEC-2 (T1) | LIFT iteration-loop framing → queue TASK-116 (add Phase 4 "Iterate" to write-a-skill) | Anthropic's "Iterate until satisfied" honest about skill quality; dev-flow single-pass Review gate is optimistic | ADR-024 |
+| DEC-3 (T1) | Quality checklist NO LIFT — bidirectional finding (dev-flow inline > Anthropic script-based at current scale) | dev-flow checklist human-first; Anthropic scripts premature at 17-skill scale | ADR-024 |
+| DEC-4 (T1) | LIFT TOC convention for >300-line refs → queue TASK-116; DEFER domain-organization (no cross-framework skills); DEFER programmatic-validation (future tooling sprint, NOT TASK-116) | TOC additive cost low; domain-organization waits for first cross-framework skill; validation scripts are tooling, not skill-rework | ADR-024 |
+| DEC-5 (T1) | LIFT description-pushiness anti-pattern → queue TASK-116 (add 5th Red Flag) | dev-flow Red Flags cover OVERTRIGGERING but not UNDERTRIGGERING; real failure mode | ADR-024 |
+| DEC-6 (T1) | Record 4 bidirectional findings (dev-flow > Anthropic on explicit checklist + line cap + red-flags template + mandatory ref frontmatter) per Sprint 042/043/044 pattern | Pattern is load-bearing for ext-ref audits (4 sprints, 9 total findings); prevents future "match upstream" pressure | ADR-024 |
+| DEC-7 (T1) | Scale-driven defer note — no `.out-of-scope/` pointers warranted (defers are scale-fit, not concept-reject) per Sprint 044 ADR-023 discipline | Pointer files only for concept rejections; scale-driven defers stay in ADR § Decision text | ADR-024 |
 
 ---
 
