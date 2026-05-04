@@ -1,7 +1,7 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-01
-update_trigger: New skill, agent, or script added; stack or architecture decisions change
+last_updated: 2026-05-04
+update_trigger: New skill, agent, script, or hook added; stack or architecture decisions change
 status: current
 ---
 
@@ -9,27 +9,28 @@ status: current
 
 ## Project Overview
 - **Name**: dev-flow
-- **Type**: Starter Scaffold / Skill Library
-- **Stack**: Markdown · Claude Code skills system · Node.js ≥18
+- **Type**: Claude Code plugin · Skill Library · Workflow Scaffold
+- **Stack**: Markdown · Claude Code skills system · Node.js ≥18 · PowerShell ≥5.1 (Windows hooks)
 - **Architecture**: Plugin-first layout — components at repo root per Claude Code plugin spec
 
 ## File Structure
 ```
-skills/          # SKILL.md files + references/ subdirs (plugin auto-discovers)
-agents/          # agent definitions (dispatcher + 6 specialists)
-scripts/         # audit-baseline.js, eval-skills.js (Node hook scripts retired ADR-016)
+skills/          # 17 SKILL.md files + references/ subdirs (plugin auto-discovers)
+agents/          # 7 agents (dispatcher + 6 specialists)
+scripts/         # audit-baseline.js, eval-skills.js (Node) + session-start.ps1, codemap-refresh.ps1 (PowerShell hooks per ADR-016)
 hooks/
-  hooks.json     # plugin hook config
+  hooks.json     # 3 hooks: SessionStart PS · PreToolUse chain-guard · PostToolUse codemap-refresh
 .claude-plugin/
-  plugin.json    # plugin manifest
+  plugin.json    # plugin manifest (lockstep with marketplace.json per ADR-006)
   marketplace.json
 .claude/
   CLAUDE.md      # this file — project context
   CONTEXT.md     # shared domain vocab, gates, modes, agent roster
   settings.json  # local dev hooks
-docs/
-  blueprint/     # v1 reference (read-only archive)
-bin/             # dev-flow-init.js scaffold bootstrap
+docs/            # ARCHITECTURE/AI_CONTEXT/CHANGELOG/SUPPORT + DECISIONS (≤015 frozen) + sprint/ research/ audit/
+  adr/           # ADR-016+ one file per ADR (Sprint 043 DEC-7) · codemap/ 3-tier (CODEMAP.md + handoff.json)
+.out-of-scope/   # negative-space pointer files (Sprint 043 ADR-022)
+bin/             # dev-flow-init.js scaffold bootstrap (built-ins only per ADR-002)
 ```
 
 ## Code Generation Order

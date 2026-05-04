@@ -1,79 +1,81 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-27
-update_trigger: Blueprint version bump protocol changes; new contribution category added; breaking-change policy added
+last_updated: 2026-05-04
+update_trigger: Versioning bump rules · skill-change protocol · breaking-change policy · contribution surfaces change
 status: current
 ---
 
 # Contributing to dev-flow
 
-## Blueprint versioning
+dev-flow is a Claude Code plugin (skill library + agent roster + gate-driven workflow). No app code, no runtime server. All contributions are Markdown, agents, hooks, or harness scripts.
 
-The blueprint uses semver encoded in `docs/CHANGELOG.md` and `AI_WORKFLOW_BLUEPRINT.md`:
+Read [`.claude/CONTEXT.md`](.claude/CONTEXT.md) and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) before proposing changes.
 
-| Bump | What triggers it | Examples |
-|:-----|:----------------|:---------|
-| **MAJOR** | Phase model change, gate model change, hook contract change | Removing a gate, changing phase numbering, rewriting the hook input contract |
-| **MINOR** | New mode, new agent, new skill, new hard stop | Adding a 7th mode, adding an 8th subagent, adding hard stop #28 |
-| **PATCH** | Clarification, prompt rewording, fix, doc improvement | Fixing a typo, rewording a gate prompt, adding a stack to a customization table |
+## Versioning
 
-Every version bump requires a `docs/CHANGELOG.md` entry with the bump rationale.
+The plugin uses semver in [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json), [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) (lockstep per ADR-006), and [`docs/CHANGELOG.md`](docs/CHANGELOG.md):
 
-## Blueprint change process
+| Bump  | Triggers                                                                                  | Examples                                                              |
+|:------|:------------------------------------------------------------------------------------------|:----------------------------------------------------------------------|
+| MAJOR | Phase model change, gate model change, hook contract change, agent roster MAJOR breaking  | Removing a gate, renumbering modes, rewriting hook input contract     |
+| MINOR | New mode, new agent, new skill, new hard-coded behavior surface                           | Adding a 5th mode, adding an 8th agent, adding a new skill            |
+| PATCH | Clarification, prompt rewording, bugfix, doc improvement                                  | Fixing a typo, rewording a gate prompt, fixing a stale doc reference  |
 
-1. Open an issue describing the proposed change and its rationale.
-2. For MAJOR bumps: document the migration path (what adopters must update).
-3. Implement the change in `docs/blueprint/` — never edit the monolith (`AI_WORKFLOW_BLUEPRINT.md` is now a redirect).
-4. Run `scripts/validate-blueprint.js` (Sprint 4) — every skill referenced in the phase binding matrix must exist in `.claude/skills/`, every agent in `.claude/agents/`.
-5. Submit a PR. Changes that alter agent behavior require eval evidence (RED-GREEN-REFACTOR — see `docs/blueprint/05-skills.md §Skill Change Protocol`).
-6. Update `docs/CHANGELOG.md` with the bump before merge.
+Every version bump requires a [`docs/CHANGELOG.md`](docs/CHANGELOG.md) entry with rationale.
 
-## Breaking change policy
+## Change process
 
-A **breaking change** is any MAJOR version bump: phase model, gate model, or hook contract change.
+1. Read [`docs/AI_CONTEXT.md`](docs/AI_CONTEXT.md) § Current Focus to confirm your change is not blocked by an active sprint.
+2. For MAJOR bumps: write an ADR documenting what changes and the migration path for adopters (`docs/adr/ADR-NNN-<slug>.md`).
+3. Implement the change against the live surface — `skills/`, `agents/`, `hooks/`, `scripts/`, or `docs/`. There is no monolith blueprint file.
+4. Bump `plugin.json` + `marketplace.json` in lockstep (ADR-006). Use `/release-patch` for PATCH bumps; manual edit for MINOR/MAJOR.
+5. Prepend `docs/CHANGELOG.md` with the bump rationale before merge.
+6. Submit PR via `/pr-reviewer` (skill) or the `code-reviewer` agent.
 
-- **MAJOR**: requires an ADR documenting what changed and the migration path for adopters. `plugin.json` version must bump in the same PR.
-- **MINOR**: `plugin.json` version bump + `docs/CHANGELOG.md` entry required in the same PR.
-- **PATCH**: `docs/CHANGELOG.md` entry sufficient; `plugin.json` bump optional if behavior is unchanged.
+## Breaking-change policy
 
-Canonical adopter pin: `plugin.json` `version` field — see [ADR-006](docs/DECISIONS.md#adr-006). Non-negotiable contracts that cannot change without MAJOR + ADR are listed in "What NOT to change" below.
+A **breaking change** is any MAJOR bump: phase model, gate model, hook contract, or agent dispatch contract change.
+
+- **MAJOR** — requires ADR + migration path; `plugin.json` + `marketplace.json` bump in same PR.
+- **MINOR** — `plugin.json` + `marketplace.json` lockstep bump + `docs/CHANGELOG.md` entry in same PR.
+- **PATCH** — `docs/CHANGELOG.md` entry sufficient; lockstep bump optional if behavior unchanged (docs-only PATCH may skip per pending P2 fix in TODO.md).
+
+Adopter pin surface: `plugin.json` `version` field — see [ADR-006](docs/DECISIONS.md). Non-negotiable contracts requiring MAJOR + ADR are listed in "What NOT to change" below.
 
 ## Skill changes
 
-- Skill changes that alter agent behavior require eval evidence before merge.
-- Use the RED-GREEN-REFACTOR protocol: commit before/after snapshots, run `python evals/measure.py compare <before.json> <after.json>`, attach output to PR. See `docs/blueprint/05-skills.md §Skill Change Protocol`.
-- Audit `description` field against agentskills.io rules: third-person, starts "Use when…", ≤500 chars, never summarizes process.
+- Skill changes that alter agent behavior require eval evidence before merge (ADR-016 / ADR-021).
+- Eval harness: `scripts/eval-skills.js` (structural-only today; behavioral 3-arm port queued as TASK-115 → Sprint 049, depends on TASK-116 acceptance harness → Sprint 048).
+- Audit `description` field against the rules in [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Skill Authoring Standards: third-person, starts `Use when…`, ≤500 chars, never summarizes process.
+- Line caps: `SKILL.md` ≤100 lines (overflow → `skills/<name>/references/`); `agents/*.md` ≤30 lines; `.claude/CLAUDE.md` ≤80 lines.
 
-## Eval gate (CI-enforced)
+## Eval gate (queued)
 
-PRs that touch any `.claude/skills/<name>/SKILL.md` file **must** include all three of the following in the same PR diff, or CI fails:
+Skill-behavior PRs require eval-evidence per ADR-021 DEC-4. Acceptance harness is **not yet wired** (TASK-116, Sprint 048). Until then, skill-behavior changes must include manual before/after demonstration in the PR body.
 
-1. **Before snapshot** — `evals/snapshots/<skill>/<task-id>-before.json` (committed before the skill change)
-2. **After snapshot** — `evals/snapshots/<skill>/<task-id>-after.json` (committed after the skill change)
-3. **Run record** — `evals/runs/<task-id>.md` containing `python evals/measure.py compare <before.json> <after.json>` output
-
-For **new skills** (no before state): omit the before snapshot and document the absence in the run record. The after snapshot and run record are still required.
-
-Gate script: `.claude/scripts/check-eval-gate.js` — runs automatically in CI on `pull_request` events.
+When TASK-116 lands, the harness lives at `tests/skill-triggering/`. Manual demonstration replaced by harness output reference. CI gate not yet enforced.
 
 ## What NOT to change
 
-The following are **non-negotiable** and cannot be relaxed without a MAJOR version bump and an ADR:
-- The 3-gate model (Gate 0, Gate 1, Gate 2)
-- The 6 workflow modes
-- The 27 hard stop catalog
-- The Thin-Coordinator Rule (§1 — dispatcher never Reads source files in compact-vulnerable phases)
+The following are **non-negotiable** and cannot be relaxed without a MAJOR bump and an ADR:
 
-Rationale: [`context/workflow/DESIGN_PHILOSOPHY.md`](context/workflow/DESIGN_PHILOSOPHY.md).
+- The 2-gate model (G1 Scope · G2 Design) — see [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Gates
+- The 4 workflow modes (`init` / `quick` / `mvp` / `sprint-bulk`) — see [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Modes
+- The one-way agent dispatch rule (only `dispatcher` spawns specialists; depth ≤2) — ADR-015
+- The `release-patch` HARD STOP at `git push` — see `skills/release-patch/SKILL.md`
+- The PreToolUse `git add && git commit` chain-guard — see `hooks/hooks.json`
+- The PowerShell-only hook policy on Windows — ADR-016
 
-## Feedback (until v2)
+Rationale: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) § Key Patterns + § Security Boundaries.
 
-Friction reports are the primary feedback channel while dev-flow is in internal v1 rollout. File a friction report before opening a GitHub issue. See [`docs/SUPPORT.md`](docs/SUPPORT.md) for the template and filing rules.
+## Feedback channel
 
-GitHub issues are for confirmed bugs only (reproduction steps verified). Feature requests go in `STRATEGY_REVIEW.md` as new R-N entries.
+Friction reports are the primary feedback surface during v1 rollout. File via [`docs/SUPPORT.md`](docs/SUPPORT.md) template before opening a GitHub issue.
+
+GitHub issues are reserved for confirmed bugs (reproduction steps verified). Feature requests go to TODO.md Backlog as new TASK-NNN entries via `/task-decomposer`.
 
 ## Quarterly maintenance
 
-- Re-audit `context/research/ADAPTATION_NOTES.md` when superpowers ships a minor or major update.
-- Run `/refactor-advisor .claude/skills/` and `/refactor-advisor .claude/agents/` quarterly.
-- Check `last-validated` dates on all skills — anything >6 months gets a staleness pass.
+- Re-diff behavioral lineage against `forrestchang/andrej-karpathy-skills` `CLAUDE.md` upstream when it ships a minor or major update; bump verified-at SHA + date in [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Behavioral Guidelines Lineage.
+- Run `/refactor-advisor skills/` and `/refactor-advisor agents/` quarterly.
+- Check `last_updated` dates on doc files — anything >6 months gets a staleness pass via `/lean-doc-generator`.

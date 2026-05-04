@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 045 T3 — TASK-117 additive lifts)
+last_updated: 2026-05-04 (post-Sprint-047 doc-surface alignment sweep)
 update_trigger: vocabulary added/changed; gate or mode count changes; agent roster changes; behavioral guidelines lineage updates
 status: current
 ---

@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 046 T2 — EPIC-Audit Phase 5 refresh)
+last_updated: 2026-05-04 (post-Sprint-047 doc-surface alignment sweep)
 update_trigger: Patterns, conventions, or current focus change; new skill or mode added
 status: current
 ---
@@ -12,7 +12,7 @@ MAX 100 LINES. Every line must be unique signal. For workflow vocabulary + gates
 ## Context Abstract
 
 system: Gate-driven workflow scaffold loaded as Claude Code plugin
-phase: EPIC-Audit Phase 5 active (Sprint 046 — stale doc refresh); Phase 6 next (Sprint 047 archive + close)
+phase: EPIC-Audit COMPLETE (Sprint 047 close); v1 ship prep next — Sprint 048 TASK-116 acceptance harness → Sprint 049 TASK-115 caveman 3-arm port → Sprint 050 v1 ship
 stack: Markdown · SKILL.md format · Node.js ≥18 · PowerShell ≥5.1 · Claude Code CLI · gh CLI
 load_next: ARCHITECTURE.md if touching workflow phases, agent dispatch, or harness hooks; .claude/CONTEXT.md for workflow vocab/principles/gates/modes
 
@@ -95,6 +95,6 @@ research file — `docs/research/<topic>-<YYYY-MM-DD>.md`; date-sanity gated by 
 
 ## Current Focus
 
-done: Sprint 045 — Phase 4f (skill-creator ADR-024) + TASK-104/117/118 closed; EPIC-Audit Phase 4 deep-dive (4a-4f) COMPLETE
-active: Sprint 046 — Phase 5 stale doc refresh (this file + ARCHITECTURE.md)
-next: Sprint 047 — Phase 6 archive ext-refs + close EPIC-Audit → v1 ship prep
+done: Sprint 047 — EPIC-Audit Phase 6 close (batch-archive 040-046 + ADR-025 + EPIC-Audit-retro.md); EPIC-Audit COMPLETE
+active: between sprints — doc-surface alignment sweep (post-EPIC-Audit drift in README/CONTRIBUTING/CLAUDE.md)
+next: Sprint 048 — TASK-116 skill-triggering acceptance harness (PowerShell port; eval-evidence prerequisite for TASK-115)
