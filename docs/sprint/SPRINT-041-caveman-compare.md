@@ -4,7 +4,7 @@ last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
 status: closed
 plan_commit: 87bb523
-close_commit: pending
+close_commit: 6640eb0
 ---
 
 # Sprint 041 — EPIC-Audit Phase 4b (Caveman compare)
