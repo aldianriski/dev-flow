@@ -103,7 +103,7 @@ No parallelism opportunity — sprint-bulk overlap gate would force sequential a
 
 ## Execution Log
 
-### 2026-05-04 | T1 done — pending commit
+### 2026-05-04 | T1 done — 1b7741b
 karpathy `EXAMPLES.md` fetched via gh CLI raw (`gh api -H "Accept: application/vnd.github.raw" repos/forrestchang/andrej-karpathy-skills/contents/EXAMPLES.md` — upstream SHA `2c606141936f`, 522 lines, 14838 bytes). Repo dir-list confirmed `EXAMPLES.md` at root (not per-skill). Format: ONE root-level file with 4 sections (one per principle: Think Before Coding / Simplicity First / Surgical Changes / Goal-Driven Execution), each with 2-3 Wrong-vs-Right Python code diffs.
 
 **Decision: N — do not adopt root-level EXAMPLES.md.** Reasons:
@@ -115,6 +115,13 @@ karpathy `EXAMPLES.md` fetched via gh CLI raw (`gh api -H "Accept: application/v
 Side findings (captured to memory):
 - gh CLI on Git Bash rewrites leading-slash endpoint paths to filesystem paths → `feedback_gh_cli_no_leading_slash.md`. Drop leading `/` on `gh api <path>` calls.
 
+### 2026-05-04 | T2 done — pending commit
+Wording diff complete via gh CLI raw fetch of karpathy `CLAUDE.md` (upstream SHA `2c606141936f`, 65 lines, 2357 bytes). Drift = INTENTIONAL adaptation for meta-repo context: "Coding" → "Acting" (P1 headline); "code" → "content"/"task" in P2/P3 bodies; bullets distilled to single paragraphs; orphan-removal subsection of P3 dropped; Goal-Driven `verify-step` format dropped (T3 decides re-add).
+
+Lineage locked in `.claude/CONTEXT.md` § Behavioral Guidelines Lineage — table of 4 principles with karpathy headline / dev-flow headline / adaptation note + MIT attribution + verified-at SHA + date. Forward maintenance contract: when upstream substantively changes, re-diff and bump SHA + date.
+
+Open finding flagged: `.claude/CONTEXT.md` lacks ownership-header frontmatter (owner / last_updated / update_trigger / status), violating CLAUDE.md DOC WORK rule. Out of T2 scope to add — surfaced to § Open Questions for Review.
+
 ---
 
 ## Files Changed
@@ -122,6 +129,8 @@ Side findings (captured to memory):
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
 | `docs/sprint/SPRINT-040-karpathy-patterns.md` | T1 | Execution Log + § Decisions DEC-1 row | low | — |
+| `.claude/CONTEXT.md` | T2 | NEW § Behavioral Guidelines Lineage block — 4-principle adaptation table + MIT attribution + upstream SHA lock | low | — |
+| `docs/sprint/SPRINT-040-karpathy-patterns.md` | T2 | Execution Log + § Decisions DEC-2 row | low | — |
 
 ---
 
@@ -130,12 +139,13 @@ Side findings (captured to memory):
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
 | DEC-1 (T1) | Do NOT adopt root-level `EXAMPLES.md` per karpathy convention | Meta-repo has no app-code domain; CLAUDE.md anti-patterns + skill Red Flags already cover principle-violation surface; karpathy value is principle wording (T2), not example format | ADR-019 (pending T4) |
+| DEC-2 (T2) | Lineage of 4 Behavioral Guidelines locked in CONTEXT.md § Behavioral Guidelines Lineage with MIT attribution + upstream SHA `2c606141936f` + date 2026-05-04 | Existing `.claude/CLAUDE.md` block was adopted without lineage record; drift risk grows silently. Locking SHA + adaptation table makes future re-diffs deterministic | ADR-019 (pending T4) |
 
 ---
 
 ## Open Questions for Review
 
-*(empty — surface execution-time uncertainties here.)*
+- **Q1 (T2)** — `.claude/CONTEXT.md` lacks ownership-header frontmatter (owner / last_updated / update_trigger / status), violating CLAUDE.md DOC WORK rule "Every doc file gets ownership header." Out of T2 surgical scope to add. Recommendation: add as P1 backlog task — convert CONTEXT.md to ownership-header convention. Sprint 040 acceptance "advance last_updated on CONTEXT.md" cannot be met until then; satisfied here by recording date `2026-05-04` inline in the new § Behavioral Guidelines Lineage block.
 
 ---
 
