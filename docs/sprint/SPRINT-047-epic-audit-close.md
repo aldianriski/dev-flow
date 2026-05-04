@@ -4,7 +4,7 @@ last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
 status: closed
 plan_commit: 04785a6
-close_commit: pending
+close_commit: c463458
 ---
 
 # Sprint 047 — EPIC-Audit Phase 6 (close EPIC-Audit + batch-archive Sprints 040-046 + final retro)

@@ -30,7 +30,7 @@ sprint: none
 
 ## Active Sprint
 
-→ docs/sprint/SPRINT-047-epic-audit-close.md
+→ — none —
 
 > Next: v1 ship prep — TASK-115 (caveman 3-arm eval harness port) + TASK-116 (superpowers acceptance harness) per ADR-020 DEC-3 + ADR-021 DEC-4.
 
