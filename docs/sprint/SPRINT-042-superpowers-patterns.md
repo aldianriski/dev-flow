@@ -115,7 +115,19 @@ T1 + T2 parallelizable (independent gh fetches: T1 = `hooks.json`, T2 = `run-hoo
 
 ## Execution Log
 
-*(Empty — populated during execution per Sprint Execute Protocol.)*
+### 2026-05-04 | T1 done — pending commit
+superpowers `hooks/hooks.json` fetched via gh CLI raw (upstream SHA `e7a2d16476bf`, 16 lines). License MIT confirmed via `gh api repos/obra/superpowers/license`.
+
+Output: `docs/research/superpowers-hooks-diff-2026-05-04.md` — full matcher comparison, hook-event coverage matrix, `${CLAUDE_PLUGIN_ROOT}` quoting check, recommendation.
+
+**Key findings:**
+- Matcher diff: dev-flow has extra `resume` (`startup|resume|clear|compact` vs `startup|clear|compact`). HARMLESS per locked OQ(b).
+- Coverage diff: dev-flow has 3 hooks (SessionStart + PreToolUse `Bash(git add*)` chain-guard + PostToolUse `Bash(git commit*)` codemap-refresh); superpowers has 1 hook (SessionStart only). dev-flow surface is RICHER than upstream.
+- Both quote `${CLAUDE_PLUGIN_ROOT}` (Windows-space-in-path safe).
+- Invocation divergence: superpowers uses shim (`run-hook.cmd` polyglot); dev-flow uses direct PowerShell call. T2 audits the shim.
+- superpowers SessionStart injects `using-superpowers` SKILL.md as `additionalContext`; dev-flow SessionStart does verification only (no injection). Different design — dev-flow's `/prime` skill handles ordered loads on demand.
+
+**Recommendation locked:** keep-superset, no change to dev-flow `hooks.json` matcher.
 
 ---
 
@@ -125,15 +137,17 @@ T1 + T2 parallelizable (independent gh fetches: T1 = `hooks.json`, T2 = `run-hoo
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
+| `docs/research/superpowers-hooks-diff-2026-05-04.md` | T1 | NEW (~80 lines) — verbatim superpowers hooks.json + side-by-side matcher + coverage matrix + reconciliation rec | low | — |
+| `docs/sprint/SPRINT-042-superpowers-patterns.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2 rows | low | — |
 
 ---
 
 ## Decisions
 
-*(Empty — populated as significant decisions land. Cross-link to ADR-021.)*
-
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
+| DEC-1 (T1) | SessionStart matcher reconciliation = **keep-superset** (`startup\|resume\|clear\|compact`); no change to dev-flow `hooks.json` | Extra `resume` matcher is harmless; covers session-resume signal coverage that align-down would lose; upstream PR out of scope | ADR-021 (pending T4) |
+| DEC-2 (T1) | Document hook-surface divergence in research note: dev-flow has RICHER hook surface (3 hooks vs superpowers' 1) — PreToolUse chain-guard + PostToolUse codemap-refresh are dev-flow value-adds | Audit framing assumed dev-flow learns FROM superpowers; reality is bidirectional — record it for future re-diff cadence | ADR-021 (pending T4) |
 
 ---
 
