@@ -114,6 +114,20 @@ Output: `docs/research/caveman-skill-diff-2026-05-04.md` (section-level matrix +
 
 No new caveman skill in dev-flow recommended — both freely installable; cloning = maintenance burden with no value. Lineage credit only via ADR-020.
 
+### 2026-05-04 | T2 done — pending commit
+Eval-harness audit complete. Sources: local plugin cache `84cc3c14fa1e/evals/{llm_run.py,measure.py}` (juliusbrussee SHA `ef6050c5e184`, 105 + 107 lines).
+
+Output: `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` (file-by-file walkthrough + tokenizer parity matrix + snapshot schema + 5 risks for TASK-115).
+
+**Key findings:**
+- `llm_run.py` 3-arm runner: baseline / terse-control / per-skill via `claude -p --system-prompt`. Snapshot schema is straight JSON (`metadata` + `prompts` + `arms`).
+- `measure.py` uses tiktoken `o200k_base` — OpenAI tokenizer, approximation of Claude BPE; ratios meaningful, absolutes "approximate output-length reduction."
+- Node port path: `gpt-tokenizer` (preferred, pure JS, ~1.2M weekly downloads) → `js-tiktoken` fallback → `@dqbd/tiktoken` WASM last resort. Pre-verification step required for byte parity.
+- Snapshot schema lock 1:1 with caveman so cross-tool validation works (caveman `measure.py` can read dev-flow snapshots; vice versa).
+- 5 risks for TASK-115: tokenizer parity (medium), `claude -p` non-determinism (medium), spawn test coverage (low), Windows space-in-PATH (low), snapshot file growth (low).
+
+**Decision:** Adopt 3-arm pattern (DEC-3); port plan ready (DEC-4); TASK-115 backlog annotation queued for sprint close.
+
 ---
 
 ## Files Changed
@@ -122,6 +136,8 @@ No new caveman skill in dev-flow recommended — both freely installable; clonin
 |:-----|:-----|:-------|:-----|:-----------|
 | `docs/research/caveman-skill-diff-2026-05-04.md` | T1 | NEW (~70 lines) — section-level matrix + winner-per-axis + net assessment | low | — |
 | `docs/sprint/SPRINT-041-caveman-compare.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2 rows | low | — |
+| `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` | T2 | NEW (~110 lines) — file walkthrough + tokenizer parity + snapshot schema + 5-risk matrix for TASK-115 | low | — |
+| `docs/sprint/SPRINT-041-caveman-compare.md` | T2 | Execution Log + § Decisions DEC-3, DEC-4 rows | low | — |
 
 ---
 
@@ -131,6 +147,8 @@ No new caveman skill in dev-flow recommended — both freely installable; clonin
 |:---|:---------|:-------|:----|
 | DEC-1 (T1) | Do NOT fork caveman into dev-flow; document as external reference only | Both juliusbrussee + mattpocock variants freely installable (MIT); cloning creates maintenance burden without value. juliusbrussee already in local plugin cache | ADR-020 (pending T3) |
 | DEC-2 (T1) | Lineage credit to BOTH variants in ADR-020 (juliusbrussee primary, mattpocock minimal-skill reference); SHAs pinned `ef6050c5e184` + `b843cb5ea74b` | Two licensed lineages; both MIT; future re-diff needs SHA anchors | ADR-020 (pending T3) |
+| DEC-3 (T2) | Adopt caveman 3-arm eval methodology for dev-flow (port shape locked) | Sprint 034 ADR-001 already adopted in spirit; T2 audit confirms portability + locks Node tokenizer choice (`gpt-tokenizer` primary) + snapshot schema 1:1 with caveman | ADR-020 (pending T3) |
+| DEC-4 (T2) | TASK-115 implementation deferred to its own sprint; backlog annotation links to T2 research note | Implementation = real-code sprint with separate test surface; out of scope for this decision-only sprint | ADR-020 (pending T3) |
 
 ---
 
