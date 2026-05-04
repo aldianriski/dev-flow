@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-03 (Sprint 39 archived)
+last_updated: 2026-05-04 (Sprint 047 — EPIC-Audit close: batch-archived Sprints 040-046)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,61 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 046 — EPIC-Audit Phase 5 stale doc refresh (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-046-stale-doc-refresh.md](sprint/SPRINT-046-stale-doc-refresh.md)
+- Plan-lock `4a70efe` · T1 `b782584` · T2 `8c7d869` · close `2a99d82`
+- Summary: refreshed `docs/ARCHITECTURE.md` (87→75 lines; ASCII collapsed, Component Map row-by-row rewrite, init-analyst/MANIFEST.json/blueprint refs/24-hard-stops claim removed) + `docs/AI_CONTEXT.md` (87→100 lines cap exact; Sprint 18/23/24 references replaced with EPIC-Audit Phase 5 active context). Both stale → current. Cross-doc verification zero contradictions.
+- ADRs: — (refresh ≠ decision; max stays 024)
+
+## Sprint 045 — Phase 4f skill-creator + TASK-104/117/118 (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md](sprint/SPRINT-045-skill-creator-and-context-lifts.md)
+- Plan-lock `89d2389` · T1 `6b094bf` · T2 `736c6bc` · T3 `fe30013` · T4 `2d1fbb6` · close `80920ef`
+- Summary: anthropics/skills/skill-creator (Apache 2.0, FIRST non-MIT ext-ref) 5-axis diff vs dev-flow write-a-skill — 3 lift candidates queued to TASK-116 (iteration loop / description-pushiness / TOC convention) + 4 bidirectional findings. TASK-104 closed (CONTEXT.md ownership header). TASK-117 closed (3 additive CONTEXT.md sections: `_Avoid_` annotations + § Relationships + § Flagged Ambiguities; 129/130 lines). TASK-118 closed (lean-doc-generator Step 0b date-sanity pre-flight; v2.0.0→2.1.0; closes 4-sprint recurring friction).
+- ADRs: ADR-024 — skill-creator patterns (7 decisions). EPIC-Audit Phase 4 deep-dive series (4a-4f) COMPLETE.
+
+## Sprint 044 — EPIC-Audit Phase 4e GSD patterns (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-044-gsd-patterns.md](sprint/SPRINT-044-gsd-patterns.md)
+- Plan-lock `aed05f0` · T1 `30a0c4f` · T2 `526c0af` · T3 `54d492f` · close `8931230`
+- Summary: gsd-build/get-shit-done deep audit (164+ assets vs dev-flow 24, 6.8× scale gap). 9-phase pipeline + commands namespace + contexts/+plans/+CONTEXT.md reconcile. 5 NO LIFT + 2 DEFER + 2 bidirectional findings. Zero `.out-of-scope/` pointers (defers are scale-driven, not concept-rejecting).
+- ADRs: ADR-023 — GSD patterns (9 decisions, scale-driven defer with explicit re-eval triggers).
+
+## Sprint 043 — EPIC-Audit Phase 4d Mattpocock skill library (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-043-mattpocock-skill-library.md](sprint/SPRINT-043-mattpocock-skill-library.md)
+- Plan-lock `2813289` · T1 `db88a40` · T2 `39a56f4` · T3 `5d2c2e7` · T4 `cacc199` · close `0a69140`
+- Summary: mattpocock/skills 4-skill diff (tdd/diagnose/zoom-out/task-decomposer) — 5 trigger-phrase lift candidates queued to TASK-116; bidirectional zoom-out finding (dev-flow > mattpocock). Bucket migration deferred (17-skill scale; threshold 20). 3 ADDITIVE CONTEXT.md lifts recommended (queued as TASK-117). NEW `.out-of-scope/` directory + 3 negative-space pointers (run-hook-shim / tests-dir-empty-scaffold / statusline-savings-badge).
+- ADRs: ADR-022 — mattpocock patterns (7 decisions; LOCKS `docs/adr/` convention as documented standard for ≥016).
+
+## Sprint 042 — EPIC-Audit Phase 4c Superpowers patterns (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-042-superpowers-patterns.md](sprint/SPRINT-042-superpowers-patterns.md)
+- Plan-lock `828b200` · T1 `c66e4b7` · T2 `cf3cbc8` · T3 `2caa3bd` · T4 `c11eb34` · close `74e1e50`
+- Summary: obra/superpowers hooks.json + run-hook.cmd shim + acceptance harness audit. Matcher reconciliation = keep-superset (dev-flow `startup|resume|clear|compact` HARMLESS extension). Shim adoption DEFERRED (cross-platform polyglot solves problem dev-flow doesn't have per ADR-016 PowerShell-only). Skill-triggering acceptance harness pattern adopted; 3-skill seed (prime/orchestrator/tdd) queued as TASK-116. PR template lifted from superpowers + adapted (drop frustration tone, add dev-flow DoD + ADR-016 skill rule).
+- ADRs: ADR-021 — superpowers patterns (6 decisions).
+
+## Sprint 041 — EPIC-Audit Phase 4b Caveman compare (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-041-caveman-compare.md](sprint/SPRINT-041-caveman-compare.md)
+- Plan-lock `87bb523` · T1 `0ee6f8d` · T2 `b79815f` · T3 `7ab9ff6` · close `6640eb0`
+- Summary: caveman dual-source diff (juliusbrussee `ef6050c5e184` + mattpocock `b843cb5ea74b` — both MIT). NO fork (both freely installable; juliusbrussee already in user plugin cache). 3-arm eval methodology adopted; port deferred to TASK-115 (gpt-tokenizer + snapshot schema 1:1 + 5-risk matrix). caveman-shrink MCP middleware REJECTED (transport-level rewrite conflates skill discipline with bytes-on-wire mutation; review signal lost). Statusline-badge contract DEFERRED per probe direction.
+- ADRs: ADR-020 — caveman patterns (5 decisions).
+
+## Sprint 040 — EPIC-Audit Phase 4a Karpathy patterns (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-040-karpathy-patterns.md](sprint/SPRINT-040-karpathy-patterns.md)
+- Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close `3fec973`
+- Summary: karpathy CLAUDE.md 4-principle Behavioral Guidelines lineage locked in `.claude/CONTEXT.md` (MIT, upstream SHA `2c606141936f`, adaptation table). Verify-step micro-protocol confirmed at G2 design-analyst MICRO-TASKS (already shipped Sprint 035 retroactively credited). Per-skill EXAMPLES.md convention REJECTED (meta-repo has no app-code domain).
+- ADRs: ADR-019 — karpathy patterns (3-decision: lineage lock + verify-step retro credit + EXAMPLES.md reject).
+
+## EPIC-Audit milestone — Phase 4 deep-dive series complete (Sprints 040-045)
+
+6 external references audited (karpathy / caveman / superpowers / mattpocock / GSD / skill-creator) across 6 sprints. 6 ADRs landed (019-024). 9 research notes. 9 bidirectional findings (where dev-flow > upstream). Pattern fully stable across 5 sprints of "decision-only sprint with 0-2 mechanical lifts" + 5 sprints of "pre-resolve OQs at promote per approve all". TASK-115 / TASK-116 queued for v1 ship prep (ADR-016 eval-evidence rule).
 
 ---
 
