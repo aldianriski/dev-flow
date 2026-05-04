@@ -128,6 +128,16 @@ Output: `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` (file-by-f
 
 **Decision:** Adopt 3-arm pattern (DEC-3); port plan ready (DEC-4); TASK-115 backlog annotation queued for sprint close.
 
+### 2026-05-04 | T3 done — pending commit
+ADR-020 written at `docs/adr/ADR-020-caveman-patterns.md`. Status: Accepted. Captures 5 decisions:
+- D1: no caveman fork in dev-flow (DEC-1)
+- D2: lineage credit to both variants with SHA pins (DEC-2)
+- D3: adopt 3-arm eval methodology — port shape locked (DEC-3 + DEC-4)
+- D4: reject caveman-shrink MCP middleware (transport-level rewrite conflates skill discipline with bytes-on-wire mutation; loss of code-review signal)
+- D5: defer statusline-badge per probe direction (OQ1)
+
+Format follows ADR-019 precedent. Both upstreams MIT confirmed via `gh api repos/.../license`. ADR-020 sequential per Sprint 040 retro pattern; max-ADR check confirmed = 019 before allocation.
+
 ---
 
 ## Files Changed
@@ -138,6 +148,8 @@ Output: `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` (file-by-f
 | `docs/sprint/SPRINT-041-caveman-compare.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2 rows | low | — |
 | `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` | T2 | NEW (~110 lines) — file walkthrough + tokenizer parity + snapshot schema + 5-risk matrix for TASK-115 | low | — |
 | `docs/sprint/SPRINT-041-caveman-compare.md` | T2 | Execution Log + § Decisions DEC-3, DEC-4 rows | low | — |
+| `docs/adr/ADR-020-caveman-patterns.md` | T3 | NEW (~75 lines) — 5-decision ADR (no fork / lineage / 3-arm port / caveman-shrink reject / statusline defer) | low | — |
+| `docs/sprint/SPRINT-041-caveman-compare.md` | T3 | Execution Log + § Decisions DEC-5, DEC-6 rows | low | — |
 
 ---
 
@@ -145,10 +157,12 @@ Output: `docs/research/caveman-eval-harness-port-notes-2026-05-04.md` (file-by-f
 
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
-| DEC-1 (T1) | Do NOT fork caveman into dev-flow; document as external reference only | Both juliusbrussee + mattpocock variants freely installable (MIT); cloning creates maintenance burden without value. juliusbrussee already in local plugin cache | ADR-020 (pending T3) |
-| DEC-2 (T1) | Lineage credit to BOTH variants in ADR-020 (juliusbrussee primary, mattpocock minimal-skill reference); SHAs pinned `ef6050c5e184` + `b843cb5ea74b` | Two licensed lineages; both MIT; future re-diff needs SHA anchors | ADR-020 (pending T3) |
-| DEC-3 (T2) | Adopt caveman 3-arm eval methodology for dev-flow (port shape locked) | Sprint 034 ADR-001 already adopted in spirit; T2 audit confirms portability + locks Node tokenizer choice (`gpt-tokenizer` primary) + snapshot schema 1:1 with caveman | ADR-020 (pending T3) |
-| DEC-4 (T2) | TASK-115 implementation deferred to its own sprint; backlog annotation links to T2 research note | Implementation = real-code sprint with separate test surface; out of scope for this decision-only sprint | ADR-020 (pending T3) |
+| DEC-1 (T1) | Do NOT fork caveman into dev-flow; document as external reference only | Both juliusbrussee + mattpocock variants freely installable (MIT); cloning creates maintenance burden without value. juliusbrussee already in local plugin cache | ADR-020 |
+| DEC-2 (T1) | Lineage credit to BOTH variants in ADR-020 (juliusbrussee primary, mattpocock minimal-skill reference); SHAs pinned `ef6050c5e184` + `b843cb5ea74b` | Two licensed lineages; both MIT; future re-diff needs SHA anchors | ADR-020 |
+| DEC-3 (T2) | Adopt caveman 3-arm eval methodology for dev-flow (port shape locked) | Sprint 034 ADR-001 already adopted in spirit; T2 audit confirms portability + locks Node tokenizer choice (`gpt-tokenizer` primary) + snapshot schema 1:1 with caveman | ADR-020 |
+| DEC-4 (T2) | TASK-115 implementation deferred to its own sprint; backlog annotation links to T2 research note | Implementation = real-code sprint with separate test surface; out of scope for this decision-only sprint | ADR-020 |
+| DEC-5 (T3) | Reject caveman-shrink MCP middleware for dev-flow | Transport-level rewrite conflates skill-internalization discipline with mechanical bytes-on-wire mutation; commit-diff signal lost; review unreviewable | ADR-020 |
+| DEC-6 (T3) | Defer statusline-badge contract per Sprint 034 probe direction (line 165); revisit when `dev-flow-compress` hardened | Coupling badge to a not-yet-hardened compression skill is premature; OQ1 carries it forward | ADR-020 |
 
 ---
 
