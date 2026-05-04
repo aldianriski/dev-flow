@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 045 closed — Phase 4f + TASK-104/117/118 + EPIC-Audit Phase 4 series complete)
+last_updated: 2026-05-04 (Sprint 046 promoted — EPIC-Audit Phase 5 stale doc refresh: ARCHITECTURE.md + AI_CONTEXT.md)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 046
 ---
 
 > **External references**
@@ -36,9 +36,9 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ docs/sprint/SPRINT-046-stale-doc-refresh.md
 
-> Next: Sprint 046 — EPIC-Audit Phase 5 (stale doc refresh — `ARCHITECTURE.md` + `AI_CONTEXT.md`).
+> Next: Sprint 047 — EPIC-Audit Phase 6 (archive external refs + close EPIC-Audit). Held per roadmap; do not pull forward into Sprint 046.
 
 ---
 
