@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 040 closed — EPIC-Audit Phase 4a Karpathy patterns)
+last_updated: 2026-05-04 (Sprint 041 promoted — EPIC-Audit Phase 4b Caveman compare)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 041
 ---
 
 > **External references**
@@ -36,9 +36,10 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ [docs/sprint/SPRINT-041-caveman-compare.md](docs/sprint/SPRINT-041-caveman-compare.md) — EPIC-Audit Phase 4b (Caveman compare) · status: planning
 
-> Next: Sprint 041 — EPIC-Audit Phase 4b (Caveman compare).
+> Tasks: T1 SKILL.md diff (caveman vs mattpocock) · T2 eval-harness port audit · T3 ADR-020 (decisions + caveman-shrink reject + statusline defer).
+> Next: Sprint 042 — EPIC-Audit Phase 4c (Superpowers patterns).
 
 ---
 
@@ -48,7 +49,6 @@ sprint: none
 
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
 
-- [ ] **Phase 4b — Caveman compare (plugin vs mattpocock skill)** (Sprint 41)
 - [ ] **Phase 4c — Superpowers patterns** (Sprint 42)
 - [ ] **Phase 4d — Mattpocock skill library** (Sprint 43)
 - [ ] **Phase 4e — Get shit done patterns** (Sprint 44)
