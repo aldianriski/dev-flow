@@ -188,6 +188,22 @@ DOC WORK rule violation surfaced in Sprint 040 Q1 now closed.
 
 Per OQ-e: T2 lands as separate commit before T3 (CONTEXT.md edit ordering for diff isolation).
 
+### 2026-05-04 | T3 done — pending commit
+TASK-117 closed: 3 additive `.claude/CONTEXT.md` sections landed per Sprint 043 DEC-5 + Sprint 045 OQ-f scope:
+
+1. **`_Avoid_` annotations on § Vocabulary** — 3 italic prose lines added below the table, addressing the most-confused term pairs (skill↔agent / mode↔gate / red flag↔BLOCKED).
+2. **NEW § Relationships section** — inserted between § Modes and § Agent Roster. 5 bullets capturing mode→gate / gate→agent / dispatcher→specialist / skill↔agent / CONTEXT.md→all.
+3. **NEW § Flagged Ambiguities section** — appended at end. 4 entries: Sprint 035 dev-flow→orchestrator rename + Sprint 035 orchestrator→dispatcher rename + Sprint 039 codemap-refresh skill-vs-script + research-note-vs-ADR-vs-sprint-plan distinction.
+
+Total file length: **129 lines** (within ≤130 cap; 24 lines added net). `last_updated` bumped to `2026-05-04 (Sprint 045 T3 — TASK-117 additive lifts)`.
+
+CONTEXT.md ripple risk: every agent + skill reads CONTEXT.md. Re-prime + agent-context refresh checklist required post-T3.
+
+**Re-prime + refresh checklist:**
+- `/prime` skill should be re-run by user at next session start to reload CONTEXT.md
+- Agent context cache will refresh on next dispatcher invocation (no manual refresh needed for agents at session level)
+- Surface to user with diff summary in close commit message + sprint retro
+
 ---
 
 ## Files Changed
@@ -199,6 +215,8 @@ Per OQ-e: T2 lands as separate commit before T3 (CONTEXT.md edit ordering for di
 | `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T1 | Execution Log + § Decisions DEC-1 through DEC-7 rows | low | — |
 | `.claude/CONTEXT.md` | T2 | NEW frontmatter header (TASK-104; 6 lines added top, 0 removed) | low | — |
 | `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T2 | Execution Log + § Decisions DEC-8 row | low | — |
+| `.claude/CONTEXT.md` | T3 | 3 additive sections (TASK-117): 3 `_Avoid_` annotations + § Relationships + § Flagged Ambiguities; 105 → 129 lines (24 added) | medium | — |
+| `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T3 | Execution Log + § Decisions DEC-9 row | low | — |
 
 ---
 
@@ -214,6 +232,7 @@ Per OQ-e: T2 lands as separate commit before T3 (CONTEXT.md edit ordering for di
 | DEC-6 (T1) | Record 4 bidirectional findings (dev-flow > Anthropic on explicit checklist + line cap + red-flags template + mandatory ref frontmatter) per Sprint 042/043/044 pattern | Pattern is load-bearing for ext-ref audits (4 sprints, 9 total findings); prevents future "match upstream" pressure | ADR-024 |
 | DEC-7 (T1) | Scale-driven defer note — no `.out-of-scope/` pointers warranted (defers are scale-fit, not concept-reject) per Sprint 044 ADR-023 discipline | Pointer files only for concept rejections; scale-driven defers stay in ADR § Decision text | ADR-024 |
 | DEC-8 (T2) | TASK-104 closed — `.claude/CONTEXT.md` ownership header added (4-field frontmatter); DOC WORK rule violation closed | Sprint 040 Q1 finding addressed; T3 prerequisite satisfied (header exists for last_updated bumps) | (no ADR — implements DOCS_Guide §3 spec) |
+| DEC-9 (T3) | TASK-117 closed — 3 additive `.claude/CONTEXT.md` sections landed (3 `_Avoid_` annotations + § Relationships + § Flagged Ambiguities); 129/130 lines | Sprint 043 DEC-5 recommendations executed per OQ-f scope (≤5 annotations + 1 relationships section + ≤4 ambiguity entries); cap held; ripple risk acknowledged via re-prime checklist | (no ADR — Sprint 043 DEC-5 is the ADR; T3 implements) |
 
 ---
 

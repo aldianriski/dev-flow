@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04
+last_updated: 2026-05-04 (Sprint 045 T3 — TASK-117 additive lifts)
 update_trigger: vocabulary added/changed; gate or mode count changes; agent roster changes; behavioral guidelines lineage updates
 status: current
 ---
@@ -23,6 +23,10 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 | **vertical slice** | Independently demoable end-to-end behavior unit |
 | **deep module** | Module whose interface is simple relative to its implementation; high leverage |
 | **grill** | One-question-at-a-time interview to stress-test a plan before committing |
+
+_Avoid: confusing **skill** with **agent** — skills are user-invokable slash commands; agents are dispatcher-spawned specialists._
+_Avoid: confusing **mode** with **gate** — modes are operational context (init/quick/mvp/sprint-bulk); gates are checkpoints within a mode (G1/G2)._
+_Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a skill mid-execution; `BLOCKED` is an analyst output that stops sprint progression._
 
 ---
 
@@ -64,6 +68,16 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 
 ---
 
+## Relationships
+
+- **mode → gate** — each mode declares which gates fire (`init` none / `quick` G1 / `mvp` G1+G2 / `sprint-bulk` G1+G2 batched once per sprint).
+- **gate → agent** — G1 may auto-spawn `scope-analyst` (size unclear); G2 always auto-spawns `design-analyst`.
+- **dispatcher → specialist** — `dispatcher` is the only agent that spawns other agents; specialists return to dispatcher (one-way, depth ≤2 per ADR-015).
+- **skill → agent** — skills do NOT spawn agents directly; orchestrator dispatch-table maps work to agents via dispatcher.
+- **CONTEXT.md → all** — every agent + skill reads CONTEXT.md before acting (`Context first` principle).
+
+---
+
 ## Agent Roster
 
 | Agent | Trigger | Spawned by |
@@ -102,3 +116,14 @@ The four principles in `.claude/CLAUDE.md` § Behavioral Guidelines (Think Befor
 | 4 | Goal-Driven Execution | Goal-Driven Execution | distilled prose; transform examples + verify-step format are out (T3 decides whether to re-add) |
 
 **License:** MIT. Attribution: `forrestchang/andrej-karpathy-skills` (Andrej Karpathy patterns). When the upstream `CLAUDE.md` substantively changes, re-diff and bump the verified-at SHA + date here. ADR-019 (Sprint 040) records the adoption decision.
+
+---
+
+## Flagged Ambiguities
+
+Resolved naming/concept ambiguities — pointer surface for new contributors.
+
+- **skill `dev-flow` vs plugin `dev-flow`** (resolved Sprint 035 ADR-014) — skill was renamed to `orchestrator`; plugin name preserved. `/orchestrator` invokes the workflow skill; `dev-flow:` is the plugin namespace prefix.
+- **agent `orchestrator` vs skill `orchestrator`** (resolved Sprint 035 ADR-014) — agent was renamed to `dispatcher`; skill `orchestrator` is the workflow command; agent `dispatcher` spawns specialists.
+- **`codemap-refresh` skill vs `scripts/codemap-refresh.ps1`** (resolved Sprint 039) — skill is the manual `/codemap-refresh` slash command for human invocation; PS script is the auto-fired post-commit hook target. Both regenerate `docs/codemap/CODEMAP.md` + `handoff.json`.
+- **research note vs ADR vs sprint plan** (resolved Sprint 040+) — research notes (`docs/research/<topic>-<date>.md`) are evaluation findings; ADRs (`docs/adr/ADR-NNN-*.md`) are decisions with Context/Decision/Alternatives/Consequences; sprint plans (`docs/sprint/SPRINT-NNN-*.md`) are execution containers. Decisions cross-link to research; sprints cross-link to ADRs.
