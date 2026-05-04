@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 042 closed — EPIC-Audit Phase 4c Superpowers patterns)
+last_updated: 2026-05-04 (Sprint 043 promoted — EPIC-Audit Phase 4d Mattpocock skill library)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 043
 ---
 
 > **External references**
@@ -36,9 +36,10 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ [docs/sprint/SPRINT-043-mattpocock-skill-library.md](docs/sprint/SPRINT-043-mattpocock-skill-library.md) — EPIC-Audit Phase 4d (Mattpocock skill library) · status: active
 
-> Next: Sprint 043 — EPIC-Audit Phase 4d (Mattpocock skill library).
+> Tasks: T1 4-skill diff (tdd/diagnose/zoom-out/task-decomposer) · T2 bucket-migration cost + CONTEXT.md reconcile · T3 `.out-of-scope/` adoption + 3 pointers · T4 ADR-022.
+> Next: Sprint 044 — EPIC-Audit Phase 4e (Get-shit-done patterns).
 
 ---
 
@@ -48,7 +49,6 @@ sprint: none
 
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
 
-- [ ] **Phase 4d — Mattpocock skill library** (Sprint 43)
 - [ ] **Phase 4e — Get shit done patterns** (Sprint 44)
 - [ ] **Phase 4f — Skill wrapper patterns with skill-creator** (Sprint 45)
 - [ ] **Phase 5 — Stale doc refresh** (Sprint 46) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
