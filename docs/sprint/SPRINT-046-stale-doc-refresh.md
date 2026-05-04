@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending
+status: closed
+plan_commit: 4a70efe
 close_commit: pending
 ---
 
@@ -128,23 +128,36 @@ T1 and T2 are mutually independent — recommended sequential execution (T1 firs
 
 ## Sprint DoD
 
-- [ ] T1 `docs/ARCHITECTURE.md` refresh: ASCII collapse + Component Map row-by-row audit + Reference Files + Key Patterns + frontmatter bump. Status flipped to `current`. ≤150 lines preserved.
-- [ ] T2 `docs/AI_CONTEXT.md` refresh: Current Focus + Patterns + Conventions + Do Not + Doc Scope Map + Context Load Order + Identity counts + cross-links + frontmatter bump. Status flipped to `current`. ≤100 lines preserved.
-- [ ] T3 TODO.md update: Active Sprint pointer (plan-lock) + Backlog tick (close) + Roadmap row (close) + Changelog block (close) + frontmatter bump.
-- [ ] Bidirectional cross-link verified: ARCHITECTURE.md → AI_CONTEXT.md AND AI_CONTEXT.md → ARCHITECTURE.md.
-- [ ] Plan-lock commit landed before any T1..T3 commit.
-- [ ] Close commit + CHANGELOG row + retro.
-- [ ] Open questions (1–8) resolved on promote, recorded as locked decisions.
-- [ ] Date verification: all artifacts stamped 2026-05-04 (manual override per OQ-4; Step 0b protects future sprints).
-- [ ] No new ADR coined this sprint (OQ-8 discipline). Max ADR stays at 024.
-- [ ] Phase 6 NOT touched (OQ-3 discipline). external-refs-probe.md untouched. EPIC-Audit row in TODO.md remains `[ ]` until Sprint 047.
-- [ ] Zero unrelated edits (T1 row-by-row only; T2 surgical only; T3 mechanical only). Sprint shape verified via per-task git diff stats.
+- [x] T1 `docs/ARCHITECTURE.md` refresh: ASCII collapsed (LAW 4) + full Component Map rewrite + Reference Files + Key Patterns + frontmatter bump. Status flipped to `current`. 87 → 75 lines (under target ≤105 by 30). → b782584.
+- [x] T2 `docs/AI_CONTEXT.md` refresh: Current Focus + Patterns + Conventions + Do Not + Identity + Structure + cross-links + frontmatter bump. Status flipped to `current`. 87 → 100 lines (cap exact). → 8c7d869.
+- [x] T3 TODO.md update: Backlog Phase 5 [x] + Changelog block + Active Sprint cleared + frontmatter bump → this commit.
+- [x] Bidirectional cross-link verified: ARCHITECTURE.md → AI_CONTEXT.md (Reference Files section); AI_CONTEXT.md → ARCHITECTURE.md (Context Load Order + Navigation Guide + Patterns sections).
+- [x] Plan-lock commit landed before any T1..T3 commit. → 4a70efe.
+- [x] Close commit + CHANGELOG row + retro. → this commit.
+- [x] Open questions (1–8) resolved on promote, recorded as locked decisions. → all 8 in § Open Questions block above.
+- [x] Date verification: all artifacts stamped 2026-05-04 (manual override per OQ-4; Step 0b protects future sprints).
+- [x] No new ADR coined this sprint (OQ-8 discipline). Max ADR stays at 024.
+- [x] Phase 6 NOT touched (OQ-3 discipline). external-refs-probe.md untouched. EPIC-Audit row in TODO.md remains `[ ]` until Sprint 047.
+- [x] Zero unrelated edits — git diff per task: T1 +45 -57 (net -12); T2 +76 -63 (net +13); T3 TODO.md only.
 
 ---
 
 ## Execution Log
 
-*(Populated during execution per Sprint Execute Protocol — append-only blocks dated YYYY-MM-DD HH:MM | T<N> done.)*
+### 2026-05-04 | T1 done — b782584
+ARCHITECTURE.md full rewrite. 87 → 75 lines. Removed: 3-gate model / 6-mode dispatch / .claude/skills/ paths / init-analyst (never existed) / MANIFEST.json / 24 hard-stops claim / track-change.js + ci-status.js / docs/blueprint/* references / ASCII System Context diagram (collapsed per LAW 4 OQ-1). Added: 17-skill component map at skills/ root + 7-agent topology (1 dispatcher + 6 specialists per ADR-015) + Sprint 038-045 hook surface (SessionStart PS + PostToolUse codemap-refresh + PreToolUse chain-guard) + Behavioral Guidelines Lineage cross-link (ADR-019) + .out-of-scope/ surface (ADR-022) + gh CLI canonical fetch (Sprint 040 codified) + ADR registry split (≥016 in docs/adr/, ≤015 frozen in DECISIONS.md per Sprint 043 DEC-7). All Component Map paths verified to exist via `ls`. 75 lines is well under target ≤105 — net -12 lines.
+
+### 2026-05-04 | T2 done — 8c7d869
+AI_CONTEXT.md full rewrite. 87 → 100 lines (cap exact). Removed: Sprint 18/23/24 references (28 sprints out of date) / 6-mode dispatch / 10 SKILL.md count / 3-gate / 24 hard-stops / MANIFEST.json / docs/blueprint/* / Python evals/. Added: EPIC-Audit Phase 5 active context + 17 user-invocable skills count + 7 agents (1 dispatcher + 6 specialists) + Sprint 040-045 conventions surface (gh CLI + Git Bash leading-slash + ADR sequential allocation + .out-of-scope/ + Behavioral Lineage + Step 0b date-sanity + research-vs-implementation split per Sprint 041 DEC-4) + cross-link discipline (defer to .claude/CONTEXT.md for vocab/principles/gates/modes/agents — no duplication per OQ-2). Initial draft was 104 lines; trimmed Structure + Conventions sections to fit cap. 
+
+Bidirectional cross-link verified post-T2: ARCHITECTURE.md § Reference Files → AI_CONTEXT.md (implicit via doc registry); AI_CONTEXT.md § Context Load Order + § Navigation Guide + § Patterns → ARCHITECTURE.md (3 explicit pointers).
+
+### 2026-05-04 | T3 done — close commit
+TODO.md mechanical updates: Active Sprint pointer cleared (`— none —`); Backlog Phase 5 row marked `[x]` with sprint-close note; Sprint 046 Changelog block added with file-by-file change summary + commit SHAs; frontmatter `last_updated:` bumped + `sprint:` cleared to `none`. CHANGELOG note updated to include Sprint 046 in pending-archive list (still 7 sprints stranded — release-patch skip-bump-on-docs-only friction continues, flagged for separate fix).
+
+Cross-doc verification: zero contradictions found between (T1 ARCHITECTURE.md, T2 AI_CONTEXT.md, .claude/CONTEXT.md Sprint 045 T3 state, .claude/CLAUDE.md, current skills/ + agents/ rosters, ADRs 010-024). All counts match (17 skills / 7 agents / 4 modes / 2 gates / 1 dispatcher + 6 specialists). All paths verified to exist.
+
+EPIC-Audit Phase 5 closed. Phase 6 untouched (OQ-3 discipline held). Sprint 047 = Phase 6 (archive + close EPIC-Audit) → v1 ship prep.
 
 ---
 
@@ -152,7 +165,10 @@ T1 and T2 are mutually independent — recommended sequential execution (T1 firs
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
-| *(populated during execution)* | | | | |
+| `docs/ARCHITECTURE.md` | T1 | REFRESH stale → current; 87 → 75 lines; full content rewrite | medium | — |
+| `docs/AI_CONTEXT.md` | T2 | REFRESH stale → current; 87 → 100 lines (cap exact); full content rewrite | medium | — |
+| `TODO.md` | T3 | Backlog Phase 5 [x]; Sprint 046 Changelog block added; Active Sprint cleared; frontmatter bumped | low | — |
+| `docs/sprint/SPRINT-046-stale-doc-refresh.md` | sprint | NEW — sprint plan + execution log + retro | low | — |
 
 ---
 
@@ -160,16 +176,46 @@ T1 and T2 are mutually independent — recommended sequential execution (T1 firs
 
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
-| *(populated during execution)* | | | |
+| DEC-1 (T1) | ASCII System Context diagram REMOVED from ARCHITECTURE.md per OQ-1 + LAW 4 (signal-dense rule) | Component Map already conveys same info; ASCII duplicates without adding signal | (refresh — no ADR) |
+| DEC-2 (T1+T2) | AI_CONTEXT.md kept SEPARATE from .claude/CONTEXT.md per OQ-2 + docs/_routing.json contract | Two readers (CC plugin loader vs AI session-start); cross-reference, not alias | (refresh — no ADR) |
+| DEC-3 (sprint) | Phase 6 NOT pulled forward into Sprint 046 per OQ-3 + roadmap | Phase 6 = own sprint (047); pulling forward = scope drift | (no ADR) |
+| DEC-4 (sprint) | Date stamped 2026-05-04 (manual override of system memo currentDate=2026-05-03) per OQ-4 | User confirmed at promote; Step 0b will WARN this on next run; manually acknowledged | (no ADR) |
+| DEC-5 (sprint) | NO new ADR coined per OQ-8 — refresh ≠ new architectural decision; existing ADRs (010-024) cited not authored | Refresh = documentation hygiene; max ADR stays at 024 until Phase 6 close ADR (Sprint 047) | (no ADR) |
 
 ---
 
 ## Open Questions for Review
 
-*(Populated during execution if any surface beyond the 8 promote-time OQs above.)*
+*(None surfaced during execution — all eight promote-time OQs (1-8) resolved cleanly per "approve all" pattern. T1+T2+T3 executed on stable inputs without re-litigation. Cross-doc verification (T3) found zero contradictions between refreshed docs and canonical sources.)*
 
 ---
 
 ## Retro
 
-*(Populated at sprint close per Sprint Close Protocol — Worked / Friction / Pattern candidates / Surprise log.)*
+### Worked
+- **Pre-resolve OQs at promote held a fifth sprint.** Sprints 042/043/044/045/046 all pre-resolved OQs at promote per "approve all" pattern. Zero mid-sprint re-litigation. Pattern is fully load-bearing now.
+- **Doc-refresh sprint executed faster than ext-ref audit sprints.** No external fetches needed; all canonical sources already local (`.claude/CONTEXT.md`, `skills/`, `agents/`, ADRs). T1+T2+T3 landed in 3 commits (vs ext-ref sprints' 4-7 commits).
+- **Drift discovery via dir listings caught critical errors fast.** `ls scripts/` revealed track-change.js + ci-status.js absent (referenced in old ARCHITECTURE.md). `ls docs/` showed no blueprint/. `ls agents/` showed no init-analyst. 5-minute scan caught ~10 stale references.
+- **Cap discipline held without compromise.** ARCHITECTURE.md 75/150 (target ≤105 beat by 30). AI_CONTEXT.md 100/100 (cap exact after one trim cycle). Initial AI_CONTEXT.md draft was 104 lines; trimmed Structure + Conventions to fit. No content lost — only condensation.
+- **Cross-link discipline preserved DRY.** AI_CONTEXT.md defers to `.claude/CONTEXT.md` for vocab/principles/gates/modes/agents — no duplication. Each file has one canonical home for its concept.
+- **Date manual override worked cleanly.** System memo currentDate=2026-05-03; user confirmed 2026-05-04 at promote. Sprint 045 T4 Step 0b would WARN this future-protect; this sprint manually acknowledged. Both date sources documented in DEC-4.
+
+### Friction
+- **System memo date drift is now a known issue.** Sprint 045 T4 Step 0b exists to prevent lean-doc-generator stamping wrong dates, but the upstream symptom is system memo lagging real date. Step 0b catches symptom; root cause (memo refresh cadence) is outside dev-flow scope. Continue manual override at promote until/unless memo refresh improves.
+- **AI_CONTEXT.md hit cap exactly (100/100).** No headroom for next refresh. If/when Sprint 047 Phase 6 closes EPIC-Audit + Current Focus changes, AI_CONTEXT.md needs trim somewhere. Worth flagging for Sprint 047 retro.
+- **Stranded sprint archive continues to grow.** Sprints 040-046 (7 sprints) now in TODO Changelog awaiting `docs/CHANGELOG.md` archive. release-patch skip-bump-on-docs-only is the cause; flagged across multiple sprint retros but no fix sprint scheduled. Sprint 047 close (Phase 6 = EPIC-Audit close) may be the natural batch-archive trigger.
+- **Component Map row-by-row audit was tedious but worth it.** 13 rows in old ARCHITECTURE.md; ~10 had stale paths or removed components. Caught silently if just frontmatter-bumped. Pattern: stale-doc refresh always requires content audit, never just header bump.
+
+### Pattern candidates (pending user confirm)
+1. **Stale-doc refresh sprint shape locked.** Sprint 046 = 3 tasks (T1 doc1, T2 doc2, T3 TODO+verification). Cleaner than ext-ref audit shape (no research notes; no ADR). Codify in `dev-flow:lean-doc-generator` references as a sprint shape variant.
+2. **Dir-listing as drift-detection.** `ls` 4-5 dirs (scripts/, agents/, docs/blueprint/, .claude/, skills/orchestrator/references/) caught 10+ stale references in 30 seconds. Pattern: any doc-refresh sprint should start with dir-listing of every path the doc references.
+3. **AI_CONTEXT.md cap pressure.** 100/100 = no headroom. Either raise cap (with rationale), restructure (move content to ARCHITECTURE.md or CONTEXT.md), or accept tight discipline. Decision deferred to Sprint 047 retro if Current Focus rewrite hits cap again.
+4. **Bidirectional cross-link as canonical sprint-DoD item.** OQ-7 added bidirectional cross-link verification to DoD. Pattern useful beyond stale-doc refresh — any time multiple docs reference each other, both directions should be checked. Consider adding to `dev-flow:lean-doc-generator` § Pre-Delivery Checklist.
+
+### Surprise log (cross-ref to Execution Log)
+- T1: Old ARCHITECTURE.md referenced 24 hard-stops + hard-stops.md file — neither exists. `ls skills/orchestrator/references/` showed only phases.md + skill-dispatch.md.
+- T1: Old ARCHITECTURE.md listed `init-analyst` agent — never existed in v2 (or was removed pre-sprint-040). `ls agents/` showed 7 agents, init-analyst not among them.
+- T1: Old ARCHITECTURE.md cited docs/blueprint/* — `ls docs/blueprint/` returned "No such file or directory." Sprint 035+ likely removed it.
+- T2: AI_CONTEXT.md initial draft was 104 lines (over cap by 4). Trimmed Structure + Conventions sections to fit. No content lost; condensation only.
+- T2: Date in system memo (currentDate=2026-05-03) lagged actual date (2026-05-04 per user confirm at promote). Manual override held. Sprint 045 T4 Step 0b will WARN this on next future sprint.
+- T3: 7 sprints (040-046) now stranded in TODO Changelog awaiting `docs/CHANGELOG.md` archive. release-patch skip-bump pattern continues; no fix sprint scheduled. Sprint 047 = natural batch-archive trigger (EPIC-Audit close).

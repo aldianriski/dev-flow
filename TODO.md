@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 046 promoted — EPIC-Audit Phase 5 stale doc refresh: ARCHITECTURE.md + AI_CONTEXT.md)
+last_updated: 2026-05-04 (Sprint 046 closed — EPIC-Audit Phase 5 stale doc refresh)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 046
+sprint: none
 ---
 
 > **External references**
@@ -36,9 +36,9 @@ sprint: 046
 
 ## Active Sprint
 
-→ docs/sprint/SPRINT-046-stale-doc-refresh.md
+→ — none —
 
-> Next: Sprint 047 — EPIC-Audit Phase 6 (archive external refs + close EPIC-Audit). Held per roadmap; do not pull forward into Sprint 046.
+> Next: Sprint 047 — EPIC-Audit Phase 6 (archive external refs + close EPIC-Audit) → v1 ship prep.
 
 ---
 
@@ -49,7 +49,7 @@ sprint: 046
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
 
 - [x] **Phase 4f — Skill wrapper patterns with skill-creator** — closed Sprint 045 T1 (ADR-024). EPIC-Audit Phase 4 deep-dive series (4a-4f) COMPLETE.
-- [ ] **Phase 5 — Stale doc refresh** (Sprint 46) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
+- [x] **Phase 5 — Stale doc refresh** — closed Sprint 046 (ARCHITECTURE.md 87→75 lines + AI_CONTEXT.md 87→100 lines; both status: stale → current).
 - [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 47)
 
 ### P1 — Doc-quality follow-ups
@@ -77,6 +77,18 @@ sprint: 046
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
+
+### Sprint 046 — EPIC-Audit Phase 5 (stale doc refresh) — closed 2026-05-04
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/ARCHITECTURE.md` | REFRESH stale → current. 87 → 75 lines. Removed: 3-gate model / 6-mode dispatch / .claude/skills/ paths / init-analyst / MANIFEST.json / 24 hard-stops claim / track-change.js + ci-status.js / docs/blueprint/* / ASCII diagram. Added: 17-skill component map at skills/ root + 7-agent topology (1 dispatcher + 6 specialists) + Sprint 038-045 hook surface + lineage cross-links + .out-of-scope/ + gh CLI + ADR registry split | (refresh — no new ADR) |
+| `docs/AI_CONTEXT.md` | REFRESH stale → current. 87 → 100 lines (cap exact). Removed: Sprint 18/23/24 references / 6-mode / 10 skills / 3 gates / 24 hard-stops / MANIFEST / docs/blueprint/* / Python evals/. Added: EPIC-Audit Phase 5 active context + 4-mode + Sprint 040-045 conventions (gh CLI + Step 0b date-sanity + research-vs-implementation split + .out-of-scope/) + cross-link discipline (defer to .claude/CONTEXT.md for vocab) | (refresh — no new ADR) |
+| `docs/sprint/SPRINT-046-stale-doc-refresh.md` | NEW — sprint plan + execution log + retro | — |
+
+Plan-lock `4a70efe` · T1 `b782584` · T2 `8c7d869` · close (this commit).
+
+EPIC-Audit Phase 5 closed. Both files cross-referenced against current `.claude/CONTEXT.md` (Sprint 045 T3 state) + skills/ + agents/ rosters + ADRs 010-024 — zero contradictions.
 
 ### Sprint 045 — Phase 4f + CONTEXT.md lifts + lean-doc date-sanity — closed 2026-05-04
 
@@ -153,7 +165,7 @@ Plan-lock `87bb523` · T1 `0ee6f8d` · T2 `b79815f` · T3 `7ab9ff6` · close (th
 
 Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close `3fec973`.
 
-*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 + 043 + 044 + 045 await archive on next `/release-patch` invocation that triggers a bump (or manual archive — release-patch skip-bump on docs-only is the cause; flagged for fix).*
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 + 043 + 044 + 045 + 046 await archive on next `/release-patch` invocation that triggers a bump (or manual archive — release-patch skip-bump on docs-only is the cause; flagged for fix).*
 
 ---
 
