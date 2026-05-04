@@ -4,7 +4,7 @@ last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
 status: closed
 plan_commit: 4a70efe
-close_commit: pending
+close_commit: 2a99d82
 ---
 
 # Sprint 046 — EPIC-Audit Phase 5 (stale doc refresh — `ARCHITECTURE.md` + `AI_CONTEXT.md`)
