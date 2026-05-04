@@ -129,6 +129,9 @@ Decision: **YES, placement = G2 design-analyst MICRO-TASKS** (correct level — 
 
 Why not task-decomposer Acceptance: Acceptance is task-level (sprint task = 1-N micro-task fanout); verify lives at micro-task level. Two distinct granularities — correct separation.
 
+### 2026-05-04 | T4 done — pending commit
+ADR-019 written at `docs/adr/ADR-019-karpathy-patterns.md`. Status: Accepted. Captures DEC-1 (reject EXAMPLES.md), DEC-2 (lineage lock + SHA `2c606141936f`), DEC-3 (verify-step retroactive credit). Format follows ADR-016 precedent (Context / Decision / Alternatives / Consequences / References). MIT attribution + upstream pin recorded. ADR numbering: honored Sprint 034 DEC-2 reservation despite gap (017, 018); future allocations should be sequential per Sprint 039 retro pattern — captured in ADR Consequences.
+
 ---
 
 ## Files Changed
@@ -139,6 +142,8 @@ Why not task-decomposer Acceptance: Acceptance is task-level (sprint task = 1-N 
 | `.claude/CONTEXT.md` | T2 | NEW § Behavioral Guidelines Lineage block — 4-principle adaptation table + MIT attribution + upstream SHA lock | low | — |
 | `docs/sprint/SPRINT-040-karpathy-patterns.md` | T2 | Execution Log + § Decisions DEC-2 row | low | — |
 | `docs/sprint/SPRINT-040-karpathy-patterns.md` | T3 | Execution Log + § Decisions DEC-3 row (verify-step already shipped Sprint 035) | low | — |
+| `docs/adr/ADR-019-karpathy-patterns.md` | T4 | NEW (~70 lines) — Context / Decision (3 parts: lineage lock, verify-step credit, EXAMPLES.md reject) / 5 Alternatives / Consequences / References | low | — |
+| `docs/sprint/SPRINT-040-karpathy-patterns.md` | T4 | Execution Log + § Decisions DEC-4 row (ADR numbering convention going forward) | low | — |
 
 ---
 
@@ -149,6 +154,7 @@ Why not task-decomposer Acceptance: Acceptance is task-level (sprint task = 1-N 
 | DEC-1 (T1) | Do NOT adopt root-level `EXAMPLES.md` per karpathy convention | Meta-repo has no app-code domain; CLAUDE.md anti-patterns + skill Red Flags already cover principle-violation surface; karpathy value is principle wording (T2), not example format | ADR-019 (pending T4) |
 | DEC-2 (T2) | Lineage of 4 Behavioral Guidelines locked in CONTEXT.md § Behavioral Guidelines Lineage with MIT attribution + upstream SHA `2c606141936f` + date 2026-05-04 | Existing `.claude/CLAUDE.md` block was adopted without lineage record; drift risk grows silently. Locking SHA + adaptation table makes future re-diffs deterministic | ADR-019 (pending T4) |
 | DEC-3 (T3) | Verify-step micro-protocol confirmed at G2 design-analyst MICRO-TASKS (already shipped Sprint 035, commit `414ee8e`); placement at task-decomposer rejected | design-analyst MICRO-TASKS template `verify: <runnable command>` is karpathy P4 pattern at the right granularity; task-decomposer Acceptance is task-level (separate granularity, correct separation). No new work — pattern in place, lineage credit only via ADR-019 | ADR-019 (pending T4) |
+| DEC-4 (T4) | ADR-019 number honored despite Sprint 038 breaking Sprint 034 DEC-2 reservation chain (took ADR-016); future ADRs should allocate sequentially via Sprint 039 retro pattern | Sprint plan committed to ADR-019; honoring keeps T1-T3 cross-references stable; gap (017, 018) accepted as one-time cost; sequential-allocation discipline restored going forward | ADR-019 |
 
 ---
 
