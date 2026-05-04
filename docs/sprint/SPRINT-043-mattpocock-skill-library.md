@@ -124,7 +124,27 @@ T1 → T2 (T2 reuses T1's bucket-listing gh fetch result). T2 → T3 (T3 confirm
 
 ## Execution Log
 
-*(Empty — append `### YYYY-MM-DD HH:MM | T<N> done — <sha>` blocks as work lands.)*
+### 2026-05-04 | T1 done — pending commit
+mattpocock skill paths verified via `gh api repos/mattpocock/skills/contents/skills/engineering` (license MIT confirmed via `gh api repos/.../license`; SHA pinned `b843cb5ea74b`). 3 same-named skills found in `engineering/` bucket (tdd 109 lines, diagnose 117 lines, zoom-out 7 lines). `task-decomposer` has no upstream (dev-flow original; mattpocock has issue-tracker-workflow skills `to-issues`/`to-prd`/`triage` instead — different domain framing).
+
+Output: `docs/research/mattpocock-skill-diff-2026-05-04.md` — 4-skill comparison matrix + trigger-phrase deltas + reference-graph deltas + per-skill lift recommendations.
+
+**Key findings:**
+- `tdd` mattpocock 109 vs dev-flow 81 lines. Mattpocock body richer (Anti-Pattern Horizontal Slices section, deep references to tests.md/mocking.md/etc); dev-flow body is intentionally lean per 100-line cap.
+- `diagnose` mattpocock 117 vs dev-flow 73 lines. Mattpocock Phase 1 ("Build a feedback loop" with 10-method enumeration + iterate-on-loop + non-deterministic-bugs subsections) is much richer.
+- `zoom-out` mattpocock 7 lines vs dev-flow 55 lines. **Inverse finding** — dev-flow superior here. mattpocock has `disable-model-invocation: true` (manual only); dev-flow auto-triggers via richer trigger-phrase surface.
+- `task-decomposer` — no upstream. dev-flow original.
+
+5 trigger-phrase lift candidates queued to TASK-116 acceptance harness for verification:
+1. `tdd` ← `red-green-refactor` (narrow, strong)
+2. `tdd` ← `integration tests` (common phrasing)
+3. `tdd` ← `test-first development` (alternative name)
+4. `diagnose` ← `performance regression` (narrow, specific)
+5. `diagnose` ← `diagnose this` / `debug this` (invocation aliases)
+
+Reject list (do NOT add even after eval): `tdd ← build features|fix bugs` (vague, collide), `diagnose ← broken|throwing|failing` (one-word, high false-positive).
+
+Per ADR-021 DEC-4: NO skill edits this sprint. T1 surfaces candidates; TASK-116 verifies; only validated phrases ship.
 
 ---
 
@@ -134,15 +154,18 @@ T1 → T2 (T2 reuses T1's bucket-listing gh fetch result). T2 → T3 (T3 confirm
 
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
+| `docs/research/mattpocock-skill-diff-2026-05-04.md` | T1 | NEW (~110 lines) — 4-skill matrix + trigger-phrase deltas + reference-graph deltas + per-skill recommendations + bidirectional finding | low | — |
+| `docs/sprint/SPRINT-043-mattpocock-skill-library.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2, DEC-3 rows | low | — |
 
 ---
 
 ## Decisions
 
-*(Empty — populated as T1..T4 land DEC-N rows.)*
-
 | ID | Decision | Reason | ADR |
 |:---|:---------|:-------|:----|
+| DEC-1 (T1) | 5 trigger-phrase lift candidates from mattpocock queued to TASK-116 acceptance harness; NO skill edits this sprint | Per ADR-021 DEC-4 skill behavior changes require eval evidence; surface candidates here, verify in TASK-116 sprint, ship only validated phrases | ADR-022 (pending T4) |
+| DEC-2 (T1) | **Bidirectional finding:** `zoom-out` is dev-flow > mattpocock (55 vs 7 lines, auto-trigger vs disable-model-invocation). NO LIFT for zoom-out | Avoid future "match mattpocock" pressure; record explicitly per Sprint 042 DEC-2 pattern | ADR-022 (pending T4) |
+| DEC-3 (T1) | `task-decomposer` has no mattpocock upstream; dev-flow original. mattpocock issue-tracker-workflow skills (`to-issues`/`to-prd`/`triage`) are different domain framing | Lineage record; not a fork | ADR-022 (pending T4) |
 
 ---
 
