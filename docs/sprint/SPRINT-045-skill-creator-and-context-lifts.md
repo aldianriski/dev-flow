@@ -204,6 +204,19 @@ CONTEXT.md ripple risk: every agent + skill reads CONTEXT.md. Re-prime + agent-c
 - Agent context cache will refresh on next dispatcher invocation (no manual refresh needed for agents at session level)
 - Surface to user with diff summary in close commit message + sprint retro
 
+### 2026-05-04 | T4 done — pending commit
+TASK-118 closed: date-sanity pre-flight added to `skills/lean-doc-generator`.
+
+Changes:
+- `skills/lean-doc-generator/SKILL.md` — Step 0b inserted between Step 0a (cache check) and Step 0 (staleness scan); ~6 lines describing date-sanity check flow + WARN+CONFIRM pattern + reference to SPRINT_PROTOCOLS.md § Date-Sanity. Frontmatter version 2.0.0 → **2.1.0** (MINOR: new behavior — pre-flight gate addition); last-validated → 2026-05-04. File length: 93 → 94 lines (cap 100; 6 lines headroom).
+- `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` — NEW § Date-Sanity section appended (29 lines): trigger + comparison logic + warning template + auto-correct rules + out-of-scope clarification + recurring-friction citation. Frontmatter `last_updated` bumped to 2026-05-04 with Sprint 045 T4 attribution. File length: 168 → 197 lines.
+
+GUARD-RAIL ONLY change. No modifications to existing Steps 1-7 doc-generation logic. Failure mode = WARN + user-confirm prompt, never silent rewrite. Sprint 042/043/044 retro friction (lean-doc-generator stamping wrong date) addressed structurally — future sprints get pre-flight protection.
+
+Per ADR-021 DEC-4: TASK-118 is guard-rail addition, not behavior delta to doc-generation logic. Eval-evidence rule satisfied via in-line WARN+CONFIRM contract (visible in skill output). TASK-116 acceptance harness can verify Step 0b auto-trigger when implemented; not blocking on this sprint.
+
+**Sprint 044 retro Pattern Candidate #4 closed.**
+
 ---
 
 ## Files Changed
@@ -217,6 +230,9 @@ CONTEXT.md ripple risk: every agent + skill reads CONTEXT.md. Re-prime + agent-c
 | `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T2 | Execution Log + § Decisions DEC-8 row | low | — |
 | `.claude/CONTEXT.md` | T3 | 3 additive sections (TASK-117): 3 `_Avoid_` annotations + § Relationships + § Flagged Ambiguities; 105 → 129 lines (24 added) | medium | — |
 | `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T3 | Execution Log + § Decisions DEC-9 row | low | — |
+| `skills/lean-doc-generator/SKILL.md` | T4 | Step 0b inserted (date-sanity pre-flight, 6 lines); version 2.0.0→2.1.0; last-validated→2026-05-04. 93→94 lines (cap 100) | medium | — |
+| `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` | T4 | NEW § Date-Sanity section appended (29 lines: trigger/logic/template/rules/citation); frontmatter last_updated bumped | medium | — |
+| `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T4 | Execution Log + § Decisions DEC-10 row | low | — |
 
 ---
 
@@ -233,6 +249,7 @@ CONTEXT.md ripple risk: every agent + skill reads CONTEXT.md. Re-prime + agent-c
 | DEC-7 (T1) | Scale-driven defer note — no `.out-of-scope/` pointers warranted (defers are scale-fit, not concept-reject) per Sprint 044 ADR-023 discipline | Pointer files only for concept rejections; scale-driven defers stay in ADR § Decision text | ADR-024 |
 | DEC-8 (T2) | TASK-104 closed — `.claude/CONTEXT.md` ownership header added (4-field frontmatter); DOC WORK rule violation closed | Sprint 040 Q1 finding addressed; T3 prerequisite satisfied (header exists for last_updated bumps) | (no ADR — implements DOCS_Guide §3 spec) |
 | DEC-9 (T3) | TASK-117 closed — 3 additive `.claude/CONTEXT.md` sections landed (3 `_Avoid_` annotations + § Relationships + § Flagged Ambiguities); 129/130 lines | Sprint 043 DEC-5 recommendations executed per OQ-f scope (≤5 annotations + 1 relationships section + ≤4 ambiguity entries); cap held; ripple risk acknowledged via re-prime checklist | (no ADR — Sprint 043 DEC-5 is the ADR; T3 implements) |
+| DEC-10 (T4) | TASK-118 closed — Step 0b date-sanity pre-flight added to `lean-doc-generator` skill (v2.0.0 → 2.1.0 MINOR); SPRINT_PROTOCOLS.md § Date-Sanity reference content added | Sprint 042/043/044 recurring date-stamp friction addressed structurally; guard-rail-only (WARN+CONFIRM, never silent rewrite); satisfies ADR-021 DEC-4 spirit (eval-evidence via in-line user-visible contract) | (no ADR — TASK-118 implements existing recurring-friction Pattern Candidate from Sprint 044 retro; not new architectural decision) |
 
 ---
 

@@ -6,8 +6,8 @@ allowed-tools: Read, Write, Bash(git *), Glob, Grep
 user-invocable: true
 context: fork
 type: rigid
-version: "2.0.0"
-last-validated: "2026-05-03"
+version: "2.1.0"
+last-validated: "2026-05-04"
 ---
 
 # Lean Documentation Generator
@@ -40,6 +40,8 @@ Generate high-signal technical documentation. Read `references/DOCS_Guide.md` be
 ## Execution Flow
 
 **Step 0a — Cache check** (label: `lean-doc-cache`): read `.claude/.lean-doc-cache.json` (created on demand, gitignored). For every file about to be re-scanned, compute SHA1 of contents; if cached SHA1 matches, skip the scan and reuse last result (log `[cache hit] <path>` at debug level). Update cache with new SHA1 after each fresh scan. SessionStart hook deletes the cache so each session starts cold. Schema: `{ "<absolute-path>": "<sha1-hex>", ... }`.
+
+**Step 0b — Date-sanity pre-flight** *(guard-rail; v2.1.0+)*: before writing any frontmatter `last_updated:` value or research-file dated filename, compare today's date (from environment context — e.g., system memo `currentDate`) against the date about to be written. If MISMATCH ≥1 day → WARN the user with one-line prompt `"Date drift: today=<X> writing=<Y>. Auto-correct? (y/n)"`; AUTO-CORRECT only on explicit `y`. Never silently fix. Closes 3-sprint recurring friction (Sprint 042/043/044 retros). Full protocol: `references/SPRINT_PROTOCOLS.md` § Date-Sanity.
 
 **Step 0 — Staleness scan**: check ownership headers; flag `stale` / `needs-review` / no-header before proceeding.
 

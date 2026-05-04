@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead
-last_updated: 2026-05-01
+last_updated: 2026-05-04 (Sprint 045 T4 — Date-Sanity section added per TASK-118)
 update_trigger: Sprint lifecycle rules change; new promote/execute/close steps added
 status: current
 ---
@@ -166,3 +166,32 @@ status: current
 9. **After** user commit → fill `close_commit: <sha>` in sprint file ownership header AND in CHANGELOG.md row.
 10. **PR check:** ask user — is parent PRD now fully done? If yes → suggest open PR with body referencing all sprint files in this PRD slice.
 11. **Run** Step 7 (Session Close summary from SKILL.md) as final step.
+
+---
+
+## Date-Sanity (Step 0b protocol)
+
+Added Sprint 045 T4 (TASK-118) to close 3-sprint recurring friction (Sprint 042/043/044 retros stamped wrong date in sprint frontmatter + research filenames; required manual fix at promote each time).
+
+**Trigger:** any sprint-lifecycle operation (promote / execute / close) about to write a `last_updated:` frontmatter value OR a dated research filename (`<topic>-<YYYY-MM-DD>.md`).
+
+**Comparison logic (prose):**
+1. Read today's date from environment context (system memo `currentDate`, `<env>` block, or equivalent reliable source).
+2. For each new `last_updated:` value about to be written, compare to today.
+3. For each new dated filename about to be created (research notes, sprint files, ADRs if dated), parse the date suffix and compare to today.
+4. If ANY mismatch ≥1 day → enter WARN+CONFIRM flow.
+
+**Warning format template:**
+```
+[date-sanity] today = 2026-05-04, writing = 2026-05-03 in <file or filename>.
+Auto-correct? (y/n)
+```
+
+**Auto-correct rules:**
+- ONLY on explicit `y` from user.
+- Apply to ALL files with the same drift in current operation (single confirm covers batch).
+- Never silently rewrite. Never bypass even if user is AFK — surface and stop.
+
+**Out of scope:** date corrections to ALREADY-WRITTEN files (those go through normal Step 0 staleness scan + ownership-header `last_updated` updates). Step 0b only guards NEW writes.
+
+**Recurring-friction citation:** Sprint 042 retro Friction #1 + Sprint 043 retro Friction #1 + Sprint 044 retro Friction #1 (TASK-118 promoted to P0 per Sprint 044 retro Pattern Candidate #4).
