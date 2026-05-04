@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending
+status: closed
+plan_commit: 828b200
 close_commit: pending
 ---
 
@@ -102,20 +102,20 @@ T1 + T2 parallelizable (independent gh fetches: T1 = `hooks.json`, T2 = `run-hoo
 
 ## Sprint DoD
 
-- [ ] T1 `docs/research/superpowers-hooks-diff-2026-05-04.md` exists with side-by-side matcher comparison + reconciliation recommendation. § Decisions row landed.
-- [ ] T2 `docs/research/superpowers-run-hook-shim-2026-05-04.md` exists with dispatcher walkthrough + dev-flow shim shape + adopt/defer recommendation. § Decisions row landed.
-- [ ] T3 `docs/research/superpowers-acceptance-harness-2026-05-04.md` exists with acceptance-pattern spec + 3-skill seed picks + implementation gaps. § Decisions row landed.
-- [ ] T4a `.github/PULL_REQUEST_TEMPLATE.md` exists, adapted to dev-flow DoD (not verbatim superpowers copy).
-- [ ] T4b `docs/adr/ADR-021-superpowers-patterns.md` exists, status Accepted, captures T1+T2+T3 + PR template lift + tests/ scope decision. Lineage credit (MIT verified).
-- [ ] Plan-lock commit landed before any T1..T4 commit.
-- [ ] Close commit + CHANGELOG row + TODO update + retro.
-- [ ] Open questions (a–d above) resolved on promote, recorded as locked decisions.
+- [x] T1 `docs/research/superpowers-hooks-diff-2026-05-04.md` exists with side-by-side matcher comparison + reconciliation recommendation. § Decisions row landed. → c66e4b7.
+- [x] T2 `docs/research/superpowers-run-hook-shim-2026-05-04.md` exists with dispatcher walkthrough + dev-flow shim shape + adopt/defer recommendation. § Decisions row landed. → cf3cbc8.
+- [x] T3 `docs/research/superpowers-acceptance-harness-2026-05-04.md` exists with acceptance-pattern spec + 3-skill seed picks + implementation gaps. § Decisions row landed. → 2caa3bd.
+- [x] T4a `.github/PULL_REQUEST_TEMPLATE.md` exists, adapted to dev-flow DoD (not verbatim superpowers copy). → c11eb34.
+- [x] T4b `docs/adr/ADR-021-superpowers-patterns.md` exists, status Accepted, captures T1+T2+T3 + PR template lift + tests/ scope decision. Lineage credit (MIT verified). → c11eb34.
+- [x] Plan-lock commit landed before any T1..T4 commit. → 828b200.
+- [x] Close commit + CHANGELOG row + TODO update + retro. → this commit.
+- [x] Open questions (a–d above) resolved on promote, recorded as locked decisions. → DEC-1 through DEC-6.
 
 ---
 
 ## Execution Log
 
-### 2026-05-04 | T1 done — pending commit
+### 2026-05-04 | T1 done — c66e4b7
 superpowers `hooks/hooks.json` fetched via gh CLI raw (upstream SHA `e7a2d16476bf`, 16 lines). License MIT confirmed via `gh api repos/obra/superpowers/license`.
 
 Output: `docs/research/superpowers-hooks-diff-2026-05-04.md` — full matcher comparison, hook-event coverage matrix, `${CLAUDE_PLUGIN_ROOT}` quoting check, recommendation.
@@ -129,7 +129,7 @@ Output: `docs/research/superpowers-hooks-diff-2026-05-04.md` — full matcher co
 
 **Recommendation locked:** keep-superset, no change to dev-flow `hooks.json` matcher.
 
-### 2026-05-04 | T2 done — pending commit
+### 2026-05-04 | T2 done — cf3cbc8
 superpowers `hooks/run-hook.cmd` (47 lines, polyglot cmd+bash) + companion `hooks/session-start` (57 lines, bash) fetched via gh CLI raw (upstream SHA `e7a2d16476bf`).
 
 Output: `docs/research/superpowers-run-hook-shim-2026-05-04.md` — verbatim source, dispatch-pattern walkthrough, Windows compatibility matrix, proposed dev-flow shim shape (UNIMPLEMENTED), adopt-vs-defer evaluation.
@@ -142,7 +142,7 @@ Output: `docs/research/superpowers-run-hook-shim-2026-05-04.md` — verbatim sou
 
 **Decision:** DEFER shim adoption per locked OQ(c). No backlog task — re-evaluate trigger conditions documented in research note.
 
-### 2026-05-04 | T3 done — pending commit
+### 2026-05-04 | T3 done — 2caa3bd
 superpowers `tests/skill-triggering/run-test.sh` (88 lines) + `run-all.sh` (60 lines) + sample prompt fetched via gh CLI raw (upstream SHA `e7a2d16476bf`).
 
 Output: `docs/research/superpowers-acceptance-harness-2026-05-04.md` — verbatim acceptance pattern, test-format spec, 3-skill seed (prime/orchestrator/tdd) with naturalistic prompts, integration target `tests/skill-triggering/`, manual-vs-automated mode comparison, 6-risk matrix.
@@ -156,7 +156,7 @@ Output: `docs/research/superpowers-acceptance-harness-2026-05-04.md` — verbati
 
 **Decision:** Adopt acceptance harness pattern; implementation deferred to TASK-116 (future sprint per ADR-016 eval-evidence rule).
 
-### 2026-05-04 | T4 done — pending commit
+### 2026-05-04 | T4 done — c11eb34
 PR template fetched via gh CLI raw (superpowers `.github/PULL_REQUEST_TEMPLATE.md`, 126 lines, upstream SHA `e7a2d16476bf`). Adapted + landed at `.github/PULL_REQUEST_TEMPLATE.md`. ADR-021 written at `docs/adr/ADR-021-superpowers-patterns.md`.
 
 **PR template adaptation:**
@@ -210,15 +210,34 @@ ADR sequential per Sprint 040/041 retro pattern; max-ADR check confirmed = 020 b
 
 ## Open Questions for Review
 
-*(Empty — populated for items surfaced during execution that need user decision.)*
+*(None surfaced during execution — all four promote-time OQs resolved cleanly. T1+T2+T3+T4 executed on locked decisions without re-litigation.)*
 
 ---
 
 ## Retro
 
-*(Empty — filled at close per Sprint Close Protocol.)*
-
 ### Worked
+- **Pre-resolved OQs at promote-time.** All four open questions (a–d) locked at promote per skill recommendation + user "approve all". No mid-sprint OQ re-litigation. T1–T4 executed on stable inputs.
+- **gh CLI sole-source pattern handled cleanly.** No local cache for `obra/superpowers`; gh CLI fetched 5 artifacts (hooks.json + run-hook.cmd + session-start + run-test.sh + PR template) without rate-limit hit. SHA pin recorded in every research note + ADR per Sprint 040 retro pattern.
+- **PR template lift was the right scope.** Lifting structure while dropping tone made the artifact useful without inheriting hostile single-author-irrelevant framing. Attribution in HTML comment header preserves MIT credit without bloat.
+- **Bidirectional finding re hooks-surface (DEC-2).** Audit framing assumed dev-flow learns from superpowers; reality is dev-flow's hook surface is RICHER (3 hooks vs 1). Recording this avoids future "we should match superpowers" pressure.
+- **Decision-only sprint with one mechanical lift was the right shape.** Sprint 042 = 3 research notes + 1 ADR + 1 lifted artifact (PR template). Per Sprint 040 retro pattern candidate #4 (decision-only sprints are valid). T4 lift was scoped tightly enough to avoid implementation drift.
+- **TASK-116 has complete design input.** Implementation sprint can promote with zero re-research — pattern, seed, mode, integration target, risk matrix all locked in T3 research note + ADR-021.
+
 ### Friction
+- **Sprint file dates wrong on first generation.** lean-doc-generator stamped 2026-05-03 throughout (sprint frontmatter + research filenames). Fixed before plan-lock but added 5 edits. Lesson: verify date in skill output before plan-lock commit.
+- **TODO.md modified by skill outside review window.** lean-doc-generator updated TODO.md autonomously (Active Sprint pointer, removed Phase 4c from Backlog) before user approval. Recovered by re-reading + re-applying date fix in next commit. Skill behavior documented in user system-reminder; not a regression.
+- **`tests/` directory creation pressure.** Probe (line 113) said "Add `tests/` directory to plugin root with smoke tests for hooks/scripts." Initial framing tempted creating empty `tests/`. Resisted (DEC-6) — empty dirs don't survive git, no value. First test files land WITH TASK-116. Lesson: scaffolding without content is anti-pattern.
+- **superpowers PR template's "94% rejection" framing required active editorial work.** Lifting verbatim would have been faster; adapting required reading every section and asking "does this apply to a single-author repo?" Worth it but cost ~10 min of decision-making. Documented in DEC-5.
+
 ### Pattern candidates (pending user confirm)
+1. **Pre-resolve OQs at promote** when user is engaged + sprint scope is well-understood. Saved a round-trip vs Sprint 041's defer-to-execution OQ pattern. Apply when promote-time skill recommendations cover all OQs cleanly.
+2. **Bidirectional ext-ref findings should be a Decisions table row, not just a research-note paragraph.** DEC-2 "dev-flow has richer hook surface than superpowers" needs the Decisions table visibility so future re-diff cadence sees it. Apply for ext-ref sprints where audit assumption (we learn from them) inverts.
+3. **Lift-but-adapt for ext-ref artifacts (PR templates, eval harnesses, etc.).** Verbatim copy = lazy + inheriting irrelevant context. Lift structure, drop tone, add project-specifics. Codify in `dev-flow:lean-doc-generator` future revision.
+4. **Date verification before plan-lock commit.** lean-doc-generator stamped wrong date this sprint (Sprint 043+ may also). Add a date-sanity check (compare frontmatter date to current date) to plan-lock pre-flight.
+
 ### Surprise log (cross-ref to Execution Log)
+- T1: dev-flow hook surface is RICHER than superpowers (3 hooks vs 1 in `hooks.json`). Audit framing inverted. Recorded as DEC-2.
+- T2: superpowers' polyglot trick (`: << 'CMDBLOCK'` bash heredoc that cmd.exe ignores) is genuinely clever — worth documenting even though dev-flow doesn't adopt the shim.
+- T3: superpowers' acceptance test reuses the SAME naive prompt format dev-flow needs (test-driven-development.txt). Reduced T3 design effort — direct pattern reuse with minor adaptation for prime + orchestrator seed.
+- T4: superpowers PR template's "94% rejection rate" framing (probe line 105) is adversarial in a way that doesn't fit a single-author repo. DEC-5 captures the lift-but-adapt rationale.

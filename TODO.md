@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 042 promoted — EPIC-Audit Phase 4c Superpowers patterns)
+last_updated: 2026-05-04 (Sprint 042 closed — EPIC-Audit Phase 4c Superpowers patterns)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 042
+sprint: none
 ---
 
 > **External references**
@@ -36,9 +36,8 @@ sprint: 042
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-042-superpowers-patterns.md](docs/sprint/SPRINT-042-superpowers-patterns.md) — EPIC-Audit Phase 4c (Superpowers patterns) · status: active
+→ — none —
 
-> Tasks: T1 hooks.json diff · T2 run-hook shim audit · T3 acceptance-harness design (prime/orchestrator/tdd seed) · T4 PR template lift + ADR-021.
 > Next: Sprint 043 — EPIC-Audit Phase 4d (Mattpocock skill library).
 
 ---
@@ -62,6 +61,7 @@ sprint: 042
 ### P1 — Implementation follow-ups (deferred from research sprints)
 
 - [ ] **TASK-115** — Port caveman 3-arm eval harness to JS (`scripts/eval-run.js` + `scripts/eval-measure.js`). Design input: [`docs/research/caveman-eval-harness-port-notes-2026-05-04.md`](docs/research/caveman-eval-harness-port-notes-2026-05-04.md). Tokenizer = `gpt-tokenizer`. Snapshot schema 1:1 with caveman. Sibling tests required. Estimated M, layers `scripts, docs`.
+- [ ] **TASK-116** — Implement skill-triggering acceptance harness at `tests/skill-triggering/` (PowerShell port of superpowers `run-test.sh` + 3-skill seed prime/orchestrator/tdd). Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Mode A (manual run before skill-description changes ship). Satisfies ADR-016 eval-evidence rule. Estimated S–M, layers `scripts, ci, docs`.
 
 ### P1 — EPIC-E: Wrap-or-replace Claude Code primitives (closed)
 
@@ -77,6 +77,19 @@ sprint: 042
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
+
+### Sprint 042 — EPIC-Audit Phase 4c (Superpowers patterns) — closed 2026-05-04
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/research/superpowers-hooks-diff-2026-05-04.md` | NEW — verbatim superpowers hooks.json + matcher comparison + coverage matrix; recommendation = keep-superset | ADR-021 |
+| `docs/research/superpowers-run-hook-shim-2026-05-04.md` | NEW — verbatim shim source + dispatch walkthrough + proposed dev-flow shape (UNIMPLEMENTED) + adopt/defer matrix | ADR-021 |
+| `docs/research/superpowers-acceptance-harness-2026-05-04.md` | NEW — pattern walkthrough + 3-skill seed (prime/orchestrator/tdd) + integration target + 6-risk matrix for TASK-116 | ADR-021 |
+| `.github/PULL_REQUEST_TEMPLATE.md` | NEW — adapted from superpowers (lift structure, drop frustration tone, add dev-flow DoD + ADR-016 skill rule + layer values) | ADR-021 |
+| `docs/adr/ADR-021-superpowers-patterns.md` | NEW — 6-decision ADR (matcher / divergence / shim defer / acceptance harness / PR template lift / tests dir defer) | ADR-021 |
+| `docs/sprint/SPRINT-042-superpowers-patterns.md` | NEW — sprint plan + execution log + 6 decisions + retro | — |
+
+Plan-lock `828b200` · T1 `c66e4b7` · T2 `cf3cbc8` · T3 `2caa3bd` · T4 `c11eb34` · close (this commit).
 
 ### Sprint 041 — EPIC-Audit Phase 4b (Caveman compare) — closed 2026-05-04
 
@@ -99,7 +112,7 @@ Plan-lock `87bb523` · T1 `0ee6f8d` · T2 `b79815f` · T3 `7ab9ff6` · close (th
 
 Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close `3fec973`.
 
-*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 await archive on next `/release-patch` invocation that triggers a bump (or manual archive).*
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 await archive on next `/release-patch` invocation that triggers a bump (or manual archive).*
 
 ---
 
@@ -155,5 +168,6 @@ Sprint 38    →  Foundation Hardening (kill Node hooks + PS replacement + lean-
 Sprint 39    →  Codemap + Modes + Skills (codemap base / sprint-bulk mode / /prime / /release-patch)  (done)
 Sprint 40    →  EPIC-Audit Phase 4a — Karpathy patterns (lineage lock + ADR-019 + verify-step retro credit)  (done)
 Sprint 41    →  EPIC-Audit Phase 4b — Caveman compare (dual-lineage + 3-arm port plan + ADR-020 + caveman-shrink reject)  (done)
-Sprint 42-45 →  EPIC-Audit Phases 4c-6 (3 ext-ref deep / stale doc refresh / archive)
+Sprint 42    →  EPIC-Audit Phase 4c — Superpowers patterns (hooks lineage + acceptance harness + PR template lift + ADR-021)  (done)
+Sprint 43-45 →  EPIC-Audit Phases 4d-6 (2 ext-ref deep / stale doc refresh / archive)
 ```
