@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 044 closed — EPIC-Audit Phase 4e GSD patterns)
+last_updated: 2026-05-04 (Sprint 045 promoted — Phase 4f + TASK-104/117/118)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: none
+sprint: 045
 ---
 
 > **External references**
@@ -36,9 +36,10 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ [docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md](docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md) — Phase 4f + CONTEXT.md lifts + lean-doc date-sanity · status: active
 
-> Next: Sprint 045 — EPIC-Audit Phase 4f (Skill wrapper patterns with skill-creator).
+> Tasks: T1 (Phase 4f skill-creator + ADR-024) · T2 (TASK-104 CONTEXT.md header) · T3 (TASK-117 3 additive sections) · T4 (TASK-118 date-sanity pre-flight).
+> Next: Sprint 046 — EPIC-Audit Phase 5 (stale doc refresh).
 
 ---
 
@@ -48,15 +49,15 @@ sprint: none
 
 > Dependency: Sprint 34 (Phase 0) gates the rest. Each phase = own sprint. Phases slid +2 to make room for Sprint 038 (Foundation Hardening) + Sprint 039 (Codemap+Modes+Skills).
 
-- [ ] **Phase 4f — Skill wrapper patterns with skill-creator** (Sprint 45)
+- [→] **Phase 4f — Skill wrapper patterns with skill-creator** — promoted to Sprint 045 T1 (anthropics/skills/skill-creator deep diff + ADR-024).
 - [ ] **Phase 5 — Stale doc refresh** (Sprint 46) — `ARCHITECTURE.md` + `AI_CONTEXT.md`
 - [ ] **Phase 6 — Archive external refs + close EPIC-Audit** (Sprint 47)
 
 ### P1 — Doc-quality follow-ups
 
-- [ ] **TASK-104** — Add ownership-header frontmatter to `.claude/CONTEXT.md` (owner / last_updated / update_trigger / status). DOC WORK rule violation surfaced in Sprint 040 Q1. Estimated S, layers `governance, docs`.
-- [ ] **TASK-117** — Apply 3 additive `.claude/CONTEXT.md` lifts per Sprint 043 DEC-5: (i) `_Avoid_` annotations on existing § Vocabulary entries; (ii) NEW § Relationships section between Modes and Agent Roster; (iii) NEW § Flagged ambiguities section at end (seed Sprint 035 ADR-014 rename + Sprint 039 codemap-refresh skill-vs-script + at-most-2 others). Design input: [`docs/research/mattpocock-bucket-and-context-2026-05-04.md`](docs/research/mattpocock-bucket-and-context-2026-05-04.md) Part B. Re-prime + agent-context refresh checklist required (CONTEXT.md ripple risk). Estimated S, layers `governance, docs`.
-- [ ] **TASK-118** — Add date-sanity check to `dev-flow:lean-doc-generator` skill pre-flight (compare frontmatter + research filename dates against today; warn or auto-correct). Sprint 042 + 043 retro pattern candidate — recurring friction. Estimated S, layers `skills, docs`.
+- [→] **TASK-104** — promoted to Sprint 045 T2.
+- [→] **TASK-117** — promoted to Sprint 045 T3.
+- [→] **TASK-118** — promoted to Sprint 045 T4.
 
 ### P1 — Implementation follow-ups (deferred from research sprints)
 
@@ -197,5 +198,7 @@ Sprint 41    →  EPIC-Audit Phase 4b — Caveman compare (dual-lineage + 3-arm 
 Sprint 42    →  EPIC-Audit Phase 4c — Superpowers patterns (hooks lineage + acceptance harness + PR template lift + ADR-021)  (done)
 Sprint 43    →  EPIC-Audit Phase 4d — Mattpocock skill library (4-skill diff + bucket defer + CONTEXT.md lifts + .out-of-scope/ + ADR-022 + docs/adr/ convention lock)  (done)
 Sprint 44    →  EPIC-Audit Phase 4e — GSD patterns (9 decisions: 5 NO LIFT + 2 DEFER + 2 bidirectional findings; ADR-023 scale-driven defer)  (done)
-Sprint 45    →  EPIC-Audit Phase 4f (skill-creator wrapper patterns) + Phases 5-6 (stale doc refresh / archive)
+Sprint 45    →  EPIC-Audit Phase 4f (skill-creator vs write-a-skill diff + ADR-024) + TASK-104 (CONTEXT.md ownership header) + TASK-117 (3 additive CONTEXT.md sections) + TASK-118 (lean-doc date-sanity pre-flight)
+Sprint 46    →  EPIC-Audit Phase 5 (stale doc refresh — ARCHITECTURE.md + AI_CONTEXT.md)
+Sprint 47    →  EPIC-Audit Phase 6 (archive external refs + close EPIC-Audit)
 ```
