@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 047 — EPIC-Audit close: batch-archived Sprints 040-046)
+last_updated: 2026-05-04 (Sprint 047 closed — EPIC-Audit complete; v1 ship prep unblocked)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -17,6 +17,13 @@ status: current
 > - `PATCH` — clarification / prompt rewording / fix
 
 ---
+
+## Sprint 047 — EPIC-Audit Phase 6 close (2026-05-04)
+
+- Sprint file: [docs/sprint/SPRINT-047-epic-audit-close.md](sprint/SPRINT-047-epic-audit-close.md)
+- Plan-lock `04785a6` · T1 `715d855` · T2 `61f828c` · T3 `0191bd1` · T4 `4334bb9` · close (this commit)
+- Summary: EPIC-Audit closed. 4 tasks: T1 batch-archive 7 sprints (040-046) → docs/CHANGELOG.md (closes 7-sprint stranded-archive friction structurally for this batch); T2 TODO.md trim (External Refs block removed + EPIC-Audit Backlog 3 rows collapsed to single done line); T3 ADR-025 EPIC-Audit close (7 decisions: EPIC done · lineage roster · 5 pattern-stability findings · deferred work registry · `.out-of-scope/` discipline · `docs/adr/` convention LOCKED + extended · v1 ship prep unblocked); T4 docs/audit/EPIC-Audit-retro.md (127-line cross-sprint synthesis spanning Sprints 034-046).
+- ADRs: ADR-025 — EPIC-Audit close. **EPIC-Audit COMPLETE.** 13 EPIC sprints (034-047) + 2 in-window foundation (038-039) = 15 total. 6 ext-refs / 7 ADRs (019-024 + 025) / 9 research notes / 9 bidirectional findings / 8 TASK-116 lift candidates accumulated / 3 conventions adopted as documented standards.
 
 ## Sprint 046 — EPIC-Audit Phase 5 stale doc refresh (2026-05-04)
 

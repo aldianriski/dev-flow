@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 047 promoted — EPIC-Audit Phase 6 close)
+last_updated: 2026-05-04 (Sprint 047 closed — EPIC-Audit complete; v1 ship prep unblocked)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 047
+sprint: none
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
