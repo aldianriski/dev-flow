@@ -2,7 +2,7 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 047 closed — EPIC-Audit complete; v1 ship prep unblocked)
+last_updated: 2026-05-04 (post-Sprint-047 backlog grooming — closed sub-blocks collapsed; v1 ship prep roadmap added)
 update_trigger: Sprint completed, task added, task status changed
 status: current
 sprint: none
@@ -23,6 +23,11 @@ sprint: none
 > - Promote from Backlog in priority order (P0 → P1 → P2 → P3).
 > - Remove promoted tasks from Backlog immediately.
 
+> **Backlog hygiene rules**
+> - Closed sub-blocks (e.g., closed EPIC, closed TASK-NNN cluster) collapse to ≤1 done-line pointer to `docs/CHANGELOG.md` after 1 sprint of cooldown. Don't accumulate done rows.
+> - Closed sub-blocks >2 sprints old → DELETE entirely (history lives in `docs/CHANGELOG.md` + sprint files; backlog is for OPEN work).
+> - When promoting a P1 cluster, leave only the 1-line summary; details go in sprint plan.
+
 > **Layer values** (meta-repo, no app code)
 > `governance, docs, scripts, skills, agents, templates, examples, ci`
 
@@ -38,28 +43,24 @@ sprint: none
 
 ## Backlog
 
-### P0 — EPIC-Audit (closed Sprint 047)
+### P0 — v1 ship prep (post-EPIC-Audit)
 
-- [x] **EPIC-Audit complete** — Phase 0 (Sprint 034 baseline) → Phase 1-3 (Sprints 035-037 rename/wiring/trim) → Phase 4 (Sprints 040-045 ext-ref deep-dives 4a-4f) → Phase 5 (Sprint 046 stale doc refresh) → Phase 6 (Sprint 047 archive + close). 13 sprints · 6 ext-refs · 6 ADRs (019-024) + ADR-025 closeout · 9 research notes · 9 bidirectional findings. Full retro: `docs/audit/EPIC-Audit-retro.md`.
+- [ ] **TASK-116** — Skill-triggering acceptance harness at `tests/skill-triggering/`. PowerShell port of superpowers `run-test.sh` + 3-skill seed (prime/orchestrator/tdd). Verifies 8 lift candidates accumulated from Sprints 043 DEC-1 + 045 DEC-2/4/5. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016/021 DEC-4 eval-evidence rule (prerequisite for TASK-115 + any future skill-behavior change). Estimated S-M, layers `scripts, ci, docs`. → Sprint 048.
+- [ ] **TASK-115** — Caveman 3-arm eval harness Node port (`scripts/eval-run.js` + `scripts/eval-measure.js`). Tokenizer = `gpt-tokenizer`. Snapshot schema 1:1 with caveman. Sibling tests required. Design input: [`docs/research/caveman-eval-harness-port-notes-2026-05-04.md`](docs/research/caveman-eval-harness-port-notes-2026-05-04.md). Depends on TASK-116 acceptance harness (eval-evidence rule). Estimated M, layers `scripts, docs`. → Sprint 049.
+- [ ] **v1 ship** — CHANGELOG release notes + plugin.json/marketplace.json bump (MINOR if TASK-115 introduces new skill or TASK-116 adds new test surface; PATCH otherwise) + git push origin master per release-patch HARD STOP protocol. → Sprint 050.
 
-### P1 — Doc-quality follow-ups
+### P2 — Tooling friction backlog (optional, not blocking v1)
 
-- [x] **TASK-104** — closed Sprint 045 T2 (CONTEXT.md ownership header added).
-- [x] **TASK-117** — closed Sprint 045 T3 (3 additive CONTEXT.md sections: `_Avoid_` annotations + § Relationships + § Flagged Ambiguities; 129/130 lines).
-- [x] **TASK-118** — closed Sprint 045 T4 (Step 0b date-sanity pre-flight added to lean-doc-generator; v2.0.0→2.1.0; closes 4-sprint recurring friction).
+- [ ] **release-patch skip-bump-on-docs-only fix** — extend `skills/release-patch/SKILL.md` to detect "EPIC close" / "sprint close" events and trigger archive flush even on docs-only diff. Closes stranded-archive friction structurally (per Sprint 047 ADR-025 DEC-8). Estimated S, layers `skills, scripts`.
+- [ ] **CONTEXT.md cap pressure** — `.claude/CONTEXT.md` at 129/130 lines (Sprint 045 retro). Next additive lift needs cap raise OR restructuring (e.g., move § Behavioral Guidelines Lineage to `references/` per Sprint 045 retro Friction #2). Estimated S, layers `governance, docs`.
 
-### P1 — Implementation follow-ups (deferred from research sprints)
+### P3 — Closed sub-blocks (CHANGELOG references only)
 
-- [ ] **TASK-115** — Port caveman 3-arm eval harness to JS (`scripts/eval-run.js` + `scripts/eval-measure.js`). Design input: [`docs/research/caveman-eval-harness-port-notes-2026-05-04.md`](docs/research/caveman-eval-harness-port-notes-2026-05-04.md). Tokenizer = `gpt-tokenizer`. Snapshot schema 1:1 with caveman. Sibling tests required. Estimated M, layers `scripts, docs`.
-- [ ] **TASK-116** — Implement skill-triggering acceptance harness at `tests/skill-triggering/` (PowerShell port of superpowers `run-test.sh` + 3-skill seed prime/orchestrator/tdd). Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Mode A (manual run before skill-description changes ship). Satisfies ADR-016 eval-evidence rule. Estimated S–M, layers `scripts, ci, docs`.
-
-### P1 — EPIC-E: Wrap-or-replace Claude Code primitives (closed)
-
-- [x] **TASK-086** — audit + ADR-012 (Sprint 28)
-- [x] **TASK-087** — review + security steps updated (Sprint 28)
-- [x] **TASK-088** — task tracking updated (Sprint 28)
-- [x] **TASK-089** — init mode updated (Sprint 28)
-- [x] **TASK-090** — sweep clean, ADR-012 closed, EPIC-E done (Sprint 29)
+> All historical TASK-NNN clusters and closed EPICs are archived in `docs/CHANGELOG.md`. Per Backlog hygiene rules: closed sub-blocks >1 sprint old are collapsed; >2 sprints old are deleted from Backlog (history lives in CHANGELOG + sprint files).
+>
+> - **EPIC-Audit (closed Sprint 047)** — `docs/CHANGELOG.md` § Sprint 047 + ADR-025 + `docs/audit/EPIC-Audit-retro.md`.
+> - **TASK-104 / 117 / 118 (closed Sprint 045)** — `docs/CHANGELOG.md` § Sprint 045.
+> - **EPIC-E TASK-086..090 (closed Sprint 028-029)** — `docs/CHANGELOG.md` (pre-Sprint-040 entries).
 
 ---
 
@@ -127,7 +128,10 @@ Sprint 41    →  EPIC-Audit Phase 4b — Caveman compare (dual-lineage + 3-arm 
 Sprint 42    →  EPIC-Audit Phase 4c — Superpowers patterns (hooks lineage + acceptance harness + PR template lift + ADR-021)  (done)
 Sprint 43    →  EPIC-Audit Phase 4d — Mattpocock skill library (4-skill diff + bucket defer + CONTEXT.md lifts + .out-of-scope/ + ADR-022 + docs/adr/ convention lock)  (done)
 Sprint 44    →  EPIC-Audit Phase 4e — GSD patterns (9 decisions: 5 NO LIFT + 2 DEFER + 2 bidirectional findings; ADR-023 scale-driven defer)  (done)
-Sprint 45    →  EPIC-Audit Phase 4f (skill-creator vs write-a-skill diff + ADR-024) + TASK-104 (CONTEXT.md ownership header) + TASK-117 (3 additive CONTEXT.md sections) + TASK-118 (lean-doc date-sanity pre-flight)
-Sprint 46    →  EPIC-Audit Phase 5 (stale doc refresh — ARCHITECTURE.md + AI_CONTEXT.md)
-Sprint 47    →  EPIC-Audit Phase 6 (archive external refs + close EPIC-Audit)
+Sprint 45    →  Phase 4f skill-creator + TASK-104/117/118 (ADR-024 + CONTEXT.md frontmatter+lifts + lean-doc Step 0b date-sanity v2.1.0)  (done)
+Sprint 46    →  EPIC-Audit Phase 5 — stale doc refresh (ARCHITECTURE.md + AI_CONTEXT.md restored to current)  (done)
+Sprint 47    →  EPIC-Audit Phase 6 close (batch-archive 040-046 + TODO trim + ADR-025 + EPIC-Audit-retro.md)  (done — EPIC-Audit COMPLETE)
+Sprint 48    →  v1 ship prep #1 — TASK-116 skill-triggering acceptance harness (verifies 8 lift candidates; satisfies ADR-016 eval-evidence rule)
+Sprint 49    →  v1 ship prep #2 — TASK-115 caveman 3-arm eval harness Node port (depends on TASK-116)
+Sprint 50    →  v1 SHIP — CHANGELOG release notes + plugin/marketplace lockstep bump + git push per release-patch protocol
 ```
