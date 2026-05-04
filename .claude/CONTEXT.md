@@ -1,3 +1,10 @@
+---
+owner: Tech Lead (Aldian Rizki)
+last_updated: 2026-05-04
+update_trigger: vocabulary added/changed; gate or mode count changes; agent roster changes; behavioral guidelines lineage updates
+status: current
+---
+
 # CONTEXT.md — dev-flow Shared Domain Language
 
 All agents and skills read this file. Single source of truth for vocabulary, principles, gates, and modes.

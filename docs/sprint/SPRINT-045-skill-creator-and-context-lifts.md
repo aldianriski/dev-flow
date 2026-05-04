@@ -181,6 +181,13 @@ Outputs:
 
 EPIC-Audit Phase 4f closed; Phase 4 (4a-4f) deep-dive series complete.
 
+### 2026-05-04 | T2 done — pending commit
+TASK-104 closed: `.claude/CONTEXT.md` ownership header added. 6 lines inserted at top (frontmatter open + 4 fields + frontmatter close); zero existing content modified. Frontmatter fields: owner / last_updated / update_trigger / status — matches DOCS_Guide §3 spec.
+
+DOC WORK rule violation surfaced in Sprint 040 Q1 now closed.
+
+Per OQ-e: T2 lands as separate commit before T3 (CONTEXT.md edit ordering for diff isolation).
+
 ---
 
 ## Files Changed
@@ -190,6 +197,8 @@ EPIC-Audit Phase 4f closed; Phase 4 (4a-4f) deep-dive series complete.
 | `docs/research/skill-creator-skill-diff-2026-05-04.md` | T1 | NEW (~110 lines) — 5-axis diff matrix + 4 bidirectional findings + per-axis recommendations + ceiling check | low | — |
 | `docs/adr/ADR-024-skill-creator-patterns.md` | T1 | NEW (~120 lines) — 7-decision ADR + 6 alternatives + lineage credit (Apache 2.0, SHA d230a6dd6eb1) | low | — |
 | `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T1 | Execution Log + § Decisions DEC-1 through DEC-7 rows | low | — |
+| `.claude/CONTEXT.md` | T2 | NEW frontmatter header (TASK-104; 6 lines added top, 0 removed) | low | — |
+| `docs/sprint/SPRINT-045-skill-creator-and-context-lifts.md` | T2 | Execution Log + § Decisions DEC-8 row | low | — |
 
 ---
 
@@ -204,6 +213,7 @@ EPIC-Audit Phase 4f closed; Phase 4 (4a-4f) deep-dive series complete.
 | DEC-5 (T1) | LIFT description-pushiness anti-pattern → queue TASK-116 (add 5th Red Flag) | dev-flow Red Flags cover OVERTRIGGERING but not UNDERTRIGGERING; real failure mode | ADR-024 |
 | DEC-6 (T1) | Record 4 bidirectional findings (dev-flow > Anthropic on explicit checklist + line cap + red-flags template + mandatory ref frontmatter) per Sprint 042/043/044 pattern | Pattern is load-bearing for ext-ref audits (4 sprints, 9 total findings); prevents future "match upstream" pressure | ADR-024 |
 | DEC-7 (T1) | Scale-driven defer note — no `.out-of-scope/` pointers warranted (defers are scale-fit, not concept-reject) per Sprint 044 ADR-023 discipline | Pointer files only for concept rejections; scale-driven defers stay in ADR § Decision text | ADR-024 |
+| DEC-8 (T2) | TASK-104 closed — `.claude/CONTEXT.md` ownership header added (4-field frontmatter); DOC WORK rule violation closed | Sprint 040 Q1 finding addressed; T3 prerequisite satisfied (header exists for last_updated bumps) | (no ADR — implements DOCS_Guide §3 spec) |
 
 ---
 
