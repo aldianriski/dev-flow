@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: planning
-plan_commit: pending
+status: active
+plan_commit: 87bb523
 close_commit: pending
 ---
 
@@ -100,19 +100,37 @@ T1 + T2 parallelizable (independent sources: T1 = SKILL.md files, T2 = Python ev
 
 ## Execution Log
 
-*(empty — populate per task close.)*
+### 2026-05-04 | T1 done — pending commit
+SKILL.md diff complete via local plugin cache (`84cc3c14fa1e/skills/caveman/SKILL.md`, 67 lines, juliusbrussee SHA `ef6050c5e184`) + gh CLI raw fetch (`mattpocock/skills/contents/skills/productivity/caveman/SKILL.md`, 49 lines, mattpocock SHA `b843cb5ea74b`). Both MIT verified via `gh api repos/.../license`.
+
+Output: `docs/research/caveman-skill-diff-2026-05-04.md` (section-level matrix + winner-per-axis + net assessment).
+
+**Key findings:**
+- juliusbrussee superior for daily use (intensity levels + wenyan + plugin integration).
+- mattpocock superior as minimal-skill reference (49 vs 67 lines).
+- Lead paragraph + Pattern line + Wrong/Right examples are byte-identical between variants.
+- Hooks/MCP/statusline live OUTSIDE SKILL.md in juliusbrussee (plugin layer); mattpocock has none.
+- caveman-shrink MCP rejection rationale strengthened: transport-level rewrite conflates skill discipline with message rewriting.
+
+No new caveman skill in dev-flow recommended — both freely installable; cloning = maintenance burden with no value. Lineage credit only via ADR-020.
 
 ---
 
 ## Files Changed
 
-*(empty — populate at close.)*
+| File | Task | Change | Risk | Test added |
+|:-----|:-----|:-------|:-----|:-----------|
+| `docs/research/caveman-skill-diff-2026-05-04.md` | T1 | NEW (~70 lines) — section-level matrix + winner-per-axis + net assessment | low | — |
+| `docs/sprint/SPRINT-041-caveman-compare.md` | T1 | Execution Log + § Decisions DEC-1, DEC-2 rows | low | — |
 
 ---
 
 ## Decisions
 
-*(empty — T1, T2 land rows here; T3 ADR pointer.)*
+| ID | Decision | Reason | ADR |
+|:---|:---------|:-------|:----|
+| DEC-1 (T1) | Do NOT fork caveman into dev-flow; document as external reference only | Both juliusbrussee + mattpocock variants freely installable (MIT); cloning creates maintenance burden without value. juliusbrussee already in local plugin cache | ADR-020 (pending T3) |
+| DEC-2 (T1) | Lineage credit to BOTH variants in ADR-020 (juliusbrussee primary, mattpocock minimal-skill reference); SHAs pinned `ef6050c5e184` + `b843cb5ea74b` | Two licensed lineages; both MIT; future re-diff needs SHA anchors | ADR-020 (pending T3) |
 
 ---
 
