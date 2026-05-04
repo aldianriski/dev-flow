@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-04
 update_trigger: sprint open / close / status change / phase scope change
-status: active
-plan_commit: pending
+status: closed
+plan_commit: aed05f0
 close_commit: pending
 ---
 
@@ -114,21 +114,21 @@ T1 → T2 (T2 reuses T1's MIT license check + SHA pin; T1's command-file reads m
 
 ## Sprint DoD
 
-- [ ] T1 `docs/research/gsd-phase-pipeline-diff-2026-05-04.md` exists with mapping matrix + bidirectional finding section + per-axis recommendation. § Decisions row landed.
-- [ ] T2 `docs/research/gsd-contexts-and-plans-2026-05-04.md` exists with Part A + Part B + Part C. § Decisions row landed. CONTEXT.md edits = 0 (additive recommendations queue to TASK-117 only).
-- [ ] T3 `docs/adr/ADR-023-gsd-patterns.md` exists, status Accepted, follows ADR-019..022 format.
-- [ ] Plan-lock commit landed before any T1..T3 commit.
-- [ ] Close commit + CHANGELOG row + TODO update + retro.
-- [ ] Open questions (a–f above) resolved on promote, recorded as locked decisions.
-- [ ] Date verification: all artifacts stamped `2026-05-04`.
-- [ ] T1 16-file read ceiling held; if expanded, surfaced + recorded.
-- [ ] Zero `.claude/CONTEXT.md` edits, zero `skills/<name>/*` edits, zero `agents/<name>/*` edits (READ-ONLY sprint).
+- [x] T1 `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` exists (filename clarified during execution to reflect commands-namespace scope) with mapping matrix + bidirectional finding + per-axis recommendation. → 30a0c4f.
+- [x] T2 `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` exists (filename clarified to reflect Part C CONTEXT.md scope) with Part A + Part B + Part C. CONTEXT.md edits = 0 confirmed (TASK-117 unchanged). → 526c0af.
+- [x] T3 `docs/adr/ADR-023-gsd-patterns.md` exists, status Accepted, follows ADR-019..022 format. → 54d492f.
+- [x] Plan-lock commit landed before any T1..T3 commit. → aed05f0.
+- [x] Close commit + CHANGELOG row + TODO update + retro. → this commit.
+- [x] Open questions (a–f above) resolved on promote, recorded as locked decisions. → DEC-1..DEC-9 + bidirectional findings.
+- [x] Date verification: all artifacts stamped `2026-05-04` (post lean-doc-generator date fix at promote — recurring friction; TASK-118 still queued).
+- [x] T1 16-file read ceiling held (~14 reads — within ceiling).
+- [x] Zero `.claude/CONTEXT.md` edits, zero `skills/<name>/*` edits, zero `agents/<name>/*` edits (READ-ONLY sprint confirmed).
 
 ---
 
 ## Execution Log
 
-### 2026-05-04 | T1 done — pending commit
+### 2026-05-04 | T1 done — 30a0c4f
 GSD repo structure verified via gh CLI dir listings (license MIT, SHA `42ed7cee8d8d`). Scale confirmed: ~64 commands + ~80 workflows + ~20 agents = 164+ surface assets vs dev-flow's 24. Plus full TypeScript SDK (package.json, tsconfig, vitest), 5-language READMEs, persistent workflow artifacts (PLAN/RESEARCH/VERIFICATION/REVIEWS).
 
 Output: `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` — phase-pipeline mapping + commands/skills namespace comparison + 8 per-pattern recommendations + bidirectional finding + 16-file-ceiling check.
@@ -151,7 +151,7 @@ Output: `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` — phase-
 
 **File-read ceiling:** within OQ-b 16-file cap (4 commands + CONTEXT.md + 6 dir listings + 3 dev-flow cross-refs).
 
-### 2026-05-04 | T2 done — pending commit
+### 2026-05-04 | T2 done — 526c0af
 GSD `contexts/` (3 mode-profiles: dev/research/review), `.plans/` (sample 1 file), and `CONTEXT.md` (41 lines, TypeScript-module domain) fetched/sampled via gh CLI raw.
 
 Output: `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` — three-part research note.
@@ -174,7 +174,7 @@ Output: `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` — three-p
 
 **DEC-7..9 land in § Decisions.**
 
-### 2026-05-04 | T3 done — pending commit
+### 2026-05-04 | T3 done — 54d492f
 ADR-023 written at `docs/adr/ADR-023-gsd-patterns.md`. Status: Accepted. Captures all 9 decisions from T1 + T2:
 - DEC-1: NO LIFT 9-phase pipeline (re-eval at ~150 assets)
 - DEC-2: NO LIFT commands/ namespace split
@@ -235,11 +235,40 @@ ADR-023 sequential per Sprint 043 DEC-7 convention lock; max-ADR check confirmed
 
 ## Open Questions for Review
 
+*(None surfaced during execution — all six promote-time OQs (a–f) resolved cleanly per "approve all" pattern. T1+T2+T3 executed on stable inputs without re-litigation. T1 16-file read ceiling held — sufficient resolution from dir-listings + 4 command samples + CONTEXT.md without needing to read 80+ workflows or 20 agents in full.)*
+
 *(Empty — append OQs as they surface during execution. All promote-time OQs (a–f) above resolved at promote per "approve all" pattern from Sprint 042/043.)*
 
 ---
 
 ## Retro
+
+### Worked
+- **Pre-resolve OQs at promote held a third sprint.** Sprint 042/043/044 all locked OQs at promote per "approve all" pattern. Zero mid-sprint re-litigation. Pattern is stable; codify in `dev-flow:lean-doc-generator` reference docs (TASK-118 scope candidate).
+- **16-file read ceiling discipline saved time at GSD scale.** GSD has 164+ assets; reading even 20% would have been ~30 files of dense markdown. Ceiling forced strategic sampling (4 commands + CONTEXT.md + 6 dir listings). Net: T1 finished in ~15 reads with sufficient resolution.
+- **Bidirectional findings pattern (Sprint 042 DEC-2, Sprint 043 DEC-2, Sprint 044 DEC-6 + DEC-9) is now tradition.** 4 sprints of explicit "where dev-flow > upstream" notes. Reduces future "match upstream" pressure on those axes. Should consider adding "bidirectional findings" as a required Decisions table category in `dev-flow:lean-doc-generator` ext-ref-audit template.
+- **Decision-only sprint shape (Sprint 040/041/042/043/044 — 5 sprints).** Pattern stabilized. ext-ref deep audit = research notes (1-3) + ADR + 0-1 mechanical lifts. Worth codifying as a sprint shape.
+- **Scale-driven NO LIFT decisions are valid sprint output.** Sprint 044 lands 0 mechanical lifts (no `.out-of-scope/` pointers, no PR template lift, no skills/CONTEXT.md edits). Pure research + ADR. Decision-only sprint with ZERO landed artifacts is a valid shape — locks "considered + deferred" surface so future sprints don't re-research.
+
+### Friction
+- **lean-doc-generator stamped 2026-05-03 again.** THIRD sprint with this friction (Sprint 042/043/044). TASK-118 (date-sanity check) is now P0 priority for next implementation sprint. The pattern is reliable enough to fix at the skill level rather than continue manual fix per sprint.
+- **Sprint plan filename drift.** lean-doc-generator named research files `gsd-phase-pipeline-diff-2026-05-04.md` and `gsd-contexts-and-plans-2026-05-04.md`; actual content scope drove rename to `gsd-phase-pipeline-and-commands-2026-05-04.md` and `gsd-contexts-plans-and-context-2026-05-04.md` (T1 included commands-namespace; T2 included CONTEXT.md as Part C). DoD updated to match. Lesson: research-file naming should follow content scope, not pre-plan; allow renaming if scope shifts.
+- **GSD scale forced strategic file sampling rather than full audit.** Could not enumerate all 64 commands + 80 workflows + 20 agents within ceiling. Acceptable trade — directory-listing + named-file sampling (phase, plan-phase, ns-workflow, etc) gave sufficient pattern signal. But a future scale-crossing re-eval would benefit from a more programmatic scan (regex extract for `name:` + `description:` across all command files in one gh batch). Captured as forward note.
+- **`.out-of-scope/` not used for ANY GSD decision.** All 5 GSD deferrals are scale-driven (pattern fine, scale wrong) rather than concept-rejecting (pattern broken). `.out-of-scope/` shape is for the latter. ADR-023 § Decision text holds the rationale. Future re-eval requires reading ADR; not as discoverable as `.out-of-scope/` pointer would be. Trade-off: pointer files would dilute `.out-of-scope/` if every "defer" decision got one. Hold current discipline (only concept-reject decisions get pointers).
+
+### Pattern candidates (pending user confirm)
+1. **Bidirectional findings as required Decisions table category.** 4 sprints of consistent use (Sprint 042 DEC-2, Sprint 043 DEC-2, Sprint 044 DEC-6 + DEC-9). Codify in `dev-flow:lean-doc-generator` ext-ref-audit template.
+2. **Decision-only sprint with 0 landed artifacts is valid.** Sprint 044 = 2 research notes + 1 ADR + 0 lifts (no `.out-of-scope/`, no template, no skill/CONTEXT.md edits). Valid sprint shape; lock as documented option in lean-doc-generator templates.
+3. **`.out-of-scope/` discipline:** only concept-rejecting decisions get pointer files; scale-driven defers stay in ADR § Decision text. Sprint 044 confirmed this discipline by NOT creating pointers for 5 scale-driven defers.
+4. **Date-sanity check in lean-doc-generator pre-flight is now P0.** Three sprints of recurring friction. Fix at skill level (TASK-118).
+5. **Strategic file-sampling at scale crossings.** GSD scale (164+ assets) couldn't fit 16-file ceiling without strategic sampling (dir listings + 4 named files). Future scale crossings may need programmatic-scan helper or higher ceilings.
+
+### Surprise log (cross-ref to Execution Log)
+- T1: GSD repo structure differs from expectation — `contexts/` and `workflows/` live under `get-shit-done/` subdirectory, not at root. Required path-verify before raw fetches. Discovered via dir-listing.
+- T1: GSD is at SCALE GAP of 6.8× vs dev-flow (164 vs 24 assets). Most pattern decisions become "fine pattern, wrong scale" rather than "broken pattern."
+- T1: GSD command body uses XML-tagged structure (`<objective>`, `<execution_context>`, `<context>`); dev-flow uses conversational markdown. Trade-off: agent parseability vs human readability. DEC-3 records consideration for selective adoption (write-a-skill template only).
+- T2: GSD `contexts/` is OUTPUT-STYLE PROFILES (low/high verbosity per work mode) — orthogonal to dev-flow CONTEXT.md (workflow vocabulary). DEC-9 records bidirectional richness (each CONTEXT.md is richer in own domain).
+- T3: 5 of 9 decisions are NO LIFT or DEFER — but `.out-of-scope/` got 0 new pointers because all defers are scale-driven, not concept-reject. Forward discipline: pointer files only for concept rejections.
 
 *(Empty — fill at close.)*
 

@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 044 promoted — EPIC-Audit Phase 4e GSD patterns)
+last_updated: 2026-05-04 (Sprint 044 closed — EPIC-Audit Phase 4e GSD patterns)
 update_trigger: Sprint completed, task added, task status changed
 status: current
-sprint: 044
+sprint: none
 ---
 
 > **External references**
@@ -36,9 +36,7 @@ sprint: 044
 
 ## Active Sprint
 
-→ [docs/sprint/SPRINT-044-gsd-patterns.md](docs/sprint/SPRINT-044-gsd-patterns.md) — EPIC-Audit Phase 4e (GSD patterns) · status: active
-
-> Tasks: T1 phase-pipeline + commands diff (16-file ceiling) · T2 contexts/+plans/+CONTEXT.md reconcile · T3 ADR-023.
+→ — none —
 
 > Next: Sprint 045 — EPIC-Audit Phase 4f (Skill wrapper patterns with skill-creator).
 
@@ -79,6 +77,17 @@ sprint: 044
 
 > Current in-progress sprint only. Completed sprints archived in `docs/CHANGELOG.md`.
 > Sprints 0–27 archived → `docs/CHANGELOG.md`.
+
+### Sprint 044 — EPIC-Audit Phase 4e (GSD patterns) — closed 2026-05-04
+
+| File | Change | ADR |
+|:-----|:-------|:----|
+| `docs/research/gsd-phase-pipeline-and-commands-2026-05-04.md` | NEW — GSD scale survey (164+ assets vs dev-flow 24) + 9-phase pipeline mapping + commands/skills namespace comparison + 8 per-pattern recommendations + bidirectional sprint-bulk finding | ADR-023 |
+| `docs/research/gsd-contexts-plans-and-context-2026-05-04.md` | NEW — Part A contexts/ defer (output-style profiles) + Part B .plans/ no-lift + Part C CONTEXT.md zero-lift + bidirectional CONTEXT.md richness finding | ADR-023 |
+| `docs/adr/ADR-023-gsd-patterns.md` | NEW — 9-decision ADR (5 NO LIFT + 2 DEFER + 2 bidirectional findings); scale-driven defer with explicit re-eval triggers | ADR-023 |
+| `docs/sprint/SPRINT-044-gsd-patterns.md` | NEW — sprint plan + execution log + 9 decisions + retro | — |
+
+Plan-lock `aed05f0` · T1 `30a0c4f` · T2 `526c0af` · T3 `54d492f` · close (this commit).
 
 ### Sprint 043 — EPIC-Audit Phase 4d (Mattpocock skill library) — closed 2026-05-04
 
@@ -129,7 +138,7 @@ Plan-lock `87bb523` · T1 `0ee6f8d` · T2 `b79815f` · T3 `7ab9ff6` · close (th
 
 Plan-lock `7e06c72` · T1 `1b7741b` · T2 `54c88b1` · T3 `8261847` · T4 `eed5126` · close `3fec973`.
 
-*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 + 043 await archive on next `/release-patch` invocation that triggers a bump (or manual archive — release-patch skip-bump on docs-only is the cause; flagged for fix).*
+*Sprints 38 + 039 archived → `docs/CHANGELOG.md`. Sprints 040 + 041 + 042 + 043 + 044 await archive on next `/release-patch` invocation that triggers a bump (or manual archive — release-patch skip-bump on docs-only is the cause; flagged for fix).*
 
 ---
 
@@ -187,5 +196,6 @@ Sprint 40    →  EPIC-Audit Phase 4a — Karpathy patterns (lineage lock + ADR-
 Sprint 41    →  EPIC-Audit Phase 4b — Caveman compare (dual-lineage + 3-arm port plan + ADR-020 + caveman-shrink reject)  (done)
 Sprint 42    →  EPIC-Audit Phase 4c — Superpowers patterns (hooks lineage + acceptance harness + PR template lift + ADR-021)  (done)
 Sprint 43    →  EPIC-Audit Phase 4d — Mattpocock skill library (4-skill diff + bucket defer + CONTEXT.md lifts + .out-of-scope/ + ADR-022 + docs/adr/ convention lock)  (done)
-Sprint 44-45 →  EPIC-Audit Phases 4e-6 (2 ext-ref deep / stale doc refresh / archive)
+Sprint 44    →  EPIC-Audit Phase 4e — GSD patterns (9 decisions: 5 NO LIFT + 2 DEFER + 2 bidirectional findings; ADR-023 scale-driven defer)  (done)
+Sprint 45    →  EPIC-Audit Phase 4f (skill-creator wrapper patterns) + Phases 5-6 (stale doc refresh / archive)
 ```
