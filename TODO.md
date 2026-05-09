@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 054
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,16 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ **Sprint 054 — Anti-Slip Discipline at G1 + Phase Guards (TASK-130)** (`docs/sprint/SPRINT-054-anti-slip-discipline-phase-guards.md`)
+
+- [ ] **T0.5** — NEW `docs/adr/ADR-031-anti-slip-discipline-at-g1.md` (≤120 lines): G1 Scope Checklist gains 4 new fields (focus · context-budget · explicit-gaps · done-confirmation) all required at PASS; behavioral enforcement only. 4-criteria match. Layers `docs`. Risk low. **FIRST** per ADR-first sequencing.
+- [ ] **T1** — Active Sprint guard at sprint-bulk Phase 0 — orchestrator SKILL.md sprint-bulk + phases.md sprint-bulk Phase. Halt + redirect to /lean-doc Sprint Promote if Active Sprint empty. Soft guard default halt. Layers `skills, docs`. Risk low.
+- [ ] **T2** — Mid-Sprint Friction Protocol explicit triggers (`phases.md`) — 5 AI invocation conditions (scope-creep · 3+ failed runs · unexpected files · ambiguity · context-budget) + 3 human shortcuts (`friction` / `defer <reason>` / `block`). Existing fix/defer/block flow preserved. Layers `skills, docs`. Risk low.
+- [ ] **T3** — G1 Scope Checklist 4 new fields (`phases.md`) — focus · context-budget · explicit-gaps · done-confirmation inserted after `red flags:` before `status:`. acceptance: preserved separate. Layers `skills, docs`. Risk medium.
+- [ ] **T4** — Validation pass: dry-run G1 anti-slip on synthetic task + verify Phase 0 + verify Friction triggers + cross-check Sprint 053 Step 1.2 + Sprint 052 F5(C) protocols preserved. Layers `ci, docs`. Risk low.
+- [ ] **T5** — Sprint close: TODO.md sprint:none + Active Sprint clear + TASK-130 `[x]` + Roadmap row done + sprint file close + CHANGELOG prepend + orchestrator SKILL.md 2.0.0→2.1.0 last-validated 2026-05-09. Layers `governance, docs`. Risk low.
+
+> Closes TASK-130 (Anti-Slip Discipline at G1 + Phase Guards). G1 PASS · Order T0.5 → T1 → T2 → T3 → T4 → T5. Priority: closes explicit user pain BEFORE TASK-125 broader audit (per user 2026-05-09 priority decision). Next: Sprint 053b — TASK-125 broader feature-usage audit · Sprint 054b — TASK-131 orchestrator doc-wire cleanup.
 
 > Sprint 053 closed `a9b1f05`. TASK-124 fully delivered: F6a (lean-doc Step 6 + task-decomposer procedure.md Step 6 actually READ templates at gen time per ADR-030 contract) + F6b (Sprint Promote Step 1.2 backflow closes coordination loop) + ADR-030 template canonical ownership. T5 surfaced + fixed direct drift (TODO.md.template TASK row 6→8 fields); deferred broader DECISIONS.md.template drift to TASK-125. lean-doc 2.1.0→2.2.0 + task-decomposer 1.0.0→1.1.0 (MINOR per new behavioral contracts).
 >
@@ -73,6 +82,8 @@ sprint: none
 - [x] **TASK-126** — Untracked-files reconcile (closed direct-commit `c18b779`): 30 files staged + tracked. All confirmed legitimate dev-flow artifacts with proper frontmatter + `status: current`; none warranted .gitignore or delete. Repo root (6 files) — AI_WORKFLOW_BLUEPRINT.md / AUDIT.md / AUDIT_PASS2.md / BASELINE_ASPECT.md / READINESS.md / STRATEGY_REVIEW.md. docs/blueprint/ (21 files + VERSION) — CRITICAL fix: plugin install via bin/dev-flow-init.js copyScaffold now ships complete. docs/context/ (3 files) — research/ADAPTATION_NOTES.md + research/CC_SPEC.md + workflow/DESIGN_PHILOSOPHY.md. **Sprint 051b unblocked.**
 - [x] **TASK-127** — Optimal usage workflow vision (closed Sprint 051b `2266b9d`): docs/blueprint/12-session-workflow.md primer (163/200 cap) · README.md Daily Pattern expansion · CLAUDE.md template Session Workflow block (3-step `/prime → /lean-doc-generator → /orchestrator`).
 - [ ] **TASK-128** — Token usage optimization audit (pre-v1-ship quality gate). Origin: user session 2026-05-08 — "we must track again the token usage optimization after all task don." Audit all skill/agent/CLAUDE.md/CONTEXT.md token footprints; identify bloat candidates; ensure caps still discipline post-feature growth. Generates audit report + targeted trim recommendations. Run AFTER all v1 prereqs land (Sprint 055), BEFORE v1 ship (Sprint 056). Estimated S, layers `governance, scripts, docs`. → Sprint 055b.
+- [ ] **TASK-130** — Orchestrator Anti-Slip Discipline at G1 + Phase Guards. Origin: user session 2026-05-09 (post-Sprint-053) — "consider slip of error AI decision, is to optimal sprint we need to consider gap limit goals, focus or context we must state, because i still see when assign a task have a possibility to miss and slip the task." Reduce AI decision-slip / task-miss risk via 4 new G1 fields (focus · context-budget · explicit-gaps · done-confirmation) + Active Sprint guard at sprint-bulk Phase 0 + Mid-Sprint Friction Protocol explicit triggers (5 AI conditions + 3 human shortcuts). ADR-031 locks anti-slip discipline. Behavioral enforcement only; automated lint deferred to TASK-116-v2. Estimated M, layers `skills, docs`. → Sprint 054.
+- [ ] **TASK-131** — Orchestrator Doc-Wire Cleanup (Sprint 054 carry-forward; same-level improvement to TASK-130). ADR-030 init phase citation + Path B task-decomposer citation + Orphan skill explicit invocation language (verify Sprint 052 F4 6 advisories actually fire at proper phase, not just listed). Estimated S-M, layers `skills, docs`. → Sprint 054b.
 - [x] **TASK-129** — `/prime` behavior fix (closed direct-commit; single-task fix per Sprint Sizing Rules "never plan a sprint with only 1 task"): Next: line emitted per detection branch (4 branches: active-sprint+open / active-sprint+done / no-sprint+backlog / no-sprint+empty); 3 anti-patterns added (no inline summarize · no re-read unchanged via SHA1 cache · no full sprint-plan read — partial via `limit: 50`); Read order table updated; Step 6 added; output format includes `[cache hit]` + `(partial)` markers. Cap held 86/100. Skill version 1.0.0 → 1.1.0. last-validated bumped 2026-05-08.
 - [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap) + skeleton creation Sprint 051a + lean-doc/task-decomposer alignment Sprint 053. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 054.
 - [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 055.
@@ -187,9 +198,11 @@ Sprint 51b   →  Lean Architecture Templates + Primer (TASK-122b applySubstitut
 Sprint 52    →  F4 wire orphan skills into orchestrator skill-dispatch + phases (6 orphans · 4→10 rows Always-On) + F5 tech-debt rollover loop (TD-NNN section · Friction→TD prompt · mid-sprint fix/defer/block · Sprint Promote scan + auto-escalate · 5 anti-pattern locks) (TASK-123) (done — `fb8e389`)
 Sprint 52b   →  release-debt resolution (Sprint 049 MINOR + 050/051a/051b PATCH chain reconcile; manual or release-patch --minor flag decision)
 Sprint 53    →  F6 task-decomposer ↔ lean-doc-generator collaboration audit + Sprint 052 T7 carry-forward (TASK-124) — ADR-030 template canonical ownership · decomposition-spec.md template-pointer · SPRINT_PROTOCOLS.md Step 1.2 backflow · lean-doc Step 6 + task-decomposer Step 6 template-read · validation pass (done — `a9b1f05`)
-Sprint 53b   →  Broader feature-usage audit sweep (TASK-125 — all skill/agent pairs: prime↔init / release-manager↔release-patch / pr-reviewer↔code-reviewer / security-auditor↔security-analyst / architecture-grill↔design-analyst)
-Sprint 54    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (retroactive eval-evidence release-patch v2.0.0 + skeleton + Sprint 053 alignment)
-Sprint 55    →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
+Sprint 54    →  TASK-130 Anti-Slip Discipline at G1 + Phase Guards (ADR-031 + 4 new G1 fields focus/context-budget/explicit-gaps/done-confirmation + sprint-bulk Phase 0 Active Sprint guard + Friction Protocol 5 AI triggers + 3 human shortcuts) (in_progress)
+Sprint 53b   →  Broader feature-usage audit sweep (TASK-125 — all skill/agent pairs: prime↔init / release-manager↔release-patch / pr-reviewer↔code-reviewer / security-auditor↔security-analyst / architecture-grill↔design-analyst) — runs AFTER 054 anti-slip closes user pain
+Sprint 54b   →  TASK-131 Orchestrator Doc-Wire Cleanup (ADR-030 init citation + Path B citation + orphan invocation verification)
+Sprint 55    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (incl. anti-slip lint + retroactive eval-evidence release-patch v2.0.0 + skeleton + Sprint 053 alignment)
+Sprint 55-2  →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
 Sprint 55b   →  Token usage optimization audit (TASK-128 — pre-v1-ship quality gate; CLAUDE.md/CONTEXT.md/skills bloat scan)
 Sprint 56    →  v1 SHIP — CHANGELOG outcome-led release notes + lockstep bump + git push
 ```
