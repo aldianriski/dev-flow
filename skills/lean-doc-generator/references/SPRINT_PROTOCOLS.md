@@ -44,6 +44,14 @@ status: current
 **Steps:**
 
 1. **Read** TODO.md § Backlog. Confirm `Active Sprint` pointer = `— none —`. If pointing to file with `status: active` → block with: "Sprint NNN still active. Close it before promoting next."
+
+1.5. **TD Scan** (TASK-123 F5(D)). Read `TODO.md § Tech Debt`. For each open TD row:
+   - **`severity: high`** → auto-escalate to Backlog P1 (no human review). Write Backlog row `TASK-NNN` from TD-NNN AC. Mark TD row `status: escalated`. Note: TD row stays in § Tech Debt (audit trail per anti-pattern lock #1) — escalation does NOT delete.
+   - **Aging `>6` sprints** (current sprint - sprint-created): prompt user `"TD-NNN is [N] sprints old (severity: X). Escalate / Downgrade / Mark resolved?"`. Apply user choice.
+   - **Missing `sprint-created:` field**: treat as requires-re-review immediately (defensive default per anti-pattern lock #3). Prompt as above.
+   - **`severity: trivial | minor | medium`** + not aging: surface count summary to user (`"N open TD rows; human review required to promote to Backlog"`). Do NOT auto-promote.
+   - **`status: escalated`** without corresponding Backlog `TASK-NNN`: HARD STOP per anti-pattern lock #5. Fix before continuing.
+
 2. **Pick** top priority items (P0 → P1 → P2). Apply sprint sizing rules: 2–3 tasks min, more if lightweight. Confirm pick with user.
 3. **Decompose** each task. Ask in single message:
 
@@ -203,3 +211,17 @@ Auto-correct? (y/n)
 **Out of scope:** date corrections to ALREADY-WRITTEN files (those go through normal Step 0 staleness scan + ownership-header `last_updated` updates). Step 0b only guards NEW writes.
 
 **Recurring-friction citation:** Sprint 042 retro Friction #1 + Sprint 043 retro Friction #1 + Sprint 044 retro Friction #1 (TASK-118 promoted to P0 per Sprint 044 retro Pattern Candidate #4).
+
+---
+
+## Tech Debt Anti-Pattern Locks
+
+Mirrors `## Anti-Drift Hard Stops` above. Prevent recurring misuse of the TD mechanic (TASK-123 F5(E)).
+
+1. **Never delete TD rows.** Resolved rows stay in `TODO.md § Tech Debt` with `status: resolved → TASK-NNN`. History is the audit trail. If a row is missing → backfill from git history; never silently lose.
+2. **Never auto-promote low-severity to Backlog.** `trivial`, `minor`, `medium` rows require human decision at Sprint Promote Step 1.5. Only `severity: high` auto-escalates without review.
+3. **Never let a TD row age past 6 sprints without re-review.** Sprint Promote Step 1.5 fires the re-review prompt (`Escalate / Downgrade / Mark resolved`). If a row has no `sprint-created:` field → treat as requires-re-review immediately (defensive default).
+4. **Never write a TD row without `severity:` + `source:`.** Rows missing either field are invalid — fix before continuing. Both fields populate by construction in F5(B) Sprint Close write path and F5(C) mid-sprint defer path.
+5. **Never merge a `status: escalated` TD row without a corresponding Backlog `TASK-NNN`.** Escalation is incomplete until the Backlog row exists. Sprint Promote Step 1.5 hard-stops if escalated row lacks Backlog match.
+
+**Enforcement:** behavioral (read at Sprint Promote / Sprint Close / Sprint Execute by `lean-doc-generator` skill type: rigid). Automated lint deferred to TASK-116-v2 acceptance harness (Sprint 054).
