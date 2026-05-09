@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-09 (Sprint 054b closed — TASK-131 orchestrator doc-wire cleanup)
+last_updated: 2026-05-09 (Sprint 052b in-flight — release-debt 10-sprint reconcile; Blueprint 2.5.0 → 2.6.0)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -17,6 +17,20 @@ status: current
 > - `PATCH` — clarification / prompt rewording / fix
 
 ---
+
+## Sprint 052b — Release-Debt Resolution (10-sprint MINOR reconcile) (2026-05-09)
+
+- Sprint file: [docs/sprint/SPRINT-052b-release-debt-resolution.md](sprint/SPRINT-052b-release-debt-resolution.md)
+- Plan-lock `e175dca` · T1 close — see commit log
+- **Blueprint version:** MINOR bump 2.5.0 → 2.6.0 lockstep (`plugin.json` + `marketplace.json`) per semver MINOR rule. Consolidates 1 MINOR-class (Sprint 049) + 9 PATCH (Sprints 050/051a/051b/052/053/053b/053c/054/054b) since last bump. See per-sprint blocks below for full detail. **Rationale:** Sprint 049 introduced 3 MINOR-class behavioral changes (release-patch generalize ADR-027 + dev-flow-compress drop + architecture-grill rename) but bumped via release-patch (PATCH-only by design — release-patch HARD-rejects MINOR per ADR-027 boundary); 9 subsequent sprints accumulated as PATCH; chain crossed P0 threshold at Sprint 052 + grew to 10 by 2026-05-09. Reload activates on next plugin reinstall.
+- **Consolidated reconcile by class** (since 2.5.0):
+  - **Features:** F3 init scaffold (TASK-121) · F4 wire 6 orphan skills (TASK-123) · F5 tech-debt rollover loop (TASK-123) · session-workflow primer (TASK-127) · 11-lean-architecture primer (TASK-122a/b) · prime/release-patch/Architecture-Grill universal-skill rows.
+  - **Behavioral (skill MINORs):** lean-doc-generator 2.0→2.2 (Step 0b date-sanity · template-load contract) · task-decomposer 1.0→1.1 (template-load contract) · orchestrator 2.0→2.1 (Phase 0 Active Sprint guard · Mid-Sprint Friction Protocol triggers · G1 anti-slip 4-field).
+  - **Fixes:** 053b T7 17-edit primer propagation · 053c init-primer cleanup (TASK-132) · 054b orchestrator doc-wire (TASK-131) · 053b T6 wire-fixes (security-auditor ADR-015 cite · phases.md `/prime` handoff).
+  - **Docs:** 6 ADRs since 2.5.0 — 027 generalize · 028 init contract · 029 lean-arch · 030 template canonical · 031 anti-slip · 032 release-debt (this sprint, T5).
+- T1 reconcile (this commit): manifest 2.5.0 → 2.6.0 lockstep + this CHANGELOG block prepend. NO release-patch invocation (DEC-1 — manual reconcile this sprint; `--minor` flag deferred to TASK-NEW post-v1).
+- T2-T5 (in-flight): release-manager + release-patch SKILL.md wire-fixes (053b T2 findings #1-#5) · 05-skills.md primer drift (053b T2 findings #6-#7) · Sprint 053b factual close-out · ADR-032 5-decision lock (flag scope · release-manager role · prevention mechanism · mode boundary · re-litigation lock).
+- release-debt: RESOLVED at T1. Chain depth 10 → 0. Prevention mechanism per ADR-032 DEC-3 (Sprint Promote Step 1.5 release-debt scan + auto-escalate at 3+ depth) — locked T5.
 
 ## Sprint 054b — Orchestrator Doc-Wire Cleanup (TASK-131) (2026-05-09)
 

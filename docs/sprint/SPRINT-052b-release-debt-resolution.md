@@ -3,7 +3,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: planned
-plan_commit: TBD
+plan_commit: e175dca
 close_commit: TBD
 ---
 
@@ -89,6 +89,9 @@ status: PASS
 | File | Task | Change | Risk |
 |:-----|:-----|:-------|:-----|
 | `docs/sprint/SPRINT-052b-release-debt-resolution.md` | sprint | NEW — this file | low |
+| `.claude-plugin/plugin.json` | T1 | 2.5.0 → 2.6.0 (MINOR — consolidates 1 MINOR-class Sprint 049 + 9 PATCH chain) | medium |
+| `.claude-plugin/marketplace.json` | T1 | 2.5.0 → 2.6.0 lockstep (ADR-006) | medium |
+| `docs/CHANGELOG.md` | T1 | Prepend Sprint 052b consolidated MINOR block w/ class-grouped reconcile + 049-054b cross-link | low |
 
 ## Decisions
 
