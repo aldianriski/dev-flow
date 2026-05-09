@@ -3,7 +3,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
 status: active
-plan_commit: TBD
+plan_commit: cf1fb37
 close_commit: TBD
 ---
 
