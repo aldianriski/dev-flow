@@ -5,27 +5,42 @@ update_trigger: Layer added, dependency rule changed, or major refactor
 status: current
 ---
 
-# [Project Name] — Architecture [CUSTOMIZE]
+# [Project Name] — Architecture
 
-## Dependency Rule [CUSTOMIZE]
-<!-- Outer layers depend on inner layers — never the reverse. -->
-[Outer Layer] → [Middle Layer] → [Inner Layer]
+Architecture: **Clean Architecture + Domain-Driven Design** (per ADR-029).
 
-<!-- Example (filled in): -->
-Controller → Service → Repository → External
+## Dependency Rule
 
-## Directory Structure [CUSTOMIZE]
+`interface → application → domain ← infrastructure`
+
+- **Domain** has zero outward dependencies — pure business logic, no framework or I/O.
+- **Application** depends inward on domain only.
+- **Infrastructure** depends on domain (via interfaces) + application (via ports). Frameworks live here, never in domain.
+- **Interface** depends on application + domain. Drives use case execution.
+- **Shared** is cross-cutting (errors, common types) — keep minimal; not a kitchen-sink.
+
+## Directory Structure
 
 ```
 /[source-root]/
-  /[api]/           # [HTTP handlers, request validation]
-  /[service]/       # [business logic — no I/O here]
-  /[repository]/    # [data access, DB queries]
-  /[model]/         # [domain entities, types]
+  /domain/         # entities · value objects · aggregates · domain events · repository interfaces
+  /application/    # use cases (commands + queries) · application services · DTOs · ports
+  /infrastructure/ # repository implementations · framework adapters · db · http clients · mappers
+  /interface/      # HTTP / CLI / UI entry points — controllers · routes · presenters
+  /shared/         # cross-cutting (errors · common types · cross-context value objects)
+[app-root-line]
+[cmd-root-line]
+[test-root-line]
 ```
 
+react-next variant: 4 layers (no `interface/`); Next.js `app/` is the interface adapter.
+go-gin variant: tests live alongside source per Go convention (no top-level `tests/`).
+
+Full primer → [`docs/blueprint/11-lean-architecture.md`](../docs/blueprint/11-lean-architecture.md).
+
 ## Key Integration Points [CUSTOMIZE]
-<!-- External systems, APIs, or services this project integrates with. -->
+
+External systems, APIs, or services this project integrates with.
 
 | System | Purpose | Location in code |
 |:-------|:--------|:-----------------|
@@ -33,4 +48,5 @@ Controller → Service → Repository → External
 | [System name] | [what it does] | `[path/to/integration]` |
 
 ## Architecture Decision Records
-See [DECISIONS.md](docs/DECISIONS.md) for all ADRs.
+
+See [`docs/DECISIONS.md`](docs/DECISIONS.md) (or `docs/adr/ADR-NNN-*.md` per ADR-022 convention) for all ADRs.
