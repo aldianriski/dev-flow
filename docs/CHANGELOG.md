@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-09 (Sprint 051b closed — ADR-029 user-project surfaces shipped; TASK-122b + TASK-127 closed)
+last_updated: 2026-05-09 (Sprint 052 closed — TASK-123 F4 + F5 shipped; orphan skills wired + tech-debt rollover loop)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -17,6 +17,17 @@ status: current
 > - `PATCH` — clarification / prompt rewording / fix
 
 ---
+
+## Sprint 052 — F4 Wire Orphan Skills + F5 Tech-Debt Rollover Loop (2026-05-09)
+
+- Sprint file: [docs/sprint/SPRINT-052-orphan-skill-wiring-tech-debt-rollover.md](sprint/SPRINT-052-orphan-skill-wiring-tech-debt-rollover.md)
+- Plan/T1 `ffcc3e4` · T2 `2b462c7` · T3 `ba64493` · T5 `ccba56f` · T4 `c4b2c83` · T7 fold-in `122c98d` · close (TBD SHA)
+- Summary: TASK-123 fully delivered. **F4** — wired 6 orphan skills (`prime` · `zoom-out` · `tdd` · `diagnose` · `refactor-advisor` · `release-manager`) into orchestrator phase detection. `skills/orchestrator/references/skill-dispatch.md` Always-On table grew 4→10 rows in lifecycle order. `skills/orchestrator/references/phases.md` gained advisory hints block (6 bullets) at start of sprint-bulk Phase + `task-type:` advisory line in G1 Scope Checklist template. orchestrator SKILL.md unchanged (cap 95/100 held). **F5** — 4-mechanic tech-debt rollover loop. (A) NEW `## Tech Debt` section in `TODO.md` + `templates/TODO.md.template` (TD-NNN namespace · severity tiers trivial/minor/medium/high · status open/escalated/resolved permanent · sprint-created field · optional AC). (B) Sprint Close Protocol Step 4 § Retro Friction items now prompt `"TD row? (Y/N/already-resolved)"`. (C) NEW `## Mid-Sprint Friction Protocol` section in phases.md — fix/defer/block prompt; defer writes TD row immediately + continues task. (D) Sprint Promote Step 1.5 TD Scan inserted between Steps 1 and 2 — severity:high auto-escalates Backlog P1; aging >6 sprints triggers re-review prompt; trivial/minor/medium human-gate. (E) `## Tech Debt Anti-Pattern Locks` section appended to SPRINT_PROTOCOLS.md (5 numbered locks mirroring Anti-Drift Hard Stops style).
+- ADRs: none. Decisions inherit from TASK-123 backlog row spec (user-locked at session 2026-05-08 expansion).
+- Behavioral enforcement only this sprint; **automated lint carried forward to TASK-116-v2** (Sprint 054 acceptance harness).
+- Carried forward: dual-track during escalation window (TD row + Backlog row both exist until resolution) is acceptable audit-trail cost; anti-pattern lock #5 (HARD STOP if escalated lacks Backlog match) prevents desync.
+- **T7 in-sprint fold-in** (user-surfaced 2026-05-09): closed `templates/` ↔ lean-doc-generator wiring gap. `DOCS_Guide.md` § Core Files now maps each doc type to its `templates/<X>.md.template` (Canonical template column + template-as-canonical-format rule). Closes drift risk for Sprint 051b template rewrites. Deeper integration (lean-doc Step 6 Generate actually READING templates/) deferred to **TASK-124** Sprint 053 (F6a template lineage scope).
+- release-debt: depth grew to 5 sprints (Sprint 049 MINOR + 050/051a/051b/052 PATCH chain). Sprint 052b release-debt resolution increasingly urgent.
 
 ## Sprint 051b — Lean Architecture Templates + Primer + Workflow Vision Fold-in (2026-05-09)
 
