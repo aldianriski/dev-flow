@@ -4,7 +4,7 @@ last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: closed
 plan_commit: 986a3b3
-close_commit: TBD
+close_commit: a9b1f05
 ---
 
 # Sprint 053 — F6 task-decomposer ↔ lean-doc-generator Collaboration Audit + Template-Loader Integration
@@ -205,7 +205,7 @@ task-decomposer procedure.md Step 6 — extended with template-read invocation B
 
 **Sprint 051b regression:** templates/CLAUDE.md.template untouched since Sprint 051b T2 dry-render verification (4 stacks render clean). T3 contract change makes lean-doc READ this template at gen time — should reproduce Sprint 051b clean output. No actual regression run possible without separate /lean-doc invocation; logical correctness verified.
 
-### 2026-05-09 | sprint close — TBD
+### 2026-05-09 | sprint close — `a9b1f05`
 This commit. TASK-124 fully delivered: F6a (Sprint 052 T7 carry-forward) — lean-doc Step 6 + task-decomposer procedure.md Step 6 actually READ templates at gen time per ADR-030 contract. F6b (collaboration pattern alignment) — Sprint Promote Step 1.2 backflow closes coordination loop. ADR-030 locks template canonical ownership with 4-criteria match. T5 surfaced + fixed direct drift (TODO.md.template TASK row 6→8 fields); deferred broader DECISIONS.md.template drift to TASK-125. release-patch NOT invoked (release-debt 6-sprint chain → Sprint 052b owed). Last-validated bumped: lean-doc 2.1.0→2.2.0; task-decomposer 1.0.0→1.1.0.
 
 ---
