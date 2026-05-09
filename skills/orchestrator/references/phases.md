@@ -219,3 +219,33 @@ Use when running a multi-task sprint end-to-end. Replaces per-task G1+G2 with a 
 - When all tasks are `[x]`: run `/lean-doc-generator` Sprint Close, then prompt for `/release-patch` if version bump applicable.
 
 **Note**: sprint-PRD is session-scoped — emitted as a formatted block in the conversation, never written to disk. Persistent artifact creation is out of scope; separate task if needed.
+
+---
+
+## Mid-Sprint Friction Protocol
+
+**Trigger** (TASK-123 F5(C)): AI surfaces an issue mid-task OR human types `friction` at any task boundary during Sprint Execute.
+
+**Prompt to human:**
+```
+[friction] <one-line issue description>
+Fix now / defer / block?
+  fix              — halt current task step; address inline; resume from suspended step
+  defer <reason>   — write TD row in TODO.md § Tech Debt + continue task
+  block            — halt sprint per First-Blocker Halt rule (sprint-bulk Phase Step 5)
+```
+
+**On `fix`:** suspend current task step; complete fix; run feedback loop (test/lint/typecheck); resume from suspended step.
+
+**On `defer <one-line-reason>`:** write `TD-NNN` row in `TODO.md § Tech Debt` immediately:
+- `severity:` human-supplied OR AI-assessed (`trivial | minor | medium | high`)
+- `source:` `session <ISO-date> mid-sprint T<N>` (current sprint task ID)
+- `status: open`
+- `sprint-created: <NNN>` (current sprint number)
+- Summary line: the deferred-reason verbatim
+
+Then continue current task. Do NOT halt for defer.
+
+**On `block`:** invoke First-Blocker Halt (sprint-bulk Phase Step 5). Halts loop; reports halted task + remaining list; waits for human direction.
+
+**Anti-pattern locks** for TD rows written via this protocol → see `lean-doc-generator/references/SPRINT_PROTOCOLS.md § Tech Debt Anti-Pattern Locks`.

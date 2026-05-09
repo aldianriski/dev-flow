@@ -83,6 +83,7 @@ See `references/phases.md` § sprint-bulk Phase for full detail.
 ## Skill Dispatch
 
 At G1, look up task `layers` in `references/skill-dispatch.md` → list advisory skills.
+Mid-sprint friction handling → `references/phases.md § Mid-Sprint Friction Protocol`.
 
 ---
 
