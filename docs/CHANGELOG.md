@@ -22,7 +22,7 @@ status: current
 
 - Sprint file: [docs/sprint/SPRINT-055b-token-output-discipline.md](sprint/SPRINT-055b-token-output-discipline.md)
 - Plan commit: `b05ae9a`
-- Close commit: tbd (filled after squash)
+- Close commit: `be46f3f`
 - Tasks: T1 TASK-128 ✓ · T2 TASK-NEW DEC-3 codify ✓ · T3 TASK-133 Output Discipline ✓
 - ADRs: ADR-033 Output Discipline (5 decisions: principle home + pointer propagation + O8 anchor + zero-headroom handling + re-litigation lock)
 - Skill version bumps: lean-doc-generator 2.2.0 → 2.3.0 MINOR (Step 1.5b release-debt scan)

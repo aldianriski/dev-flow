@@ -4,7 +4,7 @@ last_updated: 2026-05-10
 update_trigger: Sprint state change
 status: closed
 plan_commit: b05ae9a
-close_commit: tbd
+close_commit: be46f3f
 ---
 
 # Sprint 055b — Token + Output Discipline (TASK-128 + DEC-3 codify + TASK-133)
