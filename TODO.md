@@ -37,7 +37,7 @@ sprint: none
 
 → — none —
 
-> Sprint 053c closed (close commit pending). TASK-132 fully delivered: T1 `docs/blueprint/10a-init.md` whole-section rewrite 237→74 lines (4 init-analyst refs eliminated; ADR-028 canonical bin/dev-flow-init.js contract documented; Stack presets + Scaffold output tables; Post-init `/prime` handoff line) · T2 `docs/blueprint/04-subagents.md` ASCII Agent Tier diagram collapsed 4→3 columns (dropped INIT ANALYST node; ADR-028 delegation note added) · T3 sweep classified 30 remaining init-analyst hits (all historical OR deprecation-pointer; 0 DRIFT-FIX-NEEDED). 0 friction. 0 new ADR. Pattern candidate: whole-section primer rewrite trigger for TASK-116-v2 acceptance harness lint.
+> Sprint 053c closed `cbdafbe`. TASK-132 fully delivered: T1 `docs/blueprint/10a-init.md` whole-section rewrite 237→74 lines (4 init-analyst refs eliminated; ADR-028 canonical bin/dev-flow-init.js contract documented; Stack presets + Scaffold output tables; Post-init `/prime` handoff line) · T2 `docs/blueprint/04-subagents.md` ASCII Agent Tier diagram collapsed 4→3 columns (dropped INIT ANALYST node; ADR-028 delegation note added) · T3 sweep classified 30 remaining init-analyst hits (all historical OR deprecation-pointer; 0 DRIFT-FIX-NEEDED). 0 friction. 0 new ADR. Pattern candidate: whole-section primer rewrite trigger for TASK-116-v2 acceptance harness lint.
 >
 > Next: Sprint 052b — release-debt resolution (8-sprint chain) · Sprint 055 — TASK-116-v2 acceptance harness · Sprint 055b — TASK-128 token usage audit + 055-2 — TASK-115-v2 caveman 3-arm eval.
 
