@@ -129,7 +129,7 @@ Plugin-wide principle for doc-history pruning. Applies to TODO.md + sprint files
 
 **Per-surface rules:**
 - **TODO.md Active Sprint ribbon:** ≤3 most-recent closed-sprint narrative pointers; older → archive narrative to CHANGELOG row.
-- **TODO.md closed task rows (P0/P1):** verbose AC summaries collapse to 1-line pointer (`closed Sprint NNN <sha> — <one-line summary>`) after 1-sprint cooldown.
+- **TODO.md closed task rows (P0/P1):** verbose AC summaries collapse to 1-line pointer (`closed Sprint NNN <sha> — <one-line summary>`) after 1-sprint cooldown; rows >2 sprints old DELETE entirely (history in CHANGELOG + sprint file + `git log`).
 - **Sprint files retro:** Worked / Friction / Pattern sub-sections capped at ≤6 bullets each; older surprise-log entries archive at close.
 - **CHANGELOG.md:** per-sprint row cap ~12 lines headline + 6 bullets max; deeper detail lives in sprint file.
 - **Roadmap (TODO.md):** done-cluster blocks (≥5 consecutive done sprints in same EPIC/theme) collapse to 1-line summary pointing to CHANGELOG range.
