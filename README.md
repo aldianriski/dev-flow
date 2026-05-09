@@ -149,7 +149,12 @@ PowerShell hooks require Windows (ADR-016). Node scripts cross-platform. Hook-to
 
 **Every session →** read [`TODO.md`](TODO.md) first to see active sprint state.
 
-Daily pattern: `/prime` to load ordered context, then check TODO.md `Active Sprint` block.
+**Daily workflow pattern** (3 steps, in order):
+1. `/prime` — load ordered context (CLAUDE.md → CONTEXT.md → MEMORY.md → TODO.md → sprint file → CODEMAP.md L0)
+2. `/lean-doc-generator` — align docs to current code state (frontmatter, codemap, CHANGELOG)
+3. `/orchestrator` — execute next task (mode: `init` / `quick` / `mvp` / `sprint-bulk`)
+
+Step 1 is never skipped. Steps 2 + 3 are conditionally skippable — see [`docs/blueprint/12-session-workflow.md`](docs/blueprint/12-session-workflow.md) for the full pattern guide.
 
 Contribution flow (versioning, skill-change protocol, breaking-change policy) → [`CONTRIBUTING.md`](CONTRIBUTING.md). Friction reports (file before opening a GitHub issue) → [`docs/SUPPORT.md`](docs/SUPPORT.md).
 
