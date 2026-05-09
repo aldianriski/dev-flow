@@ -12,6 +12,7 @@ goal: <verifiable outcome, 1 sentence>
 size: S | M | L  (S=≤2h, M=≤1d, L=>1d → BLOCK: split first)
 constraints: <list>
 layers: <list> → advisory skills: <from skill-dispatch.md>
+task-type: feature | bug-fix | refactor  → advisory: tdd | diagnose | refactor-advisor (advisory; not required)
 red flags: none | <list>
 status: PASS | BLOCK — <reason>
 ```
@@ -180,6 +181,14 @@ RECOMMENDATION: <one task or split? — ≤2 sentences>
 ## sprint-bulk Phase (mvp-class, batched)
 
 Use when running a multi-task sprint end-to-end. Replaces per-task G1+G2 with a single batched gate pass + auto-loop.
+
+**Advisory skill hints** (fire per detection at session-start / pre-G1 / G1 / Implement / Review / close):
+- `prime` — runs at session start before any orchestrator dispatch (NOT orchestrator-triggered; user-invoked or session-start hook)
+- `zoom-out` — propose before G1 if any task touches an unfamiliar module OR is cross-cutting
+- `diagnose` — propose at Implement phase if G1 task-type = bug-fix / failing test
+- `tdd` — propose at Implement phase if G1 task-type = feature / new behavior requiring tests
+- `refactor-advisor` — propose post-Review if code-reviewer flags complexity smells
+- `release-manager` — propose at sprint close if MINOR or MAJOR bump required; else `release-patch` (PATCH auto-detect path)
 
 **1. Sprint Scope Batch (G1 once)**
 - Read all `[ ]` tasks under `## Active Sprint` in TODO.md.
