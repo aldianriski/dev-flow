@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-08
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 050
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,9 +35,9 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ **TASK-121** — F3 init scaffold full (`/orchestrator init` + `bin/dev-flow-init.js` produce 11 files + 2 empty dirs). Sub-tasks T1-T5 per [`docs/sprint/SPRINT-050-init-scaffold-full.md`](docs/sprint/SPRINT-050-init-scaffold-full.md): T1 gitignore template · T2 bin/dev-flow-init.js + sibling tests · T3 orchestrator SKILL + phases.md · T4 ADR-028 · T5 TODO.md update.
 
-> Sprint 049 closed `7b04875` (TASK-120 Plugin Coherence Cleanup + release-patch Generalize · ADR-027 · architecture-grill rename · 17→16 skills). Next: Sprint 050 — F3 init scaffold full.
+> Next: Sprint 051 — F6 task-decomposer ↔ lean-doc-generator template lineage unify.
 
 ---
 
@@ -46,8 +46,8 @@ sprint: none
 ### P0 — v1 ship prep (post-EPIC-Audit, post-ISSUE-03 reframe, post-coherence-audit)
 
 - [x] **TASK-119** — User-Project Outcome Lens (closed Sprint 048 `38035d8`).
-- [ ] **TASK-120** — Plugin Coherence Cleanup + Rename + release-patch Generalize: F1 drop `dev-flow-compress` · F2 generalize `release-patch` (6-mode cascade replaces plugin-only) · architecture-grill rename · ADR-027. Layers `skills, docs, governance`. → Sprint 049 (active).
-- [ ] **TASK-121** — F3 init scaffold full: `/orchestrator init` generates `.claude/settings.json` (with hook registration!) + `.gitignore` + `docs/` skeleton + `docs/codemap/` + `docs/adr/`. Without settings.json hooks dead day-1. Layers `skills, scripts, docs`. → Sprint 050.
+- [x] **TASK-120** — Plugin Coherence Cleanup + Rename + release-patch Generalize (closed Sprint 049 `7b04875`).
+- [ ] **TASK-121** — F3 init scaffold full: `bin/dev-flow-init.js` extended (gitignore template + `createEmptyScaffoldDirs` for docs/codemap/+adr/); orchestrator SKILL init phase aligned to canonical scaffold contract; ADR-028 locks 11-file + 2-dir output. Layers `skills, scripts, docs`. → Sprint 050 (active).
 - [ ] **TASK-122** — F6 task-decomposer ↔ lean-doc-generator template lineage unify: lean-doc owns templates; task-decomposer + orchestrator init consume. Single template lineage. Layers `skills, docs`. → Sprint 051.
 - [ ] **TASK-123** — F4 wire orphan skills (tdd / refactor-advisor / diagnose / zoom-out / prime / release-manager) into orchestrator phase detection + F5 tech-debt rollover loop (`## Tech Debt` section in TODO.md + sprint-close auto-promote Retro Friction). Layers `skills, docs, governance`. → Sprint 052.
 - [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap). Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 053.
@@ -57,6 +57,7 @@ sprint: none
 ### P2 — Tooling friction backlog (optional, not blocking v1)
 
 - [ ] **release-patch skip-bump-on-docs-only fix** — extend `skills/release-patch/SKILL.md` to detect "EPIC close" / "sprint close" events and trigger archive flush even on docs-only diff. Closes stranded-archive friction structurally (per Sprint 047 ADR-025 DEC-8). Estimated S, layers `skills, scripts`.
+- [ ] **release-debt** — Sprint 049 MINOR (skill drop + rename + behavior change in release-patch) + Sprint 050 PATCH (bin/dev-flow-init.js logic add + new template) require manual reconcile + chained release. release-patch SKILL handles PATCH only by design; MINOR + queued PATCH need manual sequence. Deferred to post-Sprint-052 tooling sprint per ADR-028 OQ-J. Estimated S, layers `governance, scripts`.
 - [x] **CONTEXT.md cap pressure** — closed Sprint 048 T5 (Behavioral Guidelines Lineage relocated to `.claude/references/behavioral-guidelines-lineage.md`; CONTEXT.md now 121/130).
 
 ### P3 — Closed sub-blocks (CHANGELOG references only)
@@ -137,8 +138,8 @@ Sprint 45    →  Phase 4f skill-creator + TASK-104/117/118 (ADR-024 + CONTEXT.m
 Sprint 46    →  EPIC-Audit Phase 5 — stale doc refresh (ARCHITECTURE.md + AI_CONTEXT.md restored to current)  (done)
 Sprint 47    →  EPIC-Audit Phase 6 close (batch-archive 040-046 + TODO trim + ADR-025 + EPIC-Audit-retro.md)  (done — EPIC-Audit COMPLETE)
 Sprint 48    →  User-Project Outcome Lens (ISSUE-03 reframe + USER-OUTCOMES.md + ADR-026 + G1 outcome item) (done — `38035d8`)
-Sprint 49    →  Plugin Coherence Cleanup + Rename + release-patch Generalize (F1 drop dev-flow-compress · F2 generalize release-patch 6-mode · architecture-grill rename · ADR-027)  (in_progress)
-Sprint 50    →  F3 init scaffold full (settings.json + .gitignore + docs/ skeleton + codemap/adr dirs)
+Sprint 49    →  Plugin Coherence Cleanup + Rename + release-patch Generalize (F1 drop dev-flow-compress · F2 generalize release-patch 6-mode · architecture-grill rename · ADR-027)  (done — `7b04875`)
+Sprint 50    →  F3 init scaffold full (.gitignore + docs/codemap/+adr/ dirs + skill init phase aligned to canonical bin/dev-flow-init.js + ADR-028)  (in_progress)
 Sprint 51    →  F6 task-decomposer ↔ lean-doc-generator template lineage unify
 Sprint 52    →  F4 wire orphan skills into orchestrator + F5 tech-debt rollover loop
 Sprint 53    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (also retroactive eval-evidence for release-patch v2.0.0)

@@ -34,9 +34,10 @@ Freeform input (no mode keyword):
 ## Phases
 
 ### init
-1. Check `.claude/` doesn't exist — if it does, stop and ask
-2. Scaffold `CLAUDE.md` + `CONTEXT.md` + `TODO.md` from templates
-3. Confirm with human → done
+1. Check `.claude/` doesn't exist — if it does, stop and ask.
+2. Run `node ${CLAUDE_PLUGIN_ROOT}/bin/dev-flow-init.js` (canonical implementation per ADR-028). Full scaffold = 11 files + 2 empty dirs: `.claude/CLAUDE.md` · `.claude/CONTEXT.md` · `.claude/settings.json` · `.claude/settings.local.json` · `TODO.md` · `docs/{ARCHITECTURE,CHANGELOG,DECISIONS,AI_CONTEXT,SETUP}.md` · `docs/codemap/.gitkeep` · `docs/adr/.gitkeep` · `README.md` · `.gitignore`.
+3. Stack preset prompt at script (`node-express` / `react-next` / `python-fastapi` / `go-gin` / `custom`) — wires lint + typecheck commands into `.claude/settings.local.json` PreToolUse hooks.
+4. Confirm with human → done. Full contract → `references/phases.md § init Phase`.
 
 ### quick
 1. **Parse** — restate task as verifiable goal; confirm with human in one line

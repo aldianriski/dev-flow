@@ -51,7 +51,13 @@ const TEMPLATE_MAP = [
   { src: 'templates/AI_CONTEXT.md.template',   dest: 'docs/AI_CONTEXT.md' },
   { src: 'templates/SETUP.md.template',        dest: 'docs/SETUP.md' },
   { src: 'templates/README.md.template',       dest: 'README.md' },
+  { src: 'templates/gitignore.template',       dest: '.gitignore' },
 ];
+
+// Empty dirs created by createEmptyScaffoldDirs(target). Tracked via .gitkeep.
+// docs/codemap/ — codemap-refresh hook target; populated on first commit.
+// docs/adr/ — adr-writer skill target; populated when first hard-to-reverse decision lands.
+const EMPTY_SCAFFOLD_DIRS = ['docs/codemap', 'docs/adr'];
 
 // ─── Substitution ────────────────────────────────────────────────────────────
 
@@ -162,6 +168,21 @@ function renderTemplates(target, vars) {
   }
 }
 
+// ─── Create empty scaffold dirs ───────────────────────────────────────────────
+
+// Idempotent: re-runs do not error or duplicate. Existing .gitkeep preserved
+// (do not overwrite — user may have added intentional content alongside).
+function createEmptyScaffoldDirs(target) {
+  for (const relDir of EMPTY_SCAFFOLD_DIRS) {
+    const dirPath  = path.join(target, relDir);
+    const keepPath = path.join(dirPath, '.gitkeep');
+    fs.mkdirSync(dirPath, { recursive: true });
+    if (!fs.existsSync(keepPath)) {
+      fs.writeFileSync(keepPath, '', 'utf8');
+    }
+  }
+}
+
 // ─── Prompts ─────────────────────────────────────────────────────────────────
 
 function ask(iface, question, defaultVal) {
@@ -242,9 +263,11 @@ async function main() {
   copyScaffold(target);
   const settingsResult = renderSettingsLocal(target, preset);
   renderTemplates(target, vars);
+  createEmptyScaffoldDirs(target);
 
   console.log('\nScaffold written to: ' + target);
   console.log(`Hooks configured for ${presetName}: lint=${preset.lintCommand} | typecheck=${preset.typecheckCommand}`);
+  console.log('Empty dirs created: docs/codemap/ + docs/adr/ (.gitkeep tracked)');
   if (settingsResult.preserved) {
     console.log(`Existing settings.local.json preserved; rendered output at ${settingsResult.wrote}`);
   }
@@ -255,9 +278,13 @@ module.exports = {
   applySubstitutions,
   getStackPreset,
   renderSettingsLocal,
+  renderTemplates,
+  createEmptyScaffoldDirs,
   isHookCommandSafe,
   STACK_PRESETS,
   NOOP_COMMAND,
+  TEMPLATE_MAP,
+  EMPTY_SCAFFOLD_DIRS,
 };
 
 if (require.main === module) {

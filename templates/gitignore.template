@@ -1,0 +1,20 @@
+# Claude Code harness (dev-flow)
+.claude/settings.local.json
+.claude/.session-changes.txt
+.claude/.phase
+.claude/STATE.yaml
+.claude/STATE.yml
+.claude/.lean-doc-cache.json
+
+# Caveman compress backups
+*.original.md
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Node common
+node_modules/
+dist/
+build/
+coverage/

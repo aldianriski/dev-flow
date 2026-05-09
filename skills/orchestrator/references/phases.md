@@ -54,6 +54,47 @@ Refs: [tracker URL or "none — reason"]
 
 ---
 
+## init Phase *(canonical scaffold contract — ADR-028)*
+
+Full output of `/orchestrator init` = canonical scaffold contract per ADR-028 DEC-1. Both invocation paths (plugin install via `/orchestrator init`; scaffold copy via `node bin/dev-flow-init.js`) converge on the same outputs.
+
+**Scaffold output (11 files + 2 empty dirs):**
+
+| Path | Source | Purpose |
+|:-----|:-------|:--------|
+| `.claude/CLAUDE.md` | `templates/CLAUDE.md.template` (rendered) | Project AI context |
+| `.claude/CONTEXT.md` | copied from dev-flow `.claude/CONTEXT.md` | Vocab · gates · modes · agent roster |
+| `.claude/settings.json` | copied from dev-flow `.claude/settings.json` | CC harness config + hook registration |
+| `.claude/settings.local.json` | rendered from `.claude/settings.local.example.json` | Per-machine settings + lint/typecheck commands per stack preset |
+| `TODO.md` | `templates/TODO.md.template` (rendered) | Sprint tracker |
+| `docs/ARCHITECTURE.md` | `templates/ARCHITECTURE.md.template` | Component map · key patterns |
+| `docs/CHANGELOG.md` | `templates/CHANGELOG.md.template` | Release history (Keep-a-Changelog format) |
+| `docs/DECISIONS.md` | `templates/DECISIONS.md.template` | ADR registry index |
+| `docs/AI_CONTEXT.md` | `templates/AI_CONTEXT.md.template` | Patterns · conventions · current focus |
+| `docs/SETUP.md` | `templates/SETUP.md.template` | Local dev setup guide |
+| `docs/codemap/.gitkeep` | empty file | Codemap-refresh hook target dir (populated on first commit) |
+| `docs/adr/.gitkeep` | empty file | adr-writer skill target dir (populated when first ADR lands) |
+| `README.md` | `templates/README.md.template` (rendered) | Project README |
+| `.gitignore` | `templates/gitignore.template` | dev-flow harness + node common entries |
+
+**Stack preset selection** (script prompt at `bin/dev-flow-init.js` runtime):
+
+| Preset | Layers | lint | typecheck | pkg manager |
+|:-------|:-------|:-----|:----------|:------------|
+| `node-express` | api, service, repository, middleware, model | `npm run lint` | `npx tsc --noEmit` | `npm` |
+| `react-next` | api, hook, component, page, store, infrastructure | `npm run lint` | `npx tsc --noEmit` | `npm` |
+| `python-fastapi` | api, service, repository, middleware, model | `ruff check .` | `mypy .` | `pip` |
+| `go-gin` | api, service, repository, middleware, model | `go vet ./...` | `go build ./...` | `go` |
+| `custom` | user-supplied | user-supplied | user-supplied | user-supplied |
+
+`lint` + `typecheck` are wired into `.claude/settings.local.json` PreToolUse hooks for `Bash(git commit*)` — fire before any commit lands.
+
+**Convergence (plugin install vs scaffold copy):** plugin install path delivers hooks via `hooks/hooks.json` auto-discovery (no settings.json required). Scaffold copy path delivers same hooks via `.claude/settings.json` (since user has no plugin install). bin/dev-flow-init.js copies dev-flow's `.claude/settings.json` verbatim, ensuring identical hook registration content for both paths. `settings.local.json` (per-machine) is rendered from `settings.local.example.json` with stack-specific lint/typecheck substituted.
+
+**Idempotency:** `createEmptyScaffoldDirs` is safe to re-run — preserves existing `.gitkeep` files; does not clobber user content. `renderSettingsLocal` writes `.new` suffix if existing `settings.local.json` present (per-machine config not overwritten). Other templates DO overwrite — `init` is intended for first-time scaffold; re-running on a populated repo requires user to confirm overwrite at first prompt.
+
+---
+
 ## Session Close *(after commit)*
 
 Task state written to `TODO.md` only — CC TaskCreate/TaskList not used (ADR-012).

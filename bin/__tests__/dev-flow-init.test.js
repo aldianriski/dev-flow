@@ -11,9 +11,12 @@ const {
   applySubstitutions,
   getStackPreset,
   renderSettingsLocal,
+  createEmptyScaffoldDirs,
   isHookCommandSafe,
   STACK_PRESETS,
   NOOP_COMMAND,
+  TEMPLATE_MAP,
+  EMPTY_SCAFFOLD_DIRS,
 } = require('../dev-flow-init.js');
 
 // ─── applySubstitutions ───────────────────────────────────────────────────────
@@ -249,6 +252,45 @@ test('renderSettingsLocal: preserves existing settings.local.json — writes .ne
     assert.ok(fs.existsSync(existingPath + '.new'), '.new file written');
     const original = JSON.parse(fs.readFileSync(existingPath, 'utf8'));
     assert.equal(original.existing, true, 'existing file untouched');
+  } finally {
+    rmRf(dir);
+  }
+});
+
+// ─── Init scaffold full (Sprint 050) ──────────────────────────────────────────
+
+test('TEMPLATE_MAP includes gitignore entry mapping to .gitignore', () => {
+  const entry = TEMPLATE_MAP.find((e) => e.dest === '.gitignore');
+  assert.ok(entry, 'gitignore entry present in TEMPLATE_MAP');
+  assert.equal(entry.src, 'templates/gitignore.template');
+});
+
+test('createEmptyScaffoldDirs: creates docs/codemap/ + docs/adr/ with .gitkeep', () => {
+  const dir = makeTempDir();
+  try {
+    createEmptyScaffoldDirs(dir);
+    for (const relDir of EMPTY_SCAFFOLD_DIRS) {
+      const dirPath  = path.join(dir, relDir);
+      const keepPath = path.join(dirPath, '.gitkeep');
+      assert.ok(fs.existsSync(dirPath), `${relDir} dir created`);
+      assert.ok(fs.existsSync(keepPath), `${relDir}/.gitkeep written`);
+    }
+  } finally {
+    rmRf(dir);
+  }
+});
+
+test('createEmptyScaffoldDirs: idempotent on re-run', () => {
+  const dir = makeTempDir();
+  try {
+    createEmptyScaffoldDirs(dir);
+    // Write user content alongside .gitkeep to verify second run does not clobber
+    const userMarker = path.join(dir, 'docs', 'codemap', 'CODEMAP.md');
+    fs.writeFileSync(userMarker, 'user content', 'utf8');
+    // Second invocation
+    createEmptyScaffoldDirs(dir);
+    assert.equal(fs.readFileSync(userMarker, 'utf8'), 'user content', 'user content preserved');
+    assert.ok(fs.existsSync(path.join(dir, 'docs', 'adr', '.gitkeep')), 'adr/.gitkeep still present');
   } finally {
     rmRf(dir);
   }
