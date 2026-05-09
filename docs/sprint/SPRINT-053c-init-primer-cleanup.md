@@ -3,7 +3,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: active
-plan_commit: tbd
+plan_commit: a2c54b9
 close_commit: tbd
 ---
 
@@ -103,33 +103,52 @@ status: PASS
 
 ## Execution Log
 
-*(empty — populate during execution)*
+### 2026-05-09 — T1 10a-init.md primer rewrite
+237 → 74 lines. Replaced pre-Sprint-050 init-analyst Discovery+Architecture+Sprint-0 narrative with ADR-028 canonical contract. Sections: bin/dev-flow-init.js invocation · Scaffold output table (11 files + 2 dirs) · Stack presets table · Convergence rule · Idempotency · Post-init handoff (`/prime`) · Cross-references. Cap held — primer reduced ~70%.
+
+### 2026-05-09 — T2 04-subagents.md ASCII diagram collapse
+4-column → 3-column layout. Dropped INIT ANALYST Tier-3 background-agent node (column 2). Added 1-line note below diagram: "INIT mode: no agent spawn. INIT scaffold executes via `bin/dev-flow-init.js` (per ADR-028 / Sprint 050). See `docs/blueprint/10a-init.md`."
+
+### 2026-05-09 — T3 final sweep
+Repo-wide grep classified 30 remaining `init-analyst` hits:
+- **Historical (KEEP)**: TODO.md sprint blocks · `docs/audit/EPIC-Audit-retro.md`/`v2-rewrite-plan.md`/`AUDIT-2026-05-01.md` · `docs/CHANGELOG.md` L84/L871/L902 · `SPRINT-046-stale-doc-refresh.md` · `SPRINT-053b/053c-*.md`
+- **Deprecation-pointer (KEEP)**: `10a-init.md` L6 source frontmatter (intentional supersedes-note) · `09-customization.md` L114 (Sprint 053b T7 cross-link)
+- **DRIFT-FIX-NEEDED**: 0
+Active blueprint surfaces verified clean post-T1+T2.
 
 ## Files Changed
 
-*(empty — populate during execution)*
-
 | File | Task | Change | Risk |
 |:-----|:-----|:-------|:-----|
+| `docs/sprint/SPRINT-053c-init-primer-cleanup.md` | sprint | NEW — this file | low |
+| `docs/blueprint/10a-init.md` | T1 | Whole-section rewrite 237→74 lines; 4 init-analyst refs eliminated; ADR-028 canonical bin/dev-flow-init.js contract documented; Stack presets + Scaffold output tables; Post-init `/prime` handoff line; last_updated 2026-04-20→2026-05-09 | low |
+| `docs/blueprint/04-subagents.md` | T2 | ASCII Agent Tier diagram L22-34 collapsed 4→3 columns (dropped INIT ANALYST node); 1-line ADR-028 delegation note added; last_updated already 2026-05-09 (Sprint 053b) | low |
 
 ## Decisions
 
-*(empty — none anticipated; doc-coherence sprint)*
+*(none — doc-coherence sprint, no hard-to-reverse decisions)*
 
 ## Open Questions for Review
 
-*(empty)*
+*(none — all surfaced + resolved at G1)*
 
 ## Retro
 
 ### Worked
-*(fill at close)*
+
+- **Whole-section rewrite escape hatch (per Sprint 053b retro pattern candidate) validated.** 237 → 74 lines for 10a-init.md; ≤1-line discipline correctly identified as wrong-fit at promote time → escalated to single-task multi-line sprint instead.
+- **Sweep classification framework held.** Historical / deprecation-pointer / DRIFT-FIX-NEEDED triage produced clear zero-drift verification.
+- **Cross-link discipline.** 10a-init.md cites ADR-028 + phases.md + bin script source + lean-doc template owner; future drift will surface via single-source canonical pattern.
 
 ### Friction
-*(fill at close)*
+
+- **None mid-sprint.** Plan-locked scope held; no friction protocol invocations.
 
 ### Pattern candidates
-*(fill at close)*
+
+- **Whole-section primer rewrite trigger.** When ≥30% of primer's body is about a deprecated entity, sprint G1 should auto-flag whole-rewrite scope. Currently relies on follow-up sprint observation. Add to TASK-116-v2 acceptance harness as primer-staleness lint.
+- **ASCII diagram drift detection.** Multi-line ASCII art is structurally invisible to single-line grep audits. Pattern candidate: pr-reviewer Lens 7 (Documentation) checklist item — "if diff touches an ASCII-diagram-bearing primer, verify diagram still matches current architecture."
 
 ### Surprise log
-*(fill at close)*
+
+- **Primer 70% body-reduction** vs original. Pre-ADR-028 primer described 4-phase INIT (Discovery → Architecture → Infra → Sprint 0) with 3 gates (A/B/C); post-ADR-028 primer = 1 invocation + 1 idempotency note. Indicates significant accidental complexity removed across Sprint 049→050 init reorg.

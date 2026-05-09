@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: 053c
+sprint: none
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,9 +35,11 @@ sprint: 053c
 
 ## Active Sprint
 
-→ docs/sprint/SPRINT-053c-init-primer-cleanup.md
+→ — none —
 
-> Sprint 053c — Init-Mode Primer Cleanup (TASK-132). Carry-forward from Sprint 053b T7. 4 tasks: T1 10a-init.md primer rewrite (replace init-analyst workflow with bin/dev-flow-init.js per ADR-028) · T2 04-subagents.md ASCII agent-tier diagram collapse (remove INIT ANALYST Tier-3 node, lines 22-34) · T3 final sweep for any remaining init-analyst refs in active surfaces · T4 synthesis + close. Layers: docs. Risk: low. No ADR. G1 anti-slip block per ADR-031 (PASS). Status: planning → awaiting user approval to flip active.
+> Sprint 053c closed (close commit pending). TASK-132 fully delivered: T1 `docs/blueprint/10a-init.md` whole-section rewrite 237→74 lines (4 init-analyst refs eliminated; ADR-028 canonical bin/dev-flow-init.js contract documented; Stack presets + Scaffold output tables; Post-init `/prime` handoff line) · T2 `docs/blueprint/04-subagents.md` ASCII Agent Tier diagram collapsed 4→3 columns (dropped INIT ANALYST node; ADR-028 delegation note added) · T3 sweep classified 30 remaining init-analyst hits (all historical OR deprecation-pointer; 0 DRIFT-FIX-NEEDED). 0 friction. 0 new ADR. Pattern candidate: whole-section primer rewrite trigger for TASK-116-v2 acceptance harness lint.
+>
+> Next: Sprint 052b — release-debt resolution (8-sprint chain) · Sprint 055 — TASK-116-v2 acceptance harness · Sprint 055b — TASK-128 token usage audit + 055-2 — TASK-115-v2 caveman 3-arm eval.
 
 > Sprint 053b closed `071f598`. TASK-125 broader feature-usage audit sweep delivered: 7-task plan (T1-T5 audits + T6 synthesis + T7 blueprint propagation). 16 findings consolidated. T6: 2 ≤1-line wire-fixes (security-auditor SKILL.md L14 ADR-015 citation v1.0.0→1.0.1 · phases.md § init Phase post-init `/prime` handoff). T7: 17 ≤1-line propagation edits across 6 active surfaces (02 + 04 + 05 + 09 blueprint primers + README + USER-OUTCOMES.md); 4 last_updated stamps bumped 2026-05-09; 3 NEW Universal Skills rows added (prime · release-patch · Architecture Grill). Friction Protocol invoked once (T7 fix-volume 17 vs initial 5-pair sweep expectation; user-approved full propagation). Carry-forward: TASK-132 (10a-init.md primer rewrite + 04 ASCII diagram cleanup); Sprint 052b absorbs 7 release-manager↔release-patch findings via TODO.md release-debt row cross-link.
 >
