@@ -89,6 +89,56 @@ test('applySubstitutions: replaces multiple occurrences', () => {
   assert.equal(result, 'Acme and Acme');
 });
 
+// ─── applySubstitutions — ADR-029 per-stack root tokens (Sprint 051b T1) ──────
+
+test('applySubstitutions: replaces [source-root] with preset value', () => {
+  const result = applySubstitutions('Source dir: [source-root]/', {
+    projectName: '', ownerRole: '', date: '', layers: '', sourceRoot: 'app',
+  });
+  assert.equal(result, 'Source dir: app/');
+});
+
+test('applySubstitutions: replaces [test-root] with preset value', () => {
+  const result = applySubstitutions('Tests live in [test-root]/', {
+    projectName: '', ownerRole: '', date: '', layers: '', testRoot: 'tests',
+  });
+  assert.equal(result, 'Tests live in tests/');
+});
+
+test('applySubstitutions: [source-root] falls back to sentinel when absent', () => {
+  const result = applySubstitutions('Source dir: [source-root]/', {
+    projectName: '', ownerRole: '', date: '', layers: '', sourceRoot: '',
+  });
+  assert.equal(result, 'Source dir: [source-root]/');
+});
+
+test('applySubstitutions: [app-root-line] renders Next.js comment line when appRoot present', () => {
+  const tmpl = '/src/\n[app-root-line]\n/tests/\n';
+  const result = applySubstitutions(tmpl, {
+    projectName: '', ownerRole: '', date: '', layers: '', appRoot: 'app',
+  });
+  assert.ok(result.includes('/app/'), 'appRoot path rendered');
+  assert.ok(result.includes('Next.js App Router'), 'descriptive comment rendered');
+  assert.ok(result.includes('/src/\n  /app/'), 'follows previous line directly');
+  assert.ok(result.endsWith('/tests/\n'), 'next line preserved');
+});
+
+test('applySubstitutions: [app-root-line] removes the line when appRoot absent (no artifact newline)', () => {
+  const tmpl = '/src/\n[app-root-line]\n/tests/\n';
+  const result = applySubstitutions(tmpl, {
+    projectName: '', ownerRole: '', date: '', layers: '', appRoot: '',
+  });
+  assert.equal(result, '/src/\n/tests/\n');
+});
+
+test('applySubstitutions: [cmd-root-line] removes the line when cmdRoot absent', () => {
+  const tmpl = '/internal/\n[cmd-root-line]\n# end\n';
+  const result = applySubstitutions(tmpl, {
+    projectName: '', ownerRole: '', date: '', layers: '', cmdRoot: '',
+  });
+  assert.equal(result, '/internal/\n# end\n');
+});
+
 // ─── getStackPreset ───────────────────────────────────────────────────────────
 
 test('getStackPreset: node-express has CA+DDD layers (domain, application)', () => {

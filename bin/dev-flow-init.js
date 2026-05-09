@@ -81,6 +81,12 @@ const EMPTY_SCAFFOLD_DIRS = ['docs/codemap', 'docs/adr'];
 // ─── Substitution ────────────────────────────────────────────────────────────
 
 // Replaces known template tokens; leaves [CUSTOMIZE] and unknown placeholders untouched.
+//
+// Two token classes (Sprint 051b ADR-029 lean architecture render):
+//   1. Scalar — token replaced with single string (e.g. [Project Name], [source-root]).
+//   2. Full-line conditional — token IS the entire line (incl. its newline). Renders to
+//      stack-specific content when var is present; renders to empty string (line removed)
+//      when var is absent. Used for stack-specific extras like Next.js app/ or Go cmd/.
 function applySubstitutions(template, vars) {
   let out = template;
 
@@ -93,6 +99,20 @@ function applySubstitutions(template, vars) {
   const layerBlockRe = /> `\[list your stack's layer names[^\]]*\]`\n(?:> Example[^\n]*\n)*/;
   const layers = vars.layers || '';
   out = out.replace(layerBlockRe, () => '> `' + layers + '`\n');
+
+  // Scalar substitutions for ADR-029 per-stack roots. Sentinel passthrough when absent.
+  out = out.replaceAll('[source-root]', vars.sourceRoot || '[source-root]');
+  out = out.replaceAll('[test-root]',   vars.testRoot   || '[test-root]');
+
+  // Full-line conditional substitutions. Token regex matches the token + trailing newline,
+  // so the entire line vanishes when var is absent (no artifact blank lines for stacks
+  // lacking these extras: only react-next has appRoot, only go-gin has cmdRoot).
+  out = out.replace(/\[app-root-line\]\n/g, vars.appRoot
+    ? `  /${vars.appRoot}/         # Next.js App Router (interface adapter — react-next variant)\n`
+    : '');
+  out = out.replace(/\[cmd-root-line\]\n/g, vars.cmdRoot
+    ? `  /${vars.cmdRoot}/         # Entry root (Go cmd/<binary>/main.go)\n`
+    : '');
 
   if (out.includes("[list your stack's layer names")) {
     process.stderr.write('WARNING: layer block placeholder not replaced — template format may have changed\n');
@@ -320,8 +340,12 @@ async function main() {
   const vars = {
     projectName,
     ownerRole,
-    date:   new Date().toISOString().slice(0, 10),
-    layers: preset.layers,
+    date:       new Date().toISOString().slice(0, 10),
+    layers:     preset.layers,
+    sourceRoot: preset.sourceRoot || '',
+    appRoot:    preset.appRoot    || '',
+    cmdRoot:    preset.cmdRoot    || '',
+    testRoot:   preset.testRoot   || '',
   };
 
   fs.mkdirSync(target, { recursive: true });
