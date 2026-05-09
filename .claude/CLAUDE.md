@@ -1,7 +1,7 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04
-update_trigger: New skill, agent, script, or hook added; stack or architecture decisions change
+last_updated: 2026-05-08
+update_trigger: Component added or guideline change
 status: current
 ---
 
@@ -39,14 +39,14 @@ bin/             # dev-flow-init.js scaffold bootstrap (built-ins only per ADR-0
 3. Agent binding if new agent needed
 4. `scripts/<name>.js` — only for deterministic repeated ops
 
-## Naming Conventions
-- Files: kebab-case
-
 ## Anti-Patterns
 ❌ HOW content in doc files — move to code/skill
 ❌ Skill changes without verifying against acceptance criteria
 ❌ Gate or mode count changes without updating CONTEXT.md
 ❌ Editing agents directly — always check CONTEXT.md Agent Roster first
+❌ Plugin-internal optimization without stated user-project outcome (see docs/USER-OUTCOMES.md + ADR-026)
+
+## Naming Conventions — files: kebab-case
 
 ## Commands
 ```bash
@@ -76,5 +76,4 @@ Touch only what the task requires. Do not restructure adjacent files unless your
 ### Goal-Driven Execution
 Restate the task as a verifiable goal before implementing. State what "done" looks like. Do not begin until goal is clear.
 
-## Codemap (L0)
-> Overflow: see [docs/codemap/CODEMAP.md §L0-overflow](../docs/codemap/CODEMAP.md) (TASK-098)
+## Codemap (L0) — overflow → [docs/codemap/CODEMAP.md §L0-overflow](../docs/codemap/CODEMAP.md) (TASK-098)

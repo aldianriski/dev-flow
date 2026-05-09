@@ -1,7 +1,7 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (post-Sprint-047 doc-surface alignment sweep)
-update_trigger: vocabulary added/changed; gate or mode count changes; agent roster changes; behavioral guidelines lineage updates
+last_updated: 2026-05-08
+update_trigger: Vocab, gate, mode, or agent roster change
 status: current
 ---
 
@@ -23,6 +23,7 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 | **vertical slice** | Independently demoable end-to-end behavior unit |
 | **deep module** | Module whose interface is simple relative to its implementation; high leverage |
 | **grill** | One-question-at-a-time interview to stress-test a plan before committing |
+| **user-project outcome** | Measurable benefit dev-flow delivers to a project that adopts it (8 canonical: onboard · doc-rot · architecture · rework · flow · correction · template · reliability per `docs/USER-OUTCOMES.md`) |
 
 _Avoid: confusing **skill** with **agent** — skills are user-invokable slash commands; agents are dispatcher-spawned specialists._
 _Avoid: confusing **mode** with **gate** — modes are operational context (init/quick/mvp/sprint-bulk); gates are checkpoints within a mode (G1/G2)._
@@ -38,6 +39,7 @@ _Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a 
 - **Minimal footprint** — agents read, plan, report; humans approve writes
 - **Feedback rate = speed** — fast feedback loops beat fast feature development
 - **Vertical slices** — decompose work into independently demoable units, not horizontal layers
+- **User-Project Lens** — every component states a user-project outcome (onboard · doc-rot · architecture · rework · flow · correction · template · reliability). Registry: `docs/USER-OUTCOMES.md`. Anchor: ADR-026
 
 ---
 
@@ -45,6 +47,7 @@ _Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a 
 
 ### G1 — Scope *(required: `quick` + `mvp`)*
 - [ ] Goal stated as verifiable outcome
+- [ ] User-project outcome named (≥1 per `docs/USER-OUTCOMES.md`)
 - [ ] Size estimated: **S** ≤2h / **M** ≤1d / **L** >1d → must split
 - [ ] Constraints and dependencies named
 - [ ] Skill red flags checked
@@ -104,18 +107,7 @@ _Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a 
 
 ## Behavioral Guidelines Lineage
 
-The four principles in `.claude/CLAUDE.md` § Behavioral Guidelines (Think Before Acting · Simplicity First · Surgical Changes · Goal-Driven Execution) derive from `forrestchang/andrej-karpathy-skills` `CLAUDE.md` (MIT License). Verified against upstream commit `2c606141936f` on **2026-05-04**.
-
-**Adaptation type:** intentional rewording for meta-repo context — dev-flow has no app-code domain; principles distilled from karpathy's bulleted format to single-paragraph form.
-
-| Principle | Karpathy headline | dev-flow headline | Adaptation |
-|---|---|---|---|
-| 1 | Think Before **Coding** | Think Before **Acting** | "Coding" → "Acting" (meta-repo: doc/skill work, no code) |
-| 2 | Simplicity First | Simplicity First | "code" → "content"; drops "200 lines" specifics |
-| 3 | Surgical Changes | Surgical Changes | "code" → "task"; drops orphan-removal subsection (covered by Sprint 039 retro pattern) |
-| 4 | Goal-Driven Execution | Goal-Driven Execution | distilled prose; transform examples + verify-step format are out (T3 decides whether to re-add) |
-
-**License:** MIT. Attribution: `forrestchang/andrej-karpathy-skills` (Andrej Karpathy patterns). When the upstream `CLAUDE.md` substantively changes, re-diff and bump the verified-at SHA + date here. ADR-019 (Sprint 040) records the adoption decision.
+Lineage + adaptation notes live at [`.claude/references/behavioral-guidelines-lineage.md`](references/behavioral-guidelines-lineage.md). Re-diff cadence + SHA pin contract unchanged (ADR-019).
 
 ---
 

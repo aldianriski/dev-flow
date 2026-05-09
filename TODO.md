@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (post-Sprint-047 backlog grooming — closed sub-blocks collapsed; v1 ship prep roadmap added)
-update_trigger: Sprint completed, task added, task status changed
+last_updated: 2026-05-08
+update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 048
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,24 +35,25 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ **TASK-119** — User-Project Outcome Lens (ISSUE-03 reframe + v1 ship prep reorder). Sub-tasks T1-T6 per [`docs/sprint/SPRINT-048-user-project-outcome-lens.md`](docs/sprint/SPRINT-048-user-project-outcome-lens.md): T1 USER-OUTCOMES.md · T2 ADR-026 · T3 README reframe · T4 CLAUDE.md anti-pattern · T5 CONTEXT.md principle/G1/vocab + lineage relocate · T6 TODO.md rebalance (this file).
 
-> Next: v1 ship prep — TASK-115 (caveman 3-arm eval harness port) + TASK-116 (superpowers acceptance harness) per ADR-020 DEC-3 + ADR-021 DEC-4.
+> Next: TASK-116-v2 (Node port acceptance harness, O8 plugin reliability) Sprint 049 → TASK-115-v2 (Node port caveman 3-arm) Sprint 050 → v1 SHIP Sprint 051.
 
 ---
 
 ## Backlog
 
-### P0 — v1 ship prep (post-EPIC-Audit)
+### P0 — v1 ship prep (post-EPIC-Audit, post-ISSUE-03 reframe)
 
-- [ ] **TASK-116** — Skill-triggering acceptance harness at `tests/skill-triggering/`. PowerShell port of superpowers `run-test.sh` + 3-skill seed (prime/orchestrator/tdd). Verifies 8 lift candidates accumulated from Sprints 043 DEC-1 + 045 DEC-2/4/5. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016/021 DEC-4 eval-evidence rule (prerequisite for TASK-115 + any future skill-behavior change). Estimated S-M, layers `scripts, ci, docs`. → Sprint 048.
-- [ ] **TASK-115** — Caveman 3-arm eval harness Node port (`scripts/eval-run.js` + `scripts/eval-measure.js`). Tokenizer = `gpt-tokenizer`. Snapshot schema 1:1 with caveman. Sibling tests required. Design input: [`docs/research/caveman-eval-harness-port-notes-2026-05-04.md`](docs/research/caveman-eval-harness-port-notes-2026-05-04.md). Depends on TASK-116 acceptance harness (eval-evidence rule). Estimated M, layers `scripts, docs`. → Sprint 049.
-- [ ] **v1 ship** — CHANGELOG release notes + plugin.json/marketplace.json bump (MINOR if TASK-115 introduces new skill or TASK-116 adds new test surface; PATCH otherwise) + git push origin master per release-patch HARD STOP protocol. → Sprint 050.
+- [ ] **TASK-119** — User-Project Outcome Lens: USER-OUTCOMES.md registry + ADR-026 + README outcome-first reframe + CLAUDE.md anti-pattern + CONTEXT.md 5th principle / G1 outcome item / vocab + Behavioral Guidelines Lineage relocate. Closes ISSUE-03 (plugin self-optimizes; doesn't measure user-project outcome). Layers `docs, governance`. → Sprint 048 (active).
+- [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`) replaces original PowerShell plan per ADR-026 DEC-3. **Outcome:** O8 plugin reliability — plugin updates don't regress user-project workflows. Verifies 8 lift candidates accumulated from Sprints 043 DEC-1 + 045 DEC-2/4/5. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4 eval-evidence rule. Estimated S-M, layers `scripts, ci, docs`. → Sprint 049.
+- [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer = `gpt-tokenizer`. Snapshot schema 1:1 with caveman. Sibling tests required. **Outcome:** O8 plugin reliability — compression-skill effectiveness measurable. Design input: [`docs/research/caveman-eval-harness-port-notes-2026-05-04.md`](docs/research/caveman-eval-harness-port-notes-2026-05-04.md). Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 050.
+- [ ] **v1 ship** — CHANGELOG release notes lead with user-project outcomes per ADR-026; plugin.json/marketplace.json bump (MINOR if TASK-115/116 introduce new skill or test surface; PATCH otherwise); git push origin master per release-patch HARD STOP protocol. → Sprint 051.
 
 ### P2 — Tooling friction backlog (optional, not blocking v1)
 
 - [ ] **release-patch skip-bump-on-docs-only fix** — extend `skills/release-patch/SKILL.md` to detect "EPIC close" / "sprint close" events and trigger archive flush even on docs-only diff. Closes stranded-archive friction structurally (per Sprint 047 ADR-025 DEC-8). Estimated S, layers `skills, scripts`.
-- [ ] **CONTEXT.md cap pressure** — `.claude/CONTEXT.md` at 129/130 lines (Sprint 045 retro). Next additive lift needs cap raise OR restructuring (e.g., move § Behavioral Guidelines Lineage to `references/` per Sprint 045 retro Friction #2). Estimated S, layers `governance, docs`.
+- [x] **CONTEXT.md cap pressure** — closed Sprint 048 T5 (Behavioral Guidelines Lineage relocated to `.claude/references/behavioral-guidelines-lineage.md`; CONTEXT.md now 121/130).
 
 ### P3 — Closed sub-blocks (CHANGELOG references only)
 
@@ -131,7 +132,8 @@ Sprint 44    →  EPIC-Audit Phase 4e — GSD patterns (9 decisions: 5 NO LIFT +
 Sprint 45    →  Phase 4f skill-creator + TASK-104/117/118 (ADR-024 + CONTEXT.md frontmatter+lifts + lean-doc Step 0b date-sanity v2.1.0)  (done)
 Sprint 46    →  EPIC-Audit Phase 5 — stale doc refresh (ARCHITECTURE.md + AI_CONTEXT.md restored to current)  (done)
 Sprint 47    →  EPIC-Audit Phase 6 close (batch-archive 040-046 + TODO trim + ADR-025 + EPIC-Audit-retro.md)  (done — EPIC-Audit COMPLETE)
-Sprint 48    →  v1 ship prep #1 — TASK-116 skill-triggering acceptance harness (verifies 8 lift candidates; satisfies ADR-016 eval-evidence rule)
-Sprint 49    →  v1 ship prep #2 — TASK-115 caveman 3-arm eval harness Node port (depends on TASK-116)
-Sprint 50    →  v1 SHIP — CHANGELOG release notes + plugin/marketplace lockstep bump + git push per release-patch protocol
+Sprint 48    →  User-Project Outcome Lens (ISSUE-03 reframe + USER-OUTCOMES.md + ADR-026 + G1 outcome item + CONTEXT cap relief) (in_progress)
+Sprint 49    →  v1 ship prep #1 — TASK-116-v2 Node port acceptance harness (O8 plugin reliability)
+Sprint 50    →  v1 ship prep #2 — TASK-115-v2 Node port caveman 3-arm eval (depends on TASK-116-v2)
+Sprint 51    →  v1 SHIP — CHANGELOG outcome-led release notes + plugin/marketplace lockstep bump + git push per release-patch protocol
 ```
