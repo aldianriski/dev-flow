@@ -26,7 +26,7 @@ Gate-driven agentic workflow. Read `CONTEXT.md` before acting.
 > Replaces CC primitives: `init` → CC `/init` · review step → CC `/review` · task tracking → CC TaskCreate/TaskList. See ADR-012.
 
 Freeform input (no mode keyword):
-- No active tasks in TODO.md → run `task-decomposer` first
+- No active tasks in TODO.md → run `task-decomposer` first (per ADR-030; reads `templates/TODO.md.template` at output time per `task-decomposer/references/procedure.md` Step 6)
 - Active task found → `quick` (default)
 
 ---
@@ -35,7 +35,7 @@ Freeform input (no mode keyword):
 
 ### init
 1. Check `.claude/` doesn't exist — if it does, stop and ask.
-2. Run `node ${CLAUDE_PLUGIN_ROOT}/bin/dev-flow-init.js` (canonical implementation per ADR-028). Full scaffold = 11 files + 2 empty dirs: `.claude/CLAUDE.md` · `.claude/CONTEXT.md` · `.claude/settings.json` · `.claude/settings.local.json` · `TODO.md` · `docs/{ARCHITECTURE,CHANGELOG,DECISIONS,AI_CONTEXT,SETUP}.md` · `docs/codemap/.gitkeep` · `docs/adr/.gitkeep` · `README.md` · `.gitignore`.
+2. Run `node ${CLAUDE_PLUGIN_ROOT}/bin/dev-flow-init.js` (canonical implementation per ADR-028; templates rendered via `applySubstitutions` per ADR-030 template canonical ownership). Full scaffold = 11 files + 2 empty dirs: `.claude/CLAUDE.md` · `.claude/CONTEXT.md` · `.claude/settings.json` · `.claude/settings.local.json` · `TODO.md` · `docs/{ARCHITECTURE,CHANGELOG,DECISIONS,AI_CONTEXT,SETUP}.md` · `docs/codemap/.gitkeep` · `docs/adr/.gitkeep` · `README.md` · `.gitignore`.
 3. Stack preset prompt at script (`node-express` / `react-next` / `python-fastapi` / `go-gin` / `custom`) — wires lint + typecheck commands into `.claude/settings.local.json` PreToolUse hooks.
 4. Confirm with human → done. Full contract → `references/phases.md § init Phase`.
 
