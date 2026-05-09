@@ -19,7 +19,7 @@ dev-flow is a means; **your project is the end**. The plugin claims 8 user-proje
 |:--------|:--------------|:----------------------|
 | **onboard** — faster onboarding | New contributor productive day-1 in unfamiliar repo | `/prime` ordered context load · `/zoom-out` module map · codemap L0 in CLAUDE.md |
 | **doc-rot** — less doc rot | Docs reflect current code; stale frontmatter caught | `lean-doc-generator` frontmatter discipline · PostToolUse codemap-refresh · `last_updated` triggers |
-| **architecture** — clearer architecture | Shared mental model of modules, boundaries, decisions | `system-design-reviewer` grill mode · `adr-writer` registry · 3-tier codemap |
+| **architecture** — clearer architecture | Shared mental model of modules, boundaries, decisions | `architecture-grill` grill mode · `adr-writer` registry · 3-tier codemap |
 | **rework** — fewer rework cycles | Scope/design issues caught BEFORE implementation | G1 Scope + G2 Design gates · `task-decomposer` vertical slices |
 | **flow** — optimal harness flow | Workflow runs end-to-end without friction | `dispatcher` orchestration · 4 modes · 3 hooks · skill auto-discovery |
 | **correction** — workflow correction | Mid-flight redirect when work goes off-track | `BLOCKED` analyst findings · skill red flags · grill mode |

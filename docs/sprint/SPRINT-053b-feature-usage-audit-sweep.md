@@ -3,7 +3,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: active
-plan_commit: tbd
+plan_commit: ecf9fa7
 close_commit: tbd
 ---
 
@@ -187,25 +187,51 @@ status: PASS
 
 ## Sprint DoD
 
-- [ ] T1 prime ↔ /orchestrator init audited; findings recorded with severity + disposition.
-- [ ] T2 release-manager ↔ release-patch audited DOCUMENT-ONLY; zero edits applied; findings flagged `disposition: defer-052b`; cross-link added to Sprint 052b scope.
-- [ ] T3 pr-reviewer ↔ code-reviewer audited; coordination loop verified bidirectional; findings recorded.
-- [ ] T4 security-auditor ↔ security-analyst audited; ADR-015 separate-context constraint cited; pattern-match w/ code-reviewer↔pr-reviewer recorded.
-- [ ] T5 architecture-grill ↔ design-analyst audited; Sprint 049 rename propagation verified; G2 coordination loop checked.
-- [ ] T6 synthesis table consolidates T1-T5 findings (with primer-drift Y/N column); high+med findings with ≤1-line fix-now-T6 disposition applied to skill/agent canonical; defer-052b + defer-116v2 cross-links written.
-- [ ] T7 blueprint primers (04 + 05 + 08) propagate T6 primer-drift findings as ≤1-line in-place edits; last_updated bumped 2026-05-09 per primer touched; release-manager primer entries stay AS-IS per T2 DOCUMENT-ONLY.
-- [ ] orchestrator SKILL.md cap held 97/100.
-- [ ] No new ADR (sweep + targeted-fix sprint; no hard-to-reverse decision).
-- [ ] All artifacts stamp 2026-05-09.
-- [ ] release-patch NOT invoked (release-debt 7-sprint chain → Sprint 052b owed).
-- [ ] Open questions A-H resolved at promote; zero re-litigation during execution.
-- [ ] Carry-forward: Sprint 052b release-debt resolution + T6 defer-052b items; TASK-116-v2 + T6 defer-116v2 items.
+- [x] T1 prime ↔ /orchestrator init audited; 3 findings (1 fix-now-T6 + 1 primer-drift + 1 no-action).
+- [x] T2 release-manager ↔ release-patch audited DOCUMENT-ONLY; zero edits to release-manager/release-patch SKILL.md; 7 findings ALL flagged `disposition: defer-052b`; cross-link added to TODO.md release-debt row scope.
+- [x] T3 pr-reviewer ↔ code-reviewer audited; coordination loop verified bidirectional (SKILL body + frontmatter `agent:` ↔ agent body + `preload-skills:`); cleanest pair, used as reference for T4.
+- [x] T4 security-auditor ↔ security-analyst audited; ADR-015 separate-context citation gap fixed in SKILL.md L14 (≤1-line); pattern-match w/ code-reviewer↔pr-reviewer recorded.
+- [x] T5 architecture-grill ↔ design-analyst audited; distinct-surface pair confirmed (no coordination loop expected per SKILL.md L13); Sprint 049 rename propagation incomplete → 17 fixes carried into T7 + ASCII diagram + 10a-init.md primer deferred to TASK-132.
+- [x] T6 synthesis table consolidates T1-T5 findings (16 rows w/ primer-drift Y/N column); 2 fix-now-T6 wire-fixes applied (security-auditor SKILL.md L14 ADR-015 citation · phases.md § init Phase post-init `/prime` handoff line); 7 defer-052b cross-links written to TODO.md release-debt row.
+- [x] T7 blueprint primers (02 + 04 + 05 + 09) + README + USER-OUTCOMES.md propagated T6 primer-drift findings as 17 ≤1-line in-place edits; last_updated bumped 2026-05-09 per primer touched (4 stamps); release-manager primer entries marked w/ Sprint 052b cross-link per T2 DOC-ONLY rule; 3 NEW Universal Skills rows added (prime · release-patch · Architecture Grill).
+- [x] orchestrator SKILL.md cap held 97/100 (no SKILL.md edits required; phases.md is reference file with no per-file cap).
+- [x] No new ADR (sweep + targeted-fix sprint; no hard-to-reverse decision surfaced).
+- [x] All artifacts stamp 2026-05-09.
+- [x] release-patch NOT invoked (release-debt 7-sprint chain → Sprint 052b owed; this sprint adds zero PATCH/MINOR — 2 SKILL.md content edits trigger release-patch eligibility but release-debt sprint absorbs).
+- [x] Open questions A-H resolved at promote; zero re-litigation during execution; ONE friction trigger surfaced + resolved (T7 fix-volume 17 vs initial expectation; user-approved full propagation).
+- [x] Carry-forward: Sprint 052b release-debt resolution + T2 7 findings (cross-linked in TODO.md row); TASK-132 (10a-init.md primer rewrite + 04-subagents.md ASCII diagram cleanup); TASK-116-v2 + automated divergence lint (multi-occurrence rename propagation auto-check).
 
 ---
 
 ## Execution Log
 
-*(populated during execution per Sprint Execute Protocol)*
+### 2026-05-09 — T1-T5 audits complete
+
+- **T1 (prime ↔ /orchestrator init)**: bidirectional boundary statements asymmetric (prime SKILL.md line 23 cites orchestrator; orchestrator init Phase doesn't cite prime). Surfaces non-overlapping (prime=post-scaffold session-prime; init=first-time scaffold). 1 fix-now-T6 (post-init `/prime` handoff suggestion in phases.md § init Phase). 1 primer-drift-T7 (prime missing from 05-skills.md Universal Skills).
+- **T2 (release-manager ↔ release-patch)** **DOC-ONLY**: 7 findings ALL `disposition: defer-052b` per discipline. release-manager 2026-04-21 stale; cross-citation gap; invocation asymmetry; release-patch missing from 05-skills.md Universal Skills + Phase 9 Close. T7 cross-link only per T2 DOC-ONLY rule.
+- **T3 (pr-reviewer ↔ code-reviewer)**: cleanest pair. Bidirectional citation complete (SKILL body + frontmatter `agent:`; agent body + `preload-skills:`). Naming split intentional (skill=process; agent=orchestration). Caps held. Primer alignment ✓.
+- **T4 (security-auditor ↔ security-analyst)**: pattern mirrors T3. 1 fix-now-T6 (ADR-015 citation in SKILL.md line 14 to make separate-context constraint explicit). Otherwise clean.
+- **T5 (architecture-grill ↔ design-analyst)**: distinct-surface pair (SKILL.md line 13 explicit boundary; no coordination loop expected). LARGEST primer-drift in sprint: Sprint 049 rename `system-design-reviewer` → `architecture-grill` propagation incomplete in 6 active surfaces (14 occurrences) + `init-analyst` orphan agent rows (3 occurrences) — agent never created post-ADR-028 (init = bin/dev-flow-init.js). Friction Protocol invoked 2026-05-09: user approved full propagation in T7.
+
+### 2026-05-09 — T6 synthesis + skill/agent wire-fix
+
+- Synthesis Findings Table populated (16 rows; T1-T5 outputs). Columns: pair · finding · severity · disposition · file/line if fix-now-T6 · primer-drift (T7 Y/N).
+- 2 T6 fix-now edits applied:
+  1. `skills/security-auditor/SKILL.md` L14 — added ADR-015 separate-context citation rationale (T4 finding).
+  2. `skills/orchestrator/references/phases.md` § init Phase — added "Post-init handoff" line suggesting `/prime` next session (T1 finding).
+- 7 T2 findings ALL deferred to Sprint 052b release-debt sprint (per T2 DOC-ONLY discipline).
+
+### 2026-05-09 — T7 blueprint primer alignment (full propagation per user-approved friction outcome)
+
+- 14 active stale `system-design-reviewer` refs replaced with `architecture-grill` across 6 active surfaces.
+- 3 orphan `init-analyst` agent rows removed (2 in 04-subagents.md + 1 each in 02-repo-structure.md and 09-customization.md). Init phase canonical = `bin/dev-flow-init.js` per ADR-028 + Sprint 050.
+- 4 active surfaces stamped `last_updated: 2026-05-09` (02-repo-structure.md · 04-subagents.md · 05-skills.md · 09-customization.md). README + USER-OUTCOMES.md no last_updated frontmatter.
+- 3 NEW Universal Skills rows added to 05-skills.md table: `prime` (T1 primer-drift finding) · `release-patch` (T2 primer-drift cross-link) · `Architecture Grill` (rename completion). `release-manager` row marked w/ Sprint 052b cross-link per T2 DOC-ONLY rule.
+- Verification grep: zero `system-design-reviewer` matches in active blueprint primers + README + USER-OUTCOMES.md + 04-subagents.md.
+
+**Surfaced for TASK-NEW (out of T7 ≤1-line scope):**
+- `docs/blueprint/10a-init.md` — entire primer describes deprecated init-analyst agent workflow (4 refs at L32 / L48 / L102 / L110). Per Sprint 050 ADR-028, init = `bin/dev-flow-init.js` script; primer needs whole-section rewrite, not ≤1-line edit.
+- `docs/blueprint/04-subagents.md` ASCII diagram (lines 22-34) — `INIT ANALYST` node still drawn in agent-tier flowchart; multi-line edit (collapse 6 lines).
 
 ---
 
@@ -216,6 +242,14 @@ status: PASS
 | File | Task | Change | Risk | Test added |
 |:-----|:-----|:-------|:-----|:-----------|
 | `docs/sprint/SPRINT-053b-feature-usage-audit-sweep.md` | sprint | NEW — this file | low | — |
+| `skills/security-auditor/SKILL.md` | T6 | L14 — added ADR-015 separate-context citation (≤1-line in-place) | low | — |
+| `skills/orchestrator/references/phases.md` | T6 | § init Phase — added "Post-init handoff" line suggesting `/prime` next session (≤1-line append) | low | — |
+| `docs/blueprint/02-repo-structure.md` | T7 | L24 init-analyst row deleted · L44 system-design-reviewer/→architecture-grill/ · last_updated 2026-04-20→2026-05-09 | low | — |
+| `docs/blueprint/04-subagents.md` | T7 | L64 init-analyst Agent file map row deleted · L165 init-analyst example replaced w/ scope-analyst · last_updated 2026-04-20→2026-05-09 | low | — |
+| `docs/blueprint/05-skills.md` | T7 | 5× system-design-reviewer→architecture-grill (L56/L169/L179/L265 + L130 row name+dir) · 3 NEW Universal Skills rows (prime · release-patch · Architecture Grill) · release-manager row marked w/ Sprint 052b cross-link · last_updated 2026-04-25→2026-05-09 | low | — |
+| `docs/blueprint/09-customization.md` | T7 | 3× system-design-reviewer→architecture-grill (L104/L108/L195) · L114 init-analyst-create line replaced w/ bin/dev-flow-init.js canonical pointer · last_updated 2026-04-20→2026-05-09 | low | — |
+| `README.md` | T7 | L22 system-design-reviewer→architecture-grill in Outcome architecture row | low | — |
+| `docs/USER-OUTCOMES.md` | T7 | L41 diagnose Skip-when system-design-reviewer→architecture-grill | low | — |
 
 ---
 
@@ -225,7 +259,22 @@ status: PASS
 
 | Pair | Finding | Severity | Disposition | File/Line if fix-now-T6 | Primer-drift (T7) |
 |:-----|:--------|:---------|:------------|:------------------------|:------------------|
-| *(pending T1-T5 outputs)* | | | | | |
+| T1 prime↔init | Boundary asymmetry (orchestrator init doesn't reciprocate prime's boundary citation) | low | no-action | — | N |
+| T1 prime↔init | Post-init `/prime` handoff not suggested in phases.md § init Phase Step 4 | low | fix-now-T6 | `skills/orchestrator/references/phases.md` § init Phase | N |
+| T1 prime↔init | `prime` missing from 05-skills.md Universal Skills table | low | fix-now-T7 | — | Y |
+| T2 release-manager↔release-patch | Cross-citation gap (neither cites the other as paired counterpart) | med | defer-052b | — | N |
+| T2 release-manager↔release-patch | release-manager last-validated stale 2026-04-21 (pre-ADR-027) | med | defer-052b | — | N |
+| T2 release-manager↔release-patch | Invocation asymmetry (manager has table; patch does not) | low | defer-052b | — | N |
+| T2 release-manager↔release-patch | release-debt 7-sprint chain (Sprint 049 MINOR + 050/051a/051b/052/053/054 PATCH) | high | defer-052b | — | N |
+| T2 release-manager↔release-patch | release-patch missing from 05-skills.md Universal Skills | med | fix-now-T7 (cross-link only per T2 DOC-ONLY) | — | Y |
+| T2 release-manager↔release-patch | 05-skills.md L184 Phase 9 Close lists release-manager only | low | fix-now-T7 (cross-link only per T2 DOC-ONLY) | — | Y |
+| T3 pr-reviewer↔code-reviewer | (all clean — no findings) | — | no-action | — | N |
+| T4 security-auditor↔security-analyst | ADR-015 separate-context citation gap in SKILL.md L14 | med | fix-now-T6 | `skills/security-auditor/SKILL.md` L14 | N |
+| T5 architecture-grill↔design-analyst | Distinct-surface pair confirmed; no coordination loop required | — | no-action | — | N |
+| T5 architecture-grill↔design-analyst | Sprint 049 rename `system-design-reviewer`→`architecture-grill` propagation incomplete (14 stale refs in 6 active surfaces) | high | fix-now-T7 | (T7 — 6 files) | Y |
+| T5 architecture-grill↔design-analyst | Orphan `init-analyst` agent rows (3 primers reference non-existent agent; init phase = bin/dev-flow-init.js per ADR-028) | high | fix-now-T7 | (T7 — 3 files) | Y |
+| T5 architecture-grill↔design-analyst | docs/codemap/handoff.json L320, L324 stale | low | no-action | — | N (auto-regenerates via codemap-refresh hook on commit) |
+| T5 architecture-grill↔design-analyst | docs/DECISIONS.md L344 historical Sprint 36 narrative | — | no-action | — | N (closed-sprint archive; no retroactive edits) |
 
 ---
 
@@ -243,16 +292,29 @@ status: PASS
 
 ## Retro
 
-*(populated at Sprint Close)*
-
 ### Worked
-*(pending)*
+
+- **5-pair audit methodology held discipline.** Sequential T1→T5 reads + per-pair findings table prevented context blur. T3 (cleanest pair) early in sequence served as reference pattern for T4 audit shape.
+- **Bidirectional citation rule (ADR-031 Open Q E) caught real drift.** T2 release-manager↔release-patch + T4 security-auditor↔security-analyst both surfaced via this rule; T3 pr-reviewer↔code-reviewer passed cleanly because both directions explicitly cited in SKILL+agent body AND frontmatter — pattern reusable.
+- **T2 DOCUMENT-ONLY discipline held.** Zero edits to release-manager/release-patch SKILL.md despite 5 fixable findings surfaced. Defer-052b cross-link in TODO.md release-debt row preserved findings for next sprint.
+- **Friction Protocol invocation worked.** T5 fix-volume 17 (vs initial sweep-expectation ~5) surfaced mid-sprint; user-decision in <1 turn unblocked T7 with full propagation.
+- **≤1-line in-place edit rule scaled.** 17 propagation edits across 6 active surfaces stayed compliant per-edit; aggregate volume managed via batching.
 
 ### Friction
-*(pending)*
+
+- **Initial grep undercounted T7 scope.** First sweep counted 14 stale `system-design-reviewer` refs; deeper read revealed 3 entangled orphan `init-analyst` rows + ASCII diagram + 10a-init.md primer. Friction Protocol caught it but planned context-budget (~60k) absorbed without margin. **TD candidate: Sprint Promote audit pre-step should grep for known-stale tokens to size T7-class fix volume.**
+- **10a-init.md primer requires whole-section rewrite.** ≤1-line discipline blocks fix in this sprint; deferred TASK-132. Pattern: when entire primer is ABOUT a deprecated entity, multi-line rewrite is unavoidable — sprint scope rule should call this out at G1.
+- **04-subagents.md ASCII diagram drift** — multi-line surface; same constraint as above.
+- **8 historical surfaces with stale refs** (sprint files / audit docs / DECISIONS.md / handoff.json) — explicit no-action per closed-sprint archive convention; verified at audit time, recorded for transparency.
 
 ### Pattern candidates (carried forward)
-*(pending)*
+
+- **Pre-promote stale-token sweep.** Before Sprint Promote, grep for tokens flagged in recent renames/deprecations across active blueprint primers + README + .claude/CONTEXT.md to surface drift volume early. → propose TD or TASK-NEW for token-audit harness (Sprint 055b TASK-128 overlap).
+- **Whole-primer-rewrite escape hatch.** When ≤1-line discipline can't address a finding (entire primer/diagram about deprecated entity), G1 must surface the multi-line scope and route to TASK-NEW at promote time, not surface mid-sprint as friction.
+- **Coordination-loop bidirectional rule (ADR-031 Open Q E)** — codify into PR review checklist OR pr-reviewer Lens 7 (Documentation): if SKILL+agent pair, verify both directions cite. Currently behavioral; should be lint-enforced via TASK-116-v2 acceptance harness.
 
 ### Surprise log
-*(pending)*
+
+- **`init-analyst` agent never created** despite multiple primer references. Per Sprint 050 ADR-028, init = `bin/dev-flow-init.js` script — but stale primer narratives (10a-init.md + 04 ASCII + 02-repo-structure tree) preserved the agent fiction across 3+ sprints post-deprecation. Doc-rot lesson: ADR-028 closure didn't trigger primer audit.
+- **05-skills.md was MISSING `prime` from Universal Skills table** despite prime being session-prime canonical entry. Caught in T1 finding; added in T7. Suggests primers may be missing other v1-shipped universal skills not yet audited (zoom-out · diagnose · tdd · refactor-advisor) — possible TASK-NEW scope.
+- **release-patch deprecated `release-manager` in practice** but neither skill cites the other, and 05-skills.md still listed only release-manager as Universal/Phase-9-Close. Sprint 049 ADR-027 generalize closed half the loop (release-patch ships); the other half (release-manager status reconcile) was deferred to release-debt sprint that hasn't run yet. Drift compounds across sprints when paired-skill audits are skipped.

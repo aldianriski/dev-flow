@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-25
+last_updated: 2026-05-09
 update_trigger: Blueprint MINOR version bump; new skill added; skill frontmatter convention changes
 status: current
 source: AI_WORKFLOW_BLUEPRINT.md §5 + §13 (split TASK-004); TASK-005 fixes applied
@@ -53,7 +53,7 @@ Skills with non-obvious decision logic (conditional gating, branching stages) mu
 | `security-auditor` | Pure OWASP checklist — no conditional stage gating |
 | `adr-writer` | Append-only template fill — no branching decision |
 | `refactor-advisor` | Sequential multi-lens analysis — no conditional stage skip |
-| `system-design-reviewer` | Sequential multi-lens review — no conditional stage skip |
+| `architecture-grill` | Sequential multi-lens review — no conditional stage skip |
 | `release-manager` | Invocation table + sequential steps — no conditional stage skip |
 
 ## Skill Frontmatter Standard
@@ -126,8 +126,10 @@ description: >
 | ADR Writer | `adr-writer/` | Significant technical decision made |
 | Refactor Advisor | `refactor-advisor/` | Code quality review needed |
 | Lean Doc Generator | `lean-doc-generator/` | Documentation needs creating/updating |
-| Release Manager | `release-manager/` | Preparing a release |
-| System Design Reviewer | `system-design-reviewer/` | Architecture review |
+| Prime | `prime/` | Session-start ordered context load + health check |
+| Release Manager | `release-manager/` | Preparing MINOR/MAJOR release *(see Sprint 052b scope for release-manager↔release-patch reconcile)* |
+| Release Patch | `release-patch/` | PATCH auto-detect (6-mode cascade per ADR-027) — sprint close + bug fix landings |
+| Architecture Grill | `architecture-grill/` | Architecture review (grill mode) |
 
 Note: `lean-doc-generator/` includes `references/DOCS_Guide.md` and `references/VALIDATED_PATTERNS.md`
 as supporting files referenced via `${CLAUDE_SKILL_DIR}/references/`.
@@ -166,7 +168,7 @@ as supporting files referenced via `${CLAUDE_SKILL_DIR}/references/`.
 | 0 Parse (Path A) | `dev-flow` | inline | — | 1 |
 | 0 Parse (Path B — freeform) | `task-decomposer` | fork (spawns `scope-analyst` subagent) | — | 2 |
 | 1 Clarify | (orchestrator inline — no skill) | inline | — | 1 |
-| 2 Design | `system-design-reviewer` | subagent | `refactor-advisor` (for brownfield refactor tasks) | 3 |
+| 2 Design | `architecture-grill` | subagent | `refactor-advisor` (for brownfield refactor tasks) | 3 |
 | 2 Design (FE-heavy) | `fe-design-engineer` | subagent | `fe-accessibility-auditor`, `fe-motion-designer` | 3 |
 | 2 Design (BE contract) | `api-contract-designer` | subagent | `data-model-designer` | 3 |
 | 2 Design (data/pipeline) | `analytics-schema-designer` | subagent | `etl-pipeline-builder`, `pipeline-builder` | 3 |
@@ -176,7 +178,7 @@ as supporting files referenced via `${CLAUDE_SKILL_DIR}/references/`.
 | 4 Validate | (engine — lint/typecheck/test runners) | programmatic | — | 1 |
 | 5 Test (unit/integration) | `test-case-generator` | subagent | — | 2 |
 | 5 Test (E2E) | `e2e-scenario-writer` | subagent | — | 2 |
-| 6 Review | `pr-reviewer` (via `code-reviewer` agent) | subagent (parallel) | `refactor-advisor`, `system-design-reviewer` | 3 |
+| 6 Review | `pr-reviewer` (via `code-reviewer` agent) | subagent (parallel) | `refactor-advisor`, `architecture-grill` | 3 |
 | 7 Security | `security-auditor` (via `security-analyst` agent) | subagent (parallel) | — | 3 |
 | 7 Migration (conditional) | — | subagent (`migration-analyst`) | — | 3 |
 | 7 Performance (conditional) | `query-optimizer` | subagent (`performance-analyst`) | `observability-setup` | 3 |
@@ -262,7 +264,7 @@ All skills are invoked as slash commands in Claude Code:
 /refactor-advisor [file/feature]     # Analyze refactoring opportunities (context: fork)
 /security-auditor [scope]            # Standalone security scan (context: fork)
 /pr-reviewer [files/feature]         # Standalone code review (context: fork)
-/system-design-reviewer [proposal]   # Architecture review (context: fork)
+/architecture-grill [proposal]       # Architecture review (context: fork)
 /lean-doc-generator [type] [subject] # Create/update lean docs with ownership headers
 /release-manager [version]           # Prepare release notes + CHANGELOG entry
 

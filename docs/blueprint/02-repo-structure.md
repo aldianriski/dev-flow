@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-20
+last_updated: 2026-05-09
 update_trigger: Blueprint MAJOR version bump; new agent/skill/script added to the scaffold
 status: current
 source: AI_WORKFLOW_BLUEPRINT.md §2 (split TASK-004)
@@ -21,7 +21,6 @@ source: AI_WORKFLOW_BLUEPRINT.md §2 (split TASK-004)
 │   │   └── ci-status.js             ← PostToolUse hook: CI pipeline poller after git push
 │   ├── agents/                      ← subagent definitions (specialist workers)
 │   │   ├── design-analyst.md        ← Phase 2: read-only codebase explorer (standalone)
-│   │   ├── init-analyst.md          ← INIT mode: preloads system-design-reviewer
 │   │   ├── code-reviewer.md         ← Phase 6: thin wrapper — preloads pr-reviewer skill
 │   │   ├── security-analyst.md      ← Phase 7: thin wrapper — preloads security-auditor skill
 │   │   ├── migration-analyst.md     ← conditional (§19): migration safety checker
@@ -41,7 +40,7 @@ source: AI_WORKFLOW_BLUEPRINT.md §2 (split TASK-004)
 │       │   └── SKILL.md             ← customize per stack (context: fork)
 │       ├── pr-reviewer/
 │       │   └── SKILL.md             ← customize per project architecture (context: fork)
-│       ├── system-design-reviewer/
+│       ├── architecture-grill/
 │       │   └── SKILL.md             ← customize per architecture principles (context: fork)
 │       ├── lean-doc-generator/
 │       │   ├── SKILL.md             ← universal

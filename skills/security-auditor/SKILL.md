@@ -4,14 +4,14 @@ description: Use when code, API specs, or configuration files need a security au
 user-invocable: true
 context: fork
 agent: security-analyst
-version: "1.0.0"
-last-validated: "2026-04-21"
+version: "1.0.1"
+last-validated: "2026-05-09"
 type: rigid
 ---
 
 # Security Auditor
 
-Audit code, API specs, or configurations for security vulnerabilities. Loaded by the security-analyst agent in a separate /security-review session, or invoked directly by the user.
+Audit code, API specs, or configurations for security vulnerabilities. Loaded by the security-analyst agent in a separate /security-review session (per ADR-015 — same-context security audits cause context contamination), or invoked directly by the user.
 
 ## OWASP Top 10 Checklist (2021)
 

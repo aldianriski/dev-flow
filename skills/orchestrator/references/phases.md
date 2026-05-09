@@ -100,6 +100,8 @@ Full output of `/orchestrator init` = canonical scaffold contract per ADR-028 DE
 
 **Idempotency:** `createEmptyScaffoldDirs` is safe to re-run — preserves existing `.gitkeep` files; does not clobber user content. `renderSettingsLocal` writes `.new` suffix if existing `settings.local.json` present (per-machine config not overwritten). Other templates DO overwrite — `init` is intended for first-time scaffold; re-running on a populated repo requires user to confirm overwrite at first prompt.
 
+**Post-init handoff:** next session, run `/prime` to verify scaffold loads cleanly + emit health check (skills/prime/SKILL.md is the canonical post-scaffold session-prime surface).
+
 ---
 
 ## Session Close *(after commit)*

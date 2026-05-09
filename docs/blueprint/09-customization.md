@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-20
+last_updated: 2026-05-09
 update_trigger: Blueprint MINOR version bump; new stack added; setup checklist changes
 status: current
 source: AI_WORKFLOW_BLUEPRINT.md §10 + §11 + §12 + §14 + §15 (split TASK-004)
@@ -101,18 +101,17 @@ Phase 2 — Universal Skills (20 min)
 - [ ] Create .claude/skills/ directory
 - [ ] Copy these skill directories (each contains SKILL.md):
       adr-writer/, refactor-advisor/, lean-doc-generator/,
-      release-manager/, system-design-reviewer/
+      release-manager/, release-patch/, prime/, architecture-grill/
 - [ ] Ensure lean-doc-generator/references/ directory is copied with DOCS_Guide.md and VALIDATED_PATTERNS.md
 - [ ] Verify lean-doc-generator/SKILL.md has version, stack-version, last-validated frontmatter
 - [ ] Update release-manager/SKILL.md VCS section (Bitbucket/GitHub/GitLab)
-- [ ] Add `context: fork` + `agent: general-purpose` to: refactor-advisor, system-design-reviewer
+- [ ] Add `context: fork` + `agent: general-purpose` to: refactor-advisor, architecture-grill
 - [ ] Add type:, when_to_use:, stack-version and last-validated fields to all skill frontmatter
 
 Phase 3 — Subagents (45 min)
 - [ ] Create .claude/agents/ directory
 - [ ] Create .claude/agents/design-analyst.md — customize dependency rule for your architecture
-- [ ] Create .claude/agents/init-analyst.md — preloads system-design-reviewer;
-      body adds: discovery checklist, architecture gate format (Gate A + Gate B), ADR-001 prompt
+- [ ] Init scaffold canonical: `node bin/dev-flow-init.js` (per ADR-028) — replaces deprecated init-analyst agent path
 - [ ] Create .claude/agents/code-reviewer.md — thin wrapper with `skills: pr-reviewer`;
       body adds only: role + Gate 2 tiered format + project dependency rule
 - [ ] Create .claude/agents/security-analyst.md — thin wrapper with `skills: security-auditor`;
@@ -192,7 +191,7 @@ Before shipping the workflow for a new project, verify alignment with chosen pri
 | Principle | Enforced By |
 |:----------|:-----------|
 | Single Responsibility | pr-reviewer flags composables/services >200 LOC |
-| Open/Closed | system-design-reviewer checks for extension without modification |
+| Open/Closed | architecture-grill checks for extension without modification |
 | Interface Segregation | pr-reviewer flags prop/param bags (too many fields) |
 | Dependency Inversion | pr-reviewer flags concrete dependency imports in domain layer |
 

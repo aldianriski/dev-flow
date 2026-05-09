@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-04-20
+last_updated: 2026-05-09
 update_trigger: Blueprint MAJOR/MINOR version bump; new agent added; subagent dispatch contract changes
 status: current
 source: AI_WORKFLOW_BLUEPRINT.md §4 (split TASK-004); TASK-005 fixes applied
@@ -61,7 +61,6 @@ source: AI_WORKFLOW_BLUEPRINT.md §4 (split TASK-004); TASK-005 fixes applied
 | File | Mode | Preloads Skill | Role |
 |:-----|:-----|:--------------|:-----|
 | `design-analyst.md` | full / quick | — | Codebase explorer, implementation planner |
-| `init-analyst.md` | init only | `system-design-reviewer` | Discovery + architecture for greenfield |
 | `code-reviewer.md` | full / quick / review | `pr-reviewer` | Spec compliance + code quality |
 | `security-analyst.md` | full / quick / review | `security-auditor` | Security scan |
 | `migration-analyst.md` | full / quick (conditional) | — | Migration safety: up/down parity, concurrency |
@@ -163,7 +162,7 @@ Split into *internal* (subagent's own work — generous, dies on return) and *re
 
 - Default wall-clock timeout: **600 seconds** (10 min).
 - On timeout: subagent returns `{ status: "timeout", partial: <what it has> }`. Orchestrator logs + escalates to human; never auto-retry a timed-out subagent without human ack.
-- Override in payload `budget.timeout_s` is allowed for known-heavy phases (e.g., `init-analyst` discovery may set 1800).
+- Override in payload `budget.timeout_s` is allowed for known-heavy phases (e.g., long-running scope-analyst on large codebases may set 1800).
 
 ### One-shot expansion hatch
 

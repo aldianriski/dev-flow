@@ -38,7 +38,7 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 - **`security-auditor`** (`/security-review`) → O8 · O4 — OWASP audit in separate session (ADR-015 one-way dispatch). **Skip when:** governance/docs change with no surface to audit.
 - **`refactor-advisor`** → O3 · O4 — code-smell sweep; deep-module candidates. **Skip when:** green-field code with no callers yet.
 - **`zoom-out`** → O1 · O3 — read-only module map before cross-cutting change. **Skip when:** implementation plan already exists; use `/orchestrator`.
-- **`diagnose`** → O4 · O6 — 6-phase systematic debugging. **Skip when:** architectural concern (use system-design-reviewer) or test-first work (use `/tdd`).
+- **`diagnose`** → O4 · O6 — 6-phase systematic debugging. **Skip when:** architectural concern (use architecture-grill) or test-first work (use `/tdd`).
 - **`tdd`** → O4 · O8 — tracer-bullet → red-green-refactor; reliability via test-first. **Skip when:** throwaway prototype where tests outlast use.
 - **`lean-doc-generator`** → O2 · O7 · O3 — frontmatter discipline · sprint lifecycle templates · WHY/WHERE-only enforcement. **Skip when:** target file is prose-only (no frontmatter contract) — falls back to plain edit.
 - **`adr-writer`** → O3 · O2 — captures hard-to-reverse decisions; prevents architectural amnesia. **Skip when:** reversible low-impact decision; over-ADR-ing dilutes registry signal.
