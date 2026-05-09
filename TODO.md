@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-08
 update_trigger: Sprint or task state change
 status: current
-sprint: 049
+sprint: none
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,9 +35,9 @@ sprint: 049
 
 ## Active Sprint
 
-→ **TASK-120** — Plugin Coherence Cleanup + Rename + release-patch Generalize. Sub-tasks T1-T5 per [`docs/sprint/SPRINT-049-coherence-cleanup-rename.md`](docs/sprint/SPRINT-049-coherence-cleanup-rename.md): T1 drop `dev-flow-compress` · T2 rename `system-design-reviewer` → `architecture-grill` · T3 generalize `release-patch` (6-mode cascade) · T4 ADR-027 · T5 TODO.md update.
+→ — none —
 
-> Next: Sprint 050 — F3 init scaffold full (settings.json + .gitignore + docs/ skeleton + codemap/adr dirs).
+> Sprint 049 closed `7b04875` (TASK-120 Plugin Coherence Cleanup + release-patch Generalize · ADR-027 · architecture-grill rename · 17→16 skills). Next: Sprint 050 — F3 init scaffold full.
 
 ---
 
