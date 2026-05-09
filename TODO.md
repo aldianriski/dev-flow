@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 055b
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,7 @@ sprint: none
 
 ## Active Sprint
 
-→ **— none —** (between sprints; awaiting next sprint promote)
+→ **[docs/sprint/SPRINT-055b-token-output-discipline.md](docs/sprint/SPRINT-055b-token-output-discipline.md)** (3 tasks: TASK-128 token audit · TASK-NEW DEC-3 codify · TASK-133 Output Discipline plugin principle)
 
 > Sprint 052b closed `26543d7`. release-debt 10-sprint chain RESOLVED at T1 manual MINOR 2.5.0→2.6.0 lockstep reconcile (`b03f366`); 053b T2 7 audit findings closed via T2 wire-fixes (`0018ea0`) + T3 primer drift (`edbdd49`) + T4 factual close-out (`1ef1a67`). ADR-032 5-decision lock — DEC-1 `--minor` flag deferred to TASK-NEW post-v1 · DEC-2 release-manager MINOR/MAJOR canonical · DEC-3 prevention scan codify → P1 Sprint 055b · DEC-4 mode boundary bidirectional · DEC-5 re-litigation lock. Friction → 2 TD rows (TD-001 count freshness · TD-002 cap-headroom-budget) + 1 TASK-NEW (DEC-3 codify → P1 Sprint 055b paired w/ TASK-128).
 >
@@ -106,6 +106,7 @@ sprint: none
 ### P1 — Post-052b prevention codification
 
 - [ ] **TASK-NEW (DEC-3 codification)** — Codify Sprint Promote Step 1.5 release-debt scan in `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md`. Behavioral: scan CHANGELOG since last MINOR/MAJOR; depth ≥3 → P1 candidate · ≥5 → auto-escalate P0 · ≥7 → BLOCK Sprint Promote until release-debt sprint promoted. Pair w/ existing Tech-Debt scan. Codifies Sprint 052b ADR-032 DEC-3. Estimated S, layers `skills, docs`. → Sprint 055b (paired w/ TASK-128 token-audit).
+- [ ] **TASK-133** — Output Discipline plugin principle. Origin: Sprint 055b session 2026-05-09 — `/lean-doc-generator` Sprint Promote run emitted verbose narrated steps (preamble + decorative emoji checkmarks + per-row paragraphs + meta-narration "I'll wait for your pick"). User flagged token waste + cross-skill drift risk. **Outcome:** O8 plugin reliability. **Decisions locked (AskUserQuestion 2026-05-09):** principle home = NEW `.claude/CONTEXT.md` § Output Discipline (cross-cutting, alongside Gates/Modes/Agent Roster); sprint placement = Sprint 055b (3-task sprint paired w/ TASK-128 + DEC-3 codify); ADR = YES (hard-to-reverse once 23+ files reference). **Phases:** T1 — write CONTEXT.md § Output Discipline (≤25 lines: rules + rationale + apply-when + caveman scope clause). T2 — write ADR-033 Output Discipline (decision + scope = all 16 skills + 7 agents + alternative rejected = per-skill duplication). T3 — propagate single pointer line `> Output Discipline: see `.claude/CONTEXT.md` § Output Discipline.` to 16 SKILL.md + 7 agent.md (23 files); verify per-file cap pre-write. T4 — validation pass: confirm 23 files reference principle correctly; CLAUDE.md ≤80 / SKILL.md ≤100 / agent ≤30 caps held. **Acceptance:** (1) `.claude/CONTEXT.md` gains § Output Discipline (≤25 lines) with rules: terse step verdicts (no narrate), no decorative emoji checkmarks in protocol output, compact list rendering, ≤4-line HALT prompts, no preamble fluff like "I have data needed" / "Let me emit", caveman-mode-independent (principle applies to protocol meta-output, not caveman-rendered user content). (2) ADR-033 written. (3) All 16 skills + 7 agents reference principle via single pointer line. (4) All caps held; pre-write verification recorded per file. **Edge cases:** zero-headroom skill (`release-patch/SKILL.md` 100/100) → trim adjacent or scope-exception in ADR; agent files at 28-30 lines → trim adjacent comment OR skip with ADR scope exception (note in ADR § Consequences); `caveman.md` skill describes its own output mode — principle applies to its protocol meta-output only, not user-rendered caveman content (CONTEXT.md scope clause). **HITL/AFK:** T1+T2+T4 = HITL · T3 = AFK (mechanical fan-out after T1+T2 merge). **Risk:** medium — 23-file touch fan-out; cap pressure on agents; ADR locks principle. **Assumptions registry:** A1 — CONTEXT.md has no formal cap (verified ADR-019 line 58 + post-Sprint-048 cleanup). A2 — `release-patch/SKILL.md` 100/100 zero-headroom is the ONLY zero-headroom skill (verified 2026-05-09). A3 — All 7 agents have ≥2-line headroom for single pointer line. A4 — Pointer-line wording is non-negotiable canonical form (consistency > per-file phrasing). Estimated S-M, layers `governance, skills, agents, docs`. → Sprint 055b (paired w/ TASK-128 + DEC-3 codify).
 
 ### P2 — Tooling friction backlog (optional, not blocking v1)
 
