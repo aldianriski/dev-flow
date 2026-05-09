@@ -4,7 +4,7 @@ last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: closed
 plan_commit: ffcc3e4
-close_commit: TBD
+close_commit: fb8e389
 ---
 
 # Sprint 052 — F4 Wire Orphan Skills + F5 Tech-Debt Rollover Loop
@@ -203,7 +203,7 @@ Minimal wire (per AskUserQuestion gated): added "Canonical template" column to `
 
 Closes drift risk for Sprint 051b template rewrites for the 1-sprint gap.
 
-### 2026-05-09 | sprint close — TBD
+### 2026-05-09 | sprint close — `fb8e389`
 This commit. TASK-123 fully delivered: F4 wires 6 orphan skills into orchestrator phase detection; F5 ships 4-mechanic tech-debt rollover loop (TD section schema · Friction→TD prompt · mid-sprint fix/defer/block · Sprint Promote scan + auto-escalate) + 5 anti-pattern locks. **In-sprint T7 fold-in** closed templates/ ↔ lean-doc-generator wiring gap (minimal wire; deeper integration deferred to TASK-124 Sprint 053). Behavioral enforcement only this sprint; automated lint deferred to TASK-116-v2 (Sprint 054). release-patch NOT invoked (release-debt 5-sprint chain → Sprint 052b owed).
 
 ---
