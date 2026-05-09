@@ -234,9 +234,21 @@ Use when running a multi-task sprint end-to-end. Replaces per-task G1+G2 with a 
 
 ## Mid-Sprint Friction Protocol
 
-**Trigger** (TASK-123 F5(C)): AI surfaces an issue mid-task OR human types `friction` at any task boundary during Sprint Execute.
+**Trigger** (TASK-123 F5(C); TASK-130 T2 explicit conditions per ADR-031):
 
-**Prompt to human:**
+**AI invokes** when ANY of:
+1. **Scope-creep detected** — file changes outside G1 `layers:` OR `explicit-gaps:` (per ADR-031 anti-slip).
+2. **3+ failed runs** — same test/lint/typecheck attempted 3 times without progress (per orchestrator SKILL.md Red Flag "Same fix attempted 3× without passing — stop, report, question architecture").
+3. **Unexpected file changes** — auto-tooling generated (lockfile churn · build artifacts · generated code) outside G1 scope.
+4. **Ambiguity blocking task** — clarification needed but Grill skipped at G1 (mvp mode failure mode).
+5. **Context-budget exceeded** — task token consumption exceeded G1 `context-budget:` declaration (per ADR-031 anti-slip).
+
+**Human invokes** via 3 shortcuts at any task boundary:
+- `friction` — neutral start; prompts fix/defer/block (default flow below)
+- `defer <reason>` — direct shortcut; writes TD row + continues task; skips fix/block prompt
+- `block` — direct shortcut; halts sprint per First-Blocker Halt rule
+
+**Prompt to human** (after AI invokes OR human types `friction`):
 ```
 [friction] <one-line issue description>
 Fix now / defer / block?
