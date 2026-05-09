@@ -31,7 +31,13 @@
 | `docs/sprint/SPRINT-NNN-<slug>.md` | AI mid-sprint | 400 hard cap | Append during sprint; retro at close | — (format inline this guide §3.9) |
 | Per-module `README.md` | Dev | 10 | Module purpose changes | — (no template) |
 
-**Template-as-canonical-format rule:** when a template exists for a doc type, the template IS the canonical format source — NOT this guide's inline format examples. lean-doc-generator MUST consult `templates/<X>.md.template` before generating to verify section ordering, frontmatter shape, and substitution tokens. Templates use bracket-style placeholders (`[Project Name]`, `[source-root]`, `[app-root-line]`, `[test-root-line]`, layer-block) per `bin/dev-flow-init.js applySubstitutions`. If template and inline format diverge → template wins; raise the divergence as a friction item at sprint close.
+**Template-as-canonical-format rule** (per ADR-030): when a template exists for a doc type, the template IS the canonical format source — NOT this guide's inline format examples. lean-doc-generator MUST consult `templates/<X>.md.template` before generating to verify section ordering, frontmatter shape, and substitution tokens. Templates use bracket-style placeholders (`[Project Name]`, `[source-root]`, `[app-root-line]`, `[test-root-line]`, layer-block) per `bin/dev-flow-init.js applySubstitutions`. If template and inline format diverge → template wins; raise the divergence as a friction item at sprint close.
+
+**Template-load protocol** (Step 6 contract; behavioral for `type: rigid` skills — agent issues Read tool call before writing):
+
+1. **Read** `templates/<X>.md.template` BEFORE writing. Verify (a) frontmatter field order matches template, (b) section order matches template, (c) substitution tokens preserved or replaced consistently.
+2. **Missing template** → WARN user: `"Template templates/<X>.md.template not found. Proceeding with inline format from DOCS_Guide.md §2 as fallback — raised as friction item at sprint close."` Do NOT hard-stop; degraded output is better than no output. Log the missing-template event for sprint Retro § Friction.
+3. **Divergence resolution** → template wins. Surface correction as one-line note inline (e.g., `"Section order corrected per templates/ARCHITECTURE.md.template"`). Don't silently rewrite; user MUST see the divergence so they can update either skill output or template intent.
 
 Rule: before creating any new file → ask "can this live in code comments?" If yes → code.
 

@@ -57,7 +57,7 @@ Generate high-signal technical documentation. Read `references/DOCS_Guide.md` be
 
 **Step 5 — Stack clarification** *(init only)*: ask in one message — package manager, dev infra, deferred services, frontend stack, data layer split.
 
-**Step 6 — Generate**: write approved docs; enforce all line limits from `references/DOCS_Guide.md`; include ownership header on every file.
+**Step 6 — Generate**: for each doc with a Canonical template entry in `references/DOCS_Guide.md §2`, read `templates/<X>.md.template` first (template-load protocol per ADR-030; load-order in `DOCS_Guide.md §2 Template-as-canonical-format rule`). Then write, enforcing line limits + ownership header on every file.
 
 **Step 7 — Session close**: list docs delivered + ownership headers to verify + recommended updates.
 
