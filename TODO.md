@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 053c
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,9 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ docs/sprint/SPRINT-053c-init-primer-cleanup.md
+
+> Sprint 053c — Init-Mode Primer Cleanup (TASK-132). Carry-forward from Sprint 053b T7. 4 tasks: T1 10a-init.md primer rewrite (replace init-analyst workflow with bin/dev-flow-init.js per ADR-028) · T2 04-subagents.md ASCII agent-tier diagram collapse (remove INIT ANALYST Tier-3 node, lines 22-34) · T3 final sweep for any remaining init-analyst refs in active surfaces · T4 synthesis + close. Layers: docs. Risk: low. No ADR. G1 anti-slip block per ADR-031 (PASS). Status: planning → awaiting user approval to flip active.
 
 > Sprint 053b closed `071f598`. TASK-125 broader feature-usage audit sweep delivered: 7-task plan (T1-T5 audits + T6 synthesis + T7 blueprint propagation). 16 findings consolidated. T6: 2 ≤1-line wire-fixes (security-auditor SKILL.md L14 ADR-015 citation v1.0.0→1.0.1 · phases.md § init Phase post-init `/prime` handoff). T7: 17 ≤1-line propagation edits across 6 active surfaces (02 + 04 + 05 + 09 blueprint primers + README + USER-OUTCOMES.md); 4 last_updated stamps bumped 2026-05-09; 3 NEW Universal Skills rows added (prime · release-patch · Architecture Grill). Friction Protocol invoked once (T7 fix-volume 17 vs initial 5-pair sweep expectation; user-approved full propagation). Carry-forward: TASK-132 (10a-init.md primer rewrite + 04 ASCII diagram cleanup); Sprint 052b absorbs 7 release-manager↔release-patch findings via TODO.md release-debt row cross-link.
 >
@@ -87,7 +89,6 @@ sprint: none
 - [x] **TASK-126** — Untracked-files reconcile (closed direct-commit `c18b779`): 30 files staged + tracked. All confirmed legitimate dev-flow artifacts with proper frontmatter + `status: current`; none warranted .gitignore or delete. Repo root (6 files) — AI_WORKFLOW_BLUEPRINT.md / AUDIT.md / AUDIT_PASS2.md / BASELINE_ASPECT.md / READINESS.md / STRATEGY_REVIEW.md. docs/blueprint/ (21 files + VERSION) — CRITICAL fix: plugin install via bin/dev-flow-init.js copyScaffold now ships complete. docs/context/ (3 files) — research/ADAPTATION_NOTES.md + research/CC_SPEC.md + workflow/DESIGN_PHILOSOPHY.md. **Sprint 051b unblocked.**
 - [x] **TASK-127** — Optimal usage workflow vision (closed Sprint 051b `2266b9d`): docs/blueprint/12-session-workflow.md primer (163/200 cap) · README.md Daily Pattern expansion · CLAUDE.md template Session Workflow block (3-step `/prime → /lean-doc-generator → /orchestrator`).
 - [ ] **TASK-128** — Token usage optimization audit (pre-v1-ship quality gate). Origin: user session 2026-05-08 — "we must track again the token usage optimization after all task don." Audit all skill/agent/CLAUDE.md/CONTEXT.md token footprints; identify bloat candidates; ensure caps still discipline post-feature growth. Generates audit report + targeted trim recommendations. Run AFTER all v1 prereqs land (Sprint 055), BEFORE v1 ship (Sprint 056). Estimated S, layers `governance, scripts, docs`. → Sprint 055b.
-- [ ] **TASK-132** — Init-mode primer cleanup (Sprint 053b T7 carry-forward). `docs/blueprint/10a-init.md` entire primer describes deprecated init-analyst agent workflow (4 refs at L32 / L48 / L102 / L110); per Sprint 050 ADR-028, init = `bin/dev-flow-init.js` script. Whole-section rewrite needed (not ≤1-line). ALSO `docs/blueprint/04-subagents.md` ASCII agent-tier diagram L22-34 still draws `INIT ANALYST` Tier-3 background-agent node — multi-line edit. Estimated S, layers `docs`. → Sprint 053c OR fold into Sprint 055b TASK-128 token audit (overlap: stale primer = bloat).
 - [x] **TASK-130** — Orchestrator Anti-Slip Discipline at G1 + Phase Guards (closed Sprint 054 `932d700`): ADR-031 + sprint-bulk Phase 0 Active Sprint guard + Mid-Sprint Friction Protocol explicit triggers (5 AI conditions + 3 human shortcuts) + G1 Scope Checklist 4 new anti-slip fields (focus + context-budget + explicit-gaps + done-confirmation; all required at G1 PASS). orchestrator SKILL.md 2.0.0→2.1.0. Coordination loop bidirectional w/ Sprint 053 T2.
 - [x] **TASK-131** — Orchestrator Doc-Wire Cleanup (closed Sprint 054b `65e74c5`): ADR-030 init phase + Path B citations · skill-dispatch.md NEW Invocation column (4 patterns: auto-fires · proposed→human y/n · user-invoked · agent-output-triggered) · 3 vague rows tightened (tdd · lean-doc-generator · adr-writer); orchestrator SKILL.md cap held 97/100.
 - [x] **TASK-129** — `/prime` behavior fix (closed direct-commit; single-task fix per Sprint Sizing Rules "never plan a sprint with only 1 task"): Next: line emitted per detection branch (4 branches: active-sprint+open / active-sprint+done / no-sprint+backlog / no-sprint+empty); 3 anti-patterns added (no inline summarize · no re-read unchanged via SHA1 cache · no full sprint-plan read — partial via `limit: 50`); Read order table updated; Step 6 added; output format includes `[cache hit]` + `(partial)` markers. Cap held 86/100. Skill version 1.0.0 → 1.1.0. last-validated bumped 2026-05-08.
