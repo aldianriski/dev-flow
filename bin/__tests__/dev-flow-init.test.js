@@ -139,6 +139,24 @@ test('applySubstitutions: [cmd-root-line] removes the line when cmdRoot absent',
   assert.equal(result, '/internal/\n# end\n');
 });
 
+test('applySubstitutions: [test-root-line] renders tests/ comment line when testRoot present', () => {
+  const tmpl = '/src/\n[test-root-line]\n# end\n';
+  const result = applySubstitutions(tmpl, {
+    projectName: '', ownerRole: '', date: '', layers: '', testRoot: 'tests',
+  });
+  assert.ok(result.includes('/tests/'), 'testRoot path rendered');
+  assert.ok(result.includes('unit · integration · e2e'), 'descriptive comment rendered');
+  assert.ok(result.startsWith('/src/\n/tests/'), 'follows previous line directly');
+});
+
+test('applySubstitutions: [test-root-line] removes the line when testRoot absent (go-gin)', () => {
+  const tmpl = '/internal/\n[test-root-line]\n# end\n';
+  const result = applySubstitutions(tmpl, {
+    projectName: '', ownerRole: '', date: '', layers: '', testRoot: '',
+  });
+  assert.equal(result, '/internal/\n# end\n');
+});
+
 // ─── getStackPreset ───────────────────────────────────────────────────────────
 
 test('getStackPreset: node-express has CA+DDD layers (domain, application)', () => {

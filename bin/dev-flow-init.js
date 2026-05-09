@@ -106,12 +106,16 @@ function applySubstitutions(template, vars) {
 
   // Full-line conditional substitutions. Token regex matches the token + trailing newline,
   // so the entire line vanishes when var is absent (no artifact blank lines for stacks
-  // lacking these extras: only react-next has appRoot, only go-gin has cmdRoot).
+  // lacking these extras: only react-next has appRoot; only go-gin has cmdRoot;
+  // go-gin omits testRoot per Go convention so test-root-line vanishes for go-gin).
   out = out.replace(/\[app-root-line\]\n/g, vars.appRoot
     ? `  /${vars.appRoot}/         # Next.js App Router (interface adapter — react-next variant)\n`
     : '');
   out = out.replace(/\[cmd-root-line\]\n/g, vars.cmdRoot
     ? `  /${vars.cmdRoot}/         # Entry root (Go cmd/<binary>/main.go)\n`
+    : '');
+  out = out.replace(/\[test-root-line\]\n/g, vars.testRoot
+    ? `/${vars.testRoot}/        # unit · integration · e2e\n`
     : '');
 
   if (out.includes("[list your stack's layer names")) {
