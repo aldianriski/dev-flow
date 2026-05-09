@@ -42,6 +42,8 @@ status: current
   - `acceptance`: POST /auth/login returns signed JWT on valid credentials; 401 on invalid [CUSTOMIZE: one sentence, measurable, testable by human at Gate 2]
   - `tracker`: https://linear.app/myproject/issue/ENG-001 [CUSTOMIZE: real ticket URL, or "none — [justification]"]
   - `risk`: medium
+  - `depends-on`: TASK-NNN | none [CUSTOMIZE: dependency on another task in this sprint, or "none"]
+  - `assumptions`: none [CUSTOMIZE: task-specific assumptions made during decomposition, or "none"]
 
 ---
 
