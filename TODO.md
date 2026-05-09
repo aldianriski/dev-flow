@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 052b
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,15 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ **Sprint 052b — Release-Debt Resolution** (10-sprint chain reconcile: 1 MINOR + 9 PATCH + 053b T2 7-finding fold-in + ADR-032 5 decisions).
+
+- [ ] **T1** — Manual MINOR reconcile 2.5.0 → 2.6.0 lockstep (`plugin.json` + `marketplace.json`) + consolidated `docs/CHANGELOG.md` MINOR entry covering Sprint 049-054b grouped by class. NO release-patch invocation; NO `--minor` flag work (DEC-1 lock).
+- [ ] **T2** — release-manager + release-patch SKILL.md wire-fixes (5 in-place ≤1-line edits per Sprint 054b pattern): cross-citation #1+#5 · release-manager last-validated 2026-04-21→2026-05-09 #2 · release-patch invocation parity #3 · `--from-sprint` MINOR/MAJOR-only boundary #4. Closes 053b T2 findings #1-#5.
+- [ ] **T3** — `docs/blueprint/05-skills.md` primer release-row drift propagation (cap-conscious in-place collapse; lock 5 default). 2 row updates + last_updated 2026-05-09. Closes 053b T2 findings #6-#7.
+- [ ] **T4** — Sprint 053b factual close-out note (per lock 3 — Sprint 047 T1 precedent): § Files Changed resolved-via-052b row + § Retro carry-forward note. NO Execution Log rewrites; NO G1 amendments.
+- [ ] **T5** — `docs/adr/ADR-032-release-debt-resolution-and-mode-boundary.md` (NEW) codifying DEC-1..DEC-5 (flag scope · release-manager role · prevention mechanism · mode boundary · re-litigation lock) + sprint § Decisions/Retro filled + sprint close.
+
+> **G1 PASS at promote** — recon-first lock: manifest 2.5.0 confirmed · release-manager 70/80 cap headroom · release-patch 100/100 in-place only · 053b retro 7 findings catalogued. Cap discipline ≤120 lines (ADR-022). Sprint plan: `docs/sprint/SPRINT-052b-release-debt-resolution.md`.
 
 > Sprint 053c closed `cbdafbe`. TASK-132 fully delivered: T1 `docs/blueprint/10a-init.md` whole-section rewrite 237→74 lines (4 init-analyst refs eliminated; ADR-028 canonical bin/dev-flow-init.js contract documented; Stack presets + Scaffold output tables; Post-init `/prime` handoff line) · T2 `docs/blueprint/04-subagents.md` ASCII Agent Tier diagram collapsed 4→3 columns (dropped INIT ANALYST node; ADR-028 delegation note added) · T3 sweep classified 30 remaining init-analyst hits (all historical OR deprecation-pointer; 0 DRIFT-FIX-NEEDED). 0 friction. 0 new ADR. Pattern candidate: whole-section primer rewrite trigger for TASK-116-v2 acceptance harness lint.
 >
@@ -96,7 +104,7 @@ sprint: none
 - [x] **TASK-129** — `/prime` behavior fix (closed direct-commit; single-task fix per Sprint Sizing Rules "never plan a sprint with only 1 task"): Next: line emitted per detection branch (4 branches: active-sprint+open / active-sprint+done / no-sprint+backlog / no-sprint+empty); 3 anti-patterns added (no inline summarize · no re-read unchanged via SHA1 cache · no full sprint-plan read — partial via `limit: 50`); Read order table updated; Step 6 added; output format includes `[cache hit]` + `(partial)` markers. Cap held 86/100. Skill version 1.0.0 → 1.1.0. last-validated bumped 2026-05-08.
 - [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap) + skeleton creation Sprint 051a + lean-doc/task-decomposer alignment Sprint 053. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 054.
 - [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 055.
-- [ ] **release-debt resolution sprint** — Sprint 049 MINOR (skill drop + rename + behavior change in release-patch) + Sprint 050 PATCH + Sprint 051a PATCH + Sprint 051b PATCH + 052/053/054/053b chain accumulating. release-patch SKILL handles PATCH only by design. Reconcile manual MINOR + chained PATCHes; OR extend release-patch with `--minor` flag (separate decision). **Sprint 053b T2 carry-forward (audit-derived findings to fold into 052b scope):** (a) cross-citation gap (release-manager + release-patch don't cite each other as paired counterparts) · (b) release-manager last-validated stale 2026-04-21 (pre-ADR-027 generalize) · (c) invocation asymmetry (release-manager has invocation table; release-patch does not) · (d) `--from-sprint` flag in release-manager may overlap release-patch auto-detect cascade · (e) coordination-loop rule per ADR-031 Open Q E violated. PROMOTED from P2. → Sprint 052b.
+- [ ] **release-debt resolution sprint** *(IN-FLIGHT — Sprint 052b · plan locked 2026-05-09)* — Sprint 049 MINOR (skill drop + rename + behavior change in release-patch) + Sprint 050 PATCH + Sprint 051a PATCH + Sprint 051b PATCH + 052/053/054/053b chain accumulating. release-patch SKILL handles PATCH only by design. Reconcile manual MINOR + chained PATCHes; OR extend release-patch with `--minor` flag (separate decision). **Sprint 053b T2 carry-forward (audit-derived findings to fold into 052b scope):** (a) cross-citation gap (release-manager + release-patch don't cite each other as paired counterparts) · (b) release-manager last-validated stale 2026-04-21 (pre-ADR-027 generalize) · (c) invocation asymmetry (release-manager has invocation table; release-patch does not) · (d) `--from-sprint` flag in release-manager may overlap release-patch auto-detect cascade · (e) coordination-loop rule per ADR-031 Open Q E violated. PROMOTED from P2. → Sprint 052b.
 - [ ] **v1 ship** — CHANGELOG release notes lead with user-project outcomes per ADR-026; plugin/marketplace lockstep bump (MINOR if new surface introduced; PATCH otherwise); git push per release-patch HARD STOP. → Sprint 056.
 
 ### P2 — Tooling friction backlog (optional, not blocking v1)
