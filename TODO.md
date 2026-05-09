@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 053
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,17 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ **Sprint 053 — F6 task-decomposer ↔ lean-doc-generator Collaboration Audit + Template-Loader Integration** (`docs/sprint/SPRINT-053-task-decomposer-lean-doc-collaboration-audit.md`)
+
+- [ ] **T0.5** — NEW `docs/adr/ADR-030-template-canonical-ownership.md` (≤120 lines): lean-doc owns templates as canonical format; task-decomposer + orchestrator init CONSUME; inline format examples non-authoritative. 4-criteria match. Layers `docs`. Risk low. **FIRST** per G2.
+- [ ] **T1** — `skills/task-decomposer/references/decomposition-spec.md` lines 29-40 replaced with template-pointer comment + stub; surrounding framing preserved; file 139→~133. Layers `skills, docs`. Risk low.
+- [ ] **T2** — F6b Sprint Promote Step 1.2 (`SPRINT_PROTOCOLS.md`) — Backlog-empty soft-guard prompt redirects to `/task-decomposer`; default halt. Decimal numbering preserves Step 1.5 TD Scan reference. Layers `skills, docs`. Risk low.
+- [ ] **T3** — F6a lean-doc Step 6 reference-delegation (cap 94→96/100); DOCS_Guide.md §2 rule extended w/ load-order (read before write) + missing-template fallback (WARN + inline + friction) + divergence resolution (template wins). Layers `skills, docs`. Risk medium.
+- [ ] **T4** — task-decomposer `procedure.md` Step 6 extended w/ template-read sentence; mirrors T3 contract. Read before approve. SKILL.md unchanged. Layers `skills, docs`. Risk low.
+- [ ] **T5** — Validation pass: dry-run /task-decomposer + /lean-doc-generator ARCHITECTURE.md regen + Sprint 051b CA+DDD CLAUDE.md regression check + 3-template pre-check (DECISIONS/SETUP/CHANGELOG). Friction items flagged for TASK-125. Layers `ci, docs`. Risk medium.
+- [ ] **T6** — Sprint close: TODO.md sprint:none + Active Sprint clear + TASK-124 `[x]` + Roadmap row done + sprint file close + CHANGELOG prepend + lean-doc + task-decomposer SKILL.md last-validated bumped 2026-05-09. Layers `governance, docs`. Risk low.
+
+> Closes TASK-124 (F6 + Sprint 052 T7 carry-forward). G1 PASS · G2 DONE_WITH_CONCERNS (lean-doc SKILL.md cap 4-line margin · template pre-check expansion at T5 · ADR-030 sequencing T0.5 first per G2 §10 Concern #3). Order T0.5 → T1 → T2 → T3 → T4 → T5 → T6. Next: Sprint 053b — TASK-125 broader feature-usage audit sweep.
 
 > Sprint 052 closed `fb8e389`. TASK-123 fully delivered: F4 wires 6 orphan skills (prime/zoom-out/tdd/diagnose/refactor-advisor/release-manager) into orchestrator phase detection (skill-dispatch.md Always-On 4→10 rows + phases.md advisory hints + G1 task-type line). F5 ships 4-mechanic tech-debt rollover loop (TD-NNN section in TODO.md + templates · Sprint Close Friction→TD prompt · Sprint Execute mid-sprint fix/defer/block · Sprint Promote Step 1.5 TD scan + auto-escalate) + 5 anti-pattern locks colocated in SPRINT_PROTOCOLS.md.
 >
@@ -180,7 +190,7 @@ Sprint 51a   →  Lean Architecture Foundation (STACK_PRESETS CA+DDD migration +
 Sprint 51b   →  Lean Architecture Templates + Primer (TASK-122b applySubstitutions extension w/ 5 tokens + CLAUDE.md/ARCHITECTURE.md rewrites + 06c sync + blueprint/11-lean-architecture.md primer + lean-doc wire) · TASK-127 workflow vision (blueprint/12-session-workflow.md + README Daily Pattern expansion + CLAUDE.md Session Workflow block) · in-sprint expansion: 03/08 blueprint refresh to 4-mode/2-gate model (done — `fb8e389`)
 Sprint 52    →  F4 wire orphan skills into orchestrator skill-dispatch + phases (6 orphans · 4→10 rows Always-On) + F5 tech-debt rollover loop (TD-NNN section · Friction→TD prompt · mid-sprint fix/defer/block · Sprint Promote scan + auto-escalate · 5 anti-pattern locks) (TASK-123) (done — `fb8e389`)
 Sprint 52b   →  release-debt resolution (Sprint 049 MINOR + 050/051a/051b PATCH chain reconcile; manual or release-patch --minor flag decision)
-Sprint 53    →  F6 task-decomposer ↔ lean-doc-generator collaboration audit (TASK-124 — narrow pair audit per user finding 2026-05-08)
+Sprint 53    →  F6 task-decomposer ↔ lean-doc-generator collaboration audit + Sprint 052 T7 carry-forward (TASK-124) — ADR-030 template canonical ownership · decomposition-spec.md template-pointer · SPRINT_PROTOCOLS.md Step 1.2 backflow · lean-doc Step 6 + task-decomposer Step 6 template-read · validation pass (in_progress)
 Sprint 53b   →  Broader feature-usage audit sweep (TASK-125 — all skill/agent pairs: prime↔init / release-manager↔release-patch / pr-reviewer↔code-reviewer / security-auditor↔security-analyst / architecture-grill↔design-analyst)
 Sprint 54    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (retroactive eval-evidence release-patch v2.0.0 + skeleton + Sprint 053 alignment)
 Sprint 55    →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
