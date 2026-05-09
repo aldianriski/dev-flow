@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 053b
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,9 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ docs/sprint/SPRINT-053b-feature-usage-audit-sweep.md
+
+> Sprint 053b PROMOTED 2026-05-09 (predecessor Sprint 054b `65e74c5`). TASK-125 broader feature-usage audit sweep — 6-task structure: T1 prime ↔ /orchestrator init · T2 release-manager ↔ release-patch (DOCUMENT-ONLY; defer fixes to Sprint 052b) · T3 pr-reviewer ↔ code-reviewer · T4 security-auditor ↔ security-analyst · T5 architecture-grill ↔ design-analyst · T6 synthesis + ≤1-line wire-fix application. G1 anti-slip block applied per ADR-031 (focus / context-budget / explicit-gaps / done-confirmation). No new ADR; no behavioral contract change planned; doc + targeted-fix sprint.
 
 > Sprint 054b closed `65e74c5`. TASK-131 fully delivered: ADR-030 init phase citation + Path B task-decomposer citation + Orphan skill explicit invocation language with NEW Invocation column distinguishing 4 patterns (auto-fires · proposed→human y/n · user-invoked · agent-output-triggered). orchestrator SKILL.md cap held 97/100 (in-place single-line edits); skill-dispatch.md tightened 3 vague rows + added column. Doc-coherence sprint complete; no ADR; no behavioral contract change.
 >
@@ -79,7 +81,7 @@ sprint: none
 
   Layers `skills, docs, governance`. → Sprint 052.
 - [x] **TASK-124** — F6 task-decomposer ↔ lean-doc-generator collaboration audit + pattern alignment (closed Sprint 053 `a9b1f05`): ADR-030 lock + decomposition-spec.md template-pointer + SPRINT_PROTOCOLS.md Step 1.2 backflow + lean-doc Step 6 + task-decomposer procedure.md Step 6 template-load contracts + TODO.md.template 6→8 fields fix. Original spec preserved below for archive: Origin: user session 2026-05-08 finding "this 2 skills not colaborate and have different pattern. this skills also when trigger is not create complete docs properly with the right template." Audit scope: read both SKILL.md + references; identify pattern divergence (output style · template ownership · I/O conventions · sprint-promote handoff); decide canonical (lean-doc owns templates; task-decomposer + orchestrator init consume; sprint-promote convergence with TODO.md state). Update both skills to align. Note: F6a (template lineage — lean-doc as canonical template owner) is partially addressed by Sprint 051b template re-render; F6b (collaboration pattern alignment) remains. ADR if hard-to-reverse decisions. Estimated M, layers `skills, docs`. → Sprint 053.
-- [ ] **TASK-125** — Broader feature-usage audit sweep (covers gap from F6's narrow scope). Audit ALL skill/agent pairs for collaboration patterns + naming consistency + dispatch wiring: `prime` ↔ `/orchestrator init` · `release-manager` ↔ `release-patch` · `pr-reviewer` skill ↔ `code-reviewer` agent · `security-auditor` skill ↔ `security-analyst` agent · `architecture-grill` ↔ `design-analyst` agent. Surface any other slipped pairs. Origin: user session 2026-05-08 — "audit all feature usage" was broader than F6 alone (TASK-124 covers ONE pair). Estimated M, layers `skills, docs`. → Sprint 053b.
+- [ ] **TASK-125** — Broader feature-usage audit sweep (covers gap from F6's narrow scope). Audit ALL skill/agent pairs for collaboration patterns + naming consistency + dispatch wiring: `prime` ↔ `/orchestrator init` · `release-manager` ↔ `release-patch` · `pr-reviewer` skill ↔ `code-reviewer` agent · `security-auditor` skill ↔ `security-analyst` agent · `architecture-grill` ↔ `design-analyst` agent. Surface any other slipped pairs. Origin: user session 2026-05-08 — "audit all feature usage" was broader than F6 alone (TASK-124 covers ONE pair). Estimated M, layers `skills, docs`. → Sprint 053b. PROMOTED 2026-05-09 → see `docs/sprint/SPRINT-053b-feature-usage-audit-sweep.md` (status: active).
 - [x] **TASK-126** — Untracked-files reconcile (closed direct-commit `c18b779`): 30 files staged + tracked. All confirmed legitimate dev-flow artifacts with proper frontmatter + `status: current`; none warranted .gitignore or delete. Repo root (6 files) — AI_WORKFLOW_BLUEPRINT.md / AUDIT.md / AUDIT_PASS2.md / BASELINE_ASPECT.md / READINESS.md / STRATEGY_REVIEW.md. docs/blueprint/ (21 files + VERSION) — CRITICAL fix: plugin install via bin/dev-flow-init.js copyScaffold now ships complete. docs/context/ (3 files) — research/ADAPTATION_NOTES.md + research/CC_SPEC.md + workflow/DESIGN_PHILOSOPHY.md. **Sprint 051b unblocked.**
 - [x] **TASK-127** — Optimal usage workflow vision (closed Sprint 051b `2266b9d`): docs/blueprint/12-session-workflow.md primer (163/200 cap) · README.md Daily Pattern expansion · CLAUDE.md template Session Workflow block (3-step `/prime → /lean-doc-generator → /orchestrator`).
 - [ ] **TASK-128** — Token usage optimization audit (pre-v1-ship quality gate). Origin: user session 2026-05-08 — "we must track again the token usage optimization after all task don." Audit all skill/agent/CLAUDE.md/CONTEXT.md token footprints; identify bloat candidates; ensure caps still discipline post-feature growth. Generates audit report + targeted trim recommendations. Run AFTER all v1 prereqs land (Sprint 055), BEFORE v1 ship (Sprint 056). Estimated S, layers `governance, scripts, docs`. → Sprint 055b.
