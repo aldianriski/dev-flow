@@ -130,6 +130,14 @@ status: current
 4. **Fill** § Retro:
    - Worked: what went well
    - Friction: what was slow / wrong assumption / missing context
+   - **For each Friction item, prompt** (TASK-123 F5(B)):
+     ```
+     TD row for: [friction one-liner]? (Y / N / already-resolved)
+     ```
+     - `Y` → write TD-NNN row in `TODO.md § Tech Debt` (severity user-supplied + source: `Sprint-NNN retro Friction #N` + status: `open` + sprint-created: NNN)
+     - `N` → one-off observation; no row
+     - `already-resolved` → no row; note in retro text
+     - **Anti-rule:** do NOT auto-promote ALL friction. One-off pattern observations don't warrant a row.
    - Pattern candidate: rule worth keeping permanently — surface to user, ask confirm, on yes → add to `reference/VALIDATED_PATTERNS.md` with session date
 5. **Flip** sprint file `status: closed`. Update `last_updated: <today>`.
 6. **Write** pointer row in CHANGELOG.md (prepend, newest first):
