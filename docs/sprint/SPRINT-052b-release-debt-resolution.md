@@ -92,6 +92,8 @@ status: PASS
 | `.claude-plugin/plugin.json` | T1 | 2.5.0 → 2.6.0 (MINOR — consolidates 1 MINOR-class Sprint 049 + 9 PATCH chain) | medium |
 | `.claude-plugin/marketplace.json` | T1 | 2.5.0 → 2.6.0 lockstep (ADR-006) | medium |
 | `docs/CHANGELOG.md` | T1 | Prepend Sprint 052b consolidated MINOR block w/ class-grouped reconcile + 049-054b cross-link | low |
+| `skills/release-manager/SKILL.md` | T2 | last-validated 2026-04-21 → 2026-05-09 + 1-line Paired counterpart cite (closes 053b T2 #1+#2+#4+#5; cap 71/80 headroom) | low |
+| `skills/release-patch/SKILL.md` | T2 | line 23 in-place modify — paired counterpart cite + ADR-027 boundary + auto-detect cascade note (closes 053b T2 #1+#3+#5; cap 100/100 held) | low |
 
 ## Decisions
 

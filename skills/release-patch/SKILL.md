@@ -20,7 +20,7 @@ Patch-release orchestrator. Auto-detects project type via manifest cascade. 8 or
 - Single bug-fix landed; reload needed before next session.
 - Hotfix on master.
 
-Do **not** invoke for MINOR (new mode/agent/skill) or MAJOR (gate/contract change) bumps — separate skill or manual procedure.
+Do **not** invoke for MINOR (new mode/agent/skill) or MAJOR (gate/contract change) bumps — paired counterpart `release-manager` (`/release-manager minor|major|--from-sprint`) handles those per ADR-027 boundary; release-patch never handles MINOR even with auto-detect cascade.
 
 ## Mode detection cascade
 

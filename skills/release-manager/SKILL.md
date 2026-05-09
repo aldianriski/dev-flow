@@ -4,7 +4,7 @@ description: Use when managing semantic versioning, generating changelogs from g
 user-invocable: true
 context: fork
 version: "1.0.0"
-last-validated: "2026-04-21"
+last-validated: "2026-05-09"
 type: rigid
 ---
 
@@ -21,6 +21,8 @@ Produce semantic-versioned releases with CHANGELOG entries and formatted release
 | Bug fix / patch | PATCH | Fix incorrect behavior, update dependency |
 
 Pre-release suffixes: `-alpha.N`, `-beta.N`, `-rc.N`
+
+> **Paired counterpart:** PATCH releases via `release-patch` (auto-detects manifest cascade · plugin lockstep · hard-stop push gate). Per ADR-027 boundary + ADR-006 lockstep, this skill owns MINOR/MAJOR — `--from-sprint` flag detects bump-class from Active Sprint task-types (MINOR/MAJOR only); never overlaps `release-patch` PATCH cascade.
 
 ## Invocation
 
