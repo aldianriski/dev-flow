@@ -1,0 +1,6 @@
+I need to add a JSON schema validator for our config files. It should:
+- Reject malformed input
+- Return a structured error with the failing path
+- Handle nested objects up to 5 levels deep
+
+Can you implement this with proper test coverage?

@@ -13,3 +13,7 @@ package-lock.json
 # OS
 .DS_Store
 Thumbs.db
+
+# Acceptance harness logs (per-run stream-json artifacts)
+tests/skill-triggering/logs/*
+!tests/skill-triggering/logs/.gitkeep
