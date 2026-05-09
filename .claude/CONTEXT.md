@@ -123,6 +123,23 @@ Plugin-wide principle for protocol-output style. Applies to all 16 skills + 7 ag
 
 ---
 
+## History Hygiene
+
+Plugin-wide principle for doc-history pruning. Applies to TODO.md + sprint files + CHANGELOG + Roadmap. Anchor: ADR-034. **User-Project Outcome:** O2 doc-rot prevention + O8 plugin reliability (`docs/USER-OUTCOMES.md`).
+
+**Per-surface rules:**
+- **TODO.md Active Sprint ribbon:** ≤3 most-recent closed-sprint narrative pointers; older → archive narrative to CHANGELOG row.
+- **TODO.md closed task rows (P0/P1):** verbose AC summaries collapse to 1-line pointer (`closed Sprint NNN <sha> — <one-line summary>`) after 1-sprint cooldown.
+- **Sprint files retro:** Worked / Friction / Pattern sub-sections capped at ≤6 bullets each; older surprise-log entries archive at close.
+- **CHANGELOG.md:** per-sprint row cap ~12 lines headline + 6 bullets max; deeper detail lives in sprint file.
+- **Roadmap (TODO.md):** done-cluster blocks (≥5 consecutive done sprints in same EPIC/theme) collapse to 1-line summary pointing to CHANGELOG range.
+
+**Apply when:** at Sprint Close (lean-doc Sprint Close protocol) AND at Sprint Promote (lean-doc Step 1.5c hygiene sweep — pre-plan-write eligibility check).
+
+**Why:** Doc-bloat compounds linearly per sprint; new-session render cost grows; v1 ship inherits bloat baseline. Codified plugin-wide to prevent per-skill drift; mirrors Output Discipline (ADR-033) plugin-principle pattern (single canonical CONTEXT.md source + pointer-line propagation).
+
+---
+
 ## Behavioral Guidelines Lineage
 
 Lineage + adaptation notes live at [`.claude/references/behavioral-guidelines-lineage.md`](references/behavioral-guidelines-lineage.md). Re-diff cadence + SHA pin contract unchanged (ADR-019).
