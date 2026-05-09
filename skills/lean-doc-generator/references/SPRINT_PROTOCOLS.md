@@ -45,6 +45,13 @@ status: current
 
 1. **Read** TODO.md § Backlog. Confirm `Active Sprint` pointer = `— none —`. If pointing to file with `status: active` → block with: "Sprint NNN still active. Close it before promoting next."
 
+1.2. **Backlog check** (TASK-124 F6b · ADR-030 DEC-5). Scan `TODO.md § Backlog` for open `[ ]` rows across `P0 / P1 / P2`. If zero open rows found → prompt:
+
+   > "Backlog has no open tasks (P0/P1/P2 all empty). Run `/task-decomposer` first to surface tasks, then return to Sprint Promote. Continue anyway? Default: halt (n). (y/n)"
+
+   - `n` (default) → **halt** Sprint Promote; remind user to invoke `/task-decomposer` with their intent.
+   - `y` → proceed (user may be promoting a P3-only item or manually inserted task; soft guard preserves edge cases).
+
 1.5. **TD Scan** (TASK-123 F5(D)). Read `TODO.md § Tech Debt`. For each open TD row:
    - **`severity: high`** → auto-escalate to Backlog P1 (no human review). Write Backlog row `TASK-NNN` from TD-NNN AC. Mark TD row `status: escalated`. Note: TD row stays in § Tech Debt (audit trail per anti-pattern lock #1) — escalation does NOT delete.
    - **Aging `>6` sprints** (current sprint - sprint-created): prompt user `"TD-NNN is [N] sprints old (severity: X). Escalate / Downgrade / Mark resolved?"`. Apply user choice.
