@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-09 (Sprint 052 closed — TASK-123 F4 + F5 shipped; orphan skills wired + tech-debt rollover loop)
+last_updated: 2026-05-09 (Sprint 053 closed — TASK-124 F6a/F6b + ADR-030 template canonical ownership)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -17,6 +17,17 @@ status: current
 > - `PATCH` — clarification / prompt rewording / fix
 
 ---
+
+## Sprint 053 — F6 task-decomposer ↔ lean-doc-generator Collaboration Audit + Template-Loader Integration (2026-05-09)
+
+- Sprint file: [docs/sprint/SPRINT-053-task-decomposer-lean-doc-collaboration-audit.md](sprint/SPRINT-053-task-decomposer-lean-doc-collaboration-audit.md)
+- Plan/T0.5 `986a3b3` · T1 `8831ef3` · T2 `335447a` · T3 `370bb9a` · T4 `bafc73b` · T5 `a5f83f8` · close (TBD SHA)
+- Summary: TASK-124 fully delivered. **T0.5 ADR-030 template canonical ownership** — lean-doc owns templates as canonical format; task-decomposer + orchestrator init CONSUME via Read-before-write at gen time; inline format examples non-authoritative; template wins on divergence; missing template degrades gracefully. **F6a (T3 + T4)** — lean-doc Step 6 reference-delegation form + DOCS_Guide.md §2 3-step Template-load protocol (read · missing fallback · divergence resolution). task-decomposer procedure.md Step 6 mirrors contract. Behavioral for type:rigid skills. Caps held: lean-doc SKILL.md 94/100 unchanged · task-decomposer SKILL.md 71/100 unchanged. **F6b (T2)** — SPRINT_PROTOCOLS.md Sprint Promote Step 1.2 backflow: Backlog-empty → soft prompt redirects to /task-decomposer (default halt). Coordination loop closed (task-decomposer→lean-doc existing; lean-doc→task-decomposer new). **T1** — decomposition-spec.md TASK row inline format (12 lines) replaced w/ template-pointer + 8-field summary. **T5 validation** — 2 drift findings: Finding #1 fixed inline (TODO.md.template TASK row 6→8 fields — direct T4 dependency); Finding #2 deferred to TASK-125 (DECISIONS.md.template ADR format 5 vs spec 6-7 fields).
+- ADRs: ADR-030 (template canonical ownership) · 5 decisions + 5 alternatives + cross-links to ADR-029 + Sprint 051b + Sprint 052 T7 + TASK-116-v2 + TASK-125.
+- Behavioral enforcement only this sprint (type:rigid skill contract). **Automated lint deferred to TASK-116-v2** Sprint 054 acceptance harness.
+- Skill version bumps: lean-doc-generator 2.1.0→2.2.0 · task-decomposer 1.0.0→1.1.0 (MINOR per new behavioral contracts: new hard stop = template-load gate).
+- Carry-forward: Finding #2 (DECISIONS.md.template) → TASK-125 Sprint 053b · automated divergence lint → TASK-116-v2 Sprint 054.
+- release-debt: depth grew to 6 sprints (Sprint 049 MINOR + 050/051a/051b/052/053 PATCH chain). Sprint 052b release-debt resolution increasingly urgent.
 
 ## Sprint 052 — F4 Wire Orphan Skills + F5 Tech-Debt Rollover Loop (2026-05-09)
 

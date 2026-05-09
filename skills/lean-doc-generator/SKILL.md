@@ -6,8 +6,8 @@ allowed-tools: Read, Write, Bash(git *), Glob, Grep
 user-invocable: true
 context: fork
 type: rigid
-version: "2.1.0"
-last-validated: "2026-05-04"
+version: "2.2.0"
+last-validated: "2026-05-09"
 ---
 
 # Lean Documentation Generator

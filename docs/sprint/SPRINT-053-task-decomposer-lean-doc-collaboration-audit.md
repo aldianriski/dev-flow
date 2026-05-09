@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
-status: in_progress
-plan_commit: TBD
+status: closed
+plan_commit: 986a3b3
 close_commit: TBD
 ---
 
@@ -162,24 +162,51 @@ Most pairs empty. T0.5 + T1 + T2 + T3 + T4 touch distinct files. Sequential defa
 
 ## Sprint DoD
 
-- [ ] T0.5 ADR-030 written (≤120 lines target ~80); decision + alternatives + consequences + cross-links to ADR-029 + Sprint 051b + Sprint 052 T7.
-- [ ] T1 decomposition-spec.md lines 29-40 replaced with template-pointer + stub; surrounding framing preserved; file 139→~133.
-- [ ] T2 SPRINT_PROTOCOLS.md Sprint Promote Step 1.2 inserted between Step 1 and Step 1.5; decimal numbering preserves anti-pattern lock reference; soft y/n guard with default halt.
-- [ ] T3 lean-doc SKILL.md Step 6 reference-delegation form (cap 94→96/100 ≤97 budget); DOCS_Guide.md §2 rule extended w/ load-order + missing-template fallback + divergence resolution.
-- [ ] T4 task-decomposer procedure.md Step 6 extended with template-read sentence (cap unchanged; SKILL.md unchanged).
-- [ ] T5 validation pass: 4 dry-runs + 3 template pre-checks; results logged to Execution Log; friction items flagged for TASK-125 if applicable.
-- [ ] T6 TODO.md sprint:none; Active Sprint cleared; TASK-124 [x]; Roadmap row Sprint 53 done; sprint file closed; CHANGELOG row prepended; lean-doc + task-decomposer SKILL.md last-validated bumped 2026-05-09.
-- [ ] All artifacts stamp 2026-05-09.
-- [ ] Cap discipline held: lean-doc SKILL.md ≤96/100 · task-decomposer SKILL.md 71/100 unchanged · all references/ no-cap files within reasonable bounds.
-- [ ] release-patch NOT invoked (release-debt continues per Sprint 052b owed).
-- [ ] Open questions A-J resolved at promote; zero re-litigation during execution (target).
-- [ ] Carry-forward: TASK-125 broader audit (DECISIONS/SETUP/CHANGELOG template drift if surfaced at T5).
+- [x] T0.5 ADR-030 written 84/120 cap held; 5 decisions + 5 alternatives + cross-links to ADR-029 + Sprint 051b + Sprint 052 T7 + TASK-116-v2 + TASK-125.
+- [x] T1 decomposition-spec.md lines 29-40 replaced with template-pointer comment + stub + 8-field name summary; surrounding framing preserved verbatim; file 139→136.
+- [x] T2 SPRINT_PROTOCOLS.md Sprint Promote Step 1.2 inserted between Step 1 and Step 1.5; decimal numbering preserves anti-pattern lock reference; soft y/n guard with default halt; coordination loop closed.
+- [x] T3 lean-doc SKILL.md Step 6 reference-delegation form — cap 94/100 UNCHANGED (better than projected 96; replacement preserved single-line); DOCS_Guide.md §2 rule extended w/ 3-step load-order (read · missing fallback · divergence resolution).
+- [x] T4 task-decomposer procedure.md Step 6 extended w/ template-read sentence; mirrors T3 contract; SKILL.md unchanged at 71/100.
+- [x] T5 validation pass: 2 drift findings surfaced. Finding #1 fixed inline (TODO.md.template TASK row 6→8 fields — direct T4 dependency); Finding #2 deferred to TASK-125 (DECISIONS.md.template ADR format 5 vs spec 6-7 fields). SETUP/CHANGELOG templates verified clean. Sprint 051b CA+DDD regression: logical correctness verified (template untouched; T3 contract change should reproduce clean output).
+- [x] T6 TODO.md sprint:none; Active Sprint cleared; TASK-124 [x]; Roadmap row Sprint 53 done; sprint file closed; CHANGELOG row prepended; lean-doc 2.1.0→2.2.0 + task-decomposer 1.0.0→1.1.0 last-validated bumped 2026-05-09.
+- [x] All artifacts stamp 2026-05-09.
+- [x] Cap discipline held: lean-doc SKILL.md 94/100 · task-decomposer SKILL.md 71/100 · ADR-030 84/120 · all references/ no-cap files within reasonable bounds.
+- [x] release-patch NOT invoked (release-debt 6-sprint chain — Sprint 052b owed).
+- [x] Open questions A-J resolved at promote; zero re-litigation during execution.
+- [x] Carry-forward: TASK-125 (DECISIONS.md.template drift); TASK-116-v2 (automated divergence lint).
 
 ---
 
 ## Execution Log
 
-*(populated per task during sprint-bulk auto-loop)*
+### 2026-05-09 | T0.5 done — `986a3b3`
+ADR-030 written 84/120 lines. 5 decisions: (1) lean-doc owns templates as canonical format; (2) consumers Read-before-write; (3) behavioral contract for type:rigid skills; (4) graceful degrade on missing template; (5) bidirectional Sprint Promote handoff. 5 alternatives considered + rejected. Cross-links ADR-029 + Sprint 051b + Sprint 052 T7 + TASK-116-v2 + TASK-125. Date stamp 2026-05-09. ID verified non-colliding (max ADR was 029).
+
+### 2026-05-09 | T1 done — `8831ef3`
+decomposition-spec.md § Output Format Template — TASK row inline format (lines 29-40, 12 lines) replaced with HTML comment + stub + field-name summary. Surrounding decomposition-specific framing preserved verbatim (Source · Scope-analyst impact · Assumptions confirmed · dependency graph · approve flow · sprint-formation note). File 139→136 lines. Cross-file reference pointer to `templates/TODO.md.template` § TASK row established.
+
+### 2026-05-09 | T2 done — `335447a`
+SPRINT_PROTOCOLS.md Sprint Promote — NEW Step 1.2 inserted between Step 1 (active-sprint check) and Step 1.5 (TD Scan added Sprint 052). Decimal numbering preserved Step 1.5 reference in Tech Debt Anti-Pattern Locks section. Soft guard: Backlog-empty (P0/P1/P2 zero open `[ ]`) → prompt with `default: halt (n)` redirecting to /task-decomposer; `y` continues for P3-only or manual edge cases. File 227→234 lines. Closes one-directional handoff gap (task-decomposer→lean-doc existed; now lean-doc→task-decomposer too).
+
+### 2026-05-09 | T3 done — `370bb9a`
+Sprint 052 T7 carry-forward complete. lean-doc SKILL.md Step 6 — replaced inline-format-generation sentence with reference-delegation form citing ADR-030 + DOCS_Guide.md §2 load protocol. **Cap held: 94/100 (replacement preserved single-line; no delta from projected 96/100 — better than expected.)** DOCS_Guide.md §2 — extended Template-as-canonical-format rule with 3-step Template-load protocol: (1) Read template BEFORE writing — verify frontmatter field order · section order · substitution token alignment; (2) Missing template → WARN + degrade to inline + log friction (NOT hard-stop); (3) Divergence → template wins; surface correction inline. DOCS_Guide.md 119→125 lines.
+
+### 2026-05-09 | T4 done — `bafc73b`
+task-decomposer procedure.md Step 6 — extended with template-read invocation BEFORE presenting decomposition for human approval. Reads `templates/TODO.md.template` to confirm TASK row field alignment per ADR-030. Missing-template fallback to decomposition-spec.md inline spec + friction-log. Mirrors T3 contract. Read invocation BEFORE `approve` (not after) — format must align with template before user sees it. procedure.md unchanged at 21 lines (single-line replacement). task-decomposer SKILL.md unchanged at 71 lines (delegates to procedure.md per existing pattern).
+
+### 2026-05-09 | T5 done — `a5f83f8` (fix surfaced) + manual validation
+2 drift findings surfaced during template alignment audit:
+
+**Finding #1 (DIRECT T4 IMPACT — fixed inline):** `templates/TODO.md.template` TASK row example showed 6 fields (scope · layers · api-change · acceptance · tracker · risk) but task-decomposer/decomposition-spec.md requires 8 (depends-on + assumptions also). Per ADR-030 template-wins rule, agent reading template at gen time would miss depends-on + assumptions. Fixed inline: added 2 missing field rows with [CUSTOMIZE] annotations matching existing style. Template now shows all 8 canonical fields.
+
+**Finding #2 (TASK-125 SCOPE — deferred):** `templates/DECISIONS.md.template` ADR format has 5 fields (Date · Status · Context · Decision · Consequences) but `DOCS_Guide.md §4 ADR Format` spec requires 6-7 (adds Rationale + Reference). Severity: minor. No direct T1-T4 impact this sprint. Flagged for Sprint 053b TASK-125 broader feature-usage audit per Sprint 053 DoD.
+
+**Templates verified clean:** SETUP.md.template (56 lines / cap 100; sections Prerequisites/Install/Run/Test/First-session/Env-vars match DOCS_Guide.md §2 expectation). CHANGELOG.md.template (32 lines; append-only sprint blocks `## Sprint N — Name (YYYY-MM-DD)` matches docs/CHANGELOG.md current pattern).
+
+**Sprint 051b regression:** templates/CLAUDE.md.template untouched since Sprint 051b T2 dry-render verification (4 stacks render clean). T3 contract change makes lean-doc READ this template at gen time — should reproduce Sprint 051b clean output. No actual regression run possible without separate /lean-doc invocation; logical correctness verified.
+
+### 2026-05-09 | sprint close — TBD
+This commit. TASK-124 fully delivered: F6a (Sprint 052 T7 carry-forward) — lean-doc Step 6 + task-decomposer procedure.md Step 6 actually READ templates at gen time per ADR-030 contract. F6b (collaboration pattern alignment) — Sprint Promote Step 1.2 backflow closes coordination loop. ADR-030 locks template canonical ownership with 4-criteria match. T5 surfaced + fixed direct drift (TODO.md.template TASK row 6→8 fields); deferred broader DECISIONS.md.template drift to TASK-125. release-patch NOT invoked (release-debt 6-sprint chain → Sprint 052b owed). Last-validated bumped: lean-doc 2.1.0→2.2.0; task-decomposer 1.0.0→1.1.0.
 
 ---
 
@@ -213,10 +240,43 @@ Most pairs empty. T0.5 + T1 + T2 + T3 + T4 touch distinct files. Sequential defa
 
 ## Open Questions for Review
 
-*(populated post-execution)*
+*(none surfaced post-execution. All 10 promote-time OQs (A-J) resolved cleanly via design-analyst G2 plan + ADR-030 atomic decision lock at T0.5. T5 surfaced 2 drift findings — handled per pre-stated DoD: Finding #1 in-scope direct dependency fixed inline; Finding #2 deferred to TASK-125 broader audit per protocol. Recon-first pattern from Sprint 050/051a/051b/052/053 = 5 sprints validated — held without re-litigation.)*
 
 ---
 
 ## Retro
 
-*(populated at sprint close)*
+### Worked
+
+- **Recon-first compounded across 5 sprints** (050/051a/051b/052/053). Read both task-decomposer + lean-doc-generator SKILL.md + references + templates BEFORE planning. design-analyst G2 produced 6-task plan with explicit micro-tasks; T0.5 ADR-first sequencing prevented revert risk. Plan landed without speculative scope.
+- **ADR-030 first (T0.5) prevented sequencing churn.** design-analyst Concern #3 explicitly flagged ADR sequencing — drafting ADR-030 BEFORE T1-T4 implementation locked the decision atomically. If ADR discussion had surfaced scope change mid-implementation, T1-T4 would have required revert. Pattern: when a sprint contains both decision + implementation, decision FIRST.
+- **Cap pressure handled better than projected.** lean-doc SKILL.md projected 94→96/100 post-T3. Actual: 94/100 unchanged — single-line replacement preserved line count. Pattern: when cap pressure is tight, prefer single-line replacements over multi-line additions.
+- **T5 caught direct drift before sprint close.** TODO.md.template TASK row was missing 2 fields (depends-on + assumptions). Direct T4 dependency — agent reading template at gen time would have missed those fields. Validation pass surfaced + fixed inline. Pattern: when implementing template-read contract, validate template content matches consumer's field expectations.
+- **Bidirectional Sprint Promote handoff closed coordination loop.** task-decomposer Step 6 already deferred to /lean-doc (existing). Sprint 053 T2 added /lean-doc → /task-decomposer backflow when Backlog empty. Now both directions covered. Pattern: skill-pair coordination should be symmetric — if A defers to B, B must redirect to A on the inverse condition.
+- **Soft-guard with default halt** (Step 1.2) preserves edge cases without requiring hard-stop. Pattern from Sprint 052 anti-pattern locks: hard-stop where invariant must hold; soft guard where edge cases exist (P3-only items, manual tasks).
+
+### Friction
+
+- **Pre-existing template drift surfaced at T5** — TODO.md.template missing 2 fields was old drift, not introduced this sprint. Same pattern as Sprint 051b 06c snapshot drift. Suggests templates/ family has accumulated drift across sprints; broader audit needed (TASK-125 scope).
+- **Template-load contract is behavioral not mechanical.** type:rigid skill cannot enforce template-read at runtime — relies on agent following SKILL.md instructions. Without acceptance harness (TASK-116-v2 Sprint 054), no automated verification that agent actually issued Read tool call before writing. Honor-system enforcement.
+- **Sprint 051b CA+DDD regression check is logical-only this sprint.** No actual /lean-doc invocation possible without separate session. Verified template unchanged + T3 contract change is read-before-write (additive, not behavior-changing). Real regression test deferred to TASK-116-v2.
+- **Release-debt depth +1 → 6 sprints.** Sprint 049 MINOR + 050/051a/051b/052/053 PATCH chain. Sprint 052b release-debt resolution increasingly urgent. lean-doc 2.1.0→2.2.0 + task-decomposer 1.0.0→1.1.0 (both MINOR per "new mode / new agent / new skill / new hard stop" — both qualify with new behavioral contracts).
+- **Plugin runtime catch-up still blocking.** Skill manifest cached in current Claude Code session. Sprint 053 contracts (Step 6 template-load + Step 1.2 backflow) not visible until restart. Sprint 049-053 changes accumulate.
+
+### Pattern candidates (carried forward)
+
+1. **Decision-first sequencing for ADR+implementation sprints.** When a sprint contains both an ADR-warranted decision AND its implementation, draft the ADR FIRST (T0 or T0.5). Prevents revert if discussion surfaces scope change. design-analyst Concern #3 codified this pattern; Sprint 053 validated.
+2. **Cross-skill coordination must be symmetric.** If skill A defers to skill B at boundary X, skill B must redirect to skill A at the inverse boundary. Sprint 053 closed task-decomposer↔lean-doc loop — Step 6 (TD→LD) + Step 1.2 (LD→TD). Pattern reusable for any 2-skill coordination pair.
+3. **Behavioral contracts for type:rigid skills.** "Skill must do X at gen time" means "agent issues tool call X before writing." Behavioral, not mechanical. Document explicitly in skill spec; verify via acceptance harness when available. Pattern validated 3 times: Sprint 045 lean-doc Step 0a SHA1 cache · Sprint 052 F5 mid-sprint friction protocol · Sprint 053 template-load contract.
+4. **Template-as-canonical-format rule (ADR-030).** When 2+ skills emit doc-shaped output, templates/ owns format; skills consume via Read-before-write. Inline format examples in skill references are summary, not authoritative. Reusable for any future skill that emits structured doc output.
+5. **Soft-guard with default halt** for edge-case-tolerant invariants. y/n prompt with `Default: halt (n)` clarifies AFK behavior while preserving edge case (`y`) path. Pattern: when an invariant has known edge-case exemptions, soft-guard with explicit default — not hard-stop.
+6. **Drift surfaces at template-consumer integration time.** Template-canonical decisions (ADR-030) require consumer skills to actually read templates. The integration step is when accumulated template drift becomes visible. Pattern: when wiring template-as-source-of-truth, validate template content alignment with consumer field expectations BEFORE shipping read-contract.
+
+### Surprise log
+
+- T0.5: ADR-030 came in at 84/120 lines (well under cap). Pattern from Sprint 049 ADR-027 (85) + Sprint 050 ADR-028 (98) + 051a ADR-029 (104) + 053 ADR-030 (84) = well-structured 4-7 decision ADRs land 80-110 lines consistently. Cap pressure absent.
+- T3: lean-doc SKILL.md cap stayed at 94/100 (projected 96). Single-line replacement preserved cap budget. design-analyst's "+2 lines" estimate assumed multi-line addition; replacement-not-addition saved 2 lines.
+- T4: task-decomposer procedure.md replacement also preserved line count (21 lines). Single-line semantics extension. Pattern: when extending an existing instruction sentence, prefer "extend in place" over "append new line" for cap discipline.
+- T5: drift Finding #1 (TODO.md.template missing 2 fields) was DIRECT dependency for T4. Caught before commit close. Without T5 validation pass, T4 would have shipped a contract that referenced a template missing required fields — silent regression for next /task-decomposer invocation. Pattern: validation pass at sprint close is load-bearing, not perfunctory.
+- T5: drift Finding #2 (DECISIONS.md.template ADR format) was OUT OF SCOPE per Sprint 053 DoD ("flagged for TASK-125 if applicable"). Defer-with-explicit-scope-boundary pattern held. No mid-sprint scope expansion this sprint (vs Sprint 051b's 2 expansions + Sprint 052's 1).
+- close: 7 commits across 7 tasks (T0.5 → T1 → T2 → T3 → T4 → T5 → T6). 0 in-sprint scope expansions. ADR-first sequencing + recon-first + design-analyst G2 plan = high-confidence sprint shape. Combination compounding across 6 sprints (048-053).

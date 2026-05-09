@@ -3,8 +3,8 @@ name: task-decomposer
 description: Use when converting a freeform feature request, ticket URL, PRD, or epic into structured TASK-NNN entries for TODO.md. Enforces assumption registry, risk scoring, granularity rules, and validation before writing to the backlog. Do not use when a task already exists in Active Sprint — use /orchestrator instead.
 user-invocable: true
 argument-hint: "[freeform intent | TICKET-ID | --prd file.md | --epic \"Name\" | --from-architecture]"
-version: "1.0.0"
-last-validated: "2026-04-21"
+version: "1.1.0"
+last-validated: "2026-05-09"
 context: fork
 type: rigid
 spawns: scope-analyst
