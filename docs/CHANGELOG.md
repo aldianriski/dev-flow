@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-09 (Sprint 054 closed — TASK-130 anti-slip discipline at G1 + phase guards + ADR-031)
+last_updated: 2026-05-09 (Sprint 054b closed — TASK-131 orchestrator doc-wire cleanup)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -17,6 +17,16 @@ status: current
 > - `PATCH` — clarification / prompt rewording / fix
 
 ---
+
+## Sprint 054b — Orchestrator Doc-Wire Cleanup (TASK-131) (2026-05-09)
+
+- Sprint file: [docs/sprint/SPRINT-054b-orchestrator-doc-wire-cleanup.md](sprint/SPRINT-054b-orchestrator-doc-wire-cleanup.md)
+- Plan/T1+T2 `511959b` · T3 `c054d3f` · close (TBD SHA)
+- Summary: TASK-131 closed (Sprint 054 carry-forward; doc-coherence). **T1+T2** — orchestrator/SKILL.md init Phase Step 2 + Mode Dispatch Path B note both extended w/ ADR-030 + Sprint 053 T4 procedure.md Step 6 citations. In-place single-line edits; cap held 97/100 (≤97 budget exact). **T3** — skill-dispatch.md Always-On table tightened: 3 vague rows (tdd · lean-doc-generator · adr-writer) made explicit w/ "fires when X" concrete conditions; NEW Invocation column distinguishes 4 patterns (auto-fires · proposed→human y/n · user-invoked · agent-output-triggered); refactor task-type added to mutual-exclusivity note. All 6 orphans (prime · zoom-out · diagnose · tdd · refactor-advisor · release-manager) now have explicit trigger + invocation pattern.
+- ADRs: none (doc-coherence sprint; no behavioral contract change).
+- No skill version bumps (orchestrator stays 2.1.0 — no new mode/agent/skill/hard stop).
+- Carry-forward: same as Sprint 054 — TASK-125 Sprint 053b · Sprint 052b release-debt · TASK-116-v2 Sprint 055.
+- Final sprint of session 2026-05-09. 5 sprints closed (051b · 052 · 053 · 054 · 054b) + 4 ADRs added (027 was prior; 028-031 this lineage). Plugin manifest reload required next session for Sprint 049-054b accumulated behavioral contracts to take effect.
 
 ## Sprint 054 — Anti-Slip Discipline at G1 + Phase Guards (TASK-130) (2026-05-09)
 

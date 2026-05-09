@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
-status: in_progress
-plan_commit: TBD
+status: closed
+plan_commit: 511959b
 close_commit: TBD
 ---
 
@@ -51,7 +51,14 @@ status: PASS
 
 ## Execution Log
 
-*(populated per task)*
+### 2026-05-09 | T1+T2 done — `511959b`
+T1 — orchestrator/SKILL.md init Phase Step 2: applySubstitutions citation extended w/ ADR-030 template canonical ownership reference. T2 — Mode Dispatch freeform Path B: task-decomposer note extended w/ ADR-030 + Sprint 053 T4 procedure.md Step 6 template-read contract citation. Both edits in-place single-line; cap held 97/100 (≤97 budget exact; 3-line margin preserved). Closes doc-coherence gap: ADR-030 contracts implemented Sprint 053 but orchestrator init + Path B didn't cite canonical-template chain. Now visible to readers tracing init/freeform flows back to template canonical source.
+
+### 2026-05-09 | T3 done — `c054d3f`
+skill-dispatch.md Always-On table — 3 vague rows tightened (tdd · lean-doc-generator · adr-writer); NEW Invocation column distinguishes 4 patterns (auto-fires · proposed→human y/n · user-invoked · agent-output-triggered). Refactor task-type added to mutual-exclusivity note. All 6 orphans (prime · zoom-out · diagnose · tdd · refactor-advisor · release-manager) now have explicit "fires when X" trigger + invocation pattern. Closes "advisories listed but invocation language implicit" gap surfaced at Sprint 054 retro.
+
+### 2026-05-09 | sprint close — TBD
+This commit. TASK-131 fully delivered: ADR-030 init phase citation (T1) + Path B task-decomposer citation (T2) + Orphan skill explicit invocation language with NEW Invocation column (T3). Doc-coherence sprint; no behavioral contract change; no ADR. orchestrator SKILL.md cap held 97/100. Sprint 054 carry-forward closed; coordination-loop documentation surfaces now wire-complete.
 
 ## Files Changed
 
@@ -64,4 +71,22 @@ status: PASS
 
 ## Retro
 
-*(populated at close)*
+### Worked
+- **ADR-first sequencing N/A this sprint** — doc-only sprint; no new behavioral contract; no ADR needed. Pattern from Sprint 053+054 (ADR-first for ADR+impl sprints) doesn't apply here.
+- **Cap-aware in-place single-line edits.** T1+T2 added text to existing lines without growing line count. orchestrator SKILL.md cap held 97/100 (≤97 budget exact). Pattern: when adding citations to existing single-line statements, extend in place rather than appending new lines.
+- **NEW Invocation column closes coherence gap.** T3's distinction between auto-fires / proposed→human y/n / user-invoked / agent-output-triggered patterns codifies what was implicit. Reusable for any future skill-dispatch table extension.
+- **Recon-first pattern compounded 7 sprints.** Read existing skill-dispatch.md before editing T3 — surfaced 3 vague rows + missing invocation-pattern column. Plan landed without speculative scope.
+
+### Friction
+- **Plugin runtime catch-up still blocking.** TASK-131 changes invisible to current Claude Code session until manifest reload. Same friction as Sprint 049-054. Tooling sprint Sprint 052b release-debt resolution remains owed.
+- **No automated verification.** TASK-131 doc-only changes; no tests. Behavioral correctness relies on agents reading updated skill-dispatch.md + SKILL.md at next invocation. TASK-116-v2 acceptance harness Sprint 055 will lint divergence eventually.
+- **Final session sprint per user request.** Session at 48% context budget post-Sprint-054; user requested close after TASK-131. Pattern: cap-aware sprint sizing per session — doc-only sprints fit within 50%+ remaining budget without restart.
+
+### Pattern candidates (carried forward)
+1. **In-place single-line edits for cap-pressure surfaces.** When SKILL.md near cap, extend existing single-line statements with citations rather than appending new lines. Sprint 054 T1 + Sprint 054b T1+T2 validated 3 times now. Codify in authoring rule.
+2. **Invocation pattern column for skill-dispatch tables.** 4 patterns: auto-fires · proposed→human y/n · user-invoked · agent-output-triggered. Reusable structural element. Distinguishes orchestration rules from advisory listings.
+3. **Doc-coherence carry-forward sprints valid pattern.** Sprint 054 deferred TASK-131 to focus on anti-slip user pain; Sprint 054b closes the doc-wire deficit. Pattern: when sprint scope tight, defer doc-coherence to suffix sprint (054 → 054b).
+
+### Surprise log
+- T3: skill-dispatch.md NEW Invocation column was DESIGN-BY-TYPING — not in original sprint plan. Surfaced when auditing rows for "fires when X" explicit language; realized invocation pattern was inconsistent across rows. Pattern: doc-coherence audit surfaces structural gaps that aren't visible until you START tightening row-by-row.
+- close: 3 commits across 4 tasks (T1+T2 single commit; T3 single commit; T4 close). Tightest sprint of session. Doc-only + cap-aware = high-confidence quick close.

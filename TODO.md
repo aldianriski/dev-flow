@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: 054b
+sprint: none
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,14 +35,13 @@ sprint: 054b
 
 ## Active Sprint
 
-→ **Sprint 054b — Orchestrator Doc-Wire Cleanup (TASK-131)** (`docs/sprint/SPRINT-054b-orchestrator-doc-wire-cleanup.md`)
+→ — none —
 
-- [ ] **T1** — ADR-030 init phase citation (orchestrator SKILL.md init Step 2 + phases.md init Phase). Layers `skills, docs`. Risk low.
-- [ ] **T2** — Path B task-decomposer citation (orchestrator SKILL.md Mode Dispatch freeform Path B note). Cite ADR-030 + Sprint 053 T4 procedure.md Step 6. Layers `skills, docs`. Risk low.
-- [ ] **T3** — Orphan skill explicit invocation language (skill-dispatch.md Always-On 6 orphan rows). Verify "fires when X" explicit. Layers `skills, docs`. Risk low.
-- [ ] **T4** — Sprint close. Layers `governance, docs`. Risk low.
-
-> Closes TASK-131. Doc-only sprint; no ADR; cap-aware (orchestrator SKILL.md 97/100 ≤97 margin 3-line; T1+T2 must NOT push over). Order T1 → T2 → T3 → T4. Final session sprint per user request.
+> Sprint 054b closed (TBD SHA). TASK-131 fully delivered: ADR-030 init phase citation + Path B task-decomposer citation + Orphan skill explicit invocation language with NEW Invocation column distinguishing 4 patterns (auto-fires · proposed→human y/n · user-invoked · agent-output-triggered). orchestrator SKILL.md cap held 97/100 (in-place single-line edits); skill-dispatch.md tightened 3 vague rows + added column. Doc-coherence sprint complete; no ADR; no behavioral contract change.
+>
+> **Session ending per user request.** 4 sprints closed this session (051b · 052 · 053 · 054 · 054b). Plugin manifest reload required for new behavioral contracts (Sprint 049-054b changes) to take effect in next Claude Code session.
+>
+> Next session priority: Sprint 053b — TASK-125 broader feature-usage audit (after fresh /prime + plugin manifest reload).
 
 > Sprint 054 closed `932d700`. TASK-130 fully delivered: ADR-031 anti-slip discipline at G1 + sprint-bulk Phase 0 Active Sprint guard + Mid-Sprint Friction Protocol explicit triggers (5 AI conditions + 3 human shortcuts) + G1 Scope Checklist 4 new anti-slip fields (focus · context-budget · explicit-gaps · done-confirmation; all required at G1 PASS). Coordination loop NOW BIDIRECTIONAL: Sprint 053 T2 added /lean-doc → /task-decomposer backflow; Sprint 054 T1 added /orchestrator sprint-bulk → /lean-doc Sprint Promote backflow. Anti-slip = pre-task prevention; Sprint 052 F5(C) Mid-Sprint Friction Protocol = mid-execution slip handling. Two layers complete. orchestrator SKILL.md 2.0.0→2.1.0.
 >
@@ -85,7 +84,7 @@ sprint: 054b
 - [x] **TASK-127** — Optimal usage workflow vision (closed Sprint 051b `2266b9d`): docs/blueprint/12-session-workflow.md primer (163/200 cap) · README.md Daily Pattern expansion · CLAUDE.md template Session Workflow block (3-step `/prime → /lean-doc-generator → /orchestrator`).
 - [ ] **TASK-128** — Token usage optimization audit (pre-v1-ship quality gate). Origin: user session 2026-05-08 — "we must track again the token usage optimization after all task don." Audit all skill/agent/CLAUDE.md/CONTEXT.md token footprints; identify bloat candidates; ensure caps still discipline post-feature growth. Generates audit report + targeted trim recommendations. Run AFTER all v1 prereqs land (Sprint 055), BEFORE v1 ship (Sprint 056). Estimated S, layers `governance, scripts, docs`. → Sprint 055b.
 - [x] **TASK-130** — Orchestrator Anti-Slip Discipline at G1 + Phase Guards (closed Sprint 054 `932d700`): ADR-031 + sprint-bulk Phase 0 Active Sprint guard + Mid-Sprint Friction Protocol explicit triggers (5 AI conditions + 3 human shortcuts) + G1 Scope Checklist 4 new anti-slip fields (focus + context-budget + explicit-gaps + done-confirmation; all required at G1 PASS). orchestrator SKILL.md 2.0.0→2.1.0. Coordination loop bidirectional w/ Sprint 053 T2.
-- [ ] **TASK-131** — Orchestrator Doc-Wire Cleanup (Sprint 054b in_progress). ADR-030 init phase citation + Path B task-decomposer citation + Orphan skill explicit invocation language. Estimated S-M, layers `skills, docs`. → Sprint 054b.
+- [x] **TASK-131** — Orchestrator Doc-Wire Cleanup (closed Sprint 054b TBD SHA): ADR-030 init phase + Path B citations · skill-dispatch.md NEW Invocation column (4 patterns: auto-fires · proposed→human y/n · user-invoked · agent-output-triggered) · 3 vague rows tightened (tdd · lean-doc-generator · adr-writer); orchestrator SKILL.md cap held 97/100.
 - [x] **TASK-129** — `/prime` behavior fix (closed direct-commit; single-task fix per Sprint Sizing Rules "never plan a sprint with only 1 task"): Next: line emitted per detection branch (4 branches: active-sprint+open / active-sprint+done / no-sprint+backlog / no-sprint+empty); 3 anti-patterns added (no inline summarize · no re-read unchanged via SHA1 cache · no full sprint-plan read — partial via `limit: 50`); Read order table updated; Step 6 added; output format includes `[cache hit]` + `(partial)` markers. Cap held 86/100. Skill version 1.0.0 → 1.1.0. last-validated bumped 2026-05-08.
 - [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap) + skeleton creation Sprint 051a + lean-doc/task-decomposer alignment Sprint 053. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 054.
 - [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 055.
