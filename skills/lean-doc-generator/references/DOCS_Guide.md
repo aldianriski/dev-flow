@@ -20,7 +20,7 @@
 | File | Reader | Max Lines | Update Trigger |
 |---|---|---|---|
 | `README.md` | Anyone | 50 | Project scope changes |
-| `ARCHITECTURE.md` | Tech lead | 150 | Major structural change |
+| `ARCHITECTURE.md` | Tech lead | 150 | Major structural change — use `docs/blueprint/11-lean-architecture.md` for CA+DDD canonical render (per ADR-029) |
 | `DECISIONS.md` | Team | Unlimited | Every significant decision |
 | `SETUP.md` | New dev / CI | 100 | Setup process changes |
 | `AI_CONTEXT.md` / `CONTEXT.md` | AI assistant | 100 | Patterns or conventions change |

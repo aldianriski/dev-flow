@@ -121,7 +121,7 @@ status: current
    - If gap → block close, list incomplete items.
 2. **Verify** § Files Changed covers every file in current `git diff` since `plan_commit`. If file changed but not logged → prompt user to add row.
 3. **Verify** docs sync. For each row in § Files Changed:
-   - Touched architecture → ARCHITECTURE.md updated this sprint?
+   - Touched architecture → ARCHITECTURE.md updated this sprint? Layer changes → verify against ADR-029 (`docs/blueprint/11-lean-architecture.md`).
    - Added pattern/convention → AI_CONTEXT.md § Patterns / § Conventions updated?
    - Added do-not / anti-pattern → AI_CONTEXT.md § Do Not updated?
    - § Decisions has ADR-needed → DECISIONS.md ADR written?
