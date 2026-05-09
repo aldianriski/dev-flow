@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-08
 update_trigger: Sprint or task state change
 status: current
-sprint: 048
+sprint: none
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,9 +35,9 @@ sprint: 048
 
 ## Active Sprint
 
-→ **TASK-119** — User-Project Outcome Lens (ISSUE-03 reframe + v1 ship prep reorder). Sub-tasks T1-T6 per [`docs/sprint/SPRINT-048-user-project-outcome-lens.md`](docs/sprint/SPRINT-048-user-project-outcome-lens.md): T1 USER-OUTCOMES.md · T2 ADR-026 · T3 README reframe · T4 CLAUDE.md anti-pattern · T5 CONTEXT.md principle/G1/vocab + lineage relocate · T6 TODO.md rebalance (this file).
+→ — none —
 
-> Next: TASK-116-v2 (Node port acceptance harness, O8 plugin reliability) Sprint 049 → TASK-115-v2 (Node port caveman 3-arm) Sprint 050 → v1 SHIP Sprint 051.
+> Sprint 048 closed `38035d8` (TASK-119 User-Project Outcome Lens · ADR-026 · USER-OUTCOMES.md · ISSUE-03 closed). Next: Sprint 049 — TASK-116-v2 Node port acceptance harness (O8 plugin reliability).
 
 ---
 

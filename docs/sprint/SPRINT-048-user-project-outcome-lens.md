@@ -3,8 +3,8 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-08
 update_trigger: Sprint state change
 status: closed
-plan_commit: TBD (backfill — single consolidated commit per Sprint 047 close_commit pattern)
-close_commit: TBD (backfill)
+plan_commit: 38035d8
+close_commit: 38035d8
 ---
 
 # Sprint 048 — User-Project Outcome Lens (ISSUE-03 reframe + v1 ship prep reorder)
