@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: 052b
+sprint: none
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,15 +35,11 @@ sprint: 052b
 
 ## Active Sprint
 
-→ **Sprint 052b — Release-Debt Resolution** (10-sprint chain reconcile: 1 MINOR + 9 PATCH + 053b T2 7-finding fold-in + ADR-032 5 decisions).
+→ **— none —** (between sprints; awaiting next sprint promote)
 
-- [ ] **T1** — Manual MINOR reconcile 2.5.0 → 2.6.0 lockstep (`plugin.json` + `marketplace.json`) + consolidated `docs/CHANGELOG.md` MINOR entry covering Sprint 049-054b grouped by class. NO release-patch invocation; NO `--minor` flag work (DEC-1 lock).
-- [ ] **T2** — release-manager + release-patch SKILL.md wire-fixes (5 in-place ≤1-line edits per Sprint 054b pattern): cross-citation #1+#5 · release-manager last-validated 2026-04-21→2026-05-09 #2 · release-patch invocation parity #3 · `--from-sprint` MINOR/MAJOR-only boundary #4. Closes 053b T2 findings #1-#5.
-- [ ] **T3** — `docs/blueprint/05-skills.md` primer release-row drift propagation (cap-conscious in-place collapse; lock 5 default). 2 row updates + last_updated 2026-05-09. Closes 053b T2 findings #6-#7.
-- [ ] **T4** — Sprint 053b factual close-out note (per lock 3 — Sprint 047 T1 precedent): § Files Changed resolved-via-052b row + § Retro carry-forward note. NO Execution Log rewrites; NO G1 amendments.
-- [ ] **T5** — `docs/adr/ADR-032-release-debt-resolution-and-mode-boundary.md` (NEW) codifying DEC-1..DEC-5 (flag scope · release-manager role · prevention mechanism · mode boundary · re-litigation lock) + sprint § Decisions/Retro filled + sprint close.
-
-> **G1 PASS at promote** — recon-first lock: manifest 2.5.0 confirmed · release-manager 70/80 cap headroom · release-patch 100/100 in-place only · 053b retro 7 findings catalogued. Cap discipline ≤120 lines (ADR-022). Sprint plan: `docs/sprint/SPRINT-052b-release-debt-resolution.md`.
+> Sprint 052b closed `<TBD-close-SHA>`. release-debt 10-sprint chain RESOLVED at T1 manual MINOR 2.5.0→2.6.0 lockstep reconcile (`b03f366`); 053b T2 7 audit findings closed via T2 wire-fixes (`0018ea0`) + T3 primer drift (`edbdd49`) + T4 factual close-out (`1ef1a67`). ADR-032 5-decision lock — DEC-1 `--minor` flag deferred to TASK-NEW post-v1 · DEC-2 release-manager MINOR/MAJOR canonical · DEC-3 prevention scan codify → P1 Sprint 055b · DEC-4 mode boundary bidirectional · DEC-5 re-litigation lock. Friction → 2 TD rows (TD-001 count freshness · TD-002 cap-headroom-budget) + 1 TASK-NEW (DEC-3 codify → P1 Sprint 055b paired w/ TASK-128).
+>
+> Next: Sprint 055 — TASK-116-v2 acceptance harness · Sprint 055b — TASK-128 token usage audit + TASK-NEW DEC-3 codify · Sprint 055-2 — TASK-115-v2 caveman 3-arm eval · Sprint 056 — v1 ship.
 
 > Sprint 053c closed `cbdafbe`. TASK-132 fully delivered: T1 `docs/blueprint/10a-init.md` whole-section rewrite 237→74 lines (4 init-analyst refs eliminated; ADR-028 canonical bin/dev-flow-init.js contract documented; Stack presets + Scaffold output tables; Post-init `/prime` handoff line) · T2 `docs/blueprint/04-subagents.md` ASCII Agent Tier diagram collapsed 4→3 columns (dropped INIT ANALYST node; ADR-028 delegation note added) · T3 sweep classified 30 remaining init-analyst hits (all historical OR deprecation-pointer; 0 DRIFT-FIX-NEEDED). 0 friction. 0 new ADR. Pattern candidate: whole-section primer rewrite trigger for TASK-116-v2 acceptance harness lint.
 >
@@ -104,8 +100,12 @@ sprint: 052b
 - [x] **TASK-129** — `/prime` behavior fix (closed direct-commit; single-task fix per Sprint Sizing Rules "never plan a sprint with only 1 task"): Next: line emitted per detection branch (4 branches: active-sprint+open / active-sprint+done / no-sprint+backlog / no-sprint+empty); 3 anti-patterns added (no inline summarize · no re-read unchanged via SHA1 cache · no full sprint-plan read — partial via `limit: 50`); Read order table updated; Step 6 added; output format includes `[cache hit]` + `(partial)` markers. Cap held 86/100. Skill version 1.0.0 → 1.1.0. last-validated bumped 2026-05-08.
 - [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap) + skeleton creation Sprint 051a + lean-doc/task-decomposer alignment Sprint 053. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 054.
 - [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 055.
-- [ ] **release-debt resolution sprint** *(IN-FLIGHT — Sprint 052b · plan locked 2026-05-09)* — Sprint 049 MINOR (skill drop + rename + behavior change in release-patch) + Sprint 050 PATCH + Sprint 051a PATCH + Sprint 051b PATCH + 052/053/054/053b chain accumulating. release-patch SKILL handles PATCH only by design. Reconcile manual MINOR + chained PATCHes; OR extend release-patch with `--minor` flag (separate decision). **Sprint 053b T2 carry-forward (audit-derived findings to fold into 052b scope):** (a) cross-citation gap (release-manager + release-patch don't cite each other as paired counterparts) · (b) release-manager last-validated stale 2026-04-21 (pre-ADR-027 generalize) · (c) invocation asymmetry (release-manager has invocation table; release-patch does not) · (d) `--from-sprint` flag in release-manager may overlap release-patch auto-detect cascade · (e) coordination-loop rule per ADR-031 Open Q E violated. PROMOTED from P2. → Sprint 052b.
+- [x] **release-debt resolution sprint** *(closed Sprint 052b · 10-sprint chain reconcile)* — Manual MINOR 2.5.0→2.6.0 lockstep bump; ADR-032 5-decision lock; 7 053b T2 audit findings closed via wire-fixes. See `docs/CHANGELOG.md` § Sprint 052b for detail. Prevention mechanism (DEC-3) → P1 row above (Sprint 055b TASK-NEW codification).
 - [ ] **v1 ship** — CHANGELOG release notes lead with user-project outcomes per ADR-026; plugin/marketplace lockstep bump (MINOR if new surface introduced; PATCH otherwise); git push per release-patch HARD STOP. → Sprint 056.
+
+### P1 — Post-052b prevention codification
+
+- [ ] **TASK-NEW (DEC-3 codification)** — Codify Sprint Promote Step 1.5 release-debt scan in `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md`. Behavioral: scan CHANGELOG since last MINOR/MAJOR; depth ≥3 → P1 candidate · ≥5 → auto-escalate P0 · ≥7 → BLOCK Sprint Promote until release-debt sprint promoted. Pair w/ existing Tech-Debt scan. Codifies Sprint 052b ADR-032 DEC-3. Estimated S, layers `skills, docs`. → Sprint 055b (paired w/ TASK-128 token-audit).
 
 ### P2 — Tooling friction backlog (optional, not blocking v1)
 
@@ -126,7 +126,8 @@ sprint: 052b
 >
 > **Anti-pattern locks** → `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md § Tech Debt Anti-Pattern Locks`.
 
-*(no entries yet — section ready)*
+- **TD-001** *(severity: medium · status: open · created: 052b)* — P0 release-debt depth count was stale at Sprint 052b promote (memory said 8; recon found 10 post-053c close). Auto-update threshold counts on every sprint close. **AC:** count refreshed atomically with sprint close commit (Sprint Promote Step 1.5 release-debt scan OR release-patch hook). **Sprint placement:** TBD — Sprint 055b TASK-128 token-audit overlap candidate. **Source:** Sprint 052b retro Friction #1.
+- **TD-002** *(severity: minor · status: open · created: 052b)* — release-patch SKILL.md 100/100 EXACT cap forced line-23 in-place modify rather than new cite line. Track per-skill cap-headroom-budget at last_validated stamp to flag drift. **AC:** SKILL.md frontmatter gains `cap-headroom: NN/100` field OR TASK-116-v2 acceptance harness lints headroom <5 lines. **Sprint placement:** TASK-116-v2 Sprint 055 (lint candidate). **Source:** Sprint 052b retro Friction #2.
 
 ---
 
@@ -213,7 +214,7 @@ Sprint 50    →  F3 init scaffold full (.gitignore + docs/codemap/+adr/ dirs + 
 Sprint 51a   →  Lean Architecture Foundation (STACK_PRESETS CA+DDD migration + createProjectSkeleton + ADR-029)  (done — `460175b`)
 Sprint 51b   →  Lean Architecture Templates + Primer (TASK-122b applySubstitutions extension w/ 5 tokens + CLAUDE.md/ARCHITECTURE.md rewrites + 06c sync + blueprint/11-lean-architecture.md primer + lean-doc wire) · TASK-127 workflow vision (blueprint/12-session-workflow.md + README Daily Pattern expansion + CLAUDE.md Session Workflow block) · in-sprint expansion: 03/08 blueprint refresh to 4-mode/2-gate model (done — `fb8e389`)
 Sprint 52    →  F4 wire orphan skills into orchestrator skill-dispatch + phases (6 orphans · 4→10 rows Always-On) + F5 tech-debt rollover loop (TD-NNN section · Friction→TD prompt · mid-sprint fix/defer/block · Sprint Promote scan + auto-escalate · 5 anti-pattern locks) (TASK-123) (done — `fb8e389`)
-Sprint 52b   →  release-debt resolution (Sprint 049 MINOR + 050/051a/051b PATCH chain reconcile; manual or release-patch --minor flag decision)
+Sprint 52b   →  release-debt resolution (10-sprint chain reconcile: 1 MINOR Sprint 049 + 9 PATCH 050/051a/051b/052/053/053b/053c/054/054b · manual MINOR 2.5.0→2.6.0 + ADR-032 5-decision lock + 7 053b T2 audit findings closed)  (done — `<TBD>`)
 Sprint 53    →  F6 task-decomposer ↔ lean-doc-generator collaboration audit + Sprint 052 T7 carry-forward (TASK-124) — ADR-030 template canonical ownership · decomposition-spec.md template-pointer · SPRINT_PROTOCOLS.md Step 1.2 backflow · lean-doc Step 6 + task-decomposer Step 6 template-read · validation pass (done — `a9b1f05`)
 Sprint 54    →  TASK-130 Anti-Slip Discipline at G1 + Phase Guards (ADR-031 + 4 new G1 fields focus/context-budget/explicit-gaps/done-confirmation + sprint-bulk Phase 0 Active Sprint guard + Friction Protocol 5 AI triggers + 3 human shortcuts) (done — `932d700`)
 Sprint 53b   →  Broader feature-usage audit sweep (TASK-125 — all skill/agent pairs: prime↔init / release-manager↔release-patch / pr-reviewer↔code-reviewer / security-auditor↔security-analyst / architecture-grill↔design-analyst) — runs AFTER 054 anti-slip closes user pain

@@ -2,7 +2,7 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
-status: planned
+status: closed
 plan_commit: e175dca
 close_commit: TBD
 ---
@@ -96,19 +96,61 @@ status: PASS
 | `skills/release-patch/SKILL.md` | T2 | line 23 in-place modify — paired counterpart cite + ADR-027 boundary + auto-detect cascade note (closes 053b T2 #1+#3+#5; cap 100/100 held) | low |
 | `docs/blueprint/05-skills.md` | T3 | 2 in-place ≤1-line edits — release-manager row cross-link resolved + Phase 9 Close expanded to release-patch OR release-manager (closes 053b T2 #6+#7) | low |
 | `docs/sprint/SPRINT-053b-feature-usage-audit-sweep.md` | T4 | 6 Synthesis Findings disposition flips defer-052b→closed-052b-T1/T2/T3 + 1 Files Changed close-out cross-ref row + 1 Retro pattern-candidates fold-in note (factual close-out per Sprint 047 T1 precedent; lock 3) | low |
+| `docs/adr/ADR-032-release-debt-resolution-and-mode-boundary.md` | T5 | NEW — 5 decisions (DEC-1..DEC-5) + 5 alternatives + consequences + 13 references; cap 85/120 (35-line headroom) | low |
+| `docs/sprint/SPRINT-052b-release-debt-resolution.md` | T5 | sprint § Decisions populated · § Retro Worked/Friction/Pattern/Surprise filled · Execution Log T1-T5 narrative · status planned→closed · close_commit backfill | low |
+| `TODO.md` | T5 | release-debt P0 [x] · TD-001 + TD-002 added · P1 section + TASK-NEW DEC-3 codify added · Active Sprint cleared · Roadmap Sprint 52b updated · frontmatter sprint:052b→none | low |
 
 ## Decisions
 
-*(T5 — DEC-1..DEC-5 per ADR-032)*
+DEC-1..DEC-5 codified in [ADR-032](../adr/ADR-032-release-debt-resolution-and-mode-boundary.md):
+- **DEC-1** `--minor` flag scope — DEFERRED to TASK-NEW post-v1 (release-patch stays PATCH-only at v2.0.0).
+- **DEC-2** `release-manager` canonical role — MINOR/MAJOR ONLY; not deprecated; bidirectional cite enforces.
+- **DEC-3** Prevention mechanism — Sprint Promote Step 1.5 release-debt scan (depth ≥3 P1, ≥5 P0, ≥7 BLOCK); codification = TASK-NEW post-052b.
+- **DEC-4** Mode boundary — bidirectional + non-overlapping; release-patch never handles MINOR.
+- **DEC-5** Re-litigation lock — `--minor` debate this sprint = HARD STOP per ADR-031 lock 5.
 
 ## Retro
 
 ### Worked
 
+- **Recon-first at promote held discipline.** Stage 2 read manifests + both SKILL.md + 053b synthesis table + CHANGELOG tail BEFORE decompose; uncovered release-patch HARD-rejects MINOR (boundary-of-existing-skill) which steered T1 manual recommendation. ~50% speculative scope cut per `feedback_recon_first.md`.
+- **Manual MINOR reconcile = bounded scope.** T1 = 3-file edit (plugin.json + marketplace.json + CHANGELOG.md prepend); ~5k context budget; no skill changes. Closed 10-sprint chain in single commit.
+- **Bidirectional cite single-line edit pattern reused.** T2 release-manager added 1 line · release-patch line-23 in-place modify (no net line addition; cap 100/100 held). Sprint 054b validated pattern transferred cleanly to release-* skill pair.
+- **Lock 3 factual close-out precedent.** Sprint 047 T1 boundary applied to T4 cleanly: 6 disposition flips + 1 Files Changed row + 1 Retro pattern note in 053b sprint file; no Execution Log rewrites; no plan revision.
+- **5-decision ADR scope held budget.** ADR-032 = 85/120 lines (35-line headroom); 5 decisions × ≤4 lines + 5 alternatives × ≤2 lines + cross-links fit cleanly.
+
 ### Friction
+
+- **Sprint plan said "8-sprint chain" at promote but recon found 10.** Initial promote decompose inherited 8-sprint count from session 2026-05-08 audit memory; recon-first re-count post-053c close updated to 10. Caught + corrected pre-T1 commit (sprint file + CHANGELOG + TODO Active Sprint pointer). **TD candidate: P0 promotion threshold counts should auto-update on every sprint close, not stale-cached in memory.**
+- **release-patch SKILL.md cap 100/100 EXACT** — required line-23 in-place modify (extend existing line) rather than adding new cite line. Worked, but tight. **TD candidate: cap-headroom-budget per skill at last_validated stamp.**
 
 ### Pattern candidates
 
+- **Recon-first at Sprint Promote uncovers boundary-of-existing-skill** (release-patch HARD-rejects MINOR). Pattern reusable: when promote scope touches mature infra, recon-first identifies design-locked boundaries that steer task direction.
+- **5-decision ADR with single-line decisions ≤120 cap** — DEC-N ≤4 lines + alternative ≤2 lines fits cleanly; reused from ADR-031 + ADR-030 pattern; codifiable as ADR-template line-budget guideline.
+- **Bidirectional cite via existing-line in-place modify** (T2 release-patch line-23) — when SKILL.md cap is at limit, modify existing semantically-related line to absorb cite text. Closes lint-of-bidirectional-cite-rule + cap-discipline simultaneously.
+
 ### Surprise log
 
+- **release-manager v1.0.0 last-validated 2026-04-21 was pre-ADR-027** — meaning release-manager was orphaned semantically since Sprint 049. Bidirectional cite + last-validated bump fixes this without code change. Suggests other skills may have stale last-validated stamps not yet audited (TASK-128 Sprint 055b token-audit candidate scope).
+- **DEC-3 prevention scan codification deferred to TASK-NEW** — ADR-032 records DECISION but Sprint Promote Step 1.5 codification requires `lean-doc-generator/references/SPRINT_PROTOCOLS.md` + skill version bump. Out-of-scope for 052b focus discipline; recorded as TASK-NEW for post-close.
+
 ## Execution Log
+
+### 2026-05-09 — Sprint Promote (Stages 1-3)
+Recon-first stage: read plugin.json + marketplace.json (both 2.5.0 lockstep) · release-manager SKILL.md (70/80 cap; last-validated 2026-04-21 stale) · release-patch SKILL.md (100/100 cap; HARD-rejects MINOR per L23+L91) · 053b Synthesis Findings (T2 6 defer-052b rows) · CHANGELOG.md tail (2.4.0→2.5.0 was Sprint 040 era). User answered 4 lock questions confirming manual reconcile + 2.6.0 MINOR + factual close-out OK + 5-decision ADR. Plan-locked `e175dca`.
+
+### 2026-05-09 — T1 Manual MINOR reconcile
+Bumped plugin.json + marketplace.json 2.5.0→2.6.0 lockstep. Prepended docs/CHANGELOG.md consolidated MINOR block w/ Features/Behavioral/Fixes/Docs class grouping covering Sprint 049 MINOR-class + 9 PATCH chain (050-054b). NO release-patch invocation. Commit `b03f366`.
+
+### 2026-05-09 — T2 release-manager + release-patch wire-fixes
+3 in-place edits closing 053b T2 #1-#5: release-manager last-validated bump + 1-line paired counterpart cite (cap 71/80) · release-patch line-23 in-place modify with paired counterpart + ADR-027 boundary + auto-detect cascade note (cap 100/100 held). Commit `0018ea0`.
+
+### 2026-05-09 — T3 05-skills.md primer-drift propagation
+2 in-place edits closing 053b T2 #6-#7: Universal Skills release-manager row cross-link resolved · Phase 9 Close expanded to release-patch OR release-manager. last_updated 2026-05-09 already set by Sprint 053b T7. Commit `edbdd49`.
+
+### 2026-05-09 — T4 Sprint 053b factual close-out
+Per lock 3 (Sprint 047 T1 precedent): 6 Synthesis Findings disposition flips defer-052b→closed-052b-T1/T2/T3 with commit SHAs · 1 Files Changed close-out cross-ref row · 1 Retro pattern-candidates fold-in note. NO Execution Log rewrites; NO G1 amendments. defer-052b grep: only 053b sprint file narrative archive remains. Commit `1ef1a67`.
+
+### 2026-05-09 — T5 ADR-032 + sprint Decisions/Retro + close
+ADR-032 written w/ 5 decisions + 5 alternatives + consequences + 13 references; 85/120 lines (35-line headroom). Sprint § Decisions block populated w/ DEC-1..DEC-5 cross-links. Sprint § Retro Worked (5) / Friction (2 — both flagged TD candidate) / Pattern candidates (3) / Surprise log (2) filled. TD-NNN prompts pending Friction items. TODO.md updated: release-debt P0 row [x] · Active Sprint cleared · Roadmap row appended.
