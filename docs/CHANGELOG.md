@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 055b closed — token + output discipline)
+last_updated: 2026-05-10 (Sprint 055c closed — history hygiene + legacy-doc scan)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,21 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 055c — History Hygiene Plugin Principle + Legacy-Doc Scan (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-055c-history-hygiene.md](sprint/SPRINT-055c-history-hygiene.md)
+- Plan commit: `cf1fb37` (backfilled `5e55424`)
+- Close commit: TBD
+- Tasks: T1 TASK-134a Phase 1 ✓ (`0875c87`) · T2 TASK-134a Phase 2-4 ✓ (`c178d55`) · T3 TASK-134b Phase 1 ✓ (`d6702bb`) · T4 TASK-134b Phase 2-3 ✓ (`4459338`)
+- ADRs: ADR-034 History Hygiene (5 DECs: principle home in `.claude/CONTEXT.md` § · 5 per-surface rules · 2-trigger apply-when Sprint Close + Promote Step 1.5c · 3-action collapse/archive/delete policy · re-litigation lock per ADR-031)
+- Files changed: 11 (1 new ADR · 1 new script · 1 new audit report · 4 archive moves · 4 modifications) · Tests added: 0 (governance + tooling sprint)
+- Summary: T1 codified plugin-wide History Hygiene principle (CONTEXT.md § +17 lines · ADR-034 · pattern shape mirrors ADR-033 Output Discipline); T2 applied rules to TODO.md (ribbon trim 8→3 · 12 closed-row collapses · 10 row deletes per DEC-4 · CHANGELOG/Roadmap audit clean · sprint-files retro caps audit clean · cross-ref grep verified); T3 wrote zero-dep `scripts/scan-legacy-docs.js` (267 lines · refs + age + status + verdicts · cross-platform); T4 ran scan (161 files · 6 repo-root anomalies) → user verdicts 4 ARCHIVE (AUDIT/AUDIT_PASS2/BASELINE_ASPECT/READINESS → `docs/archive/`) + 2 KEEP (AI_WORKFLOW_BLUEPRINT redirect-stub · STRATEGY_REVIEW strategic ref); frontmatter annotations applied; cross-refs verified clean.
+- Pattern candidates (3): plugin-principle paired sprint shape (codify-then-apply same cycle · 2nd instance after Sprint 055b) · repo-root anomaly rule for legacy scans · frontmatter annotation on archive (preserves provenance at file).
+- 0 friction (mid-T2 rule clarification absorbed in-scope per ADR-034 DEC-2 codify+apply pattern; no Mid-Sprint Friction Protocol invocation).
+- Blueprint version: 2.6.0 unchanged (no plugin manifest contract change). Release-debt depth: 6 PATCH-only sprints since 2.5.0→2.6.0 (Sprint 055c added) · still <7 BLOCK threshold; reconcile deferred to Sprint 056 v1-ship per Open Question verdict at promote.
 
 ---
 

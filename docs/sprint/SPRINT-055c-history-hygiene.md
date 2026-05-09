@@ -2,7 +2,7 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: active
+status: closed
 plan_commit: cf1fb37
 close_commit: TBD
 ---
@@ -147,18 +147,44 @@ status: PASS
 
 ## Execution Log
 
-(empty — populated during T1-T5)
+### 2026-05-10 | T1 done — `0875c87`
+TASK-134a Phase 1 acceptance verified. `.claude/CONTEXT.md` § History Hygiene = 17 lines (≤25 cap). ADR-034 written (5 DECs · 5 alternatives · consequences positive/negative/neutral · 8 references). Pattern mirrors ADR-033 Output Discipline plugin-principle shape (single canonical CONTEXT.md source). DoD met: CONTEXT.md edited · ADR-034 written · TODO.md TASK-134a phase 1 verified inline. No surprises.
+
+### 2026-05-10 | T2 done — `c178d55`
+TASK-134a Phase 2-4 acceptance verified. **Phase 2 (TODO.md):** Active Sprint ribbon trimmed 8 → 3 closed-sprint pointers (055b · 054b · 054 retained; 048-053c narratives archived to CHANGELOG); 12 closed P0/P1 task rows collapsed to 1-line pointers (TASK-119/120/121/122a/122b/123/124/125/126/127/128/130/131/133); 10 row deletes for >2-sprint-old closed cluster per DEC-4 delete trigger. **Phase 3 (sprint files):** Sprint 055b retro caps audit clean (Worked 6/Friction 5/Pattern 4 — at or below ≤6 cap); prior 3 sprints (054/054b/053b) audit clean. **Phase 4 (CHANGELOG + Roadmap):** Last 5 CHANGELOG entries cap-audited (Sprint 055b row 12 lines + 6 bullets — exact cap; older entries within bounds); Roadmap done-cluster collapse audit clean (existing 1-line summaries already compliant; no new collapse needed). Cross-ref grep verified clean (no broken TASK-NNN/Sprint-NNN links). **Mid-T2 in-scope clarification:** rule clarification surfaced re: 3-surface application (TODO/sprint/CHANGELOG) vs 5-surface; confirmed in-scope per ADR-034 DEC-2 codify+apply pattern (no DEFER). DoD met across all 6 acceptance items.
+
+### 2026-05-10 | T3 done — `d6702bb`
+TASK-134b Phase 1 acceptance verified. `scripts/scan-legacy-docs.js` written (267 lines · Node ≥18 · zero external deps · regex-based YAML frontmatter parse · `child_process` shell-out for `git grep` cross-platform). Scan logic: walks `*.md` under tracked paths (excludes `node_modules`/`.git`/`.claude/plugins/`/`docs/codemap/`/`docs/audit/legacy-doc-scan-*`); computes incoming refs (basename grep minus self) + age (`git log -1 --format=%ar` + `--format=%at`) + frontmatter status. Hard-flag rule: `incoming_refs == 0 AND (age > 90d OR status:deprecated)`. Repo-root anomaly rule: any `*.md` at root NOT in canonical set surfaced regardless of refs. Output: `docs/audit/legacy-doc-scan-2026-05-10.md` per-file table (path · refs · age · status · verdict-suggestion · T4 applied). Initial scan: 161 files · 0 hard-flag · 6 repo-root anomalies · 0 soft orphans. DoD met.
+
+### 2026-05-10 | T4 done — `4459338`
+TASK-134b Phase 2-3 acceptance verified. **Phase 2 (run + classify):** 6 repo-root anomalies surfaced (AI_WORKFLOW_BLUEPRINT/AUDIT/AUDIT_PASS2/BASELINE_ASPECT/READINESS/STRATEGY_REVIEW). User verdicts: 4 ARCHIVE (AUDIT · AUDIT_PASS2 · BASELINE_ASPECT · READINESS) + 2 KEEP (AI_WORKFLOW_BLUEPRINT redirect-stub · STRATEGY_REVIEW strategic reference) + 0 DELETE this round. **Phase 3 (apply verdicts):** 4 files `git mv`'d to `docs/archive/` (NEW dir created); each gained frontmatter annotation (`status: archived` + `archived: 2026-05-10` + `archived_in_sprint: 055c (TASK-134b)` + `archived_reason` + `original_path`); 2 KEEP files retained at root with rationale documented in audit report. Cross-ref grep verified clean (no broken root-path links post-move). Audit report updated with T4 verdict column. CODEMAP.md auto-refresh hook fires on commit. DoD met across all 4 acceptance items.
+
+### 2026-05-10 | T5 — sprint close
+Standard Sprint Close protocol per `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md`. All T1-T4 verified · Files Changed table populated · Decisions logged · Retro captured · CHANGELOG row prepended · TODO.md Active Sprint cleared · squash-commit message provided.
 
 ## Files Changed
 
 | File | Task | Change | Risk |
 |:-----|:-----|:-------|:-----|
-
-(empty — populated during execution)
+| `.claude/CONTEXT.md` | T1 | +17 lines § History Hygiene (5 per-surface rules + 2-trigger apply-when + rationale) | low |
+| `docs/adr/ADR-034-history-hygiene.md` | T1 | NEW · 5 DECs codifying plugin-wide history-hygiene principle | low |
+| `TODO.md` | T2 | Ribbon trim 8→3 + 12 closed-row collapses + 10 row deletes + 3-surface rule clarification | medium |
+| `scripts/scan-legacy-docs.js` | T3 | NEW · 267 lines · zero-dep legacy-doc scanner (refs · age · status · verdicts) | low |
+| `docs/audit/legacy-doc-scan-2026-05-10.md` | T3+T4 | NEW · scan output (161 files · 6 anomalies) updated with T4 verdict column | low |
+| `docs/archive/AUDIT.md` | T4 | `git mv` from root (EPIC-Audit closed Sprint 047 ADR-025) + frontmatter annotation | low |
+| `docs/archive/AUDIT_PASS2.md` | T4 | `git mv` from root (same lifecycle as AUDIT.md) + frontmatter annotation | low |
+| `docs/archive/BASELINE_ASPECT.md` | T4 | `git mv` from root (imported reference) + frontmatter annotation | low |
+| `docs/archive/READINESS.md` | T4 | `git mv` from root (pre-v1 dashboard superseded by TODO.md Backlog) + frontmatter annotation | low |
+| `docs/sprint/SPRINT-055c-history-hygiene.md` | T1-T5 | sprint file (status flip · execution log · files changed · decisions · retro) | low |
+| `docs/CHANGELOG.md` | T5 | prepend Sprint 055c row | low |
 
 ## Decisions
 
-(empty — populated when significant decisions surface)
+### 2026-05-10 | DEC-1 through DEC-5 — codified in ADR-034
+All 5 DECs (principle home in CONTEXT.md · 5 per-surface rules · 2-trigger apply-when · 3-action collapse/archive/delete policy · re-litigation lock per ADR-031) locked at T1 commit `0875c87`. Re-tune cadence: post-v1 (Sprint 056) DEC-2 thresholds eligible; DEC-1 + DEC-3 + DEC-5 indefinitely locked.
+
+### 2026-05-10 | T2 mid-sprint rule clarification (in-scope per ADR-034 DEC-2)
+Surfaced ambiguity re: 3-surface (TODO + sprint + CHANGELOG) vs 5-surface (+ Roadmap + sprint-retro) application scope during T2.1 ribbon trim. Resolved in-scope per DEC-2 codify+apply pattern — clarification stays inside T2 acceptance bounds (no Mid-Sprint Friction Protocol DEFER triggered). 0 friction added.
 
 ## Open Questions for Review
 
@@ -169,4 +195,29 @@ Step 1.5b release-debt scan: last MINOR lockstep manifest bump = Sprint 052b (2.
 
 ## Retro
 
-(empty — populated at Sprint Close)
+### Worked
+
+- **Plugin-principle pattern reuse from ADR-033.** History Hygiene ADR-034 reused exact shape (single canonical CONTEXT.md § + ADR + future pointer-line propagation) one sprint after Output Discipline; pattern-shape replay = predictable outcome + 0 design friction.
+- **Pre-locked decisions before promote.** Pick A confirmed by user pre-promote; ADR requirement + WIDE scope locked at promote → 0 G1 grilling needed at execute time.
+- **Codify+apply paired sprint structure.** T1 codify → T2 apply → T3 scan tooling → T4 verdict apply in same cycle = principle tested against real artifacts (15 closed-row collapses + 4 archives) before plugin-wide propagation.
+- **Zero-dep scan script.** `scripts/scan-legacy-docs.js` 267 lines no external deps (regex YAML parse · `child_process` git grep) = portable across Windows/POSIX immediately.
+- **HITL gate at T4.1→T4.2 verdict transition.** User per-file verdicts (4 ARCHIVE + 2 KEEP) prevented bulk-apply mistakes; cross-ref grep verified clean post-move.
+- **0 friction across all 4 tasks.** Mid-T2 rule clarification absorbed in-scope (not DEFER-triggered); plan held end-to-end.
+
+### Friction
+
+- (none — sprint executed clean per plan; 0 surprises; 0 Mid-Sprint Friction Protocol invocations.)
+
+### Pattern candidates
+
+- **Plugin-principle paired sprint shape (codify-then-apply in same cycle).** ADR-033 Output Discipline (Sprint 055b) + ADR-034 History Hygiene (Sprint 055c) both used principle codification (T1) + apply (T2-T4) + verify against real artifacts in same sprint cycle. 2nd successful instance → eligible to propose as `VALIDATED_PATTERNS.md` entry post-confirm.
+- **Repo-root anomaly rule for legacy scans.** `scan-legacy-docs.js` repo-root anomaly check (any non-canonical `*.md` at root) caught 6 candidates regardless of incoming refs (pure ref-count would have missed all 6 — they had refs from each other). Surface-location-based anomaly detection complements ref-count orphan detection.
+- **Frontmatter annotation on archive (vs delete).** `archived_in_sprint: NNN` + `archived_reason` + `original_path` on T4 archives preserves discovery trail at the file itself (not just CHANGELOG); reviewer browsing `docs/archive/` sees provenance immediately. Reusable for all future archive operations.
+
+### Pattern candidates — confirmed for `VALIDATED_PATTERNS.md`?
+
+User confirm needed: which of the 3 pattern candidates above warrant promotion to `references/VALIDATED_PATTERNS.md`? Default: surface to user at session close; no auto-promote.
+
+### TD rows from Friction
+
+None — Friction list empty.
