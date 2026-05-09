@@ -1,3 +1,14 @@
+---
+owner: Tech Lead (Aldian Rizki)
+last_updated: 2026-05-10
+update_trigger: ARCHIVED — no further updates
+status: archived
+archived: 2026-05-10
+archived_in_sprint: 055c (TASK-134b)
+archived_reason: Imported reference doc (no original frontmatter); generic multi-agent production-readiness checklist; not project-specific to dev-flow. Preserved for historical reference; if recurring tool needed, adapt content into dev-flow blueprint surface.
+original_path: BASELINE_ASPECT.md (repo root)
+---
+
 # BASELINE_ASPECT.md
 ## Multi-Agent AI Orchestration — Production Readiness Audit
 

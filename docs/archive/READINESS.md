@@ -1,10 +1,14 @@
 ---
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-04-27
-update_trigger: TASK closure flips a row; new readiness gate added; v1/v2 scope changes
-status: current
+update_trigger: ARCHIVED — no further updates
+status: archived
+archived: 2026-05-10
+archived_in_sprint: 055c (TASK-134b)
+archived_reason: Pre-v1 readiness dashboard superseded by TODO.md Backlog P0/P1 + Roadmap; row state stale since 2026-04-27. Companion AUDIT.md also archived. Preserved for historical reference only.
+original_path: READINESS.md (repo root)
 scope: internal team rollout (v1) → public marketplace (v2)
-companion: AUDIT.md (tactical findings), STRATEGY_REVIEW.md (direction), TODO.md (source of truth for tasks)
+companion: AUDIT.md (tactical findings — also archived), STRATEGY_REVIEW.md (direction — kept at repo root), TODO.md (source of truth for tasks)
 ---
 
 # dev-flow — Readiness Dashboard

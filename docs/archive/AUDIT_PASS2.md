@@ -1,8 +1,12 @@
 ---
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-04-27
-update_trigger: New pass-2 finding added; finding resolved → move to docs/CHANGELOG.md
-status: current
+update_trigger: ARCHIVED — no further updates
+status: archived
+archived: 2026-05-10
+archived_in_sprint: 055c (TASK-134b)
+archived_reason: EPIC-Audit closed Sprint 047 (ADR-025); pass-2 findings resolved + moved to docs/CHANGELOG.md; preserved for historical reference only.
+original_path: AUDIT_PASS2.md (repo root)
 audit_pass: 2 (deep — line-by-line SKILL.md + blueprint + eval methodology)
 audit_lens: HOW filter · correctness · self-rule compliance · context efficiency
 ---

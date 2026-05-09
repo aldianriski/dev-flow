@@ -29,14 +29,16 @@ _No hard-flag candidates (refs==0 AND age/status condition). See Repo-Root Anoma
 
 ## Repo-Root Anomalies (manual review)
 
-| Path | Refs | Age (d) | Status | Suggested Verdict |
-|:-----|-----:|--------:|:-------|:------------------|
-| `AI_WORKFLOW_BLUEPRINT.md` | 21 | 1 | current | **REVIEW** |
-| `AUDIT.md` | 20 | 1 | current | **REVIEW** |
-| `AUDIT_PASS2.md` | 4 | 1 | current | **REVIEW** |
-| `BASELINE_ASPECT.md` | 3 | 1 | _(none)_ | **REVIEW** |
-| `READINESS.md` | 4 | 1 | current | **REVIEW** |
-| `STRATEGY_REVIEW.md` | 5 | 1 | current | **REVIEW** |
+| Path | Refs | Age (d) | Status | Suggested Verdict | T4 Applied (2026-05-10) |
+|:-----|-----:|--------:|:-------|:------------------|:------------------------|
+| `AI_WORKFLOW_BLUEPRINT.md` | 21 | 1 | current | **REVIEW** | **KEEP** — `type: redirect` frontmatter; intentional discoverability stub |
+| `AUDIT.md` | 20 | 1 | current | **REVIEW** | **ARCHIVED** → `docs/archive/AUDIT.md` (EPIC-Audit closed Sprint 047 ADR-025) |
+| `AUDIT_PASS2.md` | 4 | 1 | current | **REVIEW** | **ARCHIVED** → `docs/archive/AUDIT_PASS2.md` (same lifecycle as AUDIT.md) |
+| `BASELINE_ASPECT.md` | 3 | 1 | _(none)_ | **REVIEW** | **ARCHIVED** → `docs/archive/BASELINE_ASPECT.md` (imported reference, no project-specific content) |
+| `READINESS.md` | 4 | 1 | current | **REVIEW** | **ARCHIVED** → `docs/archive/READINESS.md` (pre-v1 dashboard superseded by TODO.md Backlog) |
+| `STRATEGY_REVIEW.md` | 5 | 1 | current | **REVIEW** | **KEEP** — strategic reference; revisit-on-pivot trigger; pre-v1 still relevant |
+
+**T4 verdict applications:** 2 KEEP · 4 ARCHIVE (no DELETE this round). All ARCHIVE files moved via `git mv` to `docs/archive/` w/ frontmatter updated (`status: archived` + `archived: 2026-05-10` + `archived_in_sprint: 055c (TASK-134b)` + `archived_reason` + `original_path`). Cross-ref grep verified clean (no broken root-path links).
 
 ## Soft Orphans (cluster)
 

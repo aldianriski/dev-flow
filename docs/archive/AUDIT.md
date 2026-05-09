@@ -1,9 +1,13 @@
 ---
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-04-27
-update_trigger: New audit finding added; finding resolved → move to docs/CHANGELOG.md
-status: current
-audit_pass: 2 (pass 2 complete — see AUDIT_PASS2.md)
+update_trigger: ARCHIVED — no further updates
+status: archived
+archived: 2026-05-10
+archived_in_sprint: 055c (TASK-134b)
+archived_reason: EPIC-Audit closed Sprint 047 (ADR-025); tactical findings moved to docs/CHANGELOG.md; preserved for historical reference only.
+original_path: AUDIT.md (repo root)
+audit_pass: 2 (pass 2 complete — see AUDIT_PASS2.md, also archived)
 audit_lens: correctness · context efficiency · UX · self-rule compliance
 ---
 
