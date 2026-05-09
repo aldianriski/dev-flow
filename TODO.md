@@ -47,13 +47,14 @@ sprint: none
 
 - [x] **TASK-119** — User-Project Outcome Lens (closed Sprint 048 `38035d8`).
 - [x] **TASK-120** — Plugin Coherence Cleanup + Rename + release-patch Generalize (closed Sprint 049 `7b04875`).
-- [ ] **TASK-121** — F3 init scaffold full: `bin/dev-flow-init.js` extended (gitignore template + `createEmptyScaffoldDirs` for docs/codemap/+adr/); orchestrator SKILL init phase aligned to canonical scaffold contract; ADR-028 locks 11-file + 2-dir output. Layers `skills, scripts, docs`. → Sprint 050 (active).
+- [x] **TASK-121** — F3 init scaffold full (closed Sprint 050 `8940f01` — gitignore template + docs/codemap+adr dirs + ADR-028).
 - [x] **TASK-122a** — Lean Architecture Foundation (closed Sprint 051a `460175b`).
 - [ ] **TASK-122b** — Lean Architecture Templates + Primer: `templates/CLAUDE.md.template` rewritten per stack (File Structure / Dependency Rule / Layers / Anti-Patterns / Commands); `templates/ARCHITECTURE.md.template` per-layer purpose + stack examples; NEW `docs/blueprint/11-lean-architecture.md` CA+DDD primer (≤250 lines); blueprint/ tracking review (currently untracked in git). Depends on TASK-122a (ADR-029 + skeleton lock). Layers `templates, docs`. → Sprint 051b.
 - [ ] **TASK-123** — F4 wire orphan skills (tdd / refactor-advisor / diagnose / zoom-out / prime / release-manager) into orchestrator phase detection + F5 tech-debt rollover loop (`## Tech Debt` section in TODO.md + sprint-close auto-promote Retro Friction). Layers `skills, docs, governance`. → Sprint 052.
-- [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap). Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 053.
-- [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 054.
-- [ ] **v1 ship** — CHANGELOG release notes lead with user-project outcomes per ADR-026; plugin/marketplace lockstep bump (MINOR if new surface introduced; PATCH otherwise); git push per release-patch HARD STOP. → Sprint 055.
+- [ ] **TASK-124** — F6 task-decomposer ↔ lean-doc-generator collaboration audit + pattern alignment. Origin: user session 2026-05-08 finding "this 2 skills not colaborate and have different pattern. this skills also when trigger is not create complete docs properly with the right template." Audit scope: read both SKILL.md + references; identify pattern divergence (output style · template ownership · I/O conventions · sprint-promote handoff); decide canonical (lean-doc owns templates; task-decomposer + orchestrator init consume; sprint-promote convergence with TODO.md state). Update both skills to align. Note: F6a (template lineage — lean-doc as canonical template owner) is partially addressed by Sprint 051b template re-render; F6b (collaboration pattern alignment) remains. ADR if hard-to-reverse decisions. Estimated M, layers `skills, docs`. → Sprint 053 (own sprint; not folded into F4+F5 to avoid L-size violation).
+- [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap) + skeleton creation Sprint 051a + lean-doc/task-decomposer alignment Sprint 053. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 054.
+- [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 055.
+- [ ] **v1 ship** — CHANGELOG release notes lead with user-project outcomes per ADR-026; plugin/marketplace lockstep bump (MINOR if new surface introduced; PATCH otherwise); git push per release-patch HARD STOP. → Sprint 056.
 
 ### P2 — Tooling friction backlog (optional, not blocking v1)
 
@@ -142,9 +143,10 @@ Sprint 48    →  User-Project Outcome Lens (ISSUE-03 reframe + USER-OUTCOMES.md
 Sprint 49    →  Plugin Coherence Cleanup + Rename + release-patch Generalize (F1 drop dev-flow-compress · F2 generalize release-patch 6-mode · architecture-grill rename · ADR-027)  (done — `7b04875`)
 Sprint 50    →  F3 init scaffold full (.gitignore + docs/codemap/+adr/ dirs + skill init phase aligned to canonical bin/dev-flow-init.js + ADR-028)  (done — `8940f01`)
 Sprint 51a   →  Lean Architecture Foundation (STACK_PRESETS CA+DDD migration + createProjectSkeleton + ADR-029)  (done — `460175b`)
-Sprint 51b   →  Lean Architecture Templates + Primer (CLAUDE.md + ARCHITECTURE.md per-stack rewrites + blueprint/11-lean-architecture.md CA+DDD primer)
-Sprint 52    →  F4 wire orphan skills into orchestrator + F5 tech-debt rollover loop + F6 fold-in (template lineage from Sprint 051 work)
-Sprint 53    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (also retroactive eval-evidence for release-patch v2.0.0)
-Sprint 54    →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
-Sprint 55    →  v1 SHIP — CHANGELOG outcome-led release notes + lockstep bump + git push
+Sprint 51b   →  Lean Architecture Templates + Primer (CLAUDE.md + ARCHITECTURE.md per-stack rewrites + blueprint/11-lean-architecture.md CA+DDD primer + blueprint/ git tracking)
+Sprint 52    →  F4 wire orphan skills into orchestrator (tdd / refactor-advisor / diagnose / zoom-out / prime / release-manager phase detection) + F5 tech-debt rollover loop (TODO ## Tech Debt section + sprint-close auto-promote Retro Friction)
+Sprint 53    →  F6 task-decomposer ↔ lean-doc-generator collaboration audit + pattern alignment (TASK-124 — own sprint; user-flagged finding 2026-05-08; partial F6a covered by Sprint 051b templates; F6b collaboration pattern was at risk of being buried, surfaced here)
+Sprint 54    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (also retroactive eval-evidence for release-patch v2.0.0 + skeleton + Sprint 053 alignment)
+Sprint 55    →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
+Sprint 56    →  v1 SHIP — CHANGELOG outcome-led release notes + lockstep bump + git push
 ```
