@@ -4,7 +4,7 @@ last_updated: 2026-05-10
 update_trigger: Sprint state change
 status: closed
 plan_commit: cf1fb37
-close_commit: TBD
+close_commit: a197a47
 ---
 
 # Sprint 055c — History Hygiene Plugin Principle + Legacy-Doc Scan (TASK-134a + TASK-134b)
