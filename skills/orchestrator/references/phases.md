@@ -14,8 +14,14 @@ constraints: <list>
 layers: <list> → advisory skills: <from skill-dispatch.md>
 task-type: feature | bug-fix | refactor  → advisory: tdd | diagnose | refactor-advisor (advisory; not required)
 red flags: none | <list>
+focus: <single-concern statement; one sentence; what NOT to drift to>
+context-budget: <token estimate (e.g. ~5k) OR `no-limit`>
+explicit-gaps: <bullet list of deferred items + out-of-scope> | none
+done-confirmation: <measurable observable test; "[X happens] WHEN [Y trigger]">
 status: PASS | BLOCK — <reason>
 ```
+
+**Anti-slip fields** (per ADR-031): `focus` · `context-budget` · `explicit-gaps` · `done-confirmation` are ALL required at G1 PASS. Partial fill = BLOCK. `acceptance:` (task completion criteria) and `done-confirmation:` (observable test that proves done) are SEPARATE concerns — keep both. Friction Protocol `context-budget exceeded` trigger reads from G1 `context-budget:` field.
 
 ## G2 — Design Checklist *(mvp only)*
 
