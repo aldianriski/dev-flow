@@ -250,6 +250,7 @@ status: PASS
 | `docs/blueprint/09-customization.md` | T7 | 3× system-design-reviewer→architecture-grill (L104/L108/L195) · L114 init-analyst-create line replaced w/ bin/dev-flow-init.js canonical pointer · last_updated 2026-04-20→2026-05-09 | low | — |
 | `README.md` | T7 | L22 system-design-reviewer→architecture-grill in Outcome architecture row | low | — |
 | `docs/USER-OUTCOMES.md` | T7 | L41 diagnose Skip-when system-design-reviewer→architecture-grill | low | — |
+| *(close-out cross-reference)* | T2 fold-in | 6 T2 defer-052b findings closed in Sprint 052b T1+T2+T3 — see Synthesis Findings Table dispositions above (flipped 2026-05-09 per Sprint 047 T1 factual close-out precedent; lock 3 052b promote) | — | — |
 
 ---
 
@@ -262,12 +263,12 @@ status: PASS
 | T1 prime↔init | Boundary asymmetry (orchestrator init doesn't reciprocate prime's boundary citation) | low | no-action | — | N |
 | T1 prime↔init | Post-init `/prime` handoff not suggested in phases.md § init Phase Step 4 | low | fix-now-T6 | `skills/orchestrator/references/phases.md` § init Phase | N |
 | T1 prime↔init | `prime` missing from 05-skills.md Universal Skills table | low | fix-now-T7 | — | Y |
-| T2 release-manager↔release-patch | Cross-citation gap (neither cites the other as paired counterpart) | med | defer-052b | — | N |
-| T2 release-manager↔release-patch | release-manager last-validated stale 2026-04-21 (pre-ADR-027) | med | defer-052b | — | N |
-| T2 release-manager↔release-patch | Invocation asymmetry (manager has table; patch does not) | low | defer-052b | — | N |
-| T2 release-manager↔release-patch | release-debt 7-sprint chain (Sprint 049 MINOR + 050/051a/051b/052/053/054 PATCH) | high | defer-052b | — | N |
-| T2 release-manager↔release-patch | release-patch missing from 05-skills.md Universal Skills | med | fix-now-T7 (cross-link only per T2 DOC-ONLY) | — | Y |
-| T2 release-manager↔release-patch | 05-skills.md L184 Phase 9 Close lists release-manager only | low | fix-now-T7 (cross-link only per T2 DOC-ONLY) | — | Y |
+| T2 release-manager↔release-patch | Cross-citation gap (neither cites the other as paired counterpart) | med | closed-052b-T2 `0018ea0` | — | N |
+| T2 release-manager↔release-patch | release-manager last-validated stale 2026-04-21 (pre-ADR-027) | med | closed-052b-T2 `0018ea0` | — | N |
+| T2 release-manager↔release-patch | Invocation asymmetry (manager has table; patch does not) | low | closed-052b-T2 `0018ea0` (auto-detect cascade clarify) | — | N |
+| T2 release-manager↔release-patch | release-debt 7-sprint chain (Sprint 049 MINOR + 050/051a/051b/052/053/054 PATCH) | high | closed-052b-T1 `b03f366` (10-sprint reconcile 2.5.0→2.6.0) | — | N |
+| T2 release-manager↔release-patch | release-patch missing from 05-skills.md Universal Skills | med | closed-052b-T3 `edbdd49` (cross-link resolved) | — | Y |
+| T2 release-manager↔release-patch | 05-skills.md L184 Phase 9 Close lists release-manager only | low | closed-052b-T3 `edbdd49` (Phase 9 Close expanded to release-patch OR release-manager) | — | Y |
 | T3 pr-reviewer↔code-reviewer | (all clean — no findings) | — | no-action | — | N |
 | T4 security-auditor↔security-analyst | ADR-015 separate-context citation gap in SKILL.md L14 | med | fix-now-T6 | `skills/security-auditor/SKILL.md` L14 | N |
 | T5 architecture-grill↔design-analyst | Distinct-surface pair confirmed; no coordination loop required | — | no-action | — | N |
@@ -312,6 +313,7 @@ status: PASS
 - **Pre-promote stale-token sweep.** Before Sprint Promote, grep for tokens flagged in recent renames/deprecations across active blueprint primers + README + .claude/CONTEXT.md to surface drift volume early. → propose TD or TASK-NEW for token-audit harness (Sprint 055b TASK-128 overlap).
 - **Whole-primer-rewrite escape hatch.** When ≤1-line discipline can't address a finding (entire primer/diagram about deprecated entity), G1 must surface the multi-line scope and route to TASK-NEW at promote time, not surface mid-sprint as friction.
 - **Coordination-loop bidirectional rule (ADR-031 Open Q E)** — codify into PR review checklist OR pr-reviewer Lens 7 (Documentation): if SKILL+agent pair, verify both directions cite. Currently behavioral; should be lint-enforced via TASK-116-v2 acceptance harness.
+- **T2 7-finding fold-in completed Sprint 052b** (2026-05-09) — release-manager↔release-patch DOC-ONLY findings deferred at T2 close are now closed via Sprint 052b T1 (10-sprint reconcile) + T2 (3 in-place wire-fixes) + T3 (2 primer drift edits). ADR-032 codifies long-term release-debt prevention (Sprint Promote Step 1.5 scan).
 
 ### Surprise log
 

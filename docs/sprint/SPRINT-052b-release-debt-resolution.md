@@ -95,6 +95,7 @@ status: PASS
 | `skills/release-manager/SKILL.md` | T2 | last-validated 2026-04-21 → 2026-05-09 + 1-line Paired counterpart cite (closes 053b T2 #1+#2+#4+#5; cap 71/80 headroom) | low |
 | `skills/release-patch/SKILL.md` | T2 | line 23 in-place modify — paired counterpart cite + ADR-027 boundary + auto-detect cascade note (closes 053b T2 #1+#3+#5; cap 100/100 held) | low |
 | `docs/blueprint/05-skills.md` | T3 | 2 in-place ≤1-line edits — release-manager row cross-link resolved + Phase 9 Close expanded to release-patch OR release-manager (closes 053b T2 #6+#7) | low |
+| `docs/sprint/SPRINT-053b-feature-usage-audit-sweep.md` | T4 | 6 Synthesis Findings disposition flips defer-052b→closed-052b-T1/T2/T3 + 1 Files Changed close-out cross-ref row + 1 Retro pattern-candidates fold-in note (factual close-out per Sprint 047 T1 precedent; lock 3) | low |
 
 ## Decisions
 
