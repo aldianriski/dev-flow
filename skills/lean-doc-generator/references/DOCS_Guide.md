@@ -17,18 +17,21 @@
 
 ## §2 — Core Files
 
-| File | Reader | Max Lines | Update Trigger |
-|---|---|---|---|
-| `README.md` | Anyone | 50 | Project scope changes |
-| `ARCHITECTURE.md` | Tech lead | 150 | Major structural change — use `docs/blueprint/11-lean-architecture.md` for CA+DDD canonical render (per ADR-029) |
-| `DECISIONS.md` | Team | Unlimited | Every significant decision |
-| `SETUP.md` | New dev / CI | 100 | Setup process changes |
-| `AI_CONTEXT.md` / `CONTEXT.md` | AI assistant | 100 | Patterns or conventions change |
-| `TODO.md` | Dev / AI | Unlimited | Backlog change · sprint promote/close |
-| `CHANGELOG.md` | Reviewer | Unlimited (append-only) | Sprint closed |
-| `TEST_SCENARIOS.md` | Dev / QA | Unlimited | New test, coverage gap, suite restructure |
-| `docs/sprint/SPRINT-NNN-<slug>.md` | AI mid-sprint | 400 hard cap | Append during sprint; retro at close |
-| Per-module `README.md` | Dev | 10 | Module purpose changes |
+| File | Reader | Max Lines | Update Trigger | Canonical template |
+|---|---|---|---|---|
+| `README.md` | Anyone | 50 | Project scope changes | `templates/README.md.template` |
+| `ARCHITECTURE.md` | Tech lead | 150 | Major structural change — use `docs/blueprint/11-lean-architecture.md` for CA+DDD canonical render (per ADR-029) | `templates/ARCHITECTURE.md.template` (CA+DDD via per-stack substitutions) |
+| `DECISIONS.md` | Team | Unlimited | Every significant decision | `templates/DECISIONS.md.template` |
+| `SETUP.md` | New dev / CI | 100 | Setup process changes | `templates/SETUP.md.template` |
+| `AI_CONTEXT.md` / `CONTEXT.md` | AI assistant | 100 | Patterns or conventions change | `templates/AI_CONTEXT.md.template` |
+| `CLAUDE.md` (project AI context) | AI assistant | 80 | Project shape / Session Workflow / anti-patterns change | `templates/CLAUDE.md.template` (CA+DDD + Session Workflow per ADR-029) |
+| `TODO.md` | Dev / AI | Unlimited | Backlog change · sprint promote/close · TD section change | `templates/TODO.md.template` (incl. Tech Debt section per TASK-123 F5) |
+| `CHANGELOG.md` | Reviewer | Unlimited (append-only) | Sprint closed | `templates/CHANGELOG.md.template` |
+| `TEST_SCENARIOS.md` | Dev / QA | Unlimited | New test, coverage gap, suite restructure | — (no template; format inline this guide) |
+| `docs/sprint/SPRINT-NNN-<slug>.md` | AI mid-sprint | 400 hard cap | Append during sprint; retro at close | — (format inline this guide §3.9) |
+| Per-module `README.md` | Dev | 10 | Module purpose changes | — (no template) |
+
+**Template-as-canonical-format rule:** when a template exists for a doc type, the template IS the canonical format source — NOT this guide's inline format examples. lean-doc-generator MUST consult `templates/<X>.md.template` before generating to verify section ordering, frontmatter shape, and substitution tokens. Templates use bracket-style placeholders (`[Project Name]`, `[source-root]`, `[app-root-line]`, `[test-root-line]`, layer-block) per `bin/dev-flow-init.js applySubstitutions`. If template and inline format diverge → template wins; raise the divergence as a friction item at sprint close.
 
 Rule: before creating any new file → ask "can this live in code comments?" If yes → code.
 
