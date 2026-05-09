@@ -69,3 +69,5 @@ Execution procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 - Never write the CHANGELOG until the version is confirmed with the user.
 - Do NOT run `git tag` — propose the command for the user to execute.
 - Empty sections (e.g., no breaking changes) are omitted from the CHANGELOG entry.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

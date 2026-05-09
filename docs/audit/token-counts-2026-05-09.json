@@ -1,0 +1,351 @@
+{
+  "generated": "2026-05-09",
+  "tokenizer": "gpt-tokenizer (cl100k_base / o200k default)",
+  "groups": {
+    "skills": {
+      "file_count": 16,
+      "total_tokens": 14692,
+      "total_lines": 1301,
+      "files": [
+        {
+          "path": "skills/orchestrator/SKILL.md",
+          "tokens": 1509,
+          "lines": 100,
+          "cap": 100,
+          "headroom": 0,
+          "tokens_per_line": 15.1
+        },
+        {
+          "path": "skills/prime/SKILL.md",
+          "tokens": 1425,
+          "lines": 89,
+          "cap": 100,
+          "headroom": 11,
+          "tokens_per_line": 16
+        },
+        {
+          "path": "skills/release-patch/SKILL.md",
+          "tokens": 1371,
+          "lines": 101,
+          "cap": 100,
+          "headroom": -1,
+          "tokens_per_line": 13.6
+        },
+        {
+          "path": "skills/lean-doc-generator/SKILL.md",
+          "tokens": 1301,
+          "lines": 97,
+          "cap": 100,
+          "headroom": 3,
+          "tokens_per_line": 13.4
+        },
+        {
+          "path": "skills/task-decomposer/SKILL.md",
+          "tokens": 1016,
+          "lines": 74,
+          "cap": 100,
+          "headroom": 26,
+          "tokens_per_line": 13.7
+        },
+        {
+          "path": "skills/codemap-refresh/SKILL.md",
+          "tokens": 971,
+          "lines": 63,
+          "cap": 100,
+          "headroom": 37,
+          "tokens_per_line": 15.4
+        },
+        {
+          "path": "skills/architecture-grill/SKILL.md",
+          "tokens": 900,
+          "lines": 94,
+          "cap": 100,
+          "headroom": 6,
+          "tokens_per_line": 9.6
+        },
+        {
+          "path": "skills/security-auditor/SKILL.md",
+          "tokens": 878,
+          "lines": 79,
+          "cap": 100,
+          "headroom": 21,
+          "tokens_per_line": 11.1
+        },
+        {
+          "path": "skills/pr-reviewer/SKILL.md",
+          "tokens": 874,
+          "lines": 92,
+          "cap": 100,
+          "headroom": 8,
+          "tokens_per_line": 9.5
+        },
+        {
+          "path": "skills/tdd/SKILL.md",
+          "tokens": 713,
+          "lines": 83,
+          "cap": 100,
+          "headroom": 17,
+          "tokens_per_line": 8.6
+        },
+        {
+          "path": "skills/refactor-advisor/SKILL.md",
+          "tokens": 702,
+          "lines": 64,
+          "cap": 100,
+          "headroom": 36,
+          "tokens_per_line": 11
+        },
+        {
+          "path": "skills/release-manager/SKILL.md",
+          "tokens": 694,
+          "lines": 74,
+          "cap": 100,
+          "headroom": 26,
+          "tokens_per_line": 9.4
+        },
+        {
+          "path": "skills/write-a-skill/SKILL.md",
+          "tokens": 686,
+          "lines": 83,
+          "cap": 100,
+          "headroom": 17,
+          "tokens_per_line": 8.3
+        },
+        {
+          "path": "skills/adr-writer/SKILL.md",
+          "tokens": 657,
+          "lines": 76,
+          "cap": 100,
+          "headroom": 24,
+          "tokens_per_line": 8.6
+        },
+        {
+          "path": "skills/diagnose/SKILL.md",
+          "tokens": 611,
+          "lines": 75,
+          "cap": 100,
+          "headroom": 25,
+          "tokens_per_line": 8.1
+        },
+        {
+          "path": "skills/zoom-out/SKILL.md",
+          "tokens": 384,
+          "lines": 57,
+          "cap": 100,
+          "headroom": 43,
+          "tokens_per_line": 6.7
+        }
+      ]
+    },
+    "skill-references": {
+      "file_count": 12,
+      "total_tokens": 17465,
+      "total_lines": 1317,
+      "files": [
+        {
+          "path": "skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md",
+          "tokens": 3855,
+          "lines": 242,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 15.9
+        },
+        {
+          "path": "skills/orchestrator/references/phases.md",
+          "tokens": 3544,
+          "lines": 282,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 12.6
+        },
+        {
+          "path": "skills/lean-doc-generator/references/VALIDATED_PATTERNS.md",
+          "tokens": 3089,
+          "lines": 203,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 15.2
+        },
+        {
+          "path": "skills/release-patch/references/version-detection.md",
+          "tokens": 2121,
+          "lines": 184,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 11.5
+        },
+        {
+          "path": "skills/lean-doc-generator/references/DOCS_Guide.md",
+          "tokens": 1580,
+          "lines": 126,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 12.5
+        },
+        {
+          "path": "skills/task-decomposer/references/decomposition-spec.md",
+          "tokens": 1175,
+          "lines": 137,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 8.6
+        },
+        {
+          "path": "skills/orchestrator/references/skill-dispatch.md",
+          "tokens": 989,
+          "lines": 60,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 16.5
+        },
+        {
+          "path": "skills/task-decomposer/references/procedure.md",
+          "tokens": 480,
+          "lines": 22,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 21.8
+        },
+        {
+          "path": "skills/pr-reviewer/references/review-standards.md",
+          "tokens": 261,
+          "lines": 28,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 9.3
+        },
+        {
+          "path": "skills/release-manager/references/procedure.md",
+          "tokens": 161,
+          "lines": 10,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 16.1
+        },
+        {
+          "path": "skills/adr-writer/references/procedure.md",
+          "tokens": 120,
+          "lines": 8,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 15
+        },
+        {
+          "path": "skills/architecture-grill/references/procedure.md",
+          "tokens": 90,
+          "lines": 15,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 6
+        }
+      ]
+    },
+    "agents": {
+      "file_count": 7,
+      "total_tokens": 1932,
+      "total_lines": 182,
+      "files": [
+        {
+          "path": "agents/dispatcher.md",
+          "tokens": 448,
+          "lines": 29,
+          "cap": 30,
+          "headroom": 1,
+          "tokens_per_line": 15.4
+        },
+        {
+          "path": "agents/design-analyst.md",
+          "tokens": 293,
+          "lines": 31,
+          "cap": 30,
+          "headroom": -1,
+          "tokens_per_line": 9.5
+        },
+        {
+          "path": "agents/performance-analyst.md",
+          "tokens": 269,
+          "lines": 25,
+          "cap": 30,
+          "headroom": 5,
+          "tokens_per_line": 10.8
+        },
+        {
+          "path": "agents/scope-analyst.md",
+          "tokens": 246,
+          "lines": 31,
+          "cap": 30,
+          "headroom": -1,
+          "tokens_per_line": 7.9
+        },
+        {
+          "path": "agents/migration-analyst.md",
+          "tokens": 242,
+          "lines": 26,
+          "cap": 30,
+          "headroom": 4,
+          "tokens_per_line": 9.3
+        },
+        {
+          "path": "agents/security-analyst.md",
+          "tokens": 220,
+          "lines": 20,
+          "cap": 30,
+          "headroom": 10,
+          "tokens_per_line": 11
+        },
+        {
+          "path": "agents/code-reviewer.md",
+          "tokens": 214,
+          "lines": 20,
+          "cap": 30,
+          "headroom": 10,
+          "tokens_per_line": 10.7
+        }
+      ]
+    },
+    "project-claude": {
+      "file_count": 1,
+      "total_tokens": 838,
+      "total_lines": 80,
+      "files": [
+        {
+          "path": ".claude/CLAUDE.md",
+          "tokens": 838,
+          "lines": 80,
+          "cap": 80,
+          "headroom": 0,
+          "tokens_per_line": 10.5
+        }
+      ]
+    },
+    "project-context": {
+      "file_count": 1,
+      "total_tokens": 1929,
+      "total_lines": 140,
+      "files": [
+        {
+          "path": ".claude/CONTEXT.md",
+          "tokens": 1929,
+          "lines": 140,
+          "cap": null,
+          "headroom": null,
+          "tokens_per_line": 13.8
+        }
+      ]
+    }
+  },
+  "totals": {
+    "files": 37,
+    "tokens": 36856,
+    "lines": 3020
+  },
+  "session_start_load": {
+    "description": "Files loaded automatically on every new session via CLAUDE.md project memory + MEMORY.md auto-memory + skill metadata (descriptions only, NOT bodies — bodies load on Skill invoke).",
+    "components": {
+      "project-claude": 838,
+      "auto-memory-MEMORY.md": null,
+      "skill-descriptions-only": null
+    },
+    "note": "Skill BODIES (SKILL.md content) load on demand when skill triggers — not session-start. Skill DESCRIPTIONS load always (~2-3k tokens for 23 skills per /context view)."
+  }
+}

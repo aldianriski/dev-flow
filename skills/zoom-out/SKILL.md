@@ -52,3 +52,5 @@ LOAD THIS NEXT:
 
 ❌ **Inventing domain terms** — always defer to CONTEXT.md vocabulary; inconsistent naming causes agent drift
 ❌ **Suggesting implementation** — zoom-out is orientation only; use orchestrator for implementation
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

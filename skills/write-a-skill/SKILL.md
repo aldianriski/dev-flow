@@ -78,3 +78,5 @@ Await explicit approval before writing files.
 ❌ **Skill duplicates existing skill** — update the existing skill with a reference instead of creating new
 ❌ **No red flags** — every skill has failure modes; name them before shipping
 ❌ **Script for non-deterministic output** — scripts are for reliable, repeatable ops only
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

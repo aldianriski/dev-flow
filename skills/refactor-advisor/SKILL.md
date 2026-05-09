@@ -59,3 +59,5 @@ Analyze code for quality issues and produce targeted refactor proposals with bef
 - Every `medium` or `high` risk proposal must name specific tests that need updating.
 - Do NOT write implementation code — proposals only.
 - If no clear improvement can be identified → say so rather than inventing issues.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

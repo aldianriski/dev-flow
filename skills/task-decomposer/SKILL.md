@@ -69,3 +69,5 @@ Execution procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 | "This is small, skip the assumption registry" | Unconfirmed auth assumptions are the top source of security regressions |
 | "Four questions is too many, I'll ask all at once" | Stacked questions produce vague answers — one at a time forces precision |
 | "These two tasks are related, I'll merge them" | Related ≠ same concern — verify acceptance criteria are truly identical first |
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

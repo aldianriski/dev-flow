@@ -74,3 +74,5 @@ status: DONE | DONE_WITH_CONCERNS | BLOCKED
 - Do NOT return raw file contents — line references and minimal excerpts only.
 - Do NOT write, delete, or modify any files.
 - Return token budget: ≤250 tokens (CRITICAL findings have no token cap).
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

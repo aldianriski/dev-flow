@@ -15,3 +15,5 @@ Review-phase specialist. Follow the `pr-reviewer` skill (preloaded) for all revi
 **Input** (from dispatcher): `task.id`, `task.title`, `task.acceptance`, approved Gate 1 micro-task list, changed files list.
 
 **Output**: ≤250 tokens. Tiered report — CRITICAL / BLOCKING / NON-BLOCKING / APPROVED PATTERNS. No file writes. No git operations.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).

@@ -59,6 +59,13 @@ status: current
    - **`severity: trivial | minor | medium`** + not aging: surface count summary to user (`"N open TD rows; human review required to promote to Backlog"`). Do NOT auto-promote.
    - **`status: escalated`** without corresponding Backlog `TASK-NNN`: HARD STOP per anti-pattern lock #5. Fix before continuing.
 
+1.5b. **Release-debt scan** (Sprint 052b ADR-032 DEC-3 codification · TASK-NEW Sprint 055b T2). Read `docs/CHANGELOG.md`. Count completed sprints since last `MINOR` OR `MAJOR` plugin release (`plugin.json` + `marketplace.json` lockstep bump). Apply rules:
+   - **Depth `≥3` sprints**: surface as P1 candidate. Prompt user `"Release-debt depth = [N] PATCH-only sprints since last MINOR. Promote release-debt resolution to Backlog P1? (y/n)"`.
+   - **Depth `≥5` sprints**: auto-escalate to Backlog P0 (no human review). Write `release-debt resolution sprint` row in Backlog § P0 with reconcile AC = manual MINOR/MAJOR lockstep bump per ADR-032 DEC-2.
+   - **Depth `≥7` sprints**: HARD STOP Sprint Promote. Block message: `"Release-debt depth = [N]. Promote release-debt resolution sprint FIRST per ADR-032 DEC-3 (≥7 = block threshold)."` Resume Sprint Promote only after release-debt sprint promoted + status=active.
+   - **Counter-stale guard** (TD-001 codify): release-debt depth count refreshes atomically with this scan; do NOT trust pre-cached values from prior session memory.
+   - **Pre-release versions** (alpha/beta/rc): treat as MINOR for depth-counting purposes (release effort already happened).
+
 2. **Pick** top priority items (P0 → P1 → P2). Apply sprint sizing rules: 2–3 tasks min, more if lightweight. Confirm pick with user.
 3. **Decompose** each task. Ask in single message:
 

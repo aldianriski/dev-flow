@@ -58,3 +58,5 @@ The PostToolUse hook on `Bash(git commit*)` fires `scripts/codemap-refresh.ps1` 
 - `hooks/hooks.json` `PostToolUse` matcher `Bash(git commit*)` — auto-trigger config
 - `docs/_routing.json` `L0_overflow` — CLAUDE.md spill rule consumed by this skill's output
 - `docs/sprint/SPRINT-039-codemap-modes-skills.md` T1 acceptance — full criteria for TASK-098
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

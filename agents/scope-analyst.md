@@ -26,3 +26,5 @@ Feature description + optional file hints from dispatcher.
 ## Rules
 - No file writes. No spawning agents. No implementation suggestions.
 - `NEEDS_CONTEXT` → one specific question only.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).

@@ -84,3 +84,5 @@ Next:        run /orchestrator to continue Sprint 039 (3 open tasks)
 
 - Output of TASK-098 (CODEMAP.md `## L0-overflow`) is the canonical L0 module view; TASK-098 PostToolUse hook keeps it fresh.
 - Sprint 039 PRD: `docs/sprint/SPRINT-039-codemap-modes-skills.md` T3 acceptance.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

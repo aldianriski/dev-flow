@@ -87,3 +87,5 @@ status: DONE | DONE_WITH_CONCERNS | BLOCKED
 | "Lens 1 only has minor gaps — I'll flag and continue" | Any Lens 1 (spec compliance) failure → `BLOCKED`. Do not proceed to S2 lenses. |
 
 *Severity examples + hard rules → `references/review-standards.md`*
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

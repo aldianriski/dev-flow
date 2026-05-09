@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-08
+last_updated: 2026-05-10
 update_trigger: Vocab, gate, mode, or agent roster change
 status: current
 ---
@@ -102,6 +102,24 @@ _Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a 
 - Red flags: 3–5 inline, not in a separate doc
 - Add scripts only for deterministic, repeatedly-generated operations
 - Trigger phrase must be specific enough to avoid false positives
+
+---
+
+## Output Discipline
+
+Plugin-wide principle for protocol-output style. Applies to all 16 skills + 7 agents in `dev-flow:`. Anchor: ADR-033. **User-Project Outcome:** O8 plugin reliability (`docs/USER-OUTCOMES.md`).
+
+**Rules:**
+- Status = one-line verdict per step (e.g. `Step N — <result>`); no narrated walkthrough.
+- No decorative emoji checkmarks (✅/❌) in protocol output. Plain-text verdicts only.
+- Lists render compactly: `TASK-NNN — title (P0)` per row; no per-row paragraph.
+- HALT prompts ≤ 4 lines + option list. No re-explanation of options already in the skill body.
+- No preamble fluff: skip phrases like "I have data needed", "Let me emit", "I'll wait for your pick".
+- Code blocks, commit messages, ADR text, security warnings, and irreversible-action confirmations: write normal (Auto-Clarity rule).
+
+**Apply when:** any skill or agent emits protocol-mediated output — sprint-promote step verdicts, decompose Q&A, gate decisions, halt prompts, status reports.
+
+**Why:** Verbose narration wastes tokens (~400/sprint per Sprint 055b T1 audit) and buries actionable signal under prose. Codified plugin-wide to prevent per-skill drift; single canonical source + pointer-line propagation across 23 components beats per-file duplication.
 
 ---
 

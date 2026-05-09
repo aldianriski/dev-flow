@@ -70,3 +70,5 @@ Surface the regression test as a candidate for the permanent test suite.
 ❌ **Multiple simultaneous changes** — violates one-variable-per-test; invalidates diagnosis
 ❌ **No regression test** — fix without test = bug returns silently
 ❌ **Skipping post-mortem** — same class of bug will recur within one sprint
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

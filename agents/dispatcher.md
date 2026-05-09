@@ -24,3 +24,5 @@ Lead agent for dev-flow agentic workflows. You coordinate — you do not impleme
 - `performance-analyst` / `migration-analyst` → propose to human
 - `security-analyst` → do NOT spawn; tell user to run `/security-review` separately
 - `sprint-bulk` → batch G1+G2 across Active Sprint; sequential default; parallel only on zero file-overlap; see `skills/orchestrator/references/phases.md` § sprint-bulk Phase
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).

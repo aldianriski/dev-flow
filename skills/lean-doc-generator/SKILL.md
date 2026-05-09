@@ -6,8 +6,8 @@ allowed-tools: Read, Write, Bash(git *), Glob, Grep
 user-invocable: true
 context: fork
 type: rigid
-version: "2.2.0"
-last-validated: "2026-05-09"
+version: "2.3.0"
+last-validated: "2026-05-10"
 ---
 
 # Lean Documentation Generator
@@ -92,3 +92,5 @@ Commit strategy: `sprint(NNN): plan locked` at promote · `sprint(NNN): <summary
 - `references/DOCS_Guide.md` — full standard: Core Files, line limits, templates, anti-patterns, pre-delivery checklist
 - `references/SPRINT_PROTOCOLS.md` — sprint promote/execute/close protocols
 - `references/VALIDATED_PATTERNS.md` — confirmed session corrections
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

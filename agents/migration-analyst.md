@@ -21,3 +21,5 @@ Migration safety specialist. Check only changed migration files.
 **Input** (from dispatcher): migration file path(s), `task.id`, `task.title`.
 
 **Output**: ≤250 tokens. GO / NO-GO + CRITICAL / BLOCKING / NON-BLOCKING. No file writes.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).

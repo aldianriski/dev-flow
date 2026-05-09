@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-09 (Sprint 052b in-flight — release-debt 10-sprint reconcile; Blueprint 2.5.0 → 2.6.0)
+last_updated: 2026-05-10 (Sprint 055b closed — token + output discipline)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,22 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 055b — Token Audit + Output Discipline + Release-Debt Scan (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-055b-token-output-discipline.md](sprint/SPRINT-055b-token-output-discipline.md)
+- Plan commit: `b05ae9a`
+- Close commit: tbd (filled after squash)
+- Tasks: T1 TASK-128 ✓ · T2 TASK-NEW DEC-3 codify ✓ · T3 TASK-133 Output Discipline ✓
+- ADRs: ADR-033 Output Discipline (5 decisions: principle home + pointer propagation + O8 anchor + zero-headroom handling + re-litigation lock)
+- Skill version bumps: lean-doc-generator 2.2.0 → 2.3.0 MINOR (Step 1.5b release-debt scan)
+- Files changed: 28 modified + 5 new (audit script + propagate script + ADR-033 + 2 audit reports) · Tests added: 0 (audit + codification sprint)
+- Summary: T1 token audit (37 files · 35,549 → 36,856 tokens after T3) surfaced 8 ranked bloat candidates + 3 verdicts (caveman KEEP · sprint-close commit-ID DEFER · planner compress DEFER); T2 codified ADR-032 DEC-3 release-debt scan (Step 1.5b: depth ≥3 P1 · ≥5 auto-escalate · ≥7 BLOCK + counter-stale guard + pre-release MINOR clause); T3 codified Output Discipline plugin-wide (`.claude/CONTEXT.md` § Output Discipline + ADR-033 + 22/23-file pointer fan-out via `scripts/propagate-output-discipline.js`; release-patch SKILL.md sole exception per DEC-4 zero-headroom).
+- Pattern candidates (4): verify-per-file fan-out via Node script · plugin-principle 4-step shape (CONTEXT.md + ADR + propagation script + cap-validation) · mid-sprint scope deferral via Surprise log · audit-then-codify sequence.
+- Mid-Sprint Friction Protocol invoked once (post-T3): user-surfaced History Hygiene scope expansion → DEFER per ADR-031 anti-slip → TASK-134a + TASK-134b written to Backlog (Sprint 055c candidate).
+- Blueprint version: 2.6.0 unchanged (no plugin manifest contract change; lean-doc skill MINOR is internal contract only).
 
 ---
 

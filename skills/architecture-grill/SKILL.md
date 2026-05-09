@@ -89,3 +89,5 @@ Procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 - Do NOT propose implementation details — design review only.
 - Do NOT return raw file contents.
 - If no architecture document exists for a brownfield review → return `NEEDS_CONTEXT`.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

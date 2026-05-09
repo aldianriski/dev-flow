@@ -20,3 +20,5 @@ Performance specialist. Triggered only when task has `risk: high` + `layers` inc
 **Input** (from dispatcher): changed files list, `task.title`, CLAUDE.md performance baselines if present.
 
 **Output**: ≤250 tokens. CRITICAL / BLOCKING / NON-BLOCKING + RECOMMENDATION. No file writes.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).

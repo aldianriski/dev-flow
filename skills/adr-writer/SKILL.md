@@ -71,3 +71,5 @@ Execution procedure: `${CLAUDE_SKILL_DIR}/references/procedure.md`
 - Consequences must have at least one Negative entry — no decision is cost-free.
 - `docs/DECISIONS.md` is append-only — never edit past ADRs, only mark them deprecated or superseded.
 - If `docs/DECISIONS.md` does not exist, create it with the ownership header first, then append the ADR.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

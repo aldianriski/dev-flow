@@ -15,3 +15,5 @@ Security audit specialist. Runs in a separate session via /security-review. Foll
 **Input** (from dispatcher): `task.id`, `task.title`, changed files list, stack (framework + language) from CLAUDE.md.
 
 **Output**: ≤250 tokens (CRITICAL findings have no cap). Tiered report — CRITICAL / BLOCKING / NON-BLOCKING. No file writes.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).

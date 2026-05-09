@@ -78,3 +78,5 @@ Only after ALL tests are green:
 ❌ **Full suite not run after each GREEN** — regressions hidden until too late
 ❌ **Refactoring before all tests green** — mixing concerns; stop, go green first
 ❌ **Testing implementation details** — fragile suite; rewrite test against public interface
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

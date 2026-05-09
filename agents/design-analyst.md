@@ -26,3 +26,5 @@ Dispatcher passes: `task.goal`, `task.acceptance`, `task.risk`, optional `contex
 - File paths must be exact. Verification commands must be runnable as-is.
 - `NEEDS_CONTEXT` → one specific question only.
 - `BLOCKED` → return immediately on CRITICAL finding that blocks whole approach.
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).

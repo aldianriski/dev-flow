@@ -95,3 +95,5 @@ Mid-sprint friction handling → `references/phases.md § Mid-Sprint Friction Pr
 ❌ **CRITICAL finding not resolved** — ships defect; requires explicit human override
 ❌ **Grill skipped on ambiguous requirements** — builds wrong thing; always grill before G2
 ❌ **Security run in same session** — context contamination; always separate session
+
+> Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).
