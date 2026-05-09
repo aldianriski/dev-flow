@@ -76,7 +76,7 @@ python -m py_compile evals/measure.py           # syntax-only check
 **`settings.local.json not found`** — copy from `.claude/settings.local.example.json`; this file
 is gitignored per machine.
 
-**`CLAUDE.md over budget`** — CLAUDE.md must stay ≤200 lines. Run `/dev-flow-compress` to condense.
+**`CLAUDE.md over budget`** — CLAUDE.md must stay ≤200 lines. Run `/caveman:compress` to condense.
 
 **Test runner exits with no output** — Node built-in test runner requires Node ≥18.
 Confirm with `node --version`.

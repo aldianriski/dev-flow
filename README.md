@@ -36,7 +36,7 @@ Plugin auto-discovers components at repo root after install. All counts verified
 |:----------|:------|:-------------|
 | Gates     | 2     | G1 Scope + G2 Design checkpoints before any commit |
 | Modes     | 4     | `init` · `quick` · `mvp` · `sprint-bulk` (operational context) |
-| Skills    | 17    | User-invokable slash commands (`skills/<name>/SKILL.md`) |
+| Skills    | 16    | User-invokable slash commands (`skills/<name>/SKILL.md`) |
 | Agents    | 7     | dispatcher + 6 specialists (design / code-reviewer / scope / security / performance / migration) |
 | Hooks     | 3     | SessionStart bootstrap · PreToolUse chain-guard · PostToolUse codemap-refresh |
 | Scripts   | 4     | 2 Node (`audit-baseline.js`, `eval-skills.js`) + 2 PowerShell (`session-start.ps1`, `codemap-refresh.ps1`) |
@@ -96,7 +96,7 @@ Full gate checklists → [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Gates · 
 | `orchestrator`            | `/orchestrator`          | Core workflow — gates, modes, agent dispatch | flow · correction · rework |
 | `task-decomposer`         | `/task-decomposer`       | Freeform intent → TASK-NNN entries + vertical slices | rework · template |
 | `prime`                   | `/prime`                 | Ordered context loader at session start | onboard · flow |
-| `system-design-reviewer`  | `/system-design-reviewer`| Architecture review + grill mode | architecture · rework |
+| `architecture-grill`      | `/architecture-grill`    | Architecture stress-test + grill mode (ad-hoc; distinct from design-analyst auto-G2) | architecture · rework |
 | `pr-reviewer`             | `/pr-reviewer`           | Structured 7-lens code review | rework · reliability |
 | `security-auditor`        | `/security-review`       | OWASP audit (separate session) | reliability · rework |
 | `refactor-advisor`        | `/refactor-advisor`      | Code smells + deep-module opportunities | architecture · rework |
@@ -106,8 +106,7 @@ Full gate checklists → [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Gates · 
 | `lean-doc-generator`      | `/lean-doc-generator`    | WHY/WHERE docs · sprint lifecycle (start/promote/close) | doc-rot · template · architecture |
 | `adr-writer`              | `/adr-writer`            | Architectural decision records | architecture · doc-rot |
 | `release-manager`         | `/release-manager`       | Semver + changelog generation | reliability · flow |
-| `release-patch`           | `/release-patch`         | PATCH bump (`plugin.json` + `marketplace.json` lockstep), HARD STOP at push | reliability · flow |
-| `dev-flow-compress`       | `/dev-flow-compress`     | Compress CLAUDE.md / memory files (caveman style) | flow |
+| `release-patch`           | `/release-patch`         | PATCH bump — auto-detects manifest (plugin / npm / python / cargo / go / flat); HARD STOP at push | reliability · flow |
 | `write-a-skill`           | `/write-a-skill`         | Author new skills with quality constraints | template · reliability |
 | `codemap-refresh`         | `/codemap-refresh`       | Regenerate `docs/codemap/` (also auto on commit) | onboard · doc-rot |
 

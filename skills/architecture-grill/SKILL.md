@@ -1,16 +1,16 @@
 ---
-name: system-design-reviewer
-description: Use when reviewing a proposed or existing system design — before building a new service or major feature, or auditing an existing architecture for scalability, coupling, or correctness issues — at Gate 1 design approval or on demand. Do not use for code-level review or debugging; use pr-reviewer or diagnose instead.
+name: architecture-grill
+description: Use when stress-testing a proposed or existing architecture via grill mode (one-question-at-a-time interview) — at Gate 1 design approval, before building a new service or major feature, or auditing for scalability/coupling/correctness issues. Distinct from design-analyst (auto-G2 plan) — this is ad-hoc human-driven grill. Do not use for code-level review or debugging; use pr-reviewer or diagnose instead.
 user-invocable: true
 context: fork
-version: "1.0.0"
-last-validated: "2026-04-21"
+version: "2.0.0"
+last-validated: "2026-05-08"
 type: flexible
 ---
 
-# System Design Reviewer
+# architecture-grill
 
-Review a proposed or existing system design for scalability, coupling, correctness, and architecture quality. Supports both greenfield design and brownfield audits.
+Stress-test architecture via grill mode + 5 review lenses. Greenfield or brownfield. Distinct from `design-analyst` (auto-G2 design plan agent) — this skill is the ad-hoc human-driven interview surface.
 
 ## Review Lenses
 
@@ -42,7 +42,7 @@ Review a proposed or existing system design for scalability, coupling, correctne
 ## Output Format
 
 ```
-## System Design Review — [system or feature name]
+## Architecture Grill — [system or feature name]
 
 status: APPROVED | APPROVED_WITH_CONCERNS | NEEDS_REVISION | BLOCKED
 

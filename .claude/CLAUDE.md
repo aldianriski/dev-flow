@@ -15,7 +15,7 @@ status: current
 
 ## File Structure
 ```
-skills/          # 17 SKILL.md files + references/ subdirs (plugin auto-discovers)
+skills/          # 16 SKILL.md files + references/ subdirs (plugin auto-discovers)
 agents/          # 7 agents (dispatcher + 6 specialists)
 scripts/         # audit-baseline.js, eval-skills.js (Node) + session-start.ps1, codemap-refresh.ps1 (PowerShell hooks per ADR-016)
 hooks/

@@ -28,12 +28,12 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 
 ---
 
-## Skills (17) → outcomes
+## Skills (16) → outcomes
 
 - **`orchestrator`** → O5 · O6 · O4 — gate-driven dispatch; G1 catches scope drift; G2 forces design before commit. **Skip when:** trivial in-file edit (no scope/design questions); use direct edit.
 - **`task-decomposer`** → O4 · O7 — vertical slice decomposition; assumption registry prevents premature implementation. **Skip when:** task already in Active Sprint — use `/orchestrator`.
 - **`prime`** → O1 · O5 — deterministic context load (CLAUDE.md → CONTEXT.md → MEMORY → sprint → codemap L0). **Skip when:** resuming mid-session with context still warm.
-- **`system-design-reviewer`** → O3 · O4 — grill mode surfaces hidden coupling pre-implementation. **Skip when:** single-file bug fix — use `/diagnose`.
+- **`architecture-grill`** → O3 · O4 — ad-hoc grill mode (one-question-at-a-time) surfaces hidden coupling pre-implementation; distinct from `design-analyst` (auto-G2 design plan agent). **Skip when:** single-file bug fix — use `/diagnose`.
 - **`pr-reviewer`** → O4 · O8 — 7-lens structured review; catches regressions before merge. **Skip when:** docs-only PR with no behavior change.
 - **`security-auditor`** (`/security-review`) → O8 · O4 — OWASP audit in separate session (ADR-015 one-way dispatch). **Skip when:** governance/docs change with no surface to audit.
 - **`refactor-advisor`** → O3 · O4 — code-smell sweep; deep-module candidates. **Skip when:** green-field code with no callers yet.
@@ -43,8 +43,7 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 - **`lean-doc-generator`** → O2 · O7 · O3 — frontmatter discipline · sprint lifecycle templates · WHY/WHERE-only enforcement. **Skip when:** target file is prose-only (no frontmatter contract) — falls back to plain edit.
 - **`adr-writer`** → O3 · O2 — captures hard-to-reverse decisions; prevents architectural amnesia. **Skip when:** reversible low-impact decision; over-ADR-ing dilutes registry signal.
 - **`release-manager`** → O8 · O5 — semver discipline; changelog generation from git. **Skip when:** pre-v1 unstable phase; bump-then-rebump churn.
-- **`release-patch`** → O8 · O5 — PATCH bump lockstep (`plugin.json` + `marketplace.json`); HARD STOP at push. **Skip when:** docs-only diff (skill auto-skips bump per Sprint 045 contract).
-- **`dev-flow-compress`** → O5 — caveman compression of CLAUDE.md / memory files; saves input tokens. **Skip when:** target file already <1k tokens; compression overhead exceeds saving.
+- **`release-patch`** → O8 · O5 — PATCH bump with auto-detected manifest cascade (plugin lockstep / npm `package.json` / python `pyproject.toml` / cargo `Cargo.toml` / go tag / flat `VERSION`); CHANGELOG prepend; plugin-mode-only steps (MEMORY refresh + CONTEXT drift check); HARD STOP at push. **Skip when:** no version manifest detected (release is tag-only with no version field anywhere) — skill prompts and exits clean. Auto-skips when diff is docs-only.
 - **`write-a-skill`** → O7 · O8 — skill authoring with size caps + trigger-quality gates. **Skip when:** one-off prompt that won't be reused.
 - **`codemap-refresh`** → O1 · O2 — regenerates `docs/codemap/CODEMAP.md` + `handoff.json` (3-tier). **Skip when:** PostToolUse hook will fire on next commit anyway; manual run is for first-time setup or stale-hook recovery.
 
