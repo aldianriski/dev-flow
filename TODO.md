@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint or task state change
 status: current
-sprint: — none — (055c closed)
+sprint: 055 (active)
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,17 +35,15 @@ sprint: — none — (055c closed)
 
 ## Active Sprint
 
-→ **— none —**
+→ **[docs/sprint/SPRINT-055-acceptance-harness.md](docs/sprint/SPRINT-055-acceptance-harness.md)** *(status: active — plan locked)*
 
-> Sprint 055c closed (close commit pending). 4 tasks delivered: T1 TASK-134a Phase 1 codified plugin-wide History Hygiene principle (CONTEXT.md § +17 lines · ADR-034 5 DECs · pattern mirrors ADR-033 Output Discipline) · T2 TASK-134a Phase 2-4 applied rules (TODO.md ribbon 8→3 · 12 closed-row collapses · 10 row deletes · CHANGELOG + sprint-retro audits clean · cross-ref grep verified) · T3 TASK-134b Phase 1 wrote `scripts/scan-legacy-docs.js` (zero-dep · 267 lines · refs+age+status+verdicts) · T4 TASK-134b Phase 2-3 verdicts applied (4 ARCHIVE: AUDIT/AUDIT_PASS2/BASELINE_ASPECT/READINESS → `docs/archive/` · 2 KEEP: AI_WORKFLOW_BLUEPRINT/STRATEGY_REVIEW). 0 friction. Pre-v1 doc hygiene baseline established.
+> Sprint 055 plan locked at promote: TASK-116-v2 acceptance harness Node port (`scripts/eval-acceptance.js`) + TD-002 cap-headroom lint fold-in. 5 tasks: T1 skeleton + 3-skill seed Mode A · T2 8-lift verification + retroactive eval-evidence · T3 TD-002 cap-headroom lint · T4 conditional ADR-035 (only if Mode-A-vs-B branch surfaces) · T5 close. Release-debt depth=6 deferred to Sprint 056 v1-ship per ADR-032 DEC-2.
 >
-> Next: Sprint 055 — TASK-116-v2 acceptance harness · Sprint 055-2 — TASK-115-v2 caveman 3-arm eval · Sprint 056 — v1 ship (incl. release-debt reconcile MINOR/MAJOR lockstep per ADR-032 DEC-2).
+> Next: Sprint 055-2 — TASK-115-v2 caveman 3-arm eval · Sprint 056 — v1 ship (incl. release-debt reconcile MINOR/MAJOR lockstep per ADR-032 DEC-2).
 
-> Sprint 055b closed `be46f3f`. 3 tasks delivered: T1 TASK-128 token audit (37 files · 35,549→36,856 tokens; 8 ranked bloat candidates; 3 verdicts) · T2 TASK-NEW DEC-3 release-debt scan codified (Step 1.5b) · T3 TASK-133 Output Discipline plugin principle (CONTEXT.md + ADR-033 + 22/23-file pointer fan-out). lean-doc-generator 2.2.0→2.3.0 MINOR. Mid-Sprint Friction Protocol invoked → TASK-134a + TASK-134b deferred to Sprint 055c.
+> Sprint 055c closed `a197a47`. 4 tasks delivered: T1+T2 TASK-134a History Hygiene principle (CONTEXT.md § + ADR-034 5 DECs + ribbon 8→3 + 12 closed-row collapses + 10 deletes) · T3+T4 TASK-134b legacy-doc scan (`scripts/scan-legacy-docs.js` zero-dep + 4 ARCHIVE/2 KEEP verdicts). 0 friction.
 
-> Sprint 054b closed `65e74c5`. TASK-131 doc-wire cleanup: ADR-030 init phase citation + Path B citation + skill-dispatch NEW Invocation column distinguishing 4 patterns. orchestrator SKILL.md cap held 97/100. No ADR; no behavioral contract change.
-
-> Sprint 054 closed `932d700`. TASK-130 anti-slip discipline at G1: ADR-031 + sprint-bulk Phase 0 Active Sprint guard + Mid-Sprint Friction Protocol explicit triggers + G1 4 new fields (focus · context-budget · explicit-gaps · done-confirmation). orchestrator 2.0.0→2.1.0.
+> Sprint 055b closed `be46f3f`. 3 tasks: TASK-128 token audit · TASK-NEW DEC-3 release-debt scan codified (Step 1.5b) · TASK-133 Output Discipline plugin principle (CONTEXT.md + ADR-033 + 23-file pointer fan-out). lean-doc 2.2.0→2.3.0.
 
 ---
 
@@ -57,7 +55,7 @@ sprint: — none — (055c closed)
 - [x] **TASK-130** — closed Sprint 054 `932d700` — orchestrator anti-slip discipline at G1 + ADR-031 + Phase 0 Active Sprint guard + Friction Protocol explicit triggers; orchestrator 2.0.0→2.1.0.
 - [x] **TASK-131** — closed Sprint 054b `65e74c5` — orchestrator doc-wire cleanup (ADR-030 init citation + Path B citation + skill-dispatch NEW Invocation column).
 - [x] **TASK-129** — closed direct-commit — /prime behavior fix (per-detection-branch Next: + 3 anti-patterns + Step 6 + cache markers); skill 1.0.0→1.1.0.
-- [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap) + skeleton creation Sprint 051a + lean-doc/task-decomposer alignment Sprint 053. Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 054.
+- [→] **TASK-116-v2** — promoted Sprint 055 (planning) — acceptance harness Node port + TD-002 cap-headroom lint fold-in; details in [SPRINT-055-acceptance-harness.md](docs/sprint/SPRINT-055-acceptance-harness.md).
 - [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 055.
 - [x] **TASK-134a** — closed Sprint 055c (close commit pending) — History Hygiene plugin principle codified (CONTEXT.md § +17 lines · ADR-034 5 DECs · TODO/sprint/CHANGELOG/Roadmap rules applied; ribbon 8→3 · 12 row collapses · 10 row deletes; 0 friction).
 - [x] **TASK-134b** — closed Sprint 055c (close commit pending) — Legacy-doc scan + cleanup (`scripts/scan-legacy-docs.js` zero-dep 267 lines + 6 repo-root anomalies → 4 ARCHIVE/2 KEEP verdicts applied; cross-refs verified clean).
