@@ -4,7 +4,7 @@ last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: closed
 plan_commit: 2eb437f
-close_commit: TBD
+close_commit: 2266b9d
 ---
 
 # Sprint 051b — Lean Architecture Templates + Primer + Workflow Vision Fold-in
@@ -218,7 +218,7 @@ NEW `docs/blueprint/12-session-workflow.md` (163/200 cap held). 7 sections: The 
 
 Refresh: 03-workflow-phases.md 87→103 lines (mode table · gate table · phases per mode · agent dispatch · hard stops · cross-links). 08-orchestrator-prompts.md 397→210 lines (deprecated Gate 0/1/2 prompts + full/hotfix/review/resume mode prompts trimmed; Parse Path A/B + G1 + Grill + G2 + Sprint-Bulk Batched + Implement + Review + Commit + Sprint Close + Hard Stops kept). Cross-link mesh: 03 ↔ 08 ↔ 12 ↔ CONTEXT.md ↔ orchestrator/SKILL.md.
 
-### 2026-05-09 | sprint close — TBD
+### 2026-05-09 | sprint close — `2266b9d`
 This commit. ADR-029 user-project surfaces fully landed: CLAUDE.md template + ARCHITECTURE.md template + blueprint/11-lean-architecture.md primer + lean-doc-generator wire + applySubstitutions per-stack render. TASK-127 vision codified: blueprint/12-session-workflow.md primer + README Daily Pattern + CLAUDE.md Session Workflow block. T5.5 closed unrelated stale-blueprint coherence gap. release-patch NOT invoked (Sprint 052b release-debt resolution still owed).
 
 ---
