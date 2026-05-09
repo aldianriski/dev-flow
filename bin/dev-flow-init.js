@@ -13,27 +13,46 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 
 // Per-stack defaults. lintCommand/typecheckCommand wire into settings.local.json
 // PreToolUse hooks for Bash(git commit*) / Bash(git push*).
+//
+// Layer set = Clean Architecture + DDD canonical (ADR-029):
+//   domain         — entities, value objects, aggregates, domain events, repo interfaces
+//   application    — use cases, application services, DTOs, ports
+//   infrastructure — repo implementations, framework adapters, db, external clients
+//   interface      — HTTP/CLI/UI entry (controllers, routes, presenters)
+//   shared         — cross-cutting (errors, types, value objects shared across contexts)
+//
+// react-next variant: 4 layers (interface collapses into Next.js app/ routing).
+// go-gin: tests live alongside source per Go convention; testRoot omitted.
 const STACK_PRESETS = {
   'node-express': {
-    layers: 'api, service, repository, middleware, model',
+    layers: 'domain, application, infrastructure, interface, shared',
+    sourceRoot: 'src',
+    testRoot: 'tests',
     lintCommand: 'npm run lint',
     typecheckCommand: 'npx tsc --noEmit',
     packageManager: 'npm',
   },
   'react-next': {
-    layers: 'api, hook, component, page, store, infrastructure',
+    layers: 'domain, application, infrastructure, shared',
+    sourceRoot: 'src',
+    appRoot: 'app',
+    testRoot: 'tests',
     lintCommand: 'npm run lint',
     typecheckCommand: 'npx tsc --noEmit',
     packageManager: 'npm',
   },
   'python-fastapi': {
-    layers: 'api, service, repository, middleware, model',
+    layers: 'domain, application, infrastructure, interface, shared',
+    sourceRoot: 'app',
+    testRoot: 'tests',
     lintCommand: 'ruff check .',
     typecheckCommand: 'mypy .',
     packageManager: 'pip',
   },
   'go-gin': {
-    layers: 'api, service, repository, middleware, model',
+    layers: 'domain, application, infrastructure, interface, shared',
+    sourceRoot: 'internal',
+    cmdRoot: 'cmd',
     lintCommand: 'go vet ./...',
     typecheckCommand: 'go build ./...',
     packageManager: 'go',
@@ -183,6 +202,52 @@ function createEmptyScaffoldDirs(target) {
   }
 }
 
+// ─── Create lean architecture skeleton (ADR-029) ──────────────────────────────
+
+// Materializes per-stack project skeleton: CA+DDD layer dirs under sourceRoot,
+// optional appRoot (Next.js) / cmdRoot (Go), and tests/{unit,integration,e2e}/
+// when testRoot is set. Custom presets without sourceRoot are skipped silently
+// (user owns project shape).
+//
+// Idempotent: preserves user content alongside .gitkeep files.
+function createProjectSkeleton(target, preset) {
+  if (!preset || !preset.sourceRoot) return;
+
+  const writeKeep = (dirPath) => {
+    fs.mkdirSync(dirPath, { recursive: true });
+    const keepPath = path.join(dirPath, '.gitkeep');
+    if (!fs.existsSync(keepPath)) {
+      fs.writeFileSync(keepPath, '', 'utf8');
+    }
+  };
+
+  // Layer dirs under sourceRoot
+  const layerList = (preset.layers || '')
+    .split(',')
+    .map((l) => l.trim())
+    .filter(Boolean);
+  for (const layer of layerList) {
+    writeKeep(path.join(target, preset.sourceRoot, layer));
+  }
+
+  // Next.js App Router (react-next)
+  if (preset.appRoot) {
+    writeKeep(path.join(target, preset.appRoot));
+  }
+
+  // Go cmd entry root (go-gin)
+  if (preset.cmdRoot) {
+    writeKeep(path.join(target, preset.cmdRoot));
+  }
+
+  // Test dirs (skipped for stacks where tests live alongside source — Go)
+  if (preset.testRoot) {
+    for (const testDir of ['unit', 'integration', 'e2e']) {
+      writeKeep(path.join(target, preset.testRoot, testDir));
+    }
+  }
+}
+
 // ─── Prompts ─────────────────────────────────────────────────────────────────
 
 function ask(iface, question, defaultVal) {
@@ -264,10 +329,21 @@ async function main() {
   const settingsResult = renderSettingsLocal(target, preset);
   renderTemplates(target, vars);
   createEmptyScaffoldDirs(target);
+  createProjectSkeleton(target, preset);
 
   console.log('\nScaffold written to: ' + target);
   console.log(`Hooks configured for ${presetName}: lint=${preset.lintCommand} | typecheck=${preset.typecheckCommand}`);
   console.log('Empty dirs created: docs/codemap/ + docs/adr/ (.gitkeep tracked)');
+  if (preset.sourceRoot) {
+    const extras = [];
+    if (preset.appRoot) extras.push(preset.appRoot + '/');
+    if (preset.cmdRoot) extras.push(preset.cmdRoot + '/');
+    if (preset.testRoot) extras.push(preset.testRoot + '/{unit,integration,e2e}/');
+    const extraStr = extras.length ? ' + ' + extras.join(' + ') : '';
+    console.log(`Lean architecture skeleton (ADR-029): ${preset.sourceRoot}/{${preset.layers}}/${extraStr}`);
+  } else {
+    console.log('Lean architecture skeleton: skipped (custom preset — user owns project shape)');
+  }
   if (settingsResult.preserved) {
     console.log(`Existing settings.local.json preserved; rendered output at ${settingsResult.wrote}`);
   }
@@ -280,6 +356,7 @@ module.exports = {
   renderSettingsLocal,
   renderTemplates,
   createEmptyScaffoldDirs,
+  createProjectSkeleton,
   isHookCommandSafe,
   STACK_PRESETS,
   NOOP_COMMAND,

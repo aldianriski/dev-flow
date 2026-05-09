@@ -12,6 +12,7 @@ const {
   getStackPreset,
   renderSettingsLocal,
   createEmptyScaffoldDirs,
+  createProjectSkeleton,
   isHookCommandSafe,
   STACK_PRESETS,
   NOOP_COMMAND,
@@ -90,16 +91,33 @@ test('applySubstitutions: replaces multiple occurrences', () => {
 
 // ─── getStackPreset ───────────────────────────────────────────────────────────
 
-test('getStackPreset: node-express has repository in layers', () => {
-  assert.ok(getStackPreset('node-express').layers.includes('repository'));
+test('getStackPreset: node-express has CA+DDD layers (domain, application)', () => {
+  const layers = getStackPreset('node-express').layers;
+  assert.ok(layers.includes('domain'), 'domain layer present');
+  assert.ok(layers.includes('application'), 'application layer present');
+  assert.ok(layers.includes('infrastructure'), 'infrastructure layer present');
+  assert.ok(layers.includes('interface'), 'interface layer present');
+  assert.ok(layers.includes('shared'), 'shared layer present');
 });
 
 test('getStackPreset: node-express has npm-style lint command', () => {
   assert.equal(getStackPreset('node-express').lintCommand, 'npm run lint');
 });
 
-test('getStackPreset: react-next layers include hook', () => {
-  assert.ok(getStackPreset('react-next').layers.includes('hook'));
+test('getStackPreset: node-express sourceRoot = src and testRoot = tests', () => {
+  const p = getStackPreset('node-express');
+  assert.equal(p.sourceRoot, 'src');
+  assert.equal(p.testRoot, 'tests');
+});
+
+test('getStackPreset: react-next has 4-layer variant (interface collapses to app/)', () => {
+  const p = getStackPreset('react-next');
+  assert.ok(p.layers.includes('domain'));
+  assert.ok(p.layers.includes('application'));
+  assert.ok(p.layers.includes('infrastructure'));
+  assert.ok(p.layers.includes('shared'));
+  assert.ok(!p.layers.includes('interface'), 'no interface layer (collapses to app/)');
+  assert.equal(p.appRoot, 'app');
 });
 
 test('getStackPreset: python-fastapi uses ruff for lint', () => {
@@ -110,6 +128,10 @@ test('getStackPreset: python-fastapi uses pip as package manager', () => {
   assert.equal(getStackPreset('python-fastapi').packageManager, 'pip');
 });
 
+test('getStackPreset: python-fastapi sourceRoot = app', () => {
+  assert.equal(getStackPreset('python-fastapi').sourceRoot, 'app');
+});
+
 test('getStackPreset: go-gin uses go vet for lint', () => {
   assert.equal(getStackPreset('go-gin').lintCommand, 'go vet ./...');
 });
@@ -118,9 +140,16 @@ test('getStackPreset: go-gin uses go build for typecheck', () => {
   assert.equal(getStackPreset('go-gin').typecheckCommand, 'go build ./...');
 });
 
-test('getStackPreset: every preset has all four required fields', () => {
+test('getStackPreset: go-gin sourceRoot = internal + cmdRoot = cmd; no testRoot', () => {
+  const p = getStackPreset('go-gin');
+  assert.equal(p.sourceRoot, 'internal');
+  assert.equal(p.cmdRoot, 'cmd');
+  assert.equal(p.testRoot, undefined, 'go tests live alongside source per Go convention');
+});
+
+test('getStackPreset: every preset has CA+DDD core fields', () => {
   for (const [name, preset] of Object.entries(STACK_PRESETS)) {
-    for (const field of ['layers', 'lintCommand', 'typecheckCommand', 'packageManager']) {
+    for (const field of ['layers', 'sourceRoot', 'lintCommand', 'typecheckCommand', 'packageManager']) {
       assert.ok(preset[field], `${name}.${field} is set`);
     }
   }
@@ -291,6 +320,95 @@ test('createEmptyScaffoldDirs: idempotent on re-run', () => {
     createEmptyScaffoldDirs(dir);
     assert.equal(fs.readFileSync(userMarker, 'utf8'), 'user content', 'user content preserved');
     assert.ok(fs.existsSync(path.join(dir, 'docs', 'adr', '.gitkeep')), 'adr/.gitkeep still present');
+  } finally {
+    rmRf(dir);
+  }
+});
+
+// ─── Lean architecture skeleton (Sprint 051a / ADR-029) ───────────────────────
+
+test('createProjectSkeleton: creates 5 CA layers under src/ for node-express', () => {
+  const dir = makeTempDir();
+  try {
+    createProjectSkeleton(dir, getStackPreset('node-express'));
+    for (const layer of ['domain', 'application', 'infrastructure', 'interface', 'shared']) {
+      const layerPath = path.join(dir, 'src', layer);
+      const keepPath  = path.join(layerPath, '.gitkeep');
+      assert.ok(fs.existsSync(layerPath), `src/${layer}/ created`);
+      assert.ok(fs.existsSync(keepPath),  `src/${layer}/.gitkeep written`);
+    }
+  } finally {
+    rmRf(dir);
+  }
+});
+
+test('createProjectSkeleton: creates app/ + 4 layers under src/ for react-next', () => {
+  const dir = makeTempDir();
+  try {
+    createProjectSkeleton(dir, getStackPreset('react-next'));
+    assert.ok(fs.existsSync(path.join(dir, 'app', '.gitkeep')), 'app/.gitkeep written (Next.js routing)');
+    for (const layer of ['domain', 'application', 'infrastructure', 'shared']) {
+      assert.ok(fs.existsSync(path.join(dir, 'src', layer, '.gitkeep')), `src/${layer}/.gitkeep written`);
+    }
+    // interface should NOT be a src/ subdir for react-next (collapses to app/)
+    assert.ok(!fs.existsSync(path.join(dir, 'src', 'interface')), 'no src/interface/ for react-next');
+  } finally {
+    rmRf(dir);
+  }
+});
+
+test('createProjectSkeleton: creates internal/ layers + cmd/ for go-gin (no testRoot)', () => {
+  const dir = makeTempDir();
+  try {
+    createProjectSkeleton(dir, getStackPreset('go-gin'));
+    for (const layer of ['domain', 'application', 'infrastructure', 'interface', 'shared']) {
+      assert.ok(fs.existsSync(path.join(dir, 'internal', layer, '.gitkeep')), `internal/${layer}/.gitkeep written`);
+    }
+    assert.ok(fs.existsSync(path.join(dir, 'cmd', '.gitkeep')), 'cmd/.gitkeep written (Go entry root)');
+    assert.ok(!fs.existsSync(path.join(dir, 'tests')), 'no top-level tests/ for go-gin');
+  } finally {
+    rmRf(dir);
+  }
+});
+
+test('createProjectSkeleton: creates tests/{unit,integration,e2e}/ for non-go stacks', () => {
+  const dir = makeTempDir();
+  try {
+    createProjectSkeleton(dir, getStackPreset('node-express'));
+    for (const testDir of ['unit', 'integration', 'e2e']) {
+      assert.ok(fs.existsSync(path.join(dir, 'tests', testDir, '.gitkeep')), `tests/${testDir}/.gitkeep written`);
+    }
+  } finally {
+    rmRf(dir);
+  }
+});
+
+test('createProjectSkeleton: skips custom preset (no sourceRoot)', () => {
+  const dir = makeTempDir();
+  try {
+    const customPreset = getStackPreset('custom', { layers: 'domain, application', lintCommand: 'echo lint', typecheckCommand: 'echo tc', packageManager: 'npm' });
+    createProjectSkeleton(dir, customPreset);
+    // Nothing should be created — custom preset has no sourceRoot
+    assert.ok(!fs.existsSync(path.join(dir, 'src')),       'no src/ for custom');
+    assert.ok(!fs.existsSync(path.join(dir, 'app')),       'no app/ for custom');
+    assert.ok(!fs.existsSync(path.join(dir, 'internal')),  'no internal/ for custom');
+    assert.ok(!fs.existsSync(path.join(dir, 'tests')),     'no tests/ for custom');
+  } finally {
+    rmRf(dir);
+  }
+});
+
+test('createProjectSkeleton: idempotent on re-run preserves user content', () => {
+  const dir = makeTempDir();
+  try {
+    createProjectSkeleton(dir, getStackPreset('python-fastapi'));
+    // Write user content under app/domain/
+    const userFile = path.join(dir, 'app', 'domain', 'order.py');
+    fs.writeFileSync(userFile, 'class Order: pass\n', 'utf8');
+    // Second invocation
+    createProjectSkeleton(dir, getStackPreset('python-fastapi'));
+    assert.equal(fs.readFileSync(userFile, 'utf8'), 'class Order: pass\n', 'user content preserved');
+    assert.ok(fs.existsSync(path.join(dir, 'app', 'application', '.gitkeep')), 'application/.gitkeep still present');
   } finally {
     rmRf(dir);
   }

@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-08
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 051a
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,9 +35,9 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ **TASK-122a** — Lean Architecture Foundation (STACK_PRESETS migration + project skeleton scaffold + ADR-029). Sub-tasks T1-T5 per [`docs/sprint/SPRINT-051a-lean-architecture-foundation.md`](docs/sprint/SPRINT-051a-lean-architecture-foundation.md): T1 STACK_PRESETS migration · T2 createProjectSkeleton function · T3 sibling tests · T4 ADR-029 · T5 TODO.md update.
 
-> Sprint 050 closed `8940f01` (TASK-121 F3 init scaffold full · ADR-028 · gitignore template · docs/codemap+adr dirs). Next: Sprint 051 — **ISSUE-04 lean architecture skeleton** (Clean Architecture + DDD per-stack scaffold; replaces F6 template unify per session decision).
+> Next: Sprint 051b — TASK-122b template re-render (CLAUDE.md + ARCHITECTURE.md per CA+DDD) + blueprint primer (docs/blueprint/11-lean-architecture.md).
 
 ---
 
@@ -48,7 +48,8 @@ sprint: none
 - [x] **TASK-119** — User-Project Outcome Lens (closed Sprint 048 `38035d8`).
 - [x] **TASK-120** — Plugin Coherence Cleanup + Rename + release-patch Generalize (closed Sprint 049 `7b04875`).
 - [ ] **TASK-121** — F3 init scaffold full: `bin/dev-flow-init.js` extended (gitignore template + `createEmptyScaffoldDirs` for docs/codemap/+adr/); orchestrator SKILL init phase aligned to canonical scaffold contract; ADR-028 locks 11-file + 2-dir output. Layers `skills, scripts, docs`. → Sprint 050 (active).
-- [ ] **TASK-122** — ISSUE-04 lean architecture skeleton (Clean Architecture + DDD): per-stack project skeleton scaffold (S1) + CLAUDE.md template auto-fill per stack (S2) + ARCHITECTURE.md per-stack content (S3) + `docs/blueprint/11-lean-architecture.md` CA+DDD primer (S4). Replaces F6 template unify (rolls into S2/S3 work — lean-doc owns templates). Closes ISSUE-04 (no user-project lean architecture; folder structure left undefined per-adoption). Layers `skills, scripts, templates, docs`. → Sprint 051.
+- [ ] **TASK-122a** — Lean Architecture Foundation: STACK_PRESETS migration to CA+DDD layers (`domain · application · infrastructure · interface · shared`); per-stack source/test/app/cmd roots; new `createProjectSkeleton(target, preset)` function with idempotency; sibling tests (43 total); ADR-029 lock. Outcome: O1 + O3 + O4 + O7. Layers `scripts, ci, docs`. → Sprint 051a (active).
+- [ ] **TASK-122b** — Lean Architecture Templates + Primer: `templates/CLAUDE.md.template` rewritten per stack (File Structure / Dependency Rule / Layers / Anti-Patterns / Commands); `templates/ARCHITECTURE.md.template` per-layer purpose + stack examples; NEW `docs/blueprint/11-lean-architecture.md` CA+DDD primer (≤250 lines); blueprint/ tracking review (currently untracked in git). Depends on TASK-122a (ADR-029 + skeleton lock). Layers `templates, docs`. → Sprint 051b.
 - [ ] **TASK-123** — F4 wire orphan skills (tdd / refactor-advisor / diagnose / zoom-out / prime / release-manager) into orchestrator phase detection + F5 tech-debt rollover loop (`## Tech Debt` section in TODO.md + sprint-close auto-promote Retro Friction). Layers `skills, docs, governance`. → Sprint 052.
 - [ ] **TASK-116-v2** — Skill-triggering acceptance harness: Node port (`scripts/eval-acceptance.js`). **Outcome:** O8 plugin reliability. Verifies 8 lift candidates from Sprints 043 + 045 + retroactive eval-evidence for release-patch v2.0.0 (ADR-027 DEC-2 gap). Design input: [`docs/research/superpowers-acceptance-harness-2026-05-04.md`](docs/research/superpowers-acceptance-harness-2026-05-04.md). Satisfies ADR-016 + ADR-021 DEC-4. Estimated S-M, layers `scripts, ci, docs`. → Sprint 053.
 - [ ] **TASK-115-v2** — Caveman 3-arm eval harness Node port (`scripts/eval-caveman.js` + `scripts/eval-measure.js`). Tokenizer `gpt-tokenizer`. Snapshot schema 1:1 with caveman. **Outcome:** O8 plugin reliability. Depends on TASK-116-v2. Estimated M, layers `scripts, docs`. → Sprint 054.
@@ -140,7 +141,8 @@ Sprint 47    →  EPIC-Audit Phase 6 close (batch-archive 040-046 + TODO trim + 
 Sprint 48    →  User-Project Outcome Lens (ISSUE-03 reframe + USER-OUTCOMES.md + ADR-026 + G1 outcome item) (done — `38035d8`)
 Sprint 49    →  Plugin Coherence Cleanup + Rename + release-patch Generalize (F1 drop dev-flow-compress · F2 generalize release-patch 6-mode · architecture-grill rename · ADR-027)  (done — `7b04875`)
 Sprint 50    →  F3 init scaffold full (.gitignore + docs/codemap/+adr/ dirs + skill init phase aligned to canonical bin/dev-flow-init.js + ADR-028)  (done — `8940f01`)
-Sprint 51    →  ISSUE-04 lean architecture skeleton (Clean Architecture + DDD per-stack scaffold + CLAUDE.md/ARCHITECTURE.md templates auto-fill + blueprint/11-lean-architecture.md) — replaces F6
+Sprint 51a   →  Lean Architecture Foundation (STACK_PRESETS CA+DDD migration + createProjectSkeleton + ADR-029)  (in_progress)
+Sprint 51b   →  Lean Architecture Templates + Primer (CLAUDE.md + ARCHITECTURE.md per-stack rewrites + blueprint/11-lean-architecture.md CA+DDD primer)
 Sprint 52    →  F4 wire orphan skills into orchestrator + F5 tech-debt rollover loop + F6 fold-in (template lineage from Sprint 051 work)
 Sprint 53    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (also retroactive eval-evidence for release-patch v2.0.0)
 Sprint 54    →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
