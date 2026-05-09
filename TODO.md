@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint or task state change
 status: current
-sprint: none
+sprint: 052
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,13 +35,16 @@ sprint: none
 
 ## Active Sprint
 
-→ — none —
+→ **Sprint 052 — F4 Wire Orphan Skills + F5 Tech-Debt Rollover Loop** (`docs/sprint/SPRINT-052-orphan-skill-wiring-tech-debt-rollover.md`)
 
-> Sprint 051b closed `2266b9d`. ISSUE-04 second half delivered: ADR-029 CA+DDD canonical now visible in user-project surfaces (CLAUDE.md template + ARCHITECTURE.md template + blueprint/11-primer + lean-doc-generator wire). TASK-127 vision codified (blueprint/12-primer + README Daily Pattern + CLAUDE.md Session Workflow block). Mid-execution: T4.5 closed orphan-primer risk + T5.5 refreshed stale blueprint/03+08 (6-mode/3-gate → 4-mode/2-gate alignment).
->
-> **Carried forward to TASK-125** (Sprint 053b broader audit): self-reported-current frontmatter ≠ actually-current — lean-doc staleness scan should cross-validate content against CONTEXT.md authoritative source. blueprint/04 / 05 / 06a / 06b / 09 / 10* candidates for next audit pass.
->
-> Next: Sprint 052 — F4 wire orphan skills + F5 tech-debt rollover (TASK-123).
+- [x] **T1** — F4 wire 6 orphan skills (`prime`/`zoom-out`/`tdd`/`diagnose`/`refactor-advisor`/`release-manager`) into `skills/orchestrator/references/skill-dispatch.md` Always-On table (4→10 rows) + `skills/orchestrator/references/phases.md` advisory hints block + G1 task-type advisory line. Layers `skills`. Risk low. Closed `ffcc3e4` — skill-dispatch.md 46→58 lines; phases.md 212→221 lines; orchestrator SKILL.md cap 95/100 held.
+- [ ] **T2** — F5(A) `## Tech Debt` section schema. Insert after `## Backlog` in `TODO.md` (empty + docstring) + `templates/TODO.md.template` (with 1 `[CUSTOMIZE]` example row). Schema: TD-NNN ID · severity (trivial/minor/medium/high) · source · status (open/escalated/resolved) · sprint-created · optional AC. Layers `governance, docs`. Risk low.
+- [ ] **T3** — F5(B) Sprint Close Friction→TD prompt. Modify `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` Sprint Close Protocol Step 4 — sub-step `"TD row for: ...? (Y/N/already-resolved)"`. Layers `skills, docs`. Risk low.
+- [ ] **T5** — F5(D)+(E) Sprint Promote TD Scan + Anti-Pattern Locks. Add Step 1.5 to Sprint Promote Protocol (high → auto-escalate Backlog P1; aging >6 sprints → re-review prompt; missing sprint-created → defensive re-review). Append `## Tech Debt Anti-Pattern Locks` section (5 locks). Same SPRINT_PROTOCOLS.md file. Layers `skills, docs`. Risk low.
+- [ ] **T4** — F5(C) Mid-Sprint Friction Protocol. Append `## Mid-Sprint Friction Protocol` section to `phases.md` (trigger · fix/defer/block prompt · per-choice action). Add 1-line pointer in orchestrator SKILL.md Skill Dispatch (cap 95→96). Layers `skills`. Risk medium.
+- [ ] **T6** — Sprint close: TODO.md frontmatter `none` + Active Sprint clear + TASK-123 `[x]` + Roadmap row done + sprint file close + CHANGELOG row prepend. Layers `governance, docs`. Risk low.
+
+> Closes TASK-123 (F4 + F5). G1 PASS · G2 DONE_WITH_CONCERNS (TD anti-pattern lock automation deferred to TASK-116-v2 Sprint 054). Order T1 → T2 → T3 → T5 → T4 → T6 (T3+T5 share SPRINT_PROTOCOLS.md; T1+T4 share phases.md). Next: Sprint 052b — release-debt resolution (5-sprint MINOR+PATCH chain).
 
 ---
 
@@ -78,6 +81,23 @@ sprint: none
 - [ ] **release-patch skip-bump-on-docs-only fix** — extend `skills/release-patch/SKILL.md` to detect "EPIC close" / "sprint close" events and trigger archive flush even on docs-only diff. Closes stranded-archive friction structurally (per Sprint 047 ADR-025 DEC-8). Estimated S, layers `skills, scripts`.
 - [x] **release-debt** — PROMOTED to P0 (Sprint 052b) per session 2026-05-08 audit; depth grew to 4 sprints; deferring indefinitely was risk. See P0 row above.
 - [x] **CONTEXT.md cap pressure** — closed Sprint 048 T5 (Behavioral Guidelines Lineage relocated to `.claude/references/behavioral-guidelines-lineage.md`; CONTEXT.md now 121/130).
+
+---
+
+## Tech Debt
+
+> **Schema** (TASK-123 F5 — Sprint 052):
+> - **IDs:** `TD-NNN` namespace (separate from `TASK-NNN`).
+> - **Severity tiers:** `trivial · minor · medium · high` (lowercase, ascending risk). `high` auto-escalates to Backlog P1 at Sprint Promote (no human review). `trivial · minor · medium` require human gate.
+> - **Status values:** `open · escalated · resolved`. ALL three permanent — rows are NEVER deleted (audit trail). Resolved rows stay with `status: resolved → TASK-NNN`.
+> - **Sort order:** open (high → trivial), then escalated, then resolved at bottom.
+> - **Aging:** `current sprint - sprint-created`. >6 sprints triggers re-review prompt at Sprint Promote.
+>
+> **Anti-pattern locks** → `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md § Tech Debt Anti-Pattern Locks`.
+
+*(no entries yet — section ready)*
+
+---
 
 ### P3 — Closed sub-blocks (CHANGELOG references only)
 
@@ -161,7 +181,7 @@ Sprint 49    →  Plugin Coherence Cleanup + Rename + release-patch Generalize (
 Sprint 50    →  F3 init scaffold full (.gitignore + docs/codemap/+adr/ dirs + skill init phase aligned to canonical bin/dev-flow-init.js + ADR-028)  (done — `8940f01`)
 Sprint 51a   →  Lean Architecture Foundation (STACK_PRESETS CA+DDD migration + createProjectSkeleton + ADR-029)  (done — `460175b`)
 Sprint 51b   →  Lean Architecture Templates + Primer (TASK-122b applySubstitutions extension w/ 5 tokens + CLAUDE.md/ARCHITECTURE.md rewrites + 06c sync + blueprint/11-lean-architecture.md primer + lean-doc wire) · TASK-127 workflow vision (blueprint/12-session-workflow.md + README Daily Pattern expansion + CLAUDE.md Session Workflow block) · in-sprint expansion: 03/08 blueprint refresh to 4-mode/2-gate model (done — TBD SHA)
-Sprint 52    →  F4 wire orphan skills into orchestrator (tdd / refactor-advisor / diagnose / zoom-out / prime / release-manager phase detection) + F5 tech-debt rollover loop (TASK-123) [TASK-129 prime fix landed direct-commit pre-Sprint-052]
+Sprint 52    →  F4 wire orphan skills into orchestrator skill-dispatch + phases (6 orphans · 4→10 rows Always-On) + F5 tech-debt rollover loop (TD-NNN section · Friction→TD prompt · mid-sprint fix/defer/block · Sprint Promote scan + auto-escalate · 5 anti-pattern locks) (TASK-123) (in_progress)
 Sprint 52b   →  release-debt resolution (Sprint 049 MINOR + 050/051a/051b PATCH chain reconcile; manual or release-patch --minor flag decision)
 Sprint 53    →  F6 task-decomposer ↔ lean-doc-generator collaboration audit (TASK-124 — narrow pair audit per user finding 2026-05-08)
 Sprint 53b   →  Broader feature-usage audit sweep (TASK-125 — all skill/agent pairs: prime↔init / release-manager↔release-patch / pr-reviewer↔code-reviewer / security-auditor↔security-analyst / architecture-grill↔design-analyst)

@@ -61,6 +61,24 @@ status: current
 
 ---
 
+## Tech Debt
+
+> **Schema** (per dev-flow TASK-123 F5):
+> - **IDs:** `TD-NNN` namespace (separate from `TASK-NNN`).
+> - **Severity tiers:** `trivial · minor · medium · high` (lowercase, ascending risk). `high` auto-escalates to Backlog P1 at Sprint Promote (no human review). `trivial · minor · medium` require human gate.
+> - **Status values:** `open · escalated · resolved`. ALL three permanent — rows NEVER deleted (audit trail). Resolved → `status: resolved → TASK-NNN`.
+> - **Sort order:** open (high → trivial), then escalated, then resolved at bottom.
+> - **Aging:** `current sprint - sprint-created`. >6 sprints triggers re-review prompt at Sprint Promote.
+>
+> **Anti-pattern locks** → `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md § Tech Debt Anti-Pattern Locks`.
+
+- **TD-001** severity: medium | source: Sprint-001 retro Friction #1 | status: open | sprint-created: 001 [CUSTOMIZE: example row — replace with first real entry or remove]
+  - Summary: [one-line description of the debt item]
+  - AC: [optional — observable outcome when resolved]
+  - Sprint-placed: [optional — Sprint NNN where addressed]
+
+---
+
 ## Changelog
 
 > Current sprint only. Once changes reflected in docs, MOVE to `docs/CHANGELOG.md` then DELETE from here.
