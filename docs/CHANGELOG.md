@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-04 (Sprint 047 closed — EPIC-Audit complete; v1 ship prep unblocked)
+last_updated: 2026-05-09 (Sprint 051b closed — ADR-029 user-project surfaces shipped; TASK-122b + TASK-127 closed)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -17,6 +17,15 @@ status: current
 > - `PATCH` — clarification / prompt rewording / fix
 
 ---
+
+## Sprint 051b — Lean Architecture Templates + Primer + Workflow Vision Fold-in (2026-05-09)
+
+- Sprint file: [docs/sprint/SPRINT-051b-lean-architecture-templates-primer.md](sprint/SPRINT-051b-lean-architecture-templates-primer.md)
+- Plan/T1 `2eb437f` · T2 `f40900e` · T3 `0cf9cad` · T4 `d5aa753` · T5 `879e013` · T5.5 `0c970ff` · close (TBD SHA)
+- Summary: ISSUE-04 second half closed. ADR-029 CA+DDD canonical now visible in user-project surfaces. T1 — extend `applySubstitutions` (5 new tokens: 3 scalar `[Project Name]`-style passthrough + 3 full-line conditional `[app-root-line]`/`[cmd-root-line]`/`[test-root-line]` for stack-specific extras vanishing cleanly when absent); 49→51 tests pass. T2 — `templates/CLAUDE.md.template` 74/80 cap held (Behavioral Guidelines compressed to single-line subsections); Session Workflow block (TASK-127 fold-in) placed after Project Overview; CA arrow Dependency Rule; File Structure uses new substitution tokens; `06c-claude-md-template.md` snapshot fully synced (was pre-frontmatter older version). T3 — `templates/ARCHITECTURE.md.template` rewritten with CA arrow + per-layer purpose + new substitution tokens. T4 — NEW `docs/blueprint/11-lean-architecture.md` (236/250 cap) — CA+DDD primer (5-layer table · per-stack roots · react-next variant · multi-context upgrade · 3 anti-patterns · per-stack examples). T4.5 in-sprint fold-in — wired 11-primer into lean-doc-generator skill (DOCS_Guide.md § Core Files + SPRINT_PROTOCOLS.md § Sprint Close architecture check) closing orphan-primer risk. T5 — NEW `docs/blueprint/12-session-workflow.md` (163/200 cap) — 3-step session pattern primer (`/prime → /lean-doc-generator → /orchestrator`); README.md line 152 expansion. T5.5 in-sprint expansion — `docs/blueprint/03-workflow-phases.md` (87→103) + `docs/blueprint/08-orchestrator-prompts.md` (397→210) refreshed from stale 6-mode/3-gate to current 4-mode/2-gate model (CONTEXT.md + orchestrator SKILL.md authoritative); deprecated phase prompts trimmed.
+- ADRs: none (all decisions inherit from ADR-029 Sprint 051a). Mid-execution scope expansions (T4.5 + T5.5) handled via explicit AskUserQuestion + user-approval.
+- Carried forward to **TASK-125** (Sprint 053b): self-reported-current frontmatter ≠ actually-current — lean-doc staleness scan needs cross-validation against authoritative source files (CONTEXT.md for modes/gates). Additional blueprint files candidate for next audit pass: `04-subagents.md` · `05-skills.md` · `06a-settings.md` · `06b-scripts.md` · `09-customization.md` · `10*-modes.md`.
+- release-debt: NOT bumped (Sprint 049 MINOR + 050 PATCH + 051a PATCH + 051b PATCH chain — 4 sprints accumulating). Sprint 052b release-debt resolution remains queued.
 
 ## Sprint 047 — EPIC-Audit Phase 6 close (2026-05-04)
 
