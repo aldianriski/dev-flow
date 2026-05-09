@@ -22,7 +22,7 @@ status: current
 
 - Sprint file: [docs/sprint/SPRINT-055c-history-hygiene.md](sprint/SPRINT-055c-history-hygiene.md)
 - Plan commit: `cf1fb37` (backfilled `5e55424`)
-- Close commit: TBD
+- Close commit: `a197a47` (backfilled `5a3f079`)
 - Tasks: T1 TASK-134a Phase 1 ✓ (`0875c87`) · T2 TASK-134a Phase 2-4 ✓ (`c178d55`) · T3 TASK-134b Phase 1 ✓ (`d6702bb`) · T4 TASK-134b Phase 2-3 ✓ (`4459338`)
 - ADRs: ADR-034 History Hygiene (5 DECs: principle home in `.claude/CONTEXT.md` § · 5 per-surface rules · 2-trigger apply-when Sprint Close + Promote Step 1.5c · 3-action collapse/archive/delete policy · re-litigation lock per ADR-031)
 - Files changed: 11 (1 new ADR · 1 new script · 1 new audit report · 4 archive moves · 4 modifications) · Tests added: 0 (governance + tooling sprint)
