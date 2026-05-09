@@ -21,7 +21,7 @@ status: current
 ## Sprint 054b — Orchestrator Doc-Wire Cleanup (TASK-131) (2026-05-09)
 
 - Sprint file: [docs/sprint/SPRINT-054b-orchestrator-doc-wire-cleanup.md](sprint/SPRINT-054b-orchestrator-doc-wire-cleanup.md)
-- Plan/T1+T2 `511959b` · T3 `c054d3f` · close (TBD SHA)
+- Plan/T1+T2 `511959b` · T3 `c054d3f` · close `65e74c5`
 - Summary: TASK-131 closed (Sprint 054 carry-forward; doc-coherence). **T1+T2** — orchestrator/SKILL.md init Phase Step 2 + Mode Dispatch Path B note both extended w/ ADR-030 + Sprint 053 T4 procedure.md Step 6 citations. In-place single-line edits; cap held 97/100 (≤97 budget exact). **T3** — skill-dispatch.md Always-On table tightened: 3 vague rows (tdd · lean-doc-generator · adr-writer) made explicit w/ "fires when X" concrete conditions; NEW Invocation column distinguishes 4 patterns (auto-fires · proposed→human y/n · user-invoked · agent-output-triggered); refactor task-type added to mutual-exclusivity note. All 6 orphans (prime · zoom-out · diagnose · tdd · refactor-advisor · release-manager) now have explicit trigger + invocation pattern.
 - ADRs: none (doc-coherence sprint; no behavioral contract change).
 - No skill version bumps (orchestrator stays 2.1.0 — no new mode/agent/skill/hard stop).

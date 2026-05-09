@@ -4,7 +4,7 @@ last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: closed
 plan_commit: 511959b
-close_commit: TBD
+close_commit: 65e74c5
 ---
 
 # Sprint 054b — Orchestrator Doc-Wire Cleanup (TASK-131)
@@ -57,7 +57,7 @@ T1 — orchestrator/SKILL.md init Phase Step 2: applySubstitutions citation exte
 ### 2026-05-09 | T3 done — `c054d3f`
 skill-dispatch.md Always-On table — 3 vague rows tightened (tdd · lean-doc-generator · adr-writer); NEW Invocation column distinguishes 4 patterns (auto-fires · proposed→human y/n · user-invoked · agent-output-triggered). Refactor task-type added to mutual-exclusivity note. All 6 orphans (prime · zoom-out · diagnose · tdd · refactor-advisor · release-manager) now have explicit "fires when X" trigger + invocation pattern. Closes "advisories listed but invocation language implicit" gap surfaced at Sprint 054 retro.
 
-### 2026-05-09 | sprint close — TBD
+### 2026-05-09 | sprint close — `65e74c5`
 This commit. TASK-131 fully delivered: ADR-030 init phase citation (T1) + Path B task-decomposer citation (T2) + Orphan skill explicit invocation language with NEW Invocation column (T3). Doc-coherence sprint; no behavioral contract change; no ADR. orchestrator SKILL.md cap held 97/100. Sprint 054 carry-forward closed; coordination-loop documentation surfaces now wire-complete.
 
 ## Files Changed
