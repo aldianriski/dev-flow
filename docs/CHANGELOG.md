@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-09 (Sprint 053 closed — TASK-124 F6a/F6b + ADR-030 template canonical ownership)
+last_updated: 2026-05-09 (Sprint 054 closed — TASK-130 anti-slip discipline at G1 + phase guards + ADR-031)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -17,6 +17,17 @@ status: current
 > - `PATCH` — clarification / prompt rewording / fix
 
 ---
+
+## Sprint 054 — Anti-Slip Discipline at G1 + Phase Guards (TASK-130) (2026-05-09)
+
+- Sprint file: [docs/sprint/SPRINT-054-anti-slip-discipline-phase-guards.md](sprint/SPRINT-054-anti-slip-discipline-phase-guards.md)
+- Plan/T0.5 `eb6ad7f` · T1 `36972bb` · T2 `3decd4f` · T3 `7cd1a5c` · T4 (validation; no commit) · close (TBD SHA)
+- Summary: TASK-130 fully delivered. **T0.5 ADR-031 anti-slip discipline at G1** — G1 Scope Checklist gains 4 new fields canonical (focus · context-budget · explicit-gaps · done-confirmation); all required at PASS — partial fill = BLOCK. acceptance + done-confirmation kept SEPARATE (different concerns: completion criteria vs observable test). Behavioral enforcement via type:rigid skill contract; automated lint deferred to TASK-116-v2 Sprint 055. ADR-031 99/120 cap held. **T1 sprint-bulk Phase 0 Active Sprint guard** — orchestrator SKILL.md gained Step 0 reference-delegation form (cap 94→97/100; ≤97 budget exact; 3-line margin); phases.md gained full Step 0 prompt format with soft-guard default halt redirecting to /lean-doc Sprint Promote. **Coordination loop NOW BIDIRECTIONAL**: Sprint 053 T2 added /lean-doc Sprint Promote → /task-decomposer backflow when Backlog empty; Sprint 054 T1 added /orchestrator sprint-bulk → /lean-doc Sprint Promote backflow when Active Sprint empty. **T2 Mid-Sprint Friction Protocol explicit triggers** — Trigger section extended with 5 AI invocation conditions (scope-creep detected · 3+ failed runs · unexpected file changes · ambiguity blocking task · context-budget exceeded) + 3 human invocation shortcuts at task boundary (`friction` neutral / `defer <reason>` direct / `block` direct). Existing fix/defer/block flow preserved verbatim. **T3 G1 Scope Checklist 4 new fields** — focus · context-budget · explicit-gaps · done-confirmation inserted after `red flags:` before `status:`; anti-slip note added. **T4 validation pass** — synthetic dry-run "Add user profile page" task; all 4 fields meaningful + non-conflicting; Phase 0 + Friction triggers verified; Sprint 053 + Sprint 052 protocols intact (separate file). **No drift findings.**
+- ADRs: ADR-031 (anti-slip discipline at G1) — 5 decisions + 5 alternatives + cross-links to ADR-030 + ADR-029 + Sprint 052 F5(C) + Sprint 053 T0.5 ADR-first pattern + TASK-116-v2 + TASK-125.
+- **Two-layer slip handling complete**: anti-slip at G1 (Sprint 054 ADR-031) prevents slip BEFORE; Mid-Sprint Friction Protocol (Sprint 052 F5(C)) handles slip AFTER. Behavioral enforcement only this sprint; automated lint deferred to TASK-116-v2 Sprint 055.
+- Skill version bump: orchestrator 2.0.0→2.1.0 (MINOR — new Phase 0 + new G1 fields + new Friction Protocol explicit triggers; qualifies as "new mode/agent/skill/hard stop").
+- Carry-forward: TASK-131 Sprint 054b doc-wire cleanup (ADR-030 init citation + Path B citation + orphan invocation verification) · TASK-125 Sprint 053b broader feature-usage audit (DECISIONS.md.template drift + other skill/agent pairs) · TASK-116-v2 Sprint 055 acceptance harness (anti-slip lint + automated divergence lint).
+- release-debt: depth grew to 7 sprints (Sprint 049 MINOR + 050/051a/051b/052/053/054 PATCH chain) + new orchestrator MINOR. Sprint 052b release-debt resolution increasingly urgent.
 
 ## Sprint 053 — F6 task-decomposer ↔ lean-doc-generator Collaboration Audit + Template-Loader Integration (2026-05-09)
 

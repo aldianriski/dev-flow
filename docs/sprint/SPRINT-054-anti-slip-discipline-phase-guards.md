@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
-status: in_progress
-plan_commit: TBD
+status: closed
+plan_commit: eb6ad7f
 close_commit: TBD
 ---
 
@@ -187,23 +187,45 @@ status: PASS
 
 ## Sprint DoD
 
-- [ ] T0.5 ADR-031 written ≤120 lines target ~80; 4-criteria match + 4 new fields canonical + behavioral enforcement scope explicit; cross-links to ADR-030 + ADR-029 + Sprint 052 F5(C) + TASK-116-v2.
-- [ ] T1 sprint-bulk Phase 0 inserted (Active Sprint guard) — orchestrator SKILL.md + phases.md; soft-guard with default halt; cap orchestrator SKILL.md ≤97/100.
-- [ ] T2 Mid-Sprint Friction Protocol Trigger line extended w/ 5 AI invocation conditions + 3 human shortcuts (`friction` / `defer <reason>` / `block`); existing fix/defer/block flow preserved.
-- [ ] T3 G1 Scope Checklist gains 4 new fields (focus · context-budget · explicit-gaps · done-confirmation) inserted after `red flags:` before `status:`; all required at G1 PASS.
-- [ ] T4 validation pass: dry-run G1 anti-slip on synthetic task + verify Phase 0 + verify Friction Protocol triggers + cross-check Sprint 053 + Sprint 052 protocols preserved.
-- [ ] T5 TODO.md sprint:none; Active Sprint clear; TASK-125 carry-forward updated; Roadmap Sprint 54 done; sprint file closed; CHANGELOG row prepended; orchestrator SKILL.md 2.0.0→2.1.0 last-validated 2026-05-09.
-- [ ] All artifacts stamp 2026-05-09.
-- [ ] Cap discipline held: orchestrator SKILL.md ≤97/100 · phases.md grows ~25 lines (no cap) · ADR-031 ≤120/120.
-- [ ] release-patch NOT invoked (release-debt continues per Sprint 052b owed).
-- [ ] Open questions A-J resolved at promote; zero re-litigation during execution (target).
-- [ ] Carry-forward: Sprint 054b doc-wire cleanup (ADR-030 init + Path B + orphan invocation); TASK-116-v2 automated divergence lint.
+- [x] T0.5 ADR-031 written 99/120 cap held; 4-criteria match + 4 new fields canonical + behavioral enforcement scope explicit; cross-links to ADR-030 + ADR-029 + Sprint 052 F5(C) + Sprint 053 T0.5 pattern + TASK-116-v2 + TASK-125.
+- [x] T1 sprint-bulk Phase 0 inserted (Active Sprint guard) — orchestrator SKILL.md + phases.md; soft-guard with default halt; cap orchestrator SKILL.md 97/100 (≤97 budget exact); coordination loop bidirectional w/ Sprint 053 T2.
+- [x] T2 Mid-Sprint Friction Protocol Trigger line extended w/ 5 AI invocation conditions + 3 human shortcuts (`friction` / `defer <reason>` / `block`); existing fix/defer/block flow preserved verbatim.
+- [x] T3 G1 Scope Checklist gains 4 new fields (focus · context-budget · explicit-gaps · done-confirmation) inserted after `red flags:` before `status:`; all required at G1 PASS; acceptance + done-confirmation kept separate.
+- [x] T4 validation pass: dry-run G1 anti-slip on "Add user profile page" — all 4 fields meaningful + non-conflicting; Phase 0 verified line 199; Friction Protocol 5+3 invocations verified; Sprint 053 + Sprint 052 protocols intact (separate file). No drift findings.
+- [x] T5 TODO.md sprint:none; Active Sprint clear; TASK-130 [x]; Roadmap Sprint 54 done; sprint file closed; CHANGELOG row prepended; orchestrator SKILL.md 2.0.0→2.1.0 last-validated 2026-05-09.
+- [x] All artifacts stamp 2026-05-09.
+- [x] Cap discipline held: orchestrator SKILL.md 97/100 (was 94, +3 from T1) · phases.md 251→279 (28 lines added; no cap) · ADR-031 99/120.
+- [x] release-patch NOT invoked (release-debt 7-sprint chain → Sprint 052b owed).
+- [x] Open questions A-J resolved at promote; zero re-litigation during execution.
+- [x] Carry-forward: TASK-131 Sprint 054b doc-wire cleanup (ADR-030 init + Path B + orphan invocation); TASK-116-v2 automated divergence lint Sprint 055.
 
 ---
 
 ## Execution Log
 
-*(populated per task during sprint-bulk auto-loop)*
+### 2026-05-09 | T0.5 done — `eb6ad7f`
+ADR-031 written 99/120. 5 decisions: 4 new G1 fields canonical (focus/context-budget/explicit-gaps/done-confirmation) all required at PASS · acceptance + done-confirmation kept SEPARATE · behavioral enforcement via type:rigid skill contract · field insertion after red-flags before status · backwards-compat (NEXT G1 invocations only). 5 alternatives considered + rejected. Cross-links ADR-030 + Sprint 052 F5(C) + Sprint 053 T0.5 ADR-first pattern + ADR-029 + Sprint 050/051a/051b retro Frictions root-cause + TASK-116-v2 Sprint 055 + TASK-125 Sprint 053b. ID verified non-colliding (max ADR was 030).
+
+### 2026-05-09 | T1 done — `36972bb`
+sprint-bulk Phase 0 Active Sprint guard wired. orchestrator/SKILL.md gained Step 0 reference-delegation form citing phases.md § sprint-bulk Phase 0 (cap 94→97/100; ≤97 budget exact; 3-line margin remaining). phases.md sprint-bulk Phase gained full Step 0 prompt format: read TODO.md frontmatter sprint: + Active Sprint section; if sprint:none OR zero `[ ]` tasks → halt + soft-guard prompt with default halt (n) redirecting to /lean-doc-generator Sprint Promote; y continues for edge cases. Coordination loop now COMPLETE bidirectionally: Sprint 053 T2 added /lean-doc → /task-decomposer backflow when Backlog empty; Sprint 054 T1 adds /orchestrator sprint-bulk → /lean-doc Sprint Promote backflow when Active Sprint empty.
+
+### 2026-05-09 | T2 done — `3decd4f`
+Mid-Sprint Friction Protocol explicit triggers wired. phases.md § Mid-Sprint Friction Protocol Trigger section extended with 5 AI invocation conditions (scope-creep · 3+ failed runs · unexpected files · ambiguity blocking task · context-budget exceeded) + 3 human shortcuts at any task boundary (`friction` neutral start · `defer <reason>` direct shortcut · `block` direct shortcut). Existing fix/defer/block prompt flow preserved verbatim. On-defer write path (TD row in TODO.md § Tech Debt with severity + source: session ISO-date mid-sprint T<N> + status:open + sprint-created:NNN + Summary verbatim) unchanged from Sprint 052 F5(C). Closes "AI invocation conditions underspecified" gap surfaced at recon — was honor-system; now explicit list. phases.md 261→273 lines.
+
+### 2026-05-09 | T3 done — `7cd1a5c`
+G1 Scope Checklist gained 4 new anti-slip fields per ADR-031: focus (single-concern statement; what NOT to drift to) · context-budget (token estimate OR `no-limit`) · explicit-gaps (bullet list of deferred + out-of-scope OR `none`) · done-confirmation (measurable observable test "[X happens] WHEN [Y trigger]"). Insertion order: after `red flags:` before `status:`. acceptance: + done-confirmation: kept SEPARATE per ADR-031 DEC-2 (different concerns: completion criteria vs observable test; merging causes drift). Anti-slip note added: all 4 required at G1 PASS (partial fill = BLOCK); Friction Protocol context-budget-exceeded trigger reads from G1 context-budget field declaration. Behavioral enforcement via type:rigid skill contract; automated lint deferred TASK-116-v2 Sprint 055. phases.md 273→279 lines.
+
+### 2026-05-09 | T4 done — validation pass
+**Section structure verified:** phases.md sections at 7 (G1 Scope Checklist), 26 (G2 Design), 187 (sprint-bulk Phase) with sub-Steps 0-6 sequentially numbered (Phase 0 inserted at line 199 before Step 1 line 209). Mid-Sprint Friction Protocol at line 241 with Trigger section line 243 explicit AI/human invocation lists.
+
+**Synthetic dry-run G1 anti-slip:** "Add user profile page" task — all 4 anti-slip fields fillable + meaningful + non-conflicting with existing fields. acceptance:= "Profile page accessible to authenticated users; edits persist via PATCH /users/:id" + done-confirmation:= "User navigates /profile → sees info → edits name+bio → Save → PATCH succeeds → page re-renders WHEN logged in" — different concerns, both populated, no drift. focus:= "ONLY profile render + update; NOT auth flow, NOT new fields" — clear anti-tangent anchor. context-budget:= "~10k tokens" — concrete halt threshold. explicit-gaps:= 3 deferred items — closes "I'll just also fix..." mid-task drift root cause.
+
+**Cross-check Sprint 053 + Sprint 052 protocols:** SPRINT_PROTOCOLS.md (separate file; not touched this sprint) Sprint Promote Step 1.2 lean-doc → task-decomposer backflow + Step 1.5 TD Scan + § Tech Debt Anti-Pattern Locks all preserved. Sprint 052 F5(C) Mid-Sprint Friction Protocol on-defer write path (TD row schema) preserved. Sprint 053 T2 Step 1.2 wording preserved.
+
+**No drift findings.** Clean validation pass. No friction items flagged.
+
+### 2026-05-09 | sprint close — TBD
+This commit. TASK-130 fully delivered: ADR-031 anti-slip discipline at G1 (5 decisions; 99/120 cap held); sprint-bulk Phase 0 Active Sprint guard (closes coordination loop bidirectionally with Sprint 053 T2); Mid-Sprint Friction Protocol explicit triggers (5 AI conditions + 3 human shortcuts); G1 Scope Checklist 4 new anti-slip fields (focus + context-budget + explicit-gaps + done-confirmation). orchestrator SKILL.md 94→97/100 (≤97 budget exact). orchestrator skill version 2.0.0→2.1.0 (MINOR per new Phase 0 + new G1 fields + new Friction Protocol triggers — qualifies as "new mode/agent/skill/hard stop"). Behavioral enforcement only this sprint; automated lint deferred to TASK-116-v2 Sprint 055. Carry-forward: TASK-131 Sprint 054b doc-wire cleanup (ADR-030 init citation + Path B citation + orphan invocation verification). release-patch NOT invoked (release-debt 7-sprint chain → Sprint 052b owed).
 
 ---
 
@@ -235,10 +257,42 @@ status: PASS
 
 ## Open Questions for Review
 
-*(populated post-execution)*
+*(none surfaced post-execution. All 10 promote-time OQs (A-J) resolved cleanly via design-analyst-pattern + ADR-031 atomic decision lock at T0.5. Recon-first pattern from Sprint 050/051a/051b/052/053/054 = 6 sprints validated — held without re-litigation. Validation pass T4 surfaced no drift findings — clean execution.)*
 
 ---
 
 ## Retro
 
-*(populated at sprint close)*
+### Worked
+
+- **Recon-first compounded across 6 sprints** (050/051a/051b/052/053/054). Read orchestrator SKILL.md + phases.md + Sprint 052 F5(C) + Sprint 053 T2 BEFORE planning. Plan landed without speculative scope. design-analyst-pattern micro-tasks executed clean.
+- **ADR-first sequencing held** (T0.5 → T1-T3 → T4 → T5). Sprint 053 T0.5 pattern reused — ADR-031 drafted FIRST atomically locked decision; T1-T3 implementation didn't risk revert. Pattern now validated 2 sprints (053 + 054). Codify in lean-doc-generator Sprint Promote checklist as recommended pattern.
+- **Cap pressure handled at margin.** orchestrator SKILL.md 94→97/100 (≤97 budget exact). T1 used reference-delegation form (1-line Step 0 in SKILL.md + full prompt in phases.md). Pattern from Sprint 052 T4 + Sprint 053 T3 reused. Cap discipline: when SKILL.md near cap, full content goes to references/ + 1-line pointer.
+- **Bidirectional coordination loop completed.** Sprint 053 T2 added /lean-doc Sprint Promote → /task-decomposer backflow when Backlog empty. Sprint 054 T1 adds /orchestrator sprint-bulk → /lean-doc Sprint Promote backflow when Active Sprint empty. Pattern: skill-pair coordination must be SYMMETRIC — both directions covered. Reusable for future skill-pair wires.
+- **Anti-slip discipline ROOT-CAUSES drift.** Sprint 050/051a/051b/052/053 retro Frictions all traced to under-specified pre-task scope. ADR-031's 4 new G1 fields (focus + context-budget + explicit-gaps + done-confirmation) prevent slip BEFORE it happens; Mid-Sprint Friction Protocol (Sprint 052 F5(C)) handles slip AFTER. Two layers complete.
+- **Synthetic dry-run validated discipline at T4.** "Add user profile page" task fillable through all 4 new fields meaningfully. acceptance: + done-confirmation: kept separate (different concerns) — both populated cleanly. Pattern: synthetic test before sprint close validates new mechanism's usability.
+
+### Friction
+
+- **Behavioral enforcement only.** All anti-slip + phase guards rely on type:rigid skill contract. Until TASK-116-v2 Sprint 055 acceptance harness lands, no automated verification that agent fills 4 new G1 fields OR Phase 0 fires. Honor-system gap. Documented in ADR-031 Negative Consequences + carry-forward to TASK-116-v2.
+- **G1 checklist length growth.** 4 new fields = ~6 more lines in checklist template. Risk: humans skim under time pressure. Mitigation: ADR-031 partial-fill = BLOCK rule. But behavioral hard-stop relies on agent self-discipline (per type:rigid contract).
+- **Friction Protocol 5 AI conditions could over-trigger.** Each condition (e.g. "scope-creep detected — file changes outside G1 layers") needs concrete threshold. Currently relies on agent judgment. Without acceptance harness lint, threshold drift possible. Mitigation: documented thresholds explicit (e.g. "3+ failed runs" not "few failed runs").
+- **release-debt depth +1 → 7 sprints.** Sprint 049 MINOR + 050/051a/051b/052/053/054 PATCH chain. Sprint 052b release-debt resolution increasingly urgent. orchestrator skill bumped 2.0.0→2.1.0 this sprint MINOR (new Phase 0 + new G1 fields + new Friction triggers qualify). Now 2 MINOR + 5 PATCH outstanding.
+- **Plugin runtime catch-up still blocking.** Skill manifest cached. Sprint 049-054 changes accumulate. Restart needed for new behavioral contracts to take effect in current Claude Code session.
+
+### Pattern candidates (carried forward)
+
+1. **ADR-first sequencing for ADR+implementation sprints (validated 2 sprints).** Sprint 053 T0.5 + Sprint 054 T0.5 both drafted ADR FIRST before T1-T4 implementation. Prevents revert if discussion surfaces scope change. Pattern stable; recommend codifying in lean-doc Sprint Promote checklist as "ADR present? Draft FIRST."
+2. **Bidirectional coordination loop for skill pairs.** When skill A defers to skill B at boundary X, skill B must redirect to skill A at inverse boundary. Sprint 053 + 054 closed task-decomposer↔lean-doc + lean-doc↔orchestrator loops. Reusable for future skill-pair wires (TASK-125 Sprint 053b will likely surface more).
+3. **Reference-delegation pattern for SKILL.md cap pressure.** When SKILL.md near cap (≥95/100), full content goes to references/<topic>.md + 1-line pointer in SKILL.md. Pattern validated 4 times now (Sprint 052 T4 + Sprint 053 T3 + Sprint 054 T1 + ongoing). Codify as authoring rule.
+4. **Two-layer slip handling.** Anti-slip at G1 (Sprint 054 ADR-031) prevents slip BEFORE; Mid-Sprint Friction Protocol (Sprint 052 F5(C)) handles slip AFTER. Pattern: complete coverage requires BOTH preventive (gate-time discipline) + reactive (mid-execution protocol). Single layer always has gaps.
+5. **Anti-slip fields canonical at G1.** 4 fields (focus + context-budget + explicit-gaps + done-confirmation) provide pre-task slip prevention vocabulary. Required-at-PASS rule (partial fill = BLOCK) makes discipline behavioral hard-stop. Reusable for any future task-management discipline (e.g. orchestrator init, task-decomposer post-decomposition).
+6. **Coordination loop visible in CHANGELOG.** Sprint 053 + 054 CHANGELOG entries cite each other (053 mentions inverse direction; 054 closes loop). Future readers can trace the pattern across both sprints. Pattern: when implementing 2-sided coordination across multiple sprints, cross-reference in CHANGELOG.
+
+### Surprise log
+
+- T0.5: ADR-031 came in at 99/120 lines (target ~80). Slight overshoot from comprehensive consequences section (8 positive + 4 negative + 3 neutral bullets). Pattern from Sprint 049-054 ADRs: 80-110 lines is normal range for 4-7 decision ADRs. Cap pressure absent.
+- T1: orchestrator SKILL.md hit 97/100 exact (≤97 budget). Reference-delegation form added 3 lines (Step 0 single-line + 2 lines for soft-guard reference). Cap budget held but tight. Future SKILL.md edits must use references/ overflow.
+- T3: G1 Scope Checklist 4 new fields rendered cleanly in synthetic dry-run. Initial concern (T4) was that 4 new fields would feel mechanical/burdensome. Actual experience: each field forced precise statement that surfaced ambiguity (e.g. focus: "ONLY X; NOT Y, NOT Z" makes drift-points explicit upfront). Pattern: pre-task explicit fields surface ambiguity that would otherwise emerge as mid-task drift.
+- T4: Validation produced ZERO drift findings (vs Sprint 053 T5 surfaced 2 findings; Sprint 052 T5 surfaced N/A). Indicates Sprint 054 scope was self-contained (all changes in 2 files: orchestrator SKILL.md + phases.md). Smaller blast radius = fewer cross-cutting drift surfaces.
+- close: 5 commits across 6 tasks (T0.5 → T1 → T2 → T3 → T4 → T5). 0 in-sprint scope expansions. ADR-first + recon-first + cap-aware reference-delegation + dry-run validation = high-confidence sprint shape. Combination compounding across 7 sprints (048-054).
