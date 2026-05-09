@@ -190,6 +190,16 @@ Use when running a multi-task sprint end-to-end. Replaces per-task G1+G2 with a 
 - `refactor-advisor` — propose post-Review if code-reviewer flags complexity smells
 - `release-manager` — propose at sprint close if MINOR or MAJOR bump required; else `release-patch` (PATCH auto-detect path)
 
+**0. Active Sprint guard** *(Phase 0 pre-check; ADR-031 / TASK-130 T1)*
+- Read `TODO.md` frontmatter `sprint:` field AND `## Active Sprint` section.
+- If `sprint: none` OR Active Sprint section has zero open `[ ]` task lines → halt + prompt:
+
+   > "Active Sprint not populated (sprint:none OR Active Sprint § empty). Run `/lean-doc-generator` Sprint Promote first to populate Active Sprint, then return to `/orchestrator sprint-bulk`. Continue anyway? Default: halt (n). (y/n)"
+
+- `n` (default) → halt; remind user to invoke `/lean-doc-generator` Sprint Promote with current Backlog.
+- `y` → proceed (edge case: manual sprint setup OR Active Sprint hand-curated).
+- Mirrors `lean-doc-generator/references/SPRINT_PROTOCOLS.md § Sprint Promote Step 1.2` (lean-doc → task-decomposer backflow) — closes inverse direction (orchestrator sprint-bulk → lean-doc Sprint Promote).
+
 **1. Sprint Scope Batch (G1 once)**
 - Read all `[ ]` tasks under `## Active Sprint` in TODO.md.
 - Run G1 checklist for the sprint as a whole: combined goal, total size (must be ≤ M when summed; L → split sprint), shared constraints, sprint-wide red flags.

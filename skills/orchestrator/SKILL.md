@@ -56,6 +56,7 @@ Freeform input (no mode keyword):
 7. **Commit** — structured message; propose `performance-analyst` / `migration-analyst` if applicable
 
 ### sprint-bulk
+0. **Active Sprint guard** *(Phase 0 pre-check; ADR-031)* — verify TODO.md `sprint:NNN` AND Active Sprint has `[ ]` tasks. Empty → halt + redirect to `/lean-doc-generator` Sprint Promote (`references/phases.md` § sprint-bulk Phase 0)
 1. **Sprint Scope Batch (G1 once)** — combined goal, sprint-wide red flags; BLOCK on fail
 2. **Sprint Design Batch (G2 once)** — scope-analyst + design-analyst on full task list; emit session-scoped sprint-PRD block
 3. **Overlap gate** — pairwise FILES_AFFECTED intersection; ALL pairs empty → parallel; else sequential (default)
