@@ -127,7 +127,7 @@ description: >
 | Refactor Advisor | `refactor-advisor/` | Code quality review needed |
 | Lean Doc Generator | `lean-doc-generator/` | Documentation needs creating/updating |
 | Prime | `prime/` | Session-start ordered context load + health check |
-| Release Manager | `release-manager/` | Preparing MINOR/MAJOR release *(see Sprint 052b scope for release-manager↔release-patch reconcile)* |
+| Release Manager | `release-manager/` | Preparing MINOR/MAJOR release (paired w/ `release-patch` per ADR-027 boundary; never overlaps PATCH cascade) |
 | Release Patch | `release-patch/` | PATCH auto-detect (6-mode cascade per ADR-027) — sprint close + bug fix landings |
 | Architecture Grill | `architecture-grill/` | Architecture review (grill mode) |
 
@@ -183,7 +183,7 @@ as supporting files referenced via `${CLAUDE_SKILL_DIR}/references/`.
 | 7 Migration (conditional) | — | subagent (`migration-analyst`) | — | 3 |
 | 7 Performance (conditional) | `query-optimizer` | subagent (`performance-analyst`) | `observability-setup` | 3 |
 | 8 Docs | `lean-doc-generator` | inline or fork | `adr-writer` (if ADR needed) | 2 |
-| 9 Close | `release-manager` (if releasing) | inline | `incident-postmortem` (hotfix only) | 1 |
+| 9 Close | `release-patch` (PATCH auto-detect) OR `release-manager` (MINOR/MAJOR if releasing) | inline | `incident-postmortem` (hotfix only) | 1 |
 
 **Selection rules**:
 
