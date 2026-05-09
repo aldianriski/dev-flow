@@ -2,9 +2,9 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-09
 update_trigger: Sprint state change
-status: active
+status: closed
 plan_commit: ecf9fa7
-close_commit: tbd
+close_commit: 071f598
 ---
 
 # Sprint 053b — Feature-Usage Audit Sweep (TASK-125)
