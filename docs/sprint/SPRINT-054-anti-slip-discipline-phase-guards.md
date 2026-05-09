@@ -4,7 +4,7 @@ last_updated: 2026-05-09
 update_trigger: Sprint state change
 status: closed
 plan_commit: eb6ad7f
-close_commit: TBD
+close_commit: 932d700
 ---
 
 # Sprint 054 — Anti-Slip Discipline at G1 + Phase Guards (TASK-130)
@@ -224,7 +224,7 @@ G1 Scope Checklist gained 4 new anti-slip fields per ADR-031: focus (single-conc
 
 **No drift findings.** Clean validation pass. No friction items flagged.
 
-### 2026-05-09 | sprint close — TBD
+### 2026-05-09 | sprint close — `932d700`
 This commit. TASK-130 fully delivered: ADR-031 anti-slip discipline at G1 (5 decisions; 99/120 cap held); sprint-bulk Phase 0 Active Sprint guard (closes coordination loop bidirectionally with Sprint 053 T2); Mid-Sprint Friction Protocol explicit triggers (5 AI conditions + 3 human shortcuts); G1 Scope Checklist 4 new anti-slip fields (focus + context-budget + explicit-gaps + done-confirmation). orchestrator SKILL.md 94→97/100 (≤97 budget exact). orchestrator skill version 2.0.0→2.1.0 (MINOR per new Phase 0 + new G1 fields + new Friction Protocol triggers — qualifies as "new mode/agent/skill/hard stop"). Behavioral enforcement only this sprint; automated lint deferred to TASK-116-v2 Sprint 055. Carry-forward: TASK-131 Sprint 054b doc-wire cleanup (ADR-030 init citation + Path B citation + orphan invocation verification). release-patch NOT invoked (release-debt 7-sprint chain → Sprint 052b owed).
 
 ---
