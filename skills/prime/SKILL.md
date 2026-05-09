@@ -6,8 +6,8 @@ allowed-tools: Read, Bash, Grep
 user-invocable: true
 context: fork
 type: rigid
-version: "1.0.0"
-last-validated: "2026-05-03"
+version: "1.1.0"
+last-validated: "2026-05-08"
 ---
 
 # prime
@@ -29,7 +29,7 @@ Not a substitute for `/zoom-out` (mid-session orientation) or `/orchestrator` (t
 | 1 | `.claude/CLAUDE.md` | YES | Project instructions, anti-patterns, line caps, commands |
 | 2 | `.claude/CONTEXT.md` | YES | Shared vocabulary, gates, modes, agent roster |
 | 3 | MEMORY.md (resolved per harness) | NO | User-level memory index — sprint state, feedback, references |
-| 4 | Active sprint plan (`docs/sprint/SPRINT-NNN-*.md`) | NO | Current sprint PRD, tasks, decisions, retro |
+| 4 | Active sprint plan (`docs/sprint/SPRINT-NNN-*.md`) | NO | Frontmatter + § Active Sprint section ONLY (~50 lines via Read `limit: 50` OR Grep section) — NOT the full file |
 | 5 | `docs/codemap/CODEMAP.md` `## L0-overflow` block | NO | Module one-liner overview (TASK-098 output) |
 
 **Resolution rules**:
@@ -38,28 +38,30 @@ Not a substitute for `/zoom-out` (mid-session orientation) or `/orchestrator` (t
 
 ## Steps
 
-1. Read each path in order. Track `[OK]` / `[MISSING]` per item.
+1. Read each path in order. Track `[OK]` / `[MISSING]` per item. For sprint plan use partial read (frontmatter + § Active Sprint only). For unchanged-since-last-session files, emit `[cache hit]` instead of re-reading (SHA1 lookup per Sprint 045 lean-doc Step 0a).
 2. If either CLAUDE.md or CONTEXT.md is `[MISSING]`, abort with FAIL — these are required.
-3. Parse `TODO.md` frontmatter → resolve active sprint number.
+3. Parse `TODO.md` frontmatter → resolve active sprint number; count `Backlog` open tasks too.
 4. Count incomplete tasks (`- [ ]` lines under `## Active Sprint` heading).
 5. Emit health report.
+6. Emit `Next:` line based on detection: active sprint + open tasks → `/orchestrator`; active sprint + zero open → `/lean-doc-generator` Sprint Close; no sprint + backlog has tasks → `/lean-doc-generator` Sprint Promote; no sprint + empty backlog → `/task-decomposer` or `/zoom-out`.
 
 ## Output format
 
 ```
 === PRIME HEALTH ===
-[OK]      .claude/CLAUDE.md
-[OK]      .claude/CONTEXT.md
-[OK]      MEMORY.md
-[OK]      docs/sprint/SPRINT-039-codemap-modes-skills.md
-[OK]      docs/codemap/CODEMAP.md (L0-overflow)
-Sprint:   039 (Codemap + Modes + Skills)
-Tasks:    3 open / 4 total
-Status:   ready
+[OK]         .claude/CLAUDE.md
+[cache hit]  .claude/CONTEXT.md
+[OK]         MEMORY.md
+[OK]         docs/sprint/SPRINT-039-codemap-modes-skills.md (partial)
+[OK]         docs/codemap/CODEMAP.md (L0-overflow)
+Sprint:      039 (Codemap + Modes + Skills)
+Tasks:       3 open / 4 total
+Status:      ready
+Next:        run /orchestrator to continue Sprint 039 (3 open tasks)
 ====================
 ```
 
-If any optional file is missing, replace `[OK]` with `[MISSING]` and continue. If a required file is missing, replace `Status: ready` with `Status: FAIL — <file> missing` and exit non-zero (skill abort).
+`[cache hit]` marker = file SHA1 unchanged since last session, skipped re-read. `(partial)` marker on sprint plan = frontmatter + § Active Sprint only. If any optional file is missing, replace `[OK]` with `[MISSING]` and continue. If a required file is missing, replace `Status: ready` with `Status: FAIL — <file> missing` and exit non-zero (skill abort). Pick ONE `Next:` line per detection branch (Step 6).
 
 ## Constraints
 
@@ -74,6 +76,9 @@ If any optional file is missing, replace `[OK]` with `[MISSING]` and continue. I
 ❌ **Failing on MEMORY.md or CODEMAP.md absence** — both are optional; `[MISSING]` is the correct response.
 ❌ **Writing context summaries back to disk** — this skill is read-only by contract.
 ❌ **Running mid-task** — the skill is for session priming, not active task work; mid-task invocation suggests context drift.
+❌ **Summarizing file contents inline** — emit health check ONLY; files load into conversation context for downstream skills/agents to consume. Inline narrative duplicates content + wastes tokens.
+❌ **Re-reading unchanged files within same session** — use SHA1 cache lookup (`.claude/.lean-doc-cache.json` per Sprint 045 lean-doc Step 0a pattern); emit `[cache hit]` marker for unchanged files.
+❌ **Reading full sprint plan** — sprint files run 200-300 lines; only frontmatter + § Active Sprint section (~50 lines) needed for priming. Use Read `limit: 50` OR Grep for the section.
 
 ## Reference
 
