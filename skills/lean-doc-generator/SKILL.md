@@ -6,7 +6,7 @@ allowed-tools: Read, Write, Bash(git *), Glob, Grep
 user-invocable: true
 context: fork
 type: rigid
-version: "2.3.0"
+version: "2.3.1"
 last-validated: "2026-05-10"
 ---
 
@@ -63,9 +63,7 @@ Generate high-signal technical documentation. Read `references/DOCS_Guide.md` be
 
 ---
 
-## Sprint Lifecycle
-
-Full protocols in `references/SPRINT_PROTOCOLS.md`.
+## Sprint Lifecycle — full protocols → `references/SPRINT_PROTOCOLS.md`
 
 | User says… | Protocol |
 |---|---|

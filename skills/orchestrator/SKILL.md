@@ -3,16 +3,14 @@ name: orchestrator
 description: Use when starting, resuming, or completing any development task or sprint. Orchestrates gate-driven agentic workflow — init, quick, mvp, and sprint-bulk modes — with G1 Scope and G2 Design gates. Do not use for non-task work — use /zoom-out for orientation, /diagnose for debugging, /refactor-advisor for code-smell sweeps.
 user-invocable: true
 argument-hint: "[mode] [task-or-description]"
-version: "2.1.0"
-last-validated: "2026-05-09"
+version: "2.1.1"
+last-validated: "2026-05-10"
 type: rigid
 ---
 
 # orchestrator
 
 Gate-driven agentic workflow. Read `CONTEXT.md` before acting.
-
----
 
 ## Mode Dispatch
 
@@ -23,13 +21,9 @@ Gate-driven agentic workflow. Read `CONTEXT.md` before acting.
 | `mvp` | G1 + G2 | feature work, M+ size, multi-task |
 | `sprint-bulk` | G1 + G2 (batched once per sprint) | multi-task sprint, auto-loop Active Sprint tasks |
 
-> Replaces CC primitives: `init` → CC `/init` · review step → CC `/review` · task tracking → CC TaskCreate/TaskList. See ADR-012.
-
 Freeform input (no mode keyword):
 - No active tasks in TODO.md → run `task-decomposer` first (per ADR-030; reads `templates/TODO.md.template` at output time per `task-decomposer/references/procedure.md` Step 6)
 - Active task found → `quick` (default)
-
----
 
 ## Phases
 

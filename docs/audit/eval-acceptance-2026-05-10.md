@@ -1,7 +1,7 @@
 ---
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
-update_trigger: Re-run acceptance harness OR new prompt added
+update_trigger: Re-run acceptance harness
 status: current
 task: TASK-116-v2
 sprint: 055
@@ -10,96 +10,106 @@ sprint: 055
 # Skill-Triggering Acceptance Eval — 2026-05-10
 
 > Source: `scripts/eval-acceptance.js` · per `docs/research/superpowers-acceptance-harness-2026-05-04.md`
-> Pass rule: stream-json contains `"name":"Skill"` AND `"skill":"<name>"` (or `<namespace>:<name>`); ≥2/3 runs (Mode A quorum per OQ(D)).
-> Eval-evidence policy: `CLAUDE.md` Quick Rules L42 + ADR-021 DEC-4 (acceptance harness pattern). Plan T2 AC-4 cited "ADR-016 § Consequences" — corrected at T2 friction-fix to ADR-021 § Consequences (ADR-016 = "Kill Node hook scripts", unrelated; cross-ref in ADR-021 line 66 is itself stale).
+> Pass rule: stream-json contains `"name":"Skill"` AND target skill name; ≥2/3 runs (Mode A quorum per OQ(D)).
+> Run timestamp: `2026-05-10T02-01-24-672Z` · claude version: `_(dry-run)_` (pin per research §gaps R1)
 
-## Status (2026-05-10)
+## Summary
 
-**Live runs: OPERATOR-PENDING.** Harness validated dry-run only (T1 + T2 builds). Live `claude -p` invocations require:
-- Operator local env w/ `claude` CLI installed AND dev-flow plugin loaded (`/plugin install dev-flow` OR `--plugin-dir <path>` per research §gaps R2)
-- API token spend (8 prompts × 3 runs = ~24 invocations w/ `--max-turns 5` each)
-- Pin `claude --version` in this report at first live run (research §gaps R1)
+- Skills evaluated: **8**
+- Pass: **0**
+- Fail: **8**
 
-This report frozen at T2 close as **harness contract + prompt catalog**. First live run will overwrite per-run sections; lift-coverage table below preserves design contract.
+## Per-Skill Results
 
-## Lift Candidate Coverage (TASK-116-v2)
-
-8 lift candidates from Sprints 043 + 045 + 049 + 051a + 052 + 053 + 054 + 055b + 055c. Each gets PASS/FAIL/DEFERRED-with-rationale per ADR-031 anti-slip explicit-skip.
-
-| # | Lift Candidate | Sprint | Coverage | Status |
-|---|:---------------|:------:|:---------|:-------|
-| 1 | release-patch v2.0.0 generalize (ADR-027 DEC-2 gap) | 049 | `prompts/release-patch.txt` | OPERATOR-PENDING |
-| 2 | skeleton-create (`bin/dev-flow-init.js` + STACK_PRESETS) | 051a | DEFERRED — bin script, not skill-triggerable via `Skill` tool (per OQ(E) + research §gaps R2 explicit-skip pattern) | DEFERRED |
-| 3 | skill-dispatch wiring (6 orphans) | 052 | `prompts/refactor-advisor.txt` + `prompts/zoom-out.txt` (proxy for 2 of 6 orphans now wired) | OPERATOR-PENDING |
-| 4 | lean-doc-generator template canonical (ADR-030 DEC-5) | 053 | `prompts/lean-doc-generator.txt` | OPERATOR-PENDING |
-| 5 | task-decomposer template-pointer (ADR-030 backflow) | 053 | `prompts/task-decomposer.txt` | OPERATOR-PENDING |
-| 6 | anti-slip 4 G1 fields (ADR-031) | 054 | DEFERRED — orchestrator behavior (G1 field-fill verification), not Skill-tool-trigger; orchestrator skill-trigger already covered by `prompts/orchestrator.txt` (T1 seed) | DEFERRED |
-| 7 | output-discipline pointer fan-out (ADR-033) | 055b | DEFERRED — CONTEXT.md cross-cutting principle; manifests as protocol-output style WITHIN other skills, not as standalone trigger; needs different harness shape (output-style lint, not skill-trigger detection) | DEFERRED |
-| 8 | history-hygiene principle (ADR-034) | 055c | DEFERRED — same shape as #7; behavior at Sprint Close + Promote within `lean-doc-generator`; lean-doc trigger covered by `prompts/lean-doc-generator.txt` | DEFERRED |
-
-**Net coverage:** 5 OPERATOR-PENDING (testable via Skill-tool harness) · 3 DEFERRED-with-rationale (non-trigger-shaped principles or non-skill bin scripts).
-
-**v1 ship gate (Sprint 056):** ≥4/5 testable PASS at first live run (≥80% threshold; allows 1 false-fail per non-determinism R4). 3 DEFERRED entries do NOT count against gate (explicit-skip per ADR-031). <4/5 → remediation candidates surface to Sprint 055-2 (skill-description tuning).
-
-## Per-Skill Prompt Catalog
-
-8 prompt files staged under `tests/skill-triggering/prompts/`:
-
-| Prompt File | Target Skill | Source | Naturalistic? |
-|:------------|:-------------|:-------|:--------------|
-| `prime.txt` | `prime` | T1 (research §3-skill-seed-picks) | Yes |
-| `orchestrator.txt` | `orchestrator` | T1 (research §3-skill-seed-picks) | Yes |
-| `tdd.txt` | `tdd` | T1 (research §3-skill-seed-picks; superpowers' validated structure) | Yes |
-| `release-patch.txt` | `release-patch` | T2 (lift #1) | Yes — describes "bump version + prep release, don't push" |
-| `lean-doc-generator.txt` | `lean-doc-generator` | T2 (lift #4 / lift #8 proxy) | Yes — describes "write architectural overview, why-not-how" |
-| `task-decomposer.txt` | `task-decomposer` | T2 (lift #5) | Yes — describes "break down feature idea into structured backlog" |
-| `refactor-advisor.txt` | `refactor-advisor` | T2 (lift #3 proxy 1 of 2) | Yes — describes "module hard to work with, where new logic should go" |
-| `zoom-out.txt` | `zoom-out` | T2 (lift #3 proxy 2 of 2) | Yes — describes "high-level map before changes, no implementation suggestions" |
-
-**Prompt design rule** (research §acceptance-pattern): naturalistic — DOES NOT name target skill in body. Failure to trigger = skill description weakness OR naming collision OR model variance.
+| Skill | Runs | Passes | Verdict | Log dir |
+|:------|-----:|-------:|:--------|:--------|
+| `lean-doc-generator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/lean-doc-generator/` |
+| `orchestrator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/orchestrator/` |
+| `prime` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/prime/` |
+| `refactor-advisor` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/refactor-advisor/` |
+| `release-patch` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/release-patch/` |
+| `task-decomposer` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/task-decomposer/` |
+| `tdd` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/tdd/` |
+| `zoom-out` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/zoom-out/` |
 
 ## Per-Run Detail
 
-_(populated at first live run; dry-run rows omitted from frozen contract version.)_
+### `lean-doc-generator`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\lean-doc-generator\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\lean-doc-generator\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\lean-doc-generator\run-3.json`)
+
+### `orchestrator`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\orchestrator\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\orchestrator\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\orchestrator\run-3.json`)
+
+### `prime`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\prime\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\prime\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\prime\run-3.json`)
+
+### `refactor-advisor`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\refactor-advisor\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\refactor-advisor\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\refactor-advisor\run-3.json`)
+
+### `release-patch`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\release-patch\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\release-patch\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\release-patch\run-3.json`)
+
+### `task-decomposer`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\task-decomposer\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\task-decomposer\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\task-decomposer\run-3.json`)
+
+### `tdd`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\tdd\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\tdd\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\tdd\run-3.json`)
+
+### `zoom-out`
+
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\zoom-out\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\zoom-out\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\zoom-out\run-3.json`)
 
 ## Cap Headroom (TD-002 lint fold-in)
 
-> Rule: `headroom = 100 - line_count`. `OK` ≥5 · `WARN` <5 · `EXEMPT` = explicit ADR grandfather (only `release-patch` per ADR-032/ADR-033 DEC-4 historically).
-> Lint executed 2026-05-10 (T3) via inline scan logic equivalent to `scripts/eval-acceptance.js --cap-headroom-warn`.
+> Rule: `headroom = 100 - line_count`. OK ≥5 · WARN <5 · EXEMPT = 0 (grandfathered, e.g. release-patch per ADR-032).
 
 | Skill | Lines | Headroom | Verdict |
 |:------|------:|---------:|:--------|
-| `release-patch` | 101 | -1 | **BREACH** |
-| `orchestrator` | 100 | 0 | **WARN** |
-| `lean-doc-generator` | 97 | 3 | **WARN** |
-| `architecture-grill` | 94 | 6 | OK |
-| `pr-reviewer` | 92 | 8 | OK |
-| `prime` | 89 | 11 | OK |
-| `tdd` | 83 | 17 | OK |
-| `write-a-skill` | 83 | 17 | OK |
-| `security-auditor` | 79 | 21 | OK |
-| `adr-writer` | 76 | 24 | OK |
-| `diagnose` | 75 | 25 | OK |
-| `release-manager` | 74 | 26 | OK |
-| `task-decomposer` | 74 | 26 | OK |
-| `refactor-advisor` | 64 | 36 | OK |
-| `codemap-refresh` | 63 | 37 | OK |
-| `zoom-out` | 57 | 43 | OK |
+| `adr-writer` | 76 | 24 | **OK** |
+| `architecture-grill` | 94 | 6 | **OK** |
+| `codemap-refresh` | 63 | 37 | **OK** |
+| `diagnose` | 75 | 25 | **OK** |
+| `lean-doc-generator` | 95 | 5 | **OK** |
+| `orchestrator` | 94 | 6 | **OK** |
+| `pr-reviewer` | 92 | 8 | **OK** |
+| `prime` | 89 | 11 | **OK** |
+| `refactor-advisor` | 64 | 36 | **OK** |
+| `release-manager` | 74 | 26 | **OK** |
+| `release-patch` | 95 | 5 | **OK** |
+| `security-auditor` | 79 | 21 | **OK** |
+| `task-decomposer` | 74 | 26 | **OK** |
+| `tdd` | 83 | 17 | **OK** |
+| `write-a-skill` | 83 | 17 | **OK** |
+| `zoom-out` | 57 | 43 | **OK** |
 
-**Summary:** 16 skills · 13 OK · 2 WARN · 1 BREACH · 0 EXEMPT (current state).
-
-**Critical findings:**
-
-1. **`release-patch/SKILL.md` = 101/100 BREACH.** Was 100/100 EXEMPT per ADR-032/ADR-033 DEC-4 (sole zero-headroom skill). Drifted +1 since Sprint 055b T3.4 cap-validation. Root cause unknown — needs `git blame` + trim. **Surfaced as Open Question to user; remediation NOT in T3 scope (Friction Protocol defer per ADR-031 scope-creep guard).**
-2. **`orchestrator/SKILL.md` = 100/100 (was 99/100 Sprint 055b).** +1 drift; now at EXACT cap. Either: (a) grant new EXEMPT via ADR, OR (b) trim 1 line. Surfaced as Open Question.
-3. **`lean-doc-generator/SKILL.md` = 97/100 (was 96/100 Sprint 055b).** +1 drift; below WARN threshold. Trim opportunity at next edit.
-
-**TD-002 resolution:** `status: resolved → TASK-116-v2 (Sprint 055)`. Lint mechanism live; warns surface drift early per Sprint 052b retro Friction #2 root concern. Frontmatter `cap-headroom: NN/100` field (Path A) NOT adopted — Path B (harness lint) wins on cost + auditability per OQ(F) decision.
+Summary: 16 skills · 0 WARN · 0 EXEMPT.
 
 ## Operator Notes
 
-- First live run command: `node scripts/eval-acceptance.js --cap-headroom-warn`
-- Single-skill: `node scripts/eval-acceptance.js --skill release-patch`
+- Re-run: `node scripts/eval-acceptance.js [--skill <name>] [--runs N] [--cap-headroom-warn]`
 - Logs: `tests/skill-triggering/logs/<timestamp>/<skill>/run-N.json` (gitignored).
 - Mode A (manual) per ADR-021 DEC-4. Mode B (CI on every PR) deferred until ≥10 skills triggering OR cost gate flips per research §recommendation.
-- Pin `claude --version` at first live run.
+- Pass-rate baseline: ≥6/8 lift candidates pass for v1-ship gate (Sprint 056). <6/8 → remediation candidates surface to Sprint 055-2.

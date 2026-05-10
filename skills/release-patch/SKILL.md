@@ -1,13 +1,12 @@
 ---
 name: release-patch
 description: Use when releasing a patch on any project — auto-detects manifest (plugin / npm / python / cargo / go / flat), bumps PATCH version, prepends CHANGELOG entry, runs plugin-only metadata refresh if applicable, then HARD STOPS before push. Skips bump entirely if only docs/ changed. Never invokes `git push`; emits ready-to-push message and exits.
-argument-hint: ""
 allowed-tools: Read, Write, Edit, Bash(git diff *), Bash(git log *), Bash(git tag *), Glob, Grep
 user-invocable: true
 context: fork
 type: rigid
-version: "2.0.0"
-last-validated: "2026-05-08"
+version: "2.0.1"
+last-validated: "2026-05-10"
 ---
 
 # release-patch
@@ -17,8 +16,7 @@ Patch-release orchestrator. Auto-detects project type via manifest cascade. 8 or
 ## When to invoke
 
 - Sprint just closed; PATCH bump needed.
-- Single bug-fix landed; reload needed before next session.
-- Hotfix on master.
+- Single bug-fix landed or hotfix on master; reload needed before next session.
 
 Do **not** invoke for MINOR (new mode/agent/skill) or MAJOR (gate/contract change) bumps — paired counterpart `release-manager` (`/release-manager minor|major|--from-sprint`) handles those per ADR-027 boundary; release-patch never handles MINOR even with auto-detect cascade.
 
@@ -34,7 +32,7 @@ Do **not** invoke for MINOR (new mode/agent/skill) or MAJOR (gate/contract chang
 | `VERSION` (flat file) | flat | overwrite with new semver |
 | none of above | n/a | emit `[skip] no version manifest detected`, exit 0 |
 
-Multiple manifests detected → priority: plugin > npm > python > cargo > go > flat. Detection + per-mode bump procedure: `${CLAUDE_SKILL_DIR}/references/version-detection.md`.
+Multi-manifest priority: plugin > npm > python > cargo > go > flat. Per-mode procedure: `${CLAUDE_SKILL_DIR}/references/version-detection.md`.
 
 ## Steps
 
@@ -78,14 +76,12 @@ Exit 0. **Skill never invokes `git push`.** Reviewer: `grep -r "git push" skills
 ## Constraints
 
 - Plugin lockstep: `plugin.json` + `marketplace.json` versions MUST stay equal — never bump one without the other.
-- Skip-bump path is exit 0 (not an error); pure-docs commits are normal mid-sprint.
 - CHANGELOG format follows detected file's existing entries verbatim per mode; never invent.
 - Push gate is hard text-emit; exit immediately after.
 - Mode detection runs every invocation; never hardcode mode.
 
 ## Red flags
 
-❌ **Calling `git push` directly** — push is the human gate; skill must emit text only.
 ❌ **Bumping plugin.json without marketplace.json (or vice versa)** — Sprint 30 lockstep contract.
 ❌ **Skipping the diff check** — noisy version churn for docs-only commits.
 ❌ **MINOR/MAJOR bumps** — out of scope; governance-level decisions.
@@ -95,6 +91,4 @@ Exit 0. **Skill never invokes `git push`.** Reviewer: `grep -r "git push" skills
 ## Reference
 
 - `references/version-detection.md` — manifest cascade + per-mode bump procedure
-- `.claude-plugin/plugin.json` + `marketplace.json` — plugin mode lockstep targets
-- Sprint 30 ADR / DECISIONS.md — plugin-install regression motivating lockstep contract
 - ADR-027 (Sprint 049) — release-patch generalization decision
