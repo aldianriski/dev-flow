@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: planning
-plan_commit: pending
+status: active
+plan_commit: 9c214d1
 close_commit: pending
 ---
 
@@ -204,11 +204,12 @@ status: PASS (pending Plan-locked approval)
 
 ## Execution Log
 
-*(empty — appended during sprint execution)*
+- **T1 close 2026-05-10** — Flow Grill protocol spec written (ADR-036 + FLOW_GRILL.md). 7 decisions locked (DEC-1..DEC-7); 5 alternatives rejected with rationale; 6 required FLOW_GRILL sections delivered (ledger schema · batched+follow-up Q&A · iteration loop · review-before-lock · lock semantics · handoff envelope · Context Budget Across Skills · anti-slip mapping). FLOW_GRILL.md 172/180 lines (cap PASS · 8-line headroom). ADR-036 93 lines (no cap). User mid-promote refinements baked: DEC-3 batched+follow-up · DEC-4 explicit review step · Context Budget section. HITL gate fired post-commit per pre-locked D-K.
 
 ## Files Changed
 
-*(empty — populated during execution; one row per file: `File | Task | Change (one-line WHY) | Risk | Test added`)*
+- `docs/adr/ADR-036-flow-grill-planning-convergence.md` | T1 | NEW (93 lines) — anchors 3-into-1 collapse decision · 7 DECs · cites ADR-006/026/027/030/031/032/033/034 | risk: low (additive doc) | test: N/A
+- `skills/lean-doc-generator/references/FLOW_GRILL.md` | T1 | NEW (172 lines) — canonical Flow Grill protocol; 6 required sections + anti-slip mapping + red flags | risk: low (new reference, no existing skill behavior changes until T2-T4) | test: N/A (behavior tests fold into TASK-136..138 ACs per T1 AC.5)
 
 ## Decisions
 
