@@ -67,36 +67,18 @@ status: current
    - **Pre-release versions** (alpha/beta/rc): treat as MINOR for depth-counting purposes (release effort already happened).
 
 2. **Pick** top priority items (P0 → P1 → P2). Apply sprint sizing rules: 2–3 tasks min, more if lightweight. Confirm pick with user.
-3. **Decompose** each task. Ask in single message:
 
-   ```
-   Decomposing T1 — [task name]. Need confirm:
+3. **Flow Grill — iteration loop** (per ADR-036 / `FLOW_GRILL.md`). Hydrate Open Questions ledger from `task-decomposer` seed (`## Flow Grill Seed` JSON block emitted on `approve`) if present; cold-start otherwise. Iterate batched Q&A loop per `FLOW_GRILL.md` § Q&A Discipline (≤5 independent Qs/turn; follow-up turn on ambiguous answer; never batch dependent or open-ended Qs) until all required ledger fields populated (tasks · assumptions · risk · layers · anti-slip 4 fields per ADR-031 · decisions_pre_locked). **Ledger is session-scoped; NOT persisted to disk pre-lock.**
 
-   - Scope: in-scope vs out-of-scope?
-   - Acceptance: what observable outcome = done?
-   - Edge cases: empty / null / large / concurrent / error path?
-   - Files (likely): paths or "tbd"?
-   - Tests: what scenarios add to TEST_SCENARIOS.md?
-   - Risk: low / med / high — reason?
-   - Depends on: other task in this sprint?
-   - ADR needed: yes / no / maybe — topic?
-   - Definition of done: code merged + tests green + which docs update?
-   - Existing pattern to mirror: file path or —?
+4. **Review-before-lock** (per ADR-036 DEC-4 / `FLOW_GRILL.md` § Review-Before-Lock Step). Emit converged ledger summary to terminal (tasks · assumptions · risk · anti-slip 4 fields · decisions pre-locked · open uncertainty). Prompt three keywords: `confirm` (no-op review pass; re-emits summary; lets user read once more) · `revise <field>` (re-enter loop at named field; preserve unrelated state) · `lock` (irreversible write trigger). **Non-skippable.** Replaces old "Pause for user review" + "On approval" steps.
 
-   My confidence on this task: NN% — uncertainty area: [X].
-   ```
-
-4. **Repeat** decompose for each task. Wait for full answers before proceeding.
-5. **Generate** `docs/sprint/SPRINT-NNN-<slug>.md` from sprint file template (see `DOCS_Guide.md` §3.9):
+5. **On `lock`** — generate `docs/sprint/SPRINT-NNN-<slug>.md` from sprint file template (see `DOCS_Guide.md` §3.9). Hydrate sections from frozen ledger per `FLOW_GRILL.md` § Handoff Envelope mapping (tasks → § Plan · confirmed assumptions → § Decisions pre-locked · anti-slip 4 fields → G1 rows · unresolved Qs → § Open Questions for Review). Update TODO.md: `Active Sprint` → `→ docs/sprint/SPRINT-NNN-<slug>.md`; remove promoted tasks from Backlog.
    - NNN = next zero-padded sequence (read existing files in `docs/sprint/`)
    - `<slug>` = kebab-case theme, ≤30 chars
-   - `status: planning`. Plan section filled with decomposed tasks. Execution Log / Files Changed / Decisions / Open Questions / Retro = empty stubs.
+   - `status: planning`. Execution Log / Files Changed / Decisions / Open Questions / Retro = empty stubs.
    - Ownership header: `last_updated: <today>`, `update_trigger: sprint open / close / status change`
-6. **Update** TODO.md:
-   - `Active Sprint` → `→ docs/sprint/SPRINT-NNN-<slug>.md`
-   - Remove promoted tasks from Backlog
-7. **Pause** for user review of plan. Surface confidence ratings + open uncertainty.
-8. **On approval** → flip sprint file `status: active`, fill `plan_commit: <sha>` after user runs `sprint(NNN): plan locked` commit. Provide commit message ready to paste:
+
+6. **Plan-locked commit** — flip sprint file `status: planning → active`, fill `plan_commit: <sha>` after user runs commit. Provide commit message ready to paste:
 
    ```
    sprint(NNN): plan locked — [theme]
@@ -108,7 +90,7 @@ status: current
    Plan frozen at this commit. Execution log + retro append in subsequent commits, squashed at close.
    ```
 
-9. **Block** any further plan edit. From this point all changes go to Execution Log § Surprise.
+7. **Block** any further plan edit. From this point all changes go to Execution Log § Surprise.
 
 ---
 

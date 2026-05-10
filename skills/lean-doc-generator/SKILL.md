@@ -6,7 +6,7 @@ allowed-tools: Read, Write, Bash(git *), Glob, Grep
 user-invocable: true
 context: fork
 type: rigid
-version: "2.3.1"
+version: "2.4.0"
 last-validated: "2026-05-10"
 ---
 
@@ -89,6 +89,7 @@ Commit strategy: `sprint(NNN): plan locked` at promote · `sprint(NNN): <summary
 
 - `references/DOCS_Guide.md` — full standard: Core Files, line limits, templates, anti-patterns, pre-delivery checklist
 - `references/SPRINT_PROTOCOLS.md` — sprint promote/execute/close protocols
+- `references/FLOW_GRILL.md` — terminal-first planning convergence loop (Sprint Promote Steps 3-5 · ADR-036)
 - `references/VALIDATED_PATTERNS.md` — confirmed session corrections
 
 > Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../../.claude/CONTEXT.md#output-discipline).

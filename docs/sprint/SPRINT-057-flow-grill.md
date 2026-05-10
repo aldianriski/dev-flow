@@ -205,11 +205,14 @@ status: PASS (pending Plan-locked approval)
 ## Execution Log
 
 - **T1 close 2026-05-10** — Flow Grill protocol spec written (ADR-036 + FLOW_GRILL.md). 7 decisions locked (DEC-1..DEC-7); 5 alternatives rejected with rationale; 6 required FLOW_GRILL sections delivered (ledger schema · batched+follow-up Q&A · iteration loop · review-before-lock · lock semantics · handoff envelope · Context Budget Across Skills · anti-slip mapping). FLOW_GRILL.md 172/180 lines (cap PASS · 8-line headroom). ADR-036 93 lines (no cap). User mid-promote refinements baked: DEC-3 batched+follow-up · DEC-4 explicit review step · Context Budget section. HITL gate fired post-commit per pre-locked D-K.
+- **T2 close 2026-05-10** — Sprint Promote Steps 3-7 rewritten to consume FLOW_GRILL.md loop. New step shape: 1 read + 1.2 backlog + 1.5 TD scan + 1.5b release-debt scan + 2 pick + 3 Flow Grill iterate + 4 review-before-lock + 5 on-lock write + 6 plan-locked commit + 7 block edits. Old steps 3-4 (single-message decompose Q&A) + 7 (pause for review) + 8 (on approval flip) collapsed into new 3+4+6. Step 5 sprint-file write gated on `lock` keyword per FLOW_GRILL.md handoff envelope. SKILL.md 95/100 (cap PASS · 5-line headroom WARN tier preserved); FLOW_GRILL.md pointer added to References. lean-doc 2.3.1 → 2.4.0 MINOR.
 
 ## Files Changed
 
 - `docs/adr/ADR-036-flow-grill-planning-convergence.md` | T1 | NEW (93 lines) — anchors 3-into-1 collapse decision · 7 DECs · cites ADR-006/026/027/030/031/032/033/034 | risk: low (additive doc) | test: N/A
 - `skills/lean-doc-generator/references/FLOW_GRILL.md` | T1 | NEW (172 lines) — canonical Flow Grill protocol; 6 required sections + anti-slip mapping + red flags | risk: low (new reference, no existing skill behavior changes until T2-T4) | test: N/A (behavior tests fold into TASK-136..138 ACs per T1 AC.5)
+- `skills/lean-doc-generator/references/SPRINT_PROTOCOLS.md` | T2 | EDIT (232 → 223 lines) — § Sprint Promote Steps 3-7 rewritten to consume FLOW_GRILL.md loop; 9 → 7 numbered steps (collapse old 3+4 → new 3 · old 5+6 → new 5 · old 7+8 → new 4+6) | risk: medium (protocol contract change; cross-skill citers preserved at sub-step granularity 1.5b) | test: validated by T3 (orchestrator consumes new Step 5 write contract)
+- `skills/lean-doc-generator/SKILL.md` | T2 | EDIT (94 → 95 lines) — version 2.3.1 → 2.4.0 MINOR · last-validated 2026-05-10 · References section adds FLOW_GRILL.md pointer line | risk: low (version bump + pointer additive) | test: N/A (frontmatter + ref pointer)
 
 ## Decisions
 
