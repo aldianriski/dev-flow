@@ -4,7 +4,7 @@ last_updated: 2026-05-10
 update_trigger: Sprint state change
 status: closed
 plan_commit: fa4b784
-close_commit: TBD
+close_commit: 396f05d
 ---
 
 # Sprint 055 — Acceptance Harness Node Port + TD-002 Cap-Headroom Lint Fold-In (TASK-116-v2)
