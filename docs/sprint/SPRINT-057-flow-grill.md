@@ -4,7 +4,7 @@ last_updated: 2026-05-10 (Sprint 057 closed — Flow Grill shipped, v3.1.0 locks
 update_trigger: Sprint state change
 status: closed
 plan_commit: 9c214d1
-close_commit: pending
+close_commit: 08c1178
 ---
 
 # Sprint 057 — Flow Grill: terminal-first planning convergence

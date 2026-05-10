@@ -51,7 +51,7 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 
 - Sprint file: [docs/sprint/SPRINT-057-flow-grill.md](sprint/SPRINT-057-flow-grill.md)
 - Plan commit: `9c214d1`
-- Close commit: pending
+- Close commit: `08c1178`
 - Tasks: T1 ✓ (`11a373b`) · T2 ✓ (`40694a7`) · T3 ✓ (`8d99871`) · T4 ✓ (`7121219`) · T5 ✓ (`27a7dd1`)
 - ADRs: ADR-036 Flow Grill 3-into-1 planning convergence (7 DECs · 5 alternatives rejected · cites ADR-006/026/027/030/031/032/033/034)
 - Files changed: 14 (1 NEW ADR · 1 NEW FLOW_GRILL.md · 6 EDIT skills/agents · 2 EDIT manifests · 1 EDIT CONTEXT.md · 1 EDIT CHANGELOG · 1 EDIT TODO · 1 EDIT sprint file) · Tests added: 0 (smoke-tested via mental trace; behavior tests fold into Sprint 058 SDLC audit if surfaced)
