@@ -17,3 +17,7 @@ Thumbs.db
 # Acceptance harness logs (per-run stream-json artifacts)
 tests/skill-triggering/logs/*
 !tests/skill-triggering/logs/.gitkeep
+
+# Caveman 3-arm eval snapshots (per-run live-LLM artifacts; Sprint 055-2 T1)
+evals/snapshots/*
+!evals/snapshots/.gitkeep

@@ -137,11 +137,17 @@ status: PASS
 
 ## Execution Log
 
-(empty — populated during T1/T2/T3 execution per Sprint Execute Protocol)
+### 2026-05-10 T1 done
+T1 runner skeleton + prompts + snapshot dir + dry-run validation. Recon resolved caveman SKILL.md at `~/.claude/plugins/cache/caveman/caveman/84cc3c14fa1e/skills/caveman/SKILL.md` (3585 chars). gpt-tokenizer already in `package.json` devDependencies (^3.4.0) — OQ(N) pre-satisfied; ADR-035 still mandatory T2 for scope-codification. Dry-run validated: 10 prompts × 3 arms = 30 placeholder responses; schema 1:1 with caveman upstream confirmed (metadata + prompts + arms.{__baseline__, __terse__, caveman}); snapshot correctly gitignored. **In-scope adjustment from plan AC5:** ported all 10 upstream prompts (not 5) for stronger cross-tool parity baseline; AC5 satisfied (5 was minimum). MIT attribution lines added to `evals/prompts/en.txt` + `#`-comment filter added to runner loader.
 
 ## Files Changed
 
-(empty — populated per file touched per Sprint Execute Protocol step 4)
+| File | Task | Change |
+|---|---|---|
+| `scripts/eval-caveman.js` | T1 | NEW — runner; 3 arms × N prompts; plugin-cache resolve hard-fail per OQ(M); --dry-run + --prompts + --out + --model + --skill + --plugin flags; CAVEMAN_SKILL_PATH env override |
+| `evals/prompts/en.txt` | T1 | NEW — 10 prompts ported verbatim from caveman upstream evals/prompts/en.txt (MIT); 2-line `#`-comment attribution header |
+| `evals/snapshots/.gitkeep` | T1 | NEW — directory anchor |
+| `.gitignore` | T1 | UPDATE — added `evals/snapshots/*` (except `.gitkeep`) |
 
 ## Decisions
 
