@@ -22,7 +22,7 @@ All agents and skills read this file. Single source of truth for vocabulary, pri
 | **red flag** | Condition that hard-stops a skill; listed inline per skill |
 | **vertical slice** | Independently demoable end-to-end behavior unit |
 | **deep module** | Module whose interface is simple relative to its implementation; high leverage |
-| **grill** | Question-driven interview to stress-test a plan before committing. Two variants: strict 1-per-turn (`/architecture-grill` for high-stakes design where Q dependence is the norm) · batched + follow-up (Flow Grill for routine planning convergence; ≤5 independent Qs/turn + follow-up on ambiguous answer per ADR-036 DEC-3) |
+| **grill** | Question-driven interview to stress-test a plan before committing. Two variants: strict 1-per-turn (`design-analyst --grill` flag for high-stakes design where Q dependence is the norm; architecture-grill skill merged into design-analyst v4.0.0 per ADR-037) · batched + follow-up (Flow Grill for routine planning convergence; ≤5 independent Qs/turn + follow-up on ambiguous answer per ADR-036 DEC-3) |
 | **flow grill** | Terminal-first iterative Q&A loop converging sprint planning OQs BEFORE sprint doc write; collapses 3-stage planning handoff (decompose → Sprint Promote → orchestrator G1+G2) into one. Anchor: ADR-036 · canonical: `lean-doc-generator/references/FLOW_GRILL.md` |
 | **user-project outcome** | Measurable benefit dev-flow delivers to a project that adopts it (8 canonical: onboard · doc-rot · architecture · rework · flow · correction · template · reliability per `docs/USER-OUTCOMES.md`) |
 

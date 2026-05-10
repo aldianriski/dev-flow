@@ -6,10 +6,10 @@ status: current
 generator: scripts/eval-skills.js
 ---
 
-# Skill Eval Report — 2026-05-10T15:47:30.434Z
+# Skill Eval Report — 2026-05-10T16:59:47.371Z
 
-- Skills evaluated: **16**
-- Pass: **13**
+- Skills evaluated: **15**
+- Pass: **12**
 - Fail: **3**
 - Total violations: 3
 
@@ -28,11 +28,10 @@ generator: scripts/eval-skills.js
 | Skill | Lines | Status | Violations |
 |:------|------:|:-------|:-----------|
 | adr-writer | 76 | ✓ pass | — |
-| architecture-grill | 94 | ✓ pass | — |
-| codemap-refresh | 63 | ✗ fail (1) | R7 |
+| codemap-refresh | 64 | ✗ fail (1) | R7 |
 | diagnose | 75 | ✓ pass | — |
 | lean-doc-generator | 96 | ✓ pass | — |
-| orchestrator | 94 | ✓ pass | — |
+| orchestrator | 98 | ✓ pass | — |
 | pr-reviewer | 92 | ✓ pass | — |
 | prime | 89 | ✗ fail (1) | R7 |
 | refactor-advisor | 64 | ✓ pass | — |

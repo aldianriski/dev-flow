@@ -7,7 +7,7 @@ status: current
 
 # dev-flow — Agentic Engineering Workflow Starter
 
-Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v3.1.0 — v1 STABLE + Flow Grill**
+Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v4.0.0 — Flow Grill + audit-driven cleanup (15 skills · 6 agents)**
 
 Drop into any repo to get a human-gated AI workflow. Dispatcher delegates to specialists. Humans approve gates. No app code required.
 
@@ -36,8 +36,8 @@ Plugin auto-discovers components at repo root after install. All counts verified
 |:----------|:------|:-------------|
 | Gates     | 2     | G1 Scope + G2 Design checkpoints before any commit |
 | Modes     | 4     | `init` · `quick` · `mvp` · `sprint-bulk` (operational context) |
-| Skills    | 16    | User-invokable slash commands (`skills/<name>/SKILL.md`) |
-| Agents    | 7     | dispatcher + 6 specialists (design / code-reviewer / scope / security / performance / migration) |
+| Skills    | 15    | User-invokable slash commands (`skills/<name>/SKILL.md`) — architecture-grill merged into design-analyst v4.0.0 per ADR-037 |
+| Agents    | 6     | 6 specialists (design / code-reviewer / scope / security / performance / migration) — dispatcher role lives in orchestrator skill per ADR-037 |
 | Hooks     | 3     | SessionStart bootstrap · PreToolUse chain-guard · PostToolUse codemap-refresh |
 | Scripts   | 10    | 8 Node (`audit-baseline` · `audit-tokens` · `eval-acceptance` · `eval-caveman` · `eval-measure` · `eval-skills` · `propagate-output-discipline` · `scan-legacy-docs`) + 2 PowerShell (`session-start.ps1` · `codemap-refresh.ps1`) |
 
@@ -70,180 +70,34 @@ node bin/dev-flow-init.js
 
 ## How You Use It
 
-> Helicopter view from the **adopter's** perspective. What you actually type and what happens behind the scenes.
+A gated workflow: you give intent → plugin converts to tasks → executes with human checkpoints → ships. You only type ~5 commands per feature; everything else runs inside those commands.
 
-A Claude Code plugin that turns ad-hoc AI coding into a **gated workflow**. You give it intent ("add OAuth"), it converts to tasks, executes them with checkpoints, and ships. Humans approve gates; the plugin orchestrates the rest.
+| Daily entry points | When |
+|:-------------------|:-----|
+| `/prime` | every session start |
+| `/task-decomposer "<intent>"` | new feature/bug |
+| `/lean-doc-generator` (sprint promote/close) | per sprint |
+| `/orchestrator sprint-bulk` | execute the sprint |
+| `/diagnose` · `/refactor-advisor` · `/release-patch` · `/security-review` | as needed |
 
-### Mental model — three layers
-
-```
-LAYER 3 — Daily experience (what you type)
-  /orchestrator   /task-decomposer   /prime   /diagnose   ...
-              ↓ calls
-LAYER 2 — Gates + modes (the structure)
-  G1 Scope    G2 Design
-  init  /  quick  /  mvp  /  sprint-bulk
-              ↓ uses
-LAYER 1 — Specialists + hooks (background)
-  orchestrator → design-analyst / scope-analyst / code-reviewer / ...
-  SessionStart hook · PostToolUse codemap-refresh hook
-```
-
-### Top-level entry points (what you actually type)
-
-| Slash command | When to use | Frequency |
-|:--------------|:------------|:----------|
-| `/orchestrator init` | First-time scaffold in a new project | once per project |
-| `/prime` | Start of every session | daily |
-| `/task-decomposer "<intent>"` | New feature/bug/idea, no task yet | per feature |
-| `/orchestrator sprint-bulk` | Sprint is planned, time to execute | per sprint |
-| `/lean-doc-generator` | Sprint promote / close · doc updates | 2× per sprint |
-| `/diagnose` | Debug a defect or failing test | as needed |
-| `/refactor-advisor` | Code feels harder to change | occasional |
-| `/release-patch` | PATCH bump (auto-detects manifest) | per ship |
-| `/security-review` | Separate session for OWASP audit | per release |
-
-Other skills (`/zoom-out`, `/tdd`, `/pr-reviewer`, `/codemap-refresh`, `/release-manager`, `/adr-writer`, `/write-a-skill`) fire **automatically** at the right moment — you mostly don't type them.
-
-### End-to-end lifecycle (one feature, start to ship)
-
-```
-DAY 0 — adopt the plugin (one-time)
-  $ claude plugin marketplace add https://github.com/aldianriski/dev-flow
-  $ /orchestrator init           # scaffolds CLAUDE.md · CONTEXT.md · TODO.md · docs/
-
-DAY 1 — start a feature
-  > /prime                       # loads CLAUDE.md → CONTEXT.md → TODO.md → codemap
-  > /task-decomposer "add Google OAuth login"
-    [batched ≤5 Qs · scope · risk · acceptance · handoff]
-  > approve                      # writes TASK-NNN to TODO.md Backlog + emits Flow Grill Seed
-
-DAY 1 — promote to sprint
-  > /lean-doc-generator sprint promote
-    [Flow Grill loop hydrates seed · iterates Q&A until ledger converges · review summary]
-  > lock                         # writes docs/sprint/SPRINT-NNN-*.md
-  $ git commit                   # plan-locked commit
-
-DAY 1-N — execute the sprint
-  > /orchestrator sprint-bulk
-    [reads locked ledger · per-task: implement → propose code-reviewer y/n → commit → next]
-
-DAY N — close the sprint
-  > /lean-doc-generator sprint close
-  > /release-patch               # auto-detects PATCH bump · OR manual /release-manager for MINOR/MAJOR
-```
-
-### What "good behavior" looks like
-
-- **You only type ~5 commands per feature.** Everything else is AI-driven inside those commands.
-- **Gates pause for you to read, not type long answers.** Most prompts accept short keywords (`approve` / `lock` / `y` / `n` / `friction` / `block`).
-- **Mistakes are reversible.** Sprint plans are commit-frozen; mid-sprint pivots go to "Surprise Log", not to plan edits.
-- **The plugin doesn't write app code on its own** — every code change runs through implement → review → commit with human checkpoints.
+Full helicopter view (3-layer mental model · entry-points table · end-to-end lifecycle ASCII · good-behavior rules) → [`docs/HOW-YOU-USE-IT.md`](docs/HOW-YOU-USE-IT.md).
 
 ## First Sprint Walkthrough
 
-Zero → first sprint complete in 7 steps:
+Zero → first sprint complete: install (above) → `/prime` → `/task-decomposer` → `/lean-doc-generator` sprint promote → `/orchestrator` sprint-bulk → `/lean-doc-generator` sprint close. Full step-by-step + lifecycle ASCII → [`docs/HOW-YOU-USE-IT.md`](docs/HOW-YOU-USE-IT.md).
 
-1. **Install + scaffold** — see § How to Adopt above.
-2. **`/prime`** — load context (CLAUDE.md, CONTEXT.md, MEMORY.md, active sprint, codemap L0) before any work session.
-3. **`/task-decomposer`** — convert a feature request, ticket URL, or PRD into structured TASK-NNN entries in `TODO.md`.
-4. **Pick a mode** — see cheat-sheet below.
-5. **G1 Scope** — restate goal as verifiable outcome; estimate size (S ≤2h / M ≤1d / L >1d → split); name constraints; check skill red flags.
-6. **G2 Design** *(mvp only)* — `design-analyst` returns `DONE` / `DONE_WITH_CONCERNS`; write ADR via `/adr-writer` for any hard-to-reverse decision.
-7. **Implement → review → commit** — execute plan; propose `code-reviewer` agent (or `/pr-reviewer` skill); commit with structured message.
+## Skills · Agents · Hooks · Scripts
 
-| Mode          | Gates fired      | Use when |
-|:--------------|:-----------------|:---------|
-| `init`        | none             | first-time scaffold (no `.claude/` exists) |
-| `quick`       | G1               | single task, S size, low risk |
-| `mvp`         | G1 + G2          | feature work, M+ size, multi-task |
-| `sprint-bulk` | G1 + G2 (batched once per sprint) | multi-task sprint; auto-loop Active Sprint |
+15 skills + 6 specialist agents (dispatcher role lives in orchestrator skill per ADR-037) + 3 hooks (SessionStart · PreToolUse chain-guard · PostToolUse codemap-refresh) + 10 scripts (Node + PowerShell).
 
-Full gate checklists → [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Gates · full mode definitions → [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Modes.
-
-## Skills
-
-| Skill                     | Trigger                  | Purpose | Outcomes |
-|:--------------------------|:-------------------------|:--------|:---------|
-| `orchestrator`            | `/orchestrator`          | Core workflow — gates, modes, agent dispatch | flow · correction · rework |
-| `task-decomposer`         | `/task-decomposer`       | Freeform intent → TASK-NNN entries + vertical slices | rework · template |
-| `prime`                   | `/prime`                 | Ordered context loader at session start | onboard · flow |
-| `architecture-grill`      | `/architecture-grill`    | Architecture stress-test + grill mode (ad-hoc; distinct from design-analyst auto-G2) | architecture · rework |
-| `pr-reviewer`             | `/pr-reviewer`           | Structured 7-lens code review | rework · reliability |
-| `security-auditor`        | `/security-review`       | OWASP audit (separate session) | reliability · rework |
-| `refactor-advisor`        | `/refactor-advisor`      | Code smells + deep-module opportunities | architecture · rework |
-| `zoom-out`                | `/zoom-out`              | Bird's-eye module map before diving in | onboard · architecture |
-| `diagnose`                | `/diagnose`              | 6-phase systematic debugging | rework · correction |
-| `tdd`                     | `/tdd`                   | Tracer bullet → red-green-refactor | rework · reliability |
-| `lean-doc-generator`      | `/lean-doc-generator`    | WHY/WHERE docs · sprint lifecycle (start/promote/close) | doc-rot · template · architecture |
-| `adr-writer`              | `/adr-writer`            | Architectural decision records | architecture · doc-rot |
-| `release-manager`         | `/release-manager`       | Semver + changelog generation | reliability · flow |
-| `release-patch`           | `/release-patch`         | PATCH bump — auto-detects manifest (plugin / npm / python / cargo / go / flat); HARD STOP at push | reliability · flow |
-| `write-a-skill`           | `/write-a-skill`         | Author new skills with quality constraints | template · reliability |
-| `codemap-refresh`         | `/codemap-refresh`       | Regenerate `docs/codemap/` (also auto on commit) | onboard · doc-rot |
-
-Full authoring standards → [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Skill Authoring Standards.
-
-## Agents
-
-`dispatcher` is the only user-facing agent (entry point for `/orchestrator`). The 6 specialists are dispatcher-spawned only; skills do not spawn agents directly (ADR-015).
-
-| Agent                  | Spawned by             | Trigger | Outcomes |
-|:-----------------------|:-----------------------|:--------|:---------|
-| `dispatcher`           | user (`/orchestrator`) | every workflow run | flow · correction |
-| `design-analyst`       | dispatcher (auto)      | G2 in `mvp` mode | architecture · rework |
-| `code-reviewer`        | dispatcher (propose)   | post-implementation, human approves | rework · reliability |
-| `scope-analyst`        | dispatcher (auto)      | G1 if size unclear | rework |
-| `performance-analyst`  | dispatcher (propose)   | hot-path / api / db touched + high risk | reliability · rework |
-| `migration-analyst`    | dispatcher (propose)   | DB schema change detected | reliability |
-| `security-analyst`     | user (`/security-review`) | separate session — never same-context | reliability |
-
-Full trigger conditions → [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Agent Roster · one-way dispatch detail → [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) § Key Patterns.
-
-## Hooks and Scripts
-
-| Hook        | Fires on                | What it does |
-|:------------|:------------------------|:-------------|
-| SessionStart | `startup`/`resume`/`clear`/`compact` | Verify CLAUDE.md (fail) + settings + active sprint (warn) |
-| PreToolUse   | `Bash(git add*)`        | Block `git add && git commit` chains so lint hook fires |
-| PostToolUse  | `Bash(git commit*)`     | Regenerate `docs/codemap/CODEMAP.md` + `handoff.json` |
-
-| Script                   | Runtime    | Purpose |
-|:-------------------------|:-----------|:--------|
-| `audit-baseline.js`      | Node ≥18   | Repo metrics snapshot for audits |
-| `eval-skills.js`         | Node ≥18   | Skill structural eval (frontmatter + caps + Red Flags) |
-| `eval-acceptance.js`     | Node ≥18   | Skill-triggering acceptance harness — naive prompt → claude -p → stream-json grep; `--cap-headroom-warn` flag for SKILL.md drift lint. See [`tests/skill-triggering/README.md`](tests/skill-triggering/README.md) |
-| `scan-legacy-docs.js`    | Node ≥18   | Walks `*.md`; flags hard orphans + repo-root anomalies + cluster orphans. Output: `docs/audit/legacy-doc-scan-<date>.md` |
-| `session-start.ps1`      | PowerShell ≥5.1 | SessionStart hook target |
-| `codemap-refresh.ps1`    | PowerShell ≥5.1 | PostToolUse hook target — codemap regen |
-
-PowerShell hooks require Windows (ADR-016). Node scripts cross-platform. Hook-to-script wiring → [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) § Component Map.
+Canonical mappings:
+- Per-component **outcomes + skip-when** → [`docs/USER-OUTCOMES.md`](docs/USER-OUTCOMES.md)
+- Trigger conditions + agent roster + dispatch rules → [`.claude/CONTEXT.md`](.claude/CONTEXT.md)
+- Hook wiring → [`hooks/hooks.json`](hooks/hooks.json) · script index → [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) § Component Map
 
 ## Working on This Repo
 
-**Every session →** read [`TODO.md`](TODO.md) first to see active sprint state.
-
-**Daily workflow pattern** (3 steps, in order):
-1. `/prime` — load ordered context (CLAUDE.md → CONTEXT.md → MEMORY.md → TODO.md → sprint file → CODEMAP.md L0)
-2. `/lean-doc-generator` — align docs to current code state (frontmatter, codemap, CHANGELOG)
-3. `/orchestrator` — execute next task (mode: `init` / `quick` / `mvp` / `sprint-bulk`)
-
-Step 1 is never skipped. Steps 2 + 3 are conditionally skippable — see [`docs/blueprint/12-session-workflow.md`](docs/blueprint/12-session-workflow.md) for the full pattern guide.
-
-Contribution flow (versioning, skill-change protocol, breaking-change policy) → [`CONTRIBUTING.md`](CONTRIBUTING.md). Friction reports (file before opening a GitHub issue) → [`docs/SUPPORT.md`](docs/SUPPORT.md).
-
-## Roadmap
-
-Active multi-sprint plan post-v1 (per `refined-task-list.md` Workstream A/B/C):
-
-| Sprint | Theme | Status | Version |
-|:-------|:------|:-------|:--------|
-| **057** | Flow Grill — terminal-first planning convergence (3-into-1 collapse of decompose→promote→orchestrator G1+G2) | ✓ shipped | v3.1.0 MINOR |
-| **058** | SDLC coverage audit (read-only; 23 components × 6 phases · gap analysis · remediation plan) | ✓ shipped | no bump (docs-only) |
-| **059** | Audit-driven cleanup batch (arch-grill MERGE + dispatcher REMOVE + Codemap user-scope + history-rule scope + TODO history audit) | planned | v4.0.0 MAJOR |
-| **060** | Testing skill (`test-planner` — covers unit / integration / e2e / regression grouping) | planned | v4.1.0 MINOR |
-
-Latest audit findings → [`docs/audit/SDLC-coverage-2026-05-10.md`](docs/audit/SDLC-coverage-2026-05-10.md). Multi-sprint sequencing locked at Sprint 058 close per audit-first discipline.
+Read [`TODO.md`](TODO.md) first to see active sprint state. Contribution flow (versioning · skill-change protocol · breaking-change policy) → [`CONTRIBUTING.md`](CONTRIBUTING.md). Friction reports → [`docs/SUPPORT.md`](docs/SUPPORT.md). Full session-workflow pattern guide → [`docs/blueprint/12-session-workflow.md`](docs/blueprint/12-session-workflow.md).
 
 ## Further Reading
 

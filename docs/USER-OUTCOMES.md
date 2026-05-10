@@ -48,9 +48,11 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 
 ---
 
-## Agents (7) → outcomes
+## Agents (6) → outcomes
 
-- **`dispatcher`** → O5 · O6 — only user-facing agent; spawns specialists per ADR-015 one-way contract. **Skip when:** task is read-only exploration — use `/zoom-out` or direct file reads.
+> **Note (v4.0.0):** `dispatcher` agent removed per ADR-037 R3 — orchestrator skill IS the dispatcher role; file existed with zero `Agent({subagent_type:'dispatcher'})` invocations. Roster reduced 7 → 6.
+
+
 - **`design-analyst`** → O3 · O4 — read-only architectural plan at G2 + **5 review lenses** (correctness · scalability · coupling · operational · resilience) auto-applied; supports `--grill` flag for strict 1-Q-at-a-time mode (architecture-grill merged in v4.0.0 per ADR-037). Never modifies files. **Skip when:** mode is `quick` (no G2) or `init` (no work yet).
 - **`code-reviewer`** → O4 · O8 — post-implementation review; loads `pr-reviewer` skill. **Skip when:** docs/governance-only diff; reviewer can fast-path.
 - **`scope-analyst`** → O4 — blast-radius assessment at G1 when size unclear. **Skip when:** size already estimated S/M/L with named files.

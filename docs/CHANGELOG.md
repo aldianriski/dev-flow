@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 058 closed — SDLC audit shipped, no version bump)
+last_updated: 2026-05-10 (Release 4.0.0 — audit-driven cleanup batch)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -43,6 +43,27 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 **Release mechanics:**
 - Manual MINOR lockstep bump 3.0.0 → 3.1.0 (`plugin.json` + `marketplace.json`). NO `release-patch` invocation per ADR-027 boundary; manual sprint-less bump pattern (4th instance: Sprint 052b T1 + Release 2.7.0 + Release 3.0.0 + this Release 3.1.0).
 - Release-debt depth post-bump: 0 (this is the first MINOR of the new cycle; Step 1.5b scan continues per ADR-032 DEC-3).
+- Push gate: emit-only per release-patch HARD STOP (operator runs `git push origin master`).
+
+---
+
+## v4.0.0 — Audit-driven cleanup batch (2026-05-10)
+
+Sprint 058 SDLC audit verdicts executed in single MAJOR consolidation per release-debt discipline. Plugin contract cleaner: 15 skills · 6 agents (was 16 · 7). Adopter-scoped tooling default for codemap; clarified user-vs-internal scope boundary.
+
+**Outcomes shipped:**
+
+- **O3 architecture** — arch-grill MERGE into `design-analyst` (5 review lenses correctness/scalability/coupling/operational/resilience now STANDING G2 review, not ad-hoc · `--grill` flag preserves strict 1-Q-at-a-time mode); dispatcher agent REMOVED (orchestrator skill IS the role per zero-invocation evidence). Joint ADR-037 covers both R1+R3.
+- **O5 flow** — Plugin component count reduces 16→15 skills + 7→6 agents (simpler surface to learn); codemap-refresh adopter-scoped by default (no longer scans dev-flow's own docs in adopter projects); `--Internal` flag preserves dev-flow self-audit.
+- **O8 reliability** — User-vs-internal scope boundary clarified (ADR-034 § Scope new subsection · CONTEXT.md History Hygiene scope pointer); codemap mode field in CODEMAP.md frontmatter; eval gates carried (no NEW BREACH).
+- **O1 onboard** — README "How You Use It" helicopter view section added (3-layer mental model · 9-row entry points table · end-to-end lifecycle ASCII · 4-bullet good-behavior rules); new adopter-orienting surface between How to Adopt and First Sprint Walkthrough.
+- **O2 doc-rot** — TODO.md 6 orphan `[x]` rows backfilled with close-SHA via git log evidence (TASK-129/116-v2/115-v2/134a/134b/v1-ship); preamble gains 1-line history note pointing to CHANGELOG + sprint/ + git log as archive.
+
+**Components changed:** ADR-037 NEW (R1+R3 joint) · `agents/design-analyst.md` extended + `agents/references/lenses.md` NEW (establishes agents/references/ pattern) · `skills/architecture-grill/` DELETED · `agents/dispatcher.md` DELETED · `skills/orchestrator/SKILL.md` § Dispatcher Role · `scripts/codemap-refresh.ps1` dual-mode + sibling test · `skills/codemap-refresh/SKILL.md` 1.0.0→2.0.0 · `docs/adr/ADR-034-history-hygiene.md` § Scope · `TODO.md` preamble + backfills · `README.md` banner+counts+roadmap + new section · `docs/USER-OUTCOMES.md` 16→15 skills · 7→6 agents · `.claude/CONTEXT.md` vocab simplified.
+
+**Release mechanics:**
+- Manual MAJOR lockstep bump 3.1.0 → 4.0.0 (`plugin.json` + `marketplace.json`). NO `release-patch` invocation per ADR-027 boundary; manual sprint-less bump pattern (5th instance: Sprint 052b T1 + Releases 2.7.0 / 3.0.0 / 3.1.0 / this 4.0.0).
+- Release-debt depth post-bump: 0 (this absorbs Sprint 058 docs-only carry).
 - Push gate: emit-only per release-patch HARD STOP (operator runs `git push origin master`).
 
 ---
