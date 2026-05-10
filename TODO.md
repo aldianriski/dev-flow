@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint or task state change
 status: current
-sprint: 055-2 (planning)
+sprint: 055-2
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,7 @@ sprint: 055-2 (planning)
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-055-2-caveman-3arm-eval.md](docs/sprint/SPRINT-055-2-caveman-3arm-eval.md)** (status: planning — pending plan-locked commit)
+→ **[docs/sprint/SPRINT-055-2-caveman-3arm-eval.md](docs/sprint/SPRINT-055-2-caveman-3arm-eval.md)** (status: active · plan_commit `573c062`)
 
 > Sprint 055-2 promoted 2026-05-10 — TASK-115-v2 Caveman 3-arm eval Node port. Single-task sprint per anti-drift hard-stop #3 (3 sub-tasks: T1 runner + T2 measure + T3 tests/close). Pre-promote release-debt cleared via Release 2.7.0 (`9cc3470`); cap-headroom OQ-1/2/3 cleared via `b40c087`. Step 1.5b BLOCK lifted (depth=0).
 >
