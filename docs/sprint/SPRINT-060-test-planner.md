@@ -94,6 +94,7 @@ The audit's remediation T3 pre-locked 3 task seeds with sizes/risks/outcomes; th
 
 - **T1 close 2026-05-10** — test-planner skill body + references + USER-OUTCOMES row. `skills/test-planner/SKILL.md` NEW 88/100 lines (12-line headroom OK tier); description leads with "Use when…" + clear distinction from tdd/pr-reviewer; 5-Q batched planning protocol; 4-group convention summary table; output format spec; 5 Red Flags; references pointer. `skills/test-planner/references/TEST_GROUPING.md` NEW 175 lines (over the ~80-120 estimate but justified by 4-group × ~25-line depth + decision tree + skip-when + tdd hand-off envelope + anti-outcomes); per-group covers scope/examples/counter-examples/pitfalls/speed-budget. `docs/USER-OUTCOMES.md` § Skills 15 → 16; new test-planner row mapping O8 reliability + O4 rework with non-tautological skip-when (trivial change OR coverage-% anti-outcome). HITL gate fired post-commit per D-C.
 - **T2 close 2026-05-10** — test-planner wired into orchestrator skill-dispatch.md. New row in Always-On table between tdd and existing rows: `G1 task-type = feature / new-behavior · pre-tdd planning step → test-planner → propose y/n (skip if tdd already covers informally)`. Notes section gains 1-line clarification on test-planner vs tdd pairing (planner plans · tdd writes). No CONTEXT.md vocabulary change needed (judgment call: 4-group convention details live in TEST_GROUPING.md, not as canonical CONTEXT vocab). Single-file edit · 0 friction.
+- **T3 close 2026-05-10** — Plugin propagation + lockstep MINOR bump 4.0.0 → 4.1.0 (HITL gate cleared by user `lock`). plugin.json + marketplace.json bumped lockstep per ADR-006. CHANGELOG v4.1.0 prepended outcome-led per ADR-026 (O8 reliability + O4 rework + O5 flow lead; ≤12 lines headline + 6 bullets max per ADR-034). README banner v4.0.0 → v4.1.0 + components table Skills 15 → 16. Eval gates: eval-skills.js test-planner row PASSES R1-R7 (frontmatter · "Use when…" · ≤500 chars · ≤100 SKILL.md · Red Flags section); 13 pass / 3 PRE-EXISTING R7 violations carry (codemap-refresh + prime + release-patch). cap-headroom lint: 16 skills · 14 OK / 2 WARN (lean-doc 96/100 + orchestrator 98/100 carry from Sprint 059) / 0 BREACH; test-planner 89/100 = 11-line OK headroom. Manual MINOR sprint-less bump 6th-instance pattern (Sprint 052b T1 + Releases 2.7.0 / 3.0.0 / 3.1.0 / 4.0.0 / this 4.1.0); release-patch NOT invoked per ADR-027 boundary.
 
 ## Files Changed
 
@@ -101,6 +102,10 @@ The audit's remediation T3 pre-locked 3 task seeds with sizes/risks/outcomes; th
 - `skills/test-planner/references/TEST_GROUPING.md` | T1 | NEW (175 lines · over ~80-120 target but content-justified) — full per-group definitions × 4 + decision tree + skip-when + tdd hand-off envelope + anti-outcomes | risk: low | test: N/A
 - `docs/USER-OUTCOMES.md` | T1 | EDIT — § Skills heading 15 → 16; new test-planner row mapping O8 + O4 with non-tautological skip-when | risk: low | test: N/A
 - `skills/orchestrator/references/skill-dispatch.md` | T2 | EDIT — new test-planner row in Always-On table between tdd row + lean-doc row; notes section clarifies planner vs tdd pairing | risk: low (additive table row + 1-line note) | test: N/A
+- `.claude-plugin/plugin.json` | T3 | EDIT — version 4.0.0 → 4.1.0 lockstep | risk: low | test: N/A
+- `.claude-plugin/marketplace.json` | T3 | EDIT — version 4.0.0 → 4.1.0 lockstep | risk: low | test: N/A
+- `docs/CHANGELOG.md` | T3 | EDIT — v4.1.0 row prepended outcome-led O8+O4+O5 per ADR-026 lens; History Hygiene cap respected | risk: low | test: N/A
+- `README.md` | T3 | EDIT — banner v4.0.0 → v4.1.0; components table Skills 15 → 16; agents 6 unchanged | risk: low | test: N/A
 
 ## Decisions
 
@@ -108,4 +113,31 @@ The audit's remediation T3 pre-locked 3 task seeds with sizes/risks/outcomes; th
 
 ## Retro
 
-*(empty — populated at close: Worked / Friction / Pattern candidates / TD prompts; ≤6 bullets each per ADR-034 History Hygiene)*
+**Worked (≤6 per ADR-034):**
+
+1. Audit-pre-locked seeds (Sprint 058 T3 remediation plan) executed cleanly — 3 task seeds → 3 commits, 0 mid-sprint scope creep, 0 friction. Validates audit-first sequencing discipline (ADR-031 anti-slip + Sprint 058 D-G outcome-lens carry-forward).
+2. test-planner skill design fits cleanly into existing tdd/pr-reviewer pairing — distinct surface (planner plans · tdd writes · pr-reviewer reviews) closes Sprint 058 audit T1's Testing-phase gap finding without overlap.
+3. References-pattern reused from Sprint 057 (FLOW_GRILL.md) + Sprint 059 (lenses.md): `skills/test-planner/references/TEST_GROUPING.md` keeps SKILL.md at 88/100 (12-line headroom OK); generalized "reference-only growth canon" pattern now 6+ instances locked.
+4. Outcome-lens carries forward (Sprint 058 D-G standing principle) — test-planner row in USER-OUTCOMES.md tagged O8+O4 with non-tautological skip-when at design time, not retroactively.
+5. eval-skills R1-R7 passed first try for test-planner — frontmatter discipline + "Use when…" + ≤500-char description + ≤100 SKILL.md + Red Flags section all satisfied without iteration.
+6. 4-group canonical convention (D-A pre-locked) prevented design oscillation — no mid-sprint debate about adding 5th group or per-project flexibility.
+
+**Friction (≤6):**
+
+1. None. AFK execution clean across all 3 tasks. T1 HITL gate cleared via "continue"-style fast-path from prior sprint's pattern; T3 HITL gate cleared cleanly with eval gates passing.
+
+**Pattern candidates (≤6 — for VALIDATED_PATTERNS.md if user confirms):**
+
+1. **Skill-creation pattern (4th instance)** — SKILL.md ≤100 with Q&A protocol summary + table summary + Red Flags + references pointer · references/<NAME>.md holds full body. Validated across FLOW_GRILL (Sprint 057) · lenses.md (Sprint 059) · TEST_GROUPING.md (this sprint). Reference-only growth canon now strongly validated for both skills and agents (post-Sprint-059 agents/references/ extension).
+2. **Audit-driven multi-sprint sequencing** — Sprint 058 audit produced remediation plan with task seeds → Sprint 059 + Sprint 060 each consumed seeds 1:1 with 0 mid-sprint scope creep. Validates audit-first principle for cross-cutting work; recommends future audit-led sprints follow same shape.
+3. **4-group test convention as canonical** — unit/integration/e2e/regression as 4-locked-groups (no 5th, no per-project flex in plugin-bundled skill) made test-planner skill design tight; adopters extend in their own conventions, plugin ships canonical. Pattern: lock canonical → adopter extends → plugin doesn't enforce extensions.
+
+**TD prompts (carry-forward / new):**
+
+- TD-003 (medium · open · 055b) — scoped-checkout-glob anti-pattern → carry to next session post-v1-feedback-workstream-close.
+- TD-004 (minor · open · 055b) — pointer-line `+2 lines` canonical → T3 CHANGELOG prepend used the pattern; codification opportunity remains for future sprint.
+- NO new TD added this sprint.
+
+**Eval gate carry-forward:** cap-headroom 16 skills · 14 OK / 2 WARN (lean-doc 96/100 + orchestrator 98/100 carry from Sprint 059 T2 Dispatcher Role subsection) / 0 BREACH; test-planner 89/100 OK 11-line headroom. eval-skills 13 pass / 3 PRE-EXISTING R7 violations (codemap-refresh + prime + release-patch missing ## Red Flags section) carry forward unchanged from Sprint 037+ baseline. Manual MINOR 4.0.0 → 4.1.0 lockstep verified clean.
+
+**Sprint 060 closes refined-task-list.md FULLY.** Workstream A (Sprint 057 Flow Grill) + B/C audit (Sprint 058 SDLC audit) + B/C cleanup (Sprint 059 v4.0.0) + C testing (this Sprint 060 v4.1.0). Post-v1-feedback workstream complete; next sprints free for new work.

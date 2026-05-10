@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 059 closed — v4.0.0 audit-driven cleanup shipped)
+last_updated: 2026-05-10 (Sprint 060 closed — v4.1.0 test-planner shipped · refined-task-list.md FULLY closed)
 update_trigger: Sprint or task state change
 status: current
-sprint: 060
+sprint: — none —
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -37,13 +37,13 @@ sprint: 060
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-060-test-planner.md](docs/sprint/SPRINT-060-test-planner.md)**
+→ **— none —**
 
-> **Sprint 060 — test-planner skill (v4.1.0 MINOR) (planning).** Final sprint of post-v1-feedback workstream. Closes refined-task-list.md item 7 (Workstream C). 3 tasks: T1 NEW test-planner SKILL.md + references/TEST_GROUPING.md + USER-OUTCOMES row (HITL · medium risk) · T2 wire into orchestrator skill-dispatch · T3 plugin propagation + lockstep MINOR 4.0.0→4.1.0 (HITL). 5 decisions pre-locked (D-A 4-group convention unit/integration/e2e/regression · D-B manual MINOR 6th-instance · D-C HITL T1+T3 · D-D outcome-lens carries forward · D-E push emit-only). Anti-slip 4 fields populated. Risk medium; layers `skills, docs, ci`.
+> **Last closed:** Sprint 060 test-planner skill (v4.1.0 MINOR · 3 tasks shipped · 0 friction). NEW skill `test-planner` closes Testing-phase gap from Sprint 058 audit T1; 4-group canonical convention (unit · integration · e2e · regression); paired with tdd. Plugin: 16 skills · 6 agents. Manual MINOR 6th-instance lockstep bump. Close commit pending squash. See `docs/CHANGELOG.md § Sprint 060`.
 >
-> **Status:** plan written via Flow Grill v3.1.0+ (3rd dogfood); awaiting plan-locked commit.
+> **Status: refined-task-list.md FULLY CLOSED.** Workstream A (057 Flow Grill v3.1.0) + B/C audit (058 SDLC audit) + B/C cleanup (059 v4.0.0) + C testing (060 v4.1.0) — all post-v1-feedback work shipped. Next sprints free for new initiatives.
 >
-> **Predecessor:** Sprint 059 closed (`e71dfab`) · v4.0.0 audit-driven cleanup shipped. Push gate emit-only — operator runs `git push origin master` after 060 close (closes refined-task-list.md fully).
+> **Operator action:** push gate emit-only — `git push origin master` for ~50+ unpushed commits across Sprints 056-060. After push, plugin cache will refresh on next session for v4.1.0 visibility.
 
 ---
 
@@ -178,5 +178,5 @@ Sprint 56    →  v1 SHIP — CHANGELOG outcome-led release notes + lockstep bum
 Sprint 57    →  Flow Grill — terminal-first planning convergence (items 1+2+6 from refined-task-list.md · TASK-135..139 · ADR-036 · 3-skill handoff collapse: task-decomposer seed → lean-doc Sprint Promote grill → orchestrator sprint-bulk consume-ledger · v3.1.0 MINOR lockstep) (done — `27a7dd1`)
 Sprint 58    →  SDLC audit — read-only redundancy + gap analysis (item 8 from refined-task-list.md · 23 components × 6 phases mapped · R1 MERGE arch-grill into design-analyst · R2 0/4 pairs redundant (intentional separations) · R3 REMOVE dispatcher.md (zero-invocation grep evidence) · items 3/4/5/7 sequenced to Sprint 059/060) (done — `837b552`)
 Sprint 59    →  Audit-driven cleanup batch (v4.0.0 MAJOR · arch-grill MERGED into design-analyst · dispatcher REMOVED + role folded to orchestrator · codemap user-scope default + --Internal flag · ADR-034 § Scope clarification · TODO 6 orphan backfills · README 261→115 -56% via pointer+canonical-doc fan-out · new docs/HOW-YOU-USE-IT.md · ADR-037 joint R1+R3 · 5th-instance manual sprint-less MAJOR pattern) (done — `e71dfab`)
-Sprint 60    →  Testing skill (item 7 from refined-task-list.md · dedicated test-planning skill + grouping conventions unit/integration/e2e/regression · sprint-flow integration · v4.1.0 MINOR · informed by Sprint 058 audit findings) (planned)
+Sprint 60    →  Testing skill (item 7 from refined-task-list.md · NEW test-planner skill 88/100 · 4-group canonical convention · references/TEST_GROUPING.md · wired into orchestrator skill-dispatch · v4.1.0 MINOR 6th-instance manual sprint-less bump · 0 friction · refined-task-list.md FULLY CLOSED) (done — pending close SHA)
 ```

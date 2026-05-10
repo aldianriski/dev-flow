@@ -62,6 +62,21 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 
 ---
 
+## Sprint 060 — test-planner skill (v4.1.0 MINOR · final post-v1-feedback sprint) (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-060-test-planner.md](sprint/SPRINT-060-test-planner.md)
+- Plan commit: `e411f2e`
+- Close commit: pending
+- Tasks: T1 ✓ test-planner SKILL+refs+USER-OUTCOMES (`2fae662`) · T2 ✓ wire skill-dispatch (`5212884`) · T3 ✓ release v4.1.0 (`1bec589`)
+- ADRs: none (additive skill addition; no architectural decision needed)
+- Files changed: 9 across all tasks · Tests added: 0 (eval-skills structural validation only at T3)
+- Summary: Closes Testing-phase PRIMARY gap from Sprint 058 audit T1. NEW skill `test-planner` with 4-group canonical convention (unit · integration · e2e · regression). SKILL.md 88/100 + references/TEST_GROUPING.md 175 lines. Wired into orchestrator skill-dispatch as propose y/n at G1 feature/new-behavior · pairs with tdd (planner plans · tdd writes). Plugin component count 15→16 skills · 6 agents unchanged. Manual MINOR 6th-instance lockstep bump (release-patch HARD-rejects MINOR per ADR-027).
+- Decisions (5 user-locked at promote): D-A 4-group canonical convention · D-B manual MINOR 6th-instance · D-C HITL T1+T3 · D-D outcome-lens carries forward · D-E push emit-only.
+- Pattern candidates surfaced (3): skill-creation pattern (4th instance · references-only growth canon) · audit-driven multi-sprint sequencing (Sprint 058→059→060 1:1 seed consumption · 0 scope creep) · 4-group test convention as canonical (lock canonical · adopter extends · plugin doesn't enforce).
+- **Closes refined-task-list.md FULLY.** Workstream A (Sprint 057 Flow Grill) + B/C audit (Sprint 058) + B/C cleanup (Sprint 059) + C testing (this Sprint 060). Post-v1-feedback workstream complete.
+
+---
+
 ## v4.1.0 — test-planner skill (2026-05-10)
 
 NEW skill `test-planner` closes the Testing-phase PRIMARY gap surfaced in Sprint 058 SDLC audit. Distinct from `tdd` (writes tests) / `pr-reviewer` (reviews code) / `code-reviewer` agent (post-impl review). Closes refined-task-list.md item 7 — final piece of post-v1-feedback workstream.
