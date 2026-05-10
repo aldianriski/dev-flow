@@ -66,7 +66,7 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 
 - Sprint file: [docs/sprint/SPRINT-060-test-planner.md](sprint/SPRINT-060-test-planner.md)
 - Plan commit: `e411f2e`
-- Close commit: pending
+- Close commit: `f8e70e9`
 - Tasks: T1 ✓ test-planner SKILL+refs+USER-OUTCOMES (`2fae662`) · T2 ✓ wire skill-dispatch (`5212884`) · T3 ✓ release v4.1.0 (`1bec589`)
 - ADRs: none (additive skill addition; no architectural decision needed)
 - Files changed: 9 across all tasks · Tests added: 0 (eval-skills structural validation only at T3)
