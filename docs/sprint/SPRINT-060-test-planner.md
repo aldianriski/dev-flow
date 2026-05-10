@@ -93,12 +93,14 @@ The audit's remediation T3 pre-locked 3 task seeds with sizes/risks/outcomes; th
 ## Execution Log
 
 - **T1 close 2026-05-10** — test-planner skill body + references + USER-OUTCOMES row. `skills/test-planner/SKILL.md` NEW 88/100 lines (12-line headroom OK tier); description leads with "Use when…" + clear distinction from tdd/pr-reviewer; 5-Q batched planning protocol; 4-group convention summary table; output format spec; 5 Red Flags; references pointer. `skills/test-planner/references/TEST_GROUPING.md` NEW 175 lines (over the ~80-120 estimate but justified by 4-group × ~25-line depth + decision tree + skip-when + tdd hand-off envelope + anti-outcomes); per-group covers scope/examples/counter-examples/pitfalls/speed-budget. `docs/USER-OUTCOMES.md` § Skills 15 → 16; new test-planner row mapping O8 reliability + O4 rework with non-tautological skip-when (trivial change OR coverage-% anti-outcome). HITL gate fired post-commit per D-C.
+- **T2 close 2026-05-10** — test-planner wired into orchestrator skill-dispatch.md. New row in Always-On table between tdd and existing rows: `G1 task-type = feature / new-behavior · pre-tdd planning step → test-planner → propose y/n (skip if tdd already covers informally)`. Notes section gains 1-line clarification on test-planner vs tdd pairing (planner plans · tdd writes). No CONTEXT.md vocabulary change needed (judgment call: 4-group convention details live in TEST_GROUPING.md, not as canonical CONTEXT vocab). Single-file edit · 0 friction.
 
 ## Files Changed
 
 - `skills/test-planner/SKILL.md` | T1 | NEW (88/100 lines · 12-line headroom OK) — protocol entry: description "Use when…" + 5-Q batched planning + 4-group table + output format + 5 Red Flags + references pointer | risk: low (additive new skill) | test: deferred to T3 eval-skills run
 - `skills/test-planner/references/TEST_GROUPING.md` | T1 | NEW (175 lines · over ~80-120 target but content-justified) — full per-group definitions × 4 + decision tree + skip-when + tdd hand-off envelope + anti-outcomes | risk: low | test: N/A
 - `docs/USER-OUTCOMES.md` | T1 | EDIT — § Skills heading 15 → 16; new test-planner row mapping O8 + O4 with non-tautological skip-when | risk: low | test: N/A
+- `skills/orchestrator/references/skill-dispatch.md` | T2 | EDIT — new test-planner row in Always-On table between tdd row + lean-doc row; notes section clarifies planner vs tdd pairing | risk: low (additive table row + 1-line note) | test: N/A
 
 ## Decisions
 
