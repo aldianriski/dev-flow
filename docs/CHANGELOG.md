@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 055 closed — acceptance harness + TD-002 fold-in)
+last_updated: 2026-05-10 (Release 2.7.0 — release-debt reconcile + cap-headroom hygiene)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,25 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Release 2.7.0 — Release-Debt Reconcile + Cap-Headroom Hygiene (2026-05-10)
+
+- **Type:** MINOR — lockstep `plugin.json` + `marketplace.json` 2.6.0 → 2.7.0
+- **Trigger:** Step 1.5b BLOCK threshold (release-debt depth = 7 PATCH-only sprints since 2.5.0 → 2.6.0; Sprint 055 close pushed across threshold; Sprint Promote blocked until reconcile)
+- **Mechanism:** Manual reconcile per ADR-032 DEC-2 (release-patch HARD-rejects MINOR per ADR-027 boundary; manual sprint-less bump precedent = Sprint 052b T1)
+- **Scope** (all work since 2.6.0 / Sprint 052b close 2026-05-09):
+  - Sprint 055 — acceptance harness Node port + TD-002 cap-headroom lint resolved (`396f05d`)
+  - Sprint 055b — token audit + Output Discipline plugin principle ADR-033 + release-debt Step 1.5b codification (`be46f3f`)
+  - Sprint 055c — History Hygiene plugin principle ADR-034 + legacy-doc scan + cleanup (`a197a47`)
+  - TASK-129 direct-commit — `/prime` per-detection-branch `Next:` + 3 anti-patterns + Step 6 + cache markers (skill 1.0.0 → 1.1.0)
+  - Cap-headroom hygiene — 3 SKILL.md trims close OQ-1/2/3 from Sprint 055 (`b40c087`)
+- **Skill bumps included** (PATCH; cap-trim hygiene, no behavioral change): release-patch 2.0.0 → 2.0.1 · orchestrator 2.1.0 → 2.1.1 · lean-doc-generator 2.3.0 → 2.3.1
+- **ADRs included:** ADR-033 Output Discipline (Sprint 055b) · ADR-034 History Hygiene (Sprint 055c)
+- **Lint baseline post-reconcile:** 16/16 SKILL files OK · 0 WARN · 0 EXEMPT (was 13 OK / 2 WARN / 1 EXEMPT pre-trim)
+- **release-debt:** RESOLVED. Chain depth 7 → 0. Sprint 055-2 promote unblocked. Sprint 056 v1-ship next.
+- **NO `release-patch` invocation** — manual reconcile per Sprint 052b T1 DEC-1 precedent (release-patch handles PATCH only).
 
 ---
 
