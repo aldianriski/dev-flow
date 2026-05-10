@@ -76,7 +76,7 @@ _Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a 
 
 - **mode → gate** — each mode declares which gates fire (`init` none / `quick` G1 / `mvp` G1+G2 / `sprint-bulk` G1+G2 resolved upstream via Flow Grill per ADR-036).
 - **gate → agent** — G1 may auto-spawn `scope-analyst` (size unclear); G2 always auto-spawns `design-analyst`.
-- **dispatcher → specialist** — `dispatcher` is the only agent that spawns other agents; specialists return to dispatcher (one-way, depth ≤2 per ADR-015).
+- **dispatcher → specialist** — the orchestrator skill (which IS the dispatcher role per ADR-037) is the only thing that spawns specialist agents; specialists return to orchestrator (one-way, depth ≤2 per ADR-015).
 - **skill → agent** — skills do NOT spawn agents directly; orchestrator dispatch-table maps work to agents via dispatcher.
 - **CONTEXT.md → all** — every agent + skill reads CONTEXT.md before acting (`Context first` principle).
 
@@ -84,15 +84,16 @@ _Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a 
 
 ## Agent Roster
 
+> Dispatcher role lives in `skills/orchestrator/SKILL.md` (per ADR-037 R3 — agent file removed in v4.0.0; role description folded into orchestrator skill).
+
 | Agent | Trigger | Spawned by |
 |---|---|---|
-| `dispatcher` | `/orchestrator` | user |
-| `design-analyst` | G2 always | dispatcher (auto) |
-| `code-reviewer` | post-implementation | dispatcher (auto) |
-| `scope-analyst` | G1 if size unclear | dispatcher (auto) |
+| `design-analyst` | G2 always (default) · `--grill` flag for strict 1-Q-at-a-time mode (ADR-037) | orchestrator (auto) |
+| `code-reviewer` | post-implementation | orchestrator (auto) |
+| `scope-analyst` | G1 if size unclear | orchestrator (auto) |
 | `security-analyst` | separate `/security-review` session | user |
-| `performance-analyst` | high-risk + api/db layers | dispatcher (propose → human approves) |
-| `migration-analyst` | DB schema change detected | dispatcher (propose → human approves) |
+| `performance-analyst` | high-risk + api/db layers | orchestrator (propose → human approves) |
+| `migration-analyst` | DB schema change detected | orchestrator (propose → human approves) |
 
 ---
 

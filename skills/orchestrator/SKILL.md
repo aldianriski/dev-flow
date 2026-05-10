@@ -62,11 +62,15 @@ See `references/phases.md` § sprint-bulk Phase for full detail.
 
 ---
 
+## Dispatcher Role
+
+This skill IS the dispatcher role (per ADR-037 R3 — `agents/dispatcher.md` removed in v4.0.0; role lives here). Coordinate; never self-implement. Read `CONTEXT.md` first. Restate task as verifiable goal → select mode → run gates → dispatch specialists per table below → gate human approval (never self-approve gates).
+
 ## Agent Dispatch
 
 | Agent | Trigger | Type |
 |---|---|---|
-| `design-analyst` | G2 in `mvp` | auto |
+| `design-analyst` | G2 in `mvp` (default) · `--grill` flag for strict 1-Q-at-a-time mode (ADR-037) | auto |
 | `code-reviewer` | post-implement | propose → human approves |
 | `scope-analyst` | G1 if size unclear | auto |
 | `performance-analyst` | api/db/hot-path + high risk | propose → human approves |
