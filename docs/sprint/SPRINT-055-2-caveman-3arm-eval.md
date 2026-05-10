@@ -140,6 +140,9 @@ status: PASS
 ### 2026-05-10 T1 done
 T1 runner skeleton + prompts + snapshot dir + dry-run validation. Recon resolved caveman SKILL.md at `~/.claude/plugins/cache/caveman/caveman/84cc3c14fa1e/skills/caveman/SKILL.md` (3585 chars). gpt-tokenizer already in `package.json` devDependencies (^3.4.0) — OQ(N) pre-satisfied; ADR-035 still mandatory T2 for scope-codification. Dry-run validated: 10 prompts × 3 arms = 30 placeholder responses; schema 1:1 with caveman upstream confirmed (metadata + prompts + arms.{__baseline__, __terse__, caveman}); snapshot correctly gitignored. **In-scope adjustment from plan AC5:** ported all 10 upstream prompts (not 5) for stronger cross-tool parity baseline; AC5 satisfied (5 was minimum). MIT attribution lines added to `evals/prompts/en.txt` + `#`-comment filter added to runner loader.
 
+### 2026-05-10 T2 done
+T2 measurer + audit report + ADR-035 + evals/README.md. `scripts/eval-measure.js` (179 lines) ports caveman upstream `measure.py` 1:1 — gpt-tokenizer o200k_base · median/mean/min/max/stdev per arm · markdown table sorted by median savings desc · warm-up row terse-vs-baseline · `--format json` alternate. Tokenizer parity smoke PASS: `"Hello, world!"` → 4 tokens (matches Python tiktoken o200k_base); `"The quick brown fox jumps over the lazy dog."` → 10 tokens (matches). End-to-end pipeline validated against T1 dry-run snapshot (placeholder-derived numbers spurious but pipeline confirmed). ADR-035 written (5 DECs: two-tier policy · operator-install model · gpt-tokenizer initial vetted dep · ADR-002 unchanged for Tier A · re-litigation lock per ADR-031). evals/README.md trimmed to 30/30 lines exact per plan AC. docs/audit/eval-caveman-2026-05-10.md frozen as harness contract per Sprint 055 PC-1 pattern.
+
 ## Files Changed
 
 | File | Task | Change |
@@ -148,6 +151,10 @@ T1 runner skeleton + prompts + snapshot dir + dry-run validation. Recon resolved
 | `evals/prompts/en.txt` | T1 | NEW — 10 prompts ported verbatim from caveman upstream evals/prompts/en.txt (MIT); 2-line `#`-comment attribution header |
 | `evals/snapshots/.gitkeep` | T1 | NEW — directory anchor |
 | `.gitignore` | T1 | UPDATE — added `evals/snapshots/*` (except `.gitkeep`) |
+| `scripts/eval-measure.js` | T2 | NEW — token counter; gpt-tokenizer o200k_base; median/mean/min/max/stdev; markdown + json formats; warm-up row terse-vs-baseline |
+| `evals/README.md` | T2 | NEW — 30/30 lines exact; setup + how-to-run + tokenizer parity command |
+| `docs/audit/eval-caveman-2026-05-10.md` | T2 | NEW — harness contract frozen per Sprint 055 PC-1 pattern; tokenizer parity smoke documented |
+| `docs/adr/ADR-035-eval-script-npm-dep-carve-out.md` | T2 | NEW — 5 DECs; npm-dep scope carve-out from ADR-002 (Tier A scaffold stdlib-only · Tier B eval/measurement vetted-npm-OK; gpt-tokenizer initial vetted dep) |
 
 ## Decisions
 
