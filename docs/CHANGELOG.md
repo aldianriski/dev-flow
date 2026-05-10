@@ -51,7 +51,7 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 
 - Sprint file: [docs/sprint/SPRINT-059-cleanup-batch.md](sprint/SPRINT-059-cleanup-batch.md)
 - Plan commit: `b1ae530`
-- Close commit: pending
+- Close commit: `e71dfab`
 - Tasks: T1 ✓ arch-grill MERGE + ADR-037 (`97276cd`) · T2 ✓ dispatcher REMOVE (`586f91a`) · T3 ✓ codemap user-scope (`29afd71`) · T4 ✓ history-rule scope (`4c75941`) · T5 ✓ TODO history audit (`c5cd305`) · T7 initial ✓ README helicopter (`e067ca7`) · T6 release v4.0.0 + revised T7 trim (`bad0bf0`)
 - ADRs: ADR-037 (joint R1+R3 · 7 DECs · 5 alternatives · rollback path)
 - Files changed: ~16 (per-task SHAs above) · Tests added: 1 (codemap-refresh dual-mode Pester · scripts/__tests__/codemap-refresh.test.ps1 NEW)
