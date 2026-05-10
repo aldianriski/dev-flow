@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 058 closed — SDLC audit shipped)
+last_updated: 2026-05-10 (Sprint 059 closed — v4.0.0 audit-driven cleanup shipped)
 update_trigger: Sprint or task state change
 status: current
-sprint: 059
+sprint: 060
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -37,13 +37,11 @@ sprint: 059
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-059-cleanup-batch.md](docs/sprint/SPRINT-059-cleanup-batch.md)**
+→ **— none —**
 
-> **Sprint 059 — Audit-driven cleanup batch (v4.0.0 MAJOR) (planning).** Workstream B+C remediation per Sprint 058 audit verdicts. 7 tasks: T1 arch-grill MERGE + ADR-037 (HITL · gates downstream) · T2 dispatcher REMOVE + orchestrator subsection · T3 codemap-refresh user-scope rewrite + --internal flag · T4 history-rule scope clarify · T5 TODO history audit + preamble note · T6 plugin propagation + lockstep MAJOR bump 3.1.0→4.0.0 (HITL) · T7 README "How You Use It" helicopter view section. 8 decisions pre-locked at promote (D-A..D-H; D-B joint ADR-037 covers R1+R3 · D-E design-analyst gains --grill flag · D-G outcome-lens carries forward as standing principle · D-H may split 059a/059b on friction). Anti-slip 4 fields populated (focus cleanup-only · budget ~30-40k · gaps Sprint 060+push+features · done T6/T7 land). Risk high (T1 hard-to-reverse + T6 MAJOR); layers `agents, skills, scripts, docs, ci`.
+> **Last closed:** Sprint 059 Audit-driven cleanup batch (v4.0.0 MAJOR · 7 tasks shipped). Plugin contract: 15 skills · 6 agents (down from 16 · 7). arch-grill MERGED into design-analyst (5 lenses standing G2 · `--grill` strict mode preserved); dispatcher.md REMOVED (orchestrator IS the role); codemap-refresh adopter-scoped by default; ADR-037 joint R1+R3; ADR-034 § Scope user-vs-internal clarification; TODO 6 orphans backfilled; README 261→115 (-56% via pointer + canonical-doc fan-out); new docs/HOW-YOU-USE-IT.md. 0 friction · 0 NEW eval breach · close commit pending. See `docs/CHANGELOG.md § Sprint 059`.
 >
-> **Status:** plan written via Flow Grill v3.1.0 (2nd dogfood — loop ran inline from source FLOW_GRILL.md since cached plugin still 3.0.0); awaiting human review + Plan-locked approval before flip to `status: active` + plan_commit landing.
->
-> **Predecessor:** Sprint 058 closed (`837b552`) · SDLC-coverage audit shipped. Push gate emit-only — operator runs `git push origin master` after 059 close lands (recommended before 060 promote).
+> **Next:** Sprint 060 (testing skill — `test-planner` v4.1.0 MINOR; 3 task seeds locked at Sprint 058 audit T3). Promote via Flow Grill v3.1.0+. Push gate emit-only — operator runs `git push origin master` recommended before 060 promote (clean baseline for v4.1.0 cut · ~50+ commits unpushed since Sprint 056).
 
 ---
 
@@ -177,6 +175,6 @@ Sprint 55b   →  Token usage optimization audit (TASK-128 — pre-v1-ship quali
 Sprint 56    →  v1 SHIP — CHANGELOG outcome-led release notes + lockstep bump + git push
 Sprint 57    →  Flow Grill — terminal-first planning convergence (items 1+2+6 from refined-task-list.md · TASK-135..139 · ADR-036 · 3-skill handoff collapse: task-decomposer seed → lean-doc Sprint Promote grill → orchestrator sprint-bulk consume-ledger · v3.1.0 MINOR lockstep) (done — `27a7dd1`)
 Sprint 58    →  SDLC audit — read-only redundancy + gap analysis (item 8 from refined-task-list.md · 23 components × 6 phases mapped · R1 MERGE arch-grill into design-analyst · R2 0/4 pairs redundant (intentional separations) · R3 REMOVE dispatcher.md (zero-invocation grep evidence) · items 3/4/5/7 sequenced to Sprint 059/060) (done — `837b552`)
-Sprint 59    →  Audit-driven cleanup batch (items 3+4+5 from refined-task-list.md · Codemap user-scope fix · history-rule scope clarify · TODO history persistence · arch-grill removal · dispatcher agent removal/consolidation · any audit-surfaced redundancies · v4.0.0 MAJOR single-MAJOR consolidation per release-debt discipline) (planned)
+Sprint 59    →  Audit-driven cleanup batch (v4.0.0 MAJOR · arch-grill MERGED into design-analyst · dispatcher REMOVED + role folded to orchestrator · codemap user-scope default + --Internal flag · ADR-034 § Scope clarification · TODO 6 orphan backfills · README 261→115 -56% via pointer+canonical-doc fan-out · new docs/HOW-YOU-USE-IT.md · ADR-037 joint R1+R3 · 5th-instance manual sprint-less MAJOR pattern) (done — pending close SHA)
 Sprint 60    →  Testing skill (item 7 from refined-task-list.md · dedicated test-planning skill + grouping conventions unit/integration/e2e/regression · sprint-flow integration · v4.1.0 MINOR · informed by Sprint 058 audit findings) (planned)
 ```

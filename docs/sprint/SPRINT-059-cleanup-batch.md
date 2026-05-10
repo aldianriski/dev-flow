@@ -210,4 +210,31 @@ Sprint 058 audit produced 6 verdicts requiring hard-to-reverse cleanup actions. 
 
 ## Retro
 
-*(empty — populated at close: Worked / Friction / Pattern candidates / TD prompts; ≤6 bullets each per ADR-034 History Hygiene)*
+**Worked (≤6 per ADR-034):**
+
+1. Joint ADR-037 (covering R1+R3 in single ADR per D-B) saved ~80% content vs separate ADR-037+ADR-038; both verdicts shared "zero-empirical-use → fold into existing surface" rationale shape — DEC-5 well-justified.
+2. T1 + T2 ordering tight: T1 wrote ADR-037 (covering both R1 and R3), T2 executed R3 referencing the already-written ADR. No mid-sprint ADR rework.
+3. Bonus discovery during T7 trim: collapsing Skills/Agents tables in README eliminated stale rows (arch-grill / dispatcher) as a side effect — staleness fix + size reduction in single edit.
+4. User mid-sprint trim feedback (3 rounds: helicopter inline → move to doc → collapse 4 sections → remove daily-pattern dup) drove README from 261 peak → 115 lines (-56%); pattern validated for future README work: single-source + pointer-line fan-out.
+5. agents/references/ subdirectory pattern established cleanly (mirrors skills/<name>/references/) — design-analyst.md 30→27 lines (cap headroom regained); generalizable for any future agent needing >30-line body.
+6. T6 eval gates ran clean: no NEW breach, 12/3 pass-fail with all 3 fails PRE-EXISTING — proves the cleanup batch didn't regress baseline.
+
+**Friction (≤6):**
+
+1. T7 sized 83 lines of README content first (3 lines over the ≤80 target) before mid-sprint trim feedback surfaced — should have surfaced cap-headroom risk to user before adding the inline section.
+2. T7 trim cycle required 3 mid-sprint revisions (initial overlap with HOW-YOU-USE-IT planning · then context-cost feedback · then daily-pattern duplicate). Future README additions should default to "pointer + canonical doc" pattern from the start.
+
+**Pattern candidates (≤6 — for VALIDATED_PATTERNS.md promotion if user confirms):**
+
+1. **Joint ADR for shared-rationale verdicts** — when ≥2 audit verdicts share rationale shape (zero-empirical-use · MERGE-into-existing · etc), single ADR with multi-DEC structure beats separate ADRs (~80% content savings). Validated 2× now (ADR-037 R1+R3 · earlier ADR-027 covered 3 decisions).
+2. **README-as-pointer-not-encyclopedia** — collapse all per-component tables (Skills · Agents · Hooks · Scripts) to single pointer section linking USER-OUTCOMES + CONTEXT + ARCHITECTURE; saves O(n) lines per component change. Validated 56% reduction in this sprint.
+3. **Trim-as-staleness-fix two-fer** — when a README table is removed, all stale rows in it disappear automatically (no maintenance burden). Documented arch-grill + dispatcher row staleness elimination this sprint.
+4. **agents/references/ subdirectory** — for agents needing body content >30-line cap; mirrors skills/<name>/references/ pattern; agent SKILL stays a pointer-line wrapper. Validated by design-analyst.md restructure.
+
+**TD prompts (carry-forward / new):**
+
+- TD-003 (medium · open · 055b) — scoped-checkout-glob anti-pattern → unchanged carry to Sprint 060 or beyond.
+- TD-004 (minor · open · 055b) — pointer-line `+2 lines` canonical → T6 used the pattern in CHANGELOG row prepend; codification opportunity remains for Sprint 060.
+- NO new TD added this sprint.
+
+**Eval gate carry-forward:** cap-headroom 15 skills · 13 OK / 2 WARN (lean-doc 96/100 + orchestrator 98/100 ← +5 lines from T2 Dispatcher Role subsection) / 0 BREACH; orchestrator entered WARN tier from T2 — acceptable but Sprint 060 should monitor before further additions. eval-skills 12 pass / 3 pre-existing R7 violations carry forward unchanged. v4.0.0 lockstep manifests verified clean.

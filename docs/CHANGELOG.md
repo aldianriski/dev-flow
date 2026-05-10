@@ -47,6 +47,21 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 
 ---
 
+## Sprint 059 — Audit-driven cleanup batch (v4.0.0 MAJOR) (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-059-cleanup-batch.md](sprint/SPRINT-059-cleanup-batch.md)
+- Plan commit: `b1ae530`
+- Close commit: pending
+- Tasks: T1 ✓ arch-grill MERGE + ADR-037 (`97276cd`) · T2 ✓ dispatcher REMOVE (`586f91a`) · T3 ✓ codemap user-scope (`29afd71`) · T4 ✓ history-rule scope (`4c75941`) · T5 ✓ TODO history audit (`c5cd305`) · T7 initial ✓ README helicopter (`e067ca7`) · T6 release v4.0.0 + revised T7 trim (`bad0bf0`)
+- ADRs: ADR-037 (joint R1+R3 · 7 DECs · 5 alternatives · rollback path)
+- Files changed: ~16 (per-task SHAs above) · Tests added: 1 (codemap-refresh dual-mode Pester · scripts/__tests__/codemap-refresh.test.ps1 NEW)
+- Summary: Sprint 058 SDLC audit verdicts executed in single MAJOR consolidation. arch-grill skill MERGED into design-analyst (5 lenses standing G2 · `--grill` flag preserves strict mode); dispatcher.md REMOVED (orchestrator skill IS the role per zero-invocation evidence); codemap-refresh adopter-scoped by default (`--Internal` flag for plugin self-audit); ADR-034 § Scope clarifies user-vs-internal applicability; TODO 6 orphan rows backfilled with close-SHA; README aggressive trim 261→115 (-56% · 3 user-feedback rounds drove pointer + canonical-doc fan-out pattern); new docs/HOW-YOU-USE-IT.md (100 lines · canonical user-workflow doc); plugin lockstep MAJOR 3.1.0 → 4.0.0 (5th-instance manual sprint-less bump pattern; release-patch NOT invoked per ADR-027).
+- Decisions (8 user-locked at promote): D-A single MAJOR consolidation · D-B joint ADR-037 R1+R3 · D-C manual MAJOR (release-patch NOT invoked) · D-D HITL T1 + T6 · D-E design-analyst --grill flag preserves strict mode · D-F push emit-only · D-G outcome-lens carries forward as standing principle · D-H may split 059a/059b on friction (NOT exercised — single sprint sufficed).
+- Cap-headroom: orchestrator 93→98/100 (OK→WARN tier from T2 Dispatcher Role subsection · 2-line headroom remaining); design-analyst 30→27 lines (NET IMPROVEMENT via agents/references/lenses.md split). Sprint 060 should monitor orchestrator before additions.
+- Pattern candidates surfaced (4): joint ADR for shared-rationale verdicts · README-as-pointer-not-encyclopedia · trim-as-staleness-fix two-fer · agents/references/ subdirectory pattern.
+
+---
+
 ## v4.0.0 — Audit-driven cleanup batch (2026-05-10)
 
 Sprint 058 SDLC audit verdicts executed in single MAJOR consolidation per release-debt discipline. Plugin contract cleaner: 15 skills · 6 agents (was 16 · 7). Adopter-scoped tooling default for codemap; clarified user-vs-internal scope boundary.
