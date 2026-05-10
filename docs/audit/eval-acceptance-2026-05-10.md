@@ -64,7 +64,37 @@ _(populated at first live run; dry-run rows omitted from frozen contract version
 
 ## Cap Headroom (TD-002 lint fold-in)
 
-_(populated at T3 commit; runs `--cap-headroom-warn` flag.)_
+> Rule: `headroom = 100 - line_count`. `OK` ≥5 · `WARN` <5 · `EXEMPT` = explicit ADR grandfather (only `release-patch` per ADR-032/ADR-033 DEC-4 historically).
+> Lint executed 2026-05-10 (T3) via inline scan logic equivalent to `scripts/eval-acceptance.js --cap-headroom-warn`.
+
+| Skill | Lines | Headroom | Verdict |
+|:------|------:|---------:|:--------|
+| `release-patch` | 101 | -1 | **BREACH** |
+| `orchestrator` | 100 | 0 | **WARN** |
+| `lean-doc-generator` | 97 | 3 | **WARN** |
+| `architecture-grill` | 94 | 6 | OK |
+| `pr-reviewer` | 92 | 8 | OK |
+| `prime` | 89 | 11 | OK |
+| `tdd` | 83 | 17 | OK |
+| `write-a-skill` | 83 | 17 | OK |
+| `security-auditor` | 79 | 21 | OK |
+| `adr-writer` | 76 | 24 | OK |
+| `diagnose` | 75 | 25 | OK |
+| `release-manager` | 74 | 26 | OK |
+| `task-decomposer` | 74 | 26 | OK |
+| `refactor-advisor` | 64 | 36 | OK |
+| `codemap-refresh` | 63 | 37 | OK |
+| `zoom-out` | 57 | 43 | OK |
+
+**Summary:** 16 skills · 13 OK · 2 WARN · 1 BREACH · 0 EXEMPT (current state).
+
+**Critical findings:**
+
+1. **`release-patch/SKILL.md` = 101/100 BREACH.** Was 100/100 EXEMPT per ADR-032/ADR-033 DEC-4 (sole zero-headroom skill). Drifted +1 since Sprint 055b T3.4 cap-validation. Root cause unknown — needs `git blame` + trim. **Surfaced as Open Question to user; remediation NOT in T3 scope (Friction Protocol defer per ADR-031 scope-creep guard).**
+2. **`orchestrator/SKILL.md` = 100/100 (was 99/100 Sprint 055b).** +1 drift; now at EXACT cap. Either: (a) grant new EXEMPT via ADR, OR (b) trim 1 line. Surfaced as Open Question.
+3. **`lean-doc-generator/SKILL.md` = 97/100 (was 96/100 Sprint 055b).** +1 drift; below WARN threshold. Trim opportunity at next edit.
+
+**TD-002 resolution:** `status: resolved → TASK-116-v2 (Sprint 055)`. Lint mechanism live; warns surface drift early per Sprint 052b retro Friction #2 root concern. Frontmatter `cap-headroom: NN/100` field (Path A) NOT adopted — Path B (harness lint) wins on cost + auditability per OQ(F) decision.
 
 ## Operator Notes
 
