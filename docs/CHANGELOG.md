@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Release 3.1.0 — Flow Grill)
+last_updated: 2026-05-10 (Sprint 058 closed — SDLC audit shipped, no version bump)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -44,6 +44,21 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 - Manual MINOR lockstep bump 3.0.0 → 3.1.0 (`plugin.json` + `marketplace.json`). NO `release-patch` invocation per ADR-027 boundary; manual sprint-less bump pattern (4th instance: Sprint 052b T1 + Release 2.7.0 + Release 3.0.0 + this Release 3.1.0).
 - Release-debt depth post-bump: 0 (this is the first MINOR of the new cycle; Step 1.5b scan continues per ADR-032 DEC-3).
 - Push gate: emit-only per release-patch HARD STOP (operator runs `git push origin master`).
+
+---
+
+## Sprint 058 — SDLC Coverage Audit (read-only · docs-only · no version bump) (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-058-sdlc-audit.md](sprint/SPRINT-058-sdlc-audit.md)
+- Plan commit: `b81b2a6`
+- Close commit: pending
+- Tasks: T1 ✓ Coverage matrix · T2 ✓ Gap analysis + 6 verdicts (R1 MERGE arch-grill · R2 0/4 redundant · R3 REMOVE dispatcher) · T3 ✓ Remediation plan (Sprint 059 6 seeds + Sprint 060 3 seeds) · T4 ✓ Audit close + README update + close commit
+- ADRs: none (audit-only; ADR-037 deferred to Sprint 059 for arch-grill removal)
+- Files changed: 5 (audit doc NEW · README EDIT · sprint file EDIT · CHANGELOG EDIT · TODO EDIT) · Tests added: 0 (read-only audit)
+- Summary: SDLC coverage audit ships gap analysis + remediation plan for Sprint 059 (v4.0.0 MAJOR cleanup) + Sprint 060 (v4.1.0 MINOR testing skill). 23 components × 6 phases mapped per cell schema D-E (PRIMARY/SECONDARY/NONE); 6 verdicts O-tagged per D-G (O1-O8 outcome lens). R3 dispatcher zero-invocation grep evidence drove REMOVE verdict. Item 7 (testing skill) seeded for Sprint 060 with unit/integration/e2e/regression grouping convention. Docs-only diff → release-patch SKIP path; no plugin.json/marketplace.json modification.
+- Decisions (7 user-locked at promote): D-A audit-only · D-B docs-only no manifest bump · D-C audit doc location · D-D HITL T1/T2/T3 · D-E cell schema PRIMARY/SECONDARY/NONE · D-F verdict schema KEEP/MERGE/REMOVE/RESCOPE · D-G user-outcome lens sprint-wide.
+- Multi-sprint plan finalized: Sprint 058 (done) → Sprint 059 (6 seeds · v4.0.0) → Sprint 060 (3 seeds · v4.1.0). Closes refined-task-list.md Workstream C item 8.
+- Push gate: emit-only per pre-locked D-F (Sprint 057 carry-forward) — operator runs `git push origin master` after this sprint's close lands.
 
 ---
 

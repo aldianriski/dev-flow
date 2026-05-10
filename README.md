@@ -7,7 +7,7 @@ status: current
 
 # dev-flow — Agentic Engineering Workflow Starter
 
-Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v3.0.0 — v1 STABLE**
+Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v3.1.0 — v1 STABLE + Flow Grill**
 
 Drop into any repo to get a human-gated AI workflow. Dispatcher delegates to specialists. Humans approve gates. No app code required.
 
@@ -159,6 +159,19 @@ PowerShell hooks require Windows (ADR-016). Node scripts cross-platform. Hook-to
 Step 1 is never skipped. Steps 2 + 3 are conditionally skippable — see [`docs/blueprint/12-session-workflow.md`](docs/blueprint/12-session-workflow.md) for the full pattern guide.
 
 Contribution flow (versioning, skill-change protocol, breaking-change policy) → [`CONTRIBUTING.md`](CONTRIBUTING.md). Friction reports (file before opening a GitHub issue) → [`docs/SUPPORT.md`](docs/SUPPORT.md).
+
+## Roadmap
+
+Active multi-sprint plan post-v1 (per `refined-task-list.md` Workstream A/B/C):
+
+| Sprint | Theme | Status | Version |
+|:-------|:------|:-------|:--------|
+| **057** | Flow Grill — terminal-first planning convergence (3-into-1 collapse of decompose→promote→orchestrator G1+G2) | ✓ shipped | v3.1.0 MINOR |
+| **058** | SDLC coverage audit (read-only; 23 components × 6 phases · gap analysis · remediation plan) | ✓ shipped | no bump (docs-only) |
+| **059** | Audit-driven cleanup batch (arch-grill MERGE + dispatcher REMOVE + Codemap user-scope + history-rule scope + TODO history audit) | planned | v4.0.0 MAJOR |
+| **060** | Testing skill (`test-planner` — covers unit / integration / e2e / regression grouping) | planned | v4.1.0 MINOR |
+
+Latest audit findings → [`docs/audit/SDLC-coverage-2026-05-10.md`](docs/audit/SDLC-coverage-2026-05-10.md). Multi-sprint sequencing locked at Sprint 058 close per audit-first discipline.
 
 ## Further Reading
 

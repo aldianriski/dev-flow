@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: planning
-plan_commit: pending
+status: active
+plan_commit: b81b2a6
 close_commit: pending
 ---
 
@@ -122,16 +122,48 @@ The audit answers four questions:
 
 ## Execution Log
 
-*(empty — appended during sprint execution)*
+- **T1 close 2026-05-10** — Coverage matrix built. 23-row × 6-phase table populated for 16 skills + 7 agents. Cell schema PRIMARY/SECONDARY/NONE per D-E. Auto-fire flag column populated for all skills (1 auto-fires hook · 1 auto-fires post-flag · 11 propose-or-user · 3 agent-preloaded). Invoked-by column populated for agents — `dispatcher` confirmed **zero invocations** via grep evidence (0 `subagent_type:dispatcher` + 0 `Agent({.*dispatcher)` + 2 prose-only references in unrelated files). Phase tally: Testing 5P, Maintenance 5P, Design 7P (over-served signal), Requirements 2P, Implementation 3P, Deployment 2P. No friction.
+- **T2 close 2026-05-10** — Gap analysis + 6 verdicts written (R1 + 4 R2 pairs + R3). **R1: MERGE arch-grill into design-analyst** (5 lenses fold to G2 auto-fire; preserve `--grill` flag for strict mode). **R2: 0 of 4 pairs redundant** — all are intentional separations (lifecycle / boundary / skill-agent pairing per ADR-015). **R3: REMOVE dispatcher.md** (zero-invocation evidence; fold role into orchestrator SKILL.md). Items 3/4/5 → Sprint 059; item 7 → Sprint 060. All 6 verdicts O-tagged per D-G (O3/O5/O8/O4/O1/O2 distribution). No friction.
+- **T3 close 2026-05-10** — Remediation plan written. Sprint 059 = 6 task seeds (T1 arch-grill MERGE · T2 dispatcher REMOVE · T3 Codemap user-scope · T4 history-rule scope · T5 TODO history audit · T6 propagation+v4.0.0 MAJOR bump); ADR-037 required (arch-grill removal hard-to-reverse). Sprint 060 = 3 task seeds (T1 test-planner skill · T2 dispatch wiring · T3 v4.1.0 MINOR bump). Sequencing diagram added (058 → 059 → 060). Deferred list: 9 items (R2 pairs · Requirements gap · Implementation linting · TD-003/004 carry-forward · Mode A live runs · push gate). No friction.
+- **T4 close 2026-05-10** — Audit doc + README + sprint retro + CHANGELOG + TODO Active Sprint clear + close commit. README banner v3.0.0 → v3.1.0; new Roadmap section added with 057-060 multi-sprint table + audit pointer. Docs-only diff confirmed; release-patch SKIP path applies; plugin.json/marketplace.json untouched. AFK execution as planned.
 
 ## Files Changed
 
-*(empty — populated during execution; one row per file: `File | Task | Change (one-line WHY) | Risk | Test added`)*
+- `docs/audit/SDLC-coverage-2026-05-10.md` | T1+T2+T3 | NEW (~280 lines) — full SDLC audit (Matrix · Gap Analysis · Remediation Plan + 6 verdicts + Sprint 059/060 seeds + sequencing diagram + deferred list) | risk: low (read-only doc) | test: N/A
+- `README.md` | T4 | EDIT (+18 lines) — banner v3.0.0 → v3.1.0; new ## Roadmap section with 057-060 multi-sprint plan + audit doc pointer | risk: low (additive section) | test: N/A
+- `docs/sprint/SPRINT-058-sdlc-audit.md` | T4 | EDIT — Execution Log (4 task closes) + Files Changed (3 rows) + Retro populated | risk: low | test: N/A
+- `docs/CHANGELOG.md` | T4 | EDIT — Sprint 058 row prepended (audit deliverable; no version bump) | risk: low | test: N/A
+- `TODO.md` | T4 | EDIT — Active Sprint cleared to `— none —`; frontmatter `sprint: 058 → 059`; Roadmap Sprint 058 row `(planned) → (done — <SHA>)` | risk: low | test: N/A
 
 ## Decisions
 
-*(empty — populated during execution for architectural-level decisions; D-A..D-G already captured in Pre-locked decisions section above)*
+D-A..D-G locked at promote (see Pre-locked decisions section). No new decisions surfaced during execution.
 
 ## Retro
 
-*(empty — populated at close: Worked / Friction / Pattern candidates / TD prompts; ≤6 bullets each per ADR-034 History Hygiene)*
+**Worked (≤6 per ADR-034):**
+
+1. Recon-first via parallel Bash extraction of all 23 components' name+description in 2 calls (vs 23 individual Reads); cut ~80% token cost on T1 inventory phase per memory rule `feedback_recon_first.md`.
+2. R3 grep evidence preceded R3 verdict — empirical zero-count drove conclusive REMOVE rather than speculation. Audit-first principle validated.
+3. USER-OUTCOMES.md already had per-component outcome mapping → D-G outcome-tagging step was free (just had to surface in verdict format).
+4. Flow Grill v3.1.0 first-dogfood worked: ledger consolidated 9 confirmed assumptions + 7 decisions + 4 anti-slip fields without re-asking; 0 mid-sprint re-opens.
+5. Sprint sequencing diagram in T3 (058→059→060) caught one risk early: Sprint 059 size = L (3M+3S) may need split into 059a+059b; flagged for Sprint 059 promote.
+6. Single audit doc carrying all 3 sections (Matrix + Gap + Remediation) avoided 3-doc fan-out; History Hygiene principle preserved.
+
+**Friction (≤6):**
+
+1. None. Sprint executed AFK per plan; no Mid-Sprint Friction Protocol triggers.
+
+**Pattern candidates (≤6 — for VALIDATED_PATTERNS.md promotion if user confirms):**
+
+1. **Audit-as-recon pattern** — read-only sprint that produces inventory + verdicts + remediation seeds before hard-to-reverse cleanup sprint. Validated 058 → 059 sequencing prevents premature removal.
+2. **Bulk extraction over per-file Read** — for N≥10 file scans of small targeted fields (frontmatter), Bash + grep + sed loop saves ~80% tokens vs N parallel Reads. Add to recon-first canon.
+3. **Outcome-tagging discipline (D-G)** — every audit verdict explicitly tagged O1-O8 per ADR-026. Prevents internal-hygiene-only verdicts that don't serve user-project value. Candidate for Sprint Promote standard prompt addition.
+
+**TD prompts (open / surface for review):**
+
+- TD-003 (medium · open · 055b) — scoped-checkout-glob anti-pattern → carry to Sprint 059.
+- TD-004 (minor · open · 055b) — pointer-line `+2 lines` canonical → carry to Sprint 059 (T6 propagation may use the pattern).
+- No NEW TD added this sprint (audit-only, no code edits).
+
+**Eval gate carry-forward:** no eval runs this sprint (docs-only diff). Existing baseline: cap-headroom 15 OK / 1 WARN (lean-doc 96/100) / 0 BREACH; eval-skills 13/16 (3 pre-existing R7 violations carry forward). Sprint 059 v4.0.0 MAJOR bump will re-run gates.

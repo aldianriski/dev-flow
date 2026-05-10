@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 057 closed — Flow Grill v3.1.0 shipped)
+last_updated: 2026-05-10 (Sprint 058 closed — SDLC audit shipped)
 update_trigger: Sprint or task state change
 status: current
-sprint: 058
+sprint: 059
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,13 +35,11 @@ sprint: 058
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-058-sdlc-audit.md](docs/sprint/SPRINT-058-sdlc-audit.md)**
+→ **— none —**
 
-> **Sprint 058 — SDLC Coverage Audit (read-only sweep) (planning).** Workstream C item 8 from `refined-task-list.md`. 4 tasks: T1 Coverage matrix 23×6 (HITL · gates T2) · T2 Gap analysis + verdicts O-tagged per D-G (HITL · drives Sprint 059 scope) · T3 Remediation plan Sprint 059+060 task seeds (HITL · locks 059/060 perimeter) · T4 Audit close + README update + close commit (AFK · docs-only no version bump). 7 decisions pre-locked at promote (D-A..D-G; D-G user-outcome lens sprint-wide). Anti-slip 4 fields populated (focus audit-only · budget ~10-15k · gaps Sprint 059/060 · done T4 lands). Risk low; layers `docs, ci`.
+> **Last closed:** Sprint 058 SDLC Coverage Audit (docs-only · no version bump · 4 tasks shipped). Audit doc `docs/audit/SDLC-coverage-2026-05-10.md` produced gap analysis + remediation plan; R1 MERGE arch-grill into design-analyst · R3 REMOVE dispatcher.md confirmed via grep evidence; Sprint 059 (v4.0.0 MAJOR · 6 seeds) + Sprint 060 (v4.1.0 MINOR · 3 seeds) scoped. Close commit pending squash. See `docs/CHANGELOG.md § Sprint 058`.
 >
-> **Status:** plan written via Flow Grill v3.1.0 (first dogfood — loop ran inline from source FLOW_GRILL.md since cached plugin still 3.0.0); awaiting human review + Plan-locked approval before flip to `status: active` + plan_commit landing.
->
-> **Predecessor:** Sprint 057 closed (`08c1178`) · Release 3.1.0 Flow Grill shipped (`27a7dd1`). Push gate emit-only — operator runs `git push origin master` after this sprint's promote/close lands.
+> **Next:** Sprint 059 (audit-driven cleanup batch — v4.0.0 MAJOR; 6 task seeds locked at Sprint 058 T3). ADR-037 required (arch-grill removal hard-to-reverse). Promote via Flow Grill v3.1.0 (now properly cached after 057 ship). Push gate emit-only — operator runs `git push origin master` recommended before 059 promote (clean baseline for v4.0.0 cut).
 
 ---
 
@@ -174,7 +172,7 @@ Sprint 55-2  →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
 Sprint 55b   →  Token usage optimization audit (TASK-128 — pre-v1-ship quality gate; CLAUDE.md/CONTEXT.md/skills bloat scan)
 Sprint 56    →  v1 SHIP — CHANGELOG outcome-led release notes + lockstep bump + git push
 Sprint 57    →  Flow Grill — terminal-first planning convergence (items 1+2+6 from refined-task-list.md · TASK-135..139 · ADR-036 · 3-skill handoff collapse: task-decomposer seed → lean-doc Sprint Promote grill → orchestrator sprint-bulk consume-ledger · v3.1.0 MINOR lockstep) (done — `27a7dd1`)
-Sprint 58    →  SDLC audit — read-only redundancy + gap analysis (item 8 from refined-task-list.md · maps 6 SDLC phases against 16 skills + 7 agents · surfaces R1 arch-grill removal + R2 broader redundancy sweep + R3 dispatcher agent redundancy (file exists, zero skills invoke via Agent subagent_type — orchestrator skill IS the logic) + items 3/4/5/7 sequencing) (planned)
+Sprint 58    →  SDLC audit — read-only redundancy + gap analysis (item 8 from refined-task-list.md · 23 components × 6 phases mapped · R1 MERGE arch-grill into design-analyst · R2 0/4 pairs redundant (intentional separations) · R3 REMOVE dispatcher.md (zero-invocation grep evidence) · items 3/4/5/7 sequenced to Sprint 059/060) (done — pending close SHA)
 Sprint 59    →  Audit-driven cleanup batch (items 3+4+5 from refined-task-list.md · Codemap user-scope fix · history-rule scope clarify · TODO history persistence · arch-grill removal · dispatcher agent removal/consolidation · any audit-surfaced redundancies · v4.0.0 MAJOR single-MAJOR consolidation per release-debt discipline) (planned)
 Sprint 60    →  Testing skill (item 7 from refined-task-list.md · dedicated test-planning skill + grouping conventions unit/integration/e2e/regression · sprint-flow integration · v4.1.0 MINOR · informed by Sprint 058 audit findings) (planned)
 ```
