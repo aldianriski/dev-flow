@@ -129,6 +129,8 @@ Plugin-wide principle for protocol-output style. Applies to all 16 skills + 7 ag
 
 Plugin-wide principle for doc-history pruning. Applies to TODO.md + sprint files + CHANGELOG + Roadmap. Anchor: ADR-034. **User-Project Outcome:** O2 doc-rot prevention + O8 plugin reliability (`docs/USER-OUTCOMES.md`).
 
+> **Scope** (Sprint 059 ADR-037 clarification): rules apply to dev-flow plugin internal artifacts ONLY; adopter projects MAY copy this principle but are NOT enforced by the plugin. See [ADR-034 § Scope](../docs/adr/ADR-034-history-hygiene.md#scope-sprint-059-t4--adr-037-user-vs-internal-clarification).
+
 **Per-surface rules:**
 - **TODO.md Active Sprint ribbon:** ≤3 most-recent closed-sprint narrative pointers; older → archive narrative to CHANGELOG row.
 - **TODO.md closed task rows (P0/P1):** verbose AC summaries collapse to 1-line pointer (`closed Sprint NNN <sha> — <one-line summary>`) after 1-sprint cooldown; rows >2 sprints old DELETE entirely (history in CHANGELOG + sprint file + `git log`).

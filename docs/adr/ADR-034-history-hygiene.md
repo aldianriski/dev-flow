@@ -28,6 +28,23 @@ Sprint 055b session 2026-05-10 T3 close surfaced compounding doc-history bloat a
 
 User explicit lock at Sprint 055c promote 2026-05-10 (Pick A confirmed): paired sprint with TASK-134b legacy-doc scan; ADR required (hard-to-reverse once principle propagates); WIDE scope (TODO.md + sprint files + CHANGELOG + ADRs/Roadmap).
 
+## Scope (Sprint 059 T4 / ADR-037 user-vs-internal clarification)
+
+**Rules in this ADR apply to dev-flow's internal sprint artifacts ONLY.** Specifically:
+
+- `TODO.md` (Active Sprint ribbon · Backlog rows · Tech Debt · Roadmap) at the dev-flow plugin repo root
+- `docs/sprint/SPRINT-NNN-*.md` files in the dev-flow plugin repo
+- `docs/CHANGELOG.md` in the dev-flow plugin repo
+- ADR registry (`docs/adr/`) in the dev-flow plugin repo
+
+**Adopter projects MAY adopt the principle** by copying this ADR + the per-surface rules into their own repo's `docs/adr/` and applying matching pruning conventions to their own TODO/sprint/CHANGELOG. The dev-flow plugin **does NOT enforce** these rules on adopter project artifacts:
+
+- The plugin's `lean-doc-generator` Sprint Promote / Sprint Close protocols apply hygiene to whatever the adopter has marked as their sprint artifacts (per their `.claude/CONTEXT.md` § History Hygiene if they've copied this principle).
+- The plugin does NOT scan adopter TODO.md / sprint files for collapse-eligibility on its own initiative.
+- Adopter opt-in is intentional — different teams have different cadence + history-preservation preferences.
+
+**Cross-reference (Sprint 059 T3):** `scripts/codemap-refresh.ps1` similarly applies adopter-scope by default + `--Internal` flag for plugin self-audit (per ADR-037). Both ADR-034 (this) and ADR-037 (codemap user-scope) ship in v4.0.0 lockstep clarifying user-vs-internal applicability across the plugin.
+
 ## Decision
 
 **DEC-1: History Hygiene = plugin-wide principle in `.claude/CONTEXT.md` § History Hygiene.** Single canonical source. Lives alongside Gates / Modes / Output Discipline as cross-cutting principle. Five per-surface rules + apply-when + rationale. ≤25 lines. Read by all agents + skills per existing `Context first` principle (CONTEXT.md line 38). Mirrors Output Discipline (ADR-033) plugin-principle pattern shape — same canonical-CONTEXT-section structure.
