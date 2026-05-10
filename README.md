@@ -139,7 +139,9 @@ Full trigger conditions → [`.claude/CONTEXT.md`](.claude/CONTEXT.md) § Agent 
 | Script                   | Runtime    | Purpose |
 |:-------------------------|:-----------|:--------|
 | `audit-baseline.js`      | Node ≥18   | Repo metrics snapshot for audits |
-| `eval-skills.js`         | Node ≥18   | Skill structural eval (behavioral 3-arm port queued, TASK-115) |
+| `eval-skills.js`         | Node ≥18   | Skill structural eval (frontmatter + caps + Red Flags) |
+| `eval-acceptance.js`     | Node ≥18   | Skill-triggering acceptance harness — naive prompt → claude -p → stream-json grep; `--cap-headroom-warn` flag for SKILL.md drift lint. See [`tests/skill-triggering/README.md`](tests/skill-triggering/README.md) |
+| `scan-legacy-docs.js`    | Node ≥18   | Walks `*.md`; flags hard orphans + repo-root anomalies + cluster orphans. Output: `docs/audit/legacy-doc-scan-<date>.md` |
 | `session-start.ps1`      | PowerShell ≥5.1 | SessionStart hook target |
 | `codemap-refresh.ps1`    | PowerShell ≥5.1 | PostToolUse hook target — codemap regen |
 
