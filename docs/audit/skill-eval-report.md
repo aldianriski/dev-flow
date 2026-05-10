@@ -6,12 +6,12 @@ status: current
 generator: scripts/eval-skills.js
 ---
 
-# Skill Eval Report — 2026-05-01T14:43:55.658Z
+# Skill Eval Report — 2026-05-10T15:47:30.434Z
 
-- Skills evaluated: **14**
-- Pass: **14**
-- Fail: **0**
-- Total violations: 0
+- Skills evaluated: **16**
+- Pass: **13**
+- Fail: **3**
+- Total violations: 3
 
 ## Rules
 
@@ -27,17 +27,34 @@ generator: scripts/eval-skills.js
 
 | Skill | Lines | Status | Violations |
 |:------|------:|:-------|:-----------|
-| adr-writer | 74 | ✓ pass | — |
-| dev-flow-compress | 62 | ✓ pass | — |
-| diagnose | 73 | ✓ pass | — |
-| lean-doc-generator | 89 | ✓ pass | — |
-| orchestrator | 84 | ✓ pass | — |
-| pr-reviewer | 90 | ✓ pass | — |
-| refactor-advisor | 62 | ✓ pass | — |
-| release-manager | 70 | ✓ pass | — |
-| security-auditor | 77 | ✓ pass | — |
-| system-design-reviewer | 92 | ✓ pass | — |
-| task-decomposer | 72 | ✓ pass | — |
-| tdd | 81 | ✓ pass | — |
-| write-a-skill | 81 | ✓ pass | — |
-| zoom-out | 55 | ✓ pass | — |
+| adr-writer | 76 | ✓ pass | — |
+| architecture-grill | 94 | ✓ pass | — |
+| codemap-refresh | 63 | ✗ fail (1) | R7 |
+| diagnose | 75 | ✓ pass | — |
+| lean-doc-generator | 96 | ✓ pass | — |
+| orchestrator | 94 | ✓ pass | — |
+| pr-reviewer | 92 | ✓ pass | — |
+| prime | 89 | ✗ fail (1) | R7 |
+| refactor-advisor | 64 | ✓ pass | — |
+| release-manager | 74 | ✓ pass | — |
+| release-patch | 95 | ✗ fail (1) | R7 |
+| security-auditor | 79 | ✓ pass | — |
+| task-decomposer | 74 | ✓ pass | — |
+| tdd | 83 | ✓ pass | — |
+| write-a-skill | 83 | ✓ pass | — |
+| zoom-out | 57 | ✓ pass | — |
+
+## Violation details
+
+### codemap-refresh
+
+- **R7** — has "## Red Flags" section
+
+### prime
+
+- **R7** — has "## Red Flags" section
+
+### release-patch
+
+- **R7** — has "## Red Flags" section
+

@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Release 3.0.0 — v1 STABLE)
+last_updated: 2026-05-10 (Release 3.1.0 — Flow Grill)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,35 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## v3.1.0 — Flow Grill: terminal-first planning convergence (2026-05-10)
+
+Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) — collapses 3-skill planning handoff (`task-decomposer` → `lean-doc Sprint Promote` Steps 3-7 → `orchestrator sprint-bulk` G1+G2 batch) into single terminal-first Flow Grill loop. Open Questions converge in conversation BEFORE any sprint doc write; sprint file gated on `lock` keyword.
+
+**Outcomes shipped (O5 flow + O8 reliability):**
+
+- **O5 flow** — 3× → 1× context loads per planning cycle; ~20-30k tokens saved per Sprint Promote (Sprint 055b T1 audit baseline). OQs surface terminal-first → no retroactive doc patches; baked-in assumptions eliminated.
+- **O5 flow** — Plugin-principle pattern reused (CONTEXT.md canonical + pointer-line fan-out per ADR-033/034 shape); single planning surface (Flow Grill) replaces three.
+- **O8 reliability** — Anti-slip 4 fields preserved as ledger rows (ADR-031 contract intact); single mechanism replaces parallel collection at G1.
+
+**Components changed:**
+
+- ADR-036 — Flow Grill 3-into-1 collapse decision (7 DECs · 5 alternatives rejected · cites ADR-006/026/027/030/031/032/033/034).
+- `skills/lean-doc-generator/references/FLOW_GRILL.md` NEW (172/180 lines) — canonical iteration loop · batched+follow-up Q&A discipline · review-before-lock step · Context Budget Across Skills · anti-slip mapping.
+- `skills/lean-doc-generator` 2.3.1 → 2.4.0 — Sprint Promote Steps 3-7 rewritten (9 → 7 numbered steps); Step 5 sprint-file write gated on `lock`.
+- `skills/orchestrator` 2.1.1 → 2.2.0 — sprint-bulk Steps 1+2 collapsed to "consume locked Flow Grill ledger"; phases renumbered 6 → 5.
+- `skills/task-decomposer` 1.1.0 → 1.2.0 — emits `## Flow Grill Seed` JSON block on `approve` for Sprint Promote ledger hydration.
+- `agents/dispatcher.md` — responsibility 3 + sprint-bulk dispatch rule updated.
+- `.claude/CONTEXT.md` — § Vocabulary `flow grill` + `grill` rows updated; § Modes sprint-bulk row + § Relationships mode→gate line updated lockstep.
+
+**What's next (Sprint 058+):** SDLC audit read-only sweep (item 8 from refined-task-list.md) — surfaces R1 arch-grill removal · R2 broader skill redundancy · R3 dispatcher agent redundancy + Workstream B/C sequencing. Then Sprint 059 = single MAJOR cleanup batch (v4.0.0).
+
+**Release mechanics:**
+- Manual MINOR lockstep bump 3.0.0 → 3.1.0 (`plugin.json` + `marketplace.json`). NO `release-patch` invocation per ADR-027 boundary; manual sprint-less bump pattern (4th instance: Sprint 052b T1 + Release 2.7.0 + Release 3.0.0 + this Release 3.1.0).
+- Release-debt depth post-bump: 0 (this is the first MINOR of the new cycle; Step 1.5b scan continues per ADR-032 DEC-3).
+- Push gate: emit-only per release-patch HARD STOP (operator runs `git push origin master`).
 
 ---
 
