@@ -1,24 +1,41 @@
 # scripts/codemap-refresh.ps1
-# Codemap base knowledge refresh (TASK-098, ADR-016 PS-only hook policy).
+# Codemap base knowledge refresh (TASK-098, ADR-016 PS-only hook policy, ADR-037 user-scope default).
 # Pure regex file-walk. No LLM. No Node. ASCII-only. PS 5.1+ compatible.
 #
-# Outputs:
+# Default mode (Sprint 059 ADR-037): scans the ADOPTER's repo (via $env:CLAUDE_PROJECT_DIR).
+# --Internal flag: scans dev-flow's own repo (legacy plugin-self-audit behavior; pre-v4 default).
+#
+# Outputs (relative to scan root):
 #   docs/codemap/CODEMAP.md   - L1 overview (Hubs, Deps, Modules, L0-overflow)
 #   docs/codemap/handoff.json - L2 envelope { nodes, edges, metadata, last_built }
 #
 # Hub = incoming markdown-link count across all *.md files.
 # Edge = explicit [text](path) markdown link only (V1).
-# Module = top-level directory at repo root (Test-Path filter; non-existent dirs skipped).
+# Module = top-level directory at scan root (dynamic enumeration; --Internal uses curated list).
 #
 # Exit 0 = ok or warn. Failure on PostToolUse hook is non-blocking (warn to stdout).
+
+param(
+    [switch]$Internal
+)
 
 $ErrorActionPreference = 'Continue'
 $started = Get-Date
 
-# Resolve repo root (same ladder as session-start.ps1).
-$root = if ($env:CLAUDE_PROJECT_DIR) { $env:CLAUDE_PROJECT_DIR }
-        elseif ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT }
-        else { (Get-Location).Path }
+# Resolve scan root.
+# Default: adopter's project (CLAUDE_PROJECT_DIR set by Claude Code at session start).
+# --Internal: dev-flow's own plugin root (legacy self-audit path).
+if ($Internal) {
+    $root = if ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT }
+            elseif ($env:CLAUDE_PROJECT_DIR) { $env:CLAUDE_PROJECT_DIR }
+            else { (Get-Location).Path }
+    $modeLabel = 'internal (dev-flow self-audit)'
+} else {
+    $root = if ($env:CLAUDE_PROJECT_DIR) { $env:CLAUDE_PROJECT_DIR }
+            elseif ($env:CLAUDE_PLUGIN_ROOT) { $env:CLAUDE_PLUGIN_ROOT }
+            else { (Get-Location).Path }
+    $modeLabel = 'user (adopter project scan)'
+}
 
 $codemapDir = Join-Path $root 'docs\codemap'
 $codemapMd  = Join-Path $codemapDir 'CODEMAP.md'
@@ -28,25 +45,47 @@ if (-not (Test-Path -LiteralPath $codemapDir)) {
     New-Item -ItemType Directory -Path $codemapDir -Force | Out-Null
 }
 
-# Module candidates - top-level dirs (filter to existing only).
-$moduleCandidates = @('agents', 'bin', 'docs', 'hooks', 'scripts', 'skills', 'templates', '.claude', '.claude-plugin')
+# Module enumeration.
+# --Internal: hand-curated dev-flow module list with one-liners.
+# Default: dynamic top-level directory enumeration; one-liners loaded from .claude/codemap-modules.json if present.
 $modules = @()
-foreach ($m in $moduleCandidates) {
-    $p = Join-Path $root $m
-    if (Test-Path -LiteralPath $p -PathType Container) { $modules += $m }
-}
+$moduleOneLiners = @{}
 
-# One-liners (hand-curated; updated when new module added).
-$moduleOneLiners = @{
-    'agents'         = 'Agent definitions (dispatcher + 6 specialists) for /orchestrator dispatch.'
-    'bin'            = 'Scaffold CLI - dev-flow-init.js (adopter onboarding entry point).'
-    'docs'           = 'Project docs - sprints, ADRs, audit, codemap, routing rules.'
-    'hooks'          = 'Plugin hook config (hooks.json) - SessionStart + PreToolUse + PostToolUse.'
-    'scripts'        = 'Harness scripts - audit-baseline, eval-skills, codemap-refresh, session-start.ps1.'
-    'skills'         = 'SKILL.md files - orchestrator, lean-doc-generator, task-decomposer, etc.'
-    'templates'      = 'Doc templates - CLAUDE.md.template + 6 other scaffolds.'
-    '.claude'        = 'Project context dir - CLAUDE.md, CONTEXT.md, settings.json, settings.local.json.'
-    '.claude-plugin' = 'Plugin manifest dir - plugin.json, marketplace.json (semver tracking).'
+if ($Internal) {
+    $moduleCandidates = @('agents', 'bin', 'docs', 'hooks', 'scripts', 'skills', 'templates', '.claude', '.claude-plugin')
+    foreach ($m in $moduleCandidates) {
+        $p = Join-Path $root $m
+        if (Test-Path -LiteralPath $p -PathType Container) { $modules += $m }
+    }
+    $moduleOneLiners = @{
+        'agents'         = 'Agent definitions (orchestrator role + 6 specialists) for /orchestrator dispatch.'
+        'bin'            = 'Scaffold CLI - dev-flow-init.js (adopter onboarding entry point).'
+        'docs'           = 'Project docs - sprints, ADRs, audit, codemap, routing rules.'
+        'hooks'          = 'Plugin hook config (hooks.json) - SessionStart + PreToolUse + PostToolUse.'
+        'scripts'        = 'Harness scripts - audit-baseline, eval-skills, codemap-refresh, session-start.ps1.'
+        'skills'         = 'SKILL.md files - orchestrator, lean-doc-generator, task-decomposer, etc.'
+        'templates'      = 'Doc templates - CLAUDE.md.template + 6 other scaffolds.'
+        '.claude'        = 'Project context dir - CLAUDE.md, CONTEXT.md, settings.json, settings.local.json.'
+        '.claude-plugin' = 'Plugin manifest dir - plugin.json, marketplace.json (semver tracking).'
+    }
+} else {
+    # Dynamic enumeration: every top-level dir at scan root (filter hidden + node_modules + .git).
+    $allDirs = Get-ChildItem -LiteralPath $root -Directory -Force -ErrorAction SilentlyContinue |
+               Where-Object {
+                   $_.Name -notin @('.git', 'node_modules', '.next', '.svelte-kit', 'dist', 'build', 'target', '.idea', '.vscode')
+               }
+    foreach ($d in $allDirs) { $modules += $d.Name }
+
+    # Load adopter-supplied one-liners if present.
+    $oneLinersFile = Join-Path $root '.claude\codemap-modules.json'
+    if (Test-Path -LiteralPath $oneLinersFile) {
+        try {
+            $json = Get-Content -LiteralPath $oneLinersFile -Raw -Encoding UTF8 | ConvertFrom-Json
+            $json.PSObject.Properties | ForEach-Object { $moduleOneLiners[$_.Name] = $_.Value }
+        } catch {
+            Write-Warning "[codemap-refresh] failed to parse $oneLinersFile - using fallback descriptions"
+        }
+    }
 }
 
 # Scan all .md files for [text](path) markdown links.
@@ -72,10 +111,8 @@ foreach ($f in $mdFiles) {
     foreach ($mm in $matches) {
         $target = $mm.Groups[1].Value.Trim()
         if ($target -match '^https?:' -or $target -match '^mailto:' -or $target.StartsWith('#')) { continue }
-        # Strip anchor fragments
         $target = ($target -split '#')[0].Trim()
         if (-not $target) { continue }
-        # Skip square-bracket placeholders (e.g. [scope], [type]) and other non-path tokens
         if ($target -match '[\[\]<>]' -or $target -match '^\s*$') { continue }
 
         [void]$edges.Add(@{ from = $relFrom; to = $target; kind = 'markdown-link' })
@@ -84,18 +121,15 @@ foreach ($f in $mdFiles) {
     }
 }
 
-# Top 10 hubs by incoming-link count.
 $topHubs = $hubCounts.GetEnumerator() | Sort-Object -Property Value -Descending | Select-Object -First 10
-
-# Top 10 deps = same as hubs, just framed differently (most-referenced paths).
 $topDeps = $topHubs
 
-# Write handoff.json.
 $handoff = @{
     nodes = $nodes.ToArray()
     edges = $edges.ToArray()
     metadata = @{
         generated_by = 'codemap-refresh'
+        mode         = $modeLabel
         repo_root    = $root
         module_count = $modules.Count
         node_count   = $nodes.Count
@@ -106,7 +140,6 @@ $handoff = @{
 $utf8NoBom = New-Object System.Text.UTF8Encoding $false
 [System.IO.File]::WriteAllText($handoffJs, ($handoff | ConvertTo-Json -Depth 6), $utf8NoBom)
 
-# Write CODEMAP.md.
 $elapsedMs = [int]((Get-Date) - $started).TotalMilliseconds
 $nl = [System.Environment]::NewLine
 
@@ -116,11 +149,13 @@ $lines = New-Object System.Collections.ArrayList
 [void]$lines.Add('last_updated: ' + (Get-Date).ToString('yyyy-MM-dd'))
 [void]$lines.Add('update_trigger: auto-generated by /codemap-refresh on every git commit (PostToolUse hook)')
 [void]$lines.Add('status: current')
+[void]$lines.Add('mode: ' + $modeLabel)
 [void]$lines.Add('---')
 [void]$lines.Add('')
 [void]$lines.Add('# CODEMAP')
 [void]$lines.Add('')
 [void]$lines.Add('> Auto-generated by `/codemap-refresh` (TASK-098). Do not hand-edit. Edits are overwritten on next commit.')
+[void]$lines.Add('> Mode: ' + $modeLabel + '. To switch: pass `-Internal` for dev-flow self-audit; default = adopter project scan (Sprint 059 ADR-037).')
 [void]$lines.Add('')
 [void]$lines.Add('## Hubs')
 [void]$lines.Add('')
@@ -140,7 +175,7 @@ foreach ($d in $topDeps) {
 [void]$lines.Add('')
 [void]$lines.Add('## Modules')
 [void]$lines.Add('')
-[void]$lines.Add('Top-level directories at repo root (bare list; descriptions in §L0-overflow below):')
+[void]$lines.Add('Top-level directories at scan root (descriptions in §L0-overflow below):')
 [void]$lines.Add('')
 foreach ($m in $modules) {
     [void]$lines.Add('- `' + $m + '/`')
@@ -151,16 +186,16 @@ foreach ($m in $modules) {
 [void]$lines.Add('Canonical L0 view spilled from CLAUDE.md (80-line cap policy). CLAUDE.md `## Codemap (L0)` keeps only the pointer; descriptions live here:')
 [void]$lines.Add('')
 foreach ($m in $modules) {
-    $desc = if ($moduleOneLiners.ContainsKey($m)) { $moduleOneLiners[$m] } else { '(no description)' }
+    $desc = if ($moduleOneLiners.ContainsKey($m)) { $moduleOneLiners[$m] } else { '(no description - add via .claude/codemap-modules.json)' }
     [void]$lines.Add('- `' + $m + '/` - ' + $desc)
 }
 [void]$lines.Add('')
 [void]$lines.Add('---')
 [void]$lines.Add('')
 [void]$lines.Add('Generated in ' + $elapsedMs + ' ms.')
-[void]$lines.Add('Nodes: ' + $nodes.Count + ' | Edges: ' + $edges.Count + ' | Modules: ' + $modules.Count)
+[void]$lines.Add('Nodes: ' + $nodes.Count + ' | Edges: ' + $edges.Count + ' | Modules: ' + $modules.Count + ' | Mode: ' + $modeLabel)
 
 [System.IO.File]::WriteAllText($codemapMd, (($lines -join $nl) + $nl), $utf8NoBom)
 
-Write-Output ('[codemap-refresh] OK - ' + $elapsedMs + ' ms - ' + $nodes.Count + ' nodes / ' + $edges.Count + ' edges / ' + $modules.Count + ' modules')
+Write-Output ('[codemap-refresh] OK - ' + $modeLabel + ' - ' + $elapsedMs + ' ms - ' + $nodes.Count + ' nodes / ' + $edges.Count + ' edges / ' + $modules.Count + ' modules')
 exit 0

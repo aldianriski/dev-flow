@@ -1,13 +1,13 @@
 ---
 name: codemap-refresh
-description: Use when refreshing the codemap base knowledge — module map, hub list, dep graph, and L2 handoff envelope. Regenerates docs/codemap/CODEMAP.md and docs/codemap/handoff.json by scanning all markdown files in the repo. Pure regex file walk, no LLM cost. Auto-fires via PostToolUse hook on every git commit; manual trigger is for first-time setup or when the auto-hook is suspected stale.
-argument-hint: ""
+description: Use when refreshing the codemap base knowledge — module map, hub list, dep graph, and L2 handoff envelope for YOUR adopter project (default) or for dev-flow plugin self-audit (--Internal flag). Regenerates docs/codemap/CODEMAP.md and docs/codemap/handoff.json by scanning all markdown files at scan root. Pure regex file walk, no LLM cost. Auto-fires via PostToolUse hook on every git commit; manual trigger is for first-time setup or when the auto-hook is suspected stale.
+argument-hint: "[--Internal]"
 allowed-tools: Bash, Read
 user-invocable: true
 context: fork
 type: rigid
-version: "1.0.0"
-last-validated: "2026-05-03"
+version: "2.0.0"
+last-validated: "2026-05-10"
 ---
 
 # codemap-refresh
@@ -25,10 +25,11 @@ The PostToolUse hook on `Bash(git commit*)` fires `scripts/codemap-refresh.ps1` 
 
 ## Steps
 
-1. Run `powershell -NoProfile -ExecutionPolicy Bypass -File "scripts/codemap-refresh.ps1"` from repo root.
-2. Read `docs/codemap/CODEMAP.md` to verify Hubs/Deps/Modules sections regenerated.
-3. Read `docs/codemap/handoff.json` `last_built` timestamp — must be within last few seconds.
-4. Report summary: nodes, edges, modules, elapsed ms.
+1. Run `powershell -NoProfile -ExecutionPolicy Bypass -File "scripts/codemap-refresh.ps1"` from your project root (default = adopter scan; per Sprint 059 ADR-037).
+2. For dev-flow plugin self-audit, append `-Internal` (pre-v4 default behavior preserved).
+3. Read `docs/codemap/CODEMAP.md` to verify Hubs/Deps/Modules + frontmatter `mode:` line.
+4. Read `docs/codemap/handoff.json` `last_built` timestamp — must be within last few seconds.
+5. Adopter projects: optionally create `.claude/codemap-modules.json` mapping module-dir → one-line description for richer L0-overflow output. Schema: `{ "src": "App source code", "api": "API routes", ... }`.
 
 ## What it produces
 
