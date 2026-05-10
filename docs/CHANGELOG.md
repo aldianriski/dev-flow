@@ -51,7 +51,7 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 
 - Sprint file: [docs/sprint/SPRINT-058-sdlc-audit.md](sprint/SPRINT-058-sdlc-audit.md)
 - Plan commit: `b81b2a6`
-- Close commit: pending
+- Close commit: `837b552`
 - Tasks: T1 ✓ Coverage matrix · T2 ✓ Gap analysis + 6 verdicts (R1 MERGE arch-grill · R2 0/4 redundant · R3 REMOVE dispatcher) · T3 ✓ Remediation plan (Sprint 059 6 seeds + Sprint 060 3 seeds) · T4 ✓ Audit close + README update + close commit
 - ADRs: none (audit-only; ADR-037 deferred to Sprint 059 for arch-grill removal)
 - Files changed: 5 (audit doc NEW · README EDIT · sprint file EDIT · CHANGELOG EDIT · TODO EDIT) · Tests added: 0 (read-only audit)

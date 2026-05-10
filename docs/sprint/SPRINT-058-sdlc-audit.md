@@ -2,9 +2,9 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: active
+status: closed
 plan_commit: b81b2a6
-close_commit: pending
+close_commit: 837b552
 ---
 
 # Sprint 058 — SDLC Coverage Audit (read-only sweep)
