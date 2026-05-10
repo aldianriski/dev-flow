@@ -67,13 +67,13 @@ _Avoid: confusing **red flag** with `BLOCKED` finding — red flags hard-stop a 
 | `init` | none | first-time project scaffold |
 | `quick` | G1 | single task, low risk, S size |
 | `mvp` | G1 + G2 | feature work, multi-task, M+ size |
-| `sprint-bulk` | G1 + G2 (batched once per sprint) | multi-task sprint; sequential default; parallel only when file-overlap == ∅ |
+| `sprint-bulk` | G1+G2 (resolved upstream via Flow Grill — ADR-036) | multi-task sprint; sequential default; parallel only when file-overlap == ∅ |
 
 ---
 
 ## Relationships
 
-- **mode → gate** — each mode declares which gates fire (`init` none / `quick` G1 / `mvp` G1+G2 / `sprint-bulk` G1+G2 batched once per sprint).
+- **mode → gate** — each mode declares which gates fire (`init` none / `quick` G1 / `mvp` G1+G2 / `sprint-bulk` G1+G2 resolved upstream via Flow Grill per ADR-036).
 - **gate → agent** — G1 may auto-spawn `scope-analyst` (size unclear); G2 always auto-spawns `design-analyst`.
 - **dispatcher → specialist** — `dispatcher` is the only agent that spawns other agents; specialists return to dispatcher (one-way, depth ≤2 per ADR-015).
 - **skill → agent** — skills do NOT spawn agents directly; orchestrator dispatch-table maps work to agents via dispatcher.

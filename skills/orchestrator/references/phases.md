@@ -208,32 +208,28 @@ Use when running a multi-task sprint end-to-end. Replaces per-task G1+G2 with a 
 - `y` → proceed (edge case: manual sprint setup OR Active Sprint hand-curated).
 - Mirrors `lean-doc-generator/references/SPRINT_PROTOCOLS.md § Sprint Promote Step 1.2` (lean-doc → task-decomposer backflow) — closes inverse direction (orchestrator sprint-bulk → lean-doc Sprint Promote).
 
-**1. Sprint Scope Batch (G1 once)**
-- Read all `[ ]` tasks under `## Active Sprint` in TODO.md.
-- Run G1 checklist for the sprint as a whole: combined goal, total size (must be ≤ M when summed; L → split sprint), shared constraints, sprint-wide red flags.
-- BLOCK if any sprint-level red flag fails.
+**1. Consume locked Flow Grill ledger (G1+G2 resolved upstream)** *(per ADR-036 / `lean-doc-generator/references/FLOW_GRILL.md`)*
+- Read sprint file frontmatter (`docs/sprint/SPRINT-NNN-*.md`) — Flow Grill `lock` produced § Plan tasks list + G1 anti-slip 4 fields (focus / context-budget / explicit-gaps / done-confirmation per ADR-031) + § Decisions pre-locked + FILES_AFFECTED per task (from task-decomposer seed hydration).
+- **No fresh G1 dispatch** — anti-slip fields already gathered in ledger; sprint-wide goal + size + red flags already resolved at lock.
+- **No fresh G2 dispatch by default** — `scope-analyst` FILES_AFFECTED already in ledger via `task-decomposer` seed; `design-analyst` micro-tasks emerge per-task at Auto-loop Step 4. Exception: dispatch `design-analyst` for a specific task if its ledger row flags `design-analyst: needed` (rare; ledger-resident decision).
+- BLOCK if locked sprint frontmatter missing required ledger fields → halt + redirect to `/lean-doc-generator` Sprint Promote re-run with completed ledger.
 
-**2. Sprint Design Batch (G2 once)**
-- Auto-dispatch `scope-analyst` ONCE with the full task list. Expect FILES AFFECTED list per task.
-- Auto-dispatch `design-analyst` ONCE with combined task list — produces a session-scoped sprint-PRD block (not written to disk; persistent artifact = separate task).
-- BLOCK on any `BLOCKED` finding. Hard-to-reverse decision → dispatch `adr-writer`.
-
-**3. Overlap derivation (parallelism gate)**
-- For each task pair `(Ti, Tj)`, compute `FILES_AFFECTED(Ti) ∩ FILES_AFFECTED(Tj)`.
+**2. Overlap derivation (parallelism gate)**
+- For each task pair `(Ti, Tj)`, compute `FILES_AFFECTED(Ti) ∩ FILES_AFFECTED(Tj)` (from ledger-hydrated FILES_AFFECTED per task).
 - If ANY pair has non-empty intersection → run sequentially (default).
 - If ALL pairs have empty intersection → fan out tasks to parallel subagents.
-- Pure set intersection on path strings; no schema change to scope-analyst needed.
+- Pure set intersection on path strings; FILES_AFFECTED already resident in ledger (no fresh scope-analyst dispatch).
 
-**4. Sequential auto-loop (default path)**
+**3. Sequential auto-loop (default path)**
 - Iterate Active Sprint tasks `[ ]` in declared order.
 - Per-task: run Implement → propose `code-reviewer` y/n (per dispatcher dispatch rules; never auto-fire) → Commit → mark `[x]`.
 - After each task close, advance to next `[ ]`.
 
-**5. First-blocker halt**
-- Halt loop on first of: scope-analyst returns `BLOCKED`, design-analyst returns `BLOCKED`, human types `block` at any task boundary, code-reviewer returns `CRITICAL`.
+**4. First-blocker halt**
+- Halt loop on first of: scope-analyst returns `BLOCKED` (only if dispatched per Step 1 exception), design-analyst returns `BLOCKED` (only if dispatched per Step 1 exception), human types `block` at any task boundary, code-reviewer returns `CRITICAL`.
 - Do NOT auto-skip blocked task. Report which task halted, why, and the remaining task list. Wait for human direction.
 
-**6. Sprint close**
+**5. Sprint close**
 - When all tasks are `[x]`: run `/lean-doc-generator` Sprint Close, then prompt for `/release-patch` if version bump applicable.
 
 **Note**: sprint-PRD is session-scoped — emitted as a formatted block in the conversation, never written to disk. Persistent artifact creation is out of scope; separate task if needed.
@@ -262,7 +258,7 @@ Use when running a multi-task sprint end-to-end. Replaces per-task G1+G2 with a 
 Fix now / defer / block?
   fix              — halt current task step; address inline; resume from suspended step
   defer <reason>   — write TD row in TODO.md § Tech Debt + continue task
-  block            — halt sprint per First-Blocker Halt rule (sprint-bulk Phase Step 5)
+  block            — halt sprint per First-Blocker Halt rule (sprint-bulk Phase Step 4)
 ```
 
 **On `fix`:** suspend current task step; complete fix; run feedback loop (test/lint/typecheck); resume from suspended step.
@@ -276,6 +272,6 @@ Fix now / defer / block?
 
 Then continue current task. Do NOT halt for defer.
 
-**On `block`:** invoke First-Blocker Halt (sprint-bulk Phase Step 5). Halts loop; reports halted task + remaining list; waits for human direction.
+**On `block`:** invoke First-Blocker Halt (sprint-bulk Phase Step 4). Halts loop; reports halted task + remaining list; waits for human direction.
 
 **Anti-pattern locks** for TD rows written via this protocol → see `lean-doc-generator/references/SPRINT_PROTOCOLS.md § Tech Debt Anti-Pattern Locks`.

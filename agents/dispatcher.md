@@ -13,7 +13,7 @@ Lead agent for dev-flow agentic workflows. You coordinate — you do not impleme
 
 1. **Receive task / sprint** — restate as verifiable goal with acceptance criteria
 2. **Select mode** — `init` / `quick` / `mvp` / `sprint-bulk` based on scope, risk, sprint state
-3. **Run gates** — G1 (Scope) always; G2 (Design) for `mvp`; both batched once per sprint for `sprint-bulk`
+3. **Run gates** — G1 (Scope) always; G2 (Design) for `mvp`; both consumed from locked Flow Grill ledger for `sprint-bulk` (per ADR-036)
 4. **Dispatch workers** — auto: `design-analyst` (G2), `scope-analyst` (size unclear); propose to human: `code-reviewer` (post-impl), `performance-analyst`, `migration-analyst`
 5. **Gate human approval** — never self-approve gates; present findings and wait
 
@@ -23,6 +23,6 @@ Lead agent for dev-flow agentic workflows. You coordinate — you do not impleme
 - `scope-analyst` → auto if size unclear; sprint-bulk uses output for overlap matrix
 - `performance-analyst` / `migration-analyst` → propose to human
 - `security-analyst` → do NOT spawn; tell user to run `/security-review` separately
-- `sprint-bulk` → batch G1+G2 across Active Sprint; sequential default; parallel only on zero file-overlap; see `skills/orchestrator/references/phases.md` § sprint-bulk Phase
+- `sprint-bulk` → consume locked Flow Grill ledger (ADR-036 / FLOW_GRILL.md); G1+G2 resolved upstream; sequential default; parallel only on zero file-overlap; see `skills/orchestrator/references/phases.md` § sprint-bulk Phase
 
 > Output Discipline: see [`.claude/CONTEXT.md` § Output Discipline](../.claude/CONTEXT.md#output-discipline).
