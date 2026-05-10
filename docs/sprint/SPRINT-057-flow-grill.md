@@ -1,8 +1,8 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10
+last_updated: 2026-05-10 (Sprint 057 closed — Flow Grill shipped, v3.1.0 lockstep)
 update_trigger: Sprint state change
-status: active
+status: closed
 plan_commit: 9c214d1
 close_commit: pending
 ---
@@ -237,4 +237,34 @@ status: PASS (pending Plan-locked approval)
 
 ## Retro
 
-*(empty — populated at close: Worked / Friction / Pattern candidates / TD prompts)*
+### Worked
+
+- **Plan-as-spec discipline.** Pre-locked decisions (D-A..D-F) at promote eliminated mid-sprint re-litigation; T1-T5 each ran without scope-drift questions back to user. 6 promote-time decisions × 0 reopens at execution = anti-slip 4 fields (ADR-031) doing their job.
+- **Reference-only growth, SKILL.md flat.** 172-line FLOW_GRILL.md absorbed all canonical grill semantics; SKILL.md edits across 3 skills were pointer-line + version-bump only. cap-headroom 16/16 maintained (0 NEW BREACH); lean-doc 96/100 actually IMPROVED 1 line vs 97/100 baseline.
+- **Plugin-principle pattern (ADR-033/034 shape) reused cleanly.** Single canonical ref + pointer-line fan-out across 3 skills; no per-skill duplication. 4th instance of the pattern (after Output Discipline · History Hygiene · Anti-Slip).
+- **Manual MINOR bump rhythm internalized.** 4th instance (Sprint 052b T1 + Release 2.7.0 + Release 3.0.0 + this 3.1.0); release-patch boundary ADR-027 holding firm — operator did not even consider invoking it. Pattern locked, not just observed.
+- **HITL gates fired exactly twice as planned.** T1 close (gates downstream T2-T5) + T5 close (version bump human review). Zero ad-hoc human pauses; pre-locked D-K stop-points eliminated guess-when-to-pause friction.
+- **Anti-slip ledger hydration validated mentally.** T4 task-decomposer Seed shape `{tasks, assumptions, risk, layers}` mapped 1:1 to FLOW_GRILL.md ledger fields without reshape; design from T1 spec held all the way through T4 implementation.
+
+### Friction
+
+*(none surfaced during execution; 0 friction events logged across T1-T5 per pre-T5 retro intent.)*
+
+> **TD prompts:** none (0 friction → 0 TD rows added this sprint).
+
+### Pattern candidates
+
+- **Reference-only growth canon.** When changing 3+ skills, body in NEW `references/<NAME>.md`; SKILL.md changes restricted to pointer-line + version-bump. 5th instance after Output Discipline (ADR-033) · History Hygiene (ADR-034) · Anti-Slip (ADR-031) · plus Sprint 053 ADR-030 template canonical. **Surface to user for promotion to canonical pattern in `references/VALIDATED_PATTERNS.md`.**
+- **Pre-locked decision list at promote (D-A..D-N).** 6 decisions pre-locked + 11 OQs answered at promote-time = zero mid-sprint scope-drift this sprint. Already canonical in ADR-031 anti-slip (focus + explicit-gaps); this sprint demonstrates the discipline at peak fidelity. **Re-validate as canonical at next sprint.**
+- **3-into-1 collapse via canonical ref + downstream pointer fans.** TASK-135 (canonical) → TASK-136/137/138 (downstream consumers, each pointer-line addition) → TASK-139 (propagation pass). Repeatable shape for cross-skill consolidations. **Surface to user for VALIDATED_PATTERNS.md.**
+
+### TD disposition
+
+- **TD-003** *(medium · open · created 055b)* — scoped-checkout-glob anti-pattern. **Disposition:** carry to Sprint 058 (SDLC audit) per pre-locked OQ-I. Natural fit if audit surfaces governance hygiene phase; otherwise standalone Sprint 059 candidate.
+- **TD-004** *(minor · open · created 055b)* — pointer-line `\n\n<pointer>\n` (+2 lines) canonical. **Disposition:** verified at T5; **NOT folded** into TASK-139 because T5 propagation used the canonical +2-line shape implicitly (no documentation surface added) — codification opportunity remains. Carry to Sprint 058 audit phase or Sprint 059 cleanup batch per pre-locked OQ-I.
+
+### Eval gate carry-forward (R7 baseline)
+
+- 3 PRE-EXISTING `## Red Flags` failures: codemap-refresh · prime · release-patch (since Sprint 037+ baseline; not introduced by Sprint 057). Carry forward; addressable in Sprint 058 audit findings or Sprint 059 cleanup.
+- cap-headroom: 15 OK · 1 WARN (lean-doc 96/100, 1-line improvement vs 97/100 baseline) · 0 BREACH (improved from baseline 13/2/1; 0 NEW per AC).
+- 0 NEW eval breaches introduced by Sprint 057.

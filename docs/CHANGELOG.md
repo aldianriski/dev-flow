@@ -47,6 +47,23 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 
 ---
 
+## Sprint 057 — Flow Grill: terminal-first planning convergence (3.1.0 MINOR) (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-057-flow-grill.md](sprint/SPRINT-057-flow-grill.md)
+- Plan commit: `9c214d1`
+- Close commit: pending
+- Tasks: T1 ✓ (`11a373b`) · T2 ✓ (`40694a7`) · T3 ✓ (`8d99871`) · T4 ✓ (`7121219`) · T5 ✓ (`27a7dd1`)
+- ADRs: ADR-036 Flow Grill 3-into-1 planning convergence (7 DECs · 5 alternatives rejected · cites ADR-006/026/027/030/031/032/033/034)
+- Files changed: 14 (1 NEW ADR · 1 NEW FLOW_GRILL.md · 6 EDIT skills/agents · 2 EDIT manifests · 1 EDIT CONTEXT.md · 1 EDIT CHANGELOG · 1 EDIT TODO · 1 EDIT sprint file) · Tests added: 0 (smoke-tested via mental trace; behavior tests fold into Sprint 058 SDLC audit if surfaced)
+- Summary: 3-skill planning handoff (`task-decomposer` → `lean-doc Sprint Promote` Steps 3-7 → `orchestrator sprint-bulk` G1+G2 batch) collapsed into single terminal-first Flow Grill loop; sprint file write gated on `lock` keyword; task-decomposer emits `## Flow Grill Seed` JSON for ledger hydration; orchestrator sprint-bulk Steps 1+2 merged to "consume locked Flow Grill ledger"; v3.1.0 MINOR lockstep manual bump per ADR-027 boundary.
+- Decisions (6 user-locked at promote): D-A Workstream-A scope items 1+2+6 (3/4/5 → 059, 7/8 → 058) · D-B `lock` keyword semantics mirror `approve` · D-C anti-slip 4 fields PRESERVED as ledger fields (single mechanism) · D-D bump = MINOR 3.0.0→3.1.0 lockstep · D-E manual bump (no release-patch invocation) · D-F push emit-only.
+- Pattern candidates (3 surfaced for VALIDATED_PATTERNS.md promotion): reference-only growth canon (5th instance) · pre-locked decisions at promote (peak fidelity demo) · 3-into-1 collapse via canonical ref + downstream pointer fans.
+- 0 friction events. 0 TD rows added. TD-003 + TD-004 carry forward to Sprint 058 audit phase.
+- Eval gates: cap-headroom 15 OK · 1 WARN (lean-doc 96/100, 1-line improvement vs 97/100 baseline) · 0 BREACH (improved from 13/2/1 baseline; 0 NEW per AC). Eval-skills 13 pass / 3 fail (codemap-refresh + prime + release-patch missing `## Red Flags` — all PRE-EXISTING since Sprint 037+ baseline).
+- Blueprint version: 3.1.0 (MINOR lockstep). Release-debt depth post-bump: 0 (first MINOR of new cycle).
+
+---
+
 ## v3.0.0 — v1 STABLE (2026-05-10)
 
 dev-flow ships v1 stable. **First release with full eval-evidence baseline** (acceptance harness + caveman 3-arm token-compression) — outcome **O8 reliability** is now measurable, not aspirational. Outcome-led notes per ADR-026 lens (`docs/USER-OUTCOMES.md`); 8 outcomes lead, components support.

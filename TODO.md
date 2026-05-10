@@ -2,10 +2,10 @@
 
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10
+last_updated: 2026-05-10 (Sprint 057 closed — Flow Grill v3.1.0 shipped)
 update_trigger: Sprint or task state change
 status: current
-sprint: 057
+sprint: 058
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,13 +35,11 @@ sprint: 057
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-057-flow-grill.md](docs/sprint/SPRINT-057-flow-grill.md)**
+→ — none —
 
-> **Sprint 057 — Flow Grill: terminal-first planning convergence (planning).** Workstream A (items 1+2+6 from `refined-task-list.md`). 5 tasks: T1 FLOW_GRILL.md spec + ADR-036 (HITL gate downstream) · T2 lean-doc Sprint Promote rewrite Steps 3-7 + version 2.3.1→2.4.0 · T3 orchestrator sprint-bulk consume-ledger + 2.1.1→2.2.0 · T4 task-decomposer Flow Grill Seed handoff + 1.1.0→1.2.0 · T5 plugin propagation + lockstep MINOR bump 3.0.0→3.1.0 (HITL). 6 decisions pre-locked at promote (D-A scope · D-B lock keyword · D-C anti-slip preserved · D-D MINOR class · D-E manual bump · D-F push emit-only). PRs: TASK-135..139 (TODO § Backlog P0 cluster).
+> **Last closed:** Sprint 057 Flow Grill (3.1.0 MINOR; 5 tasks shipped · ADR-036 · 3-into-1 planning convergence). Close commit pending squash. See `docs/CHANGELOG.md § Sprint 057` + `docs/sprint/SPRINT-057-flow-grill.md`.
 >
-> **Status:** plan written; awaiting human review + Plan-locked approval before flip to `status: active` + plan_commit landing.
->
-> **Predecessor:** Sprint 056 closed (`f746db2` Release 3.0.0 v1 STABLE shipped; 32+ commits awaiting operator `git push origin master`). Post-v1 backlog carry: TD-003 medium + TD-004 minor (verify TASK-139 fold-in opportunity at T5) · Sprint 055-2 OQs 4 deferred (live cross-skill measurement Mode A · multi-skill rollout · Mode B CI · cross-tool reverse-validation; not in scope this sprint).
+> **Next:** Sprint 058 (SDLC audit, read-only sweep — item 8 from `refined-task-list.md`; surfaces R1 arch-grill removal · R2 broader skill redundancy · R3 dispatcher agent redundancy) per Workstream-C audit-first sequencing (D-A pre-lock).
 
 ---
 
@@ -173,7 +171,7 @@ Sprint 55    →  v1 prereq #1 — TASK-116-v2 Node port acceptance harness (inc
 Sprint 55-2  →  v1 prereq #2 — TASK-115-v2 Node port caveman 3-arm eval
 Sprint 55b   →  Token usage optimization audit (TASK-128 — pre-v1-ship quality gate; CLAUDE.md/CONTEXT.md/skills bloat scan)
 Sprint 56    →  v1 SHIP — CHANGELOG outcome-led release notes + lockstep bump + git push
-Sprint 57    →  Flow Grill — terminal-first planning convergence (items 1+2+6 from refined-task-list.md · TASK-135..139 · ADR-036 · 3-skill handoff collapse: task-decomposer seed → lean-doc Sprint Promote grill → orchestrator sprint-bulk consume-ledger · v3.1.0 MINOR lockstep) (planned)
+Sprint 57    →  Flow Grill — terminal-first planning convergence (items 1+2+6 from refined-task-list.md · TASK-135..139 · ADR-036 · 3-skill handoff collapse: task-decomposer seed → lean-doc Sprint Promote grill → orchestrator sprint-bulk consume-ledger · v3.1.0 MINOR lockstep) (done — `27a7dd1`)
 Sprint 58    →  SDLC audit — read-only redundancy + gap analysis (item 8 from refined-task-list.md · maps 6 SDLC phases against 16 skills + 7 agents · surfaces R1 arch-grill removal + R2 broader redundancy sweep + R3 dispatcher agent redundancy (file exists, zero skills invoke via Agent subagent_type — orchestrator skill IS the logic) + items 3/4/5/7 sequencing) (planned)
 Sprint 59    →  Audit-driven cleanup batch (items 3+4+5 from refined-task-list.md · Codemap user-scope fix · history-rule scope clarify · TODO history persistence · arch-grill removal · dispatcher agent removal/consolidation · any audit-surfaced redundancies · v4.0.0 MAJOR single-MAJOR consolidation per release-debt discipline) (planned)
 Sprint 60    →  Testing skill (item 7 from refined-task-list.md · dedicated test-planning skill + grouping conventions unit/integration/e2e/regression · sprint-flow integration · v4.1.0 MINOR · informed by Sprint 058 audit findings) (planned)
