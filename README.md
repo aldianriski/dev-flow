@@ -1,13 +1,13 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-08
+last_updated: 2026-05-10
 update_trigger: Component or outcome registry change
 status: current
 ---
 
 # dev-flow — Agentic Engineering Workflow Starter
 
-Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v2.5.0**
+Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v3.0.0 — v1 STABLE**
 
 Drop into any repo to get a human-gated AI workflow. Dispatcher delegates to specialists. Humans approve gates. No app code required.
 
@@ -24,7 +24,7 @@ dev-flow is a means; **your project is the end**. The plugin claims 8 user-proje
 | **flow** — optimal harness flow | Workflow runs end-to-end without friction | `dispatcher` orchestration · 4 modes · 3 hooks · skill auto-discovery |
 | **correction** — workflow correction | Mid-flight redirect when work goes off-track | `BLOCKED` analyst findings · skill red flags · grill mode |
 | **template** — init / template audit | Every new project starts from same scaffold baseline | `/orchestrator init` deterministic scaffold · sprint+ADR templates · `write-a-skill` standards |
-| **reliability** — plugin reliability | Plugin updates don't regress your project's workflows | Eval harness (acceptance + caveman 3-arm; queued v1 prereq) · skill-trigger discipline · ADR-016 eval-evidence rule |
+| **reliability** — plugin reliability | Plugin updates don't regress your project's workflows | Eval harness shipped (acceptance Mode A · caveman 3-arm token-compression · cap-headroom lint 16/16 OK) · skill-trigger discipline · ADR-016 eval-evidence rule |
 
 What dev-flow does **NOT** claim: app-code generation · CI/CD pipeline · automated coverage tooling · project-management replacement · telemetry of user-project metrics. Honest scope → [`docs/USER-OUTCOMES.md` § Anti-outcomes](docs/USER-OUTCOMES.md).
 
@@ -39,7 +39,7 @@ Plugin auto-discovers components at repo root after install. All counts verified
 | Skills    | 16    | User-invokable slash commands (`skills/<name>/SKILL.md`) |
 | Agents    | 7     | dispatcher + 6 specialists (design / code-reviewer / scope / security / performance / migration) |
 | Hooks     | 3     | SessionStart bootstrap · PreToolUse chain-guard · PostToolUse codemap-refresh |
-| Scripts   | 4     | 2 Node (`audit-baseline.js`, `eval-skills.js`) + 2 PowerShell (`session-start.ps1`, `codemap-refresh.ps1`) |
+| Scripts   | 10    | 8 Node (`audit-baseline` · `audit-tokens` · `eval-acceptance` · `eval-caveman` · `eval-measure` · `eval-skills` · `propagate-output-discipline` · `scan-legacy-docs`) + 2 PowerShell (`session-start.ps1` · `codemap-refresh.ps1`) |
 
 [`.claude/CONTEXT.md`](.claude/CONTEXT.md) is the single source of truth for vocabulary, gates, modes, and agent roster.
 

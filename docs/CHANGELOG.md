@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 055-2 closed — caveman 3-arm eval Node port)
+last_updated: 2026-05-10 (Release 3.0.0 — v1 STABLE)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,49 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## v3.0.0 — v1 STABLE (2026-05-10)
+
+dev-flow ships v1 stable. **First release with full eval-evidence baseline** (acceptance harness + caveman 3-arm token-compression) — outcome **O8 reliability** is now measurable, not aspirational. Outcome-led notes per ADR-026 lens (`docs/USER-OUTCOMES.md`); 8 outcomes lead, components support.
+
+**Outcomes shipped since 2.5.0** (4 MINOR-class consolidations + this MAJOR; see Sprint 049 → 056 blocks below for full lineage):
+
+- **O1 onboard** — `/prime` per-detection-branch `Next:` (Sprint 053c+054 fixes) · 11-lean-architecture primer + 12-session-workflow primer (Sprint 051b) · CLAUDE.md + ARCHITECTURE.md user-project templates (Sprint 051b ADR-029).
+- **O2 doc-rot** — Step 1.5b release-debt scan codified (Sprint 055b ADR-032 DEC-3) · 3 plugin-wide drift principles at CONTEXT.md anchor (Output Discipline ADR-033 · History Hygiene ADR-034 · Anti-Slip ADR-031) · `scan-legacy-docs.js` (Sprint 055c).
+- **O3 architecture** — ADR-027 plugin coherence cleanup · ADR-029 CA+DDD lean architecture canonical · ADR-030 template canonical ownership · ADR-032 release-debt + mode boundary · ADR-035 eval-script npm-dep carve-out (8 ADRs added since 2.5.0).
+- **O4 rework** — G1 anti-slip discipline 4 fields canonical (focus · context-budget · explicit-gaps · done-confirmation; Sprint 054 ADR-031) · Mid-Sprint Friction Protocol explicit triggers (5 AI · 3 human shortcuts; Sprint 054 T2) · sprint-bulk Phase 0 Active Sprint guard.
+- **O5 flow** — bidirectional coordination loop (`/lean-doc` ↔ `/task-decomposer` Sprint 053; `/orchestrator` ↔ `/lean-doc` Sprint 054) · 6 orphan skills wired into orchestrator dispatch (Sprint 052 TASK-123 F4) · template-load protocol per ADR-030.
+- **O6 correction** — tech-debt rollover loop with severity tiers + auto-escalate (Sprint 052 TASK-123 F5 · 5 anti-pattern locks) · TD scan at Sprint Promote with high → P1 auto-escalation · scoped friction defer pattern (Sprint 055 D6 + Sprint 055-2 D1 plan-IS-design defer).
+- **O7 template** — `bin/dev-flow-init.js` canonical scaffold (Sprint 050 ADR-028) · createProjectSkeleton with stack presets (node-express · react-next · python-fastapi · go-gin · custom; Sprint 051a) · `applySubstitutions` 5-token extension for stack-conditional rendering (Sprint 051b T1).
+- **O8 reliability** — **acceptance harness** `scripts/eval-acceptance.js` 3-run quorum Mode A (Sprint 055 TASK-116-v2) · **caveman 3-arm token-compression** `scripts/eval-caveman.js` + `scripts/eval-measure.js` 1:1 schema with caveman upstream (Sprint 055-2 TASK-115-v2) · **cap-headroom lint** `--cap-headroom-warn` 16/16 OK · 0 WARN baseline (Sprint 055 T3 + cap-headroom hygiene `b40c087`) · **eval-evidence rule** locked per ADR-016 + ADR-021.
+
+**Plugin metrics at v1 cut:** 16 skills · 7 agents · 10 scripts · 3 hooks · 19 ADRs (016-035, frozen 001-015) · 16/16 SKILL files OK ≥5 cap-headroom.
+
+**What's next (post-v1):** O8 — live cross-skill measurement (Sprint 055-2 OQ-1 deferred; Mode A operator opt-in) · multi-skill compression rollout · Mode B CI gating threshold benchmark · cross-tool reverse-validation. No urgency; v1 reliability baseline = harness-as-contract per Sprint 055 PC-3.
+
+**Release mechanics:**
+- Manual MAJOR lockstep bump 2.7.1 → 3.0.0 (`plugin.json` + `marketplace.json`). NO `release-patch` invocation — release-patch HARD-rejects MAJOR per ADR-027 boundary; manual sprint-less bump precedent: Sprint 052b T1 (2.5.0 → 2.6.0) + Release 2.7.0 + this Release 3.0.0 (3 instances; pattern locked per ADR-032 DEC-2).
+- Release-debt depth at v1 cut: 0 (consolidated this release). New cycle starts post-v1; Step 1.5b scan continues per ADR-032 DEC-3.
+- Push gate: emit-only per release-patch HARD STOP (operator runs `git push origin master`).
+
+---
+
+## Sprint 056 — v1 SHIP (3.0.0 MAJOR; outcome-led release notes) (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-056-v1-ship.md](sprint/SPRINT-056-v1-ship.md)
+- Plan commit: `d718c15`
+- Close commit: pending
+- Tasks: T1 outcome-led CHANGELOG ✓ (this entry) · T2 README polish · T3 manual MAJOR bump · T4 close + push emit
+- ADRs: none (sprint scope = release packaging, not new architecture)
+- Files changed: 4 (CHANGELOG · README · plugin.json · marketplace.json) + sprint/TODO/memory housekeeping
+- Summary: v1 STABLE shipped. Outcome-led CHANGELOG per ADR-026; manual MAJOR lockstep bump 2.7.1 → 3.0.0; README polish (banner + counts + reliability past-tense); push readiness emit-only per D-D operator gate.
+- Decisions (4 user-locked at promote): D-A bump = MAJOR 3.0.0 semver-clean (not literal 1.0.0 reset) · D-B Sprint 055-2 OQs all deferred post-v1 · D-C README polish scope = banner + counts + reliability cell · D-D push = emit-only operator gate.
+- Pattern candidates: manual MAJOR sprint-less bump (3rd instance; pattern locked per ADR-032 DEC-2 — codified, not just observed).
+- Open Questions for post-v1: OQ-1 live cross-skill measurement (Mode A operator opt-in; carry from 055-2) · OQ-2 multi-skill rollout · OQ-3 Mode B CI gating · OQ-4 cross-tool reverse-validation.
+- 0 friction events. 0 TD rows added.
+- Blueprint version: 3.0.0 (MAJOR lockstep). Release-debt: 0 (consolidated this release).
 
 ---
 

@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: planning
-plan_commit: tbd
+status: active
+plan_commit: d718c15
 close_commit: tbd
 ---
 
@@ -146,11 +146,18 @@ status: PASS
 
 ## Execution Log
 
-(empty — populated during T1/T2/T3/T4 execution per Sprint Execute Protocol)
+### 2026-05-10 T1 done
+T1 outcome-led CHANGELOG v3.0.0 entry prepended to `docs/CHANGELOG.md` (~25 lines incl. separator; well under ≤60 cap per AC4). Lead with O1-O8 user-project outcomes per ADR-026; each outcome cites 2-3 specific components delivered since 2.5.0 baseline (Sprint 049 → 056 lineage). Aspirational "what's next" anchor for post-v1 work (OQ-1/2/3/4 deferred). Release mechanics section documents manual MAJOR pattern (3rd instance: Sprint 052b T1 + Release 2.7.0 + this Release 3.0.0; ADR-032 DEC-2 lock). Plugin metrics snapshot at v1 cut: 16 skills · 7 agents · 10 scripts · 3 hooks · 19 ADRs. Frontmatter `last_updated:` bumped to "Release 3.0.0 — v1 STABLE".
+
+### 2026-05-10 T2 done
+T2 README v1 polish: banner `**v2.5.0**` → `**v3.0.0 — v1 STABLE**`; Scripts row `4` → `10` with full inventory (8 Node + 2 PowerShell); reliability cell past-tense "Eval harness shipped (acceptance Mode A · caveman 3-arm token-compression · cap-headroom lint 16/16 OK)"; frontmatter `last_updated:` 2026-05-08 → 2026-05-10. Outcome table rows preserved verbatim per AC5 (already stable).
 
 ## Files Changed
 
-(empty — populated per file touched per Sprint Execute Protocol step 4)
+| File | Task | Change |
+|---|---|---|
+| `docs/CHANGELOG.md` | T1 | UPDATE — prepended `## v3.0.0 — v1 STABLE` block (outcome-led O1-O8 per ADR-026; ≤60 lines) + Sprint 056 sprint block + frontmatter `last_updated:` to v3.0.0 |
+| `README.md` | T2 | UPDATE — banner v2.5.0 → v3.0.0 + Scripts cell 4 → 10 inventory + reliability cell past-tense + last_updated bump |
 
 ## Decisions
 

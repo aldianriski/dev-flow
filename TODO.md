@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint or task state change
 status: current
-sprint: 056 (planning)
+sprint: 056
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,7 +35,7 @@ sprint: 056 (planning)
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-056-v1-ship.md](docs/sprint/SPRINT-056-v1-ship.md)** (status: planning — pending plan-locked commit)
+→ **[docs/sprint/SPRINT-056-v1-ship.md](docs/sprint/SPRINT-056-v1-ship.md)** (status: active · plan_commit `d718c15`)
 
 > Sprint 056 promoted 2026-05-10 — v1 SHIP. MAJOR lockstep bump 2.7.1 → 3.0.0 (semver-clean per D-A user-lock; not literal 1.0.0). Outcome-led CHANGELOG per ADR-026 + README v1 polish + manual MAJOR bump (release-patch HARD-rejects MAJOR per ADR-027 boundary; precedent Sprint 052b T1 / Release 2.7.0). Push emit-only per D-D. 4 OQs from Sprint 055-2 all deferred post-v1.
 >
