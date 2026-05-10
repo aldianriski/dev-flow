@@ -37,11 +37,13 @@ sprint: 060
 
 ## Active Sprint
 
-→ **— none —**
+→ **[docs/sprint/SPRINT-060-test-planner.md](docs/sprint/SPRINT-060-test-planner.md)**
 
-> **Last closed:** Sprint 059 Audit-driven cleanup batch (v4.0.0 MAJOR · 7 tasks shipped). Plugin contract: 15 skills · 6 agents (down from 16 · 7). arch-grill MERGED into design-analyst (5 lenses standing G2 · `--grill` strict mode preserved); dispatcher.md REMOVED (orchestrator IS the role); codemap-refresh adopter-scoped by default; ADR-037 joint R1+R3; ADR-034 § Scope user-vs-internal clarification; TODO 6 orphans backfilled; README 261→115 (-56% via pointer + canonical-doc fan-out); new docs/HOW-YOU-USE-IT.md. 0 friction · 0 NEW eval breach · close commit pending. See `docs/CHANGELOG.md § Sprint 059`.
+> **Sprint 060 — test-planner skill (v4.1.0 MINOR) (planning).** Final sprint of post-v1-feedback workstream. Closes refined-task-list.md item 7 (Workstream C). 3 tasks: T1 NEW test-planner SKILL.md + references/TEST_GROUPING.md + USER-OUTCOMES row (HITL · medium risk) · T2 wire into orchestrator skill-dispatch · T3 plugin propagation + lockstep MINOR 4.0.0→4.1.0 (HITL). 5 decisions pre-locked (D-A 4-group convention unit/integration/e2e/regression · D-B manual MINOR 6th-instance · D-C HITL T1+T3 · D-D outcome-lens carries forward · D-E push emit-only). Anti-slip 4 fields populated. Risk medium; layers `skills, docs, ci`.
 >
-> **Next:** Sprint 060 (testing skill — `test-planner` v4.1.0 MINOR; 3 task seeds locked at Sprint 058 audit T3). Promote via Flow Grill v3.1.0+. Push gate emit-only — operator runs `git push origin master` recommended before 060 promote (clean baseline for v4.1.0 cut · ~50+ commits unpushed since Sprint 056).
+> **Status:** plan written via Flow Grill v3.1.0+ (3rd dogfood); awaiting plan-locked commit.
+>
+> **Predecessor:** Sprint 059 closed (`e71dfab`) · v4.0.0 audit-driven cleanup shipped. Push gate emit-only — operator runs `git push origin master` after 060 close (closes refined-task-list.md fully).
 
 ---
 
