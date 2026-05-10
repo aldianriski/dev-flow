@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: planning
-plan_commit: pending
+status: active
+plan_commit: e411f2e
 close_commit: pending
 ---
 
@@ -92,11 +92,13 @@ The audit's remediation T3 pre-locked 3 task seeds with sizes/risks/outcomes; th
 
 ## Execution Log
 
-*(empty — appended during sprint execution)*
+- **T1 close 2026-05-10** — test-planner skill body + references + USER-OUTCOMES row. `skills/test-planner/SKILL.md` NEW 88/100 lines (12-line headroom OK tier); description leads with "Use when…" + clear distinction from tdd/pr-reviewer; 5-Q batched planning protocol; 4-group convention summary table; output format spec; 5 Red Flags; references pointer. `skills/test-planner/references/TEST_GROUPING.md` NEW 175 lines (over the ~80-120 estimate but justified by 4-group × ~25-line depth + decision tree + skip-when + tdd hand-off envelope + anti-outcomes); per-group covers scope/examples/counter-examples/pitfalls/speed-budget. `docs/USER-OUTCOMES.md` § Skills 15 → 16; new test-planner row mapping O8 reliability + O4 rework with non-tautological skip-when (trivial change OR coverage-% anti-outcome). HITL gate fired post-commit per D-C.
 
 ## Files Changed
 
-*(empty — populated during execution; one row per file: `File | Task | Change (one-line WHY) | Risk | Test added`)*
+- `skills/test-planner/SKILL.md` | T1 | NEW (88/100 lines · 12-line headroom OK) — protocol entry: description "Use when…" + 5-Q batched planning + 4-group table + output format + 5 Red Flags + references pointer | risk: low (additive new skill) | test: deferred to T3 eval-skills run
+- `skills/test-planner/references/TEST_GROUPING.md` | T1 | NEW (175 lines · over ~80-120 target but content-justified) — full per-group definitions × 4 + decision tree + skip-when + tdd hand-off envelope + anti-outcomes | risk: low | test: N/A
+- `docs/USER-OUTCOMES.md` | T1 | EDIT — § Skills heading 15 → 16; new test-planner row mapping O8 + O4 with non-tautological skip-when | risk: low | test: N/A
 
 ## Decisions
 

@@ -28,7 +28,7 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 
 ---
 
-## Skills (15) → outcomes
+## Skills (16) → outcomes
 
 - **`orchestrator`** → O5 · O6 · O4 — gate-driven dispatch; G1 catches scope drift; G2 forces design before commit. **Skip when:** trivial in-file edit (no scope/design questions); use direct edit.
 - **`task-decomposer`** → O4 · O7 — vertical slice decomposition; assumption registry prevents premature implementation. **Skip when:** task already in Active Sprint — use `/orchestrator`.
@@ -39,6 +39,7 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 - **`zoom-out`** → O1 · O3 — read-only module map before cross-cutting change. **Skip when:** implementation plan already exists; use `/orchestrator`.
 - **`diagnose`** → O4 · O6 — 6-phase systematic debugging. **Skip when:** architectural concern (use architecture-grill) or test-first work (use `/tdd`).
 - **`tdd`** → O4 · O8 — tracer-bullet → red-green-refactor; reliability via test-first. **Skip when:** throwaway prototype where tests outlast use.
+- **`test-planner`** → O8 · O4 — test PLANNING + GROUPING (unit · integration · e2e · regression) BEFORE writing; complements tdd (writes) + pr-reviewer (reviews). **Skip when:** trivial change with obvious 1-test coverage (skip → use `/tdd` directly); coverage-percentage tooling needed (anti-outcome — test-planner plans scenarios, not %).
 - **`lean-doc-generator`** → O2 · O7 · O3 — frontmatter discipline · sprint lifecycle templates · WHY/WHERE-only enforcement. **Skip when:** target file is prose-only (no frontmatter contract) — falls back to plain edit.
 - **`adr-writer`** → O3 · O2 — captures hard-to-reverse decisions; prevents architectural amnesia. **Skip when:** reversible low-impact decision; over-ADR-ing dilutes registry signal.
 - **`release-manager`** → O8 · O5 — semver discipline; changelog generation from git. **Skip when:** pre-v1 unstable phase; bump-then-rebump churn.
