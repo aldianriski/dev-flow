@@ -1,0 +1,1 @@
+Here's a feature idea I want to break down: "Users should be able to export their data as CSV or JSON, with optional filters by date range and category, and the export should run async with a notification when ready." Can you turn this into a structured backlog with proper sizing and risk?

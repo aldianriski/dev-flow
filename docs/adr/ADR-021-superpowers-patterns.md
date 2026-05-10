@@ -67,7 +67,7 @@ This ADR locks all five decisions. Three research notes feed it (`docs/research/
 
 **Negative** (trade-offs accepted):
 - Hook-surface divergence creates re-diff overhead — superpowers may extend its hooks; dev-flow already has features superpowers lacks. Mitigation: annual re-diff cadence; bidirectional lessons captured in DEC-2.
-- TASK-116 still pending implementation — eval-evidence rule has no enforcement until then. Mitigation: TASK-116 added to Backlog P1 with research note as design input.
+- TASK-116 still pending implementation — eval-evidence rule has no enforcement until then. Mitigation: TASK-116 added to Backlog P1 with research note as design input. **Update 2026-05-10 (Sprint 055 T2):** TASK-116-v2 implementation landed — `scripts/eval-acceptance.js` Node port + 3-skill seed (T1) + 5 lift-candidate prompts staged (T2); first eval-evidence report at `docs/audit/eval-acceptance-2026-05-10.md` (operator-pending live runs per Mode A).
 - PR template adds checklist friction for trivial PRs. Mitigation: single-author repo; can self-tune over time. Adversarial-testing checkbox is N/A for non-skill changes.
 
 **Neutral**:
@@ -87,4 +87,5 @@ This ADR locks all five decisions. Three research notes feed it (`docs/research/
 - Sprint plan: `docs/sprint/SPRINT-042-superpowers-patterns.md`
 - Probe origin: `docs/audit/external-refs-probe.md` §80–112
 - Sprint 041 ADR-020 lineage precedent: `docs/adr/ADR-020-caveman-patterns.md`
-- ADR-016 eval-evidence rule: `docs/adr/ADR-016-kill-node-hook-scripts.md`
+- ADR-016 eval-evidence rule: `docs/adr/ADR-016-kill-node-hook-scripts.md` _(NOTE: stale cross-ref; ADR-016 actually = "Kill Node hook scripts"; eval-evidence policy lives in `CLAUDE.md` Quick Rules L42 — verified Sprint 055 T2 friction-fix 2026-05-10)_
+- TASK-116-v2 implementation: `scripts/eval-acceptance.js` + `tests/skill-triggering/` + `docs/audit/eval-acceptance-2026-05-10.md` (Sprint 055 T1+T2 close)

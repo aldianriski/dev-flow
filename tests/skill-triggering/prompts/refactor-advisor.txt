@@ -1,0 +1,1 @@
+The order processing module has gotten really hard to work with. Every time we add a new payment method or fulfillment type, three different files break in unexpected ways. Tests catch most of it but the team isn't sure where new logic should go. What's a good way to think about restructuring this?

@@ -1,0 +1,1 @@
+I just merged a small bug fix to main. I want to bump the version and prep a release, but don't push to the remote yet — just get everything staged.

@@ -1,0 +1,1 @@
+I need to write up the architectural overview for the new authentication module. It should explain why we chose JWT over session cookies, where the verification logic lives, but not document the implementation details — those belong in code comments.

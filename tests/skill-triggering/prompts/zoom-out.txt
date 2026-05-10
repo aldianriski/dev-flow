@@ -1,0 +1,1 @@
+I'm about to make changes to the billing system but I've never touched it before. Can you give me a high-level map of how the modules fit together before I dive in? I don't need implementation suggestions yet — just orientation.
