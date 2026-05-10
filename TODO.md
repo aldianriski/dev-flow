@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint or task state change
 status: current
-sprint: 055-2
+sprint: — none —
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,11 +35,11 @@ sprint: 055-2
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-055-2-caveman-3arm-eval.md](docs/sprint/SPRINT-055-2-caveman-3arm-eval.md)** (status: active · plan_commit `573c062`)
+→ **— none —**
 
-> Sprint 055-2 promoted 2026-05-10 — TASK-115-v2 Caveman 3-arm eval Node port. Single-task sprint per anti-drift hard-stop #3 (3 sub-tasks: T1 runner + T2 measure + T3 tests/close). Pre-promote release-debt cleared via Release 2.7.0 (`9cc3470`); cap-headroom OQ-1/2/3 cleared via `b40c087`. Step 1.5b BLOCK lifted (depth=0).
+> Sprint 055-2 closed (close commit pending squash). 3 tasks delivered: T1 `scripts/eval-caveman.js` + 10 prompts + snapshot scaffolding (`a75483c`) · T2 `scripts/eval-measure.js` + ADR-035 npm-dep carve-out + `evals/README.md` + audit report (`d2c85ac`) · T3 sibling tests 14/14 pass + cap-headroom lint sanity 16/16 OK (`ce00af8`). Mode A operator-pending preserved; live runs deferred per OQ(G).
 >
-> Next: Sprint 056 — v1 ship (CHANGELOG outcome-led release notes + planned MINOR/MAJOR lockstep bump per ADR-032 DEC-2).
+> Next: Sprint 056 — v1 ship (CHANGELOG outcome-led release notes + planned MINOR/MAJOR lockstep bump per ADR-032 DEC-2; MAJOR 1.0.0 trajectory).
 
 ---
 
@@ -52,6 +52,7 @@ sprint: 055-2
 - [x] **TASK-131** — closed Sprint 054b `65e74c5` — orchestrator doc-wire cleanup (ADR-030 init citation + Path B citation + skill-dispatch NEW Invocation column).
 - [x] **TASK-129** — closed direct-commit — /prime behavior fix (per-detection-branch Next: + 3 anti-patterns + Step 6 + cache markers); skill 1.0.0→1.1.0.
 - [x] **TASK-116-v2** — closed Sprint 055 (close commit pending) — acceptance harness Node port (`scripts/eval-acceptance.js` 273 lines no deps · 3-run quorum Mode A · `--cap-headroom-warn` flag) + 8 prompts (3 seed + 5 lift; 3 DEFERRED-with-rationale per ADR-031) + audit report frozen as harness contract + TD-002 fold-in resolved (Path B lint adopted; 16 skills · 13 OK/2 WARN/1 BREACH). Mode A operator-pending; live runs deferred per OQ(C).
+- [x] **TASK-115-v2** — closed Sprint 055-2 (close commit pending) — caveman 3-arm eval Node port (`scripts/eval-caveman.js` runner + `scripts/eval-measure.js` measurer · gpt-tokenizer o200k_base · snapshot 1:1 with caveman schema · plugin-cache hard-fail per OQ(M)) + 10 prompts ported (caveman MIT) + 14 sibling tests 14/14 pass + ADR-035 npm-dep carve-out from ADR-002 + audit report frozen + `evals/README.md`. Mode A operator-pending; cap-headroom 16/16 OK no drift.
 - [x] **TASK-134a** — closed Sprint 055c (close commit pending) — History Hygiene plugin principle codified (CONTEXT.md § +17 lines · ADR-034 5 DECs · TODO/sprint/CHANGELOG/Roadmap rules applied; ribbon 8→3 · 12 row collapses · 10 row deletes; 0 friction).
 - [x] **TASK-134b** — closed Sprint 055c (close commit pending) — Legacy-doc scan + cleanup (`scripts/scan-legacy-docs.js` zero-dep 267 lines + 6 repo-root anomalies → 4 ARCHIVE/2 KEEP verdicts applied; cross-refs verified clean).
 - [ ] **v1 ship** — CHANGELOG release notes lead with user-project outcomes per ADR-026; plugin/marketplace lockstep bump (MINOR if new surface introduced; PATCH otherwise); git push per release-patch HARD STOP. → Sprint 056.

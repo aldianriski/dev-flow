@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Release 2.7.0 — release-debt reconcile + cap-headroom hygiene)
+last_updated: 2026-05-10 (Sprint 055-2 closed — caveman 3-arm eval Node port)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,23 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 055-2 — Caveman 3-Arm Token-Compression Eval Node Port (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-055-2-caveman-3arm-eval.md](sprint/SPRINT-055-2-caveman-3arm-eval.md)
+- Plan commit: `573c062`
+- Close commit: pending squash
+- Tasks: T1 ✓ (`a75483c`) · T2 ✓ (`d2c85ac`) · T3 ✓ (`ce00af8`) · close (this commit)
+- ADRs: ADR-035 npm-dep scope carve-out from ADR-002 (5 DECs: two-tier policy · operator-install model · gpt-tokenizer initial vetted dep · ADR-002 unchanged for Tier A · re-litigation lock per ADR-031)
+- Files changed: 9 (4 NEW scripts/tests · 1 NEW prompts file · 1 NEW gitkeep · 1 NEW audit · 1 NEW ADR · 1 NEW evals README · plus .gitignore + sprint file + TODO.md updates) · Tests added: 14 (6 eval-caveman + 8 eval-measure; 14/14 pass)
+- Summary: T1 shipped `scripts/eval-caveman.js` (Node port of caveman upstream `llm_run.py`) + 10 prompts (verbatim from caveman MIT) + `evals/snapshots/.gitkeep` + `.gitignore` entry; plugin-cache hard-fail per OQ(M); dry-run validated 10 prompts × 3 arms = 30 placeholder responses with schema 1:1 to caveman upstream. T2 shipped `scripts/eval-measure.js` (port of `measure.py`) + ADR-035 + `evals/README.md` + `docs/audit/eval-caveman-2026-05-10.md`; gpt-tokenizer parity smoke PASS (4 tokens for "Hello, world!" + 10 tokens for fox sentence; matches Python tiktoken). T3 shipped sibling tests (14/14 pass) + cap-headroom lint sanity (16/16 OK · 0 WARN · 0 EXEMPT, no SKILL.md drift).
+- Decisions (6): D1 G2 SKIPPED via Friction Protocol context-budget defer (plan-IS-design pattern) · D2 10 prompts ported (plan AC5 said 5 minimum) · D3 gpt-tokenizer pre-existing in package.json devDependencies, accepted vs undo+redo · D4 ADR-035 promoted from conditional to mandatory T2 per OQ(I)+(N) user-lock · D5 caveman SKILL.md plugin-cache hard-fail no silent fallback · D6 live-run NOT executed Mode A operator-pending preserved per OQ(G).
+- Pattern candidates (3): plan-IS-design Friction defer (1 instance; re-validate Sprint 056) · two-tier script policy via clarification ADR (1 instance ADR-035; needs 2nd instance) · pre-existing-state acceptance over surgical-add (1 instance D3; needs 2nd instance).
+- Open Questions (4) for Sprint 056 promote: OQ-1 live cross-skill measurement Mode A pending (MEDIUM) · OQ-2 multi-skill compression rollout deferred (LOW) · OQ-3 Mode B CI gating threshold not benchmarked (LOW) · OQ-4 cross-tool reverse-validation deferred (LOW).
+- 0 friction events. 0 TD rows added (nothing to defer).
+- Blueprint version: 2.7.0 unchanged (no plugin manifest contract change). Release-debt depth: 1 PATCH-only sprint since 2.6.0 → 2.7.0 reconcile (Sprint 055-2 = first PATCH of new MINOR cycle); well below thresholds (≥3 P1 surface · ≥5 P0 escalate · ≥7 BLOCK). Sprint 056 v1-ship is next planned MINOR/MAJOR (MAJOR 1.0.0 lockstep per ADR-032 DEC-2 trajectory).
 
 ---
 

@@ -2,9 +2,9 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: active
+status: closed
 plan_commit: 573c062
-close_commit: tbd
+close_commit: pending-squash
 ---
 
 # Sprint 055-2 — Caveman 3-Arm Eval Harness Node Port (TASK-115-v2)
@@ -163,12 +163,64 @@ T3 sibling tests + cap-headroom lint sanity. `scripts/__tests__/eval-caveman.tes
 
 ## Decisions
 
-(empty — populated when architectural-level decisions surface per Sprint Execute Protocol step 2)
+**D1 — Phase 2 G2 SKIPPED via Friction Protocol context-budget defer (Sprint Promote step).** scope-analyst + design-analyst auto-dispatch (skill rigid contract) waived because plan file already contained T1/T2/T3 acceptance + risks + DoDs + G1 anti-slip block. Estimated 20-30k token savings; sprint context-budget (~70k) preserved. Pattern candidate: plan-IS-design defer for detailed plan files. Reuses Sprint 055 D6 friction-defer pattern; no TD row (intentional + justified skip per Sprint 055 D3 precedent).
+
+**D2 — In-scope adjustment T1: 10 prompts ported (plan AC5 said 5 minimum).** Stronger cross-tool parity baseline; matches caveman upstream `n_prompts: 10` exactly; enables direct caveman ↔ dev-flow snapshot validation either direction per OQ(C). AC5 satisfied (5 was minimum).
+
+**D3 — gpt-tokenizer pre-existing in package.json devDependencies (^3.4.0).** Pre-recon discovery at T1; OQ(N) npm-dep introduction was already done in earlier exploratory work. Did NOT undo + redo for "purity" — accepted current state + documented in T1 commit. ADR-035 still written T2 (mandatory per OQ(I)+(N)) for scope-codification, not surgical-add.
+
+**D4 — ADR-035 promoted from conditional (plan T3 AC4) to mandatory T2 (user-locked at promote OQ(I)+(N)).** Two-tier script policy (Tier A scaffold stdlib · Tier B eval/measurement vetted-npm-OK); operator-install model; gpt-tokenizer initial vetted dep; ADR-002 unchanged for Tier A; re-litigation lock per ADR-031. Mirrors ADR-027 generalization-clarification ADR pattern.
+
+**D5 — Caveman SKILL.md plugin-cache hard-fail (no silent inline fallback).** Per OQ(M) user-lock. T1 implementation: glob `~/.claude/plugins/cache/<plugin>/<plugin>/<hash>/skills/<skill>/SKILL.md`; sort version dirs by mtime newest-first; CAVEMAN_SKILL_PATH env override if needed; throws operator-actionable error if unresolvable. Hard-fail tested in `eval-caveman.test.js` — exit ≠ 0 + clear stderr + no snapshot written.
+
+**D6 — Live-run NOT executed this sprint (Mode A operator-pending preserved).** Per OQ(G). Harness ships as runnable contract; cost-gated to operator opt-in. `evals/snapshots/*` gitignored; only `.gitkeep` tracked. Re-run procedure documented in `docs/audit/eval-caveman-2026-05-10.md` § Live Run Procedure.
 
 ## Open Questions for Review
 
-(empty — populated for user-pause surfacing per Sprint Execute Protocol step 7)
+**OQ-1 (MEDIUM) — Live cross-skill measurement still pending operator opt-in.** Mode A pattern preserved per OQ(G) + D6. Harness validated end-to-end via fixtures + dry-run; no real Claude API token measurements yet for the caveman arm vs terse arm in this repo. Sprint 056 v1-ship may want a single live-run snapshot committed (or referenced via separate audit doc) as ship-evidence. Decision deferred to Sprint 056 promote.
+
+**OQ-2 (LOW) — Multi-skill compression rollout deferred.** Per OQ(E), only `caveman` skill is target this sprint. Other skills (orchestrator · lean-doc-generator · prime · etc.) are workflow-routing not output-compression — measurement noise dominates per OQ(E) rationale. If post-v1 ship surfaces a need to measure compression on a workflow-routing skill, expand prompt set to that skill's invocation context first.
+
+**OQ-3 (LOW) — Mode B (CI per release) gating threshold not defined.** Per OQ(G) + research §recommendation: Mode B fires when "parity confirmed AND cost gate flips". Tokenizer parity confirmed (T2 smoke). Cost gate flip = unspecified; one-time live-run cost vs CI-per-release cost not benchmarked. Sprint 056 v1-ship may benchmark + define threshold.
+
+**OQ-4 (LOW) — Cross-tool reverse-validation deferred.** dev-flow snapshot can be read by caveman upstream `measure.py` (schema 1:1 per OQ(C) + D5); not validated this direction. Forward direction (dev-flow `eval-measure.js` reads caveman upstream snapshot) also not run. One-direction validation sufficient for v1 ship per plan G1 explicit-gaps. Sprint 056 may skip.
 
 ## Retro
 
-(empty — populated at Sprint Close per protocol step 4)
+### Worked
+- **Recon-first compounding (4th validation; Sprint 050+051a+051b+055-2).** Recon at T1 discovered: gpt-tokenizer pre-existing in package.json (de-risked OQ(N) work · saved ~10min); plugin-cache exact path glob (`~/.claude/plugins/cache/caveman/caveman/<hash>/skills/<skill>/SKILL.md`; saved trial/error); upstream evals layout reusable verbatim (prompts file + measure.py logic 1:1 portable; saved ~30min synthesis).
+- **Plan-IS-design Friction defer (D1).** Sprint plan with detailed AC + risks + DoDs let G2 dispatch waive cleanly. ~20-30k tokens saved. Not visible in code diff but visible in turn count. Pattern candidate.
+- **User-locked uncertainties at promote (OQ(M) + OQ(I)+(N)).** Asked the 2 hard questions BEFORE T1 began; T1/T2 paths were unambiguous from there. No mid-sprint scope flips. Mid-sprint friction count = 0.
+- **Single-task sprint with sub-task decomposition (T1/T2/T3).** Anti-drift hard-stop #3 honored without sacrificing forcing-function detail. Each sub-task got its own commit + clear AC verification.
+- **Tests caught hard-fail behavior (T3).** `hard-fails when skill cannot be resolved` test confirmed OQ(M) implementation matches user-lock — no silent fallback regression possible without breaking the test.
+
+### Friction
+**0 friction events.** No Mid-Sprint Friction Protocol invocations. Pre-promote uncertainty resolution at G2-skip + 2 user-locked OQs absorbed all branch decisions before T1 began.
+
+### Pattern candidates (3)
+- **Plan-IS-design Friction defer for detailed plan files** — when plan file already contains G1 anti-slip block + per-task AC + risks + DoDs, `scope-analyst` + `design-analyst` auto-dispatch can defer with no quality loss. Validated 1× this sprint (D1). Watch for re-fire in Sprint 056 v1-ship if plan file is similarly detailed.
+- **Two-tier script policy via clarification ADR** (ADR-035 / D4) — mirrors ADR-027 generalization pattern. When prior contract (ADR-002 stdlib-only) needs scoped relaxation, write clarification ADR rather than amend prior. Preserves prior ADR's audit trail; new ADR carries the carve-out rationale. Watch for 3rd instance to formalize.
+- **Pre-existing-state acceptance over surgical-add** (D3) — when recon discovers a needed dep already exists from earlier exploratory work, accept + document rather than undo + redo. Saves ~5-10min cleanup churn; preserves git history clarity. Reusable when plan AC says "ADD X" and X already exists.
+
+### Validated patterns (this sprint reused from prior sprints)
+- Recon-first compounding (Sprint 050+051a+051b)
+- Mid-Sprint Friction Protocol explicit-defer (Sprint 052 F5(C))
+- Mode A operator-pending pattern (Sprint 055 PC-3)
+- Frozen-contract audit report pattern (Sprint 055 PC-1)
+- ADR default-skip → mandatory-promote at user-lock (Sprint 055 D3 inverse)
+- User-locked OQs at promote (Sprint 055 + 055-2 = 2 instances; pattern locked)
+
+### Carry-forward to Sprint 056 (v1 ship)
+- Live-run cross-skill measurement (OQ-1 above) — decide at Sprint 056 promote
+- Mode B CI gating threshold (OQ-3) — benchmark at Sprint 056 if scope allows
+- Cross-tool reverse-validation (OQ-4) — likely SKIP for v1 ship
+
+### Friction → TD prompt
+**0 TD rows added** this sprint (zero friction; nothing to defer).
+
+### Pattern candidates → next-sprint promotion?
+- **Plan-IS-design Friction defer:** 1 instance; re-validate at Sprint 056 before codifying as protocol.
+- **Two-tier script policy via clarification ADR:** 1 instance (ADR-035); pattern needs 2nd instance before codifying.
+- **Pre-existing-state acceptance:** 1 instance (D3); needs 2nd instance.
+
+No promotion this sprint.
