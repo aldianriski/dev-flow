@@ -11,7 +11,7 @@ sprint: 055
 
 > Source: `scripts/eval-acceptance.js` · per `docs/research/superpowers-acceptance-harness-2026-05-04.md`
 > Pass rule: stream-json contains `"name":"Skill"` AND target skill name; ≥2/3 runs (Mode A quorum per OQ(D)).
-> Run timestamp: `2026-05-10T02-01-24-672Z` · claude version: `_(dry-run)_` (pin per research §gaps R1)
+> Run timestamp: `2026-05-10T02-35-39-383Z` · claude version: `_(dry-run)_` (pin per research §gaps R1)
 
 ## Summary
 
@@ -23,64 +23,64 @@ sprint: 055
 
 | Skill | Runs | Passes | Verdict | Log dir |
 |:------|-----:|-------:|:--------|:--------|
-| `lean-doc-generator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/lean-doc-generator/` |
-| `orchestrator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/orchestrator/` |
-| `prime` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/prime/` |
-| `refactor-advisor` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/refactor-advisor/` |
-| `release-patch` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/release-patch/` |
-| `task-decomposer` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/task-decomposer/` |
-| `tdd` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/tdd/` |
-| `zoom-out` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-01-24-672Z/zoom-out/` |
+| `lean-doc-generator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/lean-doc-generator/` |
+| `orchestrator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/orchestrator/` |
+| `prime` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/prime/` |
+| `refactor-advisor` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/refactor-advisor/` |
+| `release-patch` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/release-patch/` |
+| `task-decomposer` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/task-decomposer/` |
+| `tdd` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/tdd/` |
+| `zoom-out` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T02-35-39-383Z/zoom-out/` |
 
 ## Per-Run Detail
 
 ### `lean-doc-generator`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\lean-doc-generator\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\lean-doc-generator\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\lean-doc-generator\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\lean-doc-generator\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\lean-doc-generator\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\lean-doc-generator\run-3.json`)
 
 ### `orchestrator`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\orchestrator\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\orchestrator\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\orchestrator\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\orchestrator\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\orchestrator\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\orchestrator\run-3.json`)
 
 ### `prime`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\prime\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\prime\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\prime\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\prime\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\prime\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\prime\run-3.json`)
 
 ### `refactor-advisor`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\refactor-advisor\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\refactor-advisor\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\refactor-advisor\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\refactor-advisor\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\refactor-advisor\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\refactor-advisor\run-3.json`)
 
 ### `release-patch`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\release-patch\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\release-patch\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\release-patch\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\release-patch\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\release-patch\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\release-patch\run-3.json`)
 
 ### `task-decomposer`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\task-decomposer\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\task-decomposer\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\task-decomposer\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\task-decomposer\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\task-decomposer\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\task-decomposer\run-3.json`)
 
 ### `tdd`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\tdd\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\tdd\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\tdd\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\tdd\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\tdd\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\tdd\run-3.json`)
 
 ### `zoom-out`
 
-- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\zoom-out\run-1.json`)
-- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\zoom-out\run-2.json`)
-- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-01-24-672Z\zoom-out\run-3.json`)
+- run 1: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\zoom-out\run-1.json`)
+- run 2: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\zoom-out\run-2.json`)
+- run 3: **FAIL** — dry-run (no claude invocation) (`tests\skill-triggering\logs\2026-05-10T02-35-39-383Z\zoom-out\run-3.json`)
 
 ## Cap Headroom (TD-002 lint fold-in)
 

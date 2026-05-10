@@ -143,6 +143,9 @@ T1 runner skeleton + prompts + snapshot dir + dry-run validation. Recon resolved
 ### 2026-05-10 T2 done
 T2 measurer + audit report + ADR-035 + evals/README.md. `scripts/eval-measure.js` (179 lines) ports caveman upstream `measure.py` 1:1 — gpt-tokenizer o200k_base · median/mean/min/max/stdev per arm · markdown table sorted by median savings desc · warm-up row terse-vs-baseline · `--format json` alternate. Tokenizer parity smoke PASS: `"Hello, world!"` → 4 tokens (matches Python tiktoken o200k_base); `"The quick brown fox jumps over the lazy dog."` → 10 tokens (matches). End-to-end pipeline validated against T1 dry-run snapshot (placeholder-derived numbers spurious but pipeline confirmed). ADR-035 written (5 DECs: two-tier policy · operator-install model · gpt-tokenizer initial vetted dep · ADR-002 unchanged for Tier A · re-litigation lock per ADR-031). evals/README.md trimmed to 30/30 lines exact per plan AC. docs/audit/eval-caveman-2026-05-10.md frozen as harness contract per Sprint 055 PC-1 pattern.
 
+### 2026-05-10 T3 done
+T3 sibling tests + cap-headroom lint sanity. `scripts/__tests__/eval-caveman.test.js` (6 tests) covers --dry-run snapshot shape · --skill flag override (caveman-commit alternate target) · # comment line filter · CAVEMAN_SKILL_PATH env override · hard-fail on unresolvable skill (no silent fallback per OQ(M)). `scripts/__tests__/eval-measure.test.js` (8 tests) covers --snapshot required · missing-file handling · markdown shape · --format json schema · math correctness via fixture · missing-arms exit-3 · --format invalid value reject. **Result: 14/14 pass.** Cap-headroom lint sanity: 16/16 SKILL files OK · 0 WARN · 0 EXEMPT (same baseline as `b40c087`; no SKILL.md drift this sprint as planned per OQ(J)). ADR-035 written = NOT a divergence-driven new ADR (it was mandatory per user-locked OQ(I)+(N) at promote, not surfaced mid-T2); plan T3 AC4 conditional ADR clause refers to ADDITIONAL ADRs (none surfaced).
+
 ## Files Changed
 
 | File | Task | Change |
@@ -155,6 +158,8 @@ T2 measurer + audit report + ADR-035 + evals/README.md. `scripts/eval-measure.js
 | `evals/README.md` | T2 | NEW — 30/30 lines exact; setup + how-to-run + tokenizer parity command |
 | `docs/audit/eval-caveman-2026-05-10.md` | T2 | NEW — harness contract frozen per Sprint 055 PC-1 pattern; tokenizer parity smoke documented |
 | `docs/adr/ADR-035-eval-script-npm-dep-carve-out.md` | T2 | NEW — 5 DECs; npm-dep scope carve-out from ADR-002 (Tier A scaffold stdlib-only · Tier B eval/measurement vetted-npm-OK; gpt-tokenizer initial vetted dep) |
+| `scripts/__tests__/eval-caveman.test.js` | T3 | NEW — 6 sibling tests; mock-free where possible (real plugin-cache resolution); covers --dry-run, --skill override, # comment filter, env override, hard-fail no-fallback per OQ(M) |
+| `scripts/__tests__/eval-measure.test.js` | T3 | NEW — 8 sibling tests; fixture-driven; covers --snapshot required, math correctness, --format json/md, exit codes (2 = bad input · 3 = bad snapshot shape) |
 
 ## Decisions
 
