@@ -22,7 +22,7 @@ status: current
 
 - Sprint file: [docs/sprint/SPRINT-055-acceptance-harness.md](sprint/SPRINT-055-acceptance-harness.md)
 - Plan commit: `fa4b784` (backfilled `5fcf2a6`)
-- Close commit: `TBD` *(filled after step 8 squash)*
+- Close commit: `396f05d` (backfilled `5459f17`)
 - Tasks: T1 ✓ (`9607cf8`) · T2 ✓ (`a195ac0`) · T3 ✓ (`158b0ce`) · T4 ✓ (`3f83dbc`) · T5 ✓ (close)
 - ADRs: — (ADR-035 explicitly NOT written per D3 — Mode-A-vs-B branch did not surface; design decision already covered by ADR-021 DEC-4 + Sprint 042 T3 research note)
 - Files changed: 17 (3 NEW scripts/tests · 8 NEW prompts · 1 NEW audit report · 5 modifications) · Tests added: 0 (dry-run validation; live runs operator-pending Mode A)
