@@ -5,7 +5,7 @@ owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint or task state change
 status: current
-sprint: 056
+sprint: — none —
 ---
 
 > **External references** — archived per Sprint 047 ADR-025 EPIC-Audit close. Lineage now lives in `docs/adr/ADR-019..024-*.md` (one ADR per ext-ref) + `docs/CHANGELOG.md` § EPIC-Audit milestone (Sprints 040-046).
@@ -35,11 +35,13 @@ sprint: 056
 
 ## Active Sprint
 
-→ **[docs/sprint/SPRINT-056-v1-ship.md](docs/sprint/SPRINT-056-v1-ship.md)** (status: active · plan_commit `d718c15`)
+→ **— none —**
 
-> Sprint 056 promoted 2026-05-10 — v1 SHIP. MAJOR lockstep bump 2.7.1 → 3.0.0 (semver-clean per D-A user-lock; not literal 1.0.0). Outcome-led CHANGELOG per ADR-026 + README v1 polish + manual MAJOR bump (release-patch HARD-rejects MAJOR per ADR-027 boundary; precedent Sprint 052b T1 / Release 2.7.0). Push emit-only per D-D. 4 OQs from Sprint 055-2 all deferred post-v1.
+> **dev-flow v3.0.0 — v1 STABLE shipped (in git; awaiting operator push).** Sprint 056 closed (close commit pending squash). 4 tasks delivered: T1+T2 outcome-led CHANGELOG v3.0.0 + README v1 polish (`f652a99`) · T3 manual MAJOR lockstep bump 2.7.1 → 3.0.0 (`f746db2`) · T4 close (this commit). 0 friction · 0 TD added · cap-headroom 16/16 OK no drift · manual MAJOR sprint-less bump pattern PROMOTED to codified (3 instances).
 >
-> Next: post-v1 — OQ-1 live cross-skill measurement (operator opt-in) · OQ-2 multi-skill rollout · OQ-3 Mode B CI gating · OQ-4 cross-tool reverse-validation. No urgency; v1 reliability baseline = harness-as-contract per Sprint 055 PC-3.
+> **Operator action required:** `git push origin master` to publish v1 (32+ commits ahead including Releases 2.7.0 · 2.7.1 · 3.0.0).
+>
+> Post-v1 backlog: TD-003 medium + TD-004 minor (Sprint 055b/c open) · Sprint 055-2 OQs (4 — live cross-skill measurement Mode A · multi-skill rollout · Mode B CI gating · cross-tool reverse-validation) · cap-headroom lint audit-doc churn polish (Sprint 056 OQ-4). All non-blocking; operator-paced.
 
 ---
 
@@ -55,7 +57,7 @@ sprint: 056
 - [x] **TASK-115-v2** — closed Sprint 055-2 (close commit pending) — caveman 3-arm eval Node port (`scripts/eval-caveman.js` runner + `scripts/eval-measure.js` measurer · gpt-tokenizer o200k_base · snapshot 1:1 with caveman schema · plugin-cache hard-fail per OQ(M)) + 10 prompts ported (caveman MIT) + 14 sibling tests 14/14 pass + ADR-035 npm-dep carve-out from ADR-002 + audit report frozen + `evals/README.md`. Mode A operator-pending; cap-headroom 16/16 OK no drift.
 - [x] **TASK-134a** — closed Sprint 055c (close commit pending) — History Hygiene plugin principle codified (CONTEXT.md § +17 lines · ADR-034 5 DECs · TODO/sprint/CHANGELOG/Roadmap rules applied; ribbon 8→3 · 12 row collapses · 10 row deletes; 0 friction).
 - [x] **TASK-134b** — closed Sprint 055c (close commit pending) — Legacy-doc scan + cleanup (`scripts/scan-legacy-docs.js` zero-dep 267 lines + 6 repo-root anomalies → 4 ARCHIVE/2 KEEP verdicts applied; cross-refs verified clean).
-- [ ] **v1 ship** — CHANGELOG release notes lead with user-project outcomes per ADR-026; plugin/marketplace lockstep bump (MINOR if new surface introduced; PATCH otherwise); git push per release-patch HARD STOP. → Sprint 056.
+- [x] **v1 ship** — closed Sprint 056 (close commit pending) — v3.0.0 MAJOR lockstep bump (`f746db2`; semver-clean 2.7.1 → 3.0.0 per D-A; not literal 1.0.0 reset). Outcome-led CHANGELOG per ADR-026 (8 outcomes lead, components support; ≤60 lines per AC) + README v1 polish (banner + Scripts 4 → 10 + reliability past-tense). NO release-patch invocation (HARD-rejects MAJOR per ADR-027); manual sprint-less bump pattern PROMOTED to codified at 3 instances (Sprint 052b T1 + Release 2.7.0 + Release 3.0.0). Push emit-only per D-D operator gate.
 
 ### P1 — Post-052b prevention codification
 

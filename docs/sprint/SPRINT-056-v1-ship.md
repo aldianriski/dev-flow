@@ -2,9 +2,9 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: active
+status: closed
 plan_commit: d718c15
-close_commit: tbd
+close_commit: pending-squash
 ---
 
 # Sprint 056 — v1 SHIP (3.0.0 MAJOR; outcome-led release notes)
@@ -152,21 +152,94 @@ T1 outcome-led CHANGELOG v3.0.0 entry prepended to `docs/CHANGELOG.md` (~25 line
 ### 2026-05-10 T2 done
 T2 README v1 polish: banner `**v2.5.0**` → `**v3.0.0 — v1 STABLE**`; Scripts row `4` → `10` with full inventory (8 Node + 2 PowerShell); reliability cell past-tense "Eval harness shipped (acceptance Mode A · caveman 3-arm token-compression · cap-headroom lint 16/16 OK)"; frontmatter `last_updated:` 2026-05-08 → 2026-05-10. Outcome table rows preserved verbatim per AC5 (already stable).
 
+### 2026-05-10 T3 done
+T3 manual MAJOR lockstep bump 2.7.1 → 3.0.0. Single commit `f746db2` per release-event convention; separate from T1+T2 commit + sprint-close commit. NO release-patch invocation per ADR-027 boundary; manual sprint-less bump now at 3 instances (Sprint 052b T1 + Release 2.7.0 + this Release 3.0.0). Pattern locked per ADR-032 DEC-2 — promoted from pattern-candidate to codified pattern via 3-instance threshold. Lockstep grep clean (both manifests at 3.0.0).
+
+### 2026-05-10 T4 done
+T4 sprint close + push emit. Cap-headroom lint sanity: 16 skills · 0 WARN · 0 EXEMPT (same baseline as `b40c087`; no drift this sprint as planned per OQ(G)). TD scan verification: TD-003 (medium · scoped-checkout-glob anti-pattern) + TD-004 (minor · minimal-line-count append pattern) both `status: open` despite plan H assumption "absorbed Sprint 055c"; reality = NOT absorbed; surface as post-v1 promote candidates (Sprint 057 or later). Sprint file Decisions/OQ/Retro populated. CHANGELOG already prepended T1 (no double-prepend). TODO.md Active Sprint cleared; v1 ship backlog row marked closed. Memory refresh deferred to post-close-commit (next turn). Push emit-only block per D-D operator gate.
+
 ## Files Changed
 
 | File | Task | Change |
 |---|---|---|
 | `docs/CHANGELOG.md` | T1 | UPDATE — prepended `## v3.0.0 — v1 STABLE` block (outcome-led O1-O8 per ADR-026; ≤60 lines) + Sprint 056 sprint block + frontmatter `last_updated:` to v3.0.0 |
 | `README.md` | T2 | UPDATE — banner v2.5.0 → v3.0.0 + Scripts cell 4 → 10 inventory + reliability cell past-tense + last_updated bump |
+| `.claude-plugin/plugin.json` | T3 | UPDATE — version 2.7.1 → 3.0.0 (lockstep) |
+| `.claude-plugin/marketplace.json` | T3 | UPDATE — version 2.7.1 → 3.0.0 (lockstep) |
+| `TODO.md` | T1+T2/T4 | UPDATE — sprint frontmatter + Active Sprint pointer (planning→active→none); v1 ship backlog row [x] closed at T4 |
+| `docs/sprint/SPRINT-056-v1-ship.md` | T4 | UPDATE — close (Decisions/OQ/Retro populated; status active → closed; close_commit added) |
 
 ## Decisions
 
-(empty — populated when architectural-level decisions surface per Sprint Execute Protocol step 2)
+**D1 (= D-A user-lock at promote) — Bump class = MAJOR 2.7.1 → 3.0.0 (semver-clean).** Rejected literal 1.0.0 reset (would downgrade major number; npm/marketplace tooling typically rejects). 3.0.0 = semver-clean upgrade for any user on 2.x. v1-stable narrative carried by outcome-led CHANGELOG (T1) + README banner "v3.0.0 — v1 STABLE", not by literal version digits.
+
+**D2 (= D-B user-lock at promote) — Sprint 055-2 carry-forward OQs (4) all DEFERRED post-v1.** OQ-1 live cross-skill measurement (MEDIUM; Mode A operator opt-in) · OQ-2 multi-skill compression rollout (LOW) · OQ-3 Mode B CI gating threshold (LOW) · OQ-4 cross-tool reverse-validation (LOW). Rationale: Mode A operator-pending pattern is the v1 ship deliverable per Sprint 055 PC-3; live runs cost API tokens and are cost-gated to operator. Harness contract is the reliability claim, not live measurement.
+
+**D3 (= D-C user-lock at promote) — README polish scope = banner + counts + reliability cell past-tense.** Outcome table rows preserved verbatim (already stable surface). Component count refreshed against filesystem grep (16 skills · 7 agents · 10 scripts; previously stale at 4 scripts).
+
+**D4 (= D-D user-lock at promote) — Push gate = emit-only.** Operator runs `git push origin master` per release-patch HARD STOP language. Preserves release-patch contract behavior even though release-patch was NOT invoked for this MAJOR (per ADR-027 boundary).
+
+**D5 — Manual MAJOR sprint-less bump pattern PROMOTED from pattern-candidate to codified pattern.** 3 instances now (Sprint 052b T1 + Release 2.7.0 + Release 3.0.0); satisfies plugin's 2nd-instance-required-to-codify rule (used in Sprint 055-2 retro for plan-IS-design candidate). Pattern codification belongs in ADR-032 DEC-2 (already locked) — no separate ADR needed; this sprint elevates the language from "pattern candidate" to "locked pattern" in Sprint 056 retro + memory refresh.
+
+**D6 — TD-003 + TD-004 NOT absorbed in Sprint 055c despite plan H assumption.** Verified at T4 close: both rows still `status: open`. Neither is `high` severity → no auto-escalate. Surface as post-v1 promote candidates (Sprint 057 or later). Plan H wrote "ASSUMED absorbed in 055c close (verify at T4 close)" — assumption falsified; verification caught it. Pattern: plan-time assumptions about cross-sprint absorption need explicit verification step (this is the value-of-T4-verify).
 
 ## Open Questions for Review
 
-(empty — populated for user-pause surfacing per Sprint Execute Protocol step 7)
+**OQ-1 (HIGH) — Operator action required: `git push origin master`** to publish v1. Branch is now ~32 commits ahead of origin/master (includes Release 2.7.0 + Release 2.7.1 + Release 3.0.0; 3 release events stacked). Single push publishes all v1 work. Per D-D + release-patch HARD STOP, push is operator-gated; AI does not auto-push.
+
+**OQ-2 (MEDIUM) — TD-003 + TD-004 carry-forward to post-v1 (per D6).** TD-003 (medium · scoped-checkout-glob anti-pattern in CLAUDE.md Quick Rules § GOVERNANCE) + TD-004 (minor · `\n\n<pointer>\n` minimal-line-count append pattern codification in `scripts/propagate-output-discipline.js` header) both `status: open`. Surface as Sprint 057 (or later) promote candidates. Neither blocks v1 ship.
+
+**OQ-3 (LOW) — Sprint 055-2 carry-forward OQs (4) per D2/D-B.** All deferred post-v1; documented here for transparency. OQ-1 live cross-skill measurement (MEDIUM) + OQ-2 multi-skill rollout + OQ-3 Mode B CI gating + OQ-4 cross-tool reverse-validation (all LOW). Mode A operator-pending pattern preserved per Sprint 055 PC-3.
+
+**OQ-4 (LOW) — Cap-headroom lint audit doc churn at every dry-run** (cosmetic timestamp + log-path updates rewrite the audit report on each invocation). Current Sprint 056 reverted T2-time churn to keep T1+T2 commit clean; T4 dry-run regenerated again but committed via close commit. Consider: rewrite audit-doc only on changes to cap table OR add `--quiet` flag for sanity-check mode that skips audit-doc rewrite. Post-v1 polish candidate; not blocking.
 
 ## Retro
 
-(empty — populated at Sprint Close per protocol step 4)
+### Worked
+- **4 user-locked decisions at promote (D-A/B/C/D)** made T1/T2/T3/T4 paths unambiguous. 0 mid-sprint scope flips. 0 friction events. 3rd consecutive sprint with this pattern (Sprint 055 + 055-2 + 056); pattern locked.
+- **Outcome-led CHANGELOG narrative held compact** (≤60 lines per AC; actual ~25 lines incl. separator). 8 outcomes lead, components support — ADR-026 lens applied cleanly.
+- **Manual MAJOR sprint-less bump pattern PROMOTED to codified** (3 instances: Sprint 052b T1 + Release 2.7.0 + Release 3.0.0). Pattern threshold met; no separate ADR needed since ADR-032 DEC-2 already locks it.
+- **T4 verification caught D6 assumption miss.** Plan H said "ASSUMED TD-003+004 absorbed Sprint 055c"; reality = NOT absorbed. T4 verification step (planned) caught the miss; surfaced as post-v1 candidate vs silently shipping with stale assumption. Verification-as-discipline pattern reinforced.
+- **Single-task sprint with 4 sub-task decomposition** worked (anti-drift hard-stop #3 honored). Each sub-task got own commit (T1+T2 bundled · T3 separate · T4 separate). v1 ship deliverable shipped end-to-end in <2 hours real time.
+- **Recon-first compounding (5th validation; Sprints 050+051a+051b+055-2+056).** README v1 polish recon (Scripts cell stale at 4; actual 10) caught at T2 plan time; stale-banner fix landed in same commit. Counts verified against filesystem, not memory.
+
+### Friction
+**0 friction events.** No Mid-Sprint Friction Protocol invocations. Pre-promote 4-decision lock + plan H verification step absorbed all branches.
+
+### Pattern candidates (1 promoted to codified · 1 still candidate · 1 new candidate)
+- **PROMOTED: Manual MAJOR sprint-less bump** — 3 instances; codified via ADR-032 DEC-2; no longer "candidate". Future MINOR/MAJOR releases follow this pattern by default unless explicit reason to invoke release-manager.
+- **STILL CANDIDATE (1 instance): Two-tier script policy via clarification ADR** (ADR-035 / Sprint 055-2). Needs 2nd instance.
+- **NEW CANDIDATE (1 instance): T4 verification of plan-time assumptions about cross-sprint absorption.** Plan H pattern "ASSUMED absorbed in <prior-sprint>; verify at T4" caught D6 here. Reusable any sprint that depends on prior-sprint cleanup. Watch for 2nd instance.
+
+### Validated patterns (this sprint reused from prior sprints)
+- 4 user-locked decisions at promote (Sprint 055 + 055-2 + 056 = 3 instances; locked)
+- Outcome-led narrative per ADR-026 (1st full application; was aspirational pre-v1)
+- Cap-headroom lint sanity at sprint close (Sprint 055 + 055-2 + 056 = 3 instances)
+- Single-task sprint with sub-task decomposition (Sprint 055-2 + 056 = 2 instances)
+- Recon-first compounding (5 sprints validated)
+- Mode A operator-pending preservation through release events (Sprint 055 PC-3 reuse)
+- Frozen audit-report contract (Sprint 055 PC-1 reuse)
+
+### Carry-forward to post-v1
+- TD-003 medium + TD-004 minor (per D6 / OQ-2) — Sprint 057 or later promote
+- Sprint 055-2 OQs (4) per D2 — operator-paced; no urgency
+- Cap-headroom audit-doc churn polish (OQ-4) — minor quality-of-life
+
+### Friction → TD prompt
+**0 TD rows added** this sprint (zero friction; nothing to defer).
+
+### Pattern candidates → next-sprint promotion?
+- Manual MAJOR sprint-less bump: PROMOTED to codified (3 instances threshold met).
+- Two-tier script policy via clarification ADR: still 1 instance; await 2nd.
+- T4 verification of plan-time absorption assumptions: 1 instance; await 2nd.
+
+### Sprint metrics
+- Tasks: 4/4 complete (T1 + T2 + T3 + T4)
+- Commits: 4 (`d718c15` plan-lock · `f652a99` T1+T2 bundle · `f746db2` T3 release · this commit T4 close)
+- Friction: 0 events · 0 TD rows added
+- Cap-headroom: 16/16 OK · 0 drift
+- Sprint duration: ~1.5 hours real time
+- Confidence accuracy: 80/85/90/85 planned vs 100% actual delivery (planned conservative; actual clean)
+
+### v1 SHIPPED ✓
+dev-flow v3.0.0 — v1 STABLE. Last sprint of pre-v1 roadmap closed. Push pending operator action.
