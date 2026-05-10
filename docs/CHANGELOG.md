@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Sprint 055c closed — history hygiene + legacy-doc scan)
+last_updated: 2026-05-10 (Sprint 055 closed — acceptance harness + TD-002 fold-in)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -15,6 +15,24 @@ status: current
 > - `MAJOR` — phase model / gate model / hook contract change
 > - `MINOR` — new mode / new agent / new skill / new hard stop
 > - `PATCH` — clarification / prompt rewording / fix
+
+---
+
+## Sprint 055 — Acceptance Harness Node Port + TD-002 Cap-Headroom Lint Fold-In (2026-05-10)
+
+- Sprint file: [docs/sprint/SPRINT-055-acceptance-harness.md](sprint/SPRINT-055-acceptance-harness.md)
+- Plan commit: `fa4b784` (backfilled `5fcf2a6`)
+- Close commit: `TBD` *(filled after step 8 squash)*
+- Tasks: T1 ✓ (`9607cf8`) · T2 ✓ (`a195ac0`) · T3 ✓ (`158b0ce`) · T4 ✓ (`3f83dbc`) · T5 ✓ (close)
+- ADRs: — (ADR-035 explicitly NOT written per D3 — Mode-A-vs-B branch did not surface; design decision already covered by ADR-021 DEC-4 + Sprint 042 T3 research note)
+- Files changed: 17 (3 NEW scripts/tests · 8 NEW prompts · 1 NEW audit report · 5 modifications) · Tests added: 0 (dry-run validation; live runs operator-pending Mode A)
+- Summary: T1 shipped `scripts/eval-acceptance.js` (273 lines, no deps; 3-run quorum harness with `--dry-run` + `--cap-headroom-warn` pre-wire) + 3-skill seed (prime/orchestrator/tdd) + tests/skill-triggering/ scaffold (README ≤40 + .gitignore + log dir); T2 staged 5 lift-candidate prompts (release-patch/lean-doc/task-decomposer/refactor-advisor/zoom-out) + 3 DEFERRED-with-rationale per ADR-031 anti-slip explicit-skip + audit report rewritten as frozen harness contract + ADR-021 § Consequences pointer (mid-sprint friction-fix replaced stale ADR-016 cite); T3 cap-headroom lint inline (16 skills · 13 OK · 2 WARN · 1 BREACH) — surfaced release-patch 101/100 BREACH + orchestrator 100/100 + lean-doc 97/100 drift; TD-002 resolved via Path B harness lint; T4 conditional ADR-035 SKIPPED (no branch surfaced) + lean-doc SKILL pointer SKIPPED (cap-pressure 97/100 per OQ(H)) → README scripts table updated.
+- Decisions (6): D1 ADR-021 canonical (not ADR-016) for eval-evidence pointer · D2 Path B lint for cap-headroom (TD-002) · D3 ADR-035 NOT written (no branch) · D4 lean-doc SKILL pointer skipped (cap-pressure) · D5 audit reports as frozen contracts · D6 release-patch BREACH NOT remediated (scope-creep guard).
+- Pattern candidates (3): PC-1 harness contract + prompt catalog as frozen audit deliverable · PC-2 Path B lint over frontmatter for cross-cutting drift detection · PC-3 Mode A operator-pending pattern for cost-gated harnesses.
+- Open Questions (4) for Sprint 056 promote: OQ-1 release-patch 101/100 BREACH (HIGH) · OQ-2 orchestrator 100/100 EXACT (MEDIUM) · OQ-3 lean-doc 97/100 (MEDIUM) · OQ-4 release-debt depth=7 BLOCK threshold (CRITICAL — Sprint 056 v1-ship is natural reconcile per ADR-032 DEC-2).
+- TD-002 status: `resolved → TASK-116-v2 Sprint 055 T3` (Path B adopted; Path A frontmatter rejected per OQ(F)).
+- Friction events (2): F1 plan T2 AC-4 wrong-ADR cite (recovered via Friction Protocol fix-now ~5min; no TD row — one-off) · F2 cap-headroom +1 drift across 3 files since Sprint 055b T3.4 (lint mechanism now live; root-cause deferred to Sprint 056 OQ-1/2/3 remediation).
+- Blueprint version: 2.6.0 unchanged (no plugin manifest contract change). Release-debt depth: 7 PATCH-only sprints since 2.5.0→2.6.0 (Sprint 055 added) — HITS ≥7 BLOCK threshold per Step 1.5b. MUST address pre-Sprint-056-promote (Sprint 056 v1-ship is the natural reconcile per ADR-032 DEC-2).
 
 ---
 

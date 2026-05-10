@@ -2,7 +2,7 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: active
+status: closed
 plan_commit: fa4b784
 close_commit: TBD
 ---
@@ -157,33 +157,96 @@ status: PASS
 
 ## Execution Log
 
-*(append-only; one block per task done OR per surprise. No edits to § Plan after plan_commit.)*
+### 2026-05-10 01:45 | T1 done
+Acceptance harness skeleton + 3-skill seed (Mode A) shipped at `9607cf8`. `scripts/eval-acceptance.js` (273 lines, no deps) — spawns `claude -p` with stream-json output, regex pass condition, 3-run quorum (≥2/3), `--dry-run` for skeleton validation, `--cap-headroom-warn` flag pre-wired for T3, `--plugin-dir` + `DEVFLOW_PLUGIN_DIR` fallback per research §gaps R2, `--date` override for JS UTC drift. Seed prompts (`prime`, `orchestrator`, `tdd`) naturalistic per research §acceptance-pattern. README ≤40 lines (exactly 40). Logs gitignored. Audit-report skeleton scaffolded. DoD: dry-run clean; live runs deferred to operator (Mode A).
+
+### 2026-05-10 08:27 | T2 done
+5 lift-candidate prompts staged + audit report rewritten as harness contract + 3 lift candidates DEFERRED-with-rationale at `a195ac0`. Prompts: `release-patch.txt` (lift #1), `lean-doc-generator.txt` (#4), `task-decomposer.txt` (#5), `refactor-advisor.txt` (#3 proxy 1/2), `zoom-out.txt` (#3 proxy 2/2). DEFERRED: #2 skeleton-create (bin script, not Skill-tool-triggerable), #6 anti-slip (orchestrator behavior, already covered by T1 seed), #7+#8 output-discipline + history-hygiene (CONTEXT.md cross-cutting principles, need different harness shape).
+
+**Mid-T2 friction-fix (logged):** plan T2 AC-4 cited "ADR-016 § Consequences" for retroactive eval-evidence pointer. Recon: ADR-016 = "Kill Node hook scripts" (verified grep — 0 eval-evidence content); eval-evidence policy actually lives in `CLAUDE.md` Quick Rules L42 + ADR-021 DEC-4 (acceptance harness pattern). Per Friction Protocol fix-now: pointer redirected to ADR-021 § Consequences; cross-ref logged in § Decisions D1.
+
+### 2026-05-10 08:29 | T3 done
+TD-002 cap-headroom lint fold-in at `158b0ce`. Lint logic equivalent to `eval-acceptance.js --cap-headroom-warn` (pre-wired in T1) executed inline; 16 skills classified — 13 OK · 2 WARN · 1 BREACH · 0 EXEMPT. Audit report § Cap Headroom populated (16-row table + 3 critical findings). TD-002 row updated `status: resolved → TASK-116-v2 Sprint 055 T3` in TODO.md § Tech Debt. Path B (harness lint) adopted; Path A (per-skill frontmatter field) rejected per OQ(F).
+
+**Surfaced as Open Questions** (NOT remediated this sprint per ADR-031 scope-creep guard): release-patch 101/100 BREACH (was 100/100 EXEMPT; +1 drift since Sprint 055b T3.4); orchestrator 100/100 (+1 drift); lean-doc 97/100 (+1 drift; below WARN threshold).
+
+### 2026-05-10 08:30 | T4 done
+ADR-035 SKIPPED (Mode-A-vs-B branch did NOT surface — T1 dry-run validated harness shape; no R2/R3 blockers materialized). lean-doc-generator SKILL.md pointer SKIPPED per OQ(H) cap-pressure rule (97/100 headroom 3, below WARN per T3 finding). T4 collapsed to README.md scripts-table update at `3f83dbc` (1-line WHERE pointer per DOCS_Guide Tier 2): eval-acceptance.js entry added · scan-legacy-docs.js entry added (Sprint 055c T3 backfill omission) · eval-skills.js description tightened.
+
+### 2026-05-10 | T5 done
+Sprint Close protocol per `SPRINT_PROTOCOLS.md`. § Files Changed populated · § Decisions written · § Open Questions surfaced · § Retro filled · CHANGELOG row prepended · TODO.md `Active Sprint` cleared. TD-002 confirmed resolved. TASK-116-v2 marked closed. Release-debt depth=7 BLOCK threshold flagged for Sprint 056 promote (critical surface to user).
 
 ## Files Changed
 
 | File | Task | Change (one-line WHY) | Risk | Test added |
 |:-----|:-----|:----------------------|:-----|:-----------|
-
-*(filled during execution; one row per file, NOT per edit.)*
+| `scripts/eval-acceptance.js` | T1 | NEW: harness skeleton + dry-run + cap-headroom flag pre-wired | medium | dry-run validation |
+| `tests/skill-triggering/prompts/prime.txt` | T1 | NEW: naturalistic seed prompt (session-bootstrap) | low | n/a |
+| `tests/skill-triggering/prompts/orchestrator.txt` | T1 | NEW: naturalistic seed prompt (workflow-control) | low | n/a |
+| `tests/skill-triggering/prompts/tdd.txt` | T1 | NEW: naturalistic seed prompt (code-implementation) | low | n/a |
+| `tests/skill-triggering/README.md` | T1 | NEW: operator how-to-run + claude version pin (R1) + Windows note (R5) | low | n/a |
+| `tests/skill-triggering/logs/.gitkeep` | T1 | NEW: keep dir; per-run JSON gitignored | low | n/a |
+| `.gitignore` | T1 | UPDATE: ignore `tests/skill-triggering/logs/*` except `.gitkeep` | low | n/a |
+| `docs/audit/eval-acceptance-2026-05-10.md` | T1+T2+T3 | NEW + REWRITTEN + EXTENDED: harness contract + prompt catalog + cap-headroom (frozen) | low | n/a |
+| `tests/skill-triggering/prompts/release-patch.txt` | T2 | NEW: lift-candidate prompt (lift #1) | low | n/a |
+| `tests/skill-triggering/prompts/lean-doc-generator.txt` | T2 | NEW: lift-candidate prompt (lift #4) | low | n/a |
+| `tests/skill-triggering/prompts/task-decomposer.txt` | T2 | NEW: lift-candidate prompt (lift #5) | low | n/a |
+| `tests/skill-triggering/prompts/refactor-advisor.txt` | T2 | NEW: lift-candidate prompt (lift #3 proxy 1/2) | low | n/a |
+| `tests/skill-triggering/prompts/zoom-out.txt` | T2 | NEW: lift-candidate prompt (lift #3 proxy 2/2) | low | n/a |
+| `docs/adr/ADR-021-superpowers-patterns.md` | T2 | UPDATE: § Consequences pointer to retroactive eval-evidence file (friction-fix; replaces stale ADR-016 ref) | low | n/a |
+| `TODO.md` | T3+T5 | UPDATE: TD-002 row → `status: resolved → TASK-116-v2`; Active Sprint cleared at close | low | n/a |
+| `README.md` | T4 | UPDATE: scripts table — eval-acceptance + scan-legacy-docs entries; eval-skills tightened | low | n/a |
+| `docs/sprint/SPRINT-055-acceptance-harness.md` | T5 | UPDATE: Execution Log + Files Changed + Decisions + Retro filled at close | low | n/a |
+| `docs/CHANGELOG.md` | T5 | UPDATE: prepend Sprint 055 row at close | low | n/a |
 
 ## Decisions
 
-*(append-only; significant architectural-level decisions; ADR pointer if global-scope.)*
+**D1 — ADR-021 (not ADR-016) is canonical home for acceptance harness pattern + eval-evidence policy** (T2 friction-fix). Plan T2 AC-4 cited "ADR-016 § Consequences" for retroactive eval-evidence pointer; recon found ADR-016 = "Kill Node hook scripts" (unrelated). Eval-evidence policy lives in `CLAUDE.md` Quick Rules L42; harness pattern decision = ADR-021 DEC-4. Pointer redirected per Friction Protocol fix-now. ADR-021 line 66 cross-ref to ADR-016 noted as itself stale (not corrected this sprint per scope-creep guard).
+
+**D2 — Path B (harness lint) chosen over Path A (per-skill frontmatter) for cap-headroom drift detection** (T3, plan OQ(F) confirmed). Rationale: Path A requires per-skill edit (16 files) without evaluator; Path B is cheaper, auditable, and re-runs cleanly. Lives in `scripts/eval-acceptance.js --cap-headroom-warn`. TD-002 resolved via this mechanism.
+
+**D3 — ADR-035 explicitly NOT written** (T4, plan OQ(G) skip-rationale logged). Mode-A-vs-B branch did NOT surface; research §gaps R2/R3 blockers did NOT materialize at T1 dry-run; ADR-021 DEC-4 + Sprint 042 T3 research note already cover the design decision. No new architectural decision = no ADR (per `references/DOCS_Guide.md` ADR-when-needed rule).
+
+**D4 — lean-doc-generator SKILL.md pointer NOT added at T4** (cap-pressure deferral per OQ(H)). lean-doc currently 97/100 (headroom 3, below WARN threshold per T3). Adding 1-line pointer would push to 98/100. T4 collapsed to README.md scripts-table update instead (Tier 2 WHERE pointer suffices for harness discoverability).
+
+**D5 — Audit reports treated as frozen contracts, not auto-regenerated** (T2, pattern emergence). `docs/audit/eval-acceptance-2026-05-10.md` § Lift Candidate Coverage + § Per-Skill Prompt Catalog deliberately frozen at T2 close as "harness contract + prompt catalog" — per-run sections will overwrite at first live run, but design contract preserved. Pattern candidate surfaced for VALIDATED_PATTERNS.md.
+
+**D6 — release-patch 101/100 BREACH NOT remediated this sprint** (T3, scope-creep guard per ADR-031). +1 drift since Sprint 055b T3.4 EXACT-cap stamp. Surfaced as Open Question for Sprint 056 v1-ship; remediation = trim OR new EXEMPT ADR. Friction Protocol defer applied (out of T3 acceptance scope; Path B lint is the deliverable, not the cap fix).
 
 ## Open Questions for Review
 
-*(surface to user at next pause; user-locked OQs A-J in plan above are NOT this section.)*
+**OQ-1 (HIGH) — release-patch SKILL.md = 101/100 BREACH.** +1 drift since Sprint 055b T3.4 EXACT-cap (was 100/100 EXEMPT per ADR-032/ADR-033 DEC-4). Root cause unknown — needs `git blame` + trim OR new EXEMPT ADR. Surfaces at next Sprint Promote per Step 1.5b cap discipline. Recommend address pre-Sprint-056 v1-ship.
+
+**OQ-2 (MEDIUM) — orchestrator SKILL.md = 100/100 EXACT.** +1 drift since Sprint 055b (was 99/100). Either: (a) grant new EXEMPT via ADR (precedent: release-patch ADR-032), OR (b) trim 1 line. No cap pressure on remaining 13 skills.
+
+**OQ-3 (MEDIUM) — lean-doc-generator SKILL.md = 97/100, headroom 3, below WARN.** +1 drift since Sprint 055b. Trim opportunity at next edit; not blocking but blocks T4-style 1-line pointer additions until trimmed.
+
+**OQ-4 (CRITICAL — ESCALATED) — Release-debt depth = 7 PATCH-only sprints since 2.5.0→2.6.0** (Sprint 055 added). HITS ≥7 BLOCK threshold per `SPRINT_PROTOCOLS.md` Step 1.5b. MUST address pre-Sprint-056-promote. Sprint 056 v1-ship is the natural reconcile per ADR-032 DEC-2 (planned MINOR/MAJOR lockstep bump) — confirms the threshold-block is itself the forcing function for the planned reconcile.
 
 ## Retro
 
 ### Worked
 
-*(filled at close.)*
+- **T1 pre-wire of `--cap-headroom-warn` flag** paid dividends at T3: lint logic equivalent already designed in T1 → T3 collapsed to inline scan + audit-report fill (10k tokens vs estimated more). Plan-time foresight per recon-first.
+- **DEFERRED-with-rationale pattern at T2** (3 of 8 lift candidates): explicit-skip per ADR-031 anti-slip held the line; resisted force-fitting non-skill-triggerable surfaces (bin scripts, cross-cutting CONTEXT.md principles). Audit report § Lift Candidate Coverage rows make the rationale auditable.
+- **T4 conditional ADR-035 default-skip** correctly fired: branch-condition gate (research §gaps R2/R3) prevented unnecessary ADR. T4 collapsed to README.md WHERE pointer (1-line, Tier 2) — minimum viable docs update.
+- **Mode A operator-pending pattern** held: harness frozen as contract; live-run cost gated to operator opt-in. No false-PASS theater.
+- **Friction-fix mid-sprint at T2 (ADR-016 → ADR-021 redirect)** absorbed without scope creep — logged as Decision D1, fix bounded to AC-4 pointer change, did not balloon into ADR-021 line-66 stale-cross-ref cleanup (deferred).
 
 ### Friction
 
-*(filled at close; per-item TD prompt per Sprint Close Protocol step 4.)*
+**F1 — Plan T2 AC-4 cited wrong ADR (ADR-016 instead of ADR-021).** Misattribution of eval-evidence policy home; ADR-016 = "Kill Node hook scripts" (unrelated). Required mid-T2 recon (grep) + redirect. ~5 min recovery via Friction Protocol fix-now. Root cause: plan-time author conflated eval-evidence policy (CLAUDE.md L42) with hook-script ADR (ADR-016) without recon at promote.
+
+> TD row for: plan-time ADR citation accuracy guard? **N** — one-off; mitigation already exists (recon-first preference + Friction Protocol fix-now); not pattern-worthy.
+
+**F2 — Cap-headroom +1 drift across 3 SKILL.md files since Sprint 055b T3.4** (release-patch 100→101, orchestrator 99→100, lean-doc 96→97). Drift surfaced by T3 lint (the very fold-in this sprint built). No commit between Sprint 055b close and Sprint 055 plan touched those files explicitly per recon — drift sources unknown. Lint mechanism now live, will catch future drift; root-cause investigation deferred to Sprint 056.
+
+> TD row for: cap-headroom drift root-cause investigation? **N** — Sprint 055 T3 already resolved TD-002 via lint mechanism; root-cause investigation = remediation work for OQ-1/2/3 in Sprint 056. Not separate TD.
 
 ### Pattern candidates
 
-*(filled at close; surface to user; on confirm → reference/VALIDATED_PATTERNS.md.)*
+**PC-1 — Harness contract + prompt catalog as audit deliverable** (audit reports as frozen contracts, NOT auto-regenerated). T2 froze `docs/audit/eval-acceptance-2026-05-10.md` § Lift Candidate Coverage + § Per-Skill Prompt Catalog as design-contract; per-run sections overwrite, contract preserved. Reuse: any harness whose runs are operator-gated + cost-significant. Surface to user for VALIDATED_PATTERNS.md.
+
+**PC-2 — Path B (lint over frontmatter) for cross-cutting drift detection.** When a property needs tracking across N artifacts (cap-headroom across 16 SKILL.md), prefer one lint script over N frontmatter fields. Cheaper, auditable, no per-file edit. 2nd instance of pattern (TD-002 Path B beats Path A; mirrors Sprint 055b T3 propagate-script-over-per-skill-edit). Surface to user for VALIDATED_PATTERNS.md.
+
+**PC-3 — Mode A operator-pending pattern for cost-gated harnesses.** When harness invocation costs API tokens × N runs × M prompts, ship harness as runnable contract + dry-run validation; defer live runs to operator opt-in; freeze design-contract at first ship. Mode B (CI per PR) deferred behind threshold gate. Sprint 055 first instance; reuse on TASK-115-v2 Caveman 3-arm eval likely. Surface to user for VALIDATED_PATTERNS.md.
