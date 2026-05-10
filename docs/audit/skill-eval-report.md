@@ -6,10 +6,10 @@ status: current
 generator: scripts/eval-skills.js
 ---
 
-# Skill Eval Report — 2026-05-10T16:59:47.371Z
+# Skill Eval Report — 2026-05-10T17:24:53.059Z
 
-- Skills evaluated: **15**
-- Pass: **12**
+- Skills evaluated: **16**
+- Pass: **13**
 - Fail: **3**
 - Total violations: 3
 
@@ -40,6 +40,7 @@ generator: scripts/eval-skills.js
 | security-auditor | 79 | ✓ pass | — |
 | task-decomposer | 74 | ✓ pass | — |
 | tdd | 83 | ✓ pass | — |
+| test-planner | 89 | ✓ pass | — |
 | write-a-skill | 83 | ✓ pass | — |
 | zoom-out | 57 | ✓ pass | — |
 

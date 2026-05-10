@@ -1,6 +1,6 @@
 ---
 owner: Tech Lead (Aldian Rizki)
-last_updated: 2026-05-10 (Release 4.0.0 — audit-driven cleanup batch)
+last_updated: 2026-05-10 (Release 4.1.0 — test-planner skill)
 update_trigger: Sprint completed; blueprint version bumped
 status: current
 ---
@@ -59,6 +59,31 @@ Workstream A from `refined-task-list.md` (post-v1-ship feedback items 1+2+6) —
 - Decisions (8 user-locked at promote): D-A single MAJOR consolidation · D-B joint ADR-037 R1+R3 · D-C manual MAJOR (release-patch NOT invoked) · D-D HITL T1 + T6 · D-E design-analyst --grill flag preserves strict mode · D-F push emit-only · D-G outcome-lens carries forward as standing principle · D-H may split 059a/059b on friction (NOT exercised — single sprint sufficed).
 - Cap-headroom: orchestrator 93→98/100 (OK→WARN tier from T2 Dispatcher Role subsection · 2-line headroom remaining); design-analyst 30→27 lines (NET IMPROVEMENT via agents/references/lenses.md split). Sprint 060 should monitor orchestrator before additions.
 - Pattern candidates surfaced (4): joint ADR for shared-rationale verdicts · README-as-pointer-not-encyclopedia · trim-as-staleness-fix two-fer · agents/references/ subdirectory pattern.
+
+---
+
+## v4.1.0 — test-planner skill (2026-05-10)
+
+NEW skill `test-planner` closes the Testing-phase PRIMARY gap surfaced in Sprint 058 SDLC audit. Distinct from `tdd` (writes tests) / `pr-reviewer` (reviews code) / `code-reviewer` agent (post-impl review). Closes refined-task-list.md item 7 — final piece of post-v1-feedback workstream.
+
+**Outcomes shipped:**
+
+- **O8 reliability** — planned coverage prevents regression; 4-group canonical convention (unit · integration · e2e · regression) makes coverage gaps explicit per group · skip-when guidance prevents N/A blind spots
+- **O4 rework** — test set decided BEFORE writing prevents wrong-test-set churn; planning step before tdd writes catches scenarios that would otherwise emerge late in red-green-refactor
+- **O5 flow** — wired into orchestrator skill-dispatch as propose y/n at G1 feature/new-behavior tasks; pairs with tdd (planner plans · tdd writes); plugin component count grows 15 → 16 skills (6 agents unchanged)
+
+**Components changed:**
+
+- `skills/test-planner/SKILL.md` NEW (88/100 lines) — protocol entry: 5-Q batched planning + 4-group convention table + output format + 5 Red Flags
+- `skills/test-planner/references/TEST_GROUPING.md` NEW (175 lines) — full per-group definitions × 4 + decision tree + skip-when + tdd hand-off envelope + anti-outcomes
+- `skills/orchestrator/references/skill-dispatch.md` — Always-On table gains test-planner row + planner-vs-tdd pairing note
+- `docs/USER-OUTCOMES.md` — skills 15 → 16 + test-planner row mapping O8 + O4
+- `README.md` — banner v4.1.0 + components table Skills 15 → 16
+
+**Release mechanics:**
+- Manual MINOR lockstep bump 4.0.0 → 4.1.0 (`plugin.json` + `marketplace.json`). NO `release-patch` invocation per ADR-027 boundary; manual sprint-less bump pattern (6th instance: Sprint 052b T1 + Releases 2.7.0 / 3.0.0 / 3.1.0 / 4.0.0 / this 4.1.0).
+- Push gate: emit-only per release-patch HARD STOP (operator runs `git push origin master`).
+- **Closes refined-task-list.md fully** after this release lands. Workstream A (Sprint 057 Flow Grill) + B/C audit (Sprint 058) + B/C cleanup (Sprint 059) + C testing skill (this Sprint 060) — complete.
 
 ---
 

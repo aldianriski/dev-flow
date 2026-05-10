@@ -11,7 +11,7 @@ sprint: 055
 
 > Source: `scripts/eval-acceptance.js` · per `docs/research/superpowers-acceptance-harness-2026-05-04.md`
 > Pass rule: stream-json contains `"name":"Skill"` AND target skill name; ≥2/3 runs (Mode A quorum per OQ(D)).
-> Run timestamp: `2026-05-10T16-59-48-480Z` · claude version: `2.1.138 (Claude Code)` (pin per research §gaps R1)
+> Run timestamp: `2026-05-10T17-25-02-261Z` · claude version: `2.1.138 (Claude Code)` (pin per research §gaps R1)
 
 ## Summary
 
@@ -23,64 +23,64 @@ sprint: 055
 
 | Skill | Runs | Passes | Verdict | Log dir |
 |:------|-----:|-------:|:--------|:--------|
-| `lean-doc-generator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/lean-doc-generator/` |
-| `orchestrator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/orchestrator/` |
-| `prime` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/prime/` |
-| `refactor-advisor` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/refactor-advisor/` |
-| `release-patch` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/release-patch/` |
-| `task-decomposer` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/task-decomposer/` |
-| `tdd` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/tdd/` |
-| `zoom-out` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T16-59-48-480Z/zoom-out/` |
+| `lean-doc-generator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/lean-doc-generator/` |
+| `orchestrator` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/orchestrator/` |
+| `prime` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/prime/` |
+| `refactor-advisor` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/refactor-advisor/` |
+| `release-patch` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/release-patch/` |
+| `task-decomposer` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/task-decomposer/` |
+| `tdd` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/tdd/` |
+| `zoom-out` | 3 | 0 | **FAIL** | `tests/skill-triggering/logs/2026-05-10T17-25-02-261Z/zoom-out/` |
 
 ## Per-Run Detail
 
 ### `lean-doc-generator`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\lean-doc-generator\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\lean-doc-generator\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\lean-doc-generator\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\lean-doc-generator\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\lean-doc-generator\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\lean-doc-generator\run-3.json`)
 
 ### `orchestrator`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\orchestrator\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\orchestrator\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\orchestrator\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\orchestrator\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\orchestrator\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\orchestrator\run-3.json`)
 
 ### `prime`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\prime\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\prime\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\prime\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\prime\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\prime\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\prime\run-3.json`)
 
 ### `refactor-advisor`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\refactor-advisor\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\refactor-advisor\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\refactor-advisor\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\refactor-advisor\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\refactor-advisor\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\refactor-advisor\run-3.json`)
 
 ### `release-patch`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\release-patch\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\release-patch\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\release-patch\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\release-patch\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\release-patch\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\release-patch\run-3.json`)
 
 ### `task-decomposer`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\task-decomposer\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\task-decomposer\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\task-decomposer\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\task-decomposer\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\task-decomposer\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\task-decomposer\run-3.json`)
 
 ### `tdd`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\tdd\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\tdd\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\tdd\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\tdd\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\tdd\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\tdd\run-3.json`)
 
 ### `zoom-out`
 
-- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\zoom-out\run-1.json`)
-- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\zoom-out\run-2.json`)
-- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T16-59-48-480Z\zoom-out\run-3.json`)
+- run 1: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\zoom-out\run-1.json`)
+- run 2: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\zoom-out\run-2.json`)
+- run 3: **FAIL** — claude exit 1 (`tests\skill-triggering\logs\2026-05-10T17-25-02-261Z\zoom-out\run-3.json`)
 
 ## Cap Headroom (TD-002 lint fold-in)
 
@@ -101,10 +101,11 @@ sprint: 055
 | `security-auditor` | 79 | 21 | **OK** |
 | `task-decomposer` | 74 | 26 | **OK** |
 | `tdd` | 83 | 17 | **OK** |
+| `test-planner` | 89 | 11 | **OK** |
 | `write-a-skill` | 83 | 17 | **OK** |
 | `zoom-out` | 57 | 43 | **OK** |
 
-Summary: 15 skills · 2 WARN · 0 EXEMPT.
+Summary: 16 skills · 2 WARN · 0 EXEMPT.
 
 ## Operator Notes
 

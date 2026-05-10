@@ -7,7 +7,7 @@ status: current
 
 # dev-flow — Agentic Engineering Workflow Starter
 
-Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v4.0.0 — Flow Grill + audit-driven cleanup (15 skills · 6 agents)**
+Claude Code plugin: gate-driven workflow + skill library + agent roster for any software project. **v4.1.0 — test-planner skill added (16 skills · 6 agents)**
 
 Drop into any repo to get a human-gated AI workflow. Dispatcher delegates to specialists. Humans approve gates. No app code required.
 
@@ -36,7 +36,7 @@ Plugin auto-discovers components at repo root after install. All counts verified
 |:----------|:------|:-------------|
 | Gates     | 2     | G1 Scope + G2 Design checkpoints before any commit |
 | Modes     | 4     | `init` · `quick` · `mvp` · `sprint-bulk` (operational context) |
-| Skills    | 15    | User-invokable slash commands (`skills/<name>/SKILL.md`) — architecture-grill merged into design-analyst v4.0.0 per ADR-037 |
+| Skills    | 16    | User-invokable slash commands (`skills/<name>/SKILL.md`) — test-planner added v4.1.0 (closes Testing-phase gap from Sprint 058 audit) |
 | Agents    | 6     | 6 specialists (design / code-reviewer / scope / security / performance / migration) — dispatcher role lives in orchestrator skill per ADR-037 |
 | Hooks     | 3     | SessionStart bootstrap · PreToolUse chain-guard · PostToolUse codemap-refresh |
 | Scripts   | 10    | 8 Node (`audit-baseline` · `audit-tokens` · `eval-acceptance` · `eval-caveman` · `eval-measure` · `eval-skills` · `propagate-output-discipline` · `scan-legacy-docs`) + 2 PowerShell (`session-start.ps1` · `codemap-refresh.ps1`) |
