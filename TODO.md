@@ -35,11 +35,13 @@ sprint: 059
 
 ## Active Sprint
 
-→ **— none —**
+→ **[docs/sprint/SPRINT-059-cleanup-batch.md](docs/sprint/SPRINT-059-cleanup-batch.md)**
 
-> **Last closed:** Sprint 058 SDLC Coverage Audit (docs-only · no version bump · 4 tasks shipped). Audit doc `docs/audit/SDLC-coverage-2026-05-10.md` produced gap analysis + remediation plan; R1 MERGE arch-grill into design-analyst · R3 REMOVE dispatcher.md confirmed via grep evidence; Sprint 059 (v4.0.0 MAJOR · 6 seeds) + Sprint 060 (v4.1.0 MINOR · 3 seeds) scoped. Close commit pending squash. See `docs/CHANGELOG.md § Sprint 058`.
+> **Sprint 059 — Audit-driven cleanup batch (v4.0.0 MAJOR) (planning).** Workstream B+C remediation per Sprint 058 audit verdicts. 7 tasks: T1 arch-grill MERGE + ADR-037 (HITL · gates downstream) · T2 dispatcher REMOVE + orchestrator subsection · T3 codemap-refresh user-scope rewrite + --internal flag · T4 history-rule scope clarify · T5 TODO history audit + preamble note · T6 plugin propagation + lockstep MAJOR bump 3.1.0→4.0.0 (HITL) · T7 README "How You Use It" helicopter view section. 8 decisions pre-locked at promote (D-A..D-H; D-B joint ADR-037 covers R1+R3 · D-E design-analyst gains --grill flag · D-G outcome-lens carries forward as standing principle · D-H may split 059a/059b on friction). Anti-slip 4 fields populated (focus cleanup-only · budget ~30-40k · gaps Sprint 060+push+features · done T6/T7 land). Risk high (T1 hard-to-reverse + T6 MAJOR); layers `agents, skills, scripts, docs, ci`.
 >
-> **Next:** Sprint 059 (audit-driven cleanup batch — v4.0.0 MAJOR; 6 task seeds locked at Sprint 058 T3). ADR-037 required (arch-grill removal hard-to-reverse). Promote via Flow Grill v3.1.0 (now properly cached after 057 ship). Push gate emit-only — operator runs `git push origin master` recommended before 059 promote (clean baseline for v4.0.0 cut).
+> **Status:** plan written via Flow Grill v3.1.0 (2nd dogfood — loop ran inline from source FLOW_GRILL.md since cached plugin still 3.0.0); awaiting human review + Plan-locked approval before flip to `status: active` + plan_commit landing.
+>
+> **Predecessor:** Sprint 058 closed (`837b552`) · SDLC-coverage audit shipped. Push gate emit-only — operator runs `git push origin master` after 059 close lands (recommended before 060 promote).
 
 ---
 
