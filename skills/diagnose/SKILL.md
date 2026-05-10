@@ -1,6 +1,6 @@
 ---
 name: diagnose
-description: Use when debugging a defect, unexpected behavior, or failing test. Runs a 6-phase systematic debugging workflow — reproduce, hypothesize, instrument, fix, regression test, post-mortem. Do not use for architectural analysis; use architecture-grill instead.
+description: Use when debugging a defect, unexpected behavior, or failing test. Runs a 6-phase systematic debugging workflow — reproduce, hypothesize, instrument, fix, regression test, post-mortem. Do not use for architectural analysis; use design-analyst --grill instead (architecture-grill merged into design-analyst per ADR-037).
 user-invocable: true
 argument-hint: "[bug description | failing test | unexpected behavior]"
 version: "1.0.0"

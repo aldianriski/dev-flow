@@ -2,8 +2,8 @@
 owner: Tech Lead (Aldian Rizki)
 last_updated: 2026-05-10
 update_trigger: Sprint state change
-status: planning
-plan_commit: pending
+status: active
+plan_commit: b1ae530
 close_commit: pending
 ---
 
@@ -174,11 +174,16 @@ Sprint 058 audit produced 6 verdicts requiring hard-to-reverse cleanup actions. 
 
 ## Execution Log
 
-*(empty — appended during sprint execution)*
+- **T1 close 2026-05-10** — arch-grill MERGE + ADR-037 (joint R1+R3) + diagnose cross-ref + USER-OUTCOMES update. `skills/architecture-grill/` deleted in entirety (SKILL.md + references/). `agents/design-analyst.md` rewritten with 5-lens summary + `--grill` flag (27/30 lines · 3-line headroom OK · was 30/30 zero-headroom; NET IMPROVEMENT). New `agents/references/lenses.md` (~80 lines) holds 5 review lenses + grill mode + greenfield/brownfield + hard rules + red flags; establishes `agents/references/` subdirectory pattern (mirrors `skills/<name>/references/` convention). ADR-037 covers BOTH R1 (arch-grill MERGE) + R3 (dispatcher REMOVE) per D-B; 7 DECs; 5 alternatives rejected; Consequences section names rollback path + cap-headroom verification. `skills/diagnose/SKILL.md` description cross-ref updated (architecture-grill → design-analyst --grill). `docs/USER-OUTCOMES.md` skills count 16 → 15 + arch-grill row removed + design-analyst row updated to mention 5 lenses + --grill flag. HITL gate fired post-commit per D-D.
 
 ## Files Changed
 
-*(empty — populated during execution; one row per file: `File | Task | Change (one-line WHY) | Risk | Test added`)*
+- `agents/design-analyst.md` | T1 | EDIT (30 → 27 lines) — added 5-lens summary + --grill flag mention + references/lenses.md pointer; cap-headroom 0 → 3 (NET IMPROVEMENT) | risk: medium (agent prompt change) | test: N/A
+- `agents/references/lenses.md` | T1 | NEW (~80 lines) — full 5 review lenses + grill mode protocol + greenfield/brownfield + hard rules + red flags; establishes agents/references/ subdirectory pattern | risk: low (new reference file) | test: N/A
+- `skills/architecture-grill/` | T1 | DELETE entire directory (SKILL.md + references/) — R1 verdict from Sprint 058 audit; 5 lenses folded into design-analyst | risk: high (skill removal · MAJOR class) | test: N/A
+- `docs/adr/ADR-037-skill-and-agent-cleanup-v4.md` | T1 | NEW (~110 lines) — joint R1+R3 ADR per D-B; 7 DECs; 5 alternatives; Consequences w/ rollback path; cites ADR-006/015/026/027/031/032/034/036 + Sprint 058 audit | risk: low (additive doc) | test: N/A
+- `skills/diagnose/SKILL.md` | T1 | EDIT — description cross-ref `architecture-grill` → `design-analyst --grill instead (architecture-grill merged into design-analyst per ADR-037)` | risk: low | test: N/A
+- `docs/USER-OUTCOMES.md` | T1 | EDIT — skills heading 16 → 15; arch-grill row removed; design-analyst row updated to mention 5 lenses + --grill flag merge per ADR-037 | risk: low | test: N/A
 
 ## Decisions
 

@@ -28,12 +28,11 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 
 ---
 
-## Skills (16) → outcomes
+## Skills (15) → outcomes
 
 - **`orchestrator`** → O5 · O6 · O4 — gate-driven dispatch; G1 catches scope drift; G2 forces design before commit. **Skip when:** trivial in-file edit (no scope/design questions); use direct edit.
 - **`task-decomposer`** → O4 · O7 — vertical slice decomposition; assumption registry prevents premature implementation. **Skip when:** task already in Active Sprint — use `/orchestrator`.
 - **`prime`** → O1 · O5 — deterministic context load (CLAUDE.md → CONTEXT.md → MEMORY → sprint → codemap L0). **Skip when:** resuming mid-session with context still warm.
-- **`architecture-grill`** → O3 · O4 — ad-hoc grill mode (one-question-at-a-time) surfaces hidden coupling pre-implementation; distinct from `design-analyst` (auto-G2 design plan agent). **Skip when:** single-file bug fix — use `/diagnose`.
 - **`pr-reviewer`** → O4 · O8 — 7-lens structured review; catches regressions before merge. **Skip when:** docs-only PR with no behavior change.
 - **`security-auditor`** (`/security-review`) → O8 · O4 — OWASP audit in separate session (ADR-015 one-way dispatch). **Skip when:** governance/docs change with no surface to audit.
 - **`refactor-advisor`** → O3 · O4 — code-smell sweep; deep-module candidates. **Skip when:** green-field code with no callers yet.
@@ -52,7 +51,7 @@ dev-flow is a plugin. The plugin is a means; **the user's project is the end**. 
 ## Agents (7) → outcomes
 
 - **`dispatcher`** → O5 · O6 — only user-facing agent; spawns specialists per ADR-015 one-way contract. **Skip when:** task is read-only exploration — use `/zoom-out` or direct file reads.
-- **`design-analyst`** → O3 · O4 — read-only architectural plan at G2; never modifies files. **Skip when:** mode is `quick` (no G2) or `init` (no work yet).
+- **`design-analyst`** → O3 · O4 — read-only architectural plan at G2 + **5 review lenses** (correctness · scalability · coupling · operational · resilience) auto-applied; supports `--grill` flag for strict 1-Q-at-a-time mode (architecture-grill merged in v4.0.0 per ADR-037). Never modifies files. **Skip when:** mode is `quick` (no G2) or `init` (no work yet).
 - **`code-reviewer`** → O4 · O8 — post-implementation review; loads `pr-reviewer` skill. **Skip when:** docs/governance-only diff; reviewer can fast-path.
 - **`scope-analyst`** → O4 — blast-radius assessment at G1 when size unclear. **Skip when:** size already estimated S/M/L with named files.
 - **`security-analyst`** → O8 — separate `/security-review` session (never same-context per ADR-015). **Skip when:** no externally-exposed surface in diff.
