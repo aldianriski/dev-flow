@@ -35,11 +35,13 @@ sprint: 058
 
 ## Active Sprint
 
-→ — none —
+→ **[docs/sprint/SPRINT-058-sdlc-audit.md](docs/sprint/SPRINT-058-sdlc-audit.md)**
 
-> **Last closed:** Sprint 057 Flow Grill (3.1.0 MINOR; 5 tasks shipped · ADR-036 · 3-into-1 planning convergence). Close commit pending squash. See `docs/CHANGELOG.md § Sprint 057` + `docs/sprint/SPRINT-057-flow-grill.md`.
+> **Sprint 058 — SDLC Coverage Audit (read-only sweep) (planning).** Workstream C item 8 from `refined-task-list.md`. 4 tasks: T1 Coverage matrix 23×6 (HITL · gates T2) · T2 Gap analysis + verdicts O-tagged per D-G (HITL · drives Sprint 059 scope) · T3 Remediation plan Sprint 059+060 task seeds (HITL · locks 059/060 perimeter) · T4 Audit close + README update + close commit (AFK · docs-only no version bump). 7 decisions pre-locked at promote (D-A..D-G; D-G user-outcome lens sprint-wide). Anti-slip 4 fields populated (focus audit-only · budget ~10-15k · gaps Sprint 059/060 · done T4 lands). Risk low; layers `docs, ci`.
 >
-> **Next:** Sprint 058 (SDLC audit, read-only sweep — item 8 from `refined-task-list.md`; surfaces R1 arch-grill removal · R2 broader skill redundancy · R3 dispatcher agent redundancy) per Workstream-C audit-first sequencing (D-A pre-lock).
+> **Status:** plan written via Flow Grill v3.1.0 (first dogfood — loop ran inline from source FLOW_GRILL.md since cached plugin still 3.0.0); awaiting human review + Plan-locked approval before flip to `status: active` + plan_commit landing.
+>
+> **Predecessor:** Sprint 057 closed (`08c1178`) · Release 3.1.0 Flow Grill shipped (`27a7dd1`). Push gate emit-only — operator runs `git push origin master` after this sprint's promote/close lands.
 
 ---
 
